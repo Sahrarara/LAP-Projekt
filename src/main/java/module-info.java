@@ -1,0 +1,10 @@
+module com.lap.lapproject {
+    requires javafx.controls;
+    requires javafx.fxml;
+
+
+    opens com.lap.lapproject to javafx.fxml;
+    exports com.lap.lapproject;
+    exports com.lap.lapproject.controller;
+    opens com.lap.lapproject.controller to javafx.fxml;
+}
