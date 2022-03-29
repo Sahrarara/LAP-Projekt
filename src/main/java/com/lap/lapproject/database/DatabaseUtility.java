@@ -64,7 +64,6 @@ public class DatabaseUtility {
             resultSet = statement.executeQuery();
             while (resultSet.next()){
                 UserModel.username = resultSet.getString("username");
-                UserModel.userid = resultSet.getString("id");
                 UserModel.fName = resultSet.getString("first_name");
                 UserModel.lName = resultSet.getString("last_name");
                 UserModel.authority = resultSet.getString("authorization");
