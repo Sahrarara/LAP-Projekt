@@ -7,7 +7,7 @@ import java.sql.*;
 
 public class DatabaseUtility {
 
-    static final String dbPrefix = "jdbc:mariadb";
+    static final String dbPrefix = "jdbc:mariadb:";
     static final String location = "//localhost:3306/room_planning";
     static final String dbUser = "root";
     static final String dbPw = "";
@@ -18,6 +18,7 @@ public class DatabaseUtility {
             connection = DriverManager.getConnection(dbPrefix+location, dbUser, dbPw);
             System.out.println("Connection successful");
         } catch (SQLException e) {
+            System.out.println("Connection failed");
             e.printStackTrace();
             return null;
         }
@@ -48,12 +49,13 @@ public class DatabaseUtility {
     }
 
 
-    public static boolean checkUsernamePassword(String username, String password){
+    public static boolean checkUsernamePasswordActiveStatus(String username, String password){
         Connection connection = connect();
         String queryUsername =
                 "SELECT * from users WHERE " +
                         "username = '" + username + "' AND " +
-                        "password = '" + password + "'";
+                        "password = '" + password + "' AND " +
+                        "active_status = '1'";
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 
@@ -63,8 +65,9 @@ public class DatabaseUtility {
             while (resultSet.next()){
                 UserModel.username = resultSet.getString("username");
                 UserModel.userid = resultSet.getString("id");
-                UserModel.fName = resultSet.getString("firstname");
-                UserModel.lName = resultSet.getString("lastname");
+                UserModel.fName = resultSet.getString("first_name");
+                UserModel.lName = resultSet.getString("last_name");
+                UserModel.authority = resultSet.getString("authorization");
                 return true;
             }
         } catch (SQLException e) {
@@ -72,5 +75,7 @@ public class DatabaseUtility {
         }
         return false;
     }
+
+
 
 }

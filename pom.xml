@@ -67,7 +67,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.lap.lapproject/com.lap.lapproject.application.LoginApplication</mainClass>
+                            <mainClass>com.lap.lapproject/com.lap.lapproject.LoginApplication</mainClass>
                         </configuration>
                     </execution>
                 </executions>
