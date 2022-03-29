@@ -1,16 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.lap.lapproject.controller.LoginController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="495.0" prefWidth="676.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <ImageView fitHeight="500.0" fitWidth="682.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../stars.jpg" />
+         </image>
+      </ImageView>
+      <VBox prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <GridPane prefHeight="502.0" prefWidth="676.0" style="-fx-background-radius: 15;">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="341.0" minWidth="10.0" prefWidth="341.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="219.5" minWidth="10.0" prefWidth="109.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="162.5" minHeight="10.0" prefHeight="119.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="295.0" minHeight="10.0" prefHeight="273.5" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="153.0" minHeight="10.0" prefHeight="103.5" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Pane depthTest="DISABLE" opacity="0.63" prefHeight="280.0" prefWidth="341.0" style="-fx-background-color: rgb(255,255,255, 125); -fx-background-radius: 9;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <effect>
+                        <Blend />
+                     </effect>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <children>
+                        <TextField layoutX="56.0" layoutY="144.0" prefHeight="25.0" prefWidth="225.0" promptText="Password" style="-fx-background-color: white;">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="NONE" />
+                           </cursor>
+                        </TextField>
+                        <Button layoutX="210.0" layoutY="201.0" mnemonicParsing="false" style="-fx-background-color: #00063F;" text="Anmelden" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Label layoutX="56.0" layoutY="205.0" text="Password vergessen?">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="63.0" layoutY="20.0" prefHeight="49.0" prefWidth="209.0" text="Willkommen">
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="56.0" layoutY="94.0" prefHeight="25.0" prefWidth="225.0" promptText="Benutzername" style="-fx-background-color: white;">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </Pane>
+               </children>
+            </GridPane>
+         </children>
+      </VBox>
+   </children>
+</GridPane>
