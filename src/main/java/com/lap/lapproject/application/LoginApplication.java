@@ -1,4 +1,4 @@
-package com.lap.lapproject;
+package com.lap.lapproject.application;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

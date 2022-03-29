@@ -27,7 +27,7 @@ public class DatabaseUtility {
 
     public static boolean checkUniqueUsername(String username){
         Connection connection = connect();
-        String query = "SELECT * FROM `login_user` WHERE `username`= '" + username + "'\n";
+        String query = "SELECT * FROM `users` WHERE `username`= '" + username + "'\n";
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         Alert a = new Alert(Alert.AlertType.ERROR);
@@ -51,7 +51,7 @@ public class DatabaseUtility {
     public static boolean checkUsernamePassword(String username, String password){
         Connection connection = connect();
         String queryUsername =
-                "SELECT * from login_user WHERE " +
+                "SELECT * from users WHERE " +
                         "username = '" + username + "' AND " +
                         "password = '" + password + "'";
         PreparedStatement statement = null;
