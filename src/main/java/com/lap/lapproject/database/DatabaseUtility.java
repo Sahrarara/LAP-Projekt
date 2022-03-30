@@ -1,6 +1,7 @@
 package com.lap.lapproject.database;
 
-import com.lap.lapproject.model.UserModel;
+import com.lap.lapproject.model.Admin;
+import com.lap.lapproject.model.Trainer;
 import javafx.scene.control.Alert;
 
 import java.sql.*;
@@ -63,11 +64,32 @@ public class DatabaseUtility {
             statement = connection.prepareStatement(queryUsername);
             resultSet = statement.executeQuery();
             while (resultSet.next()){
-                UserModel.username = resultSet.getString("username");
-                UserModel.fName = resultSet.getString("first_name");
-                UserModel.lName = resultSet.getString("last_name");
-                UserModel.authority = resultSet.getString("authorization");
-                return true;
+                String user = resultSet.getString("username");
+                String title = resultSet.getString("title");
+                String firstname = resultSet.getString("first_name");
+                String lastname = resultSet.getString("last_name");
+                String authority = resultSet.getString("authorization");
+                Boolean adminAuth = resultSet.getBoolean("admin");
+                String description = resultSet.getString("description");
+                int phoneNmbr = resultSet.getInt("phone");
+                String email = resultSet.getString("email");
+                byte[] photo = resultSet.getBytes("photo");
+                Boolean descriptionVisibility = resultSet.getBoolean("description_visable");
+                Boolean phoneNmbrVisibility = resultSet.getBoolean("phone_visable");
+                Boolean emailVisibility = resultSet.getBoolean("email_visable");
+                Boolean photoVisibility = resultSet.getBoolean("photo_visable");
+
+
+                switch (authority){
+                    case "admin":
+                        Admin admin = new Admin(user, firstname, lastname, authority, adminAuth);
+                        return true;
+                    case "coach":
+                        Trainer trainer = new Trainer(user, firstname, lastname, authority, adminAuth);
+                        return true;
+                    default:
+                        return false;
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
