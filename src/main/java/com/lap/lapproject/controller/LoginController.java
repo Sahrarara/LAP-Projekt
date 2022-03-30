@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -22,9 +23,11 @@ public class LoginController implements Initializable {
     @FXML
     private TextField usernameTF;
     @FXML
-    private TextField passwordTF;
+    private PasswordField passwordTF;
     @FXML
     private Button loginBtn;
+    @FXML
+    private Button guestLoginBtn;
 
     @FXML
     private void onLoginBtnClick(ActionEvent actionEvent) {
@@ -44,7 +47,10 @@ public class LoginController implements Initializable {
     }
 
     private boolean checkFieldsFilled() {
-        if (usernameTF.getText().isBlank() || passwordTF.getText().isBlank()) {
+        if (usernameTF.getText() == null || usernameTF.getText().isBlank() || passwordTF.getText() == null || passwordTF.getText().isBlank()) {
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setHeaderText("Bitte Benutzernamen und Passwort eingeben");
+            a.show();
             System.out.println("empty textfields");
             return false;
         }
@@ -78,5 +84,10 @@ public class LoginController implements Initializable {
 
     private Stage getCurrentStage(){
         return (Stage) usernameTF.getScene().getWindow();
+    }
+
+    @FXML
+    private void onGuestLoginBtnClick(ActionEvent actionEvent) {
+        //moveToMainPage();
     }
 }
