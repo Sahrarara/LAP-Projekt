@@ -1,6 +1,7 @@
 package com.lap.lapproject.controller;
 
 import com.lap.lapproject.LoginApplication;
+import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.database.DatabaseUtility;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,7 +37,7 @@ public class LoginController implements Initializable {
             String password = passwordTF.getText();
             if (DatabaseUtility.checkUsernamePasswordActiveStatus(username, password)){
                 System.out.println("Login successful");
-                //moveToMainPage();
+                moveToMainPage();
             } else {
                 Alert a = new Alert(Alert.AlertType.ERROR);
                 a.setHeaderText("Benutzername und/oder Passwort falsch!");
@@ -68,7 +69,7 @@ public class LoginController implements Initializable {
         Stage currentStage = this.getCurrentStage();
         currentStage.close();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(".fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML + "bigscreen.fxml"));
         Scene scene = null;
 
         try {
@@ -88,6 +89,6 @@ public class LoginController implements Initializable {
 
     @FXML
     private void onGuestLoginBtnClick(ActionEvent actionEvent) {
-        //moveToMainPage();
+        moveToMainPage();
     }
 }

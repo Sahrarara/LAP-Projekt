@@ -29,14 +29,21 @@ public class DatabaseUtility {
 
     public static boolean checkUniqueUsername(String username){
         Connection connection = connect();
-        String query = "SELECT * FROM `users` WHERE `username`= '" + username + "'\n";
-        PreparedStatement statement = null;
+        //String query = "SELECT * FROM `users` WHERE `username`= '" + username + "'\n";
+        //PreparedStatement statement = null;
+
+        String query = "{call checkUniqueUsername(?)}";
         ResultSet resultSet = null;
+        CallableStatement stmt = null;
+
         Alert a = new Alert(Alert.AlertType.ERROR);
         a.setHeaderText("Username already taken");
         try {
-            statement = connection.prepareStatement(query);
-            resultSet = statement.executeQuery();
+            stmt=connection.prepareCall(query);
+            stmt.setString(1,username);
+            resultSet = stmt.executeQuery();
+            //statement = connection.prepareStatement(query);
+            //resultSet = statement.executeQuery();
             while (resultSet.next()){
                 System.out.println(resultSet.getString("username"));
                 if (resultSet.getString("username").equals(username))
@@ -52,17 +59,26 @@ public class DatabaseUtility {
 
     public static boolean checkUsernamePasswordActiveStatus(String username, String password){
         Connection connection = connect();
-        String queryUsername =
-                "SELECT * from users WHERE " +
-                        "username = '" + username + "' AND " +
-                        "password = '" + password + "' AND " +
-                        "active_status = '1'";
-        PreparedStatement statement = null;
+        //String queryUsername =
+        //        "SELECT * from users WHERE " +
+        //                "username = '" + username + "' AND " +
+        //                "password = '" + password + "' AND " +
+        //                "active_status = '1'";
+        //PreparedStatement statement = null;
+
+        String query= "{call checkUsernamePasswordActive(?,?)}";
         ResultSet resultSet = null;
+        CallableStatement stmt = null;
 
         try {
-            statement = connection.prepareStatement(queryUsername);
-            resultSet = statement.executeQuery();
+
+            stmt=connection.prepareCall(query);
+            stmt.setString(1,username);
+            stmt.setString(2,password);
+            resultSet = stmt.executeQuery();
+
+            //statement = connection.prepareStatement(queryUsername);
+            //resultSet = statement.executeQuery();
             while (resultSet.next()){
                 String user = resultSet.getString("username");
                 String title = resultSet.getString("title");

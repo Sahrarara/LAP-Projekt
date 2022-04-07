@@ -6,8 +6,6 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Blend?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -16,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="495.0" prefWidth="676.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.LoginController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="495.0" prefWidth="676.0" style="-fx-background-color: #211D5A;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.LoginController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
@@ -24,11 +22,6 @@
     <RowConstraints vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <ImageView fitHeight="500.0" fitWidth="682.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/stars.jpg" />
-         </image>
-      </ImageView>
       <VBox prefHeight="200.0" prefWidth="100.0">
          <children>
             <GridPane prefHeight="502.0" prefWidth="676.0" style="-fx-background-radius: 15;">
@@ -51,7 +44,7 @@
                         <Insets />
                      </opaqueInsets>
                      <children>
-                        <Label layoutX="63.0" layoutY="20.0" prefHeight="49.0" prefWidth="209.0" text="Willkommen">
+                        <Label layoutX="63.0" layoutY="20.0" prefHeight="49.0" prefWidth="209.0" text="Willkommen" textFill="#211d5a">
                            <font>
                               <Font size="36.0" />
                            </font>

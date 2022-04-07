@@ -1,7 +1,9 @@
 package com.lap.lapproject.model;
 
+import javafx.beans.property.SimpleStringProperty;
+
 public class Room {
-    private String roomName;
+    private SimpleStringProperty roomName;
     private int size;
     private Location location;
     private byte[] photo;
@@ -9,7 +11,7 @@ public class Room {
 
 
     public Room(String roomName, int size, Location location, byte[] photo, Equipment equipment) {
-        this.roomName = roomName;
+        this.roomName = new SimpleStringProperty(roomName);
         this.size = size;
         this.location = location;
         this.photo = photo;
@@ -25,11 +27,15 @@ public class Room {
     }
 
     public String getRoomName() {
+        return roomName.get();
+    }
+
+    public SimpleStringProperty roomNameProperty() {
         return roomName;
     }
 
     public void setRoomName(String roomName) {
-        this.roomName = roomName;
+        this.roomName.set(roomName);
     }
 
     public int getSize() {
