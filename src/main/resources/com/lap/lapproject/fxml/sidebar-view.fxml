@@ -73,7 +73,7 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </Button>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="196.0" style="-fx-background-radius: 15; -fx-background-color: ffffff; -fx-border-radius: 15; -fx-border-color: #211D5A;" text="Logout" textFill="#211d5a" GridPane.rowIndex="9">
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="196.0" style="-fx-background-radius: 15; -fx-background-color: ffffff; -fx-border-radius: 16; -fx-border-color: #211D5A;" text="Logout" textFill="#211d5a" GridPane.rowIndex="9">
                <GridPane.margin>
                   <Insets left="15.0" right="15.0" top="50.0" />
                </GridPane.margin>
