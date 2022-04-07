@@ -43,37 +43,37 @@
                   <Insets bottom="20.0" />
                </GridPane.margin>
             </Label>
-            <Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="18.0" prefWidth="190.0" style="-fx-background-radius: 12 0 0 12; -fx-background-color: #211D5A;" text="DASHBOARD" textFill="#ffffff80" GridPane.rowIndex="1">
+            <Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="18.0" prefWidth="190.0" style="-fx-background-radius: 12 0 0 12; -fx-background-color: #211D5A;" text="DASHBOARD" textFill="#f2f4ff80" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
             </Button>
-            <Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="18.0" prefWidth="190.0" style="-fx-background-radius: 12 0 0 12; -fx-background-color: #211D5A;" text="STANDORT" textFill="#ffffff80" GridPane.rowIndex="2">
+            <Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="18.0" prefWidth="190.0" style="-fx-background-radius: 12 0 0 12; -fx-background-color: #211D5A;" text="STANDORT" textFill="#f2f4ff80" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
             </Button>
-            <Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="190.0" style="-fx-background-radius: 12 0 0 12; -fx-background-color: White;" text="USER" textFill="#ffffff80" GridPane.rowIndex="3">
+            <Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="190.0" style="-fx-background-radius: 12 0 0 12; -fx-background-color: White;" text="USER" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
             </Button>
-            <Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="190.0" style="-fx-background-radius: 12 0 0 12; -fx-background-color: #211D5A;" text="RÄUME" textFill="#ffffff80" GridPane.rowIndex="4">
+            <Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="190.0" style="-fx-background-radius: 12 0 0 12; -fx-background-color: #211D5A;" text="RÄUME" textFill="#f2f4ff80" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
             </Button>
-            <Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="190.0" style="-fx-background-radius: 12 0 0 12; -fx-background-color: #211D5A;" text="GRUPPEN" textFill="#e5e5e580" GridPane.rowIndex="5">
+            <Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="190.0" style="-fx-background-radius: 12 0 0 12; -fx-background-color: #211D5A;" text="GRUPPEN" textFill="#f2f4ff80" GridPane.rowIndex="5">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
             </Button>
-            <Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="190.0" style="-fx-background-radius: 12 0 0 12; -fx-background-color: #211D5A;" text="KURSE" textFill="#ffffff80" GridPane.rowIndex="6">
+            <Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="190.0" style="-fx-background-radius: 12 0 0 12; -fx-background-color: #211D5A;" text="KURSE" textFill="#f2f4ff80" GridPane.rowIndex="6">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
             </Button>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="196.0" style="-fx-background-radius: 12; -fx-border-radius: 12 0 0 12;" text="Logout" GridPane.rowIndex="9">
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="196.0" style="-fx-background-radius: 15; -fx-background-color: ffffff; -fx-border-radius: 15; -fx-border-color: #211D5A;" text="Logout" textFill="#211d5a" GridPane.rowIndex="9">
                <GridPane.margin>
                   <Insets left="15.0" right="15.0" top="50.0" />
                </GridPane.margin>
