@@ -61,7 +61,7 @@
                         </PasswordField>
                         <HBox alignment="CENTER" layoutX="35.0" layoutY="201.0" prefHeight="50.0" prefWidth="245.0">
                            <children>
-                              <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="27.0" prefWidth="108.0" style="-fx-background-color: ffffff; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: #211D5A;" text="ÜBERSPRINGEN" textFill="#211d5a">
+                              <Button fx:id="skipBtn" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#onSkipBtnClick" prefHeight="27.0" prefWidth="108.0" style="-fx-background-color: ffffff; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: #211D5A;" text="ÜBERSPRINGEN" textFill="#211d5a">
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>
@@ -69,7 +69,7 @@
                                     <Insets left="20.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" style="-fx-background-color: #211D5A; -fx-background-radius: 15;" text="ANMELDEN" textFill="#f2f4ff">
+                              <Button fx:id="loginBtn" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#onLoginBtnClick" prefHeight="25.0" prefWidth="108.0" style="-fx-background-color: #211D5A; -fx-background-radius: 15;" text="ANMELDEN" textFill="#f2f4ff">
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>

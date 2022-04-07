@@ -19,8 +19,8 @@ public class DatabaseUtility {
             connection = DriverManager.getConnection(dbPrefix+location, dbUser, dbPw);
             System.out.println("Connection successful");
         } catch (SQLException e) {
-            System.out.println("Connection failed");
-            e.printStackTrace();
+            System.out.println("Connection failed - Check XAMPP");
+            //e.printStackTrace();
             return null;
         }
         return connection;
@@ -59,6 +59,9 @@ public class DatabaseUtility {
 
     public static boolean checkUsernamePasswordActiveStatus(String username, String password){
         Connection connection = connect();
+        if (connection == null){
+            System.out.println("Check XAMPP");
+        }
         //String queryUsername =
         //        "SELECT * from users WHERE " +
         //                "username = '" + username + "' AND " +
