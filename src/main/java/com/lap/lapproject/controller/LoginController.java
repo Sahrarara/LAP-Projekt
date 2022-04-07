@@ -28,7 +28,7 @@ public class LoginController implements Initializable {
     @FXML
     private Button loginBtn;
     @FXML
-    private Button guestLoginBtn;
+    private Button skipBtn;
 
     @FXML
     private void onLoginBtnClick(ActionEvent actionEvent) {
@@ -88,7 +88,8 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    private void onGuestLoginBtnClick(ActionEvent actionEvent) {
+    private void onSkipBtnClick(ActionEvent actionEvent) {
         moveToMainPage();
     }
+
 }
