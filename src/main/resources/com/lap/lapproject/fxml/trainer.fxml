@@ -14,6 +14,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
+
 <Pane style="-fx-background-color: #211D5A;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-radius: 25 0 0 25; -fx-background-color: #e2e6f6;">
@@ -41,7 +42,7 @@
                   <RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Vorname" textFill="#211d5a" GridPane.columnIndex="2" GridPane.halignment="LEFT">
+                  <Label text="Vorname" GridPane.columnIndex="2" GridPane.halignment="LEFT">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -69,7 +70,7 @@
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="Telephone" textFill="#211d5a" GridPane.columnIndex="5">
+                  <Label text="Telephone" GridPane.columnIndex="5">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -77,7 +78,7 @@
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="E-Mail" textFill="#211d5a" GridPane.columnIndex="4">
+                  <Label text="E-Mail" GridPane.columnIndex="4">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -85,7 +86,7 @@
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="Nachname" textFill="#211d5a" GridPane.columnIndex="3">
+                  <Label text="Nachname" GridPane.columnIndex="3">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -118,7 +119,7 @@
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </Label>
-                  <Line endX="476.79290771484375" endY="-3.186464309692383E-4" startX="-100.0" stroke="#211d5a" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.valignment="BOTTOM" />
+                  <Line endX="476.79290771484375" endY="-3.186464309692383E-4" startX="-100.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.valignment="BOTTOM" />
                   <Label alignment="CENTER" text="Daniela" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                      <font>
                         <Font size="14.0" />
@@ -199,7 +200,7 @@
                   <Line endX="476.79290771484375" endY="-3.186464309692383E-4" startX="-100.0" stroke="#b4b2b2" GridPane.rowIndex="9" GridPane.valignment="BOTTOM" />
                </children>
             </GridPane>
-            <Label layoutX="35.0" layoutY="27.0" text="TRAINER" textFill="#211d5a">
+            <Label layoutX="35.0" layoutY="27.0" text="TRAINER">
                <font>
                   <Font size="36.0" />
                </font>
@@ -210,7 +211,7 @@
                      <graphic>
                         <ImageView fitHeight="15.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/PlusTW.png" />
+                              <Image url="@../images/lapproject/images/PlusTW.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -219,7 +220,7 @@
                      <graphic>
                         <ImageView fitHeight="15.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/DeleteTW.png" />
+                              <Image url="@../images/lapproject/images/DeleteTW.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -228,7 +229,7 @@
                      <graphic>
                         <ImageView fitHeight="15.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/Settings.png" />
+                              <Image url="@../images/lapproject/images/Settings.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -238,14 +239,14 @@
                   <Insets />
                </opaqueInsets>
             </ButtonBar>
-            <Button alignment="CENTER" contentDisplay="RIGHT" disable="true" layoutX="413.0" layoutY="84.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-border-color: #211d5a; -fx-border-radius: 15;" text="Search ..." textAlignment="JUSTIFY" textFill="#211d5aed">
+            <Button alignment="CENTER" contentDisplay="RIGHT" disable="true" layoutX="413.0" layoutY="84.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="155.0" style="-fx-background-color: white; -fx-background-radius: 20;" text="Search ..." textAlignment="JUSTIFY" textFill="#000000ed">
                <font>
                   <Font size="10.0" />
                </font>
             </Button>
             <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="428.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: black;">
                <image>
-                  <Image url="@../images/LupeBlau.png" />
+                  <Image url="@../images/lapproject/images/LupeBlau.png" />
                </image>
             </ImageView>
          </children>
