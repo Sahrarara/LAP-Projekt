@@ -35,7 +35,7 @@
                      <children>
                         <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="141.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/GruppeBlau.png" />
+                              <Image url="@../images/lapproject/images/GruppeBlau.png" />
                            </image>
                         </ImageView>
                         <Label layoutX="10.0" layoutY="15.0" text="P311" textFill="#211d5a">
@@ -67,7 +67,7 @@
                             <graphic>
                                 <ImageView fitHeight="15.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../images/PlusTW.png" />
+                                        <Image url="@../images/lapproject/images/PlusTW.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
@@ -76,7 +76,7 @@
                             <graphic>
                                 <ImageView fitHeight="15.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../images/DeleteTW.png" />
+                                        <Image url="@../images/lapproject/images/DeleteTW.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
@@ -85,7 +85,7 @@
                             <graphic>
                                 <ImageView fitHeight="15.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../images/Settings.png" />
+                                        <Image url="@../images/lapproject/images/Settings.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
@@ -102,7 +102,7 @@
                 </Button>
                 <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="428.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: black;">
                     <image>
-                        <Image url="@../images/LupeBlau.png" />
+                        <Image url="@../images/lapproject/images/LupeBlau.png" />
                     </image>
                 </ImageView>
             </children>
