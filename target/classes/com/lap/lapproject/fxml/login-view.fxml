@@ -36,7 +36,7 @@
                 <RowConstraints maxHeight="153.0" minHeight="10.0" prefHeight="103.5" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Pane depthTest="DISABLE" opacity="0.74" prefHeight="280.0" prefWidth="341.0" style="-fx-background-color: rgb(255,255,255, 125); -fx-background-radius: 9;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Pane depthTest="DISABLE" prefHeight="280.0" prefWidth="341.0" style="-fx-background-color: F2F4FF; -fx-background-radius: 9;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <effect>
                         <Blend />
                      </effect>
@@ -49,35 +49,38 @@
                               <Font size="36.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="usernameTF" layoutX="56.0" layoutY="94.0" onAction="#onLoginBtnClick" prefHeight="25.0" prefWidth="225.0" promptText="Benutzername">
+                        <TextField fx:id="usernameTF" layoutX="56.0" layoutY="94.0" onAction="#onLoginBtnClick" prefHeight="25.0" prefWidth="225.0" promptText="Benutzername" style="-fx-background-radius: 15;">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </TextField>
-                        <PasswordField fx:id="passwordTF" layoutX="56.0" layoutY="144.0" onAction="#onLoginBtnClick" prefHeight="29.0" prefWidth="225.0" promptText="Passwort">
+                        <PasswordField fx:id="passwordTF" layoutX="56.0" layoutY="153.0" onAction="#onLoginBtnClick" prefHeight="29.0" prefWidth="225.0" promptText="Passwort" style="-fx-background-radius: 15;">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </PasswordField>
-                        <HBox layoutX="56.0" layoutY="190.0" prefHeight="50.0" prefWidth="225.0">
+                        <HBox alignment="CENTER" layoutX="35.0" layoutY="201.0" prefHeight="50.0" prefWidth="245.0">
                            <children>
-                              <Button fx:id="loginBtn" mnemonicParsing="false" onAction="#onLoginBtnClick" style="-fx-background-color: #00063F;" text="Anmelden" textFill="WHITE">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
+                              <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="27.0" prefWidth="108.0" style="-fx-background-color: ffffff; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: #211D5A;" text="ÜBERSPRINGEN" textFill="#211d5a">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
                                  <HBox.margin>
-                                    <Insets right="30.0" />
+                                    <Insets left="20.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button fx:id="guestLoginBtn" mnemonicParsing="false" onAction="#onGuestLoginBtnClick" style="-fx-background-color: #00063F;" text="Gast Login" textFill="WHITE">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
+                              <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" style="-fx-background-color: #211D5A; -fx-background-radius: 15;" text="ANMELDEN" textFill="#f2f4ff">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
                                  <HBox.margin>
-                                    <Insets left="28.0" />
+                                    <Insets left="20.0" />
                                  </HBox.margin>
                               </Button>
                            </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
                         </HBox>
                      </children>
                   </Pane>
