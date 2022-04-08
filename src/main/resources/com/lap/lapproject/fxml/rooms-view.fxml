@@ -216,7 +216,7 @@
                                 </ImageView>
                             </graphic>
                         </Button>
-                        <Button minWidth="43.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" style="-fx-background-color: grey;">
+                        <Button minWidth="43.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" style="-fx-background-color: #211D5A;" textFill="#211d5a">
                             <graphic>
                                 <ImageView fitHeight="15.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -225,7 +225,7 @@
                                 </ImageView>
                             </graphic>
                         </Button>
-                        <Button minWidth="73.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="78.0" style="-fx-background-color: grey;">
+                        <Button minWidth="73.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="78.0" style="-fx-background-color: #211D5A;">
                             <graphic>
                                 <ImageView fitHeight="15.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
