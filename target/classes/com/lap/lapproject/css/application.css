@@ -1,0 +1,9 @@
+.navigation-button{
+    -fx-background-color: blue;
+    -fx-text-fill: white;
+}
+
+.navigation-button:hover{
+    -fx-background-color: white;
+    -fx-text-fill: blue;
+}

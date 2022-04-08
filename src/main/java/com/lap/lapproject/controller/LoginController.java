@@ -69,7 +69,7 @@ public class LoginController implements Initializable {
         Stage currentStage = this.getCurrentStage();
         currentStage.close();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML + "bigscreen.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_BIGSCREEN));
         Scene scene = null;
 
         try {

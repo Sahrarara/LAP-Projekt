@@ -2,6 +2,7 @@ module com.lap.lapproject {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+    requires org.slf4j;
 
 
     opens com.lap.lapproject to javafx.fxml;
