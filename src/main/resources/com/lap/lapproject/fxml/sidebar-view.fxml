@@ -36,7 +36,7 @@
             <Insets top="25.0" />
          </GridPane.margin>
       </Label>
-      <Label text="Name" textFill="#f8f7f7" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <Label fx:id="nameLabel" text="Name" textFill="#f8f7f7" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <font>
             <Font name="Comic Sans MS" size="18.0" />
          </font>
