@@ -7,4 +7,5 @@ public class Constants {
     public final static String PATH_TO_FXML_COREDATA = "/com/lap/lapproject/fxml/coreData-view.fxml";
     public final static String PATH_TO_FXML_LOGIN = "/com/lap/lapproject/fxml/login-view.fxml";
 
+    public static final String PATH_TO_FXML_TRAINER = "/com/lap/lapproject/fxml/trainer.fxml";
 }

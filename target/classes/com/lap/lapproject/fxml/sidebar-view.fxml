@@ -23,10 +23,27 @@
       <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="119.0" minHeight="5.5" prefHeight="50.5" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="141.0" minHeight="10.0" prefHeight="83.0" valignment="CENTER" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
+      <Label alignment="CENTER" contentDisplay="TOP" prefHeight="35.0" prefWidth="256.0" text="WILLKOMMEN" textFill="WHITE">
+         <font>
+            <Font name="Comic Sans MS" size="32.0" />
+         </font>
+         <GridPane.margin>
+            <Insets top="25.0" />
+         </GridPane.margin>
+      </Label>
+      <Label text="Name" textFill="#f8f7f7" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+         <font>
+            <Font name="Comic Sans MS" size="18.0" />
+         </font>
+         <GridPane.margin>
+            <Insets top="25.0" />
+         </GridPane.margin>
+      </Label>
       <Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onCoreDataButtonPressed" prefHeight="30.0" prefWidth="265.0" styleClass="navigation-button" text="DASHBOARD" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="10.0" />
@@ -78,7 +95,12 @@
             <Font name="Comic Sans MS" size="14.0" />
          </font>
       </Button>
-      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="196.0" style="-fx-background-radius: 16; -fx-background-color: ffffff;" text="Logout" textFill="#211d5a" GridPane.halignment="CENTER" GridPane.rowIndex="8">
+      <Button fx:id="trainerBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" mnemonicParsing="false" onAction="#onTrainerBtnClick" prefHeight="30.0" prefWidth="245.0" styleClass="navigation-button" text="TRAINER" textFill="WHITE" GridPane.rowIndex="7">
+         <font>
+            <Font name="Comic Sans MS" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="logoutBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onLogoutBtnClick" prefHeight="25.0" prefWidth="196.0" style="-fx-background-radius: 16; -fx-background-color: ffffff;" text="Logout" textFill="#211d5a" GridPane.halignment="CENTER" GridPane.rowIndex="9">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
@@ -137,23 +159,7 @@
             <Insets left="60.0" />
          </GridPane.margin>
       </ImageView>
-      <Label alignment="CENTER" contentDisplay="TOP" prefHeight="35.0" prefWidth="256.0" text="WILLKOMMEN" textFill="WHITE">
-         <font>
-            <Font name="Comic Sans MS" size="32.0" />
-         </font>
-         <GridPane.margin>
-            <Insets top="25.0" />
-         </GridPane.margin>
-      </Label>
-      <Label text="Name" textFill="#f8f7f7" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-         <font>
-            <Font name="Comic Sans MS" size="18.0" />
-         </font>
-         <GridPane.margin>
-            <Insets top="25.0" />
-         </GridPane.margin>
-      </Label>
-      <ImageView fitHeight="20.0" fitWidth="146.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="8" GridPane.valignment="CENTER">
+      <ImageView fitHeight="20.0" fitWidth="146.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="9" GridPane.valignment="CENTER">
          <image>
             <Image url="@../images/lapproject/images/LogoutDB.png" />
          </image>
