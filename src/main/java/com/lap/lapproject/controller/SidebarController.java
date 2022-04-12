@@ -18,7 +18,7 @@ public class SidebarController extends BaseController{
     @FXML
     void onCoreDataButtonPressed(ActionEvent event){
         log.debug("Button pressed");
-        model.setPathForDetailView(Constants.PATH_TO_FXML_COREDATA);
+        model.setPathForDetailView(Constants.PATH_TO_FXML_DASHBOARD);
     }
 
     @FXML
@@ -30,5 +30,25 @@ public class SidebarController extends BaseController{
     private void onLogoutBtnClick(ActionEvent actionEvent) {
         //TODO: clear entire Stage (Sidebar needs to be removed)
         model.setPathForDetailView(Constants.PATH_TO_FXML_LOGIN);
+    }
+
+    @FXML
+    private void onUserBtnClick(ActionEvent actionEvent) {
+        model.setPathForDetailView(Constants.PATH_TO_FXML_PROFILE);
+    }
+
+    @FXML
+    private void onRoomBtnClick(ActionEvent actionEvent) {
+        model.setPathForDetailView(Constants.PATH_TO_FXML_ROOM);
+    }
+
+    @FXML
+    private void onGroupBtnClick(ActionEvent actionEvent) {
+        model.setPathForDetailView(Constants.PATH_TO_FXML_GROUP);
+    }
+
+    @FXML
+    private void onLocationBtnClick(ActionEvent actionEvent) {
+        model.setPathForDetailView(Constants.PATH_TO_FXML_LOCATION);
     }
 }

@@ -52,7 +52,7 @@
             <Font name="Comic Sans MS" size="14.0" />
          </font>
       </Button>
-      <Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="265.0" styleClass="navigation-button" text="STANDORT" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+      <Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onLocationBtnClick" prefHeight="30.0" prefWidth="265.0" styleClass="navigation-button" text="STANDORT" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin>
@@ -63,7 +63,7 @@
             <Font name="Comic Sans MS" size="14.0" />
          </font>
       </Button>
-      <Button alignment="CENTER" graphicTextGap="5.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="245.0" styleClass="navigation-button" text="USER" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+      <Button alignment="CENTER" graphicTextGap="5.0" mnemonicParsing="false" onAction="#onUserBtnClick" prefHeight="30.0" prefWidth="245.0" styleClass="navigation-button" text="USER" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
@@ -71,7 +71,7 @@
             <Font name="Comic Sans MS" size="14.0" />
          </font>
       </Button>
-      <Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="245.0" styleClass="navigation-button" text="RÄUME" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+      <Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#onRoomBtnClick" prefHeight="30.0" prefWidth="245.0" styleClass="navigation-button" text="RÄUME" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
@@ -79,7 +79,7 @@
             <Font name="Comic Sans MS" size="14.0" />
          </font>
       </Button>
-      <Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" mnemonicParsing="false" pickOnBounds="false" prefHeight="30.0" prefWidth="245.0" styleClass="navigation-button" text="GRUPPEN" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+      <Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" mnemonicParsing="false" onAction="#onGroupBtnClick" pickOnBounds="false" prefHeight="30.0" prefWidth="245.0" styleClass="navigation-button" text="GRUPPEN" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets left="4.0" />
          </GridPane.margin>
