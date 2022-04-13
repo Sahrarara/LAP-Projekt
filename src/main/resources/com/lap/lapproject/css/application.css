@@ -148,5 +148,21 @@
     -fx-text-fill: #211D5A;
 }
 
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane {
+    -fx-background: #F2F4FF;
+}
+
+.course-container {
+    -fx-pref-width: 219px;
+    -fx-pref-height: 117px;
+    -fx-background-color: white;
+    -fx-background-radius: 25px;
+}
+
+
 
 
