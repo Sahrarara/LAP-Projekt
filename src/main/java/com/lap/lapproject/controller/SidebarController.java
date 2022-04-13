@@ -30,7 +30,7 @@ public class SidebarController extends BaseController{
     private Label nameLabel;
 
     @FXML
-    void onCoreDataButtonPressed(ActionEvent event){
+    void onDashboardButtonPressed(ActionEvent event){
         model.setPathForDetailView(Constants.PATH_TO_FXML_DASHBOARD);
     }
 
@@ -55,13 +55,18 @@ public class SidebarController extends BaseController{
     }
 
     @FXML
-    private void onGroupBtnClick(ActionEvent actionEvent) {
-        model.setPathForDetailView(Constants.PATH_TO_FXML_GROUP);
+    private void onLocationBtnClick(ActionEvent actionEvent) {
+        model.setPathForDetailView(Constants.PATH_TO_FXML_LOCATION);
     }
 
     @FXML
-    private void onLocationBtnClick(ActionEvent actionEvent) {
-        model.setPathForDetailView(Constants.PATH_TO_FXML_LOCATION);
+    private void onCourseBtnClick(ActionEvent actionEvent) {
+        model.setPathForDetailView(Constants.PATH_TO_FXML_COURSE);
+    }
+
+    @FXML
+    private void onCalenderBtnClick(ActionEvent actionEvent) {
+        model.setPathForDetailView(Constants.PATH_TO_FXML_CALENDER);
     }
 
     public void initialize(URL url, ResourceBundle resourceBundle) {

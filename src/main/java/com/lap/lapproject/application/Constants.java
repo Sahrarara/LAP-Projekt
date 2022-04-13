@@ -9,10 +9,12 @@ public class Constants {
     public final static String PATH_TO_FXML_LOGIN = "/com/lap/lapproject/fxml/login-view.fxml";
 
     public static final String PATH_TO_FXML_TRAINER = "/com/lap/lapproject/fxml/trainer.fxml";
-    //TODO: Make profile-view.fxml (ich denke Dani sitzt da gerade dran)
+    //TODO: Bitte einmal in profile view schauen, Sarah kann es nicht so schön wie ihr machen. Sorry
     public static final String PATH_TO_FXML_PROFILE = "/com/lap/lapproject/fxml/profile-view.fxml";
     public static final String PATH_TO_FXML_ROOM = "/com/lap/lapproject/fxml/rooms-view.fxml";
     public static final String PATH_TO_FXML_GROUP = "/com/lap/lapproject/fxml/groups-view.fxml";
     //TODO: Make locations-view.fxml
     public static final String PATH_TO_FXML_LOCATION = "/com/lap/lapproject/fxml/locations-view.fxml";
+    public static final String PATH_TO_FXML_COURSE = "/com/lap/lapproject/fxml/course-view.fxml";;
+    public static final String PATH_TO_FXML_CALENDER = "/com/lap/lapproject/fxml/calender-view.fxml";;
 }
