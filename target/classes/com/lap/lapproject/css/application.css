@@ -119,15 +119,43 @@
 }
 
 .input-form {
-    -fx-border-color: #b3b5ba;
+    -fx-border-color: rgba(179, 181, 186, 0.55);
     -fx-border-radius: 2px;
     -fx-background-radius: 2px;
+    -fx-background-color: #fff;
+}
+
+.input-form:focused {
+    -fx-border-color: #5C9DDE;
+
+}
+
+.text-area .content {
+    -fx-background-color: #fff;
 }
 
 .input-description {
     -fx-text-fill: #211D5A;
     -fx-font-size: 16px;
 }
+
+.check-box {
+    -fx-text-fill: #211D5A;
+}
+
+.check-box .box {
+    -fx-border-color: rgba(179, 181, 186, 0.55);
+    -fx-background-color: white;
+    -fx-border-radius: 3px;
+    -fx-background-radius: 3px;
+}
+
+.date-picker > .text-field {
+    -fx-background-color: #fff;
+}
+
+
+
 
 .button-style {
     -fx-font-family: 'Comic Sans MS';
@@ -147,6 +175,22 @@
     -fx-border-color: #b3b5ba;
     -fx-text-fill: #211D5A;
 }
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane {
+    -fx-background: #F2F4FF;
+}
+
+.course-container {
+    -fx-pref-width: 219px;
+    -fx-pref-height: 117px;
+    -fx-background-color: white;
+    -fx-background-radius: 25px;
+}
+
 
 
 

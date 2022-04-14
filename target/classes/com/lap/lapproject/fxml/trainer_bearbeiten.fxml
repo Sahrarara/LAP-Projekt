@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+
+<SplitPane dividerPositions="0.14" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="401.0" prefWidth="594.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.fxml.TrainerBearbeiten">
+   <items>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #211d5a;">
+         <children>
+            <Label layoutX="33.0" layoutY="9.0" text="Hinzufügen" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="299.0" layoutY="9.0" text="TRAINER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: f2f4ff;">
+         <children>
+            <GridPane layoutX="22.0" layoutY="7.0" prefHeight="280.0" prefWidth="550.0" style="-fx-border-style: grey; -fx-grid-lines-visible: 0;">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="132.0" minWidth="10.0" prefWidth="123.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="172.5" minWidth="10.0" prefWidth="132.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="275.0" minWidth="10.0" prefWidth="275.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="39.5" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="87.0" minHeight="10.0" prefHeight="64.5" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label alignment="CENTER" layoutX="75.0" layoutY="8.0" prefHeight="18.0" prefWidth="180.0" text="Nachname" GridPane.rowIndex="1" />
+                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="180.0" text="E-Mail" GridPane.rowIndex="2" />
+                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="180.0" text="Telephone" GridPane.rowIndex="3" />
+                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="180.0" text="Aktiv" GridPane.rowIndex="4" />
+                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="180.0" text="Foto" GridPane.rowIndex="5" />
+                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="180.0" text="Beschreibung" GridPane.rowIndex="6" />
+                  <CheckBox mnemonicParsing="false" prefHeight="16.0" prefWidth="20.0" textFill="#9f9f9f" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets left="20.0" />
+                     </GridPane.margin>
+                  </CheckBox>
+                  <CheckBox mnemonicParsing="false" prefHeight="16.0" prefWidth="20.0" textFill="#9f9f9f" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <GridPane.margin>
+                        <Insets left="20.0" />
+                     </GridPane.margin>
+                  </CheckBox>
+                  <CheckBox mnemonicParsing="false" prefHeight="16.0" prefWidth="20.0" textFill="#9f9f9f" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets left="20.0" />
+                     </GridPane.margin>
+                  </CheckBox>
+                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="118.0" style="-fx-border-radius: 0;" text="Ausblenden" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="20.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="118.0" text="Ausblenden" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="20.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="118.0" text="Ausblenden" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="20.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <RadioButton mnemonicParsing="false" prefHeight="30.0" prefWidth="126.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <GridPane.margin>
+                        <Insets left="20.0" />
+                     </GridPane.margin>
+                  </RadioButton>
+                  <TextField prefHeight="20.0" prefWidth="250.0" style="-fx-background-color: white;" text="Daniela " GridPane.columnIndex="2">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <TextField prefHeight="20.0" prefWidth="250.0" style="-fx-background-color: white;" text="Fuchs" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <TextField prefHeight="20.0" prefWidth="250.0" promptText="URL" style="-fx-background-color: white;" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <TextField prefHeight="20.0" prefWidth="250.0" promptText="Telefon" style="-fx-background-color: white;" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <TextField prefHeight="20.0" prefWidth="250.0" promptText="E-Mail" style="-fx-background-color: white;" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <TextArea prefHeight="45.0" prefWidth="275.0" promptText="Beschreibung" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </TextArea>
+                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="139.0" text="Vorname" />
+               </children>
+            </GridPane>
+            <Button layoutX="442.0" layoutY="295.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" style="-fx-background-radius: 15; -fx-background-color: #211d5a;" text="SPEICHERN" textFill="WHITE" />
+         </children>
+      </AnchorPane>
+   </items>
+   <cursor>
+      <Cursor fx:constant="NONE" />
+   </cursor>
+</SplitPane>

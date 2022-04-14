@@ -15,6 +15,8 @@ public class Constants {
     public static final String PATH_TO_FXML_GROUP = "/com/lap/lapproject/fxml/groups-view.fxml";
     //TODO: Make locations-view.fxml
     public static final String PATH_TO_FXML_LOCATION = "/com/lap/lapproject/fxml/locations-view.fxml";
-    public static final String PATH_TO_FXML_COURSE = "/com/lap/lapproject/fxml/course-view.fxml";;
-    public static final String PATH_TO_FXML_CALENDER = "/com/lap/lapproject/fxml/calender-view.fxml";;
+    public static final String PATH_TO_FXML_COURSE = "/com/lap/lapproject/fxml/events-view.fxml";
+    //TODO: Make calender-view.fxml
+    public static final String PATH_TO_FXML_CALENDER = "/com/lap/lapproject/fxml/calender-view.fxml";
+    public static final String PATH_TO_FXML_CREATE_NEW_TRAINER = "/com/lap/lapproject/fxml/adduser-view.fxml";
 }
