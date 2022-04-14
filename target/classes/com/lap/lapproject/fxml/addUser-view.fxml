@@ -109,7 +109,7 @@
             <Insets />
          </GridPane.margin>
       </TextArea>
-      <Button mnemonicParsing="false" text="ABBRECHEN" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="9">
+      <Button mnemonicParsing="false" onAction="#onAbortBtnClick" text="ABBRECHEN" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="9">
          <styleClass>
             <String fx:value="button-style" />
             <String fx:value="button-light" />
@@ -118,7 +118,7 @@
             <Insets right="20.0" />
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" text="HINZUFÜGEN" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="9">
+      <Button mnemonicParsing="false" onAction="#onAddBtnClick" text="HINZUFÜGEN" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="9">
          <GridPane.margin>
             <Insets left="100.0" right="15.0" />
          </GridPane.margin>
@@ -135,7 +135,7 @@
          </GridPane.margin>
       </CheckBox>
       <CheckBox mnemonicParsing="false" text="Ausblenden" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
-      <Button mnemonicParsing="false" text="DATEI" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
+      <Button fx:id="FileBtn" mnemonicParsing="false" onAction="#onFileBtnClick" text="DATEI" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
          <GridPane.margin>
             <Insets right="15.0" />
          </GridPane.margin>
