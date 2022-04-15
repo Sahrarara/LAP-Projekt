@@ -71,22 +71,22 @@
             <Insets left="50.0" />
          </GridPane.margin>
       </Label>
-      <TextField maxWidth="385.0" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+      <TextField fx:id="roomNameTextField" maxWidth="385.0" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </TextField>
-      <TextField maxWidth="385.0" styleClass="input-form" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4">
+      <TextField fx:id="sizeTextField" maxWidth="385.0" styleClass="input-form" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </TextField>
-      <TextField maxWidth="300.0" styleClass="input-form" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5">
+      <TextField fx:id="photoPathTextField" maxWidth="300.0" styleClass="input-form" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </TextField>
-      <Button mnemonicParsing="false" text="ABBRECHEN" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+      <Button mnemonicParsing="false" onAction="#onAbortBtnClick" text="ABBRECHEN" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
          <styleClass>
             <String fx:value="button-style" />
             <String fx:value="button-light" />
@@ -95,7 +95,7 @@
             <Insets right="100.0" />
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" text="HINZUFÜGEN" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+      <Button mnemonicParsing="false" onAction="#onAddBtnClick" text="HINZUFÜGEN" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
          <GridPane.margin>
             <Insets left="220.0" right="15.0" />
          </GridPane.margin>
@@ -104,7 +104,7 @@
             <String fx:value="button-dark" />
          </styleClass>
       </Button>
-      <Button mnemonicParsing="false" text="DATEI" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+      <Button mnemonicParsing="false" onAction="#onFileBtnClick" text="DATEI" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets right="80.0" />
          </GridPane.margin>
@@ -113,7 +113,7 @@
             <String fx:value="button-dark" />
          </styleClass>
       </Button>
-      <ChoiceBox prefWidth="385.0" styleClass="input-form" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <ChoiceBox prefWidth="385.0" styleClass="input-form" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      <ChoiceBox fx:id="locationChoiceBox" prefWidth="385.0" styleClass="input-form" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <ChoiceBox fx:id="equipmentChoiceBox" prefWidth="385.0" styleClass="input-form" GridPane.columnIndex="1" GridPane.rowIndex="6" />
    </children>
 </GridPane>
