@@ -72,12 +72,12 @@
             <Insets left="50.0" />
          </GridPane.margin>
       </Label>
-      <TextField maxWidth="385.0" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+      <TextField fx:id="courseNameLabel" maxWidth="385.0" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </TextField>
-      <Button mnemonicParsing="false" text="ABBRECHEN" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+      <Button mnemonicParsing="false" onAction="#onAbortBtnClick" text="ABBRECHEN" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
          <styleClass>
             <String fx:value="button-style" />
             <String fx:value="button-light" />
@@ -86,7 +86,7 @@
             <Insets right="100.0" />
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" text="HINZUFÜGEN" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+      <Button mnemonicParsing="false" onAction="#onAddBtnClick" text="HINZUFÜGEN" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
          <GridPane.margin>
             <Insets left="220.0" right="15.0" />
          </GridPane.margin>
@@ -95,9 +95,9 @@
             <String fx:value="button-dark" />
          </styleClass>
       </Button>
-      <ChoiceBox prefWidth="385.0" styleClass="input-form" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="4" />
-      <DatePicker layoutX="221.0" layoutY="225.0" styleClass="date-picker" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-      <TextField layoutX="221.0" layoutY="112.0" maxWidth="385.0" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      <ChoiceBox fx:id="programChoiceBox" prefWidth="385.0" styleClass="input-form" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <DatePicker fx:id="startDate" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <DatePicker fx:id="endDate" layoutX="221.0" layoutY="225.0" styleClass="date-picker" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <TextField fx:id="courseSize" layoutX="221.0" layoutY="112.0" maxWidth="385.0" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="1" GridPane.rowIndex="6" />
    </children>
 </GridPane>

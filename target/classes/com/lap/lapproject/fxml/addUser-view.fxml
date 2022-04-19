@@ -79,32 +79,32 @@
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin></Label>
-      <TextField maxWidth="385.0" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+      <TextField fx:id="firstnameTextField" maxWidth="385.0" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </TextField>
-      <TextField maxWidth="385.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+      <TextField fx:id="lastnameTextField" maxWidth="385.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </TextField>
-      <TextField maxWidth="385.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="4">
+      <TextField fx:id="emailTextField" maxWidth="385.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </TextField>
-      <TextField maxWidth="385.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="5">
+      <TextField fx:id="telephoneTextField" maxWidth="385.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </TextField>
-      <TextField maxWidth="300.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="7">
+      <TextField fx:id="photoTextField" maxWidth="300.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="7">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </TextField>
-      <TextArea maxWidth="385.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="8">
+      <TextArea fx:id="descriptionTextArea" maxWidth="385.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="8">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
@@ -127,14 +127,14 @@
             <String fx:value="button-dark" />
          </styleClass>
       </Button>
-      <CheckBox mnemonicParsing="false" text="Ausblenden" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-      <CheckBox mnemonicParsing="false" text="Ausblenden" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-      <CheckBox mnemonicParsing="false" text="                    " GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6">
+      <CheckBox fx:id="emailCheckbox" mnemonicParsing="false" text="Ausblenden" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+      <CheckBox fx:id="telephoneCheckbox" mnemonicParsing="false" text="Ausblenden" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+      <CheckBox fx:id="activeCheckbox" mnemonicParsing="false" text="                    " GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </CheckBox>
-      <CheckBox mnemonicParsing="false" text="Ausblenden" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+      <CheckBox fx:id="photoCheckbox" mnemonicParsing="false" text="Ausblenden" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
       <Button fx:id="FileBtn" mnemonicParsing="false" onAction="#onFileBtnClick" text="DATEI" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
          <GridPane.margin>
             <Insets right="15.0" />
