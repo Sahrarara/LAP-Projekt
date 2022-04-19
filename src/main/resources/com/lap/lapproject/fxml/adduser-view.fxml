@@ -18,19 +18,19 @@
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="144.5" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="118.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="650.0" minWidth="10.0" prefWidth="400.5" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="628.0" minWidth="10.0" prefWidth="10.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="628.0" minWidth="10.0" prefWidth="30.0" />
    </columnConstraints>
    <rowConstraints>
       <RowConstraints maxHeight="222.0" minHeight="10.0" percentHeight="0.0" prefHeight="77.5" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="37.5" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="332.5" prefHeight="10.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="332.5" prefHeight="10.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="332.5" prefHeight="10.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="332.5" prefHeight="10.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="322.5" prefHeight="10.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="322.5" prefHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="332.5" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="332.5" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="332.5" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="332.5" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="322.5" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="322.5" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="322.5" minHeight="10.0" prefHeight="72.5" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="370.5" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="370.5" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
       <Pane minHeight="40.0" prefHeight="40.0" style="-fx-background-color: #211D5A;" GridPane.halignment="CENTER">
@@ -44,41 +44,20 @@
       </Pane>
       <Pane minHeight="40.0" prefHeight="90.0" prefWidth="411.0" style="-fx-background-color: #211D5A;" GridPane.columnIndex="2">
          <children>
-            <Label layoutY="29.0" styleClass="title-form" text="TRAINER" textFill="WHITE">
+            <Label layoutX="61.0" layoutY="28.0" styleClass="title-form" text="TRAINER" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <Label styleClass="input-description" text="Vorname" GridPane.halignment="LEFT" GridPane.rowIndex="2">
-         <GridPane.margin>
-            <Insets left="20.0" />
-         </GridPane.margin></Label>
-      <Label styleClass="input-description" text="Nachname" GridPane.halignment="LEFT" GridPane.rowIndex="3">
-         <GridPane.margin>
-            <Insets left="20.0" />
-         </GridPane.margin></Label>
-      <Label styleClass="input-description" text="E-Mail" GridPane.halignment="LEFT" GridPane.rowIndex="4">
-         <GridPane.margin>
-            <Insets left="20.0" />
-         </GridPane.margin></Label>
-      <Label styleClass="input-description" text="Telefon" GridPane.halignment="LEFT" GridPane.rowIndex="5">
-         <GridPane.margin>
-            <Insets left="20.0" />
-         </GridPane.margin></Label>
-      <Label styleClass="input-description" text="Aktiv" GridPane.halignment="LEFT" GridPane.rowIndex="6">
-         <GridPane.margin>
-            <Insets left="20.0" />
-         </GridPane.margin></Label>
-      <Label styleClass="input-description" text="Foto" GridPane.halignment="LEFT" GridPane.rowIndex="7">
-         <GridPane.margin>
-            <Insets left="20.0" />
-         </GridPane.margin></Label>
-      <Label styleClass="input-description" text="Beschreibung" GridPane.halignment="LEFT" GridPane.rowIndex="8">
-         <GridPane.margin>
-            <Insets left="20.0" />
-         </GridPane.margin></Label>
+      <Label styleClass="input-description" text="Vorname" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+      <Label styleClass="input-description" text="Nachname" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+      <Label styleClass="input-description" text="E-Mail" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+      <Label styleClass="input-description" text="Telefon" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+      <Label styleClass="input-description" text="Aktiv" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+      <Label styleClass="input-description" text="Foto" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+      <Label styleClass="input-description" text="Beschreibung" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
       <TextField maxWidth="385.0" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets />
