@@ -22,6 +22,8 @@ public class ProfileController {
     private TextField telephoneLabel;
     @FXML
     private TextArea descriptionLabel;
+    @FXML
+    private ImageView pathToImage;
 
     @FXML
     private void onSaveBtnClick(ActionEvent actionEvent) {
