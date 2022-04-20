@@ -21,7 +21,7 @@
          <items>
             <AnchorPane>
                <children>
-                  <Label layoutX="76.0" layoutY="22.0" prefHeight="56.0" prefWidth="235.0" styleClass="title-first" text="BOOKING" textFill="#201d592d">
+                  <Label layoutX="76.0" layoutY="22.0" prefHeight="56.0" prefWidth="342.0" styleClass="title-first" text="RAUMBELEGUNG" textFill="#201d592d">
                      <font>
                         <Font name="Comic Sans MS" size="40.0" />
                      </font>
