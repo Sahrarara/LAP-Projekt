@@ -89,11 +89,11 @@
                            <graphic>
                               <CheckBox mnemonicParsing="false" />
                            </graphic></TableColumn>
-                        <TableColumn prefWidth="144.5" text="Name" />
-                        <TableColumn prefWidth="144.5" text="Kursbegin" />
-                        <TableColumn minWidth="0.0" prefWidth="144.5" text="Kursende" />
-                        <TableColumn minWidth="0.0" prefWidth="144.5" text="Programm" />
-                        <TableColumn text="Teilnehmer " />
+                        <TableColumn minWidth="-1.0" prefWidth="120.0" text="Name" />
+                        <TableColumn minWidth="-1.0" prefWidth="144.5" text="Kursbegin" />
+                        <TableColumn minWidth="-1.0" prefWidth="144.5" text="Kursende" />
+                        <TableColumn minWidth="-1.0" prefWidth="135.5" text="Programm" />
+                        <TableColumn prefWidth="113.5" text="Gruppengröße" />
                      </columns>
                   </TableView>
                </children>
