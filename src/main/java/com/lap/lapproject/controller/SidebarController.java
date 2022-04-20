@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +28,28 @@ public class SidebarController extends BaseController{
     private Button logoutBtn;
     @FXML
     private Label nameLabel;
+    @FXML
+    private Button locationBtn;
+    @FXML
+    private Button profileBtn;
+    @FXML
+    private Button roomsBtn;
+    @FXML
+    private Button courseBtn;
+    @FXML
+    private Button trainerBtn;
+    @FXML
+    private Button calenderBtn;
+    @FXML
+    private ImageView profileIcon;
+    @FXML
+    private ImageView locationIcon;
+    @FXML
+    private ImageView roomsIcon;
+    @FXML
+    private ImageView courseIcon;
+    @FXML
+    private ImageView trainerIcon;
 
     @FXML
     void onDashboardButtonPressed(ActionEvent event){
@@ -70,7 +93,7 @@ public class SidebarController extends BaseController{
         UserData.email = null;
         UserData.telephoneNmbr = 0;
         UserData.description = null;
-        UserData.authority = null;
+        UserData.authority = "guest";
         moveToLogin();
     }
 
@@ -81,19 +104,25 @@ public class SidebarController extends BaseController{
     }
 
     private void authorityVisibility(){
-
         String authority = UserData.authority;
-        if (authority != null){
             switch (authority){
-                case "coach":
-                    System.out.println("Coach privileges");
                 case "admin":
                     System.out.println("Admin privileges");
+                    break;
+                case "coach":
+                    System.out.println("Coach privileges");
+                    trainerIcon.setVisible(false);
+                    trainerBtn.setVisible(false);
+                    break;
                 default:
+                    System.out.println("Guest privileges");
                     logoutBtn.setText(" Zurück zum Login");
+                    trainerIcon.setVisible(false);
+                    trainerBtn.setVisible(false);
+                    profileIcon.setVisible(false);
+                    profileBtn.setVisible(false);
+                    break;
             }
-        }
-        logoutBtn.setText(" Zurück zum Login");
     }
 
     private void setUsername(){
