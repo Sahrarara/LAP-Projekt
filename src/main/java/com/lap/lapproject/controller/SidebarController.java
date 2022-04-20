@@ -36,15 +36,8 @@ public class SidebarController extends BaseController{
     }
 
     @FXML
-    private void onTrainerBtnClick(ActionEvent actionEvent) {
-        model.setPathForDetailView(Constants.PATH_TO_FXML_TRAINER);
-    }
-
-    @FXML
-    private void onLogoutBtnClick(ActionEvent actionEvent) {
-        UserData.firstName = null;
-        UserData.lastName = null;
-        moveToLogin();
+    private void onLocationBtnClick(ActionEvent actionEvent) {
+        model.setPathForDetailView(Constants.PATH_TO_FXML_LOCATION);
     }
 
     @FXML
@@ -58,18 +51,33 @@ public class SidebarController extends BaseController{
     }
 
     @FXML
-    private void onLocationBtnClick(ActionEvent actionEvent) {
-        model.setPathForDetailView(Constants.PATH_TO_FXML_LOCATION);
-    }
-
-    @FXML
     private void onCourseBtnClick(ActionEvent actionEvent) {
         model.setPathForDetailView(Constants.PATH_TO_FXML_COURSE);
     }
 
     @FXML
+    private void onTrainerBtnClick(ActionEvent actionEvent) {
+        model.setPathForDetailView(Constants.PATH_TO_FXML_TRAINER);
+    }
+
+    @FXML
     private void onCalenderBtnClick(ActionEvent actionEvent) {
         model.setPathForDetailView(Constants.PATH_TO_FXML_CALENDER);
+    }
+
+    @FXML
+    private void onLogoutBtnClick(ActionEvent actionEvent) {
+        UserData.firstName = null;
+        UserData.lastName = null;
+        UserData.email = null;
+        UserData.telephoneNmbr = 0;
+        UserData.description = null;
+        moveToLogin();
+    }
+
+    @FXML
+    private void initialize(){
+        setUsername();
     }
 
     private void setUsername(){
@@ -78,11 +86,6 @@ public class SidebarController extends BaseController{
         } else {
             nameLabel.setText("Gast");
         }
-    }
-
-    @FXML
-    private void initialize(){
-        setUsername();
     }
 
     private Stage getCurrentStage(){

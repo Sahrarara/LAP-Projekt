@@ -12,6 +12,7 @@ public class Constants {
     public static final String PATH_TO_FXML_PROFILE = "/com/lap/lapproject/fxml/profile-view.fxml";
     public static final String PATH_TO_FXML_ROOM = "/com/lap/lapproject/fxml/rooms-view.fxml";
     public static final String PATH_TO_FXML_LOCATION = "/com/lap/lapproject/fxml/locations-view.fxml";
+    //TODO: Find out why events-view.fxml won't be called
     public static final String PATH_TO_FXML_COURSE = "/com/lap/lapproject/fxml/events-view.fxml";
     //TODO: Make calender-view.fxml
     public static final String PATH_TO_FXML_CALENDER = "/com/lap/lapproject/fxml/calender-view.fxml";
