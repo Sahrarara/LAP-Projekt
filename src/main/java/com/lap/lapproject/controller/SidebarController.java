@@ -4,6 +4,7 @@ import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.Admin;
 import com.lap.lapproject.model.Trainer;
+import com.lap.lapproject.model.UserData;
 import com.lap.lapproject.model.UserModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,6 +42,8 @@ public class SidebarController extends BaseController{
 
     @FXML
     private void onLogoutBtnClick(ActionEvent actionEvent) {
+        UserData.firstName = null;
+        UserData.lastName = null;
         moveToLogin();
     }
 
@@ -69,8 +72,17 @@ public class SidebarController extends BaseController{
         model.setPathForDetailView(Constants.PATH_TO_FXML_CALENDER);
     }
 
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        nameLabel.setText("Gast");
+    private void setUsername(){
+        if (UserData.firstName != null){
+            nameLabel.setText(UserData.firstName);
+        } else {
+            nameLabel.setText("Gast");
+        }
+    }
+
+    @FXML
+    private void initialize(){
+        setUsername();
     }
 
     private Stage getCurrentStage(){

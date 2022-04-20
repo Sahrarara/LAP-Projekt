@@ -13,27 +13,28 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane prefHeight="584.0" prefWidth="699.0" style="-fx-background-color: #F2F4FF;" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.AddUserController">
+<GridPane prefHeight="552.0" prefWidth="776.0" style="-fx-background-color: #F2F4FF;" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.AddUserController">
    <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="144.5" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="118.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="650.0" minWidth="10.0" prefWidth="400.5" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="628.0" minWidth="10.0" prefWidth="10.0" />
+      <ColumnConstraints hgrow="SOMETIMES" prefWidth="80.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="112.0" prefWidth="112.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="147.5" minWidth="104.5" prefWidth="124.5" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="407.0" minWidth="368.5" prefWidth="388.0" />
+      <ColumnConstraints hgrow="SOMETIMES" prefWidth="80.0" />
    </columnConstraints>
    <rowConstraints>
       <RowConstraints maxHeight="222.0" minHeight="10.0" percentHeight="0.0" prefHeight="77.5" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="37.5" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="332.5" prefHeight="10.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="332.5" prefHeight="10.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="332.5" prefHeight="10.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="332.5" prefHeight="10.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="322.5" prefHeight="10.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="322.5" prefHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints prefHeight="3.0" vgrow="SOMETIMES" />
+      <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="322.5" minHeight="10.0" prefHeight="72.5" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="370.5" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="370.5" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <Pane minHeight="40.0" prefHeight="40.0" style="-fx-background-color: #211D5A;" GridPane.halignment="CENTER">
+      <Pane minHeight="40.0" prefHeight="78.0" prefWidth="150.0" style="-fx-background-color: #211D5A;" GridPane.columnIndex="1" GridPane.halignment="CENTER">
          <children>
             <Label layoutX="20.0" layoutY="32.0" text="Hinzufügen" textFill="WHITE">
                <font>
@@ -42,74 +43,74 @@
             </Label>
          </children>
       </Pane>
-      <Pane minHeight="40.0" prefHeight="90.0" prefWidth="411.0" style="-fx-background-color: #211D5A;" GridPane.columnIndex="2">
+      <Pane minHeight="40.0" prefHeight="90.0" prefWidth="411.0" style="-fx-background-color: #211D5A;" GridPane.columnIndex="3">
          <children>
-            <Label layoutY="29.0" styleClass="title-form" text="TRAINER" textFill="WHITE">
+            <Label layoutX="61.0" layoutY="28.0" styleClass="title-form" text="TRAINER" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <Label styleClass="input-description" text="Vorname" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+      <Label styleClass="input-description" text="Vorname" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
          <GridPane.margin>
-            <Insets left="20.0" />
+            <Insets left="10.0" />
          </GridPane.margin></Label>
-      <Label styleClass="input-description" text="Nachname" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+      <Label styleClass="input-description" text="Nachname" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3">
          <GridPane.margin>
-            <Insets left="20.0" />
+            <Insets left="10.0" />
          </GridPane.margin></Label>
-      <Label styleClass="input-description" text="E-Mail" GridPane.halignment="LEFT" GridPane.rowIndex="4">
+      <Label styleClass="input-description" text="E-Mail" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4">
          <GridPane.margin>
-            <Insets left="20.0" />
+            <Insets left="10.0" />
          </GridPane.margin></Label>
-      <Label styleClass="input-description" text="Telefon" GridPane.halignment="LEFT" GridPane.rowIndex="5">
+      <Label styleClass="input-description" text="Telefon" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5">
          <GridPane.margin>
-            <Insets left="20.0" />
+            <Insets left="10.0" />
          </GridPane.margin></Label>
-      <Label styleClass="input-description" text="Aktiv" GridPane.halignment="LEFT" GridPane.rowIndex="6">
+      <Label styleClass="input-description" text="Aktiv" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="6">
          <GridPane.margin>
-            <Insets left="20.0" />
+            <Insets left="10.0" />
          </GridPane.margin></Label>
-      <Label styleClass="input-description" text="Foto" GridPane.halignment="LEFT" GridPane.rowIndex="7">
+      <Label styleClass="input-description" text="Foto" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="7">
          <GridPane.margin>
-            <Insets left="20.0" />
+            <Insets left="10.0" />
          </GridPane.margin></Label>
-      <Label styleClass="input-description" text="Beschreibung" GridPane.halignment="LEFT" GridPane.rowIndex="8">
+      <Label styleClass="input-description" text="Beschreibung" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="8">
          <GridPane.margin>
-            <Insets left="20.0" />
+            <Insets left="10.0" />
          </GridPane.margin></Label>
-      <TextField maxWidth="385.0" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+      <TextField maxWidth="385.0" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </TextField>
-      <TextField maxWidth="385.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+      <TextField maxWidth="385.0" styleClass="input-form" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </TextField>
-      <TextField maxWidth="385.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="4">
+      <TextField maxWidth="385.0" styleClass="input-form" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </TextField>
-      <TextField maxWidth="385.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="5">
+      <TextField maxWidth="385.0" styleClass="input-form" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </TextField>
-      <TextField maxWidth="300.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="7">
+      <TextField maxWidth="300.0" styleClass="input-form" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="7">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </TextField>
-      <TextArea maxWidth="385.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="8">
+      <TextArea maxWidth="385.0" styleClass="input-form" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="8">
          <GridPane.margin>
-            <Insets />
+            <Insets bottom="10.0" top="10.0" />
          </GridPane.margin>
       </TextArea>
-      <Button mnemonicParsing="false" text="ABBRECHEN" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="9">
+      <Button mnemonicParsing="false" text="ABBRECHEN" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="9">
          <styleClass>
             <String fx:value="button-style" />
             <String fx:value="button-light" />
@@ -118,33 +119,34 @@
             <Insets right="20.0" />
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" text="HINZUFÜGEN" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="9">
+      <Button mnemonicParsing="false" text="HINZUFÜGEN" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="9">
          <GridPane.margin>
-            <Insets left="100.0" right="15.0" />
+            <Insets />
          </GridPane.margin>
          <styleClass>
             <String fx:value="button-style" />
             <String fx:value="button-dark" />
          </styleClass>
       </Button>
-      <CheckBox mnemonicParsing="false" text="Ausblenden" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-      <CheckBox mnemonicParsing="false" text="Ausblenden" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-      <CheckBox mnemonicParsing="false" text="                    " GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6">
+      <CheckBox mnemonicParsing="false" text="Ausblenden" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+      <CheckBox mnemonicParsing="false" text="Ausblenden" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+      <CheckBox mnemonicParsing="false" text="                    " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </CheckBox>
-      <CheckBox mnemonicParsing="false" text="Ausblenden" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
-      <Button mnemonicParsing="false" text="DATEI" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
+      <CheckBox mnemonicParsing="false" text="Ausblenden" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+      <Button mnemonicParsing="false" text="DATEI" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
          <GridPane.margin>
-            <Insets right="15.0" />
+            <Insets />
          </GridPane.margin>
          <styleClass>
             <String fx:value="button-style" />
             <String fx:value="button-dark" />
          </styleClass>
       </Button>
-      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #211D5A;" GridPane.columnIndex="1" />
-      <Pane prefHeight="90.0" prefWidth="40.0" style="-fx-background-color: #211D5A;" GridPane.columnIndex="3" />
+      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #211D5A;" GridPane.columnIndex="2" />
+      <Pane prefHeight="90.0" prefWidth="40.0" style="-fx-background-color: #211D5A;" GridPane.columnIndex="4" />
+      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #211D5A;" />
    </children>
 </GridPane>
