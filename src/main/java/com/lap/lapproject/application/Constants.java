@@ -7,7 +7,6 @@ public class Constants {
     public final static String PATH_TO_FXML_DASHBOARD = "/com/lap/lapproject/fxml/dashboard-view.fxml";
     public final static String PATH_TO_FXML_LOGIN = "/com/lap/lapproject/fxml/login-view.fxml";
     public static final String PATH_TO_FXML_TRAINER = "/com/lap/lapproject/fxml/trainer.fxml";
-    //TODO: Bitte einmal in profile view schauen, Sarah kann es nicht so schön wie ihr machen. Sorry
     public static final String PATH_TO_FXML_PROFILE = "/com/lap/lapproject/fxml/profile-view.fxml";
     public static final String PATH_TO_FXML_ROOM = "/com/lap/lapproject/fxml/rooms-view.fxml";
     public static final String PATH_TO_FXML_LOCATION = "/com/lap/lapproject/fxml/location-view.fxml";

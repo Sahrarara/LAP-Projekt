@@ -24,8 +24,6 @@ public class SidebarController extends BaseController{
 
     private static final Logger log = LoggerFactory.getLogger(SidebarController.class);
     @FXML
-    private Button trainerBtn;
-    @FXML
     private Button logoutBtn;
     @FXML
     private Label nameLabel;
@@ -72,12 +70,30 @@ public class SidebarController extends BaseController{
         UserData.email = null;
         UserData.telephoneNmbr = 0;
         UserData.description = null;
+        UserData.authority = null;
         moveToLogin();
     }
 
     @FXML
     private void initialize(){
+        authorityVisibility();
         setUsername();
+    }
+
+    private void authorityVisibility(){
+
+        String authority = UserData.authority;
+        if (authority != null){
+            switch (authority){
+                case "coach":
+                    System.out.println("Coach privileges");
+                case "admin":
+                    System.out.println("Admin privileges");
+                default:
+                    logoutBtn.setText(" Zurück zum Login");
+            }
+        }
+        logoutBtn.setText(" Zurück zum Login");
     }
 
     private void setUsername(){

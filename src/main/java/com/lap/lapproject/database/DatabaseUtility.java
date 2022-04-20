@@ -108,9 +108,10 @@ public class DatabaseUtility {
                         UserData.email = email;
                         UserData.telephoneNmbr = phoneNmbr;
                         UserData.description = description;
-                        System.out.println(email);
-                        System.out.println(admin.getEmail());
-                        System.out.println(UserData.email);
+                        UserData.authority = authority;
+                        System.out.println(authority);
+                        System.out.println(admin.getAuthority());
+                        System.out.println(UserData.authority);
                         return true;
                     case "coach":
                         Trainer trainer = new Trainer(user, firstname, lastname, authority, adminAuth, email, phoneNmbr, description);
@@ -119,6 +120,10 @@ public class DatabaseUtility {
                         UserData.email = email;
                         UserData.telephoneNmbr = phoneNmbr;
                         UserData.description = description;
+                        UserData.authority = authority;
+                        System.out.println(authority);
+                        System.out.println(trainer.getAuthority());
+                        System.out.println(UserData.authority);
                         return true;
                     default:
                         return false;
