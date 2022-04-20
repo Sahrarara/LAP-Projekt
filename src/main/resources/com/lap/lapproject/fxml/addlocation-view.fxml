@@ -60,12 +60,12 @@
             <Insets left="20.0" />
          </GridPane.margin>
       </Label>
-      <TextField maxWidth="385.0" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+      <TextField fx:id="streetNameTextField" maxWidth="385.0" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </TextField>
-      <Button mnemonicParsing="false" text="ABBRECHEN" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+      <Button mnemonicParsing="false" onAction="#onAbortBtnClick" text="ABBRECHEN" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5">
          <styleClass>
             <String fx:value="button-style" />
             <String fx:value="button-light" />
@@ -74,7 +74,7 @@
             <Insets right="20.0" />
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" text="HINZUFÜGEN" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+      <Button mnemonicParsing="false" onAction="#onAddBtnClick" text="HINZUFÜGEN" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets right="25.0" />
          </GridPane.margin>
@@ -83,8 +83,8 @@
             <String fx:value="button-dark" />
          </styleClass>
       </Button>
-      <TextField layoutX="221.0" layoutY="126.0" maxWidth="385.0" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-      <TextField layoutX="221.0" layoutY="126.0" maxWidth="385.0" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+      <TextField fx:id="zipCodeTextField" layoutX="221.0" layoutY="126.0" maxWidth="385.0" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+      <TextField fx:id="locationTextField" layoutX="221.0" layoutY="126.0" maxWidth="385.0" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.rowIndex="4" />
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #211D5A;" />
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #211D5A;" GridPane.columnIndex="3" />
    </children>
