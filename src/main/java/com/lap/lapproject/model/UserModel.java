@@ -23,7 +23,7 @@ public abstract class UserModel {
         this.username = username;
     }
 
-    protected String getfName() {
+    public String getfName() {
         return fName;
     }
 
@@ -31,7 +31,7 @@ public abstract class UserModel {
         this.fName = fName;
     }
 
-    protected String getlName() {
+    public String getlName() {
         return lName;
     }
 
@@ -39,7 +39,7 @@ public abstract class UserModel {
         this.lName = lName;
     }
 
-    protected String getAuthority() {
+    public String getAuthority() {
         return authority;
     }
 
@@ -47,7 +47,7 @@ public abstract class UserModel {
         this.authority = authority;
     }
 
-    protected Boolean getAdminPrivilege() {
+    public Boolean getAdminPrivilege() {
         return adminPrivilege;
     }
 
@@ -55,7 +55,7 @@ public abstract class UserModel {
         this.adminPrivilege = adminPrivilege;
     }
 
-    protected String getDescription() {
+    public String getDescription() {
         return description;
     }
 
@@ -63,15 +63,20 @@ public abstract class UserModel {
         this.description = description;
     }
 
-    protected int getPhoneNmbr() {
+    public int getPhoneNmbr() {
         return phoneNmbr;
+    }
+
+    @Override
+    public String toString() {
+        return "" + phoneNmbr;
     }
 
     protected void setPhoneNmbr(int phoneNmbr) {
         this.phoneNmbr = phoneNmbr;
     }
 
-    protected String getEmail() {
+    public String getEmail() {
         return email;
     }
 
@@ -79,7 +84,7 @@ public abstract class UserModel {
         this.email = email;
     }
 
-    protected Boolean getDescriptionVisibility() {
+    public Boolean getDescriptionVisibility() {
         return descriptionVisibility;
     }
 
@@ -125,6 +130,9 @@ public abstract class UserModel {
         this.lName = lName;
         this.authority = authority;
         this.adminPrivilege = adminPrivilege;
+        this.email = email;
+        this.phoneNmbr = phoneNmbr;
+        this.description = description;
     }
 
     protected UserModel(String username, String fName, String lName, String authority, Boolean adminPrivilege, String description, int phoneNmbr, String email, byte[] photo, Boolean descriptionVisibility, Boolean phoneNmbrVisibility, Boolean emailVisibility, Boolean photoVisibility) {

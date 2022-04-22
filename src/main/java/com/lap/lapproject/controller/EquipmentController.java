@@ -1,4 +1,4 @@
 package com.lap.lapproject.controller;
 
-public class CoreDataController {
+public class EquipmentController {
 }

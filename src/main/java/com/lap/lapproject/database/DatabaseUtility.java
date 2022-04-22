@@ -2,6 +2,7 @@ package com.lap.lapproject.database;
 
 import com.lap.lapproject.model.Admin;
 import com.lap.lapproject.model.Trainer;
+import com.lap.lapproject.model.UserData;
 import javafx.scene.control.Alert;
 
 import java.sql.*;
@@ -101,10 +102,28 @@ public class DatabaseUtility {
 
                 switch (authority){
                     case "admin":
-                        Admin admin = new Admin(user, firstname, lastname, authority, adminAuth);
+                        Admin admin = new Admin(user, firstname, lastname, authority, adminAuth, email, phoneNmbr, description);
+                        UserData.firstName = admin.getfName();
+                        UserData.lastName = admin.getlName();
+                        UserData.email = email;
+                        UserData.telephoneNmbr = phoneNmbr;
+                        UserData.description = description;
+                        UserData.authority = authority;
+                        System.out.println(authority);
+                        System.out.println(admin.getAuthority());
+                        System.out.println(UserData.authority);
                         return true;
                     case "coach":
-                        Trainer trainer = new Trainer(user, firstname, lastname, authority, adminAuth);
+                        Trainer trainer = new Trainer(user, firstname, lastname, authority, adminAuth, email, phoneNmbr, description);
+                        UserData.firstName = trainer.getfName();
+                        UserData.lastName = trainer.getlName();
+                        UserData.email = email;
+                        UserData.telephoneNmbr = phoneNmbr;
+                        UserData.description = description;
+                        UserData.authority = authority;
+                        System.out.println(authority);
+                        System.out.println(trainer.getAuthority());
+                        System.out.println(UserData.authority);
                         return true;
                     default:
                         return false;

@@ -1,5 +1,6 @@
 package com.lap.lapproject.controller;
 
+import com.lap.lapproject.model.UserData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -22,8 +23,19 @@ public class ProfileController {
     private TextField telephoneLabel;
     @FXML
     private TextArea descriptionLabel;
+    @FXML
+    private ImageView pathToImage;
 
     @FXML
     private void onSaveBtnClick(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    private void initialize(){
+        firstnameLabel.setText(UserData.firstName);
+        lastnameLabel.setText(UserData.lastName);
+        emailLabel.setText(UserData.email);
+        telephoneLabel.setText(String.valueOf(UserData.telephoneNmbr));
+        descriptionLabel.setText(UserData.description);
     }
 }

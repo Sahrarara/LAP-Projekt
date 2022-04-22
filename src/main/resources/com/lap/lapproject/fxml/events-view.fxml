@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #211D5A;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.EventsViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #211D5A;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.EventsController">
    <children>
       <SplitPane dividerPositions="0.23684210526315788" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="605.0" prefWidth="751.0" styleClass="split-pane-background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
@@ -29,7 +29,7 @@
                   </Label>
                   <ButtonBar buttonMinWidth="10.0" layoutX="294.0" layoutY="74.0" prefHeight="70.0" prefWidth="169.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="520.0" AnchorPane.topAnchor="74.0">
                      <buttons>
-                        <Button graphicTextGap="2.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0">
+                        <Button graphicTextGap="2.0" mnemonicParsing="false" onAction="#onAddCourseBtnClick" prefHeight="30.0" prefWidth="60.0">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -42,7 +42,7 @@
                               <String fx:value="icon-plus" />
                            </styleClass>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0">
+                        <Button mnemonicParsing="false" onAction="#onDeleteCourseBtnClick" prefHeight="30.0" prefWidth="60.0">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -55,7 +55,7 @@
                               <String fx:value="icon-trash" />
                            </styleClass>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0">
+                        <Button mnemonicParsing="false" onAction="#onSettingsBtnClick" prefHeight="30.0" prefWidth="60.0">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -89,11 +89,11 @@
                            <graphic>
                               <CheckBox mnemonicParsing="false" />
                            </graphic></TableColumn>
-                        <TableColumn prefWidth="144.5" text="Name" />
-                        <TableColumn prefWidth="144.5" text="Kursbegin" />
-                        <TableColumn minWidth="0.0" prefWidth="144.5" text="Kursende" />
-                        <TableColumn minWidth="0.0" prefWidth="144.5" text="Programm" />
-                        <TableColumn text="Teilnehmer " />
+                        <TableColumn minWidth="-1.0" prefWidth="120.0" text="Name" />
+                        <TableColumn minWidth="-1.0" prefWidth="144.5" text="Kursbegin" />
+                        <TableColumn minWidth="-1.0" prefWidth="144.5" text="Kursende" />
+                        <TableColumn minWidth="-1.0" prefWidth="135.5" text="Programm" />
+                        <TableColumn prefWidth="113.5" text="Gruppengröße" />
                      </columns>
                   </TableView>
                </children>

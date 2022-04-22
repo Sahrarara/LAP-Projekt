@@ -1,4 +1,4 @@
 package com.lap.lapproject.controller;
 
-public class SearchController {
+public class AddBookingController {
 }

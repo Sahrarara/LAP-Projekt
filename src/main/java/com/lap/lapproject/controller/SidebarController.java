@@ -4,6 +4,7 @@ import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.Admin;
 import com.lap.lapproject.model.Trainer;
+import com.lap.lapproject.model.UserData;
 import com.lap.lapproject.model.UserModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,11 +25,31 @@ public class SidebarController extends BaseController{
 
     private static final Logger log = LoggerFactory.getLogger(SidebarController.class);
     @FXML
-    private Button trainerBtn;
-    @FXML
     private Button logoutBtn;
     @FXML
     private Label nameLabel;
+    @FXML
+    private Button locationBtn;
+    @FXML
+    private Button profileBtn;
+    @FXML
+    private Button roomsBtn;
+    @FXML
+    private Button courseBtn;
+    @FXML
+    private Button trainerBtn;
+    @FXML
+    private Button calenderBtn;
+    @FXML
+    private ImageView profileIcon;
+    @FXML
+    private ImageView locationIcon;
+    @FXML
+    private ImageView roomsIcon;
+    @FXML
+    private ImageView courseIcon;
+    @FXML
+    private ImageView trainerIcon;
 
     @FXML
     void onDashboardButtonPressed(ActionEvent event){
@@ -35,13 +57,8 @@ public class SidebarController extends BaseController{
     }
 
     @FXML
-    private void onTrainerBtnClick(ActionEvent actionEvent) {
-        model.setPathForDetailView(Constants.PATH_TO_FXML_TRAINER);
-    }
-
-    @FXML
-    private void onLogoutBtnClick(ActionEvent actionEvent) {
-        moveToLogin();
+    private void onLocationBtnClick(ActionEvent actionEvent) {
+        model.setPathForDetailView(Constants.PATH_TO_FXML_LOCATION);
     }
 
     @FXML
@@ -55,13 +72,13 @@ public class SidebarController extends BaseController{
     }
 
     @FXML
-    private void onLocationBtnClick(ActionEvent actionEvent) {
-        model.setPathForDetailView(Constants.PATH_TO_FXML_LOCATION);
+    private void onCourseBtnClick(ActionEvent actionEvent) {
+        model.setPathForDetailView(Constants.PATH_TO_FXML_COURSE);
     }
 
     @FXML
-    private void onCourseBtnClick(ActionEvent actionEvent) {
-        model.setPathForDetailView(Constants.PATH_TO_FXML_COURSE);
+    private void onTrainerBtnClick(ActionEvent actionEvent) {
+        model.setPathForDetailView(Constants.PATH_TO_FXML_TRAINER);
     }
 
     @FXML
@@ -69,8 +86,51 @@ public class SidebarController extends BaseController{
         model.setPathForDetailView(Constants.PATH_TO_FXML_CALENDER);
     }
 
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        nameLabel.setText("Gast");
+    @FXML
+    private void onLogoutBtnClick(ActionEvent actionEvent) {
+        UserData.firstName = null;
+        UserData.lastName = null;
+        UserData.email = null;
+        UserData.telephoneNmbr = 0;
+        UserData.description = null;
+        UserData.authority = "guest";
+        moveToLogin();
+    }
+
+    @FXML
+    private void initialize(){
+        authorityVisibility();
+        setUsername();
+    }
+
+    private void authorityVisibility(){
+        String authority = UserData.authority;
+            switch (authority){
+                case "admin":
+                    System.out.println("Admin privileges");
+                    break;
+                case "coach":
+                    System.out.println("Coach privileges");
+                    trainerIcon.setVisible(false);
+                    trainerBtn.setVisible(false);
+                    break;
+                default:
+                    System.out.println("Guest privileges");
+                    logoutBtn.setText(" Zurück zum Login");
+                    trainerIcon.setVisible(false);
+                    trainerBtn.setVisible(false);
+                    profileIcon.setVisible(false);
+                    profileBtn.setVisible(false);
+                    break;
+            }
+    }
+
+    private void setUsername(){
+        if (UserData.firstName != null){
+            nameLabel.setText(UserData.firstName);
+        } else {
+            nameLabel.setText("Gast");
+        }
     }
 
     private Stage getCurrentStage(){
