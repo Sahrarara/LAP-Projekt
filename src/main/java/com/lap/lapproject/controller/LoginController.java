@@ -8,10 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -29,6 +26,10 @@ public class LoginController implements Initializable {
     private Button loginBtn;
     @FXML
     private Button skipBtn;
+    @FXML
+    private Button forgotPasswordBtn;
+    @FXML
+    private Label adminKontaktLabel;
 
     @FXML
     private void onLoginBtnClick(ActionEvent actionEvent) {
@@ -90,6 +91,11 @@ public class LoginController implements Initializable {
     @FXML
     private void onSkipBtnClick(ActionEvent actionEvent) {
         moveToMainPage();
+    }
+
+    public void onforgotPasswordBtn(ActionEvent actionEvent) {
+        forgotPasswordBtn.setVisible(false);
+        adminKontaktLabel.setText("Bitte kontaktieren Sie Ihren Admin");
     }
 
 }

@@ -54,12 +54,12 @@
                               <Font size="14.0" />
                            </font>
                         </TextField>
-                        <PasswordField fx:id="passwordTF" layoutX="56.0" layoutY="153.0" onAction="#onLoginBtnClick" prefHeight="29.0" prefWidth="225.0" promptText="Passwort" style="-fx-background-radius: 15;">
+                        <PasswordField fx:id="passwordTF" layoutX="56.0" layoutY="137.0" onAction="#onLoginBtnClick" prefHeight="29.0" prefWidth="225.0" promptText="Passwort" style="-fx-background-radius: 15;">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </PasswordField>
-                        <HBox alignment="CENTER" layoutX="35.0" layoutY="201.0" prefHeight="50.0" prefWidth="245.0">
+                        <HBox alignment="CENTER" layoutX="36.0" layoutY="174.0" prefHeight="50.0" prefWidth="245.0">
                            <children>
                               <Button fx:id="skipBtn" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#onSkipBtnClick" prefHeight="27.0" prefWidth="108.0" style="-fx-background-color: ffffff; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: #211D5A;" text="ÜBERSPRINGEN" textFill="#211d5a">
                                  <opaqueInsets>
@@ -82,8 +82,14 @@
                               <Insets />
                            </opaqueInsets>
                         </HBox>
+                        <Button fx:id="forgotPasswordBtn" layoutX="108.0" layoutY="232.0" mnemonicParsing="false" onAction="#onforgotPasswordBtn" style="-fx-background-color: none;" text="Passwort vergessen?" textFill="#211d5a" />
                      </children>
                   </Pane>
+                  <Label fx:id="adminKontaktLabel" alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="43.0" prefWidth="341.0" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
                </children>
             </GridPane>
          </children>
