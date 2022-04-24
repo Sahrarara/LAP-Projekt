@@ -59,7 +59,7 @@
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../images/lapproject/images/Settings.png" />
+                                    <Image url="@../images/lapproject/images/pen_Icon_white.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -73,7 +73,7 @@
                         <Insets />
                      </opaqueInsets>
                   </ButtonBar>
-                  <TextField layoutX="550.0" layoutY="91.0" prefHeight="37.0" prefWidth="200.0" promptText="         Search..." styleClass="search-field" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="91.0" />
+                  <TextField layoutX="550.0" layoutY="91.0" prefHeight="37.0" prefWidth="200.0" promptText="         Suche..." styleClass="search-field" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="91.0" />
                   <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="559.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: black;">
                      <image>
                         <Image url="@../images/lapproject/images/LupeBlau.png" />

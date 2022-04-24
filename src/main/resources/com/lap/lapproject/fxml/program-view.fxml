@@ -58,7 +58,7 @@
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../images/lapproject/images/Settings.png" />
+                                    <Image url="@../images/lapproject/images/pen_Icon_white.png" />
                                  </image>
                               </ImageView>
                            </graphic>

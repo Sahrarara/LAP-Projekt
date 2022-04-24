@@ -58,7 +58,7 @@
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../images/lapproject/images/Settings.png" />
+                                    <Image url="@../images/lapproject/images/pen_Icon_white.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -72,7 +72,7 @@
                         <Insets />
                      </opaqueInsets>
                   </ButtonBar>
-                  <TextField layoutX="550.0" layoutY="91.0" prefHeight="37.0" prefWidth="200.0" promptText="         Search..." styleClass="search-field" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="91.0">
+                  <TextField layoutX="550.0" layoutY="91.0" prefHeight="37.0" prefWidth="200.0" promptText="         Suche..." styleClass="search-field" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="91.0">
                      <opaqueInsets>
                         <Insets left="5.0" right="5.0" />
                      </opaqueInsets>
@@ -93,7 +93,7 @@
                               <CheckBox mnemonicParsing="false" />
                            </graphic>
                         </TableColumn>
-                        <TableColumn minWidth="-1.0" prefWidth="223.0" text="Strasse" />
+                        <TableColumn minWidth="-1.0" prefWidth="223.0" text="Straße" />
                         <TableColumn prefWidth="222.0" text="PLZ" />
                         <TableColumn prefWidth="223.0" text="Ort" />
                      </columns>

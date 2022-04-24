@@ -41,15 +41,7 @@
       <RowConstraints maxHeight="370.5" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <Pane minHeight="40.0" prefHeight="78.0" prefWidth="150.0" style="-fx-background-color: #211D5A;" GridPane.columnIndex="1" GridPane.halignment="CENTER">
-         <children>
-            <Label layoutX="20.0" layoutY="32.0" text="Hinzufügen" textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
+      <Pane minHeight="40.0" prefHeight="78.0" prefWidth="150.0" style="-fx-background-color: #211D5A;" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
       <Pane minHeight="40.0" prefHeight="90.0" prefWidth="411.0" style="-fx-background-color: #211D5A;" GridPane.columnIndex="3">
          <children>
             <Label layoutX="61.0" layoutY="28.0" styleClass="title-form" text="TRAINER" textFill="WHITE">
@@ -146,7 +138,7 @@
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #211D5A;" GridPane.columnIndex="2" />
       <Pane prefHeight="90.0" prefWidth="40.0" style="-fx-background-color: #211D5A;" GridPane.columnIndex="4" />
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #211D5A;" />
-      <Label layoutX="98.0" layoutY="158.0" styleClass="input-description" text="Password" GridPane.columnIndex="1" GridPane.rowIndex="7">
+      <Label layoutX="98.0" layoutY="158.0" styleClass="input-description" text="Passwort" GridPane.columnIndex="1" GridPane.rowIndex="7">
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin>

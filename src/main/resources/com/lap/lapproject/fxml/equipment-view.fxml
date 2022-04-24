@@ -58,7 +58,7 @@
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../images/lapproject/images/Settings.png" />
+                                    <Image url="@../images/lapproject/images/pen_Icon_white.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -93,8 +93,8 @@
                               <CheckBox mnemonicParsing="false" />
                            </graphic>
                         </TableColumn>
-                        <TableColumn prefWidth="304.0" text="Ausrüstungsname" />
-                        <TableColumn minWidth="-1.0" prefWidth="366.0" text="Stück" />
+                        <TableColumn prefWidth="337.5" text="Ausrüstungsname" />
+                        <TableColumn minWidth="-1.0" prefWidth="337.5" text="Stück" />
                      </columns>
                   </TableView>
                </children>
