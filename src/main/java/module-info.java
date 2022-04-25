@@ -3,6 +3,7 @@ module com.lap.lapproject {
     requires javafx.fxml;
     requires java.sql;
     requires org.slf4j;
+    requires com.calendarfx.view;
 
 
     opens com.lap.lapproject to javafx.fxml;

@@ -5,5 +5,5 @@ public class Trainer extends UserModel {
         super(username, fName, lName, authority, adminPrivilege);
     }
 
-
+    public Trainer(){super();};
 }

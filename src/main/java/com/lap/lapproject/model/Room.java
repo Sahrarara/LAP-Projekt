@@ -9,7 +9,13 @@ public class Room {
     private byte[] photo;
     private Equipment equipment;
 
+    public Room(String roomName, int size, Location location) {
+        this.roomName = new SimpleStringProperty(roomName);
+        this.size = size;
+        this.location = location;
+    }
 
+    //TODO: photo, equipment
     public Room(String roomName, int size, Location location, byte[] photo, Equipment equipment) {
         this.roomName = new SimpleStringProperty(roomName);
         this.size = size;

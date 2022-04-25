@@ -124,6 +124,8 @@ public abstract class UserModel {
         this.photo = photo;
     }
 
+    protected UserModel(){}
+
     protected UserModel(String username, String fName, String lName, String authority, Boolean adminPrivilege) {
         this.username = username;
         this.fName = fName;

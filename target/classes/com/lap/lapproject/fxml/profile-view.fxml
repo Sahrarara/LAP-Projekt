@@ -22,7 +22,7 @@
          <items>
             <AnchorPane prefHeight="99.0" prefWidth="731.0">
                <children>
-                  <Label layoutX="60.0" layoutY="36.0" prefHeight="56.0" prefWidth="315.0" styleClass="title-first" text="MEIN PROFIL" textFill="#201d592d">
+                  <Label layoutX="68.0" layoutY="36.0" prefHeight="56.0" prefWidth="315.0" styleClass="title-first" text="MEIN PROFIL" textFill="#201d592d">
                      <font>
                         <Font name="Comic Sans MS" size="40.0" />
                      </font>
@@ -142,6 +142,18 @@
                               <Image url="@../images/lapproject/images/PenB.png" />
                            </image>
                         </ImageView>
+                        <Button layoutX="575.0" layoutY="425.0" mnemonicParsing="false" text="PASSWORT ÄNDERN" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+                           <font>
+                              <Font name="Comic Sans MS" size="12.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="button-light" />
+                              <String fx:value="button-style" />
+                           </styleClass>
+                           <GridPane.margin>
+                              <Insets bottom="10.0" />
+                           </GridPane.margin>
+                        </Button>
                      </children>
                   </GridPane>
                </children>
