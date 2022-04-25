@@ -39,15 +39,7 @@
       <RowConstraints prefHeight="26.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <Pane minHeight="40.0" prefHeight="40.0" style="-fx-background-color: #211D5A;" GridPane.columnIndex="1" GridPane.halignment="CENTER">
-         <children>
-            <Label layoutX="20.0" layoutY="32.0" text="Hinzufügen" textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
+      <Pane minHeight="40.0" prefHeight="40.0" style="-fx-background-color: #211D5A;" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
       <Pane minHeight="40.0" prefHeight="90.0" prefWidth="411.0" style="-fx-background-color: #211D5A;" GridPane.columnIndex="2">
          <children>
             <Label layoutY="29.0" styleClass="title-form" text="BELEGUNG ERFASSEN" textFill="WHITE">
@@ -67,7 +59,7 @@
             <Insets left="20.0" />
          </GridPane.margin>
       </Label>
-      <Label styleClass="input-description" text="Vortragender" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4">
+      <Label styleClass="input-description" text="Vortragender" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>

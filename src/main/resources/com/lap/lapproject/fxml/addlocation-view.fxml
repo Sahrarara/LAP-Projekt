@@ -27,15 +27,7 @@
       <RowConstraints prefHeight="70.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <Pane minHeight="40.0" prefHeight="40.0" style="-fx-background-color: #211D5A;" GridPane.columnIndex="1" GridPane.halignment="CENTER">
-         <children>
-            <Label layoutX="20.0" layoutY="32.0" text="Hinzufügen" textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
+      <Pane minHeight="40.0" prefHeight="40.0" style="-fx-background-color: #211D5A;" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
       <Pane style="-fx-background-color: #211D5A;" GridPane.columnIndex="2">
          <children>
             <Label layoutY="29.0" styleClass="title-form" text="STANDORT" textFill="WHITE">

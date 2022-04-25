@@ -68,7 +68,7 @@
 
 .table-view .column-header-background .label{
     -fx-background-color: transparent;
-    -fx-text-fill:#000000;
+    -fx-text-fill: #000000;
 }
 
 .table-view .column-header {
@@ -85,7 +85,7 @@
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em; /* 0 */
     -fx-border-color: #211D5A;
-    -fx-table-cell-border-color:#211D5A;
+    -fx-table-cell-border-color: #211D5A;
 }
 
 .table-row-cell:odd {
@@ -102,8 +102,7 @@
 
 /*scroll-bar vertical*/
 .table-view .virtual-flow .scroll-bar:vertical .thumb {
-    -fx-background-color:  #211D5A;
-
+    -fx-background-color: #211D5A;
 }
 
 /*scroll-bar horizontal*/
@@ -153,8 +152,6 @@
 .date-picker > .text-field {
     -fx-background-color: #fff;
 }
-
-
 
 
 .button-style {
