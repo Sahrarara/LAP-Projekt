@@ -87,6 +87,21 @@ public class SidebarController extends BaseController{
     }
 
     @FXML
+    private void onSearchBtnClick(ActionEvent actionEvent) {
+        model.setPathForDetailView(Constants.PATH_TO_FXML_SEARCH);
+    }
+
+    @FXML
+    private void onProgramBtnClick(ActionEvent actionEvent) {
+        model.setPathForDetailView(Constants.PATH_TO_FXML_PROGRAM);
+    }
+
+    @FXML
+    private void onEquipmentBtnClick(ActionEvent actionEvent) {
+        model.setPathForDetailView(Constants.PATH_TO_FXML_EQUIPMENT);
+    }
+
+    @FXML
     private void onLogoutBtnClick(ActionEvent actionEvent) {
         UserData.firstName = null;
         UserData.lastName = null;
@@ -154,5 +169,7 @@ public class SidebarController extends BaseController{
         currentStage.setScene(scene);
         currentStage.show();
     }
+
+
 
 }
