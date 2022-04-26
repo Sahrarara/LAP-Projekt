@@ -142,12 +142,12 @@ public class DatabaseUtility {
     public static ArrayList<Booking> readAll(){
         Connection connection = connect();
         ArrayList<Booking> list= new ArrayList<>();
+//"SELECT courses.course_name,rooms.room_number,users.username, booking.datetime_start,booking.datetime_end FROM `booking` " +
 
-        String query = //"SELECT courses.course_name,rooms.room_number,users.username, booking.datetime_start,booking.datetime_end FROM `booking` " +
-                "SELECT * FROM `booking` " +
+        String query = "SELECT * FROM `booking` " +
                 " JOIN courses ON booking.course_id=courses.course_id" +
                 " JOIN rooms ON booking.room_id=rooms.room_id" +
-                " JOIN users ON booking.user_id=users.user_id;" +
+                " JOIN users ON booking.user_id=users.user_id" +
                 " JOIN location ON rooms.location_id=location.location_id;";
         //TODO: join rooms_equipment
 
@@ -164,7 +164,7 @@ public class DatabaseUtility {
                 //Equipment equipment = new Equipment();
                 Room room = new Room(resultSet.getString("rooms.room_number"),resultSet.getInt("rooms.size"), location);
                 Trainer trainer = new Trainer();
-                Program program = new Program(resultSet.getString("name"));
+                Program program = new Program(resultSet.getString("course_name"));
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 String timestart = resultSet.getString("course_start");

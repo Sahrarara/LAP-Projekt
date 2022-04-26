@@ -6,11 +6,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.ButtonBar;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class LocationController {
+    @FXML
+    private ButtonBar locationBtnBar;
+
     @FXML
     private void onAddLocationBtnClick(ActionEvent actionEvent) {
         Stage stage = new Stage();

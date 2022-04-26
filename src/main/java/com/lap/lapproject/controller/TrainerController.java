@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.ButtonBar;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -13,6 +14,9 @@ import java.io.IOException;
 import static com.lap.lapproject.controller.BaseController.model;
 
 public class TrainerController {
+
+    @FXML
+    private ButtonBar trainerBtnBar;
 
     @FXML
     private void onAddTrainerBtnClick(ActionEvent actionEvent) {

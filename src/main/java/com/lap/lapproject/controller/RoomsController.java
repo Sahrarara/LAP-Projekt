@@ -6,11 +6,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.ButtonBar;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class RoomsController {
+    @FXML
+    private ButtonBar roomsBtnBar;
+
     @FXML
     private void onAddRoomBtnClick(ActionEvent actionEvent) {
         Stage stage = new Stage();

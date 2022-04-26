@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,6 +19,8 @@ public class EquipmentController {
     private Button deleteEquipmentBtn;
     @FXML
     private Button settingsBtn;
+    @FXML
+    private ButtonBar equipmentBtnBar;
 
     @FXML
     private void onAddEquipmentBtnClick(ActionEvent actionEvent) {

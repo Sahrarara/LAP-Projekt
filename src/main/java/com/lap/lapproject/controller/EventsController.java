@@ -7,11 +7,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class EventsController {
+    @FXML
+    private ButtonBar coursesBtnBar;
+
     @FXML
     private void onAddCourseBtnClick(ActionEvent actionEvent) {
         Stage stage = new Stage();

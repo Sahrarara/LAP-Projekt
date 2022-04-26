@@ -36,14 +36,6 @@ public class CalenderController extends BaseController{
         birthdays.setStyle(Calendar.Style.STYLE5);
         holidays.setStyle(Calendar.Style.STYLE2);
 
-        CalendarSource myCalendarSource = new CalendarSource("My Calendars");
-        myCalendarSource.getCalendars().addAll(birthdays, holidays);
-
-        Entry recurringEntry = new Entry("Java");
-        recurringEntry.setInterval(LocalDateTime.of(2021,12,23,9,00),
-                LocalDateTime.of(2021,12,23,15,00));
-        //1 mal wöchentlich für 10 Wochen. Count für anzahl. Until=YYYYMMDD
-        recurringEntry.setRecurrenceRule("RRULE:FREQ=WEEKLY;UNTIL=20220723");
 
 
         model.bookings.forEach(element ->{
@@ -53,9 +45,8 @@ public class CalenderController extends BaseController{
             birthdays.addEntries(entry);
         });
 
-
-        holidays.addEntries(recurringEntry);
-
+        CalendarSource myCalendarSource = new CalendarSource("My Calendars");
+        myCalendarSource.getCalendars().addAll(birthdays, holidays);
         calendarView.getCalendarSources().addAll(myCalendarSource);
 
         calendarView.setRequestedTime(LocalTime.now());

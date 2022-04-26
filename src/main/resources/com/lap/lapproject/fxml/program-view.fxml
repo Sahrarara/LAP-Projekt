@@ -26,7 +26,7 @@
                         <Font name="Comic Sans MS" size="40.0" />
                      </font>
                   </Label>
-                  <ButtonBar buttonMinWidth="10.0" layoutX="294.0" layoutY="74.0" prefHeight="70.0" prefWidth="169.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="520.0" AnchorPane.topAnchor="74.0">
+                  <ButtonBar fx:id="programBtnBar" buttonMinWidth="10.0" layoutX="294.0" layoutY="74.0" prefHeight="70.0" prefWidth="169.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="520.0" AnchorPane.topAnchor="74.0">
                      <buttons>
                         <Button fx:id="addProgramBtn" graphicTextGap="2.0" mnemonicParsing="false" onAction="#onAddProgramBtnClick" prefHeight="30.0" prefWidth="60.0">
                            <graphic>
