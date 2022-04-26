@@ -15,6 +15,36 @@ public abstract class UserModel {
     private Boolean emailVisibility;
     private Boolean photoVisibility;
 
+    protected UserModel(String username, String fName, String lName, String authority, Boolean adminPrivilege, String description, int phoneNmbr, String email, byte[] photo, Boolean descriptionVisibility, Boolean phoneNmbrVisibility, Boolean emailVisibility, Boolean photoVisibility) {
+        this.username = username;
+        this.fName = fName;
+        this.lName = lName;
+        this.authority = authority;
+        this.adminPrivilege = adminPrivilege;
+        this.description = description;
+        this.phoneNmbr = phoneNmbr;
+        this.email = email;
+        this.photo = photo;
+        this.descriptionVisibility = descriptionVisibility;
+        this.phoneNmbrVisibility = phoneNmbrVisibility;
+        this.emailVisibility = emailVisibility;
+        this.photoVisibility = photoVisibility;
+    }
+
+
+    protected UserModel(String username, String fName, String lName, String authority, Boolean adminPrivilege) {
+        this.username = username;
+        this.fName = fName;
+        this.lName = lName;
+        this.authority = authority;
+        this.adminPrivilege = adminPrivilege;
+        this.email = email;
+        this.phoneNmbr = phoneNmbr;
+        this.description = description;
+    }
+
+    protected UserModel(){}
+
     protected String getUsername() {
         return username;
     }
@@ -124,32 +154,4 @@ public abstract class UserModel {
         this.photo = photo;
     }
 
-    protected UserModel(){}
-
-    protected UserModel(String username, String fName, String lName, String authority, Boolean adminPrivilege) {
-        this.username = username;
-        this.fName = fName;
-        this.lName = lName;
-        this.authority = authority;
-        this.adminPrivilege = adminPrivilege;
-        this.email = email;
-        this.phoneNmbr = phoneNmbr;
-        this.description = description;
-    }
-
-    protected UserModel(String username, String fName, String lName, String authority, Boolean adminPrivilege, String description, int phoneNmbr, String email, byte[] photo, Boolean descriptionVisibility, Boolean phoneNmbrVisibility, Boolean emailVisibility, Boolean photoVisibility) {
-        this.username = username;
-        this.fName = fName;
-        this.lName = lName;
-        this.authority = authority;
-        this.adminPrivilege = adminPrivilege;
-        this.description = description;
-        this.phoneNmbr = phoneNmbr;
-        this.email = email;
-        this.photo = photo;
-        this.descriptionVisibility = descriptionVisibility;
-        this.phoneNmbrVisibility = phoneNmbrVisibility;
-        this.emailVisibility = emailVisibility;
-        this.photoVisibility = photoVisibility;
-    }
 }
