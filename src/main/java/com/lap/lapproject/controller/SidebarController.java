@@ -126,14 +126,10 @@ public class SidebarController extends BaseController{
                     break;
                 case "coach":
                     System.out.println("Coach privileges");
-                    trainerIcon.setVisible(false);
-                    trainerBtn.setVisible(false);
                     break;
                 default:
                     System.out.println("Guest privileges");
                     logoutBtn.setText(" Zurück zum Login");
-                    trainerIcon.setVisible(false);
-                    trainerBtn.setVisible(false);
                     profileIcon.setVisible(false);
                     profileBtn.setVisible(false);
                     break;

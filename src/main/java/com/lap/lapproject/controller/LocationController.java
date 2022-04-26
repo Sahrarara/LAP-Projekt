@@ -2,6 +2,7 @@ package com.lap.lapproject.controller;
 
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
+import com.lap.lapproject.model.UserData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,4 +41,25 @@ public class LocationController {
     @FXML
     private void onSettingsBtnClick(ActionEvent actionEvent) {
     }
+
+
+    @FXML
+    private void initialize(){
+        authorityVisibility();
+    }
+
+    private void authorityVisibility(){
+        String authority = UserData.authority;
+        switch (authority){
+            case "admin":
+                break;
+            case "coach":
+                locationBtnBar.setVisible(false);
+                break;
+            default:
+                locationBtnBar.setVisible(false);
+                break;
+        }
+    }
+
 }
