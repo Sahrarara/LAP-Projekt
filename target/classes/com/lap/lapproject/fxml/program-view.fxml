@@ -28,7 +28,7 @@
                   </Label>
                   <ButtonBar buttonMinWidth="10.0" layoutX="294.0" layoutY="74.0" prefHeight="70.0" prefWidth="169.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="520.0" AnchorPane.topAnchor="74.0">
                      <buttons>
-                        <Button graphicTextGap="2.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0">
+                        <Button fx:id="addProgramBtn" graphicTextGap="2.0" mnemonicParsing="false" onAction="#onAddProgramBtnClick" prefHeight="30.0" prefWidth="60.0">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -41,7 +41,7 @@
                               <String fx:value="icon-plus" />
                            </styleClass>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0">
+                        <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#onDeleteBtnClick" prefHeight="30.0" prefWidth="60.0">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -54,7 +54,7 @@
                               <String fx:value="icon-trash" />
                            </styleClass>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0">
+                        <Button fx:id="settingsBtn" mnemonicParsing="false" onAction="#onSettingsBtnClick" prefHeight="30.0" prefWidth="60.0">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -72,7 +72,7 @@
                         <Insets />
                      </opaqueInsets>
                   </ButtonBar>
-                  <TextField layoutX="550.0" layoutY="91.0" prefHeight="37.0" prefWidth="200.0" promptText="         Suche..." styleClass="search-field" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="91.0">
+                  <TextField layoutX="550.0" layoutY="91.0" onAction="#onSearchBarClick" prefHeight="37.0" prefWidth="200.0" promptText="         Suche..." styleClass="search-field" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="91.0">
                      <opaqueInsets>
                         <Insets left="5.0" right="5.0" />
                      </opaqueInsets>
