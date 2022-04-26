@@ -30,7 +30,7 @@
       <RowConstraints maxHeight="141.0" minHeight="10.0" prefHeight="83.0" valignment="CENTER" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <Button alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onDashboardButtonPressed" prefHeight="30.0" prefWidth="265.0" styleClass="navigation-button" text="SUCHE" textAlignment="RIGHT" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+      <Button fx:id="searchBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onSearchBtnClick" prefHeight="30.0" prefWidth="265.0" styleClass="navigation-button" text="SUCHE" textAlignment="RIGHT" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin>
@@ -180,12 +180,12 @@
             <Insets left="60.0" />
          </GridPane.margin>
       </ImageView>
-      <Button fx:id="profileBtn1" alignment="CENTER" graphicTextGap="5.0" mnemonicParsing="false" onAction="#onUserBtnClick" prefHeight="30.0" prefWidth="245.0" styleClass="navigation-button" text="PROGRAMM" textFill="WHITE" GridPane.rowIndex="7">
+      <Button fx:id="programBtn" alignment="CENTER" graphicTextGap="5.0" mnemonicParsing="false" onAction="#onProgramBtnClick" prefHeight="30.0" prefWidth="245.0" styleClass="navigation-button" text="PROGRAMM" textFill="WHITE" GridPane.rowIndex="7">
          <font>
             <Font name="Comic Sans MS" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="profileBtn11" alignment="CENTER" graphicTextGap="5.0" layoutX="23.0" layoutY="407.0" mnemonicParsing="false" onAction="#onUserBtnClick" prefHeight="30.0" prefWidth="245.0" styleClass="navigation-button" text="AUSSTATTUNG" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="8">
+      <Button fx:id="equipmentBtn" alignment="CENTER" graphicTextGap="5.0" layoutX="23.0" layoutY="407.0" mnemonicParsing="false" onAction="#onEquipmentBtnClick" prefHeight="30.0" prefWidth="245.0" styleClass="navigation-button" text="AUSSTATTUNG" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="8">
          <font>
             <Font name="Comic Sans MS" size="14.0" />
          </font>
