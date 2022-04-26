@@ -26,4 +26,7 @@ public class Constants {
     public static final String PATH_TO_FXML_CREATE_NEW_COURSE = "/com/lap/lapproject/fxml/addcourse-view.fxml";
     public static final String PATH_TO_FXML_CREATE_NEW_LOCATION = "/com/lap/lapproject/fxml/addlocation-view.fxml";
     public static final String PATH_TO_FXML_CREATE_NEW_ROOM = "/com/lap/lapproject/fxml/addroom-view.fxml";
+    public static final String PATH_TO_FXML_CREATE_NEW_PROGRAM = "/com/lap/lapproject/fxml/addprogram-view.fxml";
+    public static final String PATH_TO_FXML_CREATE_NEW_EQUIPMENT = "/com/lap/lapproject/fxml/addequipment-view.fxml";
+    public static final String PATH_TO_FXML_CHANGE_PASSWORD = "/com/lap/lapproject/fxml/changepassword-view.fxml";
 }
