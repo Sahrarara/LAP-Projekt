@@ -51,7 +51,7 @@
             <String fx:value="button-light" />
          </styleClass>
          <GridPane.margin>
-            <Insets right="10.0" />
+            <Insets right="15.0" />
          </GridPane.margin>
       </Button>
       <Button mnemonicParsing="false" onAction="#onAddBtnClick" text="HINZUFÜGEN" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3">

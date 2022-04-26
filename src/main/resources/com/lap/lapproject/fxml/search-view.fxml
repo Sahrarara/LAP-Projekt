@@ -12,7 +12,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #211D5A;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.SearchController">
    <children>
-      <SplitPane dividerPositions="0.5257048092868989" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="605.0" prefWidth="751.0" styleClass="split-pane-background" stylesheets="@../css/application.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <SplitPane dividerPositions="0.5257048092868989" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="728.0" prefWidth="800.0" styleClass="split-pane-background" stylesheets="@../css/application.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
             <AnchorPane>
                <children>
@@ -35,36 +35,36 @@
                         <RowConstraints minHeight="25.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <ChoiceBox prefWidth="150.0" styleClass="input-form" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                        <ChoiceBox prefWidth="152.0" styleClass="input-form" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                        <ChoiceBox prefWidth="150.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                        <ChoiceBox prefHeight="72.0" prefWidth="148.0" styleClass="input-form" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <ChoiceBox prefWidth="180.0" styleClass="input-form" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <ChoiceBox prefWidth="180.0" styleClass="input-form" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <ChoiceBox prefWidth="180.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <ChoiceBox prefWidth="180.0" styleClass="input-form" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                         <Label text="Standort" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
                            <GridPane.margin>
-                              <Insets left="20.0" />
+                              <Insets left="10.0" />
                            </GridPane.margin>
                         </Label>
                         <Label text="Raum" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
                            <GridPane.margin>
-                              <Insets left="20.0" />
+                              <Insets left="10.0" />
                            </GridPane.margin>
                         </Label>
                         <Label text="Veranstaltung" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
                            <GridPane.margin>
-                              <Insets left="20.0" />
+                              <Insets left="10.0" />
                            </GridPane.margin>
                         </Label>
                         <Label text="Vortragender" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
                            <GridPane.margin>
-                              <Insets left="20.0" />
+                              <Insets left="10.0" />
                            </GridPane.margin>
                         </Label>
                         <Label text="Datum" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                            <GridPane.margin>
-                              <Insets left="20.0" />
+                              <Insets left="10.0" />
                            </GridPane.margin>
                         </Label>
-                        <ChoiceBox layoutX="10.0" layoutY="85.0" prefHeight="72.0" prefWidth="148.0" styleClass="input-form" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                        <ChoiceBox layoutX="10.0" layoutY="85.0" prefWidth="180.0" styleClass="input-form" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
                   <GridPane layoutX="3.0" layoutY="191.0" prefHeight="97.0" prefWidth="749.0" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="220.0">
@@ -81,40 +81,40 @@
                       <RowConstraints vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <ChoiceBox prefWidth="150.0" styleClass="input-form" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                        <ChoiceBox prefWidth="150.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                        <ChoiceBox prefWidth="150.0" styleClass="input-form" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                        <ChoiceBox prefWidth="150.0" styleClass="input-form" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                        <ChoiceBox prefWidth="150.0" styleClass="input-form" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-                        <ChoiceBox layoutX="10.0" layoutY="23.0" prefWidth="150.0" styleClass="input-form" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                        <ChoiceBox prefWidth="180.0" styleClass="input-form" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <ChoiceBox prefWidth="180.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <ChoiceBox prefWidth="180.0" styleClass="input-form" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <ChoiceBox prefWidth="180.0" styleClass="input-form" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <ChoiceBox prefWidth="180.0" styleClass="input-form" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                        <ChoiceBox layoutX="10.0" layoutY="23.0" prefWidth="180.0" styleClass="input-form" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
                         <Label text="Zeit von" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
                            <GridPane.margin>
-                              <Insets left="20.0" />
+                              <Insets left="10.0" />
                            </GridPane.margin>
                         </Label>
                         <Label text="Zeit bis" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
                            <GridPane.margin>
-                              <Insets left="20.0" />
+                              <Insets left="10.0" />
                            </GridPane.margin>
                         </Label>
                         <Label text="Verfügbarkeit" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
                            <GridPane.margin>
-                              <Insets left="20.0" />
+                              <Insets left="10.0" />
                            </GridPane.margin>
                         </Label>
                         <Label text="Raumgröße" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
                            <GridPane.margin>
-                              <Insets left="20.0" />
+                              <Insets left="10.0" />
                            </GridPane.margin>
                         </Label>
                         <Label text="Ausstattung" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                            <GridPane.margin>
-                              <Insets left="20.0" />
+                              <Insets left="10.0" />
                            </GridPane.margin>
                         </Label>
                         <Label text="Ersteller " GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                            <GridPane.margin>
-                              <Insets left="20.0" />
+                              <Insets left="10.0" />
                            </GridPane.margin>
                         </Label>
                      </children>

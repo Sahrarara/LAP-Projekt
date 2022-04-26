@@ -17,7 +17,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #211D5A;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.BookingController">
    <children>
-      <SplitPane dividerPositions="0.23684210526315788" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="605.0" prefWidth="751.0" styleClass="split-pane-background" stylesheets="@../css/application.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <SplitPane dividerPositions="0.23684210526315788" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="728.0" prefWidth="800.0" styleClass="split-pane-background" stylesheets="@../css/application.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
             <AnchorPane>
                <children>
@@ -72,12 +72,12 @@
                         <Insets />
                      </opaqueInsets>
                   </ButtonBar>
-                  <TextField layoutX="550.0" layoutY="91.0" prefHeight="37.0" prefWidth="200.0" promptText="         Suche..." styleClass="search-field" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="91.0">
+                  <TextField layoutX="550.0" layoutY="91.0" prefHeight="37.0" prefWidth="200.0" promptText="         Suche..." styleClass="search-field" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="549.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="104.0">
                      <opaqueInsets>
                         <Insets left="5.0" right="5.0" />
                      </opaqueInsets>
                   </TextField>
-                  <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="559.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: black;">
+                  <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="561.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: black;">
                      <image>
                         <Image url="@../images/lapproject/images/LupeBlau.png" />
                      </image>
@@ -98,7 +98,7 @@
                         <TableColumn minWidth="-1.0" prefWidth="111.5" text="Vortragender" />
                         <TableColumn minWidth="-1.0" prefWidth="111.5" text="Datum" />
                         <TableColumn minWidth="-1.0" prefWidth="111.5" text="Beginn(Uhrzeit)" />
-                        <TableColumn minWidth="-1.0" prefWidth="111.5" text="Ende(Uhrzeit)" />
+                        <TableColumn minWidth="-1.0" prefWidth="161.5" text="Ende(Uhrzeit)" />
                      </columns>
                   </TableView>
                </children>

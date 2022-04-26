@@ -1,6 +1,6 @@
 .navigation-button {
     -fx-background-color: #211D5A;
-    -fx-background-radius: 12 0 0 12;
+    -fx-background-radius: 20 0 0 20;
     -fx-text-fill: white;
 }
 
@@ -24,7 +24,7 @@
 }
 
 .title-first {
-    -fx-font-family: 'Comic Sans MS';
+    -fx-font-family: 'Candara';
     -fx-font-size: 40px;
     -fx-text-fill: #211d5a;
 }
@@ -112,7 +112,7 @@
 
 
 .title-form {
-    -fx-font-family: 'Comic Sans MS';
+    -fx-font-family: 'Candara';
     -fx-font-size: 24px;
     -fx-text-fill: white;
 }
@@ -155,7 +155,7 @@
 
 
 .button-style {
-    -fx-font-family: 'Comic Sans MS';
+    -fx-font-family: 'Candara';
     -fx-border-radius: 20px;
     -fx-background-radius: 20px;
     -fx-border-width: 1px;
@@ -165,12 +165,14 @@
 .button-dark {
     -fx-background-color: #211D5A;
     -fx-text-fill: white;
+    -fx-font-size: 14px;
 }
 
 .button-light {
     -fx-background-color: #F2F4FF;
     -fx-border-color: #b3b5ba;
     -fx-text-fill: #211D5A;
+    -fx-font-size: 14px;
 }
 
 .scroll-pane {
@@ -181,12 +183,6 @@
     -fx-background: #F2F4FF;
 }
 
-.course-container {
-    -fx-pref-width: 219px;
-    -fx-pref-height: 117px;
-    -fx-background-color: white;
-    -fx-background-radius: 25px;
-}
 
 
 

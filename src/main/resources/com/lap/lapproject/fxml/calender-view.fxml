@@ -10,6 +10,6 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.lap.lapproject.controller.CalenderController"
             prefHeight="400.0" prefWidth="600.0">
-    <BorderPane fx:id="borderCalender" minHeight="800.0" minWidth="800.0"/>
+    <BorderPane fx:id="borderCalender" minHeight="728.0" minWidth="785.0"/>
 
 </AnchorPane>
