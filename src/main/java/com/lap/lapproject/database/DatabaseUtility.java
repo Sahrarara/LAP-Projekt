@@ -18,10 +18,10 @@ public class DatabaseUtility {
     static final String dbUser = "root";
     static final String dbPw = "";
 
-    private static Connection connect (){
+    private static Connection connect() {
         Connection connection;
         try {
-            connection = DriverManager.getConnection(dbPrefix+location, dbUser, dbPw);
+            connection = DriverManager.getConnection(dbPrefix + location, dbUser, dbPw);
             System.out.println("Connection successful");
         } catch (SQLException e) {
             System.out.println("Connection failed - Check XAMPP");
@@ -32,7 +32,7 @@ public class DatabaseUtility {
     }
 
 
-    public static boolean checkUniqueUsername(String username){
+    public static boolean checkUniqueUsername(String username) {
         Connection connection = connect();
         //String query = "SELECT * FROM `users` WHERE `username`= '" + username + "'\n";
         //PreparedStatement statement = null;
@@ -44,27 +44,27 @@ public class DatabaseUtility {
         Alert a = new Alert(Alert.AlertType.ERROR);
         a.setHeaderText("Username already taken");
         try {
-            stmt=connection.prepareCall(query);
-            stmt.setString(1,username);
+            stmt = connection.prepareCall(query);
+            stmt.setString(1, username);
             resultSet = stmt.executeQuery();
             //statement = connection.prepareStatement(query);
             //resultSet = statement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 System.out.println(resultSet.getString("username"));
                 if (resultSet.getString("username").equals(username))
                     a.show();
                 return false;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return true;
     }
 
 
-    public static boolean checkUsernamePasswordActiveStatus(String username, String password){
+    public static boolean checkUsernamePasswordActiveStatus(String username, String password) {
         Connection connection = connect();
-        if (connection == null){
+        if (connection == null) {
             System.out.println("Check XAMPP");
         }
         //String queryUsername =
@@ -74,20 +74,20 @@ public class DatabaseUtility {
         //                "active_status = '1'";
         //PreparedStatement statement = null;
 
-        String query= "{call checkUsernamePasswordActive(?,?)}";
+        String query = "{call checkUsernamePasswordActive(?,?)}";
         ResultSet resultSet = null;
         CallableStatement stmt = null;
 
         try {
 
-            stmt=connection.prepareCall(query);
-            stmt.setString(1,username);
-            stmt.setString(2,password);
+            stmt = connection.prepareCall(query);
+            stmt.setString(1, username);
+            stmt.setString(2, password);
             resultSet = stmt.executeQuery();
 
             //statement = connection.prepareStatement(queryUsername);
             //resultSet = statement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 String user = resultSet.getString("username");
                 String title = resultSet.getString("title");
                 String firstname = resultSet.getString("first_name");
@@ -104,7 +104,7 @@ public class DatabaseUtility {
                 Boolean photoVisibility = resultSet.getBoolean("photo_visable");
 
 
-                switch (authority){
+                switch (authority) {
                     case "admin":
                         Admin admin = new Admin(user, firstname, lastname, authority, adminAuth, email, phoneNmbr, description);
                         UserData.firstName = admin.getfName();
@@ -139,9 +139,9 @@ public class DatabaseUtility {
         return false;
     }
 
-    public static ArrayList<Booking> readAll(){
+    public static ArrayList<Booking> readAll() {
         Connection connection = connect();
-        ArrayList<Booking> list= new ArrayList<>();
+        ArrayList<Booking> list = new ArrayList<>();
 //"SELECT courses.course_name,rooms.room_number,users.username, booking.datetime_start,booking.datetime_end FROM `booking` " +
 
         String query = "SELECT * FROM `booking` " +
@@ -158,11 +158,11 @@ public class DatabaseUtility {
             statement = connection.prepareStatement(query);
             resultSet = statement.executeQuery();
 
-            while (resultSet.next()){
-                Location location = new Location(resultSet.getString("street"),resultSet.getString("zip"),resultSet.getString("city"));
+            while (resultSet.next()) {
+                Location location = new Location(resultSet.getString("street"), resultSet.getString("zip"), resultSet.getString("city"));
                 //TODO: Equipment von rooms_equipment hinzufügen
                 //Equipment equipment = new Equipment();
-                Room room = new Room(resultSet.getString("rooms.room_number"),resultSet.getInt("rooms.size"), location);
+                Room room = new Room(resultSet.getString("rooms.room_number"), resultSet.getInt("rooms.size"), location);
                 Trainer trainer = new Trainer();
                 Program program = new Program(resultSet.getString("course_name"));
 
@@ -172,7 +172,7 @@ public class DatabaseUtility {
                 String timeend = resultSet.getString("course_end");
                 LocalDateTime courseend = LocalDateTime.parse(timeend, formatter);
 
-                Course course = new Course(resultSet.getString("course_name"),program,coursestart,courseend,resultSet.getInt("group_size"));
+                Course course = new Course(resultSet.getString("course_name"), program, coursestart, courseend, resultSet.getInt("group_size"));
 
 
                 String datetimestart = resultSet.getString("datetime_start");
@@ -190,5 +190,70 @@ public class DatabaseUtility {
         }
         return list;
     }
+
+
+    public static boolean getLocation() {
+        Connection connection = connect();
+        String query = "SELECT * FROM location";
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        try {
+            statement = connection.prepareStatement(query);
+            resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Location location = new Location(resultSet.getString("street"),
+                        resultSet.getString("zip"), resultSet.getString("city"));
+
+                ListModel.locationList.add(location);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+
+    public static boolean getProgram() {
+        Connection connection = connect();
+        String query = "SELECT * FROM programs";
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        try {
+            statement = connection.prepareStatement(query);
+            resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Program program = new Program(resultSet.getString("name"));
+                ListModel.programList.add(program);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return true;
+    }
+
+    public  static boolean getRoom() {
+        Connection connection = connect();
+        String query = "SELECT room_number,size,street FROM rooms JOIN location ON rooms.location_id = location.location_id";
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            statement = connection.prepareStatement(query);
+            resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                Location location = new Location(resultSet.getString("street"));
+                Room room = new Room(resultSet.getString("room_number"), resultSet.getInt("size"), location);
+                ListModel.roomList.add(room);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return true;
+    }
+
 
 }

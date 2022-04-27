@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SidebarController extends BaseController{
+public class SidebarController extends BaseController {
 
     private static final Logger log = LoggerFactory.getLogger(SidebarController.class);
     @FXML
@@ -52,7 +52,7 @@ public class SidebarController extends BaseController{
     private ImageView trainerIcon;
 
     @FXML
-    void onDashboardButtonPressed(ActionEvent event){
+    void onDashboardButtonPressed(ActionEvent event) {
         model.setPathForDetailView(Constants.PATH_TO_FXML_DASHBOARD);
     }
 
@@ -102,6 +102,11 @@ public class SidebarController extends BaseController{
     }
 
     @FXML
+    private void onBookingBtnClick(ActionEvent actionEvent) {
+        model.setPathForDetailView(Constants.PATH_TO_FXML_BOOKING);
+    }
+
+    @FXML
     private void onLogoutBtnClick(ActionEvent actionEvent) {
         UserData.firstName = null;
         UserData.lastName = null;
@@ -113,42 +118,42 @@ public class SidebarController extends BaseController{
     }
 
     @FXML
-    private void initialize(){
+    private void initialize() {
         authorityVisibility();
         setUsername();
     }
 
-    private void authorityVisibility(){
+    private void authorityVisibility() {
         String authority = UserData.authority;
-            switch (authority){
-                case "admin":
-                    System.out.println("Admin privileges");
-                    break;
-                case "coach":
-                    System.out.println("Coach privileges");
-                    break;
-                default:
-                    System.out.println("Guest privileges");
-                    logoutBtn.setText(" Zurück zum Login");
-                    profileIcon.setVisible(false);
-                    profileBtn.setVisible(false);
-                    break;
-            }
+        switch (authority) {
+            case "admin":
+                System.out.println("Admin privileges");
+                break;
+            case "coach":
+                System.out.println("Coach privileges");
+                break;
+            default:
+                System.out.println("Guest privileges");
+                logoutBtn.setText(" Zurück zum Login");
+                profileIcon.setVisible(false);
+                profileBtn.setVisible(false);
+                break;
+        }
     }
 
-    private void setUsername(){
-        if (UserData.firstName != null){
+    private void setUsername() {
+        if (UserData.firstName != null) {
             nameLabel.setText(UserData.firstName);
         } else {
             nameLabel.setText("Gast");
         }
     }
 
-    private Stage getCurrentStage(){
+    private Stage getCurrentStage() {
         return (Stage) nameLabel.getScene().getWindow();
     }
 
-    private void moveToLogin(){
+    private void moveToLogin() {
         Stage currentStage = this.getCurrentStage();
         currentStage.close();
 
@@ -156,8 +161,8 @@ public class SidebarController extends BaseController{
         Scene scene = null;
 
         try {
-            scene= new Scene(fxmlLoader.load());
-        } catch (IOException e){
+            scene = new Scene(fxmlLoader.load());
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -165,7 +170,6 @@ public class SidebarController extends BaseController{
         currentStage.setScene(scene);
         currentStage.show();
     }
-
 
 
 }

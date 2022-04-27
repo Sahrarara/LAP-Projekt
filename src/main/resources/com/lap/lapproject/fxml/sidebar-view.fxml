@@ -26,6 +26,7 @@
       <RowConstraints prefHeight="0.0" vgrow="SOMETIMES" />
       <RowConstraints prefHeight="0.0" vgrow="SOMETIMES" />
       <RowConstraints prefHeight="0.0" vgrow="SOMETIMES" />
+      <RowConstraints prefHeight="0.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="119.0" minHeight="5.5" prefHeight="50.5" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="141.0" minHeight="10.0" prefHeight="83.0" valignment="CENTER" vgrow="SOMETIMES" />
    </rowConstraints>
@@ -54,7 +55,7 @@
             <Insets bottom="30.0" />
          </GridPane.margin>
       </Label>
-      <Button fx:id="locationBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onLocationBtnClick" prefHeight="35.0" prefWidth="245.0" styleClass="navigation-button" text="STANDORT      " textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+      <Button fx:id="locationBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onLocationBtnClick" prefHeight="35.0" prefWidth="245.0" styleClass="navigation-button" text="STANDORT      " textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin>
@@ -65,7 +66,7 @@
             <Font name="Candara" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="profileBtn" alignment="CENTER" graphicTextGap="5.0" mnemonicParsing="false" onAction="#onUserBtnClick" prefHeight="35.0" prefWidth="245.0" styleClass="navigation-button" text="USER                " textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="9">
+      <Button fx:id="profileBtn" alignment="CENTER" graphicTextGap="5.0" mnemonicParsing="false" onAction="#onUserBtnClick" prefHeight="35.0" prefWidth="245.0" styleClass="navigation-button" text="USER                " textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="10">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
@@ -73,7 +74,7 @@
             <Font name="Candara" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="roomsBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#onRoomBtnClick" prefHeight="35.0" prefWidth="245.0" styleClass="navigation-button" text="RÄUME            " textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+      <Button fx:id="roomsBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" mnemonicParsing="false" onAction="#onRoomBtnClick" prefHeight="35.0" prefWidth="245.0" styleClass="navigation-button" text="RÄUME            " textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
@@ -81,7 +82,7 @@
             <Font name="Candara" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="courseBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" mnemonicParsing="false" onAction="#onCourseBtnClick" pickOnBounds="false" prefHeight="35.0" prefWidth="245.0" styleClass="navigation-button" text="KURSE             " textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+      <Button fx:id="courseBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" mnemonicParsing="false" onAction="#onCourseBtnClick" pickOnBounds="false" prefHeight="35.0" prefWidth="245.0" styleClass="navigation-button" text="KURSE             " textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets left="4.0" />
          </GridPane.margin>
@@ -89,7 +90,7 @@
             <Font name="Candara" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="trainerBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" mnemonicParsing="false" onAction="#onTrainerBtnClick" prefHeight="35.0" prefWidth="245.0" styleClass="navigation-button" text="TRAINER         " textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+      <Button fx:id="trainerBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" mnemonicParsing="false" onAction="#onTrainerBtnClick" prefHeight="35.0" prefWidth="245.0" styleClass="navigation-button" text="TRAINER         " textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
@@ -97,12 +98,12 @@
             <Font name="Candara" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="calenderBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" mnemonicParsing="false" onAction="#onCalenderBtnClick" prefHeight="35.0" prefWidth="245.0" styleClass="navigation-button" text="KALENDER      " textFill="WHITE" GridPane.rowIndex="6">
+      <Button fx:id="calenderBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" mnemonicParsing="false" onAction="#onCalenderBtnClick" prefHeight="35.0" prefWidth="245.0" styleClass="navigation-button" text="KALENDER      " textFill="WHITE" GridPane.rowIndex="7">
          <font>
             <Font name="Candara" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="logoutBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onLogoutBtnClick" prefHeight="30.0" prefWidth="196.0" style="-fx-background-radius: 16; -fx-background-color: ffffff;" text="Logout" textFill="#211d5a" GridPane.halignment="CENTER" GridPane.rowIndex="11">
+      <Button fx:id="logoutBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onLogoutBtnClick" prefHeight="30.0" prefWidth="196.0" style="-fx-background-radius: 16; -fx-background-color: ffffff;" text="Logout" textFill="#211d5a" GridPane.halignment="CENTER" GridPane.rowIndex="12">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
@@ -121,7 +122,7 @@
             <Insets left="30.0" />
          </GridPane.margin>
       </ImageView>
-      <ImageView fx:id="profileIcon" fitHeight="25.0" fitWidth="25.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="9">
+      <ImageView fx:id="profileIcon" fitHeight="25.0" fitWidth="25.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="10">
          <image>
             <Image url="@../images/lapproject/images/Sample_User_Icon.png" />
          </image>
@@ -129,7 +130,7 @@
             <Insets left="30.0" />
          </GridPane.margin>
       </ImageView>
-      <ImageView fx:id="locationIcon" fitHeight="25.0" fitWidth="25.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+      <ImageView fx:id="locationIcon" fitHeight="25.0" fitWidth="25.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="3">
          <image>
             <Image url="@../images/lapproject/images/location_Icon_New.png" />
          </image>
@@ -137,7 +138,7 @@
             <Insets left="30.0" />
          </GridPane.margin>
       </ImageView>
-      <ImageView fx:id="roomsIcon" fitHeight="25.0" fitWidth="51.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+      <ImageView fx:id="roomsIcon" fitHeight="25.0" fitWidth="51.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="4">
          <image>
             <Image url="@../images/lapproject/images/house_Icon.png" />
          </image>
@@ -145,7 +146,7 @@
             <Insets left="30.0" />
          </GridPane.margin>
       </ImageView>
-      <ImageView fx:id="courseIcon" fitHeight="25.0" fitWidth="25.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="4">
+      <ImageView fx:id="courseIcon" fitHeight="25.0" fitWidth="25.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="5">
          <image>
             <Image url="@../images/lapproject/images/users_Icon.png" />
          </image>
@@ -153,7 +154,7 @@
             <Insets left="30.0" />
          </GridPane.margin>
       </ImageView>
-      <ImageView fx:id="trainerIcon" fitHeight="25.0" fitWidth="25.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="6">
+      <ImageView fx:id="trainerIcon" fitHeight="25.0" fitWidth="25.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="7">
          <image>
             <Image url="@../images/lapproject/images/calendar_Icon.png" />
          </image>
@@ -161,7 +162,7 @@
             <Insets left="30.0" />
          </GridPane.margin>
       </ImageView>
-      <ImageView fitHeight="20.0" fitWidth="146.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="11" GridPane.valignment="CENTER">
+      <ImageView fitHeight="20.0" fitWidth="146.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="12" GridPane.valignment="CENTER">
          <image>
             <Image url="@../images/lapproject/images/logOut_Icon.png" />
          </image>
@@ -172,17 +173,17 @@
             <Cursor fx:constant="E_RESIZE" />
          </cursor>
       </ImageView>
-      <Button fx:id="equipmentBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" mnemonicParsing="false" onAction="#onEquipmentBtnClick" prefHeight="35.0" prefWidth="245.0" styleClass="navigation-button" stylesheets="@../css/application.css" text="AUSTATTUNG" textFill="WHITE" GridPane.rowIndex="7">
+      <Button fx:id="equipmentBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" mnemonicParsing="false" onAction="#onEquipmentBtnClick" prefHeight="35.0" prefWidth="245.0" styleClass="navigation-button" stylesheets="@../css/application.css" text="AUSTATTUNG" textFill="WHITE" GridPane.rowIndex="8">
          <font>
             <Font name="Candara" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="programBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" mnemonicParsing="false" onAction="#onProgramBtnClick" prefHeight="35.0" prefWidth="245.0" styleClass="navigation-button" text="PROGRAMM    " textFill="WHITE" GridPane.rowIndex="8">
+      <Button fx:id="programBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" mnemonicParsing="false" onAction="#onProgramBtnClick" prefHeight="35.0" prefWidth="245.0" styleClass="navigation-button" text="PROGRAMM    " textFill="WHITE" GridPane.rowIndex="9">
          <font>
             <Font name="Candara" size="16.0" />
          </font>
       </Button>
-      <ImageView fx:id="trainerIcon1" fitHeight="25.0" fitWidth="25.0" layoutX="50.0" layoutY="379.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="5">
+      <ImageView fx:id="trainerIcon1" fitHeight="25.0" fitWidth="25.0" layoutX="50.0" layoutY="379.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="6">
          <image>
             <Image url="@../images/lapproject/images/RäumeBlau.png" />
          </image>
@@ -190,7 +191,7 @@
             <Insets left="30.0" />
          </GridPane.margin>
       </ImageView>
-      <ImageView fx:id="trainerIcon2" fitHeight="25.0" fitWidth="40.0" layoutX="50.0" layoutY="379.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="7">
+      <ImageView fx:id="trainerIcon2" fitHeight="25.0" fitWidth="40.0" layoutX="50.0" layoutY="379.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="8">
          <image>
             <Image url="@../images/lapproject/images/equipment.png" />
          </image>
@@ -198,10 +199,26 @@
             <Insets left="30.0" />
          </GridPane.margin>
       </ImageView>
-      <ImageView fx:id="trainerIcon3" fitHeight="25.0" fitWidth="25.0" layoutX="50.0" layoutY="379.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="8">
+      <ImageView fx:id="trainerIcon3" fitHeight="25.0" fitWidth="25.0" layoutX="50.0" layoutY="379.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="9">
          <image>
             <Image url="@../images/lapproject/images/kurse_Icon.png" />
          </image>
+         <GridPane.margin>
+            <Insets left="30.0" />
+         </GridPane.margin>
+      </ImageView>
+      <Button fx:id="bookingBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onBookingBtnClick" prefHeight="35.0" prefWidth="245.0" styleClass="navigation-button" text="BUCHUNG       " textAlignment="RIGHT" textFill="WHITE" GridPane.rowIndex="2">
+         <font>
+            <Font name="Candara" size="16.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="40.0" layoutY="155.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+         <image>
+            <Image url="@../images/lapproject/images/pencil.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
          <GridPane.margin>
             <Insets left="30.0" />
          </GridPane.margin>

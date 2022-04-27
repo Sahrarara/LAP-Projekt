@@ -2,12 +2,18 @@ package com.lap.lapproject.controller;
 
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
+import com.lap.lapproject.database.DatabaseUtility;
+import com.lap.lapproject.model.ListModel;
+import com.lap.lapproject.model.Room;
 import com.lap.lapproject.model.UserData;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ButtonBar;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -15,6 +21,16 @@ import java.io.IOException;
 public class RoomsController {
     @FXML
     private ButtonBar roomsBtnBar;
+
+
+    @FXML
+    private TableView<Room> tableViewRoom;
+    @FXML
+    private TableColumn<Room, String> roomNumberColumn;
+    @FXML
+    private TableColumn<Room, Integer> sizeColumn;
+    @FXML
+    private TableColumn<Room, String> streetColumn;
 
     @FXML
     private void onAddRoomBtnClick(ActionEvent actionEvent) {
@@ -45,6 +61,16 @@ public class RoomsController {
     @FXML
     private void initialize(){
         authorityVisibility();
+
+        DatabaseUtility.getRoom();
+        initTableRoom();
+    }
+
+    private void initTableRoom() {
+        tableViewRoom.setItems(ListModel.roomList);
+        roomNumberColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getRoomNumber()));
+        sizeColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getSize()));
+        streetColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getLocation().getStreet()));
     }
 
     private void authorityVisibility(){

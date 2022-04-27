@@ -1,24 +1,25 @@
 package com.lap.lapproject.model;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Room {
-    private SimpleStringProperty roomName;
-    private int size;
+    private SimpleStringProperty roomNumber;
+    private SimpleIntegerProperty size;
     private Location location;
     private byte[] photo;
     private Equipment equipment;
 
-    public Room(String roomName, int size, Location location) {
-        this.roomName = new SimpleStringProperty(roomName);
-        this.size = size;
+    public Room(String roomNumber, int size, Location location) {
+        this.roomNumber = new SimpleStringProperty(roomNumber);
+        this.size = new SimpleIntegerProperty(size);
         this.location = location;
     }
 
     //TODO: photo, equipment
-    public Room(String roomName, int size, Location location, byte[] photo, Equipment equipment) {
-        this.roomName = new SimpleStringProperty(roomName);
-        this.size = size;
+    public Room(String roomNumber, int size, Location location, byte[] photo, Equipment equipment) {
+        this.roomNumber = new SimpleStringProperty(roomNumber);
+        this.size = new SimpleIntegerProperty(size);
         this.location = location;
         this.photo = photo;
         this.equipment = equipment;
@@ -32,24 +33,28 @@ public class Room {
         this.photo = photo;
     }
 
-    public String getRoomName() {
-        return roomName.get();
+    public String getRoomNumber() {
+        return roomNumber.get();
     }
 
-    public SimpleStringProperty roomNameProperty() {
-        return roomName;
+    public SimpleStringProperty roomNumberProperty() {
+        return roomNumber;
     }
 
-    public void setRoomName(String roomName) {
-        this.roomName.set(roomName);
+    public void setRoomNumber(String roomNumber) {
+        this.roomNumber.set(roomNumber);
     }
 
     public int getSize() {
+        return size.get();
+    }
+
+    public SimpleIntegerProperty sizeProperty() {
         return size;
     }
 
     public void setSize(int size) {
-        this.size = size;
+        this.size.set(size);
     }
 
     public Location getLocation() {

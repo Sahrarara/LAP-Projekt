@@ -82,16 +82,16 @@
             </AnchorPane>
             <AnchorPane>
                <children>
-                  <TableView layoutX="229.0" layoutY="52.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                  <TableView fx:id="tableViewRoom" layoutX="229.0" layoutY="52.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                     <columns>
                       <TableColumn prefWidth="45.0">
                            <graphic>
                               <CheckBox mnemonicParsing="false" />
                            </graphic>
                         </TableColumn>
-                      <TableColumn minWidth="-1.0" prefWidth="211.0" text="Raumnummer" />
-                        <TableColumn minWidth="-1.0" prefWidth="251.0" text="Raumgröße" />
-                        <TableColumn minWidth="-1.0" prefWidth="250.0" text="Standort" />
+                      <TableColumn fx:id="roomNumberColumn" minWidth="-1.0" prefWidth="211.0" text="Raumnummer" />
+                        <TableColumn fx:id="sizeColumn" minWidth="-1.0" prefWidth="251.0" text="Raumgröße" />
+                        <TableColumn fx:id="streetColumn" minWidth="-1.0" prefWidth="250.0" text="Standort" />
                     </columns>
                   </TableView>
                </children>

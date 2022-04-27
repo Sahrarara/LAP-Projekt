@@ -94,7 +94,7 @@
                            </graphic>
                         </TableColumn>
                         <TableColumn prefWidth="337.5" text="Ausrüstungsname" />
-                        <TableColumn minWidth="-1.0" prefWidth="381.5" text="Stück" />
+                        <TableColumn minWidth="-1.0" prefWidth="381.5" text="Raumnummer" />
                      </columns>
                   </TableView>
                </children>
