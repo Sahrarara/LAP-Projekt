@@ -12,6 +12,7 @@ public class ProgramRepositoryJDBC extends Repository implements ProgramReposito
     @Override
     public boolean getProgram() throws SQLException {
         Connection connection = connect();
+        ListModel.programList.clear();
         String query = "SELECT * FROM programs";
         PreparedStatement statement = null;
         ResultSet resultSet = null;

@@ -13,6 +13,7 @@ public class LocationRepositoryJDBC extends Repository implements LocationReposi
 
     public boolean getLocation() {
         Connection connection = connect();
+        ListModel.locationList.clear();
         String query = "SELECT * FROM location";
         PreparedStatement statement = null;
         ResultSet resultSet = null;

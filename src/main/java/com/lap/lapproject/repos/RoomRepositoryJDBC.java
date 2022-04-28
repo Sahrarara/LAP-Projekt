@@ -16,6 +16,7 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
     @Override
     public boolean getRoom() throws SQLException {
         Connection connection = connect();
+        ListModel.roomList.clear();
         String query = GET_ROOM_QUERY;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
