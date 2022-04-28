@@ -1,7 +1,7 @@
 package com.lap.lapproject.model;
 
 import com.calendarfx.model.Entry;
-import com.lap.lapproject.database.DatabaseUtility;
+import com.lap.lapproject.repos.BookingRepositoryJDBC;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -12,9 +12,10 @@ public class Model {
     public ArrayList<Booking> bookings = new ArrayList<>();
     public ArrayList<Entry<Booking>> bookingEntries = new ArrayList<>();
 
+    private BookingRepositoryJDBC bookingRepo = new BookingRepositoryJDBC();
     public Model(){
         try {
-            bookings.addAll(DatabaseUtility.readAll());
+            bookings.addAll(bookingRepo.readAll());
         } catch (Exception e) {
             e.printStackTrace();
         }

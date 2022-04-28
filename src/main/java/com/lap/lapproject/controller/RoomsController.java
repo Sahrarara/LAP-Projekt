@@ -2,10 +2,10 @@ package com.lap.lapproject.controller;
 
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
-import com.lap.lapproject.database.DatabaseUtility;
 import com.lap.lapproject.model.ListModel;
 import com.lap.lapproject.model.Room;
 import com.lap.lapproject.model.UserData;
+import com.lap.lapproject.repos.RoomRepositoryJDBC;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +17,7 @@ import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class RoomsController {
     @FXML
@@ -59,10 +60,11 @@ public class RoomsController {
     }
 
     @FXML
-    private void initialize(){
+    private void initialize() throws SQLException {
+        RoomRepositoryJDBC roomRepo = new RoomRepositoryJDBC();
         authorityVisibility();
 
-        DatabaseUtility.getRoom();
+        roomRepo.getRoom();
         initTableRoom();
     }
 

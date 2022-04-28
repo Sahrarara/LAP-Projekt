@@ -1,6 +1,7 @@
 package com.lap.lapproject.model;
 
 public abstract class User {
+    private long id;
     private String username;
     private String fName;
     private String lName;
@@ -32,6 +33,9 @@ public abstract class User {
     }
 
 
+    protected User() {
+    }
+
     protected User(String username, String fName, String lName, String authority, Boolean adminPrivilege) {
         this.username = username;
         this.fName = fName;
@@ -43,9 +47,17 @@ public abstract class User {
         this.description = description;
     }
 
-    protected User(){}
+    public long getId() {
+        return id;
+    }
 
-    protected String getUsername() {
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    protected User(long aLong, String username, byte[] photos){}
+
+    public String getUsername() {
         return username;
     }
 
@@ -146,7 +158,7 @@ public abstract class User {
         this.photoVisibility = photoVisibility;
     }
 
-    protected byte[] getPhoto() {
+    public byte[] getPhoto() {
         return photo;
     }
 

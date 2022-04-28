@@ -2,10 +2,10 @@ package com.lap.lapproject.controller;
 
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
-import com.lap.lapproject.database.DatabaseUtility;
 import com.lap.lapproject.model.ListModel;
 import com.lap.lapproject.model.Location;
 import com.lap.lapproject.model.UserData;
+import com.lap.lapproject.repos.LocationRepositoryJDBC;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -65,13 +65,14 @@ public class LocationController {
     @FXML
     private void initialize(){
         authorityVisibility();
+        LocationRepositoryJDBC locationRepo = new LocationRepositoryJDBC();
 
         assert cityColumn != null : "fx:id=\"cityColumn\" was not injected: check your FXML file 'location-view.fxml'.";
         assert streetColumn != null : "fx:id=\"streetColumn\" was not injected: check your FXML file 'location-view.fxml'.";
         assert tableViewLocation != null : "fx:id=\"tableView\" was not injected: check your FXML file 'location-view.fxml'.";
         assert zipColumn != null : "fx:id=\"zipColumn\" was not injected: check your FXML file 'location-view.fxml'.";
 
-        DatabaseUtility.getLocation();
+        locationRepo.getLocation();
         initLocationTable();
     }
 

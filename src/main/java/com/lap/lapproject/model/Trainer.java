@@ -5,5 +5,11 @@ public class Trainer extends User {
         super(username, fName, lName, authority, adminPrivilege);
     }
 
-    public Trainer(){super();};
+    public Trainer(long aLong, String username, byte[] photos) {
+        super(aLong, username, photos);
+    }
+
+    public Trainer() {
+
+    }
 }

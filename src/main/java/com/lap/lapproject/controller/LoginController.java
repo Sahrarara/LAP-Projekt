@@ -2,7 +2,6 @@ package com.lap.lapproject.controller;
 
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
-import com.lap.lapproject.database.DatabaseUtility;
 import com.lap.lapproject.repos.UserRepositoryJDBC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
