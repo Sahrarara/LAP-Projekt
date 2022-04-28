@@ -39,14 +39,14 @@
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" prefWidth="20.0" />
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints prefHeight="2.0" vgrow="SOMETIMES" />
-                      <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
-                      <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="164.0" minHeight="10.0" prefHeight="124.5" vgrow="SOMETIMES" />
-                        <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
-                        <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="93.0" minHeight="68.0" prefHeight="93.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints prefHeight="0.0" vgrow="SOMETIMES" />
+                      <RowConstraints prefHeight="0.0" vgrow="SOMETIMES" />
+                      <RowConstraints prefHeight="0.0" vgrow="SOMETIMES" />
+                      <RowConstraints prefHeight="124.5" vgrow="SOMETIMES" />
+                        <RowConstraints prefHeight="0.0" vgrow="SOMETIMES" />
+                        <RowConstraints prefHeight="0.0" vgrow="SOMETIMES" />
+                        <RowConstraints prefHeight="120.0" vgrow="SOMETIMES" />
+                        <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                         <Label text="Vorname" textFill="#211d5a" GridPane.columnIndex="1" GridPane.rowIndex="1">
