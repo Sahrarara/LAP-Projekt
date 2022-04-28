@@ -37,7 +37,7 @@
           <RowConstraints prefHeight="20.0" vgrow="SOMETIMES" />
           <RowConstraints prefHeight="20.0" vgrow="SOMETIMES" />
             <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints prefHeight="15.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label prefHeight="56.0" prefWidth="240.0" styleClass="title-first" text="Willkommen" textFill="#211d5a" GridPane.halignment="CENTER">

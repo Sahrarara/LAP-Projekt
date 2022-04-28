@@ -90,7 +90,7 @@
             <String fx:value="button-light" />
          </styleClass>
          <GridPane.margin>
-            <Insets left="10.0" />
+            <Insets />
          </GridPane.margin>
       </Button>
       <Button mnemonicParsing="false" text="HINZUFÜGEN" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="15" GridPane.valignment="TOP">

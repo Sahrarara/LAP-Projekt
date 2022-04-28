@@ -3,6 +3,7 @@ package com.lap.lapproject.controller;
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.database.DatabaseUtility;
+import com.lap.lapproject.repos.UserRepositoryJDBC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,7 +37,7 @@ public class LoginController implements Initializable {
         if (checkFieldsFilled()){
             String username = usernameTF.getText();
             String password = passwordTF.getText();
-            if (DatabaseUtility.checkUsernamePasswordActiveStatus(username, password)){
+            if (UserRepositoryJDBC.checkUsernamePasswordActiveStatus(username, password)){
                 System.out.println("Login successful");
                 moveToMainPage();
             } else {

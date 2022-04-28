@@ -1,6 +1,6 @@
 package com.lap.lapproject.model;
 
-public abstract class UserModel {
+public abstract class User {
     private String username;
     private String fName;
     private String lName;
@@ -15,7 +15,7 @@ public abstract class UserModel {
     private Boolean emailVisibility;
     private Boolean photoVisibility;
 
-    protected UserModel(String username, String fName, String lName, String authority, Boolean adminPrivilege, String description, int phoneNmbr, String email, byte[] photo, Boolean descriptionVisibility, Boolean phoneNmbrVisibility, Boolean emailVisibility, Boolean photoVisibility) {
+    protected User(String username, String fName, String lName, String authority, Boolean adminPrivilege, String description, int phoneNmbr, String email, byte[] photo, Boolean descriptionVisibility, Boolean phoneNmbrVisibility, Boolean emailVisibility, Boolean photoVisibility) {
         this.username = username;
         this.fName = fName;
         this.lName = lName;
@@ -32,7 +32,7 @@ public abstract class UserModel {
     }
 
 
-    protected UserModel(String username, String fName, String lName, String authority, Boolean adminPrivilege) {
+    protected User(String username, String fName, String lName, String authority, Boolean adminPrivilege) {
         this.username = username;
         this.fName = fName;
         this.lName = lName;
@@ -43,7 +43,7 @@ public abstract class UserModel {
         this.description = description;
     }
 
-    protected UserModel(){}
+    protected User(){}
 
     protected String getUsername() {
         return username;
