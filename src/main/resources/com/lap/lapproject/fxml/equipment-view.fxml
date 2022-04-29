@@ -93,8 +93,8 @@
                               <CheckBox mnemonicParsing="false" />
                            </graphic>
                         </TableColumn>
-                        <TableColumn prefWidth="337.5" text="Ausrüstungsname" />
-                        <TableColumn minWidth="-1.0" prefWidth="381.5" text="Raumnummer" />
+                        <TableColumn prefWidth="337.5" text="Raumnummer" />
+                        <TableColumn minWidth="-1.0" prefWidth="381.5" text="Ausrüstungsname" />
                      </columns>
                   </TableView>
                </children>
