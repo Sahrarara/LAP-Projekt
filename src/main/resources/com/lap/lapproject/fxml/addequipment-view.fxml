@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane prefHeight="270.0" prefWidth="659.0" style="-fx-background-color: #F2F4FF;" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.AddEquipmentController">
+<GridPane prefHeight="212.0" prefWidth="660.0" style="-fx-background-color: #F2F4FF;" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.AddEquipmentController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" prefWidth="20.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="86.5" />
@@ -21,7 +21,6 @@
    <rowConstraints>
       <RowConstraints maxHeight="222.0" minHeight="10.0" percentHeight="0.0" prefHeight="77.5" vgrow="SOMETIMES" />
       <RowConstraints prefHeight="2.0" vgrow="SOMETIMES" />
-      <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
       <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
       <RowConstraints prefHeight="50.0" vgrow="SOMETIMES" />
    </rowConstraints>
@@ -41,17 +40,12 @@
             <Insets left="20.0" />
          </GridPane.margin>
       </Label>
-      <Label styleClass="input-description" text="Menge" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3">
-         <GridPane.margin>
-            <Insets left="20.0" />
-         </GridPane.margin>
-      </Label>
       <TextField fx:id="nameTextField" maxWidth="385.0" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </TextField>
-      <Button mnemonicParsing="false" onAction="#onAbortBtnClick" text="ABBRECHEN" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+      <Button mnemonicParsing="false" onAction="#onAbortBtnClick" text="ABBRECHEN" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
          <styleClass>
             <String fx:value="button-style" />
             <String fx:value="button-light" />
@@ -60,7 +54,7 @@
             <Insets right="30.0" />
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" onAction="#onAddBtnClick" text="HINZUFÜGEN" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+      <Button mnemonicParsing="false" onAction="#onAddBtnClick" text="HINZUFÜGEN" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets right="25.0" />
          </GridPane.margin>
@@ -69,7 +63,6 @@
             <String fx:value="button-dark" />
          </styleClass>
       </Button>
-      <TextField fx:id="amountTextField" layoutX="221.0" layoutY="126.0" maxWidth="385.0" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.rowIndex="3" />
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #211D5A;" />
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #211D5A;" GridPane.columnIndex="3" />
    </children>
