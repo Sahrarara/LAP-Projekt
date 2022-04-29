@@ -12,6 +12,7 @@ public class ProgramRepositoryJDBC extends Repository implements ProgramReposito
     //private static final String SQL_INSERT_PROGRAM = "INSERT INTO programs(program_id, name) VALUES (?, ?)";
     private static final String SQL_INSERT_PROGRAM_NOID = "INSERT INTO program(name) VALUES (?)";
 
+    //CREATE
     @Override
     public void addProgram(Program program) throws SQLException {
         Connection connection = connect();
@@ -33,7 +34,7 @@ public class ProgramRepositoryJDBC extends Repository implements ProgramReposito
         }
     }
 
-
+    //READ
     @Override
     public boolean getProgram() throws SQLException {
         Connection connection = connect();
@@ -54,4 +55,18 @@ public class ProgramRepositoryJDBC extends Repository implements ProgramReposito
 
         return true;
     }
+
+    //TODO: Update und Delete machen!
+    //UPDATE
+    @Override
+    public void updateProgram(Program program) throws SQLException {
+
+    }
+
+    //DELETE
+    @Override
+    public void deleteProgram(Program program) throws SQLException {
+
+    }
+
 }
