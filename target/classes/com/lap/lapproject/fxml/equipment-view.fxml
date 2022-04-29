@@ -77,7 +77,7 @@
                         <Insets left="5.0" right="5.0" />
                      </opaqueInsets>
                   </TextField>
-                  <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="561.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: black;">
+                  <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="561.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/lapproject/images/LupeBlau.png" />
                      </image>
@@ -93,8 +93,8 @@
                               <CheckBox mnemonicParsing="false" />
                            </graphic>
                         </TableColumn>
-                        <TableColumn prefWidth="337.5" text="Ausrüstungsname" />
-                        <TableColumn minWidth="-1.0" prefWidth="381.5" text="Raumnummer" />
+                        <TableColumn prefWidth="337.5" text="Raumnummer" />
+                        <TableColumn minWidth="-1.0" prefWidth="381.5" text="Ausrüstungsname" />
                      </columns>
                   </TableView>
                </children>
