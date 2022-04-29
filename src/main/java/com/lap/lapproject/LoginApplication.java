@@ -15,6 +15,7 @@ public class LoginApplication extends Application {
         stage.setTitle("Login");
         stage.setScene(scene);
         stage.show();
+        stage.setResizable(false);
     }
 
     public static void main(String[] args) {
