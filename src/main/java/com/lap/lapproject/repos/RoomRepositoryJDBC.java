@@ -11,7 +11,8 @@ import java.sql.SQLException;
 
 public class RoomRepositoryJDBC extends Repository implements RoomRepository {
 
-    private static final String GET_ROOM_QUERY =   "SELECT room_number,size,street FROM rooms JOIN location ON rooms.location_id = location.location_id";
+    private static final String GET_ROOM_QUERY =   "SELECT room_id,room_number,size,street FROM rooms JOIN location " +
+            "ON rooms.location_id = location.location_id";
 
     @Override
     public boolean getRoom() throws SQLException {
@@ -27,7 +28,9 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
 
             while (resultSet.next()) {
                 Location location = new Location(resultSet.getString("street"));
-                Room room = new Room(resultSet.getString("room_number"), resultSet.getInt("size"), location);
+                Room room = new Room(resultSet.getLong("room_id"), resultSet.getString("room_number"), resultSet.getInt(
+                        "size"),
+                        location);
                 ListModel.roomList.add(room);
             }
 

@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class LocationRepositoryJDBC extends Repository implements LocationRepository{
+public class LocationRepositoryJDBC extends Repository implements LocationRepository {
 
 
     public boolean getLocation() {
@@ -21,7 +21,7 @@ public class LocationRepositoryJDBC extends Repository implements LocationReposi
             statement = connection.prepareStatement(query);
             resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Location location = new Location(resultSet.getString("street"),
+                Location location = new Location(resultSet.getLong("location_id"), resultSet.getString("street"),
                         resultSet.getString("zip"), resultSet.getString("city"));
 
                 ListModel.locationList.add(location);

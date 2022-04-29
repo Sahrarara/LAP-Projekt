@@ -84,7 +84,7 @@
                <children>
                   <TableView fx:id="tableViewRoom" layoutX="229.0" layoutY="52.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                     <columns>
-                      <TableColumn prefWidth="45.0">
+                      <TableColumn fx:id="checkBoxColumn" prefWidth="45.0">
                            <graphic>
                               <CheckBox mnemonicParsing="false" />
                            </graphic>

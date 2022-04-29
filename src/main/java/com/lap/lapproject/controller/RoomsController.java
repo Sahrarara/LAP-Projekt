@@ -10,11 +10,12 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -26,12 +27,16 @@ public class RoomsController {
 
     @FXML
     private TableView<Room> tableViewRoom;
+
+    @FXML
+    private TableColumn<Room, CheckBox> checkBoxColumn;
     @FXML
     private TableColumn<Room, String> roomNumberColumn;
     @FXML
     private TableColumn<Room, Integer> sizeColumn;
     @FXML
     private TableColumn<Room, String> streetColumn;
+
 
     @FXML
     private void onAddRoomBtnClick(ActionEvent actionEvent) {
@@ -69,11 +74,12 @@ public class RoomsController {
     }
 
     private void initTableRoom() {
+
+
         tableViewRoom.setItems(ListModel.roomList);
         roomNumberColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getRoomNumber()));
         sizeColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getSize()));
         streetColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getLocation().getStreet()));
-
     }
 
     private void authorityVisibility(){

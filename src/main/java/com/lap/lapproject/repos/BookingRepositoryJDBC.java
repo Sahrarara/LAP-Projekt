@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class BookingRepositoryJDBC extends Repository implements BookingRepository{
+public class BookingRepositoryJDBC extends Repository implements BookingRepository {
 
     @Override
     public ArrayList<Booking> readAll() throws SQLException {
@@ -33,12 +33,17 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
             resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                Location location = new Location(resultSet.getString("street"), resultSet.getString("zip"), resultSet.getString("city"));
+                Location location = new Location(resultSet.getLong("location_id"), resultSet.getString("street"),
+                        resultSet.getString("zip"),
+                        resultSet.getString("city"));
                 //TODO: Equipment von rooms_equipment hinzufügen
                 //Equipment equipment = new Equipment();
-                Room room = new Room(resultSet.getString("rooms.room_number"), resultSet.getInt("rooms.size"), location);
+                Room room = new Room(resultSet.getLong("room_id"), resultSet.getString("rooms.room_number"),
+                        resultSet.getInt("rooms" +
+                                ".size"),
+                        location);
                 Trainer trainer = new Trainer();
-                Program program = new Program(resultSet.getString("course_name"));
+                Program program = new Program(resultSet.getLong("program_id"), resultSet.getString("course_name"));
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 String timestart = resultSet.getString("course_start");
@@ -64,7 +69,6 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
         }
         return list;
     }
-
 
 
 }

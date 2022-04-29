@@ -2,15 +2,19 @@ package com.lap.lapproject.model;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.CheckBox;
 
 public class Room {
+    private long id;
     private SimpleStringProperty roomNumber;
     private SimpleIntegerProperty size;
     private Location location;
     private byte[] photo;
     private Equipment equipment;
 
-    public Room(String roomNumber, int size, Location location) {
+
+    public Room(long id, String roomNumber, int size, Location location) {
+        this.id = id;
         this.roomNumber = new SimpleStringProperty(roomNumber);
         this.size = new SimpleIntegerProperty(size);
         this.location = location;
@@ -23,6 +27,14 @@ public class Room {
         this.location = location;
         this.photo = photo;
         this.equipment = equipment;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public byte[] getPhoto() {
@@ -72,4 +84,5 @@ public class Room {
     public void setEquipment(Equipment equipment) {
         this.equipment = equipment;
     }
+
 }

@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ProgramRepositoryJDBC extends Repository implements ProgramRepository{
+public class ProgramRepositoryJDBC extends Repository implements ProgramRepository {
     @Override
     public boolean getProgram() throws SQLException {
         Connection connection = connect();
@@ -20,7 +20,7 @@ public class ProgramRepositoryJDBC extends Repository implements ProgramReposito
             statement = connection.prepareStatement(query);
             resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Program program = new Program(resultSet.getString("name"));
+                Program program = new Program(resultSet.getLong("program_id"), resultSet.getString("name"));
                 ListModel.programList.add(program);
             }
         } catch (SQLException e) {
