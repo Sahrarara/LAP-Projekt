@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #211D5A;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.TrainerController">
+   <children>
+      <SplitPane dividerPositions="0.23684210526315788" layoutX="10.0" layoutY="10.0" orientation="VERTICAL" prefHeight="728.0" prefWidth="800.0" styleClass="split-pane-background" stylesheets="@../css/application.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <items>
+            <AnchorPane>
+               <children>
+                  <Label layoutX="76.0" layoutY="22.0" prefHeight="54.0" prefWidth="193.0" styleClass="title-first" text="TRAINER" textFill="#201d592d">
+                     <font>
+                        <Font name="Comic Sans MS" size="40.0" />
+                     </font>
+                  </Label>
+                  <ButtonBar fx:id="trainerBtnBar" buttonMinWidth="10.0" layoutX="294.0" layoutY="74.0" prefHeight="70.0" prefWidth="169.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="520.0" AnchorPane.topAnchor="74.0">
+                     <buttons>
+                        <Button graphicTextGap="2.0" mnemonicParsing="false" onAction="#onAddTrainerBtnClick" prefHeight="30.0" prefWidth="60.0">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/lapproject/images/PlusTW.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <styleClass>
+                              <String fx:value="icon-background" />
+                              <String fx:value="icon-plus" />
+                           </styleClass>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#onDeleteTrainerBtnClick" prefHeight="30.0" prefWidth="60.0">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/lapproject/images/DeleteTW.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <styleClass>
+                              <String fx:value="icon-background" />
+                              <String fx:value="icon-trash" />
+                           </styleClass>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#onSettingsBtnClick" prefHeight="30.0" prefWidth="60.0">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/lapproject/images/pen_Icon_white.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <styleClass>
+                              <String fx:value="icon-background" />
+                              <String fx:value="icon-gear" />
+                           </styleClass>
+                        </Button>
+                     </buttons>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </ButtonBar>
+                  <TextField layoutX="549.0" layoutY="104.0" prefHeight="30.0" prefWidth="188.0" promptText="         Suche..." styleClass="search-field" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="549.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="104.0">
+                     <opaqueInsets>
+                        <Insets left="5.0" right="5.0" />
+                     </opaqueInsets></TextField>
+                  <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="559.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/lapproject/images/LupeBlau.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane>
+               <children>
+                  <TableView layoutX="20.0" layoutY="23.0" prefHeight="386.0" prefWidth="800.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                     <columns>
+                        <TableColumn prefWidth="38.0">
+                           <graphic>
+                              <CheckBox mnemonicParsing="false" />
+                           </graphic>
+                        </TableColumn>
+                        <TableColumn prefWidth="147.5" text="Vorname" />
+                        <TableColumn prefWidth="147.5" text="Nachname" />
+                        <TableColumn prefWidth="147.5" text="E-Mail" />
+                        <TableColumn minWidth="0.0" prefWidth="147.5" text="Telefon" />
+                        <TableColumn minWidth="0.0" prefWidth="129.0" text="Verfügbar" />
+                     </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
