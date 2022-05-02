@@ -15,6 +15,12 @@ public class Location {
         this.city = new SimpleStringProperty(city);
     }
 
+    public Location(String street, String zipcode, String city) {
+        this.street = new SimpleStringProperty(street);
+        this.zipcode = new SimpleStringProperty(zipcode);
+        this.city = new SimpleStringProperty(city);
+    }
+
     public Location(String street) {
         this.street = new SimpleStringProperty(street);
     }

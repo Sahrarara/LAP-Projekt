@@ -3,13 +3,11 @@ package com.lap.lapproject.repos;
 import com.lap.lapproject.model.ListModel;
 import com.lap.lapproject.model.Location;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class LocationRepositoryJDBC extends Repository implements LocationRepository {
 
+    private static final String ADD_NEW_LOCATION_SQL_STRING = "INSERT INTO location (street, zip, city) VALUES (?, ?, ?)";
 
     public boolean getLocation() {
         Connection connection = connect();
@@ -31,4 +29,29 @@ public class LocationRepositoryJDBC extends Repository implements LocationReposi
         }
         return true;
     }
+    @Override
+    public void addLocation(Location location) throws SQLException {
+        Connection connection = connect();
+
+        try(PreparedStatement preparedStatement = connection.prepareStatement(ADD_NEW_LOCATION_SQL_STRING, Statement.RETURN_GENERATED_KEYS)){
+            preparedStatement.setString(1, location.getStreet());
+            preparedStatement.setString(2, location.getZipcode());
+            preparedStatement.setString(3, location.getCity());
+
+            preparedStatement.executeUpdate();
+
+            /*
+            try(ResultSet resultSet = preparedStatement.getGeneratedKeys()){
+                while(resultSet.next()){
+                    //long locationId = resultSet.getLong("location_id");
+                    //location.setId(locationId);
+
+                }
+            }
+             */
+
+        }
+    }
+
 }
+
