@@ -10,25 +10,27 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.io.IOException;
 
 public class LocationController {
 
+
     @FXML
     private TableView<Location> tableViewLocation;
     @FXML
-    private TableColumn<Location, String> cityColumn;
+    private TableColumn<Location, Boolean> checkBoxColumn;
     @FXML
     private TableColumn<Location, String> streetColumn;
-
     @FXML
     private TableColumn<Location, String> zipColumn;
+    @FXML
+    private TableColumn<Location, String> cityColumn;
 
 
     @FXML
@@ -43,8 +45,8 @@ public class LocationController {
         Scene scene = null;
 
         try {
-            scene= new Scene(fxmlLoader.load());
-        } catch (IOException e){
+            scene = new Scene(fxmlLoader.load());
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -63,22 +65,23 @@ public class LocationController {
 
 
     @FXML
-    private void initialize(){
+    private void initialize() {
+        assert tableViewLocation != null : "fx:id=\"tableViewLocation\" was not injected: check your FXML file 'location-view.fxml'.";
+        assert checkBoxColumn != null : "fx:id=\"checkBoxColumn\" was not injected: check your FXML file 'location-view.fxml'.";
+        assert streetColumn != null : "fx:id=\"streetColumn\" was not injected: check your FXML file 'location-view.fxml'.";
+        assert zipColumn != null : "fx:id=\"zipColumn\" was not injected: check your FXML file 'location-view.fxml'.";
+        assert cityColumn != null : "fx:id=\"cityColumn\" was not injected: check your FXML file 'location-view.fxml'.";
+        assert locationBtnBar != null : "fx:id=\"locationBtnBar\" was not injected: check your FXML file 'location-view.fxml'.";
+
         authorityVisibility();
         LocationRepositoryJDBC locationRepo = new LocationRepositoryJDBC();
-
-        assert cityColumn != null : "fx:id=\"cityColumn\" was not injected: check your FXML file 'location-view.fxml'.";
-        assert streetColumn != null : "fx:id=\"streetColumn\" was not injected: check your FXML file 'location-view.fxml'.";
-        assert tableViewLocation != null : "fx:id=\"tableView\" was not injected: check your FXML file 'location-view.fxml'.";
-        assert zipColumn != null : "fx:id=\"zipColumn\" was not injected: check your FXML file 'location-view.fxml'.";
-
         locationRepo.getLocation();
         initLocationTable();
     }
 
-    private void authorityVisibility(){
+    private void authorityVisibility() {
         String authority = UserData.authority;
-        switch (authority){
+        switch (authority) {
             case "admin":
                 break;
             case "coach":
@@ -96,6 +99,32 @@ public class LocationController {
         streetColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getStreet()));
         zipColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getZipcode()));
         cityColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getCity()));
+
+        checkBoxColumn.setCellValueFactory((dataFeatures) -> dataFeatures.getValue().checkedProperty());
+        checkBoxColumn.setCellFactory(new Callback<TableColumn<Location, Boolean>, TableCell<Location, Boolean>>() {
+            @Override
+            public TableCell<Location, Boolean> call(TableColumn<Location, Boolean> userBooleanTableColumn) {
+                TableCell<Location, Boolean> cell = new TableCell<>() {
+                    CheckBox checkBox = new CheckBox();
+                    @Override
+                    protected void updateItem(Boolean value, boolean empty) {
+                        super.updateItem(value, empty);
+                        if(empty) { //wenn kein inhalt
+                            setText(null);
+                            setGraphic(null);
+                        } else {
+                            setText(null);
+                            setGraphic(checkBox);
+                            checkBox.setSelected(value);
+                            // System.out.println(checkBox.isSelected());
+                        }
+                    }
+                };
+                cell.setAlignment(Pos.CENTER);
+                return cell;
+            }
+        });
+
     }
 
 }

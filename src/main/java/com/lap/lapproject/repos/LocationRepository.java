@@ -7,6 +7,5 @@ import java.sql.SQLException;
 public interface LocationRepository {
 
     boolean getLocation() throws SQLException;
-
     void addLocation(Location location) throws SQLException;
 }

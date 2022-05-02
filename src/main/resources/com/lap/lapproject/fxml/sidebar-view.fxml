@@ -173,12 +173,12 @@
             <Cursor fx:constant="E_RESIZE" />
          </cursor>
       </ImageView>
-      <Button fx:id="equipmentBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" mnemonicParsing="false" onAction="#onEquipmentBtnClick" prefHeight="35.0" prefWidth="245.0" styleClass="navigation-button" stylesheets="@../css/application.css" text="AUSTATTUNG" textFill="WHITE" GridPane.rowIndex="8">
+      <Button fx:id="equipmentBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" mnemonicParsing="false" onAction="#onEquipmentBtnClick" prefHeight="35.0" prefWidth="245.0" styleClass="navigation-button" stylesheets="@../css/application.css" text="  AUSSTATTUNG" textFill="WHITE" GridPane.rowIndex="8">
          <font>
             <Font name="Candara" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="programBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" mnemonicParsing="false" onAction="#onProgramBtnClick" prefHeight="35.0" prefWidth="245.0" styleClass="navigation-button" text="PROGRAMM    " textFill="WHITE" GridPane.rowIndex="9">
+      <Button fx:id="programBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="5.0" mnemonicParsing="false" onAction="#onProgramBtnClick" prefHeight="35.0" prefWidth="245.0" styleClass="navigation-button" text=" PROGRAMM    " textFill="WHITE" GridPane.rowIndex="9">
          <font>
             <Font name="Candara" size="16.0" />
          </font>

@@ -8,15 +8,14 @@ import java.sql.*;
 public class LocationRepositoryJDBC extends Repository implements LocationRepository {
 
     private static final String ADD_NEW_LOCATION_SQL_STRING = "INSERT INTO location (street, zip, city) VALUES (?, ?, ?)";
-
+    private static final String SELECT_LOCATION_SQL_STRING = "SELECT * FROM location";
     public boolean getLocation() {
         Connection connection = connect();
         ListModel.locationList.clear();
-        String query = "SELECT * FROM location";
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
-            statement = connection.prepareStatement(query);
+            statement = connection.prepareStatement(SELECT_LOCATION_SQL_STRING);
             resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Location location = new Location(resultSet.getLong("location_id"), resultSet.getString("street"),

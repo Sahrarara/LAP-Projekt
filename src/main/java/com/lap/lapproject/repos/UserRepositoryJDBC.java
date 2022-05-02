@@ -1,12 +1,10 @@
 package com.lap.lapproject.repos;
 
-import com.lap.lapproject.model.Admin;
-import com.lap.lapproject.model.Trainer;
-import com.lap.lapproject.model.User;
-import com.lap.lapproject.model.UserData;
+import com.lap.lapproject.model.*;
 import javafx.scene.control.Alert;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.Optional;
@@ -16,11 +14,13 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
     private static final String SQL_STRING = "INSERT INTO users (user_id, username, photo) (?, ?, ?)";
     private static final String SQL_SELECT_WHERE_ID = "SELECT * WHERE id=?";
 
+    private static final String SELECT_TRAINER_SQL_STRING = "SELECT user_id, first_name, last_name, email, phone, active_status FROM users WHERE authorization='coach'";
+
     @Override
-    public void add(User user) throws SQLException{
+    public void add(User user) throws SQLException {
         Connection connection = connect();
 
-        try(PreparedStatement preparedStatement = connection.prepareStatement(SQL_STRING, Statement.RETURN_GENERATED_KEYS)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_STRING, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setLong(1, user.getId());
             preparedStatement.setString(2, user.getUsername());
             InputStream inputStream = new ByteArrayInputStream(user.getPhoto());
@@ -28,8 +28,8 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
 
             preparedStatement.executeUpdate();
 
-            try(ResultSet resultSet = preparedStatement.getGeneratedKeys()){
-                while(resultSet.next()){
+            try (ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
+                while (resultSet.next()) {
                     long userId = resultSet.getLong("user_id");
                     user.setId(userId);
                 }
@@ -38,27 +38,53 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
     }
 
     @Override
-    public Optional<User> read(long id) throws SQLException{
+    public Optional<User> read(long id) throws SQLException {
         User user = null;
-        try(PreparedStatement preparedStatement = connect().prepareStatement(SQL_SELECT_WHERE_ID)){
+        try (PreparedStatement preparedStatement = connect().prepareStatement(SQL_SELECT_WHERE_ID)) {
 
             preparedStatement.setLong(1, id);
 
-            try(ResultSet resultSet = preparedStatement.executeQuery()){
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 getUser(resultSet);
             }
         }
-            return Optional.of(user);
+        return Optional.of(user);
     }
 
 
-    private User getUser(ResultSet resultSet) throws SQLException{
+//TODO: SCHAU DIESE FUNCTION NOCH MAL
+    @Override
+    public boolean getTrainer()  {
+        Connection connection = connect();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            statement = connection.prepareStatement(SELECT_TRAINER_SQL_STRING);
+            resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Trainer trainer =  new Trainer (resultSet.getLong("user_id"),resultSet.getString("first_name"),
+                        resultSet.getString("last_name"), resultSet.getString("email"),resultSet.getString(
+                                "phone"), resultSet.getBoolean("active_status"));
+                ListModel.trainerList.add(trainer);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+
+    private User getUser(ResultSet resultSet) throws SQLException {
         String authorization = resultSet.getString("authorization");
         User user = null;
-        switch (authorization){
+        switch (authorization) {
             //TODO: Constructor
-            case "admin": user = new Admin();
-            case "coach": user = new Trainer();
+            case "admin":
+                user = new Admin();
+            case "coach":
+                user = new Trainer();
         }
         return user;
     }
@@ -94,9 +120,9 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
                 String firstname = resultSet.getString("first_name");
                 String lastname = resultSet.getString("last_name");
                 String authority = resultSet.getString("authorization");
-                Boolean adminAuth = resultSet.getBoolean("admin");
+
                 String description = resultSet.getString("description");
-                int phoneNmbr = resultSet.getInt("phone");
+                String phoneNmbr = resultSet.getString("phone");
                 String email = resultSet.getString("email");
                 byte[] photo = resultSet.getBytes("photo");
                 Boolean descriptionVisibility = resultSet.getBoolean("description_visable");
@@ -107,7 +133,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
 
                 switch (authority) {
                     case "admin":
-                        Admin admin = new Admin(user, firstname, lastname, authority, adminAuth, email, phoneNmbr, description);
+                        Admin admin = new Admin(user, firstname, lastname, authority, email, phoneNmbr, description);
                         UserData.firstName = admin.getfName();
                         UserData.lastName = admin.getlName();
                         UserData.email = email;
@@ -119,7 +145,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
                         System.out.println(UserData.authority);
                         return true;
                     case "coach":
-                        Trainer trainer = new Trainer(user, firstname, lastname, authority, adminAuth, email, phoneNmbr, description);
+                        Trainer trainer = new Trainer(user, firstname, lastname, authority, email, phoneNmbr, description);
                         UserData.firstName = trainer.getfName();
                         UserData.lastName = trainer.getlName();
                         UserData.email = email;

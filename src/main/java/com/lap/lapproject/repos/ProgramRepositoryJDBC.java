@@ -3,25 +3,23 @@ package com.lap.lapproject.repos;
 import com.lap.lapproject.model.ListModel;
 import com.lap.lapproject.model.Program;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.sql.*;
 
 public class ProgramRepositoryJDBC extends Repository implements ProgramRepository {
     //TODO: Priebsch fragen warum Fehler
     //private static final String SQL_INSERT_PROGRAM = "INSERT INTO programs(program_id, name) VALUES (?, ?)";
     private static final String ADD_NEW_PROGRAM_SQL_STRING = "INSERT INTO programs (name) VALUES (?)";
+    private static final String SELECT_PROGRAM_SQL_STRING = "SELECT * FROM programs";
 
     //CREATE
     @Override
     public boolean getProgram() throws SQLException {
         Connection connection = connect();
         ListModel.programList.clear();
-        String query = "SELECT * FROM programs";
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
-            statement = connection.prepareStatement(query);
+            statement = connection.prepareStatement(SELECT_PROGRAM_SQL_STRING);
             resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Program program = new Program(resultSet.getLong("program_id"), resultSet.getString("name"));
@@ -30,7 +28,6 @@ public class ProgramRepositoryJDBC extends Repository implements ProgramReposito
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return true;
     }
 

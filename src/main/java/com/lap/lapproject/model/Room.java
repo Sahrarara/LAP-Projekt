@@ -1,33 +1,43 @@
 package com.lap.lapproject.model;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.CheckBox;
 
 public class Room {
     private long id;
-    private SimpleStringProperty roomNumber;
+    private String roomNumber;
     private SimpleIntegerProperty size;
     private Location location;
     private byte[] photo;
     private Equipment equipment;
 
+    private SimpleBooleanProperty checked = new SimpleBooleanProperty(false);
+
 
     public Room(long id, String roomNumber, int size, Location location) {
         this.id = id;
-        this.roomNumber = new SimpleStringProperty(roomNumber);
+       // this.roomNumber = new SimpleStringProperty(roomNumber);
+        this.roomNumber = roomNumber;
         this.size = new SimpleIntegerProperty(size);
         this.location = location;
     }
 
+    public Room(String roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
     //TODO: photo, equipment
     public Room(String roomNumber, int size, Location location, byte[] photo, Equipment equipment) {
-        this.roomNumber = new SimpleStringProperty(roomNumber);
+       // this.roomNumber = new SimpleStringProperty(roomNumber);
+        this.roomNumber = roomNumber;
         this.size = new SimpleIntegerProperty(size);
         this.location = location;
         this.photo = photo;
         this.equipment = equipment;
     }
+
 
     public long getId() {
         return id;
@@ -45,7 +55,7 @@ public class Room {
         this.photo = photo;
     }
 
-    public String getRoomNumber() {
+ /*   public String getRoomNumber() {
         return roomNumber.get();
     }
 
@@ -55,6 +65,15 @@ public class Room {
 
     public void setRoomNumber(String roomNumber) {
         this.roomNumber.set(roomNumber);
+    }
+*/
+
+    public String getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(String roomNumber) {
+        this.roomNumber = roomNumber;
     }
 
     public int getSize() {
@@ -85,4 +104,15 @@ public class Room {
         this.equipment = equipment;
     }
 
+    public boolean isChecked() {
+        return checked.get();
+    }
+
+    public SimpleBooleanProperty checkedProperty() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked.set(checked);
+    }
 }

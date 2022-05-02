@@ -106,7 +106,7 @@ public class SidebarController extends BaseController {
         UserData.firstName = null;
         UserData.lastName = null;
         UserData.email = null;
-        UserData.telephoneNmbr = 0;
+        UserData.telephoneNmbr = "0";
         UserData.description = null;
         UserData.authority = "guest";
         moveToLogin();

@@ -1,5 +1,6 @@
 package com.lap.lapproject.model;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Location {
@@ -7,6 +8,8 @@ public class Location {
     private SimpleStringProperty street;
     private SimpleStringProperty zipcode;
     private SimpleStringProperty city;
+
+    private SimpleBooleanProperty checked = new SimpleBooleanProperty(false);
 
     public Location(long id, String street, String zipcode, String city) {
         this.id = id;
@@ -67,5 +70,17 @@ public class Location {
 
     public void setCity(String city) {
         this.city.set(city);
+    }
+
+    public boolean isChecked() {
+        return checked.get();
+    }
+
+    public SimpleBooleanProperty checkedProperty() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked.set(checked);
     }
 }

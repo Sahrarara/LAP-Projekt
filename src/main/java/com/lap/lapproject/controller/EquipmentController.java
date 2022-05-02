@@ -2,14 +2,20 @@ package com.lap.lapproject.controller;
 
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
+import com.lap.lapproject.model.Equipment;
+import com.lap.lapproject.model.ListModel;
+import com.lap.lapproject.model.Location;
 import com.lap.lapproject.model.UserData;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.io.IOException;
 
@@ -24,6 +30,15 @@ public class EquipmentController {
     private ButtonBar equipmentBtnBar;
 
     @FXML
+    private TableView<Equipment> tableViewEquipment;
+    @FXML
+    private TableColumn<Equipment, Boolean> checkBoxColumn;
+    @FXML
+    private TableColumn<Equipment, String> equipmentNameColumn;
+    @FXML
+    private TableColumn<Equipment, String> roomNumberColumn;
+
+    @FXML
     private void onAddEquipmentBtnClick(ActionEvent actionEvent) {
         Stage stage = new Stage();
 
@@ -31,8 +46,8 @@ public class EquipmentController {
         Scene scene = null;
 
         try {
-            scene= new Scene(fxmlLoader.load());
-        } catch (IOException e){
+            scene = new Scene(fxmlLoader.load());
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -54,13 +69,62 @@ public class EquipmentController {
     }
 
     @FXML
-    private void initialize(){
+    private void initialize() {
+        assert tableViewEquipment != null : "fx:id=\"tableViewEquipment\" was not injected: check your FXML file 'equipment-view.fxml'.";
+        assert checkBoxColumn != null : "fx:id=\"checkBoxColumn\" was not injected: check your FXML file 'equipment-view.fxml'.";
+        assert roomNumberColumn != null : "fx:id=\"roomNumberColumn\" was not injected: check your FXML file 'equipment-view.fxml'.";
+        assert equipmentNameColumn != null : "fx:id=\"equipmentNameColumn\" was not injected: check your FXML file 'equipment-view.fxml'.";
+        assert addEquipmentBtn != null : "fx:id=\"addEquipmentBtn\" was not injected: check your FXML file 'equipment-view.fxml'.";
+        assert deleteEquipmentBtn != null : "fx:id=\"deleteEquipmentBtn\" was not injected: check your FXML file 'equipment-view.fxml'.";
+        assert equipmentBtnBar != null : "fx:id=\"equipmentBtnBar\" was not injected: check your FXML file 'equipment-view.fxml'.";
+        assert settingsBtn != null : "fx:id=\"settingsBtn\" was not injected: check your FXML file 'equipment-view.fxml'.";
+
         authorityVisibility();
+        initEquipmentTable();
+
     }
 
-    private void authorityVisibility(){
+    private void initEquipmentTable() {
+
+        for (Equipment item: ListModel.equipmentList) {
+            System.out.println(item.getRoom().getRoomNumber());
+        }
+        tableViewEquipment.setItems(ListModel.equipmentList);
+        roomNumberColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getRoom().getRoomNumber()));
+        equipmentNameColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue
+         ().getDescription()));
+
+        /*checkBoxColumn.setCellValueFactory((dataFeatures) -> dataFeatures.getValue().checkedProperty());
+        checkBoxColumn.setCellFactory(new Callback<TableColumn<Equipment, Boolean>, TableCell<Equipment, Boolean>>() {
+            @Override
+            public TableCell<Equipment, Boolean> call(TableColumn<Equipment, Boolean> userBooleanTableColumn) {
+                TableCell<Equipment, Boolean> cell = new TableCell<>() {
+                    CheckBox checkBox = new CheckBox();
+                    @Override
+                    protected void updateItem(Boolean value, boolean empty) {
+                        super.updateItem(value, empty);
+                        if(empty) { //wenn kein inhalt
+                            setText(null);
+                            setGraphic(null);
+                        } else {
+                            setText(null);
+                            setGraphic(checkBox);
+                            checkBox.setSelected(value);
+                            // System.out.println(checkBox.isSelected());
+                        }
+                    }
+                };
+                cell.setAlignment(Pos.CENTER);
+                return cell;
+            }
+        });
+*/
+
+    }
+
+    private void authorityVisibility() {
         String authority = UserData.authority;
-        switch (authority){
+        switch (authority) {
             case "admin":
                 break;
             case "coach":

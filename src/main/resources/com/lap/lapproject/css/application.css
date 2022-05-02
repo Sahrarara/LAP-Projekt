@@ -183,6 +183,10 @@
     -fx-background: #F2F4FF;
 }
 
+.search-view-font-color {
+    -fx-text-fill: #211D5A;
+}
+
 
 
 

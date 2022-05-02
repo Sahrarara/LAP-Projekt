@@ -3,12 +3,12 @@ package com.lap.lapproject.model;
 public abstract class User {
     private long id;
     private String username;
+    private Boolean activeStatus;
     private String fName;
     private String lName;
     private String authority;
-    private Boolean adminPrivilege;
     private String description;
-    private int phoneNmbr;
+    private String phoneNmbr;
     private String email;
     private byte[] photo;
     private Boolean descriptionVisibility;
@@ -16,12 +16,12 @@ public abstract class User {
     private Boolean emailVisibility;
     private Boolean photoVisibility;
 
-    protected User(String username, String fName, String lName, String authority, Boolean adminPrivilege, String description, int phoneNmbr, String email, byte[] photo, Boolean descriptionVisibility, Boolean phoneNmbrVisibility, Boolean emailVisibility, Boolean photoVisibility) {
+    public User(String username, String fName, String lName, String authority, String description, String phoneNmbr,
+                String email, byte[] photo, Boolean descriptionVisibility, Boolean phoneNmbrVisibility, Boolean emailVisibility, Boolean photoVisibility) {
         this.username = username;
         this.fName = fName;
         this.lName = lName;
         this.authority = authority;
-        this.adminPrivilege = adminPrivilege;
         this.description = description;
         this.phoneNmbr = phoneNmbr;
         this.email = email;
@@ -33,15 +33,22 @@ public abstract class User {
     }
 
 
-    protected User() {
+    public User() {
     }
 
-    protected User(String username, String fName, String lName, String authority, Boolean adminPrivilege) {
+    public User(long id, String fName, String lName, String email,String phoneNmbr, Boolean activeStatus) {
+        this.id = id;
+        this.fName = fName;
+        this.lName = lName;
+        this.email = email;
+
+        this.activeStatus = activeStatus;
+    }
+    public User(String username, String fName, String lName, String authority) {
         this.username = username;
         this.fName = fName;
         this.lName = lName;
         this.authority = authority;
-        this.adminPrivilege = adminPrivilege;
         this.email = email;
         this.phoneNmbr = phoneNmbr;
         this.description = description;
@@ -55,13 +62,14 @@ public abstract class User {
         this.id = id;
     }
 
-    protected User(long aLong, String username, byte[] photos){}
+    public User(long aLong, String username, byte[] photos) {
+    }
 
     public String getUsername() {
         return username;
     }
 
-    protected void setUsername(String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
@@ -69,7 +77,7 @@ public abstract class User {
         return fName;
     }
 
-    protected void setfName(String fName) {
+    public void setfName(String fName) {
         this.fName = fName;
     }
 
@@ -77,7 +85,7 @@ public abstract class User {
         return lName;
     }
 
-    protected void setlName(String lName) {
+    public void setlName(String lName) {
         this.lName = lName;
     }
 
@@ -85,27 +93,19 @@ public abstract class User {
         return authority;
     }
 
-    protected void setAuthority(String authority) {
+    public void setAuthority(String authority) {
         this.authority = authority;
-    }
-
-    public Boolean getAdminPrivilege() {
-        return adminPrivilege;
-    }
-
-    protected void setAdminPrivilege(Boolean adminPrivilege) {
-        this.adminPrivilege = adminPrivilege;
     }
 
     public String getDescription() {
         return description;
     }
 
-    protected void setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public int getPhoneNmbr() {
+    public String getPhoneNmbr() {
         return phoneNmbr;
     }
 
@@ -114,7 +114,7 @@ public abstract class User {
         return "" + phoneNmbr;
     }
 
-    protected void setPhoneNmbr(int phoneNmbr) {
+    public void setPhoneNmbr(String phoneNmbr) {
         this.phoneNmbr = phoneNmbr;
     }
 
@@ -122,7 +122,7 @@ public abstract class User {
         return email;
     }
 
-    protected void setEmail(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
@@ -130,31 +130,31 @@ public abstract class User {
         return descriptionVisibility;
     }
 
-    protected void setDescriptionVisibility(Boolean descriptionVisibility) {
+    public void setDescriptionVisibility(Boolean descriptionVisibility) {
         this.descriptionVisibility = descriptionVisibility;
     }
 
-    protected Boolean getPhoneNmbrVisibility() {
+    public Boolean getPhoneNmbrVisibility() {
         return phoneNmbrVisibility;
     }
 
-    protected void setPhoneNmbrVisibility(Boolean phoneNmbrVisibility) {
+    public void setPhoneNmbrVisibility(Boolean phoneNmbrVisibility) {
         this.phoneNmbrVisibility = phoneNmbrVisibility;
     }
 
-    protected Boolean getEmailVisibility() {
+    public Boolean getEmailVisibility() {
         return emailVisibility;
     }
 
-    protected void setEmailVisibility(Boolean emailVisibility) {
+    public void setEmailVisibility(Boolean emailVisibility) {
         this.emailVisibility = emailVisibility;
     }
 
-    protected Boolean getPhotoVisibility() {
+    public Boolean getPhotoVisibility() {
         return photoVisibility;
     }
 
-    protected void setPhotoVisibility(Boolean photoVisibility) {
+    public void setPhotoVisibility(Boolean photoVisibility) {
         this.photoVisibility = photoVisibility;
     }
 
@@ -162,8 +162,15 @@ public abstract class User {
         return photo;
     }
 
-    protected void setPhoto(byte[] photo) {
+    public void setPhoto(byte[] photo) {
         this.photo = photo;
     }
 
+    public Boolean getActiveStatus() {
+        return activeStatus;
+    }
+
+    public void setActiveStatus(Boolean activeStatus) {
+        this.activeStatus = activeStatus;
+    }
 }
