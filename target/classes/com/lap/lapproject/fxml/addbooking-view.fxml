@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.calendarfx.view.TimeField?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane prefHeight="628.0" prefWidth="802.0" style="-fx-background-color: #F2F4FF;" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.BookingController">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" prefWidth="95.0" />
+      <ColumnConstraints hgrow="SOMETIMES" prefWidth="200.0" />
+      <ColumnConstraints hgrow="SOMETIMES" prefWidth="404.0" />
+      <ColumnConstraints hgrow="SOMETIMES" prefWidth="95.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints maxHeight="222.0" minHeight="10.0" percentHeight="0.0" prefHeight="77.5" vgrow="SOMETIMES" />
+      <RowConstraints prefHeight="4.0" vgrow="SOMETIMES" />
+      <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints prefHeight="26.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <Pane minHeight="40.0" prefHeight="40.0" style="-fx-background-color: #211D5A;" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+      <Pane minHeight="40.0" prefHeight="90.0" prefWidth="411.0" style="-fx-background-color: #211D5A;" GridPane.columnIndex="2">
+         <children>
+            <Label layoutY="29.0" styleClass="title-form" text="BELEGUNG ERFASSEN" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Label styleClass="input-description" text="Standort" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets left="20.0" />
+         </GridPane.margin>
+      </Label>
+      <Label styleClass="input-description" text="Veranstaltungsnummer" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets left="20.0" />
+         </GridPane.margin>
+      </Label>
+      <Label styleClass="input-description" text="Vortragender" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+         <GridPane.margin>
+            <Insets left="20.0" />
+         </GridPane.margin>
+      </Label>
+      <Label styleClass="input-description" text="Raumnummer" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5">
+         <GridPane.margin>
+            <Insets left="20.0" />
+         </GridPane.margin>
+      </Label>
+      <Label styleClass="input-description" text="Datum" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="7">
+         <GridPane.margin>
+            <Insets left="20.0" />
+         </GridPane.margin>
+      </Label>
+      <Label styleClass="input-description" text="Beginn (Uhrzeit)" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="8">
+         <GridPane.margin>
+            <Insets left="20.0" />
+         </GridPane.margin>
+      </Label>
+      <Label styleClass="input-description" text="Ende(Uhrzeit)" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="9">
+         <GridPane.margin>
+            <Insets left="20.0" />
+         </GridPane.margin>
+      </Label>
+      <Button mnemonicParsing="false" text="ABBRECHEN" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="15" GridPane.valignment="TOP">
+         <styleClass>
+            <String fx:value="button-style" />
+            <String fx:value="button-light" />
+         </styleClass>
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin>
+      </Button>
+      <Button mnemonicParsing="false" text="HINZUFÜGEN" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="15" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin>
+         <styleClass>
+            <String fx:value="button-style" />
+            <String fx:value="button-dark" />
+         </styleClass>
+      </Button>
+      <Pane prefHeight="90.0" prefWidth="40.0" style="-fx-background-color: #211D5A;" GridPane.columnIndex="3" />
+      <DatePicker styleClass="input-form" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+      <Label layoutX="30.0" layoutY="208.0" styleClass="input-description" text="Bucher" GridPane.columnIndex="1" GridPane.rowIndex="6">
+         <GridPane.margin>
+            <Insets left="20.0" />
+         </GridPane.margin>
+      </Label>
+      <Label text="Standort" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <Label text="Bucher" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+      <Label styleClass="input-description" text="Datum von" GridPane.columnIndex="1" GridPane.rowIndex="11">
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </Label>
+      <Label layoutX="10.0" layoutY="447.0" styleClass="input-description" text="Datum bis" GridPane.columnIndex="1" GridPane.rowIndex="12">
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </Label>
+      <DatePicker layoutX="215.0" layoutY="319.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.rowIndex="11" />
+      <DatePicker layoutX="215.0" layoutY="446.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.rowIndex="12" />
+      <Label styleClass="input-description" text="Beginn (Uhrzeit)" GridPane.columnIndex="1" GridPane.rowIndex="13">
+         <GridPane.margin>
+            <Insets left="20.0" />
+         </GridPane.margin>
+      </Label>
+      <Label styleClass="input-description" text="Ende(Uhrzeit)" GridPane.columnIndex="1" GridPane.rowIndex="14">
+         <GridPane.margin>
+            <Insets left="20.0" />
+         </GridPane.margin>
+      </Label>
+      <Label layoutX="30.0" layoutY="338.0" styleClass="input-description" text="Serientermin" GridPane.columnIndex="1" GridPane.rowIndex="10">
+         <GridPane.margin>
+            <Insets left="20.0" />
+         </GridPane.margin>
+      </Label>
+      <ChoiceBox prefWidth="385.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+      <TimeField GridPane.columnIndex="2" GridPane.rowIndex="8">
+         <GridPane.margin>
+            <Insets top="8.0" />
+         </GridPane.margin>
+      </TimeField>
+      <TimeField GridPane.columnIndex="2" GridPane.rowIndex="9">
+         <GridPane.margin>
+            <Insets top="8.0" />
+         </GridPane.margin>
+      </TimeField>
+      <TimeField GridPane.columnIndex="2" GridPane.rowIndex="13">
+         <GridPane.margin>
+            <Insets top="8.0" />
+         </GridPane.margin>
+      </TimeField>
+      <TimeField GridPane.columnIndex="2" GridPane.rowIndex="14">
+         <GridPane.margin>
+            <Insets top="8.0" />
+         </GridPane.margin>
+      </TimeField>
+      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #211D5A;" />
+      <ChoiceBox prefWidth="385.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+      <ChoiceBox layoutX="309.0" layoutY="230.0" prefWidth="385.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+      <ChoiceBox layoutX="309.0" layoutY="194.0" prefWidth="385.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+   </children>
+</GridPane>
