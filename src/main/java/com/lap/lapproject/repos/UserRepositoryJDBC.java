@@ -53,7 +53,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
 
 
     @Override
-    public boolean getTrainer()  {
+    public boolean getTrainer() {
         Connection connection = connect();
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -62,9 +62,9 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             statement = connection.prepareStatement(SELECT_TRAINER_SQL_STRING);
             resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Trainer trainer =  new Trainer (resultSet.getLong("user_id"),resultSet.getString("first_name"),
-                        resultSet.getString("last_name"), resultSet.getString("email"),resultSet.getString(
-                                "phone"), resultSet.getBoolean("active_status"));
+                Trainer trainer = new Trainer(resultSet.getLong("user_id"), resultSet.getString("first_name"),
+                        resultSet.getString("last_name"), resultSet.getString("email"), resultSet.getString(
+                        "phone"), resultSet.getBoolean("active_status"));
                 ListModel.trainerList.add(trainer);
             }
         } catch (SQLException e) {

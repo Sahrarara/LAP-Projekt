@@ -41,7 +41,7 @@ public abstract class User {
         this.fName = fName;
         this.lName = lName;
         this.email = email;
-
+        this.phoneNmbr = phoneNmbr;
         this.activeStatus = activeStatus;
     }
     public User(String username, String fName, String lName, String authority) {
