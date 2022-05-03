@@ -4,7 +4,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -86,15 +85,11 @@
             </AnchorPane>
             <AnchorPane>
                <children>
-                  <TableView layoutX="20.0" layoutY="23.0" prefHeight="386.0" prefWidth="770.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                  <TableView fx:id="tableViewEquipment" layoutX="20.0" layoutY="23.0" prefHeight="386.0" prefWidth="770.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                      <columns>
-                        <TableColumn prefWidth="38.0">
-                           <graphic>
-                              <CheckBox mnemonicParsing="false" />
-                           </graphic>
-                        </TableColumn>
-                        <TableColumn prefWidth="337.5" text="Raumnummer" />
-                        <TableColumn minWidth="-1.0" prefWidth="381.5" text="Ausrüstungsname" />
+                        <TableColumn fx:id="checkBoxColumn" prefWidth="38.0" />
+                        <TableColumn fx:id="roomNumberColumn" prefWidth="337.5" text="Raumnummer" />
+                        <TableColumn fx:id="equipmentNameColumn" minWidth="-1.0" prefWidth="381.5" text="Ausrüstungsname" />
                      </columns>
                   </TableView>
                </children>

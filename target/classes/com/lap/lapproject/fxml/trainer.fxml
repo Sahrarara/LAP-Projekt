@@ -85,18 +85,18 @@
             </AnchorPane>
             <AnchorPane>
                <children>
-                  <TableView layoutX="20.0" layoutY="23.0" prefHeight="386.0" prefWidth="800.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                  <TableView fx:id="tableViewTrainer" layoutX="20.0" layoutY="23.0" prefHeight="386.0" prefWidth="800.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                      <columns>
-                        <TableColumn prefWidth="38.0">
+                        <TableColumn fx:id="checkBoxColumn" prefWidth="38.0">
                            <graphic>
                               <CheckBox mnemonicParsing="false" />
                            </graphic>
                         </TableColumn>
-                        <TableColumn prefWidth="147.5" text="Vorname" />
-                        <TableColumn prefWidth="147.5" text="Nachname" />
-                        <TableColumn prefWidth="147.5" text="E-Mail" />
-                        <TableColumn minWidth="0.0" prefWidth="147.5" text="Telefon" />
-                        <TableColumn minWidth="0.0" prefWidth="129.0" text="Verfügbar" />
+                        <TableColumn fx:id="firstNameColumn" prefWidth="147.5" text="Vorname" />
+                        <TableColumn fx:id="lastNameColumn" prefWidth="147.5" text="Nachname" />
+                        <TableColumn fx:id="emailColumn" prefWidth="147.5" text="E-Mail" />
+                        <TableColumn fx:id="phoneColumn" minWidth="0.0" prefWidth="147.5" text="Telefon" />
+                        <TableColumn fx:id="activeStatusColumn" minWidth="0.0" prefWidth="129.0" text="Verfügbar" />
                      </columns>
                   </TableView>
                </children>
