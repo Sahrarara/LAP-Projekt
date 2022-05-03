@@ -10,7 +10,7 @@
             <fx:include source="sidebar-view.fxml" />
          </left>
          <center>
-            <fx:include source="trainer.fxml" />
+            <fx:include source="search-view.fxml" />
          </center>
       </BorderPane>
    </children>
