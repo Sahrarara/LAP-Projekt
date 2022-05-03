@@ -34,6 +34,7 @@ public class ProgramRepositoryJDBC extends Repository implements ProgramReposito
 
     public void addProgram(Program program) throws SQLException {
         Connection connection = connect();
+        ListModel.programList.clear();
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(ADD_NEW_PROGRAM_SQL_STRING, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, program.getProgramName());

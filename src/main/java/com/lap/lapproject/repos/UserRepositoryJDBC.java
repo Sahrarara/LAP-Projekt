@@ -55,6 +55,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
     @Override
     public boolean getTrainer() {
         Connection connection = connect();
+        ListModel.trainerList.clear();
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 

@@ -23,6 +23,7 @@ public class CourseRepositoryJDBC extends Repository implements CourseRepository
     @Override
     public boolean getCourse()  {
         Connection connection = connect();
+        ListModel.courseList.clear();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 

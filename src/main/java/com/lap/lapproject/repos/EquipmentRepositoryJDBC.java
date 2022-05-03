@@ -17,6 +17,7 @@ public class EquipmentRepositoryJDBC extends Repository implements EquipmentRepo
     @Override
     public boolean getEquipment() {
         Connection connection = connect();
+        ListModel.equipmentList.clear();
         PreparedStatement statement = null;
         ResultSet rs = null;
 
