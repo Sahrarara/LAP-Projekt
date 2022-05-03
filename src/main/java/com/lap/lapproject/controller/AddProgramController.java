@@ -4,6 +4,7 @@ import com.lap.lapproject.model.Program;
 import com.lap.lapproject.repos.ProgramRepositoryJDBC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -20,21 +21,22 @@ public class AddProgramController {
 
     @FXML
     private void onAddBtnClick(ActionEvent actionEvent) throws SQLException {
-        ProgramRepositoryJDBC programRepo = new ProgramRepositoryJDBC();
-        System.out.println("AddProgrammController:: onAddBtnClick");
-        Program program = new Program(programNameTextField.getText());
-
-
-        //Program program = new Program(program);
-        // TODO check duplicate
-        ProgramRepositoryJDBC programRepositoryJDBC = new ProgramRepositoryJDBC();
-        try {
-            programRepositoryJDBC.addProgram(program);
-            programRepo.getProgram();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (!programNameTextField.getText().isBlank()){     //method is only used if textfield is not empty
+            System.out.println("AddProgrammController:: onAddBtnClick");
+            Program program = new Program(programNameTextField.getText());
+            ProgramRepositoryJDBC programRepositoryJDBC = new ProgramRepositoryJDBC();
+            try {
+                programRepositoryJDBC.addProgram(program);  //Program is added to a list. programview list is emptied
+                programRepositoryJDBC.getProgram();         //Programlist in programview is generated from scratch
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            moveToProgramPage();
+        } else {
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setHeaderText("Bitte Programnamen angeben");
+            a.show();
         }
-        moveToProgramPage();
     }
 
     private Stage getCurrentStage(){
