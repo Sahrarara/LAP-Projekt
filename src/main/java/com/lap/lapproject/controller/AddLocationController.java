@@ -31,28 +31,25 @@ public class AddLocationController {
 
     @FXML
     private void onAddBtnClick(ActionEvent actionEvent) {
-        LocationRepositoryJDBC locationRepo = new LocationRepositoryJDBC();
+        if (!streetNameTextField.getText().isBlank() && !zipCodeTextField.getText().isBlank() && !locationTextField.getText().isBlank()){
+            System.out.println("AddLocationController:: onAddBtnClick");
+            String street = streetNameTextField.getText();
+            String zip = zipCodeTextField.getText();
+            String city = locationTextField.getText();
 
-        System.out.println("AddLocationController:: onAddBtnClick");
-        String street = streetNameTextField.getText();
-        String zip = zipCodeTextField.getText();
-        String city = locationTextField.getText();
+            Location location = new Location(street, zip, city);
+            LocationRepositoryJDBC locationRepositoryJDBC = new LocationRepositoryJDBC();
+            try {
+                locationRepositoryJDBC.addLocation(location);
+                locationRepositoryJDBC.getLocation();
 
-
-        Location location = new Location(street, zip, city);
-        // TODO check duplicate
-        LocationRepositoryJDBC locationRepositoryJDBC = new LocationRepositoryJDBC();
-        try {
-            locationRepositoryJDBC.addLocation(location);
-            locationRepo.getLocation();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            moveToLocationPage();
+        } else {
+            QuickAlert.showError("Bitte alle Felder ausfüllen");
         }
-
-        moveToLocationPage();
-
-
     }
 
     private Stage getCurrentStage(){
