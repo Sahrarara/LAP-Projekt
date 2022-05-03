@@ -16,6 +16,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
+import javax.xml.transform.Source;
 import java.io.IOException;
 
 public class LocationController {
@@ -116,7 +117,10 @@ public class LocationController {
                             setText(null);
                             setGraphic(checkBox);
                             checkBox.setSelected(value);
-                            // System.out.println(checkBox.isSelected());
+                            checkBox.setOnAction(actionEvent -> {
+                                System.out.println(getTableView().getItems().get(getIndex()));
+                            });
+                            System.out.println(checkBox.isSelected());
                         }
                     }
                 };

@@ -4,11 +4,18 @@ import com.lap.lapproject.model.Course;
 
 import java.sql.SQLException;
 
-public class CourseRepositoryJDBC extends Repository implements CourseRepository{
+public class CourseRepositoryJDBC extends Repository implements CourseRepository {
 
 
     @Override
     public void addCourse() throws SQLException {
 
+    }
+
+    @Override
+    public boolean getCourse() throws SQLException {
+
+
+        return false;
     }
 }
