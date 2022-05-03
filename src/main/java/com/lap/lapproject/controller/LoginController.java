@@ -40,9 +40,7 @@ public class LoginController implements Initializable {
                 System.out.println("Login successful");
                 moveToMainPage();
             } else {
-                Alert a = new Alert(Alert.AlertType.ERROR);
-                a.setHeaderText("Benutzername und/oder Passwort falsch!");
-                a.show();
+                QuickAlert.showError("Benutzername und/oder Passwort falsch!");
                 System.out.println("Login failed");
             }
         }

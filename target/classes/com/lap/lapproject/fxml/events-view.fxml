@@ -83,17 +83,17 @@
             </AnchorPane>
             <AnchorPane>
                <children>
-                  <TableView layoutX="20.0" layoutY="20.0" prefHeight="386.0" prefWidth="770.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                  <TableView fx:id="tableViewEvent" layoutX="20.0" layoutY="20.0" prefHeight="386.0" prefWidth="770.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                      <columns>
                         <TableColumn prefWidth="50.0">
                            <graphic>
                               <CheckBox mnemonicParsing="false" />
                            </graphic></TableColumn>
-                        <TableColumn minWidth="-1.0" prefWidth="120.0" text="Name" />
-                        <TableColumn minWidth="-1.0" prefWidth="144.5" text="Kursbegin" />
-                        <TableColumn minWidth="-1.0" prefWidth="144.5" text="Kursende" />
-                        <TableColumn minWidth="-1.0" prefWidth="154.5" text="Programm" />
-                        <TableColumn prefWidth="143.5" text="Gruppengröße" />
+                        <TableColumn fx:id="courseNameColumn" minWidth="-1.0" prefWidth="120.0" text="Name" />
+                        <TableColumn fx:id="courseStartColumn" minWidth="-1.0" prefWidth="144.5" text="Kursbegin" />
+                        <TableColumn fx:id="courseEndColumn" minWidth="-1.0" prefWidth="144.5" text="Kursende" />
+                        <TableColumn fx:id="programColumn" minWidth="-1.0" prefWidth="154.5" text="Programm" />
+                        <TableColumn fx:id="groupSizeColumn" prefWidth="143.5" text="Gruppengröße" />
                      </columns>
                   </TableView>
                </children>

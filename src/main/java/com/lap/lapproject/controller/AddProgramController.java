@@ -33,9 +33,7 @@ public class AddProgramController {
             }
             moveToProgramPage();
         } else {
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.setHeaderText("Bitte Programnamen angeben");
-            a.show();
+            QuickAlert.showError("Bitte Programmnamen angeben");
         }
     }
 
