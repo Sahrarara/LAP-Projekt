@@ -22,6 +22,7 @@ public class Model {
             userRepositoryJDBC.getTrainer();
             equipmentRepositoryJDBC.getEquipment();
             courseRepositoryJDBC.addCourse();
+            courseRepositoryJDBC.getCourse();
         } catch (Exception e) {
             e.printStackTrace();
         }

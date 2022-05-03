@@ -4,7 +4,6 @@ import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.ListModel;
 import com.lap.lapproject.model.Program;
-import com.lap.lapproject.model.Room;
 import com.lap.lapproject.model.UserData;
 import com.lap.lapproject.repos.ProgramRepositoryJDBC;
 import javafx.beans.property.SimpleObjectProperty;
@@ -88,7 +87,7 @@ public class ProgramController {
 
     private void initTableProgram() {
         tableViewProgram.setItems(ListModel.programList);
-        programColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getProgram()));
+        programColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getProgramName()));
         checkBoxColumn.setCellValueFactory((dataFeatures) -> dataFeatures.getValue().checkedProperty());
         checkBoxColumn.setCellFactory(new Callback<TableColumn<Program, Boolean>, TableCell<Program, Boolean>>() {
             @Override

@@ -4,13 +4,16 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Course {
+    private long id;
     private String courseName;
     private Program program;
     private LocalDateTime courseStart;
     private LocalDateTime courseEnd;
     private int groupSize;
 
-    public Course(String courseName, Program program, LocalDateTime courseStart, LocalDateTime courseEnd, int groupSize) {
+    public Course(long id,String courseName, Program program, LocalDateTime courseStart, LocalDateTime courseEnd,
+                  int groupSize) {
+        this.id = id;
         this.courseName = courseName;
         this.program = program;
         this.courseStart = courseStart;
@@ -56,5 +59,13 @@ public class Course {
 
     public void setCourseEnd(LocalDateTime courseEnd) {
         this.courseEnd = courseEnd;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

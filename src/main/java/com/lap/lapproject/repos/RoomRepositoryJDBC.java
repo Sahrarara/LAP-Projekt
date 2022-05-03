@@ -15,7 +15,7 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
             "ON rooms.location_id = location.location_id";
 
     @Override
-    public boolean getRoom() throws SQLException {
+    public boolean getRoom() {
         Connection connection = connect();
         ListModel.roomList.clear();
         PreparedStatement statement = null;

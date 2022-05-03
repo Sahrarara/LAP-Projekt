@@ -13,7 +13,7 @@ public class EquipmentRepositoryJDBC extends Repository implements EquipmentRepo
 
     private static final String SELECT_EQUIPMENT_SQL_STRING = "SELECT * FROM rooms_equipment JOIN equipment ON rooms_equipment.equipment_id = equipment.equipment_id JOIN rooms ON rooms_equipment.room_id= rooms.room_id; ";
 
-    //TODO: SCHAU DIESE FUNCTION NOCH MAL
+
     @Override
     public boolean getEquipment() {
         Connection connection = connect();
