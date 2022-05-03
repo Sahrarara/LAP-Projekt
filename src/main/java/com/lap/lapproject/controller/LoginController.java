@@ -48,9 +48,7 @@ public class LoginController implements Initializable {
 
     private boolean checkFieldsFilled() {
         if (usernameTF.getText() == null || usernameTF.getText().isBlank() || passwordTF.getText() == null || passwordTF.getText().isBlank()) {
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.setHeaderText("Bitte Benutzernamen und Passwort eingeben");
-            a.show();
+            QuickAlert.showError("Bitte Benutzernamen und Passwort eingeben");
             System.out.println("empty textfields");
             return false;
         }
