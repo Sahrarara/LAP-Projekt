@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -49,7 +50,7 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
                 String timestart = resultSet.getString("course_start");
                 LocalDateTime coursestart = LocalDateTime.parse(timestart, formatter);
                 String timeend = resultSet.getString("course_end");
-                LocalDateTime courseend = LocalDateTime.parse(timeend, formatter);
+                LocalDate courseend = LocalDate.parse(timeend, formatter);
 
                 Course course = new Course(resultSet.getLong("course_id"),resultSet.getString("course_name"), program, coursestart,
                         courseend,

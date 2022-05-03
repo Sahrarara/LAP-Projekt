@@ -1,17 +1,17 @@
 package com.lap.lapproject.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class Course {
     private long id;
     private String courseName;
     private Program program;
     private LocalDateTime courseStart;
-    private LocalDateTime courseEnd;
+    private LocalDate courseEnd;
     private int groupSize;
 
-    public Course(long id,String courseName, Program program, LocalDateTime courseStart, LocalDateTime courseEnd,
+    public Course(long id, String courseName, Program program, LocalDateTime courseStart, LocalDate courseEnd,
                   int groupSize) {
         this.id = id;
         this.courseName = courseName;
@@ -60,13 +60,11 @@ public class Course {
         this.courseStart = courseStart;
     }
 
-    public LocalDateTime getCourseEnd() {
+    public LocalDate getCourseEnd() {
         return courseEnd;
     }
 
-    public void setCourseEnd(LocalDateTime courseEnd) {
+    public void setCourseEnd(LocalDate courseEnd) {
         this.courseEnd = courseEnd;
     }
-
-
 }
