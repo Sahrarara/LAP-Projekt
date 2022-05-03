@@ -8,8 +8,6 @@ import javafx.stage.Stage;
 public class AddEquipmentController {
     @FXML
     private TextField nameTextField;
-    @FXML
-    private TextField amountTextField;
 
     @FXML
     private void onAbortBtnClick(ActionEvent actionEvent) {
@@ -18,10 +16,16 @@ public class AddEquipmentController {
 
     @FXML
     private void onAddBtnClick(ActionEvent actionEvent) {
+        String equipmentName = nameTextField.getText();
+        if (!equipmentName.isBlank()){
+            //TODO: insert create new equipment function here
+        } else {
+            QuickAlert.showError("Bitte den Namen des Geräts/der Ausrüstung angeben");
+        }
     }
 
     private Stage getCurrentStage(){
-        return (Stage) amountTextField.getScene().getWindow();
+        return (Stage) nameTextField.getScene().getWindow();
     }
 
 }

@@ -40,7 +40,7 @@
             <Insets left="20.0" />
          </GridPane.margin>
       </Label>
-      <TextField fx:id="nameTextField" maxWidth="385.0" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+      <TextField fx:id="nameTextField" maxWidth="385.0" onAction="#onAddBtnClick" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>

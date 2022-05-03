@@ -8,8 +8,6 @@ import javafx.stage.Stage;
 
 public class AddRoomController {
     @FXML
-    private TextField roomNameTextField;
-    @FXML
     private TextField sizeTextField;
     @FXML
     private TextField photoPathTextField;
@@ -22,6 +20,7 @@ public class AddRoomController {
 
     @FXML
     private void onFileBtnClick(ActionEvent actionEvent) {
+        //TODO: File Explorer öffnen damit man ein Foto/Bild auswählen kann. Der Pfad wird dann in photoPathTextField geschrieben
     }
 
     @FXML
@@ -31,10 +30,19 @@ public class AddRoomController {
 
     @FXML
     private void onAddBtnClick(ActionEvent actionEvent) {
+        String roomName = roomNmbrTextField.getText();
+        String location = (String) locationChoiceBox.getValue();
+        int roomSize = Integer.parseInt(sizeTextField.getText());
+        String Equipment = (String) equipmentChoiceBox.getValue();
+        if (!roomName.isBlank() && !sizeTextField.getText().isBlank() && !photoPathTextField.getText().isBlank() && !(locationChoiceBox.getValue() == null) && !(equipmentChoiceBox.getValue() == null)){
+            //TODO: insert create new Room function here
+        } else {
+            QuickAlert.showError("Bitte alle Felder ausfüllen");
+        }
     }
 
     private Stage getCurrentStage(){
-        return (Stage) roomNameTextField.getScene().getWindow();
+        return (Stage) roomNmbrTextField.getScene().getWindow();
     }
 
 }

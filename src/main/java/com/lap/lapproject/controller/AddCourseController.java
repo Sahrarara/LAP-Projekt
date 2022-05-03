@@ -7,6 +7,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+
 public class AddCourseController {
     @FXML
     private TextField courseNameTextField;
@@ -26,6 +28,17 @@ public class AddCourseController {
 
     @FXML
     private void onAddBtnClick(ActionEvent actionEvent) {
+        String coursename = courseNameTextField.getText();
+        String program = programChoiceBox.getValue().toString();
+        LocalDate courseStartDate = courseStartDatePicker.getValue();
+        LocalDate courseEndDate = courseEndDatePicker.getValue();
+        int groupSize = Integer.parseInt(groupSizeTextField.getText());
+
+        if (!coursename.isBlank() && !program.isBlank() && !(courseStartDate == null) && !(courseEndDate == null) && !groupSizeTextField.getText().isBlank()){
+            //TODO: Insert create new Course function here
+        } else {
+            QuickAlert.showError("Bitte alle Felder ausfüllen");
+        }
     }
 
     private Stage getCurrentStage(){

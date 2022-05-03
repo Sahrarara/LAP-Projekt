@@ -35,6 +35,15 @@ public class ProfileController {
 
     @FXML
     private void onSaveBtnClick(ActionEvent actionEvent) {
+        String email = emailLabel.getText();
+        String telephoneNmbr = telephoneLabel.getText();
+        String description = descriptionLabel.getText();
+
+        //TODO: Insert update User function here. It only updates the currently logged in User in the database.
+
+        UserData.email = email;         //UserData will be updated after a click on the save button.
+        UserData.telephoneNmbr = telephoneNmbr;
+        UserData.description = description;
     }
 
     @FXML
