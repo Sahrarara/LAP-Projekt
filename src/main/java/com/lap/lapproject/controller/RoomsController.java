@@ -3,7 +3,6 @@ package com.lap.lapproject.controller;
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.ListModel;
-import com.lap.lapproject.model.Location;
 import com.lap.lapproject.model.Room;
 import com.lap.lapproject.model.UserData;
 import com.lap.lapproject.repos.RoomRepositoryJDBC;
@@ -11,13 +10,9 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.stage.Stage;
-import javafx.util.Callback;
-
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -25,11 +20,8 @@ public class RoomsController {
     @FXML
     private ButtonBar roomsBtnBar;
 
-
     @FXML
     private TableView<Room> tableViewRoom;
-    @FXML
-    private TableColumn<Room, Boolean> checkBoxColumn;
     @FXML
     private TableColumn<Room, String> roomNumberColumn;
     @FXML
@@ -46,8 +38,8 @@ public class RoomsController {
         Scene scene = null;
 
         try {
-            scene= new Scene(fxmlLoader.load());
-        } catch (IOException e){
+            scene = new Scene(fxmlLoader.load());
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -67,7 +59,6 @@ public class RoomsController {
     @FXML
     private void initialize() throws SQLException {
         assert tableViewRoom != null : "fx:id=\"tableViewRoom\" was not injected: check your FXML file 'rooms-view.fxml'.";
-        assert checkBoxColumn != null : "fx:id=\"checkBoxColumn\" was not injected: check your FXML file 'rooms-view.fxml'.";
         assert roomNumberColumn != null : "fx:id=\"roomNumberColumn\" was not injected: check your FXML file 'rooms-view.fxml'.";
         assert sizeColumn != null : "fx:id=\"sizeColumn\" was not injected: check your FXML file 'rooms-view.fxml'.";
         assert streetColumn != null : "fx:id=\"streetColumn\" was not injected: check your FXML file 'rooms-view.fxml'.";
@@ -85,36 +76,11 @@ public class RoomsController {
         roomNumberColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getRoomNumber()));
         sizeColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getSize()));
         streetColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getLocation().getStreet()));
-        checkBoxColumn.setCellValueFactory((dataFeatures) -> dataFeatures.getValue().checkedProperty());
-        checkBoxColumn.setCellFactory(new Callback<TableColumn<Room, Boolean>, TableCell<Room, Boolean>>() {
-            @Override
-            public TableCell<Room, Boolean> call(TableColumn<Room, Boolean> userBooleanTableColumn) {
-                TableCell<Room, Boolean> cell = new TableCell<>() {
-                    CheckBox checkBox = new CheckBox();
-                    @Override
-                    protected void updateItem(Boolean value, boolean empty) {
-                        super.updateItem(value, empty);
-                        if(empty) { //wenn kein inhalt
-                            setText(null);
-                            setGraphic(null);
-                        } else {
-                            setText(null);
-                            setGraphic(checkBox);
-                            checkBox.setSelected(value);
-                            // System.out.println(checkBox.isSelected());
-                        }
-                    }
-                };
-                cell.setAlignment(Pos.CENTER);
-                return cell;
-            }
-        });
-
     }
 
-    private void authorityVisibility(){
+    private void authorityVisibility() {
         String authority = UserData.authority;
-        switch (authority){
+        switch (authority) {
             case "admin":
                 break;
             case "coach":

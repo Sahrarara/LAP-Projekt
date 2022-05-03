@@ -33,8 +33,6 @@ public class ProgramController {
     @FXML
     private TableView<Program> tableViewProgram;
     @FXML
-    private TableColumn<Program, Boolean> checkBoxColumn;
-    @FXML
     private TableColumn<Program, String> programColumn;
 
     @FXML
@@ -71,7 +69,6 @@ public class ProgramController {
     @FXML
     private void initialize() throws SQLException {
         assert tableViewProgram != null : "fx:id=\"tableViewProgram\" was not injected: check your FXML file 'program-view.fxml'.";
-        assert checkBoxColumn != null : "fx:id=\"checkBoxColumn\" was not injected: check your FXML file 'program-view.fxml'.";
         assert programColumn != null : "fx:id=\"programColumn\" was not injected: check your FXML file 'program-view.fxml'.";
         assert addProgramBtn != null : "fx:id=\"addProgramBtn\" was not injected: check your FXML file 'program-view.fxml'.";
         assert deleteBtn != null : "fx:id=\"deleteBtn\" was not injected: check your FXML file 'program-view.fxml'.";
@@ -88,31 +85,6 @@ public class ProgramController {
     private void initTableProgram() {
         tableViewProgram.setItems(ListModel.programList);
         programColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getProgramName()));
-        checkBoxColumn.setCellValueFactory((dataFeatures) -> dataFeatures.getValue().checkedProperty());
-        checkBoxColumn.setCellFactory(new Callback<TableColumn<Program, Boolean>, TableCell<Program, Boolean>>() {
-            @Override
-            public TableCell<Program, Boolean> call(TableColumn<Program, Boolean> userBooleanTableColumn) {
-                TableCell<Program, Boolean> cell = new TableCell<>() {
-                    CheckBox checkBox = new CheckBox();
-
-                    @Override
-                    protected void updateItem(Boolean value, boolean empty) {
-                        super.updateItem(value, empty);
-                        if (empty) { //wenn kein inhalt
-                            setText(null);
-                            setGraphic(null);
-                        } else {
-                            setText(null);
-                            setGraphic(checkBox);
-                            checkBox.setSelected(value);
-                            // System.out.println(checkBox.isSelected());
-                        }
-                    }
-                };
-                cell.setAlignment(Pos.CENTER);
-                return cell;
-            }
-        });
     }
 
     private void authorityVisibility() {

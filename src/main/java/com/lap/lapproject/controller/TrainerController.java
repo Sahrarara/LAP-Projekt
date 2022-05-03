@@ -5,7 +5,6 @@ import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.ListModel;
 import com.lap.lapproject.model.Trainer;
 import com.lap.lapproject.model.UserData;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,10 +17,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import static com.lap.lapproject.controller.BaseController.model;
 
 public class TrainerController {
-
     @FXML
     private ButtonBar trainerBtnBar;
 
@@ -29,15 +26,11 @@ public class TrainerController {
     @FXML
     private TableView<Trainer> tableViewTrainer;
     @FXML
-    private TableColumn<Trainer, Boolean> checkBoxColumn;
-    @FXML
     private TableColumn<Trainer, String> firstNameColumn;
-
     @FXML
     private TableColumn<Trainer, String> lastNameColumn;
     @FXML
     private TableColumn<Trainer, String> emailColumn;
-
     @FXML
     private TableColumn<Trainer, String> phoneColumn;
     @FXML
@@ -52,8 +45,8 @@ public class TrainerController {
         Scene scene = null;
 
         try {
-            scene= new Scene(fxmlLoader.load());
-        } catch (IOException e){
+            scene = new Scene(fxmlLoader.load());
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -72,9 +65,8 @@ public class TrainerController {
 
 
     @FXML
-    private void initialize(){
+    private void initialize() {
         assert tableViewTrainer != null : "fx:id=\"tableViewTrainer\" was not injected: check your FXML file 'trainer.fxml'.";
-        assert checkBoxColumn != null : "fx:id=\"checkBoxColumn\" was not injected: check your FXML file 'trainer.fxml'.";
         assert emailColumn != null : "fx:id=\"emailColumn\" was not injected: check your FXML file 'trainer.fxml'.";
         assert firstNameColumn != null : "fx:id=\"firstNameColumn\" was not injected: check your FXML file 'trainer.fxml'.";
         assert lastNameColumn != null : "fx:id=\"lastNameColumn\" was not injected: check your FXML file 'trainer.fxml'.";
@@ -94,12 +86,11 @@ public class TrainerController {
         emailColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getEmail()));
         phoneColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getPhoneNmbr()));
         activeStatusColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getActiveStatus()));
-
     }
 
-    private void authorityVisibility(){
+    private void authorityVisibility() {
         String authority = UserData.authority;
-        switch (authority){
+        switch (authority) {
             case "admin":
                 break;
             case "coach":

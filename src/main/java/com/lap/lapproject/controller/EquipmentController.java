@@ -32,8 +32,6 @@ public class EquipmentController {
     @FXML
     private TableView<Equipment> tableViewEquipment;
     @FXML
-    private TableColumn<Equipment, Boolean> checkBoxColumn;
-    @FXML
     private TableColumn<Equipment, String> equipmentNameColumn;
     @FXML
     private TableColumn<Equipment, String> roomNumberColumn;
@@ -71,7 +69,6 @@ public class EquipmentController {
     @FXML
     private void initialize() {
         assert tableViewEquipment != null : "fx:id=\"tableViewEquipment\" was not injected: check your FXML file 'equipment-view.fxml'.";
-        assert checkBoxColumn != null : "fx:id=\"checkBoxColumn\" was not injected: check your FXML file 'equipment-view.fxml'.";
         assert roomNumberColumn != null : "fx:id=\"roomNumberColumn\" was not injected: check your FXML file 'equipment-view.fxml'.";
         assert equipmentNameColumn != null : "fx:id=\"equipmentNameColumn\" was not injected: check your FXML file 'equipment-view.fxml'.";
         assert addEquipmentBtn != null : "fx:id=\"addEquipmentBtn\" was not injected: check your FXML file 'equipment-view.fxml'.";
@@ -81,45 +78,12 @@ public class EquipmentController {
 
         authorityVisibility();
         initEquipmentTable();
-
     }
 
     private void initEquipmentTable() {
-
-        for (Equipment item: ListModel.equipmentList) {
-            System.out.println(item.getRoom().getRoomNumber());
-        }
         tableViewEquipment.setItems(ListModel.equipmentList);
         roomNumberColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getRoom().getRoomNumber()));
-        equipmentNameColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue
-         ().getDescription()));
-
-        /*checkBoxColumn.setCellValueFactory((dataFeatures) -> dataFeatures.getValue().checkedProperty());
-        checkBoxColumn.setCellFactory(new Callback<TableColumn<Equipment, Boolean>, TableCell<Equipment, Boolean>>() {
-            @Override
-            public TableCell<Equipment, Boolean> call(TableColumn<Equipment, Boolean> userBooleanTableColumn) {
-                TableCell<Equipment, Boolean> cell = new TableCell<>() {
-                    CheckBox checkBox = new CheckBox();
-                    @Override
-                    protected void updateItem(Boolean value, boolean empty) {
-                        super.updateItem(value, empty);
-                        if(empty) { //wenn kein inhalt
-                            setText(null);
-                            setGraphic(null);
-                        } else {
-                            setText(null);
-                            setGraphic(checkBox);
-                            checkBox.setSelected(value);
-                            // System.out.println(checkBox.isSelected());
-                        }
-                    }
-                };
-                cell.setAlignment(Pos.CENTER);
-                return cell;
-            }
-        });
-*/
-
+        equipmentNameColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getDescription()));
     }
 
     private void authorityVisibility() {

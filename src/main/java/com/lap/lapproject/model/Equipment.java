@@ -7,8 +7,6 @@ public class Equipment {
     private String description;
     private Room room;
 
-    private SimpleBooleanProperty checked = new SimpleBooleanProperty(false);
-
 
     public Equipment(long id, String description, Room room) {
         this.id = id;
@@ -23,6 +21,7 @@ public class Equipment {
     public void setId(long id) {
         this.id = id;
     }
+
 
     public String getDescription() {
         return description;
@@ -40,15 +39,4 @@ public class Equipment {
         this.room = room;
     }
 
-    public boolean isChecked() {
-        return checked.get();
-    }
-
-    public SimpleBooleanProperty checkedProperty() {
-        return checked;
-    }
-
-    public void setChecked(boolean checked) {
-        this.checked.set(checked);
-    }
 }

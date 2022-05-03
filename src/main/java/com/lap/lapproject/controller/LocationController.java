@@ -10,32 +10,24 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.util.Callback;
-
-import javax.xml.transform.Source;
 import java.io.IOException;
 
 public class LocationController {
+    @FXML
+    private ButtonBar locationBtnBar;
 
 
     @FXML
     private TableView<Location> tableViewLocation;
-    @FXML
-    private TableColumn<Location, Boolean> checkBoxColumn;
     @FXML
     private TableColumn<Location, String> streetColumn;
     @FXML
     private TableColumn<Location, String> zipColumn;
     @FXML
     private TableColumn<Location, String> cityColumn;
-
-
-    @FXML
-    private ButtonBar locationBtnBar;
 
 
     @FXML
@@ -68,7 +60,6 @@ public class LocationController {
     @FXML
     private void initialize() {
         assert tableViewLocation != null : "fx:id=\"tableViewLocation\" was not injected: check your FXML file 'location-view.fxml'.";
-        assert checkBoxColumn != null : "fx:id=\"checkBoxColumn\" was not injected: check your FXML file 'location-view.fxml'.";
         assert streetColumn != null : "fx:id=\"streetColumn\" was not injected: check your FXML file 'location-view.fxml'.";
         assert zipColumn != null : "fx:id=\"zipColumn\" was not injected: check your FXML file 'location-view.fxml'.";
         assert cityColumn != null : "fx:id=\"cityColumn\" was not injected: check your FXML file 'location-view.fxml'.";
@@ -78,6 +69,13 @@ public class LocationController {
         LocationRepositoryJDBC locationRepo = new LocationRepositoryJDBC();
         locationRepo.getLocation();
         initLocationTable();
+    }
+
+    public void initLocationTable() {
+        tableViewLocation.setItems(ListModel.locationList);
+        streetColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getStreet()));
+        zipColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getZipcode()));
+        cityColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getCity()));
     }
 
     private void authorityVisibility() {
@@ -95,40 +93,5 @@ public class LocationController {
     }
 
 
-    public void initLocationTable() {
-        tableViewLocation.setItems(ListModel.locationList);
-        streetColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getStreet()));
-        zipColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getZipcode()));
-        cityColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getCity()));
-
-        checkBoxColumn.setCellValueFactory((dataFeatures) -> dataFeatures.getValue().checkedProperty());
-        checkBoxColumn.setCellFactory(new Callback<TableColumn<Location, Boolean>, TableCell<Location, Boolean>>() {
-            @Override
-            public TableCell<Location, Boolean> call(TableColumn<Location, Boolean> userBooleanTableColumn) {
-                TableCell<Location, Boolean> cell = new TableCell<>() {
-                    CheckBox checkBox = new CheckBox();
-                    @Override
-                    protected void updateItem(Boolean value, boolean empty) {
-                        super.updateItem(value, empty);
-                        if(empty) { //wenn kein inhalt
-                            setText(null);
-                            setGraphic(null);
-                        } else {
-                            setText(null);
-                            setGraphic(checkBox);
-                            checkBox.setSelected(value);
-                            checkBox.setOnAction(actionEvent -> {
-                                System.out.println(getTableView().getItems().get(getIndex()));
-                            });
-                            System.out.println(checkBox.isSelected());
-                        }
-                    }
-                };
-                cell.setAlignment(Pos.CENTER);
-                return cell;
-            }
-        });
-
-    }
 
 }

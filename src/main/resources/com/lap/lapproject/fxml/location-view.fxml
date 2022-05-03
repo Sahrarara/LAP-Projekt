@@ -87,10 +87,9 @@
                <children>
                   <TableView fx:id="tableViewLocation" layoutX="20.0" layoutY="20.0" prefHeight="386.0" prefWidth="770.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                      <columns>
-                        <TableColumn fx:id="checkBoxColumn" prefWidth="40.0" />
                         <TableColumn fx:id="streetColumn" minWidth="-1.0" prefWidth="269.5" text="Straße" />
-                        <TableColumn fx:id="zipColumn" prefWidth="204.5" text="PLZ" />
-                        <TableColumn fx:id="cityColumn" prefWidth="243.0" text="Ort" />
+                        <TableColumn fx:id="zipColumn" prefWidth="234.5" text="PLZ" />
+                        <TableColumn fx:id="cityColumn" prefWidth="253.0" text="Ort" />
                      </columns>
                   </TableView>
                </children>

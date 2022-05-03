@@ -1,7 +1,6 @@
 package com.lap.lapproject.model;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class Booking {
     private Room room;

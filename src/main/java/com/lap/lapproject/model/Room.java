@@ -13,12 +13,9 @@ public class Room {
     private byte[] photo;
     private Equipment equipment;
 
-    private SimpleBooleanProperty checked = new SimpleBooleanProperty(false);
-
 
     public Room(long id, String roomNumber, int size, Location location) {
         this.id = id;
-       // this.roomNumber = new SimpleStringProperty(roomNumber);
         this.roomNumber = roomNumber;
         this.size = new SimpleIntegerProperty(size);
         this.location = location;
@@ -30,7 +27,6 @@ public class Room {
 
     //TODO: photo, equipment
     public Room(String roomNumber, int size, Location location, byte[] photo, Equipment equipment) {
-       // this.roomNumber = new SimpleStringProperty(roomNumber);
         this.roomNumber = roomNumber;
         this.size = new SimpleIntegerProperty(size);
         this.location = location;
@@ -54,19 +50,6 @@ public class Room {
     public void setPhoto(byte[] photo) {
         this.photo = photo;
     }
-
- /*   public String getRoomNumber() {
-        return roomNumber.get();
-    }
-
-    public SimpleStringProperty roomNumberProperty() {
-        return roomNumber;
-    }
-
-    public void setRoomNumber(String roomNumber) {
-        this.roomNumber.set(roomNumber);
-    }
-*/
 
     public String getRoomNumber() {
         return roomNumber;
@@ -104,15 +87,4 @@ public class Room {
         this.equipment = equipment;
     }
 
-    public boolean isChecked() {
-        return checked.get();
-    }
-
-    public SimpleBooleanProperty checkedProperty() {
-        return checked;
-    }
-
-    public void setChecked(boolean checked) {
-        this.checked.set(checked);
-    }
 }

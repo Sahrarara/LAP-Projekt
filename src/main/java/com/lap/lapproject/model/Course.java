@@ -21,6 +21,13 @@ public class Course {
         this.groupSize = groupSize;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
     public String getCourseName() {
         return courseName;
     }
@@ -61,11 +68,5 @@ public class Course {
         this.courseEnd = courseEnd;
     }
 
-    public long getId() {
-        return id;
-    }
 
-    public void setId(long id) {
-        this.id = id;
-    }
 }
