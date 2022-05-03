@@ -11,10 +11,10 @@ public class ListModel {
 
     public static ObservableList<Room> roomList = FXCollections.observableArrayList();
 
-    //??
     public static ObservableList<Equipment> equipmentList = FXCollections.observableArrayList();
-    //??
+
     public static ObservableList<Trainer> trainerList = FXCollections.observableArrayList();
+    public static ObservableList<Course> courseList = FXCollections.observableArrayList();
 
 
 }

@@ -36,7 +36,7 @@ public class ProgramRepositoryJDBC extends Repository implements ProgramReposito
         Connection connection = connect();
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(ADD_NEW_PROGRAM_SQL_STRING, Statement.RETURN_GENERATED_KEYS)) {
-            preparedStatement.setString(1, program.getProgram());
+            preparedStatement.setString(1, program.getProgramName());
 
 
             preparedStatement.executeUpdate();

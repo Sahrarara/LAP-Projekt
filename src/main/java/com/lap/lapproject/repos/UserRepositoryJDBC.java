@@ -52,7 +52,6 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
     }
 
 
-//TODO: SCHAU DIESE FUNCTION NOCH MAL
     @Override
     public boolean getTrainer()  {
         Connection connection = connect();
