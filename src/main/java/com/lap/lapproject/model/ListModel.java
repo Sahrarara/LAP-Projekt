@@ -15,6 +15,6 @@ public class ListModel {
 
     public static ObservableList<Trainer> trainerList = FXCollections.observableArrayList();
     public static ObservableList<Course> courseList = FXCollections.observableArrayList();
-
+    public static ObservableList<Booking> bookingList = FXCollections.observableArrayList();
 
 }

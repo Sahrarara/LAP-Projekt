@@ -14,6 +14,8 @@ public class Trainer extends User {
     }
 
 
+
+
     public Trainer(long id, String fName, String lName, String email, String phoneNmbr, Boolean activeStatus) {
         super(id, fName, lName, email, phoneNmbr, activeStatus);
     }

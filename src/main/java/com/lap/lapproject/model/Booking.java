@@ -18,6 +18,7 @@ public class Booking {
         this.dateTimeEnd = dateTimeEnd;
     }
 
+
     public Room getRoom() {
         return room;
     }

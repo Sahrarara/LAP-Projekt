@@ -16,6 +16,7 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
     @Override
     public ArrayList<Booking> readAll() throws SQLException {
         Connection connection = connect();
+        ListModel.bookingList.clear();
         ArrayList<Booking> list = new ArrayList<>();
 //"SELECT courses.course_name,rooms.room_number,users.username, booking.datetime_start,booking.datetime_end FROM `booking` " +
 
@@ -34,21 +35,39 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
             resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
+
+
                 Location location = new Location(resultSet.getLong("location_id"), resultSet.getString("street"),
                         resultSet.getString("zip"),
                         resultSet.getString("city"));
+
+
                 //TODO: Equipment von rooms_equipment hinzufügen
                 //Equipment equipment = new Equipment();
+
+
                 Room room = new Room(resultSet.getLong("room_id"), resultSet.getString("rooms.room_number"),
                         resultSet.getInt("rooms" +
                                 ".size"),
                         location);
-                Trainer trainer = new Trainer();
+
+
+
+                Trainer trainer = new Trainer(resultSet.getString("username"), resultSet.getString("first_name"),
+                        resultSet.getString("last_name"), resultSet.getString("authorization"), resultSet.getString("email"),
+                        resultSet.getString("phone"), resultSet.getString("description"));
+
+
+
                 Program program = new Program(resultSet.getLong("program_id"), resultSet.getString("course_name"));
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+
                 String timestart = resultSet.getString("course_start");
-                LocalDateTime coursestart = LocalDateTime.parse(timestart, formatter);
+                LocalDateTime coursestart = (LocalDateTime.parse(timestart, formatter));
+
+
                 String timeend = resultSet.getString("course_end");
                 LocalDate courseend = LocalDate.parse(timeend, formatter);
 
@@ -57,14 +76,17 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
                         resultSet.getInt("group_size"));
 
 
-                String datetimestart = resultSet.getString("datetime_start");
-                LocalDateTime startTime = LocalDateTime.parse(datetimestart, formatter);
+                String datetimeStart = resultSet.getString("datetime_start");
+                LocalDateTime startTime = LocalDateTime.parse(datetimeStart, formatter);
 
-                String datetimeend = resultSet.getString("datetime_end");
-                LocalDateTime endTime = LocalDateTime.parse(datetimeend, formatter);
+                String datetimeEnd = resultSet.getString("datetime_end");
+                LocalDateTime endTime = LocalDateTime.parse(datetimeEnd, formatter);
 
                 Booking b = new Booking(room, trainer, course, startTime, endTime);
+                ListModel.bookingList.add(b);
                 list.add(b);
+
+
 
             }
         } catch (SQLException e) {
