@@ -21,7 +21,7 @@ public class Model {
             bookings.addAll(bookingRepo.readAll());
             userRepositoryJDBC.getTrainer();
             equipmentRepositoryJDBC.getEquipment();
-            courseRepositoryJDBC.addCourse();
+            //courseRepositoryJDBC.addCourse();
             courseRepositoryJDBC.getCourse();
         } catch (Exception e) {
             e.printStackTrace();

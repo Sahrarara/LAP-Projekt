@@ -8,10 +8,10 @@ public class Course {
     private String courseName;
     private Program program;
     private LocalDateTime courseStart;
-    private LocalDate courseEnd;
+    private LocalDateTime courseEnd;
     private int groupSize;
 
-    public Course(long id, String courseName, Program program, LocalDateTime courseStart, LocalDate courseEnd,
+    public Course(long id, String courseName, Program program, LocalDateTime courseStart, LocalDateTime courseEnd,
                   int groupSize) {
         this.id = id;
         this.courseName = courseName;
@@ -20,6 +20,15 @@ public class Course {
         this.courseEnd = courseEnd;
         this.groupSize = groupSize;
     }
+    public Course(String courseName, Program program, LocalDateTime courseStart, LocalDateTime courseEnd,
+                  int groupSize) {
+        this.courseName = courseName;
+        this.program = program;
+        this.courseStart = courseStart;
+        this.courseEnd = courseEnd;
+        this.groupSize = groupSize;
+    }
+
 
     public long getId() {
         return id;
@@ -28,6 +37,7 @@ public class Course {
     public void setId(long id) {
         this.id = id;
     }
+
     public String getCourseName() {
         return courseName;
     }
@@ -60,11 +70,11 @@ public class Course {
         this.courseStart = courseStart;
     }
 
-    public LocalDate getCourseEnd() {
+    public LocalDateTime getCourseEnd() {
         return courseEnd;
     }
 
-    public void setCourseEnd(LocalDate courseEnd) {
+    public void setCourseEnd(LocalDateTime courseEnd) {
         this.courseEnd = courseEnd;
     }
 }
