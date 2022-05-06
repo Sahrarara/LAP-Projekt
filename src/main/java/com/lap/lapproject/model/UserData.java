@@ -7,6 +7,7 @@ public class UserData {
 
     private static final Logger log = LoggerFactory.getLogger(UserData.class);
 
+    public static String username = null;
     public static String firstName = null;
     public static String lastName = null;
     public static String email = null;

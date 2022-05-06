@@ -10,7 +10,7 @@ public class Repository {
     static final String dbUser = "root";
     static final String dbPw = "";
 
-    static Connection connect() {
+    protected static Connection connect() {
         Connection connection;
         try {
             connection = DriverManager.getConnection(dbPrefix + location, dbUser, dbPw);
