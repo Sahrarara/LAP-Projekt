@@ -63,6 +63,7 @@ public class AddCourseController {
 
     @FXML
     private void onAddBtnClick(ActionEvent actionEvent) {
+        if (!courseNameTextField.getText().isBlank() && !courseChoiceBox.getValue().toString().isBlank() && !(courseStartDatePicker.getValue() == null) && !(courseEndDatePicker.getValue() == null) && !groupSizeTextField.getText().isBlank()){
 
         CourseRepositoryJDBC courseRepo= new CourseRepositoryJDBC();
         ProgramRepositoryJDBC programRepositoryJDBC = new ProgramRepositoryJDBC();
@@ -97,7 +98,9 @@ public class AddCourseController {
         moveToCoursePage();
 
 
-
+    } else {
+        QuickAlert.showError("Bitte alle Felder ausfüllen");
+    }
        /* if (!courseName.isBlank() && !programName.isBlank() && !(courseStart == null) && !(courseEnd == null) && !groupSizeTextField.getText().isBlank()){
             //TODO: Insert create new Course function here
         } else {
