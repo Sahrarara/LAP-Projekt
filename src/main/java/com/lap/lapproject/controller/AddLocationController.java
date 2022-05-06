@@ -22,6 +22,7 @@ public class AddLocationController {
     private void initialize(){
         System.out.println("AddLocationController:: initialize");
 
+
     }
 
     @FXML
