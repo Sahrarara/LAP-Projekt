@@ -4,8 +4,13 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.CheckBox;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Room {
+
+    private static final Logger log = LoggerFactory.getLogger(Room.class);
+
     private long id;
     private String roomNumber;
     private SimpleIntegerProperty size;

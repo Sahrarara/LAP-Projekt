@@ -1,7 +1,13 @@
 package com.lap.lapproject.model;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Program {
+
+    private static final Logger log = LoggerFactory.getLogger(Program.class);
+
     private long id;
     private String programName;
 

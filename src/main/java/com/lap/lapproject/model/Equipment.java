@@ -1,8 +1,13 @@
 package com.lap.lapproject.model;
 
 import javafx.beans.property.SimpleBooleanProperty;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Equipment {
+
+    private static final Logger log = LoggerFactory.getLogger(Equipment.class);
+
     private long id;
     private String description;
     private Room room;

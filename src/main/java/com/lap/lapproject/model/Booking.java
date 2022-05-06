@@ -1,8 +1,14 @@
 package com.lap.lapproject.model;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.time.LocalDateTime;
 
 public class Booking {
+
+    private static final Logger log = LoggerFactory.getLogger(Booking.class);
+
     private Room room;
     private Trainer trainer;
     private Course course;

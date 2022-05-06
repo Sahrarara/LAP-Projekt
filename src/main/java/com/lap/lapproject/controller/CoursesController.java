@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-public class EventsController {
+public class CoursesController {
     @FXML
     private ButtonBar coursesBtnBar;
 
