@@ -1,6 +1,12 @@
 package com.lap.lapproject.model;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public abstract class User {
+
+    private static final Logger log = LoggerFactory.getLogger(User.class);
+
     private long id;
     private String username;
     private Boolean activeStatus;

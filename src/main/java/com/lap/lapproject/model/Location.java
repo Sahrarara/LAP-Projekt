@@ -1,8 +1,13 @@
 package com.lap.lapproject.model;
 
 import javafx.beans.property.SimpleStringProperty;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Location {
+
+    private static final Logger log = LoggerFactory.getLogger(Location.class);
+
     private long id;
     private SimpleStringProperty street;
     private SimpleStringProperty zipcode;

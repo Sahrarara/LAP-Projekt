@@ -1,9 +1,16 @@
 package com.lap.lapproject.model;
 
+import com.lap.lapproject.controller.BigScreenController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Course {
+
+    private static final Logger log = LoggerFactory.getLogger(Course.class);
+
     private long id;
     private String courseName;
     private Program program;

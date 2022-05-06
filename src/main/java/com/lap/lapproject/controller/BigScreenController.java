@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class BigScreenController extends BaseController{
 
-    private static final Logger log = LoggerFactory.getLogger(SidebarController.class);
+    private static final Logger log = LoggerFactory.getLogger(BigScreenController.class);
 
     @FXML
     private BorderPane borderPane;
