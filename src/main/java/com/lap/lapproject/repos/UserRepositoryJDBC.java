@@ -134,6 +134,8 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
                 switch (authority) {
                     case "admin":
                         Admin admin = new Admin(user, firstname, lastname, authority, email, phoneNmbr, description);
+                        UserData.username = user;
+                        System.out.println(UserData.username);
                         UserData.firstName = admin.getfName();
                         UserData.lastName = admin.getlName();
                         UserData.email = email;

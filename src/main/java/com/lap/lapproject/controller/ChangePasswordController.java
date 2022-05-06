@@ -22,7 +22,7 @@ public class ChangePasswordController extends Repository {
 
     @FXML
     private void onSaveBtnClick(ActionEvent actionEvent) {
-        if (checkFieldsEmpty() && checkOldPasswordIsNotNewPassword() && checkNewRepeatPassword() && this.checkIfPasswordIsInDatabase()){ //TODO: Noch eine boolean Funktion die checkt ob das aktuelle Passwort momentan in der Datenbank ist
+        if (checkFieldsEmpty() && checkOldPasswordIsNotNewPassword() && checkNewRepeatPassword() && this.checkIfPasswordIsInDatabase()){
             //TODO: Hier update Passwort funktion für jetzigen User einfügen. Achtung: Passwort muss gehasht werden
         }
     }
