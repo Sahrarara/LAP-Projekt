@@ -12,6 +12,7 @@ public class EquipmentRepositoryJDBC extends Repository implements EquipmentRepo
     private static final String SELECT_EQUIPMENT_SQL_STRING = "SELECT * FROM equipment";
     private static final String ADD_NEW_EQUIPMENT_SQL_STRING = "INSERT INTO equipment (equipment_description) VALUES (?)";
     private static final String UPDATE_EQUIPMENT_SQL_STRING = "UPDATE equipment SET equipment_description =? WHERE equipment_id=?";
+    private static final String DELETE_EQUIPMENT_SQL_STRING = "DELETE FROM equipment WHERE equipment_id=?";
 
     @Override
     public List<Equipment> readAll() {
@@ -74,4 +75,18 @@ public class EquipmentRepositoryJDBC extends Repository implements EquipmentRepo
         }
 
     }
+
+    @Override
+    public void deleteEquipment(Equipment equipment) throws SQLException {
+        Connection connection = connect();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(DELETE_EQUIPMENT_SQL_STRING);
+            preparedStatement.setInt(1, equipment.getId());
+            preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

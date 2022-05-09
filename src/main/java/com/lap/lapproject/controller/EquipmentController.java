@@ -3,7 +3,10 @@ package com.lap.lapproject.controller;
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.Equipment;
+import com.lap.lapproject.model.Program;
 import com.lap.lapproject.model.UserData;
+import com.lap.lapproject.repos.EquipmentRepositoryJDBC;
+import com.lap.lapproject.repos.ProgramRepositoryJDBC;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class EquipmentController extends BaseController{
     @FXML
@@ -48,10 +52,37 @@ public class EquipmentController extends BaseController{
 
     @FXML
     private void onDeleteBtnClick(ActionEvent actionEvent) {
+        EquipmentRepositoryJDBC equipmentRepositoryJDBC = new EquipmentRepositoryJDBC();
+        int myIndex = tableViewEquipment.getSelectionModel().getSelectedIndex();
+
+        Equipment equipment1 = tableViewEquipment.getSelectionModel().getSelectedItem();
+
+
+        try {
+            equipmentRepositoryJDBC.deleteEquipment(equipment1);
+            listModel.equipmentList.remove(equipment1);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @FXML
     private void onSettingsBtnClick(ActionEvent actionEvent) {
+        Stage stage = new Stage();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_PROGRAM));
+        Scene scene = null;
+
+        try {
+            scene = new Scene(fxmlLoader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        stage.setTitle("Raum Management");
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
