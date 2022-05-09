@@ -45,7 +45,7 @@
             <Insets />
          </GridPane.margin>
       </TextField>
-      <Button mnemonicParsing="false" onAction="#onAbortBtnClick" text="ABBRECHEN" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+      <Button fx:id="onAbortBtn" mnemonicParsing="false" onAction="#onAbortBtnClick" text="ABBRECHEN" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
          <styleClass>
             <String fx:value="button-style" />
             <String fx:value="button-light" />
@@ -54,7 +54,7 @@
             <Insets right="30.0" />
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" onAction="#onAddBtnClick" text="HINZUFÜGEN" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+      <Button fx:id="addEquipmentBtn" mnemonicParsing="false" onAction="#onAddBtnClick" text="HINZUFÜGEN" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets right="25.0" />
          </GridPane.margin>

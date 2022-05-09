@@ -69,6 +69,8 @@ public class EquipmentController extends BaseController{
 
         authorityVisibility();
         initEquipmentTable();
+
+        //listModel.selectedEquipmentProperty().bind(tableViewEquipment.getSelectionModel().selectedItemProperty());
     }
 
     private void initEquipmentTable() {
