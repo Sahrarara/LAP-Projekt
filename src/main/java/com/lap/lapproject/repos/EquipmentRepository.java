@@ -1,7 +1,11 @@
 package com.lap.lapproject.repos;
 
+import com.lap.lapproject.model.Equipment;
+
 import java.sql.SQLException;
+import java.util.List;
 
 public interface EquipmentRepository {
-    boolean getEquipment() throws SQLException;
+    List<Equipment> readAll() throws SQLException;
+
 }

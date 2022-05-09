@@ -1,17 +1,21 @@
 package com.lap.lapproject.controller;
 
+import com.lap.lapproject.LoginApplication;
+import com.lap.lapproject.application.Constants;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
-public class BigScreenController extends BaseController{
+public class BigScreenController extends BaseController {
 
     private static final Logger log = LoggerFactory.getLogger(BigScreenController.class);
 
@@ -42,5 +46,7 @@ public class BigScreenController extends BaseController{
         });
         log.info("Listener registered");
     }
+
+
 
 }

@@ -3,13 +3,9 @@ package com.lap.lapproject.controller;
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.Booking;
-import com.lap.lapproject.model.ListModel;
-import com.lap.lapproject.model.Location;
 import com.lap.lapproject.model.UserData;
-import com.lap.lapproject.repos.BookingRepositoryJDBC;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,13 +15,12 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
-import javafx.util.Callback;
+
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.time.LocalDateTime;
 
-public class BookingController {
+
+public class BookingController extends BaseController{
     @FXML
     private Button deleteBookingBtn;
     @FXML
@@ -35,7 +30,7 @@ public class BookingController {
     @FXML
     private TableColumn<Booking, String> locationColumn;
     @FXML
-    private TableColumn<Booking, String> roomColumn;
+    private TableColumn<Booking, Integer> roomColumn;
     @FXML
     private TableColumn<Booking, String> trainerColumn;
     @FXML
@@ -83,14 +78,8 @@ public class BookingController {
         assert roomColumn != null : "fx:id=\"roomColumn\" was not injected: check your FXML file 'booking-view.fxml'.";
         assert tableViewBooking != null : "fx:id=\"tableViewBooking\" was not injected: check your FXML file 'booking-view.fxml'.";
         assert trainerColumn != null : "fx:id=\"trainerColumn\" was not injected: check your FXML file 'booking-view.fxml'.";
-        authorityVisibility();
-        BookingRepositoryJDBC bookingRepo = new BookingRepositoryJDBC();
 
-        try {
-            bookingRepo.readAll();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        authorityVisibility();
         initBookingTable();
     }
 
@@ -98,7 +87,7 @@ public class BookingController {
     public void initBookingTable() {
 
 
-        tableViewBooking.setItems(ListModel.bookingList);
+        tableViewBooking.setItems(listModel.bookingList);
         locationColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getRoom().getLocation().getStreet()));
         roomColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getRoom().getRoomNumber()));
         trainerColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getTrainer().getfName() + " " +
@@ -106,12 +95,6 @@ public class BookingController {
         dateColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getDateTimeStart().toString().substring(0, 10)));
         dateTimeStartColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getDateTimeStart().toString().substring(11)));
         dateTimeEndColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getDateTimeEnd().toString().substring(11)));
-
-
-
-
-
-
 
     }
 

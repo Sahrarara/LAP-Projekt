@@ -1,90 +1,98 @@
 package com.lap.lapproject.repos;
 
-import com.lap.lapproject.model.ListModel;
 import com.lap.lapproject.model.Program;
-
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import static com.lap.lapproject.model.ListModel.programList;
 
 public class ProgramRepositoryJDBC extends Repository implements ProgramRepository {
-    //TODO: Priebsch fragen warum Fehler
-    //private static final String SQL_INSERT_PROGRAM = "INSERT INTO programs(program_id, name) VALUES (?, ?)";
+
     private static final String ADD_NEW_PROGRAM_SQL_STRING = "INSERT INTO programs (name) VALUES (?)";
     private static final String SELECT_PROGRAM_SQL_STRING = "SELECT * FROM programs";
     private static final String GET_PROGRAM_ID_BY_PROGRAM_NAME_SQL_STRING = "SELECT program_id FROM programs WHERE name = (?)";
-
+    private static final String UPDATE_PROGRAM_SQL_STRING = "UPDATE programs SET name =? WHERE program_id=?";
+    private static final String DELETE_PROGRAM_SQL_STRING = "DELETE FROM programs WHERE program_id=?";
 
 
     @Override
-    public void getAllPrograms() {
+    public List<Program> readProgram() throws SQLException {
         Connection connection = connect();
-        ListModel.programList.clear();
+        List<Program> programList = new ArrayList<>();
+
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
             statement = connection.prepareStatement(SELECT_PROGRAM_SQL_STRING);
             resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Program program = new Program(resultSet.getLong("program_id"), resultSet.getString("name"));
+                Program program = new Program(resultSet.getInt("program_id"), resultSet.getString("name"));
                 programList.add(program);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return programList;
     }
 
-    //CREATE
-    @Override
-    public boolean getProgram() throws SQLException {
+
+    public int addProgram(Program program) throws SQLException {
         Connection connection = connect();
-        ListModel.programList.clear();
-        PreparedStatement statement = null;
+        PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
+        int generatedKey = 0;
+
         try {
-            statement = connection.prepareStatement(SELECT_PROGRAM_SQL_STRING);
-            resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                Program program = new Program(resultSet.getLong("program_id"), resultSet.getString("name"));
-                ListModel.programList.add(program);
+            preparedStatement = connection.prepareStatement(ADD_NEW_PROGRAM_SQL_STRING, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, program.getProgramName());
+            preparedStatement.executeQuery();
+            resultSet = preparedStatement.getGeneratedKeys();
+
+            while (resultSet.next() ) {
+                generatedKey = resultSet.getInt(1);
+                program.setId(generatedKey);
             }
+            
+        } catch (SQLException e ) {
+            e.printStackTrace();
+        }
+
+        return generatedKey;
+    }
+
+
+    @Override
+    public void updateProgram(Program program) throws SQLException {
+        Connection connection = connect();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(UPDATE_PROGRAM_SQL_STRING);
+            preparedStatement.setString(1, program.getProgramName());
+            preparedStatement.setLong(2, program.getId());
+            preparedStatement.executeQuery();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return true;
-    }
-
-
-    public void addProgram(Program program) throws SQLException {
-        Connection connection = connect();
-        ListModel.programList.clear();
-
-        try (PreparedStatement preparedStatement = connection.prepareStatement(ADD_NEW_PROGRAM_SQL_STRING, Statement.RETURN_GENERATED_KEYS)) {
-            preparedStatement.setString(1, program.getProgramName());
-
-
-            preparedStatement.executeUpdate();
-
-        }
-    }
-
-    //TODO: Update und Delete machen!
-    //UPDATE
-    @Override
-    public void updateProgram(Program program) throws SQLException {
 
     }
 
-    //DELETE
     @Override
     public void deleteProgram(Program program) throws SQLException {
-
+        Connection connection = connect();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(DELETE_PROGRAM_SQL_STRING);
+            preparedStatement.setInt(1, program.getId());
+            preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 
     @Override
     public int getProgramIdByProgramName(String programName) {
-
         Connection connection = connect();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;

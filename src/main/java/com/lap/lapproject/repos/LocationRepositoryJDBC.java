@@ -1,32 +1,34 @@
 package com.lap.lapproject.repos;
-
-import com.lap.lapproject.model.ListModel;
 import com.lap.lapproject.model.Location;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LocationRepositoryJDBC extends Repository implements LocationRepository {
 
     private static final String ADD_NEW_LOCATION_SQL_STRING = "INSERT INTO location (street, zip, city) VALUES (?, ?, ?)";
     private static final String SELECT_LOCATION_SQL_STRING = "SELECT * FROM location";
-    public boolean getLocation() {
+
+    public List<Location> readAll() {
         Connection connection = connect();
-        ListModel.locationList.clear();
+        List<Location> locationList = new ArrayList<>();
         PreparedStatement statement = null;
         ResultSet resultSet = null;
+
         try {
             statement = connection.prepareStatement(SELECT_LOCATION_SQL_STRING);
             resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Location location = new Location(resultSet.getLong("location_id"), resultSet.getString("street"),
+                Location location = new Location(resultSet.getInt("location_id"), resultSet.getString("street"),
                         resultSet.getString("zip"), resultSet.getString("city"));
 
-                ListModel.locationList.add(location);
+               locationList.add(location);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return true;
+        return locationList;
     }
     @Override
     public void addLocation(Location location) throws SQLException {
@@ -38,16 +40,6 @@ public class LocationRepositoryJDBC extends Repository implements LocationReposi
             preparedStatement.setString(3, location.getCity());
 
             preparedStatement.executeUpdate();
-
-            /*
-            try(ResultSet resultSet = preparedStatement.getGeneratedKeys()){
-                while(resultSet.next()){
-                    //long locationId = resultSet.getLong("location_id");
-                    //location.setId(locationId);
-
-                }
-            }
-             */
 
         }
     }

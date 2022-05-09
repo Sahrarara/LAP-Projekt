@@ -1,24 +1,69 @@
 package com.lap.lapproject.model;
 
+import com.lap.lapproject.repos.*;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.SQLException;
+
 public class ListModel {
 
     private static final Logger log = LoggerFactory.getLogger(ListModel.class);
 
-    public static ObservableList<Location> locationList = FXCollections.observableArrayList();
+    public ObservableList<Course> courseList = FXCollections.observableArrayList();
+    public  ObservableList<Program> programList = FXCollections.observableArrayList();
+    public ObservableList<Equipment> equipmentList = FXCollections.observableArrayList();
+    public  ObservableList<Location> locationList = FXCollections.observableArrayList();
+    public  ObservableList<Booking> bookingList = FXCollections.observableArrayList();
+    public ObservableList<Trainer> trainerList = FXCollections.observableArrayList();
+    public ObservableList<Room> roomList = FXCollections.observableArrayList();
 
-    public static  ObservableList<Program> programList = FXCollections.observableArrayList();
 
-    public static ObservableList<Room> roomList = FXCollections.observableArrayList();
 
-    public static ObservableList<Equipment> equipmentList = FXCollections.observableArrayList();
+    CourseRepositoryJDBC courseRepositoryJDBC = new CourseRepositoryJDBC();
+    ProgramRepositoryJDBC programRepositoryJDBC = new ProgramRepositoryJDBC();
+    EquipmentRepositoryJDBC equipmentRepositoryJDBC = new EquipmentRepositoryJDBC();
+    LocationRepositoryJDBC locationRepositoryJDBC = new LocationRepositoryJDBC();
+    BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
+    UserRepositoryJDBC userRepositoryJDBC = new UserRepositoryJDBC();
+    RoomRepositoryJDBC roomRepositoryJDBC = new RoomRepositoryJDBC();
 
-    public static ObservableList<Trainer> trainerList = FXCollections.observableArrayList();
-    public static ObservableList<Course> courseList = FXCollections.observableArrayList();
-    public static ObservableList<Booking> bookingList = FXCollections.observableArrayList();
 
+//UPDATE Variable enthält den Wert des ausgewählten Elements
+    private ObjectProperty<Program> selectedProgram = new SimpleObjectProperty<>();
+
+
+
+    public ListModel() {
+
+        try {
+            courseList.addAll(courseRepositoryJDBC.readAll());
+            programList.addAll(programRepositoryJDBC.readProgram());
+            equipmentList.addAll(equipmentRepositoryJDBC.readAll());
+            locationList.addAll(locationRepositoryJDBC.readAll());
+            bookingList.addAll(bookingRepositoryJDBC.readAll());
+            trainerList.addAll(userRepositoryJDBC.readAllTrainer());
+            roomList.addAll(roomRepositoryJDBC.readAll());
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public Program getSelectedProgram() {
+        return selectedProgram.get();
+    }
+
+    public ObjectProperty<Program> selectedProgramProperty() {
+        return selectedProgram;
+    }
+
+    public void setSelectedProgram(Program selectedProgram) {
+        this.selectedProgram.set(selectedProgram);
+    }
 }

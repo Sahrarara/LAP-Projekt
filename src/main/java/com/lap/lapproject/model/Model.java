@@ -4,11 +4,10 @@ import com.calendarfx.model.Entry;
 import com.lap.lapproject.repos.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class Model {
 
@@ -18,16 +17,13 @@ public class Model {
     public ArrayList<Entry<Booking>> bookingEntries = new ArrayList<>();
 
     private BookingRepositoryJDBC bookingRepo = new BookingRepositoryJDBC();
-    private UserRepositoryJDBC userRepositoryJDBC = new UserRepositoryJDBC();
-    private EquipmentRepositoryJDBC equipmentRepositoryJDBC = new EquipmentRepositoryJDBC();
-    private CourseRepositoryJDBC  courseRepositoryJDBC = new CourseRepositoryJDBC();
-    public Model(){
+
+
+    public Model() {
         try {
             bookings.addAll(bookingRepo.readAll());
-            userRepositoryJDBC.getTrainer();
-            equipmentRepositoryJDBC.getEquipment();
-            //courseRepositoryJDBC.addCourse();
-            courseRepositoryJDBC.getCourse();
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -46,4 +42,9 @@ public class Model {
     public void setPathForDetailView(String pathForDetailView) {
         this.pathForDetailView.set(pathForDetailView);
     }
+
+
+
+
+
 }

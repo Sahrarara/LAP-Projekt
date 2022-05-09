@@ -2,7 +2,6 @@ package com.lap.lapproject.controller;
 
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
-import com.lap.lapproject.model.ListModel;
 import com.lap.lapproject.model.Location;
 import com.lap.lapproject.model.UserData;
 import com.lap.lapproject.repos.LocationRepositoryJDBC;
@@ -15,7 +14,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-public class LocationController {
+public class LocationController extends BaseController{
     @FXML
     private ButtonBar locationBtnBar;
 
@@ -67,12 +66,12 @@ public class LocationController {
 
         authorityVisibility();
         LocationRepositoryJDBC locationRepo = new LocationRepositoryJDBC();
-        locationRepo.getLocation();
+        //locationRepo.getLocation();
         initLocationTable();
     }
 
     public void initLocationTable() {
-        tableViewLocation.setItems(ListModel.locationList);
+        tableViewLocation.setItems(listModel.locationList);
         streetColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getStreet()));
         zipColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getZipcode()));
         cityColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getCity()));

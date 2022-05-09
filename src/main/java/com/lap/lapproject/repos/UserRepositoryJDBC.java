@@ -4,18 +4,21 @@ import com.lap.lapproject.model.*;
 import javafx.scene.control.Alert;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.InputStream;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class UserRepositoryJDBC extends Repository implements UserRepository {
-
+    //BEISPIEL???
     private static final String SQL_STRING = "INSERT INTO users (user_id, username, photo) (?, ?, ?)";
+    //BEISPIEL??
     private static final String SQL_SELECT_WHERE_ID = "SELECT * WHERE id=?";
 
     private static final String SELECT_TRAINER_SQL_STRING = "SELECT user_id, first_name, last_name, email, phone, active_status FROM users WHERE authorization='coach'";
 
+    //BEISPIEL??
     @Override
     public void add(User user) throws SQLException {
         Connection connection = connect();
@@ -30,13 +33,14 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
 
             try (ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
                 while (resultSet.next()) {
-                    long userId = resultSet.getLong("user_id");
+                    int userId = resultSet.getInt("user_id");
                     user.setId(userId);
                 }
             }
         }
     }
 
+    //BEISPIEL??
     @Override
     public Optional<User> read(long id) throws SQLException {
         User user = null;
@@ -53,9 +57,11 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
 
 
     @Override
-    public boolean getTrainer() {
+
+    public List<Trainer> readAllTrainer() {
         Connection connection = connect();
-        ListModel.trainerList.clear();
+       // ListModel.trainerList.clear();
+        List<Trainer> trainerList = new ArrayList<>();
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 
@@ -63,19 +69,18 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             statement = connection.prepareStatement(SELECT_TRAINER_SQL_STRING);
             resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Trainer trainer = new Trainer(resultSet.getLong("user_id"), resultSet.getString("first_name"),
+                Trainer trainer = new Trainer(resultSet.getInt("user_id"), resultSet.getString("first_name"),
                         resultSet.getString("last_name"), resultSet.getString("email"), resultSet.getString(
                         "phone"), resultSet.getBoolean("active_status"));
-                ListModel.trainerList.add(trainer);
+               trainerList.add(trainer);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return false;
+        return trainerList;
     }
 
-
+    //BEISPIEL??
     private User getUser(ResultSet resultSet) throws SQLException {
         String authorization = resultSet.getString("authorization");
         User user = null;
@@ -89,6 +94,9 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
         return user;
     }
 
+
+    //private static final String SELECT_USERNAME_PASSWORD_SQL_STRING = " SELECT * FROM users WHERE username = ? AND " +
+            //"password = ? AND active_status = '1'";
     public static boolean checkUsernamePasswordActiveStatus(String username, String password) {
         Connection connection = connect();
         if (connection == null) {

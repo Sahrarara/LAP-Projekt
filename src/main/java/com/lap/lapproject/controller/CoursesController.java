@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-public class CoursesController {
+public class CoursesController extends BaseController{
     @FXML
     private ButtonBar coursesBtnBar;
 
@@ -27,9 +27,9 @@ public class CoursesController {
     @FXML
     private TableColumn<Course, String> courseNameColumn;
     @FXML
-    private TableColumn<Course, LocalDateTime> courseStartColumn;
+    private TableColumn<Course, String> courseStartColumn;
     @FXML
-    private TableColumn<Course, LocalDateTime> courseEndColumn;
+    private TableColumn<Course, String> courseEndColumn;
     @FXML
     private TableColumn<Course, String> programColumn;
     @FXML
@@ -76,10 +76,10 @@ public class CoursesController {
     }
 
     private void initEventTable() {
-        tableViewEvent.setItems(ListModel.courseList);
+        tableViewEvent.setItems(listModel.courseList);
         courseNameColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getCourseName()));
-        courseStartColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getCourseStart()));
-        courseEndColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getCourseStart()));
+        courseStartColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getCourseStart().toString().substring(0, 10)));
+        courseEndColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getCourseStart().toString().substring(0, 10)));
         programColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getProgram().getProgramName()));
         groupSizeColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getGroupSize()));
     }

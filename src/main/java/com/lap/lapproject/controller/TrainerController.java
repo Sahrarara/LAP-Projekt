@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 
-public class TrainerController {
+public class TrainerController extends BaseController{
     @FXML
     private ButtonBar trainerBtnBar;
 
@@ -80,7 +80,7 @@ public class TrainerController {
     }
 
     private void initTrainerTable() {
-        tableViewTrainer.setItems(ListModel.trainerList);
+        tableViewTrainer.setItems(listModel.trainerList);
         firstNameColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getfName()));
         lastNameColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getlName()));
         emailColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getEmail()));

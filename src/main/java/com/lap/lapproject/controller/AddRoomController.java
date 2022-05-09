@@ -6,7 +6,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class AddRoomController {
+public class AddRoomController extends BaseController{
     @FXML
     private TextField sizeTextField;
     @FXML

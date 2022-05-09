@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 import java.sql.SQLException;
 
-public class AddLocationController {
+public class AddLocationController extends BaseController{
     @FXML
     private TextField streetNameTextField;
     @FXML
@@ -42,7 +42,7 @@ public class AddLocationController {
             LocationRepositoryJDBC locationRepositoryJDBC = new LocationRepositoryJDBC();
             try {
                 locationRepositoryJDBC.addLocation(location);
-                locationRepositoryJDBC.getLocation();
+                locationRepositoryJDBC.readAll();
 
             } catch (SQLException e) {
                 e.printStackTrace();

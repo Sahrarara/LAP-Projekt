@@ -1,5 +1,6 @@
 package com.lap.lapproject.model;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,14 +9,18 @@ public class Location {
 
     private static final Logger log = LoggerFactory.getLogger(Location.class);
 
-    private long id;
+    private SimpleIntegerProperty id;
     private SimpleStringProperty street;
     private SimpleStringProperty zipcode;
     private SimpleStringProperty city;
 
 
-    public Location(long id, String street, String zipcode, String city) {
-        this.id = id;
+    public Location(String street) {
+        this.street = new SimpleStringProperty(street);
+    }
+
+    public Location(int id, String street, String zipcode, String city) {
+        this.id = new SimpleIntegerProperty(id);
         this.street = new SimpleStringProperty(street);
         this.zipcode = new SimpleStringProperty(zipcode);
         this.city = new SimpleStringProperty(city);
@@ -27,16 +32,17 @@ public class Location {
         this.city = new SimpleStringProperty(city);
     }
 
-    public Location(String street) {
-        this.street = new SimpleStringProperty(street);
+
+    public int getId() {
+        return id.get();
     }
 
-    public long getId() {
+    public SimpleIntegerProperty idProperty() {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setId(int id) {
+        this.id.set(id);
     }
 
     public String getStreet() {

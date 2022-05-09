@@ -1,5 +1,6 @@
 package com.lap.lapproject.model;
 
+import javafx.beans.property.SimpleStringProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,4 +15,7 @@ public class UserData {
     public static String telephoneNmbr;
     public static String description = null;
     public static String authority = "guest";
+
+
+
 }

@@ -58,8 +58,8 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        usernameTF.setText(null);
-        passwordTF.setText(null);
+        usernameTF.setText("capitanMarvel");
+        passwordTF.setText("carol123");
     }
 
     private void moveToMainPage(){

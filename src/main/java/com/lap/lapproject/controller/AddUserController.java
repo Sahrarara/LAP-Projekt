@@ -8,7 +8,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class AddUserController {
+public class AddUserController extends BaseController{
     @FXML
     private TextField firstNameTextField;
     @FXML

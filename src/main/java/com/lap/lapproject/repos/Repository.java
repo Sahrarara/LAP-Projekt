@@ -5,10 +5,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Repository {
-    static final String dbPrefix = "jdbc:mariadb:";
-    static final String location = "//localhost:3306/room_planning";
-    static final String dbUser = "root";
-    static final String dbPw = "";
+    public static final String dbPrefix = "jdbc:mariadb:";
+    public static final String location = "//localhost:3306/room_planning";
+    public static final String dbUser = "root";
+    public static final String dbPw = "";
 
     protected static Connection connect() {
         Connection connection;

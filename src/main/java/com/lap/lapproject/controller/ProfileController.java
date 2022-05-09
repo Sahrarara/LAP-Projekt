@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ProfileController {
+public class ProfileController extends BaseController{
     @FXML
     private Label firstnameLabel;
     @FXML

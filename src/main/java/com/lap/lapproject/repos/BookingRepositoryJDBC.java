@@ -16,7 +16,7 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
     @Override
     public ArrayList<Booking> readAll() throws SQLException {
         Connection connection = connect();
-        ListModel.bookingList.clear();
+        //ListModel.bookingList.clear();
         ArrayList<Booking> list = new ArrayList<>();
 //"SELECT courses.course_name,rooms.room_number,users.username, booking.datetime_start,booking.datetime_end FROM `booking` " +
 
@@ -37,7 +37,7 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
             while (resultSet.next()) {
 
 
-                Location location = new Location(resultSet.getLong("location_id"), resultSet.getString("street"),
+                Location location = new Location(resultSet.getInt("location_id"), resultSet.getString("street"),
                         resultSet.getString("zip"),
                         resultSet.getString("city"));
 
@@ -46,10 +46,8 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
                 //Equipment equipment = new Equipment();
 
 
-                Room room = new Room(resultSet.getLong("room_id"), resultSet.getString("rooms.room_number"),
-                        resultSet.getInt("rooms" +
-                                ".size"),
-                        location);
+                Room room = new Room(resultSet.getInt("rooms.room_id"), resultSet.getInt("rooms.room_number"),
+                        resultSet.getInt("rooms.size"), location);
 
 
 
@@ -59,7 +57,7 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
 
 
 
-                Program program = new Program(resultSet.getLong("program_id"), resultSet.getString("course_name"));
+                Program program = new Program(resultSet.getInt("program_id"), resultSet.getString("course_name"));
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
@@ -71,7 +69,8 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
                 String timeEnd = resultSet.getString("course_end");
                 LocalDateTime courseEnd = (LocalDateTime.parse(timeEnd, formatter));
 
-                Course course = new Course(resultSet.getLong("course_id"),resultSet.getString("course_name"), program, courseStart,
+                Course course = new Course(resultSet.getInt("course_id"),resultSet.getString("course_name"), program,
+                        courseStart,
                         courseEnd,
                         resultSet.getInt("group_size"));
 
@@ -83,10 +82,7 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
                 LocalDateTime endTime = LocalDateTime.parse(datetimeEnd, formatter);
 
                 Booking b = new Booking(room, trainer, course, startTime, endTime);
-                ListModel.bookingList.add(b);
                 list.add(b);
-
-
 
             }
         } catch (SQLException e) {

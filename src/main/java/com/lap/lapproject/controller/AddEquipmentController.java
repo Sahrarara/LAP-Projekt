@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class AddEquipmentController {
+public class AddEquipmentController extends BaseController{
     @FXML
     private TextField nameTextField;
 

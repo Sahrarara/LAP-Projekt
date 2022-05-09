@@ -3,23 +3,17 @@ package com.lap.lapproject.controller;
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.Equipment;
-import com.lap.lapproject.model.ListModel;
-import com.lap.lapproject.model.Location;
 import com.lap.lapproject.model.UserData;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.util.Callback;
-
 import java.io.IOException;
 
-public class EquipmentController {
+public class EquipmentController extends BaseController{
     @FXML
     private Button addEquipmentBtn;
     @FXML
@@ -33,8 +27,6 @@ public class EquipmentController {
     private TableView<Equipment> tableViewEquipment;
     @FXML
     private TableColumn<Equipment, String> equipmentNameColumn;
-    @FXML
-    private TableColumn<Equipment, String> roomNumberColumn;
 
     @FXML
     private void onAddEquipmentBtnClick(ActionEvent actionEvent) {
@@ -69,7 +61,6 @@ public class EquipmentController {
     @FXML
     private void initialize() {
         assert tableViewEquipment != null : "fx:id=\"tableViewEquipment\" was not injected: check your FXML file 'equipment-view.fxml'.";
-        assert roomNumberColumn != null : "fx:id=\"roomNumberColumn\" was not injected: check your FXML file 'equipment-view.fxml'.";
         assert equipmentNameColumn != null : "fx:id=\"equipmentNameColumn\" was not injected: check your FXML file 'equipment-view.fxml'.";
         assert addEquipmentBtn != null : "fx:id=\"addEquipmentBtn\" was not injected: check your FXML file 'equipment-view.fxml'.";
         assert deleteEquipmentBtn != null : "fx:id=\"deleteEquipmentBtn\" was not injected: check your FXML file 'equipment-view.fxml'.";
@@ -81,8 +72,7 @@ public class EquipmentController {
     }
 
     private void initEquipmentTable() {
-        tableViewEquipment.setItems(ListModel.equipmentList);
-        roomNumberColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getRoom().getRoomNumber()));
+        tableViewEquipment.setItems(listModel.equipmentList);
         equipmentNameColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getDescription()));
     }
 

@@ -8,7 +8,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class AddBookingController {
+public class AddBookingController extends BaseController {
     @FXML
     private DatePicker singleDateDatePicker;
     @FXML

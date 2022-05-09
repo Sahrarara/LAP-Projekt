@@ -7,7 +7,7 @@ public abstract class User {
 
     private static final Logger log = LoggerFactory.getLogger(User.class);
 
-    private long id;
+    private int id;
     private String username;
     private Boolean activeStatus;
     private String fName;
@@ -42,7 +42,7 @@ public abstract class User {
     public User() {
     }
 
-    public User(long id, String fName, String lName, String email,String phoneNmbr, Boolean activeStatus) {
+    public User(int id, String fName, String lName, String email,String phoneNmbr, Boolean activeStatus) {
         this.id = id;
         this.fName = fName;
         this.lName = lName;
@@ -60,11 +60,11 @@ public abstract class User {
         this.description = description;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

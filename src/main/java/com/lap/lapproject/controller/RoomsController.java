@@ -2,10 +2,8 @@ package com.lap.lapproject.controller;
 
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
-import com.lap.lapproject.model.ListModel;
 import com.lap.lapproject.model.Room;
 import com.lap.lapproject.model.UserData;
-import com.lap.lapproject.repos.RoomRepositoryJDBC;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,21 +11,23 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import java.io.IOException;
-import java.sql.SQLException;
 
-public class RoomsController {
+import java.io.IOException;
+
+public class RoomsController extends BaseController {
     @FXML
     private ButtonBar roomsBtnBar;
 
     @FXML
     private TableView<Room> tableViewRoom;
     @FXML
-    private TableColumn<Room, String> roomNumberColumn;
+    private TableColumn<Room, Integer> roomNumberColumn;
     @FXML
     private TableColumn<Room, Integer> sizeColumn;
     @FXML
     private TableColumn<Room, String> streetColumn;
+    @FXML
+    private TableColumn<Room, String> equipmentColumn;
 
 
     @FXML
@@ -57,25 +57,24 @@ public class RoomsController {
     }
 
     @FXML
-    private void initialize() throws SQLException {
+    private void initialize() {
         assert tableViewRoom != null : "fx:id=\"tableViewRoom\" was not injected: check your FXML file 'rooms-view.fxml'.";
         assert roomNumberColumn != null : "fx:id=\"roomNumberColumn\" was not injected: check your FXML file 'rooms-view.fxml'.";
         assert sizeColumn != null : "fx:id=\"sizeColumn\" was not injected: check your FXML file 'rooms-view.fxml'.";
         assert streetColumn != null : "fx:id=\"streetColumn\" was not injected: check your FXML file 'rooms-view.fxml'.";
+        assert equipmentColumn != null : "fx:id=\"equipmentColumn\" was not injected: check your FXML file 'rooms-view.fxml'.";
         assert roomsBtnBar != null : "fx:id=\"roomsBtnBar\" was not injected: check your FXML file 'rooms-view.fxml'.";
 
-        RoomRepositoryJDBC roomRepo = new RoomRepositoryJDBC();
         authorityVisibility();
-
-        roomRepo.getRoom();
         initTableRoom();
     }
 
     private void initTableRoom() {
-        tableViewRoom.setItems(ListModel.roomList);
+        tableViewRoom.setItems(listModel.roomList);
         roomNumberColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getRoomNumber()));
         sizeColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getSize()));
         streetColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getLocation().getStreet()));
+        equipmentColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getEquipment().getDescription()));
     }
 
     private void authorityVisibility() {
