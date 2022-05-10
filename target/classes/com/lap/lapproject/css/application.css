@@ -96,8 +96,6 @@
 
 .table-row-cell:selected {
     -fx-background-color: #211D5A;
-    -fx-background-insets: 0;
-    -fx-background-radius: 1;
 }
 
 .table-row-cell:selected .text {
@@ -180,13 +178,13 @@
     -fx-font-size: 14px;
 }
 
-.scroll-pane {
+/*.scroll-pane {
     -fx-background-color: transparent;
 }
 
 .scroll-pane {
     -fx-background: #F2F4FF;
-}
+}*/
 
 .search-view-font-color {
     -fx-text-fill: #211D5A;

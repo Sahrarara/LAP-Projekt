@@ -56,6 +56,8 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
     }
 
 
+    private static final String SELECT_ERSTELLER_SQL_STRING = "SELECT authorization FROM users";
+
     @Override
 
     public List<Trainer> readAllTrainer() {

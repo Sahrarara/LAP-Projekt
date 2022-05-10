@@ -53,7 +53,7 @@ public class AddCourseController extends BaseController {
     }
 
     @FXML
-    private void onAddBtnClick(ActionEvent actionEvent) {
+    private void onAddBtnClick(ActionEvent actionEvent) throws SQLException {
         if (!courseNameTextField.getText().isBlank() && !courseChoiceBox.getValue().toString().isBlank() && !(courseStartDatePicker.getValue() == null) && !(courseEndDatePicker.getValue() == null) && !groupSizeTextField.getText().isBlank()) {
 
             CourseRepositoryJDBC courseRepo = new CourseRepositoryJDBC();
@@ -74,6 +74,7 @@ public class AddCourseController extends BaseController {
                     courseStart.atStartOfDay(),
                     courseEnd.atStartOfDay(),
                     groupSize);
+            courseRepo.addCourse(course);
             listModel.courseList.add(course);
           /*  // TODO check duplicate
             CourseRepositoryJDBC courseRepositoryJDBC = new CourseRepositoryJDBC();

@@ -35,10 +35,10 @@
                         <RowConstraints minHeight="25.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <ChoiceBox prefWidth="180.0" styleClass="input-form" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                        <ChoiceBox prefWidth="180.0" styleClass="input-form" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                        <ChoiceBox prefWidth="180.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                        <ChoiceBox prefWidth="180.0" styleClass="input-form" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <ChoiceBox fx:id="locationSearchChoiceBox" prefWidth="180.0" styleClass="input-form" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <ChoiceBox fx:id="roomSearchChoiceBox" prefWidth="180.0" styleClass="input-form" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <ChoiceBox fx:id="programNameChoiceBox" prefWidth="180.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <ChoiceBox fx:id="vortragenderSearchChoiceBox" prefWidth="180.0" styleClass="input-form" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                         <Label styleClass="search-view-font-color" text="Standort" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
                            <GridPane.margin>
                               <Insets left="12.0" />
@@ -79,8 +79,8 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <ChoiceBox layoutX="10.0" layoutY="85.0" prefWidth="180.0" styleClass="input-form" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-                        <ChoiceBox prefWidth="180.0" styleClass="input-form" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                        <ChoiceBox fx:id="dateSearchChoiceBox" layoutX="10.0" layoutY="85.0" prefWidth="180.0" styleClass="input-form" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                        <ChoiceBox fx:id="startTimeSearchChoiceBox" prefWidth="180.0" styleClass="input-form" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
                         <Label styleClass="search-view-font-color" text="Zeit von" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                            <GridPane.margin>
                               <Insets left="12.0" />
@@ -89,7 +89,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <ChoiceBox prefWidth="180.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                        <ChoiceBox fx:id="endTimeSearchChoiceBox" prefWidth="180.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
                         <Label styleClass="search-view-font-color" text="Zeit bis" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
                            <GridPane.margin>
                               <Insets left="12.0" />
@@ -112,10 +112,10 @@
                         <RowConstraints vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <ChoiceBox prefWidth="180.0" styleClass="input-form" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                        <ChoiceBox prefWidth="180.0" styleClass="input-form" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                        <ChoiceBox prefWidth="180.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                        <ChoiceBox layoutX="10.0" layoutY="23.0" prefWidth="180.0" styleClass="input-form" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <ChoiceBox fx:id="eveliableSearchChoiceBox" prefWidth="180.0" styleClass="input-form" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <ChoiceBox fx:id="roomSizeSearchChoiceBox" prefWidth="180.0" styleClass="input-form" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <ChoiceBox fx:id="equipmentSearchChoiceBox" prefWidth="180.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <ChoiceBox fx:id="erstellerSearchChoiceBox" layoutX="10.0" layoutY="23.0" prefWidth="180.0" styleClass="input-form" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                         <Label styleClass="search-view-font-color" text="Verfügbarkeit" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
                            <GridPane.margin>
                               <Insets left="12.0" />

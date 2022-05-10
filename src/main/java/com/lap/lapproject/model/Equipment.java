@@ -14,13 +14,13 @@ public class Equipment {
 
     public Equipment(String description) {
         this.description = new SimpleStringProperty(description);
+        this.id = new SimpleIntegerProperty();
     }
 
 
     public Equipment(int id, String description) {
         this.id = new SimpleIntegerProperty(id);
         this.description = new SimpleStringProperty(description);
-
     }
 
     public int getId() {

@@ -35,6 +35,7 @@ public class ListModel {
 
 //UPDATE Variable enthält den Wert des ausgewählten Elements
     private ObjectProperty<Program> selectedProgram = new SimpleObjectProperty<>();
+    private ObjectProperty<Equipment> selectedEquipment = new SimpleObjectProperty<>();
 
 
 
@@ -66,4 +67,19 @@ public class ListModel {
     public void setSelectedProgram(Program selectedProgram) {
         this.selectedProgram.set(selectedProgram);
     }
+
+
+
+    public Equipment getSelectedEquipment() {
+        return selectedEquipment.get();
+    }
+
+    public ObjectProperty<Equipment> selectedEquipmentProperty() {
+        return selectedEquipment;
+    }
+
+    public void setSelectedEquipment(Equipment selectedEquipment) {
+        this.selectedEquipment.set(selectedEquipment);
+    }
+
 }
