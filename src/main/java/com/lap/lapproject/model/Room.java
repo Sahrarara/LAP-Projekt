@@ -104,4 +104,8 @@ public class Room {
         this.equipment = equipment;
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(getRoomNumber());
+    }
 }

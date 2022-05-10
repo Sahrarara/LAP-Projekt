@@ -2,16 +2,17 @@ package com.lap.lapproject.repos;
 
 import com.lap.lapproject.model.*;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class BookingRepositoryJDBC extends Repository implements BookingRepository {
+
+    private static final String ADD_NEW_BOOKING_SQL_STRING =
+            "INSERT INTO booking(room_id, user_id, trainer_id, course_id, recurrence_rule, datetime_start, datetime_end)" +
+                    " VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     @Override
     public ArrayList<Booking> readAll() throws SQLException {
@@ -59,15 +60,15 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
 
                 Program program = new Program(resultSet.getInt("program_id"), resultSet.getString("course_name"));
 
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
                 String timestart = resultSet.getString("course_start");
                 LocalDateTime courseStart = (LocalDateTime.parse(timestart, formatter));
 
-
                 String timeEnd = resultSet.getString("course_end");
                 LocalDateTime courseEnd = (LocalDateTime.parse(timeEnd, formatter));
+
 
                 Course course = new Course(resultSet.getInt("course_id"),resultSet.getString("course_name"), program,
                         courseStart,
@@ -81,7 +82,11 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
                 String datetimeEnd = resultSet.getString("datetime_end");
                 LocalDateTime endTime = LocalDateTime.parse(datetimeEnd, formatter);
 
-                Booking b = new Booking(room, trainer, course, startTime, endTime);
+
+                String recurrenceRule = resultSet.getString("recurrence_rule");
+
+
+                Booking b = new Booking(room, trainer, course, startTime, endTime, recurrenceRule);
                 list.add(b);
 
             }
@@ -90,6 +95,27 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
         }
         return list;
     }
+
+    public void addBooking(long roomID, long userID, long trainerID, long courseID,
+                           String recurrenceRule, LocalDateTime localDateTimeStart, LocalDateTime localDateTimeEnd) {
+        Connection connection = connect();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(ADD_NEW_BOOKING_SQL_STRING, Statement.RETURN_GENERATED_KEYS)) {
+            preparedStatement.setLong(1, roomID);
+            preparedStatement.setLong(2, userID);
+            preparedStatement.setLong(3, trainerID);
+            preparedStatement.setLong(4, courseID);
+            preparedStatement.setString(5, recurrenceRule);
+            preparedStatement.setObject(6, localDateTimeStart);
+            preparedStatement.setObject(7, localDateTimeEnd);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
 
 
 }

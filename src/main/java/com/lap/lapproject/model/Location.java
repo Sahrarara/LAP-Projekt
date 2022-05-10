@@ -80,4 +80,9 @@ public class Location {
     public void setCity(String city) {
         this.city.set(city);
     }
+
+    @Override
+    public String toString() {
+        return getStreet();
+    }
 }

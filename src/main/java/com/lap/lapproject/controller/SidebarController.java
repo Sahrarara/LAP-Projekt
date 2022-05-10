@@ -103,6 +103,7 @@ public class SidebarController extends BaseController {
 
     @FXML
     private void onLogoutBtnClick(ActionEvent actionEvent) {
+        UserData.userID = Integer.parseInt(null);
         UserData.firstName = null;
         UserData.lastName = null;
         UserData.email = null;

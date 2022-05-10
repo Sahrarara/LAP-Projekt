@@ -115,9 +115,10 @@ public abstract class User {
         return phoneNmbr;
     }
 
+
     @Override
     public String toString() {
-        return "" + phoneNmbr;
+        return getfName() + " " + getlName();
     }
 
     public void setPhoneNmbr(String phoneNmbr) {
