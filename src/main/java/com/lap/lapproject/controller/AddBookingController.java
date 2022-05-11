@@ -69,24 +69,24 @@ public class AddBookingController extends BaseController {
         recurrenceChoiceBox.setValue("keiner");
 
         locationChoiceBox.setItems(listModel.locationList);
-        logger.info("Location: {}", listModel.locationList.stream().toList());
+        //logger.info("Location: {}", listModel.locationList.stream().toList());
 
         trainerChoiceBox.setItems(listModel.trainerList);
-        logger.info("Location: {}", listModel.trainerList.stream().toList());
+        //logger.info("Location: {}", listModel.trainerList.stream().toList());
 
         courseNameChoiceBox.setItems(listModel.courseList);
-        logger.info("Location: {}", listModel.courseList.stream().toList());
+        //logger.info("Location: {}", listModel.courseList.stream().toList());
 
 
         FilteredList<Room> roomFilteredList = new FilteredList<>(listModel.roomList);
         roomNumberChoiceBox.setItems(listModel.roomList);
-        logger.info("rooms: {}", listModel.roomList);
+        //logger.info("rooms: {}", listModel.roomList);
 
         locationChoiceBox.getSelectionModel().selectedItemProperty().addListener((Observable, oldValue, newValue) -> {
             roomFilteredList.setPredicate(room -> room.getLocation().getStreet().equals(locationChoiceBox.getValue().getStreet()));
 
-            logger.info("selected: {}", locationChoiceBox.getValue().getStreet());
-            logger.info("Filtered rooms: {}", roomFilteredList);
+            //logger.info("selected: {}", locationChoiceBox.getValue().getStreet());
+            //logger.info("Filtered rooms: {}", roomFilteredList);
 
         });
         roomNumberChoiceBox.setItems(roomFilteredList);
@@ -108,6 +108,7 @@ public class AddBookingController extends BaseController {
 
         //TODO: Rework addbooking.fxml (eintägiger Kurs vs. wöchentlicher Kurs)
         //TODO: if Bedingung damit Booking nur angelegt wird wenn möglich
+        //TODO: Datum validieren
 
 
         if (!(locationChoiceBox.getValue() == null) &&
@@ -120,10 +121,10 @@ public class AddBookingController extends BaseController {
         !(timeStartTimeField.getValue() == null) &&
         !(timeEndTimeField.getValue() == null)){
 
-            long roomID = roomNumberChoiceBox.getValue().getId();
-            long userID = UserData.userID;
-            long trainerID = trainerChoiceBox.getValue().getId();
-            long courseID = courseNameChoiceBox.getValue().getId();
+            int roomID = roomNumberChoiceBox.getValue().getId();
+            int userID = UserData.userID;
+            int trainerID = trainerChoiceBox.getValue().getId();
+            int courseID = courseNameChoiceBox.getValue().getId();
             String recurrenceRule = String.valueOf(recurrenceChoiceBox.getValue());
 
             String dateStart = null;
@@ -141,16 +142,16 @@ public class AddBookingController extends BaseController {
             String timeEnd = String.valueOf(timeEndTimeField.getValue());
 
             String datetimeStart = dateStart + "T" + timeStart;
-            logger.info("datetimeStart: {}",datetimeStart);// 2022-05-10T15:46:00
+            //logger.info("datetimeStart: {}",datetimeStart);// 2022-05-10T15:46:00
 
             String datetimeEnd = dateEnd + "T" + timeEnd;
-            logger.info("datetimeEnd: {}",datetimeEnd);// 2022-05-10T18:46:00
+            //logger.info("datetimeEnd: {}",datetimeEnd);// 2022-05-10T18:46:00
 
             LocalDateTime localDateTimeStart = LocalDateTime.parse(datetimeStart);
-            logger.info("localDateTimeStart: {}", localDateTimeStart);
+            //logger.info("localDateTimeStart: {}", localDateTimeStart);
 
             LocalDateTime localDateTimeEnd = LocalDateTime.parse(datetimeEnd);
-            logger.info("localDateTimeEnd: {}", localDateTimeEnd);
+            //logger.info("localDateTimeEnd: {}", localDateTimeEnd);
 
             BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
             bookingRepositoryJDBC.addBooking(roomID, userID, trainerID, courseID, recurrenceRule, localDateTimeStart, localDateTimeEnd);

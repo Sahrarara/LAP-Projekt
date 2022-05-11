@@ -96,14 +96,14 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
         return list;
     }
 
-    public void addBooking(long roomID, long userID, long trainerID, long courseID,
+    public void addBooking(int roomID, int userID, int trainerID, int courseID,
                            String recurrenceRule, LocalDateTime localDateTimeStart, LocalDateTime localDateTimeEnd) {
         Connection connection = connect();
         try (PreparedStatement preparedStatement = connection.prepareStatement(ADD_NEW_BOOKING_SQL_STRING, Statement.RETURN_GENERATED_KEYS)) {
-            preparedStatement.setLong(1, roomID);
-            preparedStatement.setLong(2, userID);
-            preparedStatement.setLong(3, trainerID);
-            preparedStatement.setLong(4, courseID);
+            preparedStatement.setInt(1, roomID);
+            preparedStatement.setInt(2, userID);
+            preparedStatement.setInt(3, trainerID);
+            preparedStatement.setInt(4, courseID);
             preparedStatement.setString(5, recurrenceRule);
             preparedStatement.setObject(6, localDateTimeStart);
             preparedStatement.setObject(7, localDateTimeEnd);
