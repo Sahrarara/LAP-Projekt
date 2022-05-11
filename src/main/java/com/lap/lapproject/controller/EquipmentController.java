@@ -71,7 +71,7 @@ public class EquipmentController extends BaseController{
     private void onSettingsBtnClick(ActionEvent actionEvent) {
         Stage stage = new Stage();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_PROGRAM));
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_EQUIPMENT));
         Scene scene = null;
 
         try {
@@ -101,7 +101,9 @@ public class EquipmentController extends BaseController{
         authorityVisibility();
         initEquipmentTable();
 
-        //listModel.selectedEquipmentProperty().bind(tableViewEquipment.getSelectionModel().selectedItemProperty());
+
+
+        listModel.selectedEquipmentProperty().bind(tableViewEquipment.getSelectionModel().selectedItemProperty());
     }
 
     private void initEquipmentTable() {
