@@ -66,30 +66,6 @@ public class LocationRepositoryJDBC extends Repository implements LocationReposi
         return generatedKey;
         }
 
-/*public int addEquipment(Equipment equipment) throws SQLException {
-        Connection connection = connect();
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        int generatedKey = 0;
-
-        try {
-            preparedStatement = connection.prepareStatement(ADD_NEW_EQUIPMENT_SQL_STRING, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, equipment.getDescription());
-            preparedStatement.executeQuery();
-            resultSet = preparedStatement.getGeneratedKeys();
-
-            while (resultSet.next() ) {
-                generatedKey = resultSet.getInt(1);
-                equipment.setId(generatedKey);
-            }
-
-        } catch (SQLException e ) {
-            e.printStackTrace();
-        }
-
-        return generatedKey;
-    }*/
-
 
     @Override
     public void updateLocation(Location location) throws SQLException {
