@@ -18,48 +18,74 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
 
     private static final String SELECT_TRAINER_SQL_STRING = "SELECT user_id, first_name, last_name, email, phone, active_status FROM users WHERE authorization='coach'";
 
-    //BEISPIEL??
+    private static final String ADD_NEW_USER_SQL_STRING = "INSERT INTO users (username,active_status,title,first_name,last_name,password," +
+            " authorization,description,phone,email, photo, description_visable, phone_visable, email_visable," +
+            "photo_visable) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+    private static final String SELECT_AUTHORIZATION_SQL_STRING = "SELECT DISTINCT authorization FROM users";
+
+
     @Override
     public void add(User user) throws SQLException {
         Connection connection = connect();
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL_STRING, Statement.RETURN_GENERATED_KEYS)) {
-            preparedStatement.setLong(1, user.getId());
-            preparedStatement.setString(2, user.getUsername());
+        try (PreparedStatement preparedStatement = connection.prepareStatement(ADD_NEW_USER_SQL_STRING, Statement.RETURN_GENERATED_KEYS)) {
+            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.setBoolean(2, user.getActiveStatus());
+            preparedStatement.setString(3, user.getTitle());
+            preparedStatement.setString(4, user.getfName());
+            preparedStatement.setString(5, user.getlName());
+            preparedStatement.setString(6, user.getUserPassword());
+            preparedStatement.setString(7, user.getAuthority());
+            preparedStatement.setString(8, user.getDescription());
+            preparedStatement.setString(9, user.getPhoneNmbr());
+            preparedStatement.setString(10, user.getEmail());
             InputStream inputStream = new ByteArrayInputStream(user.getPhoto());
-            preparedStatement.setBlob(3, inputStream);
+            preparedStatement.setBlob(11, inputStream);
+            preparedStatement.setBoolean(12, user.getDescriptionVisibility());
+            preparedStatement.setBoolean(13, user.getPhoneNmbrVisibility());
+            preparedStatement.setBoolean(14, user.getEmailVisibility());
+            preparedStatement.setBoolean(15, user.getPhotoVisibility());
 
-            preparedStatement.executeUpdate();
+            preparedStatement.executeQuery();
 
-            try (ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
+          /*  try (ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
                 while (resultSet.next()) {
                     int userId = resultSet.getInt("user_id");
                     user.setId(userId);
                 }
-            }
+            }*/
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
-    //BEISPIEL??
+
     @Override
-    public Optional<User> read(long id) throws SQLException {
-        User user = null;
-        try (PreparedStatement preparedStatement = connect().prepareStatement(SQL_SELECT_WHERE_ID)) {
+    public List<Trainer> readAuthorization() throws SQLException {
+        Connection connection = connect();
 
-            preparedStatement.setLong(1, id);
+        List<Trainer> authorizationList = new ArrayList<>();
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
 
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                getUser(resultSet);
+        try {
+            preparedStatement = connection.prepareStatement(SELECT_AUTHORIZATION_SQL_STRING);
+            rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                Trainer authorization = new Trainer(rs.getString("authorization"));
+                //System.out.println(rs.getString("authorization"));
+                authorizationList.add(authorization);
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return Optional.of(user);
+        return authorizationList;
     }
 
 
-    private static final String SELECT_ERSTELLER_SQL_STRING = "SELECT authorization FROM users";
-
     @Override
-
     public List<Trainer> readAllTrainer() {
         Connection connection = connect();
        // ListModel.trainerList.clear();
@@ -80,6 +106,24 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             e.printStackTrace();
         }
         return trainerList;
+    }
+
+
+
+
+    //BEISPIEL??
+    @Override
+    public Optional<User> read(long id) throws SQLException {
+        User user = null;
+        try (PreparedStatement preparedStatement = connect().prepareStatement(SQL_SELECT_WHERE_ID)) {
+
+            preparedStatement.setLong(1, id);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                getUser(resultSet);
+            }
+        }
+        return Optional.of(user);
     }
 
     //BEISPIEL??

@@ -1,6 +1,5 @@
 package com.lap.lapproject.model;
 
-import javafx.beans.property.SimpleStringProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
