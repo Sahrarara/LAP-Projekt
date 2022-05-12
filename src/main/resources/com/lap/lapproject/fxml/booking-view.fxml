@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #211D5A;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.BookingController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #211D5A;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.BookingController">
    <children>
       <SplitPane dividerPositions="0.23684210526315788" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="728.0" prefWidth="800.0" styleClass="split-pane-background" stylesheets="@../css/application.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
@@ -85,14 +85,16 @@
             </AnchorPane>
             <AnchorPane>
                <children>
-                  <TableView fx:id="tableViewBooking" layoutX="20.0" layoutY="23.0" prefHeight="386.0" prefWidth="770.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                  <TableView fx:id="tableViewBooking" layoutX="20.0" layoutY="23.0" prefHeight="386.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                      <columns>
-                        <TableColumn fx:id="locationColumn" minWidth="-1.0" prefWidth="111.5" text="Standort" />
-                        <TableColumn fx:id="roomColumn" minWidth="-1.0" prefWidth="111.5" text="Raum" />
-                        <TableColumn fx:id="trainerColumn" minWidth="-1.0" prefWidth="111.5" text="Vortragender" />
-                        <TableColumn fx:id="dateColumn" minWidth="-1.0" prefWidth="111.5" text="Datum" />
-                        <TableColumn fx:id="dateTimeStartColumn" minWidth="-1.0" prefWidth="111.5" text="Beginn(Uhrzeit)" />
-                        <TableColumn fx:id="dateTimeEndColumn" minWidth="-1.0" prefWidth="199.5" text="Ende(Uhrzeit)" />
+                        <TableColumn fx:id="locationColumn" minWidth="-1.0" prefWidth="120.0" text="Standort" />
+                        <TableColumn fx:id="roomColumn" minWidth="-1.0" text="Raum" />
+                        <TableColumn fx:id="trainerColumn" minWidth="-1.0" prefWidth="130.0" text="Vortragender" />
+                        <TableColumn fx:id="recurrenceRuleColumn" minWidth="-1.0" prefWidth="90.0" text="Serientermin" />
+                        <TableColumn fx:id="dateFromColumn" minWidth="-1.0" prefWidth="100.0" text="Datum von" />
+                        <TableColumn fx:id="dateToColumn" minWidth="-1.0" prefWidth="100.0" text="Datum bis" />
+                        <TableColumn fx:id="dateTimeStartColumn" minWidth="-1.0" prefWidth="70.0" text="Beginn" />
+                        <TableColumn fx:id="dateTimeEndColumn" minWidth="-1.0" prefWidth="70.0" text="Ende" />
                      </columns>
                   </TableView>
                </children>

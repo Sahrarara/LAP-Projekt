@@ -125,6 +125,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             statement = connection.prepareStatement(queryUsername);
             resultSet = statement.executeQuery();
             while (resultSet.next()) {
+                int userid = resultSet.getInt("user_id");
                 String user = resultSet.getString("username");
                 String title = resultSet.getString("title");
                 String firstname = resultSet.getString("first_name");
@@ -144,6 +145,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
                 switch (authority) {
                     case "admin":
                         Admin admin = new Admin(user, firstname, lastname, authority, email, phoneNmbr, description);
+                        UserData.userID = userid;
                         UserData.username = user;
                         System.out.println(UserData.username);
                         UserData.firstName = admin.getfName();
@@ -158,6 +160,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
                         return true;
                     case "coach":
                         Trainer trainer = new Trainer(user, firstname, lastname, authority, email, phoneNmbr, description);
+                        UserData.userID = userid;
                         UserData.firstName = trainer.getfName();
                         UserData.lastName = trainer.getlName();
                         UserData.email = email;

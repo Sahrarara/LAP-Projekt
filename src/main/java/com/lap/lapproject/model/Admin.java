@@ -19,4 +19,12 @@ public class Admin extends Trainer {
     public Admin() {
         super();
     }
+
+    public Admin(int id, String fName, String lName, String email, String phoneNmbr, Boolean activeStatus) {
+        super(id, fName, lName, email, phoneNmbr, activeStatus);
+    }
+
 }
+
+
+

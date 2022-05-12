@@ -17,7 +17,6 @@ public class Equipment {
         this.id = new SimpleIntegerProperty();
     }
 
-
     public Equipment(int id, String description) {
         this.id = new SimpleIntegerProperty(id);
         this.description = new SimpleStringProperty(description);

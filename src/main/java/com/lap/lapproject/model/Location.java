@@ -82,4 +82,8 @@ public class Location {
         this.city.set(city);
     }
 
+    @Override
+    public String toString() {
+        return getStreet();
+    }
 }

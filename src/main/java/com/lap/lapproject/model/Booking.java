@@ -14,14 +14,17 @@ public class Booking {
     private Course course;
     private LocalDateTime dateTimeStart;
     private LocalDateTime dateTimeEnd;
+    private String recurrenceRule;
+    private User user;
 
 
-    public Booking(Room room, Trainer trainer, Course course, LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd) {
+    public Booking(Room room, Trainer trainer, Course course, LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd, String recurrenceRule) {
         this.room = room;
         this.trainer = trainer;
         this.course = course;
         this.dateTimeStart = dateTimeStart;
         this.dateTimeEnd = dateTimeEnd;
+        this.recurrenceRule = recurrenceRule;
     }
 
 
@@ -63,5 +66,21 @@ public class Booking {
 
     public void setDateTimeEnd(LocalDateTime dateTimeEnd) {
         this.dateTimeEnd = dateTimeEnd;
+    }
+
+    public String getRecurrenceRule() {
+        return recurrenceRule;
+    }
+
+    public void setRecurrenceRule(String recurrenceRule) {
+        this.recurrenceRule = recurrenceRule;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

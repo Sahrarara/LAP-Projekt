@@ -98,4 +98,9 @@ public class Course {
     public void setCourseEnd(LocalDateTime courseEnd) {
         this.courseEnd = courseEnd;
     }
+
+    @Override
+    public String toString() {
+        return getCourseName();
+    }
 }
