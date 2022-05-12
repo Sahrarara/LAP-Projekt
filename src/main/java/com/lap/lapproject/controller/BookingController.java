@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.slf4j.Logger;
@@ -64,6 +65,7 @@ public class BookingController {
         } catch (IOException e){
             e.printStackTrace();
         }
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Raum Management");
         stage.setScene(scene);
         stage.show();
@@ -106,13 +108,6 @@ public class BookingController {
         assert tableViewBooking != null : "fx:id=\"tableViewBooking\" was not injected: check your FXML file 'booking-view.fxml'.";
         assert trainerColumn != null : "fx:id=\"trainerColumn\" was not injected: check your FXML file 'booking-view.fxml'.";
         authorityVisibility();
-        BookingRepositoryJDBC bookingRepo = new BookingRepositoryJDBC();
-
-        try {
-            bookingRepo.readAll();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         initBookingTable();
     }
 

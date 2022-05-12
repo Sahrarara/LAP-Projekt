@@ -14,13 +14,11 @@ import java.util.List;
 
 public class RoomRepositoryJDBC extends Repository implements RoomRepository {
 
-        private static final String SELECT_ROOM_SQL_STRING = "SELECT * FROM rooms " +
-                "JOIN rooms_equipment ON rooms_equipment.room_id= rooms.room_id " +
-                "JOIN equipment ON equipment.equipment_id = rooms_equipment.equipment_id " +
-                "JOIN location ON rooms.location_id = location.location_id";
 
-
-
+    private static final String SELECT_ROOM_SQL_STRING = "SELECT * FROM rooms " +
+            "JOIN location ON rooms.location_id = location.location_id " +
+            "JOIN rooms_equipment ON rooms_equipment.room_id= rooms.room_id " +
+            "LEFT JOIN equipment ON equipment.equipment_id = rooms_equipment.equipment_id  ";
     @Override
     public List<Room> readAll() {
         Connection connection = connect();
@@ -41,7 +39,6 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
 
                 Room room = new Room(resultSet.getInt("room_id"), resultSet.getInt("room_number"), resultSet.getInt(
                         "size"), location, equipment);
-
 
                 roomList.add(room);
             }

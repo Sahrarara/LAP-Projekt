@@ -55,10 +55,8 @@ public abstract class User {
         this.fName = fName;
         this.lName = lName;
         this.authority = authority;
-        this.email = email;
-        this.phoneNmbr = phoneNmbr;
-        this.description = description;
     }
+
 
     public int getId() {
         return id;
