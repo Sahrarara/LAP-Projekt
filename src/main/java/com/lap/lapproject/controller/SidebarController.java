@@ -103,13 +103,7 @@ public class SidebarController extends BaseController {
 
     @FXML
     private void onLogoutBtnClick(ActionEvent actionEvent) {
-        UserData.userID = Integer.parseInt(null);
-        UserData.firstName = null;
-        UserData.lastName = null;
-        UserData.email = null;
-        UserData.telephoneNmbr = "0";
-        UserData.description = null;
-        UserData.authority = "guest";
+        model.setLoggedInUser(null);
         moveToLogin();
     }
 
@@ -120,7 +114,7 @@ public class SidebarController extends BaseController {
     }
 
     private void authorityVisibility() {
-        String authority = UserData.authority;
+        String authority = model.getAuthority();
         switch (authority) {
             case "admin":
                 System.out.println("Admin privileges");

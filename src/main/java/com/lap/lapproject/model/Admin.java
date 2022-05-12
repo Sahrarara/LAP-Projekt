@@ -12,19 +12,11 @@ public class Admin extends Trainer {
         super(username, fName, lName, authority, email, phoneNmbr, description);
     }
 
-    public Admin(long aLong, String username, byte[] photos) {
-        super(aLong, username, photos);
-    }
+   /* public Admin(int id, String username, byte[] photos) {
+        super(id, username, photos);
+    }*/
 
     public Admin() {
         super();
     }
-
-    public Admin(int id, String fName, String lName, String email, String phoneNmbr, Boolean activeStatus) {
-        super(id, fName, lName, email, phoneNmbr, activeStatus);
-    }
-
 }
-
-
-

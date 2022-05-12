@@ -14,4 +14,6 @@ public interface UserRepository {
 
     List<Trainer> readAllTrainer() throws SQLException;
 
+    List<Trainer> readAuthorization() throws SQLException;
+
 }

@@ -22,6 +22,8 @@ public class ListModel {
     public ObservableList<Trainer> trainerList = FXCollections.observableArrayList();
     public ObservableList<Room> roomList = FXCollections.observableArrayList();
 
+    public ObservableList<Trainer> authorizationList = FXCollections.observableArrayList();
+
 
 
     CourseRepositoryJDBC courseRepositoryJDBC = new CourseRepositoryJDBC();
@@ -51,6 +53,7 @@ public class ListModel {
             bookingList.addAll(bookingRepositoryJDBC.readAll());
             trainerList.addAll(userRepositoryJDBC.readAllTrainer());
             roomList.addAll(roomRepositoryJDBC.readAll());
+            authorizationList.addAll(userRepositoryJDBC.readAuthorization());
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

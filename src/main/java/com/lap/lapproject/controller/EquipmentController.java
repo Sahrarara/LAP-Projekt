@@ -34,6 +34,7 @@ public class EquipmentController extends BaseController{
 
     @FXML
     private void onAddEquipmentBtnClick(ActionEvent actionEvent) {
+        tableViewEquipment.getSelectionModel().select(null);
         Stage stage = new Stage();
 
         FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_EQUIPMENT));
@@ -112,7 +113,7 @@ public class EquipmentController extends BaseController{
     }
 
     private void authorityVisibility() {
-        String authority = UserData.authority;
+        String authority = model.getAuthority();
         switch (authority) {
             case "admin":
                 break;
