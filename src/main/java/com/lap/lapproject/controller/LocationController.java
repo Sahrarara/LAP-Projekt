@@ -42,6 +42,7 @@ public class LocationController extends BaseController{
 
     @FXML
     private void onAddLocationBtnClick(ActionEvent actionEvent) {
+        tableViewLocation.getSelectionModel().select(null);
         Stage stage = new Stage();
 
         FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_LOCATION));
