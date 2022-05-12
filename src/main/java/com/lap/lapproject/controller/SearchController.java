@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+import com.lap.lapproject.model.ListModel;
 import com.lap.lapproject.repos.LocationRepositoryJDBC;
 import com.lap.lapproject.repos.ProgramRepositoryJDBC;
 import com.lap.lapproject.repos.RoomRepositoryJDBC;
@@ -13,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 
+import static com.lap.lapproject.controller.BaseController.listModel;
 import static com.lap.lapproject.model.ListModel.*;
 
 public class SearchController {
@@ -75,13 +77,18 @@ public class SearchController {
         assert vortragenderSearchChoiceBox != null : "fx:id=\"vortragenderSearchChoiceBox\" was not injected: check your FXML file 'search-view.fxml'.";
 
 
-       /* // get all existing programs from DB
+       // get all existing programs from DB
         ProgramRepositoryJDBC programRepositoryJDBC = new ProgramRepositoryJDBC();
-        programRepositoryJDBC.getAllPrograms();
+        UserRepositoryJDBC userRepo = new UserRepositoryJDBC();
+        LocationRepositoryJDBC locationRepo = new LocationRepositoryJDBC();
+        RoomRepositoryJDBC roomNumberRepo = new RoomRepositoryJDBC();
+        //programRepositoryJDBC.getAllPrograms();
+
+
 
         //--------------------- choicebox programNames------------------
         ObservableList<String> programNames = FXCollections.observableArrayList(
-                programList.stream()
+                listModel.programList.stream()
                         .map(program -> program.getProgramName())
                         .collect(Collectors.toList()));
 
@@ -89,10 +96,10 @@ public class SearchController {
 
 
         //--------------------- choicebox vortragende------------------
-        UserRepositoryJDBC userRepo = new UserRepositoryJDBC();
-        userRepo.getTrainer();
+
+
         ObservableList<String> tainerName = FXCollections.observableArrayList(
-                trainerList.stream()
+               listModel.trainerList.stream()
                         .map(trainer -> trainer.getfName() + " " + trainer.getlName())
                         .collect(Collectors.toList()));
 
@@ -100,11 +107,11 @@ public class SearchController {
 
 
 
-        //--------------------- choicebox location------------------
-        LocationRepositoryJDBC locationRepo = new LocationRepositoryJDBC();
-        locationRepo.getLocation();
+       //--------------------- choicebox location------------------
+
+
         ObservableList<String> locationName = FXCollections.observableArrayList(
-                locationList.stream()
+                listModel.locationList.stream()
                         .map(location -> location.getStreet())
                         .collect(Collectors.toList()));
 
@@ -114,21 +121,19 @@ public class SearchController {
 
 
         //--------------------- choicebox room------------------
-        RoomRepositoryJDBC roomNumberRepo = new RoomRepositoryJDBC();
-        roomNumberRepo.getRoom();
-        ObservableList<String> roomNumber = FXCollections.observableArrayList(
-                roomList.stream()
+        ObservableList<Integer> roomNumber = FXCollections.observableArrayList(
+                listModel.roomList.stream()
                         .map(room -> room.getRoomNumber())
                         .collect(Collectors.toList()));
 
         roomSearchChoiceBox.setItems(roomNumber);
 
 
-        //--------------------- choicebox roomSize------------------
-        RoomRepositoryJDBC roomSizeRepo = new RoomRepositoryJDBC();
-        roomSizeRepo.getRoom();
+       //--------------------- choicebox roomSize------------------
+        //RoomRepositoryJDBC roomSizeRepo = new RoomRepositoryJDBC();
+        //roomSizeRepo.getRoom();
         ObservableList<Integer> roomSize = FXCollections.observableArrayList(
-                roomList.stream()
+                listModel.roomList.stream()
                         .map(room -> room.getSize())
                         .collect(Collectors.toList()));
 
