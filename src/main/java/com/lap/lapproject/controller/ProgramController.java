@@ -119,7 +119,7 @@ public class ProgramController extends BaseController {
     }
 
     private void authorityVisibility() {
-        String authority = UserData.authority;
+        String authority = model.getAuthority();
         switch (authority) {
             case "admin":
                 break;

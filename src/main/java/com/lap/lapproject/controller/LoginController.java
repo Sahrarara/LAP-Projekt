@@ -2,6 +2,7 @@ package com.lap.lapproject.controller;
 
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
+import com.lap.lapproject.model.User;
 import com.lap.lapproject.repos.UserRepositoryJDBC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LoginController implements Initializable {
+public class LoginController extends BaseController implements Initializable{
 
 
     @FXML
@@ -36,7 +37,9 @@ public class LoginController implements Initializable {
         if (checkFieldsFilled()){
             String username = usernameTF.getText();
             String password = passwordTF.getText();
-            if (UserRepositoryJDBC.checkUsernamePasswordActiveStatus(username, password)){
+            User user = UserRepositoryJDBC.checkUsernamePasswordActiveStatus(username, password);
+            if (user != null){
+                model.setLoggedInUser(user);
                 System.out.println("Login successful");
                 moveToMainPage();
             } else {
