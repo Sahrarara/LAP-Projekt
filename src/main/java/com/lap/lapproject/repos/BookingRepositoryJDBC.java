@@ -10,33 +10,35 @@ import java.util.ArrayList;
 
 public class BookingRepositoryJDBC extends Repository implements BookingRepository {
 
+    private static final String SELECT_BOOKING_SQL_STRING = "SELECT * FROM `booking` " +
+            " JOIN courses ON booking.course_id=courses.course_id" +
+            " JOIN rooms ON booking.room_id=rooms.room_id" +
+            " JOIN users ON booking.user_id=users.user_id" +
+            " JOIN location ON rooms.location_id=location.location_id;";
+    //TODO: join rooms_equipment
+
     private static final String ADD_NEW_BOOKING_SQL_STRING =
             "INSERT INTO booking(room_id, user_id, trainer_id, course_id, recurrence_rule, datetime_start, datetime_end)" +
                     " VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+    private static final String DELETE_BOOKING_SQL_STRING = "DELETE FROM booking WHERE booking_id=?";
 
     @Override
     public ArrayList<Booking> readAll() throws SQLException {
         Connection connection = connect();
         //ListModel.bookingList.clear();
         ArrayList<Booking> list = new ArrayList<>();
-//"SELECT courses.course_name,rooms.room_number,users.username, booking.datetime_start,booking.datetime_end FROM `booking` " +
 
-        String query = "SELECT * FROM `booking` " +
-                " JOIN courses ON booking.course_id=courses.course_id" +
-                " JOIN rooms ON booking.room_id=rooms.room_id" +
-                " JOIN users ON booking.user_id=users.user_id" +
-                " JOIN location ON rooms.location_id=location.location_id;";
-        //TODO: join rooms_equipment
 
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 
         try {
-            statement = connection.prepareStatement(query);
+            assert connection != null;
+            statement = connection.prepareStatement(SELECT_BOOKING_SQL_STRING);
             resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-
 
                 Location location = new Location(resultSet.getInt("location_id"), resultSet.getString("street"),
                         resultSet.getString("zip"),
@@ -96,24 +98,39 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
         return list;
     }
 
-    public void addBooking(int roomID, int userID, int trainerID, int courseID,
-                           String recurrenceRule, LocalDateTime localDateTimeStart, LocalDateTime localDateTimeEnd) {
+
+
+//    public void addBooking(int roomID, int userID, int trainerID, int courseID,
+//                           LocalDateTime localDateTimeStart, LocalDateTime localDateTimeEnd, String recurrenceRule) {
+    public void addBooking(Booking booking) {
         Connection connection = connect();
         try (PreparedStatement preparedStatement = connection.prepareStatement(ADD_NEW_BOOKING_SQL_STRING, Statement.RETURN_GENERATED_KEYS)) {
-            preparedStatement.setInt(1, roomID);
-            preparedStatement.setInt(2, userID);
-            preparedStatement.setInt(3, trainerID);
-            preparedStatement.setInt(4, courseID);
-            preparedStatement.setString(5, recurrenceRule);
-            preparedStatement.setObject(6, localDateTimeStart);
-            preparedStatement.setObject(7, localDateTimeEnd);
+            preparedStatement.setInt(1, booking.getRoomID());//roomID
+            preparedStatement.setInt(2, booking.getUserID());//userID
+            preparedStatement.setInt(3, booking.getTrainerID());//trainerID
+            preparedStatement.setInt(4, booking.getCourseID());//courseID
+            preparedStatement.setString(5, booking.getRecurrenceRule());//recurrenceRule
+            preparedStatement.setObject(6, booking.getDateTimeStart());//localDateTimeStart
+            preparedStatement.setObject(7, booking.getDateTimeEnd());//localDateTimeEnd
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
 
 
+
+    public void deleteBooking(int bookingID) throws SQLException { //Booking booking
+        Connection connection = connect();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(DELETE_BOOKING_SQL_STRING);
+            preparedStatement.setInt(1, bookingID);
+            preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 

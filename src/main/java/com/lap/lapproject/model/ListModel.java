@@ -36,6 +36,7 @@ public class ListModel {
 //UPDATE Variable enthält den Wert des ausgewählten Elements
     private ObjectProperty<Program> selectedProgram = new SimpleObjectProperty<>();
     private ObjectProperty<Equipment> selectedEquipment = new SimpleObjectProperty<>();
+    private ObjectProperty<Booking> selectedBooking = new SimpleObjectProperty<>();
 
 
 
@@ -59,11 +60,9 @@ public class ListModel {
     public Program getSelectedProgram() {
         return selectedProgram.get();
     }
-
     public ObjectProperty<Program> selectedProgramProperty() {
         return selectedProgram;
     }
-
     public void setSelectedProgram(Program selectedProgram) {
         this.selectedProgram.set(selectedProgram);
     }
@@ -73,13 +72,28 @@ public class ListModel {
     public Equipment getSelectedEquipment() {
         return selectedEquipment.get();
     }
-
     public ObjectProperty<Equipment> selectedEquipmentProperty() {
         return selectedEquipment;
     }
-
     public void setSelectedEquipment(Equipment selectedEquipment) {
         this.selectedEquipment.set(selectedEquipment);
     }
+
+
+
+    public Booking getSelectedBooking() {
+        return selectedBooking.get();
+    }
+    public ObjectProperty<Booking> selectedBookingProperty() {
+        return selectedBooking;
+    }
+    public void setSelectedBooking(Booking selectedBooking) {
+        this.selectedBooking.set(selectedBooking);
+    }
+
+
+
+
+
 
 }

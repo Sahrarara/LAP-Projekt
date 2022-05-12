@@ -47,6 +47,85 @@ public class AddBookingController extends BaseController {
     private static final Logger logger = LoggerFactory.getLogger(AddBookingController.class);
 
     @FXML
+    private void onAbortBtnClick(ActionEvent actionEvent) {
+        getCurrentStage().close();
+    }
+
+
+
+    @FXML
+    private void onAddBtnClick(ActionEvent actionEvent) throws SQLException {
+
+        //TODO: Rework addbooking.fxml (eintägiger Kurs vs. wöchentlicher Kurs)
+        //TODO: if Bedingung damit Booking nur angelegt wird wenn möglich
+        //TODO: Datum validieren
+
+        if (!(locationChoiceBox.getValue() == null) &&
+        !(courseNameChoiceBox.getValue() == null) &&
+        !(trainerChoiceBox.getValue() == null) &&
+        !(roomNumberChoiceBox.getValue() == null) &&
+        !(recurrenceChoiceBox.getValue() == null) &&
+        !(startDatePicker.getValue() == null) &&
+        !(endDatePicker.getValue() == null) &&
+        !(timeStartTimeField.getValue() == null) &&
+        !(timeEndTimeField.getValue() == null)){
+
+            int roomID = roomNumberChoiceBox.getValue().getId();
+            int userID = UserData.userID;
+            int trainerID = trainerChoiceBox.getValue().getId();
+            int courseID = courseNameChoiceBox.getValue().getId();
+            String recurrenceRule = String.valueOf(recurrenceChoiceBox.getValue());
+
+            String dateStart = null;
+            String dateEnd = null;
+            try{
+                dateStart = String.valueOf(startDatePicker.getValue());
+                dateEnd = String.valueOf(endDatePicker.getValue());
+            }catch(IllegalArgumentException e) {
+                e.printStackTrace();
+            }
+//            String dateStart = String.valueOf(recurrenceStartDatePicker.getValue());
+//            String dateEnd = String.valueOf(recurrenceEndDatePicker.getValue());
+
+            String timeStart = String.valueOf(timeStartTimeField.getValue());
+            String timeEnd = String.valueOf(timeEndTimeField.getValue());
+
+            String datetimeStart = dateStart + "T" + timeStart;
+            //logger.info("datetimeStart: {}",datetimeStart);// 2022-05-10T15:46:00
+
+            String datetimeEnd = dateEnd + "T" + timeEnd;
+            //logger.info("datetimeEnd: {}",datetimeEnd);// 2022-05-10T18:46:00
+
+            LocalDateTime localDateTimeStart = LocalDateTime.parse(datetimeStart);
+            //logger.info("localDateTimeStart: {}", localDateTimeStart);
+
+            LocalDateTime localDateTimeEnd = LocalDateTime.parse(datetimeEnd);
+            //logger.info("localDateTimeEnd: {}", localDateTimeEnd);
+
+            BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
+
+            Booking booking = new Booking(roomID, userID, trainerID, courseID, localDateTimeStart, localDateTimeEnd, recurrenceRule);//2
+            bookingRepositoryJDBC.addBooking(booking);//2
+            //bookingRepositoryJDBC.addBooking(roomID, userID, trainerID, courseID, localDateTimeStart, localDateTimeEnd, recurrenceRule);//1
+
+
+            //TODO: Add new booking to the bookingList: how?
+//            listModel.bookingList.clear();
+//            listModel.bookingList.addAll(bookingRepositoryJDBC.readAll());
+
+
+
+
+            listModel.bookingList.add(booking);
+            moveToProgramPage();
+        } else {
+            QuickAlert.showError("Bitte alle nötigen Felder ausfüllen");
+        }
+    }
+
+
+
+    @FXML
     void initialize() {
         assert bookerLabel != null : "fx:id=\"bookerLabel\" was not injected: check your FXML file 'addbooking-view.fxml'.";
         assert courseNameChoiceBox != null : "fx:id=\"courseNameChoiceBox\" was not injected: check your FXML file 'addbooking-view.fxml'.";
@@ -90,77 +169,6 @@ public class AddBookingController extends BaseController {
 
         });
         roomNumberChoiceBox.setItems(roomFilteredList);
-
-    }
-
-
-
-    @FXML
-    private void onAbortBtnClick(ActionEvent actionEvent) {
-        getCurrentStage().close();
-    }
-
-
-
-    @FXML
-    private void onAddBtnClick(ActionEvent actionEvent) throws SQLException {
-
-
-        //TODO: Rework addbooking.fxml (eintägiger Kurs vs. wöchentlicher Kurs)
-        //TODO: if Bedingung damit Booking nur angelegt wird wenn möglich
-        //TODO: Datum validieren
-
-
-        if (!(locationChoiceBox.getValue() == null) &&
-        !(courseNameChoiceBox.getValue() == null) &&
-        !(trainerChoiceBox.getValue() == null) &&
-        !(roomNumberChoiceBox.getValue() == null) &&
-        !(recurrenceChoiceBox.getValue() == null) &&
-        !(startDatePicker.getValue() == null) &&
-        !(endDatePicker.getValue() == null) &&
-        !(timeStartTimeField.getValue() == null) &&
-        !(timeEndTimeField.getValue() == null)){
-
-            int roomID = roomNumberChoiceBox.getValue().getId();
-            int userID = UserData.userID;
-            int trainerID = trainerChoiceBox.getValue().getId();
-            int courseID = courseNameChoiceBox.getValue().getId();
-            String recurrenceRule = String.valueOf(recurrenceChoiceBox.getValue());
-
-            String dateStart = null;
-            String dateEnd = null;
-            try{
-                dateStart = String.valueOf(startDatePicker.getValue());
-                dateEnd = String.valueOf(endDatePicker.getValue());
-            }catch(IllegalArgumentException e) {
-                System.out.println("*****************   error!!!!!!!!!!!!!!!!!! *************************");
-            }
-//            String dateStart = String.valueOf(recurrenceStartDatePicker.getValue());
-//            String dateEnd = String.valueOf(recurrenceEndDatePicker.getValue());
-
-            String timeStart = String.valueOf(timeStartTimeField.getValue());
-            String timeEnd = String.valueOf(timeEndTimeField.getValue());
-
-            String datetimeStart = dateStart + "T" + timeStart;
-            //logger.info("datetimeStart: {}",datetimeStart);// 2022-05-10T15:46:00
-
-            String datetimeEnd = dateEnd + "T" + timeEnd;
-            //logger.info("datetimeEnd: {}",datetimeEnd);// 2022-05-10T18:46:00
-
-            LocalDateTime localDateTimeStart = LocalDateTime.parse(datetimeStart);
-            //logger.info("localDateTimeStart: {}", localDateTimeStart);
-
-            LocalDateTime localDateTimeEnd = LocalDateTime.parse(datetimeEnd);
-            //logger.info("localDateTimeEnd: {}", localDateTimeEnd);
-
-            BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
-            bookingRepositoryJDBC.addBooking(roomID, userID, trainerID, courseID, recurrenceRule, localDateTimeStart, localDateTimeEnd);
-
-            moveToProgramPage();
-
-        } else {
-            QuickAlert.showError("Bitte alle nötigen Felder ausfüllen");
-        }
     }
 
 
@@ -168,7 +176,6 @@ public class AddBookingController extends BaseController {
     private Stage getCurrentStage(){
         return (Stage) locationLabel.getScene().getWindow();
     }
-
 
     private void moveToProgramPage() {
         Stage currentStage = this.getCurrentStage();

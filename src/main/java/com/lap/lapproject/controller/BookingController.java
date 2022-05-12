@@ -2,10 +2,7 @@ package com.lap.lapproject.controller;
 
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
-import com.lap.lapproject.model.Booking;
-import com.lap.lapproject.model.ListModel;
-import com.lap.lapproject.model.Location;
-import com.lap.lapproject.model.UserData;
+import com.lap.lapproject.model.*;
 import com.lap.lapproject.repos.BookingRepositoryJDBC;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -20,6 +17,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -29,6 +28,9 @@ import static com.lap.lapproject.controller.BaseController.listModel;
 import static com.lap.lapproject.controller.BaseController.model;
 
 public class BookingController {
+
+    private static final Logger logger = LoggerFactory.getLogger(BookingController.class);
+
     @FXML
     private Button deleteBookingBtn;
     @FXML
@@ -55,23 +57,35 @@ public class BookingController {
     @FXML
     private void onAddBookingBtnClick(ActionEvent actionEvent) {
         Stage stage = new Stage();
-
         FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_BOOKING));
         Scene scene = null;
-
         try {
             scene= new Scene(fxmlLoader.load());
         } catch (IOException e){
             e.printStackTrace();
         }
-
         stage.setTitle("Raum Management");
         stage.setScene(scene);
         stage.show();
     }
 
+
+
     @FXML
     private void onDeleteBookingBtnClick(ActionEvent actionEvent) {
+//        listModel.getSelectedBooking().getRoom().getRoomNumber();
+//        logger.info("selectedBooking: {}", listModel.getSelectedBooking().getRoom().getRoomNumber());
+
+        Booking booking  = tableViewBooking.getSelectionModel().getSelectedItem();
+        //logger.info("Booking: {}", booking.getRoom().getRoomNumber());
+
+        BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
+
+
+
+
+
+
     }
 
     @FXML
@@ -116,6 +130,7 @@ public class BookingController {
         dateTimeStartColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getDateTimeStart().toString().substring(11)));
         dateTimeEndColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getDateTimeEnd().toString().substring(11)));
     }
+
 
     private void authorityVisibility() {
         String authority = UserData.authority;

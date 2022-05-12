@@ -16,6 +16,12 @@ public class Booking {
     private LocalDateTime dateTimeEnd;
     private String recurrenceRule;
     private User user;
+    private int bookingID;
+    private int roomID;
+    private int userID;
+    private int trainerID;
+    private int courseID;
+
 
 
     public Booking(Room room, Trainer trainer, Course course, LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd, String recurrenceRule) {
@@ -27,6 +33,49 @@ public class Booking {
         this.recurrenceRule = recurrenceRule;
     }
 
+    public Booking(int roomID, int userID, int trainerID, int courseID, LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd, String recurrenceRule) {
+        this.roomID = roomID;
+        this.userID = userID;
+        this.trainerID = trainerID;
+        this.courseID = courseID;
+        this.dateTimeStart = dateTimeStart;
+        this.dateTimeEnd = dateTimeEnd;
+        this.recurrenceRule = recurrenceRule;
+    }
+
+    public int getRoomID() {
+        return roomID;
+    }
+
+    public void setRoomID(int roomID) {
+        this.roomID = roomID;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public int getTrainerID() {
+        return trainerID;
+    }
+
+    public void setTrainerID(int trainerID) {
+        this.trainerID = trainerID;
+    }
+
+    public int getCourseID() {
+        return courseID;
+    }
+
+    public void setCourseID(int courseID) {
+        this.courseID = courseID;
+    }
+
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
     public Room getRoom() {
         return room;
