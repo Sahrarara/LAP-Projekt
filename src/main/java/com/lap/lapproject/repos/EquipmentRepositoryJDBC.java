@@ -1,7 +1,7 @@
 package com.lap.lapproject.repos;
 
 import com.lap.lapproject.model.Equipment;
-import com.lap.lapproject.model.Program;
+
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -36,6 +36,8 @@ public class EquipmentRepositoryJDBC extends Repository implements EquipmentRepo
         return equipmentList;
     }
 
+
+    @Override
     public int addEquipment(Equipment equipment) throws SQLException {
         Connection connection = connect();
         PreparedStatement preparedStatement = null;
@@ -61,6 +63,7 @@ public class EquipmentRepositoryJDBC extends Repository implements EquipmentRepo
     }
 
 
+    @Override
     public void updateEquipment(Equipment equipment) throws SQLException {
         Connection connection = connect();
         PreparedStatement preparedStatement = null;

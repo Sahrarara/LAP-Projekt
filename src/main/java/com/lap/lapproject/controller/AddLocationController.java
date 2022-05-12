@@ -1,6 +1,8 @@
 package com.lap.lapproject.controller;
 
+import com.lap.lapproject.model.Equipment;
 import com.lap.lapproject.model.Location;
+import com.lap.lapproject.repos.EquipmentRepositoryJDBC;
 import com.lap.lapproject.repos.LocationRepositoryJDBC;
 
 import javafx.event.ActionEvent;
@@ -10,20 +12,14 @@ import javafx.stage.Stage;
 
 import java.sql.SQLException;
 
-public class AddLocationController extends BaseController{
+public class AddLocationController extends BaseController {
     @FXML
     private TextField streetNameTextField;
     @FXML
     private TextField zipCodeTextField;
     @FXML
-    private TextField locationTextField;
+    private TextField locationNameTextField;
 
-    @FXML
-    private void initialize(){
-        System.out.println("AddLocationController:: initialize");
-
-
-    }
 
     @FXML
     private void onAbortBtnClick(ActionEvent actionEvent) {
@@ -31,56 +27,63 @@ public class AddLocationController extends BaseController{
     }
 
     @FXML
-    private void onAddBtnClick(ActionEvent actionEvent) {
-        if (!streetNameTextField.getText().isBlank() && !zipCodeTextField.getText().isBlank() && !locationTextField.getText().isBlank()){
-            System.out.println("AddLocationController:: onAddBtnClick");
-            String street = streetNameTextField.getText();
-            String zip = zipCodeTextField.getText();
-            String city = locationTextField.getText();
+    private void onAddBtnClick(ActionEvent actionEvent) throws SQLException {
+        String street = streetNameTextField.getText();
+        String zip = zipCodeTextField.getText();
+        String city = locationNameTextField.getText();
 
-            Location location = new Location(street, zip, city);
-            LocationRepositoryJDBC locationRepositoryJDBC = new LocationRepositoryJDBC();
-            try {
-                locationRepositoryJDBC.addLocation(location);
-                locationRepositoryJDBC.readAll();
+        Location location = new Location(street, zip, city);
+        LocationRepositoryJDBC locationRepositoryJDBC = new LocationRepositoryJDBC();
 
-            } catch (SQLException e) {
-                e.printStackTrace();
+        if (!street.isBlank() && !zip.isBlank() && !city.isBlank()) { //method is only used if textfield is not empty
+
+            if (listModel.getSelectedLocation() == null) {
+                System.out.println("AddLocationController:: onAddBtnClick");
+
+                try {
+                    locationRepositoryJDBC.addLocation(location);//Location is added to a list
+                    listModel.locationList.add(location);
+                    locationRepositoryJDBC.readAll();
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                moveToLocationPage();
+            } else {
+                //Update logik
+                location = listModel.getSelectedLocation();
+                location.setStreet(streetNameTextField.getText());
+                location.setZipcode(zipCodeTextField.getText());
+                location.setCity(locationNameTextField.getText());
+                locationRepositoryJDBC.updateLocation(location);
+                listModel.locationList.set(listModel.locationList.indexOf(location), location);
+                moveToLocationPage();
             }
-            moveToLocationPage();
         } else {
             QuickAlert.showError("Bitte alle Felder ausfüllen");
         }
     }
 
-    private Stage getCurrentStage(){
+
+    private Stage getCurrentStage() {
         System.out.println("AddLocationController:: getCurrentStage");
-        return (Stage) locationTextField.getScene().getWindow();
+        return (Stage) locationNameTextField.getScene().getWindow();
     }
 
-    private void moveToLocationPage(){
+    private void moveToLocationPage() {
         Stage currentStage = this.getCurrentStage();
-
-
         currentStage.close();
-
-/*
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_LOCATION ));
-        Scene scene = null;
-
-        try {
-            scene= new Scene(fxmlLoader.load());
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-
-        currentStage.setTitle("Raum Management");
-        currentStage.setScene(scene);
-        currentStage.show();
-
- */
-
     }
 
-
+    @FXML
+    private void initialize() {
+        System.out.println("AddLocationController:: initialize");
+        //Update logik
+        if (listModel.getSelectedLocation() != null) {
+            streetNameTextField.setText(listModel.getSelectedLocation().getStreet());
+            zipCodeTextField.setText(listModel.getSelectedLocation().getZipcode());
+            locationNameTextField.setText(listModel.getSelectedLocation().getCity());
+        }
+    }
 }
+

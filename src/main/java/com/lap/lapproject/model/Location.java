@@ -27,6 +27,7 @@ public class Location {
     }
 
     public Location(String street, String zipcode, String city) {
+        this.id = new SimpleIntegerProperty();
         this.street = new SimpleStringProperty(street);
         this.zipcode = new SimpleStringProperty(zipcode);
         this.city = new SimpleStringProperty(city);
