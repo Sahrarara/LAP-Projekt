@@ -50,7 +50,7 @@ public class AddCourseController extends BaseController {
             courseNameTextField.setText(listModel.getSelectedCourse().getCourseName());
             courseChoiceBox.setValue(listModel.getSelectedCourse().getProgram());
             courseStartDatePicker.setValue(listModel.getSelectedCourse().getCourseStart());
-            courseEndDatePicker.setValue(listModel.getSelectedCourse().getCourseStart());
+            courseEndDatePicker.setValue(listModel.getSelectedCourse().getCourseEnd());
             groupSizeTextField.setText(String.valueOf(listModel.getSelectedCourse().getGroupSize()));
 
         }
