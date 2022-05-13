@@ -104,7 +104,7 @@ public class AddCourseController extends BaseController {
                    course = listModel.getSelectedCourse();
                    course.setCourseName(courseNameTextField.getText());
                    course.setCourseStart(courseStartDatePicker.getValue());
-                   course.setCourseEnd(courseStartDatePicker.getValue());
+                   course.setCourseEnd(courseEndDatePicker.getValue());
                    course.setProgram(programRepositoryJDBC.getProgramByProgramName((String) courseChoiceBox.getValue()));
                    course.setGroupSize(Integer.parseInt(groupSizeTextField.getText()));
                    courseRepo.updateCourse(course);
