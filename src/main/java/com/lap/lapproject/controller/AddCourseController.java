@@ -44,6 +44,16 @@ public class AddCourseController extends BaseController {
 
         courseChoiceBox.setItems(programNames);
 
+        //Update logik
+
+        if (listModel.getSelectedCourse() != null) {
+            courseNameTextField.setText(listModel.getSelectedCourse().getCourseName());
+            courseChoiceBox.setValue(listModel.getSelectedCourse().getProgram());
+            courseStartDatePicker.setValue(listModel.getSelectedCourse().getCourseStart());
+            courseEndDatePicker.setValue(listModel.getSelectedCourse().getCourseStart());
+            groupSizeTextField.setText(String.valueOf(listModel.getSelectedCourse().getGroupSize()));
+
+        }
     }
 
 
@@ -54,46 +64,62 @@ public class AddCourseController extends BaseController {
 
     @FXML
     private void onAddBtnClick(ActionEvent actionEvent) throws SQLException {
-        if (!courseNameTextField.getText().isBlank() && !courseChoiceBox.getValue().toString().isBlank() && !(courseStartDatePicker.getValue() == null) && !(courseEndDatePicker.getValue() == null) && !groupSizeTextField.getText().isBlank()) {
+        CourseRepositoryJDBC courseRepo = new CourseRepositoryJDBC();
+        ProgramRepositoryJDBC programRepositoryJDBC = new ProgramRepositoryJDBC();
 
-            CourseRepositoryJDBC courseRepo = new CourseRepositoryJDBC();
-            ProgramRepositoryJDBC programRepositoryJDBC = new ProgramRepositoryJDBC();
+        System.out.println("AddCourseController:: onAddBtnClick");
+        String courseName = courseNameTextField.getText();
+        String programName = courseChoiceBox.getValue().toString();
+        Program program = programRepositoryJDBC.getProgramByProgramName(programName);
+        if (program == null) {
+            QuickAlert.showError("Program wurde nicht gefunden");
+        }
+        int programId = program.getId();
 
-            System.out.println("AddCourseController:: onAddBtnClick");
-            String courseName = courseNameTextField.getText();
-            String programName = courseChoiceBox.getValue().toString();
-            int programId = programRepositoryJDBC.getProgramIdByProgramName(programName);
-            LocalDate courseStart = courseStartDatePicker.getValue();
-            LocalDate courseEnd = courseEndDatePicker.getValue();
-            //int groupSize = groupSizeTextField.getPrefColumnCount();
-            int groupSize = Integer.parseInt(groupSizeTextField.getText());
+        LocalDate courseStart = courseStartDatePicker.getValue();
+        LocalDate courseEnd = courseEndDatePicker.getValue();
+        int groupSize = Integer.parseInt(groupSizeTextField.getText());
 
-            Course course = new Course(
-                    courseName,
-                    new Program(programId, programName),
-                    courseStart.atStartOfDay(),
-                    courseEnd.atStartOfDay(),
-                    groupSize);
+        Course course = new Course(
+                courseName,
+                new Program(programId, programName),
+                courseStart.atStartOfDay().toLocalDate(),
+                courseEnd.atStartOfDay().toLocalDate(),
+                groupSize);
+       if (!courseNameTextField.getText().isBlank() && !courseChoiceBox.getValue().toString().isBlank() && !(courseStartDatePicker.getValue() == null) && !(courseEndDatePicker.getValue() == null) && !groupSizeTextField.getText().isBlank()) {
+           if (listModel.getSelectedCourse() == null) {
+               System.out.println("AddCourseController:: onAddBtnClick");
+
+               try {
+
             courseRepo.addCourse(course);
             listModel.courseList.add(course);
-          /*  // TODO check duplicate
-            CourseRepositoryJDBC courseRepositoryJDBC = new CourseRepositoryJDBC();
-            try {
-                courseRepositoryJDBC.addCourse(course);
-                *//*courseRepo.readAll();*//*
+            courseRepo.readAll();
+                   } catch (SQLException e) {
+                       e.printStackTrace();
+                   }
+                   moveToCoursePage();
+               } else {
+                   //Update logik
+                   course = listModel.getSelectedCourse();
+                   course.setCourseName(courseNameTextField.getText());
+                   course.setCourseStart(courseStartDatePicker.getValue());
+                   course.setCourseEnd(courseStartDatePicker.getValue());
+                   course.setProgram(programRepositoryJDBC.getProgramByProgramName((String) courseChoiceBox.getValue()));
+                   course.setGroupSize(Integer.parseInt(groupSizeTextField.getText()));
+                   courseRepo.updateCourse(course);
+                   listModel.courseList.set(listModel.courseList.indexOf(course), course);
+                   moveToCoursePage();
+               }
+           } else {
+               QuickAlert.showError("Bitte alle Felder ausfüllen");
+           }
 
 
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }*/
 
-            moveToCoursePage();
 
-        } else {
-            QuickAlert.showError("Bitte alle Felder ausfüllen");
-        }
-    }
-
+               }
+          // TODO check duplicate
 
 
     private Stage getCurrentStage() {

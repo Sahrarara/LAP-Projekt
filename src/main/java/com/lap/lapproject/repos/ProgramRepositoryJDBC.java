@@ -10,7 +10,7 @@ public class ProgramRepositoryJDBC extends Repository implements ProgramReposito
 
     private static final String ADD_NEW_PROGRAM_SQL_STRING = "INSERT INTO programs (name) VALUES (?)";
     private static final String SELECT_PROGRAM_SQL_STRING = "SELECT * FROM programs";
-    private static final String GET_PROGRAM_ID_BY_PROGRAM_NAME_SQL_STRING = "SELECT program_id FROM programs WHERE name = (?)";
+    private static final String GET_PROGRAM_BY_PROGRAM_NAME_SQL_STRING = "SELECT * FROM programs WHERE name = (?)";
     private static final String UPDATE_PROGRAM_SQL_STRING = "UPDATE programs SET name =? WHERE program_id=?";
     private static final String DELETE_PROGRAM_SQL_STRING = "DELETE FROM programs WHERE program_id=?";
 
@@ -92,24 +92,23 @@ public class ProgramRepositoryJDBC extends Repository implements ProgramReposito
 
 
     @Override
-    public int getProgramIdByProgramName(String programName) {
+    public Program getProgramByProgramName(String programName) {
         Connection connection = connect();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        int programId = 0;
-
+        Program program = null;
         try {
-            preparedStatement = connection.prepareStatement(GET_PROGRAM_ID_BY_PROGRAM_NAME_SQL_STRING);
+            preparedStatement = connection.prepareStatement(GET_PROGRAM_BY_PROGRAM_NAME_SQL_STRING);
             preparedStatement.setString(1, programName);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                programId = resultSet.getInt("program_id");
+                program = new Program(resultSet.getInt("program_id"), resultSet.getString("name"));
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return programId;
+        return program;
     }
 
 }

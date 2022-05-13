@@ -46,7 +46,7 @@
             <Insets left="20.0" />
          </GridPane.margin>
       </Label>
-      <Label styleClass="input-description" text="Programm" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+      <Label styleClass="input-description" text="Program" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>

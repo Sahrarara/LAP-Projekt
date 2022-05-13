@@ -11,5 +11,5 @@ public interface ProgramRepository {
     List<Program> readProgram() throws SQLException;
     void updateProgram(Program program) throws SQLException;
     void deleteProgram(Program program) throws SQLException;
-    int getProgramIdByProgramName(String programName) throws SQLException;
+    Program getProgramByProgramName(String programName) throws SQLException;
 }

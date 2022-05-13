@@ -64,13 +64,16 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
                 String timestart = resultSet.getString("course_start");
-                LocalDateTime courseStart = (LocalDateTime.parse(timestart, formatter));
+                LocalDate courseStart = (LocalDate.parse(timestart));
 
                 String timeEnd = resultSet.getString("course_end");
-                LocalDateTime courseEnd = (LocalDateTime.parse(timeEnd, formatter));
+                LocalDate courseEnd = (LocalDate.parse(timeEnd));
 
 
-                Course course = new Course(resultSet.getInt("course_id"),resultSet.getString("course_name"), program,
+                Course course = new Course(
+                        resultSet.getInt("course_id"),
+                        resultSet.getString("course_name"),
+                        program,
                         courseStart,
                         courseEnd,
                         resultSet.getInt("group_size"));
