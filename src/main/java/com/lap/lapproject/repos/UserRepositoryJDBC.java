@@ -143,7 +143,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
 
     //private static final String SELECT_USERNAME_PASSWORD_SQL_STRING = " SELECT * FROM users WHERE username = ? AND " +
             //"password = ? AND active_status = '1'";
-    public static boolean checkUsernamePasswordActiveStatus(String username, String password) {
+    public static User checkUsernamePasswordActiveStatus(String username, String password) {
         Connection connection = connect();
         if (connection == null) {
             System.out.println("Check XAMPP");
@@ -198,10 +198,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
                         UserData.telephoneNmbr = phoneNmbr;
                         UserData.description = description;
                         UserData.authority = authority;
-                        System.out.println(authority);
-                        System.out.println(admin.getAuthority());
-                        System.out.println(UserData.authority);
-                        return true;
+                        return admin;
                     case "coach":
                         Trainer trainer = new Trainer(user, firstname, lastname, authority, email, phoneNmbr, description);
                         UserData.userID = userid;
@@ -214,15 +211,15 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
                         System.out.println(authority);
                         System.out.println(trainer.getAuthority());
                         System.out.println(UserData.authority);
-                        return true;
+                        return trainer;
                     default:
-                        return false;
+                        return null;
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return null;
     }
 
     public static boolean checkUniqueUsername(String username) {

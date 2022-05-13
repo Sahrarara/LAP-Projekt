@@ -2,6 +2,8 @@ package com.lap.lapproject.model;
 
 import com.calendarfx.model.Entry;
 import com.lap.lapproject.repos.*;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -43,8 +45,21 @@ public class Model {
         this.pathForDetailView.set(pathForDetailView);
     }
 
+    private ObjectProperty<User> loggedInUser = new SimpleObjectProperty<>();
 
+    public String getAuthority(){
+        return getLoggedInUser() == null ? "guest" :  getLoggedInUser().getAuthority();
+    }
 
+    public User getLoggedInUser() {
+        return loggedInUser.get();
+    }
 
+    public ObjectProperty<User> loggedInUserProperty() {
+        return loggedInUser;
+    }
 
+    public void setLoggedInUser(User loggedInUser) {
+        this.loggedInUser.set(loggedInUser);
+    }
 }

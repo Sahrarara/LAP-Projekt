@@ -41,18 +41,19 @@ public class ProfileController extends BaseController{
 
         //TODO: Insert update User function here. It only updates the currently logged in User in the database.
 
-        UserData.email = email;         //UserData will be updated after a click on the save button.
-        UserData.telephoneNmbr = telephoneNmbr;
-        UserData.description = description;
+        model.getLoggedInUser().setEmail(email);     // logged in user will be updated when clicked on save button
+        model.getLoggedInUser().setPhoneNmbr(telephoneNmbr);
+        model.getLoggedInUser().setDescription(description);
+        System.out.println(model.getLoggedInUser().getEmail());
     }
 
     @FXML
     private void initialize(){
-        firstnameLabel.setText(UserData.firstName);
-        lastnameLabel.setText(UserData.lastName);
-        emailLabel.setText(UserData.email);
-        telephoneLabel.setText(String.valueOf(UserData.telephoneNmbr));
-        descriptionLabel.setText(UserData.description);
+        firstnameLabel.setText(model.getLoggedInUser().getfName());
+        lastnameLabel.setText(model.getLoggedInUser().getlName());
+        emailLabel.setText(model.getLoggedInUser().getEmail());
+        telephoneLabel.setText(String.valueOf(model.getLoggedInUser().getPhoneNmbr()));
+        descriptionLabel.setText(model.getLoggedInUser().getDescription());
     }
 
     @FXML
