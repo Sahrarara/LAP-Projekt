@@ -42,7 +42,8 @@ public class AddCourseController extends BaseController {
                         .map(program -> program.getProgramName())
                         .collect(Collectors.toList()));
 
-        courseChoiceBox.setItems(programNames);
+        //courseChoiceBox.setItems(programNames);
+        courseChoiceBox.setItems(listModel.programList);
 
         //Update logik
 
@@ -105,7 +106,8 @@ public class AddCourseController extends BaseController {
                    course.setCourseName(courseNameTextField.getText());
                    course.setCourseStart(courseStartDatePicker.getValue());
                    course.setCourseEnd(courseEndDatePicker.getValue());
-                   course.setProgram(programRepositoryJDBC.getProgramByProgramName((String) courseChoiceBox.getValue()));
+                   //course.setProgram(programRepositoryJDBC.getProgramByProgramName((String) courseChoiceBox.getValue()));
+                   course.setProgram((Program) courseChoiceBox.getValue());
                    course.setGroupSize(Integer.parseInt(groupSizeTextField.getText()));
                    courseRepo.updateCourse(course);
                    listModel.courseList.set(listModel.courseList.indexOf(course), course);
