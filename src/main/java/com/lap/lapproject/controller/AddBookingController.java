@@ -87,7 +87,6 @@ public class AddBookingController extends BaseController {
             LocalDateTime localDateTimeStart = LocalDateTime.parse(dateStart + "T" + timeStartTimeField.getValue());
             LocalDateTime localDateTimeEnd = LocalDateTime.parse(dateEnd + "T" + timeEndTimeField.getValue());
 
-            //TODO: wie kann ich hier die "bookingID" auch mitgeben?
             Booking booking = new Booking(room, trainer, model.getLoggedInUser(), course, localDateTimeStart, localDateTimeEnd, recurrenceRule);
 
             //TODO: kommt "changeListener" hier????

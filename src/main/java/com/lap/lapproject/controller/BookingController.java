@@ -104,6 +104,7 @@ public class BookingController {
         assert trainerColumn != null : "fx:id=\"trainerColumn\" was not injected: check your FXML file 'booking-view.fxml'.";
         authorityVisibility();
         initBookingTable();
+        listModel.selectedBookingProperty().bind(tableViewBooking.getSelectionModel().selectedItemProperty());
     }
 
 

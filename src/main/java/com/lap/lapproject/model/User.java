@@ -66,7 +66,7 @@ public abstract class User {
         this.activeStatus = new SimpleBooleanProperty(activeStatus);
     }
 
-    //mona
+    // UserRepositoryJDBC
     public User(int id, String username, String title, Boolean activeStatus,String firstName, String lastName,
                 String authority, String description, String phoneNmbr,
                 String email, byte[] photo, Boolean descriptionVisibility,

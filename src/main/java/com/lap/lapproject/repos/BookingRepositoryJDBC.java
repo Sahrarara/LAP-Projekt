@@ -43,7 +43,9 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
             while (resultSet.next()) {
 
 
-                Location location = new Location(resultSet.getInt("location_id"), resultSet.getString("street"),
+                Location location = new Location(
+                        resultSet.getInt("location_id"),
+                        resultSet.getString("street"),
                         resultSet.getString("zip"),
                         resultSet.getString("city"));
 
@@ -52,22 +54,34 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
                 //Equipment equipment = new Equipment();
 
 
-                Room room = new Room(resultSet.getInt("rooms.room_id"), resultSet.getInt("rooms.room_number"),
-                        resultSet.getInt("rooms.size"), location);
+                Room room = new Room(
+                        resultSet.getInt("rooms.room_id"),
+                        resultSet.getInt("rooms.room_number"),
+                        resultSet.getInt("rooms.size"),
+                        location);
 
 
-                Trainer trainer = new Trainer(resultSet.getInt("user_id"), resultSet.getString("username"), resultSet.getString("first_name"),
-                        resultSet.getString("last_name"), resultSet.getString("authorization"), resultSet.getString("email"),
-                        resultSet.getString("phone"), resultSet.getString("description"), resultSet.getBoolean("active_status"));
+                Trainer trainer = new Trainer(
+                        resultSet.getInt("user_id"),
+                        resultSet.getString("username"),
+                        resultSet.getString("first_name"),
+                        resultSet.getString("last_name"),
+                        resultSet.getString("authorization"),
+                        resultSet.getString("email"),
+                        resultSet.getString("phone"),
+                        resultSet.getString("description"),
+                        resultSet.getBoolean("active_status"));
 
 
-                Program program = new Program(resultSet.getInt("program_id"), resultSet.getString("course_name"));
+                Program program = new Program(
+                        resultSet.getInt("program_id"),
+                        resultSet.getString("course_name"));
 
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-                String timestart = resultSet.getString("course_start");
-                LocalDate courseStart = (LocalDate.parse(timestart));
+                String timeStart = resultSet.getString("course_start");
+                LocalDate courseStart = (LocalDate.parse(timeStart));
 
                 String timeEnd = resultSet.getString("course_end");
                 LocalDate courseEnd = (LocalDate.parse(timeEnd));
@@ -90,7 +104,9 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
 
                 String recurrenceRule = resultSet.getString("recurrence_rule");
 
-                Booking booking = new Booking(resultSet.getInt("booking_id"), room, trainer, course, startTime, endTime, recurrenceRule);
+                Booking booking = new Booking(
+                        resultSet.getInt("booking_id"),
+                        room, trainer, course, startTime, endTime, recurrenceRule);
                 bookingList.add(booking);
             }
         } catch (SQLException e) {
