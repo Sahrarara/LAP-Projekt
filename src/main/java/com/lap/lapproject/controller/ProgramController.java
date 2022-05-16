@@ -32,7 +32,7 @@ public class ProgramController extends BaseController {
 
     @FXML
     private void onAddProgramBtnClick(ActionEvent actionEvent) {
-        //setzt wert auf null, das der Programm erkennt das Add Function aufgerufen wird
+        //setzt wert auf null, das der Program erkennt das Add Function aufgerufen wird
         tableViewProgram.getSelectionModel().select(null);
         Stage stage = new Stage();
 

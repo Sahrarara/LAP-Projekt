@@ -57,6 +57,7 @@ public class LocationController extends BaseController{
 
     @FXML
     private void onDeleteLocationBtnClick(ActionEvent actionEvent) {
+        QuickAlert.showError("Möchten Sie dieses Standort sicher Löschen?");
         LocationRepositoryJDBC locationRepositoryJDBC = new LocationRepositoryJDBC();
         int myIndex = tableViewLocation.getSelectionModel().getSelectedIndex();
 

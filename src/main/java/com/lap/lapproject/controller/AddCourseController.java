@@ -42,14 +42,13 @@ public class AddCourseController extends BaseController {
                         .map(program -> program.getProgramName())
                         .collect(Collectors.toList()));
 
-        //courseChoiceBox.setItems(programNames);
-        courseChoiceBox.setItems(listModel.programList);
+        courseChoiceBox.setItems(programNames);
+        //courseChoiceBox.setItems(listModel.programList);//empfelung vom Hr.Öller statt: courseChoiceBox.setItems(programNames);
 
         //Update logik
-
         if (listModel.getSelectedCourse() != null) {
             courseNameTextField.setText(listModel.getSelectedCourse().getCourseName());
-            courseChoiceBox.setValue(listModel.getSelectedCourse().getProgram());
+            courseChoiceBox.setValue(listModel.getSelectedCourse().getProgram().getProgramName());
             courseStartDatePicker.setValue(listModel.getSelectedCourse().getCourseStart());
             courseEndDatePicker.setValue(listModel.getSelectedCourse().getCourseEnd());
             groupSizeTextField.setText(String.valueOf(listModel.getSelectedCourse().getGroupSize()));
@@ -106,8 +105,8 @@ public class AddCourseController extends BaseController {
                    course.setCourseName(courseNameTextField.getText());
                    course.setCourseStart(courseStartDatePicker.getValue());
                    course.setCourseEnd(courseEndDatePicker.getValue());
-                   //course.setProgram(programRepositoryJDBC.getProgramByProgramName((String) courseChoiceBox.getValue()));
-                   course.setProgram((Program) courseChoiceBox.getValue());
+                   course.setProgram(programRepositoryJDBC.getProgramByProgramName((String) courseChoiceBox.getValue()));
+                   //course.setProgram((Program) courseChoiceBox.getValue()); //--empfelung vom Hr.Öller statt zeile oben
                    course.setGroupSize(Integer.parseInt(groupSizeTextField.getText()));
                    courseRepo.updateCourse(course);
                    listModel.courseList.set(listModel.courseList.indexOf(course), course);
