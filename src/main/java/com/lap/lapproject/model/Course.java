@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 
 public class Course {
 
@@ -15,11 +15,11 @@ public class Course {
     private SimpleIntegerProperty id;
     private SimpleStringProperty courseName;
     private Program program;
-    private LocalDateTime courseStart;
-    private LocalDateTime courseEnd;
+    private LocalDate courseStart;
+    private LocalDate courseEnd;
     private SimpleIntegerProperty groupSize;
 
-    public Course(int id, String courseName, Program program, LocalDateTime courseStart, LocalDateTime courseEnd,
+    public Course(int id, String courseName, Program program, LocalDate courseStart, LocalDate courseEnd,
                   int groupSize) {
         this.id = new SimpleIntegerProperty(id);
         this.courseName = new SimpleStringProperty(courseName);
@@ -28,13 +28,14 @@ public class Course {
         this.courseEnd = courseEnd;
         this.groupSize = new SimpleIntegerProperty(groupSize);
     }
-    public Course(String courseName, Program program, LocalDateTime courseStart, LocalDateTime courseEnd,
+    public Course(String courseName, Program program, LocalDate courseStart, LocalDate courseEnd,
                   int groupSize) {
         this.courseName = new SimpleStringProperty(courseName);
         this.program = program;
         this.courseStart = courseStart;
         this.courseEnd = courseEnd;
         this.groupSize = new SimpleIntegerProperty(groupSize);
+        this.id = new SimpleIntegerProperty();
     }
 
 
@@ -71,8 +72,7 @@ public class Course {
         this.program = program;
     }
 
-    public int getGroupSize() {
-        return groupSize.get();
+    public int getGroupSize() {return groupSize.get();
     }
 
     public SimpleIntegerProperty groupSizeProperty() {
@@ -83,19 +83,19 @@ public class Course {
         this.groupSize.set(groupSize);
     }
 
-    public LocalDateTime getCourseStart() {
+    public LocalDate getCourseStart() {
         return courseStart;
     }
 
-    public void setCourseStart(LocalDateTime courseStart) {
+    public void setCourseStart(LocalDate courseStart) {
         this.courseStart = courseStart;
     }
 
-    public LocalDateTime getCourseEnd() {
+    public LocalDate getCourseEnd() {
         return courseEnd;
     }
 
-    public void setCourseEnd(LocalDateTime courseEnd) {
+    public void setCourseEnd(LocalDate courseEnd) {
         this.courseEnd = courseEnd;
     }
 

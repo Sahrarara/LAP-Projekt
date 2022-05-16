@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -41,12 +42,15 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
 
             while (resultSet.next()) {
 
+
                 Location location = new Location(resultSet.getInt("location_id"), resultSet.getString("street"),
                         resultSet.getString("zip"),
                         resultSet.getString("city"));
 
+
                 //TODO: Equipment von rooms_equipment hinzufügen
                 //Equipment equipment = new Equipment();
+
 
                 Room room = new Room(resultSet.getInt("rooms.room_id"), resultSet.getInt("rooms.room_number"),
                         resultSet.getInt("rooms.size"), location);
@@ -61,13 +65,18 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
 
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                String timeStart = resultSet.getString("course_start");
-                LocalDateTime courseStart = (LocalDateTime.parse(timeStart, formatter));
+
+                String timestart = resultSet.getString("course_start");
+                LocalDate courseStart = (LocalDate.parse(timestart));
+
                 String timeEnd = resultSet.getString("course_end");
-                LocalDateTime courseEnd = (LocalDateTime.parse(timeEnd, formatter));
+                LocalDate courseEnd = (LocalDate.parse(timeEnd));
 
 
-                Course course = new Course(resultSet.getInt("course_id"),resultSet.getString("course_name"), program,
+                Course course = new Course(
+                        resultSet.getInt("course_id"),
+                        resultSet.getString("course_name"),
+                        program,
                         courseStart,
                         courseEnd,
                         resultSet.getInt("group_size"));
@@ -134,6 +143,8 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+
     }
 
 
