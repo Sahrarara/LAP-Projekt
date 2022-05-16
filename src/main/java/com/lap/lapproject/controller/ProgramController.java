@@ -3,6 +3,7 @@ package com.lap.lapproject.controller;
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.Program;
+import com.lap.lapproject.repos.CourseRepositoryJDBC;
 import com.lap.lapproject.repos.ProgramRepositoryJDBC;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
@@ -55,14 +56,20 @@ public class ProgramController extends BaseController {
     @FXML
     private void onDeleteBtnClick(ActionEvent actionEvent) {
         ProgramRepositoryJDBC programRepositoryJDBC = new ProgramRepositoryJDBC();
-        int myIndex = tableViewProgram.getSelectionModel().getSelectedIndex();
+        CourseRepositoryJDBC courseRepositoryJDBC = new CourseRepositoryJDBC();
 
-        Program program1 = tableViewProgram.getSelectionModel().getSelectedItem();
-
+        Program programToDelete = tableViewProgram.getSelectionModel().getSelectedItem();
 
         try {
-            programRepositoryJDBC.deleteProgram(program1);
-            listModel.programList.remove(program1);
+            // check in DB how many courses use the particular program
+            int coursesCount = courseRepositoryJDBC.getCoursesCountByProgramId(programToDelete.getId());
+
+            if (coursesCount == 0){
+                programRepositoryJDBC.deleteProgram(programToDelete);
+                listModel.programList.remove(programToDelete);
+            } else {
+                QuickAlert.showError("Dieses Program wird von einem Kurse benötigt! Sie können sie nicht löschen!");
+            }
 
         } catch (SQLException ex) {
             ex.printStackTrace();

@@ -13,6 +13,7 @@ public class ProgramRepositoryJDBC extends Repository implements ProgramReposito
     private static final String GET_PROGRAM_BY_PROGRAM_NAME_SQL_STRING = "SELECT * FROM programs WHERE name = (?)";
     private static final String UPDATE_PROGRAM_SQL_STRING = "UPDATE programs SET name =? WHERE program_id=?";
 
+
     private static final String DELETE_PROGRAM_SQL_STRING =
             "DELETE FROM programs WHERE program_id=?" /* + "UPDATE rooms_equipment SET equipment_id = null WHERE program_id=?"*/;
 
