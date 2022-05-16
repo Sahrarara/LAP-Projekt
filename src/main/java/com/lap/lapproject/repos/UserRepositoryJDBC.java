@@ -1,5 +1,7 @@
 package com.lap.lapproject.repos;
 
+import com.lap.lapproject.application.BCrypt;
+import com.lap.lapproject.controller.QuickAlert;
 import com.lap.lapproject.model.*;
 import javafx.scene.control.Alert;
 
@@ -47,9 +49,9 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             preparedStatement.setBoolean(14, user.getEmailVisibility());
             preparedStatement.setBoolean(15, user.getPhotoVisibility());
 
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
 
-          /*  try (ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
+           /* try (ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
                 while (resultSet.next()) {
                     int userId = resultSet.getInt("user_id");
                     user.setId(userId);
@@ -203,34 +205,29 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
 
 
 
-    public static boolean checkUniqueUsername(String username) {
+
+
+    public static final String SELECT_USERS_SQL_STRING = "SELECT username FROM users";
+    @Override
+    public void checkUniqueUsername(String username) throws SQLException {
         Connection connection = connect();
-        String query = "SELECT * FROM `users` WHERE `username`= '" + username + "'\n";
         PreparedStatement statement = null;
-
-        //String query = "{call checkUniqueUsername(?)}";
         ResultSet resultSet = null;
-        //CallableStatement stmt = null;
 
-        Alert a = new Alert(Alert.AlertType.ERROR);
-        a.setHeaderText("Username already taken");
         try {
-            //stmt = connection.prepareCall(query);
-            //stmt.setString(1, username);
-            //resultSet = stmt.executeQuery();
-            statement = connection.prepareStatement(query);
+            statement = connection.prepareStatement(SELECT_USERS_SQL_STRING);
             resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                System.out.println(resultSet.getString("username"));
-                if (resultSet.getString("username").equals(username))
-                    a.show();
-                return false;
+                String usernameDatabase = resultSet.getString("username");
+                if (usernameDatabase.equals(username)) {
+                    System.out.println("USERNAME IS SAME");
+                    QuickAlert.showError("Benutzername bereits vergeben");
+
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return true;
     }
-
 
 }
