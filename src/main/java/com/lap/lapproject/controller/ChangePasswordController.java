@@ -1,6 +1,5 @@
 package com.lap.lapproject.controller;
 
-import com.lap.lapproject.model.UserData;
 import com.lap.lapproject.repos.Repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +9,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
+
+import static com.lap.lapproject.controller.BaseController.model;
 
 public class ChangePasswordController extends Repository {
     @FXML
@@ -28,7 +29,7 @@ public class ChangePasswordController extends Repository {
     }
 
     private boolean checkIfPasswordIsInDatabase() {
-        String var10000 = UserData.username;
+        String var10000 = model.getLoggedInUser().getUsername();
         String SELECT_PASSWORD_FROM_USERNAME = "SELECT * FROM users WHERE username = '" + var10000 + "' AND  password = '" + this.currentPasswordTF.getText() + "'";
         Connection connection = connect();
         PreparedStatement statement = null;

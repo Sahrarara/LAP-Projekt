@@ -9,6 +9,7 @@ public class Booking {
 
     private static final Logger log = LoggerFactory.getLogger(Booking.class);
 
+    private int id;
     private Room room;
     private Trainer trainer;
     private Course course;
@@ -19,9 +20,20 @@ public class Booking {
 
 
 
+    public Booking(int id, Room room, Trainer trainer, Course course, LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd, String recurrenceRule) {
+        this.id = id;
+        this.room = room;
+        this.trainer = trainer;
+        this.course = course;
+        this.dateTimeStart = dateTimeStart;
+        this.dateTimeEnd = dateTimeEnd;
+        this.recurrenceRule = recurrenceRule;
+    }
+
     public Booking(Room room, Trainer trainer, User user,Course course, LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd, String recurrenceRule) {
         this.room = room;
         this.trainer = trainer;
+        this.user = user;
         this.course = course;
         this.dateTimeStart = dateTimeStart;
         this.dateTimeEnd = dateTimeEnd;
@@ -84,5 +96,13 @@ public class Booking {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

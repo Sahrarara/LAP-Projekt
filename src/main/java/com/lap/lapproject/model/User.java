@@ -14,8 +14,8 @@ public abstract class User {
     private SimpleStringProperty username;
     private SimpleStringProperty title;
     private SimpleBooleanProperty activeStatus;
-    private SimpleStringProperty fName;
-    private SimpleStringProperty lName;
+    private SimpleStringProperty firstName;
+    private SimpleStringProperty lastName;
     private SimpleStringProperty userPassword;
     private SimpleStringProperty authority;
     private SimpleStringProperty description;
@@ -27,25 +27,21 @@ public abstract class User {
     private SimpleBooleanProperty emailVisibility;
     private SimpleBooleanProperty photoVisibility;
 
-
-    public User() {
-    }
-
     //konstruktor für choiceBox befüllen in Formular addUser
     public User(String authority) {
         this.authority = new SimpleStringProperty(authority);
     }
 
     // addUser konstruktor für Formular
-    public User(String username, String title, Boolean activeStatus,String fName, String lName, String userPassword,
+    public User(String username, String title, Boolean activeStatus,String firstName, String lastName, String userPassword,
                 String authority, String description, String phoneNmbr,
                 String email, byte[] photo, Boolean descriptionVisibility,
                 Boolean phoneNmbrVisibility, Boolean emailVisibility, Boolean photoVisibility) {
         this.username = new SimpleStringProperty(username);
         this.activeStatus = new SimpleBooleanProperty(activeStatus);
         this.title = new SimpleStringProperty(title);
-        this.fName = new SimpleStringProperty(fName);
-        this.lName = new SimpleStringProperty(lName);
+        this.firstName = new SimpleStringProperty(firstName);
+        this.lastName = new SimpleStringProperty(lastName);
         this.userPassword = new SimpleStringProperty(userPassword);
         this.authority = new SimpleStringProperty(authority);
         this.description = new SimpleStringProperty(description);
@@ -58,29 +54,45 @@ public abstract class User {
         this.photoVisibility = new SimpleBooleanProperty(photoVisibility);
     }
 
-    //konstruktor für add select Abfrage und Tabelle mit Trainer befüllen
-    public User(int id, String fName, String lName, String email,String phoneNmbr, Boolean activeStatus) {
+    public User(int id, String username, String firstName, String lastName, String authority, String email, String phoneNmbr, String description, Boolean activeStatus) {
         this.id = new SimpleIntegerProperty(id);
-        this.fName = new SimpleStringProperty(fName);
-        this.lName = new SimpleStringProperty(lName);
-        this.email = new SimpleStringProperty(email);
-        this.phoneNmbr = new SimpleStringProperty(phoneNmbr);
-        this.activeStatus = new SimpleBooleanProperty(activeStatus);
-    }
-
-    public User(String username, String fName, String lName, String authority, String email, String phoneNmbr, String description) {
         this.username = new SimpleStringProperty(username);
-        this.fName = new SimpleStringProperty(fName);
-        this.lName = new SimpleStringProperty(lName);
+        this.firstName = new SimpleStringProperty(firstName);
+        this.lastName = new SimpleStringProperty(lastName);
         this.authority = new SimpleStringProperty(authority);
         this.email = new SimpleStringProperty(email);
         this.phoneNmbr = new SimpleStringProperty(phoneNmbr);
         this.description = new SimpleStringProperty(description);
+        this.activeStatus = new SimpleBooleanProperty(activeStatus);
     }
+
+    //mona
+    public User(int id, String username, String title, Boolean activeStatus,String firstName, String lastName,
+                String authority, String description, String phoneNmbr,
+                String email, byte[] photo, Boolean descriptionVisibility,
+                Boolean phoneNmbrVisibility, Boolean emailVisibility, Boolean photoVisibility) {
+        this.id = new SimpleIntegerProperty(id);
+        this.username = new SimpleStringProperty(username);
+        this.activeStatus = new SimpleBooleanProperty(activeStatus);
+        this.title = new SimpleStringProperty(title);
+        this.firstName = new SimpleStringProperty(firstName);
+        this.lastName = new SimpleStringProperty(lastName);
+        this.authority = new SimpleStringProperty(authority);
+        this.description = new SimpleStringProperty(description);
+        this.phoneNmbr = new SimpleStringProperty(phoneNmbr);
+        this.email = new SimpleStringProperty(email);
+        this.photo = photo;
+        this.descriptionVisibility = new SimpleBooleanProperty(descriptionVisibility);
+        this.phoneNmbrVisibility = new SimpleBooleanProperty(phoneNmbrVisibility);
+        this.emailVisibility = new SimpleBooleanProperty(emailVisibility);
+        this.photoVisibility = new SimpleBooleanProperty(photoVisibility);
+    }
+
 
     public int getId() {
         return id.get();
     }
+
 
     public SimpleIntegerProperty idProperty() {
         return id;
@@ -127,27 +139,27 @@ public abstract class User {
     }
 
     public String getfName() {
-        return fName.get();
+        return firstName.get();
     }
 
-    public SimpleStringProperty fNameProperty() {
-        return fName;
+    public SimpleStringProperty firstNameProperty() {
+        return firstName;
     }
 
-    public void setfName(String fName) {
-        this.fName.set(fName);
+    public void setFirstName(String firstName) {
+        this.firstName.set(firstName);
     }
 
     public String getlName() {
-        return lName.get();
+        return lastName.get();
     }
 
     public SimpleStringProperty lNameProperty() {
-        return lName;
+        return lastName;
     }
 
-    public void setlName(String lName) {
-        this.lName.set(lName);
+    public void setLastName(String lastName) {
+        this.lastName.set(lastName);
     }
 
     public String getUserPassword() {

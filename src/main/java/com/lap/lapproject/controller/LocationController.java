@@ -2,10 +2,7 @@ package com.lap.lapproject.controller;
 
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
-import com.lap.lapproject.model.Equipment;
 import com.lap.lapproject.model.Location;
-import com.lap.lapproject.model.UserData;
-import com.lap.lapproject.repos.EquipmentRepositoryJDBC;
 import com.lap.lapproject.repos.LocationRepositoryJDBC;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
@@ -13,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;

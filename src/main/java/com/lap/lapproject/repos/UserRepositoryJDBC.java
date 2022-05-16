@@ -16,7 +16,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
     //BEISPIEL??
     private static final String SQL_SELECT_WHERE_ID = "SELECT * WHERE id=?";
 
-    private static final String SELECT_TRAINER_SQL_STRING = "SELECT user_id, first_name, last_name, email, phone, active_status FROM users WHERE authorization='coach'";
+    private static final String SELECT_TRAINER_SQL_STRING = "SELECT * FROM users WHERE authorization='coach'";
 
     private static final String ADD_NEW_USER_SQL_STRING = "INSERT INTO users (username,active_status,title,first_name,last_name,password," +
             " authorization,description,phone,email, photo, description_visable, phone_visable, email_visable," +
@@ -88,7 +88,6 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
     @Override
     public List<Trainer> readAllTrainer() {
         Connection connection = connect();
-       // ListModel.trainerList.clear();
         List<Trainer> trainerList = new ArrayList<>();
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -97,9 +96,9 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             statement = connection.prepareStatement(SELECT_TRAINER_SQL_STRING);
             resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Trainer trainer = new Trainer(resultSet.getInt("user_id"), resultSet.getString("first_name"),
-                        resultSet.getString("last_name"), resultSet.getString("email"), resultSet.getString(
-                        "phone"), resultSet.getBoolean("active_status"));
+                Trainer trainer = new Trainer(resultSet.getInt("user_id"), resultSet.getString("username"), resultSet.getString("first_name"),
+                        resultSet.getString("last_name"), resultSet.getString("authorization"), resultSet.getString("email"), resultSet.getString(
+                        "phone"), resultSet.getString("description"), resultSet.getBoolean("active_status"));
                trainerList.add(trainer);
             }
         } catch (SQLException e) {
@@ -133,9 +132,9 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
         switch (authorization) {
             //TODO: Constructor
             case "admin":
-                user = new Admin();
+                //user = new Admin();
             case "coach":
-                user = new Trainer();
+                //user = new Trainer();
         }
         return user;
     }
@@ -160,22 +159,16 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
         //CallableStatement stmt = null;
 
         try {
-
-            //stmt = connection.prepareCall(queryUsername);
-            //stmt.setString(1, username);
-            //stmt.setString(2, password);
-            //resultSet = stmt.executeQuery();
-
             statement = connection.prepareStatement(queryUsername);
             resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 int userid = resultSet.getInt("user_id");
                 String user = resultSet.getString("username");
                 String title = resultSet.getString("title");
+                String activeStatus = resultSet.getString("active_status");
                 String firstname = resultSet.getString("first_name");
                 String lastname = resultSet.getString("last_name");
                 String authority = resultSet.getString("authorization");
-
                 String description = resultSet.getString("description");
                 String phoneNmbr = resultSet.getString("phone");
                 String email = resultSet.getString("email");
@@ -185,32 +178,18 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
                 Boolean emailVisibility = resultSet.getBoolean("email_visable");
                 Boolean photoVisibility = resultSet.getBoolean("photo_visable");
 
-
                 switch (authority) {
+
                     case "admin":
-                        Admin admin = new Admin(user, firstname, lastname, authority, email, phoneNmbr, description);
-                        UserData.userID = userid;
-                        UserData.username = user;
-                        System.out.println(UserData.username);
-                        UserData.firstName = admin.getfName();
-                        UserData.lastName = admin.getlName();
-                        UserData.email = email;
-                        UserData.telephoneNmbr = phoneNmbr;
-                        UserData.description = description;
-                        UserData.authority = authority;
+
+                        Admin admin = new Admin(userid, user, title, Boolean.valueOf(activeStatus), firstname, lastname, authority, description,
+                                phoneNmbr, email, photo, descriptionVisibility, phoneNmbrVisibility, emailVisibility, photoVisibility);
                         return admin;
+
                     case "coach":
-                        Trainer trainer = new Trainer(user, firstname, lastname, authority, email, phoneNmbr, description);
-                        UserData.userID = userid;
-                        UserData.firstName = trainer.getfName();
-                        UserData.lastName = trainer.getlName();
-                        UserData.email = email;
-                        UserData.telephoneNmbr = phoneNmbr;
-                        UserData.description = description;
-                        UserData.authority = authority;
-                        System.out.println(authority);
-                        System.out.println(trainer.getAuthority());
-                        System.out.println(UserData.authority);
+
+                        Trainer trainer = new Trainer(userid, user, title, Boolean.valueOf(activeStatus), firstname, lastname, authority, description,
+                                phoneNmbr, email, photo, descriptionVisibility, phoneNmbrVisibility, emailVisibility, photoVisibility);
                         return trainer;
                     default:
                         return null;
@@ -221,6 +200,8 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
         }
         return null;
     }
+
+
 
     public static boolean checkUniqueUsername(String username) {
         Connection connection = connect();

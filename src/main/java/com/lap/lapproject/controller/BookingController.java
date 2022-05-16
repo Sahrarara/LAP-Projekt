@@ -75,19 +75,14 @@ public class BookingController {
 
     @FXML
     private void onDeleteBookingBtnClick(ActionEvent actionEvent) {
-//        listModel.getSelectedBooking().getRoom().getRoomNumber();
-//        logger.info("selectedBooking: {}", listModel.getSelectedBooking().getRoom().getRoomNumber());
 
         Booking booking  = tableViewBooking.getSelectionModel().getSelectedItem();
-        //logger.info("Booking: {}", booking.getRoom().getRoomNumber());
+        //logger.info("selectedItem: {}", booking.getRoom());
 
         BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
-
-
-
-
-
-
+        bookingRepositoryJDBC.deleteBooking(booking);
+        //logger.info("deleteBooking: {}", booking.getId());
+        listModel.bookingList.remove(booking);
     }
 
     @FXML
@@ -128,7 +123,7 @@ public class BookingController {
 
 
     private void authorityVisibility() {
-        String authority = UserData.authority;
+        String authority = model.getAuthority();
         switch (authority) {
             case "admin":
                 break;

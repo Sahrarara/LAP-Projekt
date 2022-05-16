@@ -52,4 +52,9 @@ public class Program {
     public void setProgramName(String programName) {
         this.programName.set(programName);
     }
+
+    @Override
+    public String toString() {
+        return getProgramName();
+    }
 }

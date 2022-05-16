@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -30,7 +29,7 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
     @Override
     public ArrayList<Booking> readAll() throws SQLException {
         Connection connection = connect();
-        ArrayList<Booking> list = new ArrayList<>();
+        ArrayList<Booking> bookingList = new ArrayList<>();
 
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -41,9 +40,6 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
             resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-
-                int bookingID = resultSet.getInt("booking_id");
-                logger.info("BookingID: {}", bookingID);
 
                 Location location = new Location(resultSet.getInt("location_id"), resultSet.getString("street"),
                         resultSet.getString("zip"),
@@ -56,17 +52,17 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
                         resultSet.getInt("rooms.size"), location);
 
 
-                Trainer trainer = new Trainer(resultSet.getString("username"), resultSet.getString("first_name"),
+                Trainer trainer = new Trainer(resultSet.getInt("user_id"), resultSet.getString("username"), resultSet.getString("first_name"),
                         resultSet.getString("last_name"), resultSet.getString("authorization"), resultSet.getString("email"),
-                        resultSet.getString("phone"), resultSet.getString("description"));
+                        resultSet.getString("phone"), resultSet.getString("description"), resultSet.getBoolean("active_status"));
 
 
                 Program program = new Program(resultSet.getInt("program_id"), resultSet.getString("course_name"));
 
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                String timestart = resultSet.getString("course_start");
-                LocalDateTime courseStart = (LocalDateTime.parse(timestart, formatter));
+                String timeStart = resultSet.getString("course_start");
+                LocalDateTime courseStart = (LocalDateTime.parse(timeStart, formatter));
                 String timeEnd = resultSet.getString("course_end");
                 LocalDateTime courseEnd = (LocalDateTime.parse(timeEnd, formatter));
 
@@ -85,20 +81,25 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
 
                 String recurrenceRule = resultSet.getString("recurrence_rule");
 
-//                Booking b = new Booking(room, trainer, course, startTime, endTime, recurrenceRule);
-//                list.add(b);
+                Booking booking = new Booking(resultSet.getInt("booking_id"), room, trainer, course, startTime, endTime, recurrenceRule);
+                bookingList.add(booking);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return list;
+        return bookingList;
     }
 
 
 
-    public void addBooking(Booking booking) {
+    public int addBooking(Booking booking) {
         Connection connection = connect();
-        try (PreparedStatement preparedStatement = connection.prepareStatement(ADD_NEW_BOOKING_SQL_STRING, Statement.RETURN_GENERATED_KEYS)) {
+        ResultSet resultSet = null;
+        PreparedStatement preparedStatement = null;
+        int generatedKey = 0;
+
+        try {
+            preparedStatement = connection.prepareStatement(ADD_NEW_BOOKING_SQL_STRING, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1, booking.getRoom().getId());
             preparedStatement.setInt(2, booking.getUser().getId());
             preparedStatement.setInt(3, booking.getTrainer().getId());
@@ -107,20 +108,29 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
             preparedStatement.setObject(6, booking.getDateTimeStart());
             preparedStatement.setObject(7, booking.getDateTimeEnd());
             preparedStatement.executeUpdate();
+            resultSet = preparedStatement.getGeneratedKeys();
+
+            while (resultSet.next()) {
+                generatedKey = resultSet.getInt(1);
+                booking.setId(generatedKey);
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return generatedKey;
     }
 
 
 
-    public void deleteBooking(Booking booking) { //Booking booking
+    public void deleteBooking(Booking booking) {
         Connection connection = connect();
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = connection.prepareStatement(DELETE_BOOKING_SQL_STRING);
-//            preparedStatement.setInt(1, );
-//            preparedStatement.executeQuery();
+            preparedStatement.setInt(1, booking.getId());
+            logger.info("bookingID: {}", booking.getId());
+            preparedStatement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         }

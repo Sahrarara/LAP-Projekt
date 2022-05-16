@@ -2,7 +2,6 @@ package com.lap.lapproject.controller;
 
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
-import com.lap.lapproject.model.UserData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -132,8 +131,8 @@ public class SidebarController extends BaseController {
     }
 
     private void setUsername() {
-        if (UserData.firstName != null) {
-            nameLabel.setText(UserData.firstName);
+        if (model.getLoggedInUser().getfName() != null) {
+            nameLabel.setText(model.getLoggedInUser().getfName());
         } else {
             nameLabel.setText("Gast");
         }

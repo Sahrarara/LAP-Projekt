@@ -73,7 +73,6 @@ public class AddBookingController extends BaseController {
             Room room = roomNumberChoiceBox.getValue();
             Trainer trainer = trainerChoiceBox.getValue();
             Course course = courseNameChoiceBox.getValue();
-            //int userID = UserData.userID;
             String recurrenceRule = String.valueOf(recurrenceChoiceBox.getValue());
 
             String dateStart = null;
@@ -85,24 +84,17 @@ public class AddBookingController extends BaseController {
                 e.printStackTrace();
             }
 
-            String timeStart = String.valueOf(timeStartTimeField.getValue());
-            String timeEnd = String.valueOf(timeEndTimeField.getValue());
+            LocalDateTime localDateTimeStart = LocalDateTime.parse(dateStart + "T" + timeStartTimeField.getValue());
+            LocalDateTime localDateTimeEnd = LocalDateTime.parse(dateEnd + "T" + timeEndTimeField.getValue());
 
-            String datetimeStart = dateStart + "T" + timeStart;
-            String datetimeEnd = dateEnd + "T" + timeEnd;
+            //TODO: wie kann ich hier die "bookingID" auch mitgeben?
+            Booking booking = new Booking(room, trainer, model.getLoggedInUser(), course, localDateTimeStart, localDateTimeEnd, recurrenceRule);
 
-            LocalDateTime localDateTimeStart = LocalDateTime.parse(datetimeStart);
-            LocalDateTime localDateTimeEnd = LocalDateTime.parse(datetimeEnd);
-            //logger.info("localDateTimeEnd: {}", localDateTimeEnd);
+            //TODO: kommt "changeListener" hier????
 
             BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
-
-//            Booking booking = new Booking(room, trainer, user, course, localDateTimeStart, localDateTimeEnd, recurrenceRule);
-//            bookingRepositoryJDBC.addBooking(booking);
-//            listModel.bookingList.add(booking);
-
-            //TODO: Add new booking to the bookingList: how?
-            
+            bookingRepositoryJDBC.addBooking(booking);
+            listModel.bookingList.add(booking);
 
             moveToProgramPage();
 
@@ -127,7 +119,7 @@ public class AddBookingController extends BaseController {
         assert roomNumberChoiceBox != null : "fx:id=\"roomNumberChoiceBox\" was not injected: check your FXML file 'addbooking-view.fxml'.";
         assert trainerChoiceBox != null : "fx:id=\"trainerChoiceBox\" was not injected: check your FXML file 'addbooking-view.fxml'.";
 
-        bookerLabel.setText(UserData.firstName + " " + UserData.lastName);
+        bookerLabel.setText(model.getLoggedInUser().getfName()+ " " + model.getLoggedInUser().getlName());
 
         recurrenceChoiceBox.getItems().add("keiner");
         recurrenceChoiceBox.getItems().add("täglich");
@@ -142,12 +134,9 @@ public class AddBookingController extends BaseController {
 
         FilteredList<Room> roomFilteredList = new FilteredList<>(listModel.roomList);
         roomNumberChoiceBox.setItems(listModel.roomList);
-        //logger.info("rooms: {}", listModel.roomList);
 
         locationChoiceBox.getSelectionModel().selectedItemProperty().addListener((Observable, oldValue, newValue) -> {
             roomFilteredList.setPredicate(room -> room.getLocation().getStreet().equals(locationChoiceBox.getValue().getStreet()));
-            //logger.info("selected: {}", locationChoiceBox.getValue().getStreet());
-            //logger.info("Filtered rooms: {}", roomFilteredList);
 
         });
         roomNumberChoiceBox.setItems(roomFilteredList);

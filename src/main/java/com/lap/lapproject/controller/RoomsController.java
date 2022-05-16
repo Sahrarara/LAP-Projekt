@@ -3,7 +3,6 @@ package com.lap.lapproject.controller;
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.Room;
-import com.lap.lapproject.model.UserData;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

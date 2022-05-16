@@ -20,12 +20,9 @@ public class Model {
 
     private BookingRepositoryJDBC bookingRepo = new BookingRepositoryJDBC();
 
-
     public Model() {
         try {
             bookings.addAll(bookingRepo.readAll());
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -45,6 +42,8 @@ public class Model {
         this.pathForDetailView.set(pathForDetailView);
     }
 
+
+
     private ObjectProperty<User> loggedInUser = new SimpleObjectProperty<>();
 
     public String getAuthority(){
@@ -54,6 +53,7 @@ public class Model {
     public User getLoggedInUser() {
         return loggedInUser.get();
     }
+
 
     public ObjectProperty<User> loggedInUserProperty() {
         return loggedInUser;
