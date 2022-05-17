@@ -19,7 +19,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class AddUserController extends BaseController{
+public class AddUserController extends BaseController {
     @FXML
     private TextField usernameTextField;
     @FXML
@@ -70,7 +70,7 @@ public class AddUserController extends BaseController{
         getCurrentStage().close();
     }
 
-    private Stage getCurrentStage(){
+    private Stage getCurrentStage() {
         return (Stage) firstNameTextField.getScene().getWindow();
     }
 
@@ -106,13 +106,12 @@ public class AddUserController extends BaseController{
         //checkPassword(password);
 
 
-
         if (!username.isBlank() && !firstName.isBlank() && !lastName.isBlank()
                 && !(authorizationChoiceBox.getValue() == null) &&
                 !password.isBlank() && !email.isBlank() && !telephone.isBlank()) {
             //TODO: Insert create new User function hier einfügen
             try {
-                Trainer trainer = new Trainer(username, title, active, firstName, lastName, hashPassword(password),
+                Trainer trainer = new Trainer(username, title, active, firstName, lastName, password,
                         authorization, description,
                         telephone, email, convertToBytes(photoPath), descriptionVisible, telephoneVisible, emailVisible, photoVisible);
                 userRepositoryJDBC.add(trainer);
@@ -125,7 +124,6 @@ public class AddUserController extends BaseController{
             QuickAlert.showError("Bitte folgende Felder ausfüllen:\nNutzername\nVorname\nNachname\nAuthorization\npassword\ne-mail\nTelefon");
         }
     }
-
 
 
     @FXML
@@ -153,21 +151,14 @@ public class AddUserController extends BaseController{
                         .collect(Collectors.toList()));
 
         authorizationChoiceBox.setItems(authorizationName);
+
+
     }
 
     public byte[] convertToBytes(String pathToImage) throws IOException {
         FileInputStream fileInputStream = new FileInputStream(pathToImage);
         byte[] imageBytes = fileInputStream.readAllBytes();
         return imageBytes;
-        /*byte[] imageBytes;
-        if (!pathToImage.isEmpty()) {
-            FileInputStream fileInputStream = new FileInputStream(pathToImage);
-            imageBytes = fileInputStream.readAllBytes();
-            return imageBytes;
-        } else {
-            imageBytes  = null;
-        }
-        return imageBytes;*/
     }
 
     //Email prüfen
@@ -192,15 +183,11 @@ public class AddUserController extends BaseController{
         return true;
     }
 
-    //Passwort haschen
-    public String hashPassword(String password) {
-        return BCrypt.hashpw(password, BCrypt.gensalt());
-    }
 
 
-    public boolean encodeHash(String pass, String hashPassword) {
-        return BCrypt.checkpw(pass, hashPassword);
-    }
+
+
+
 
 
 

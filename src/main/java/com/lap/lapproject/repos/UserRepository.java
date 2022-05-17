@@ -18,4 +18,6 @@ public interface UserRepository {
 
     void checkUniqueUsername(String username) throws SQLException;
 
+    boolean checkUser(String username, String pass) throws SQLException;
+
 }
