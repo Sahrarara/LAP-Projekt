@@ -6,6 +6,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -33,6 +34,7 @@
       <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
       <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
       <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints prefHeight="0.0" vgrow="SOMETIMES" />
       <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
       <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
       <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
@@ -59,26 +61,28 @@
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin></Label>
-      <Label styleClass="input-description" text="E-Mail" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="8">
+      <Label styleClass="input-description" text="E-Mail" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="9">
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin></Label>
-      <Label styleClass="input-description" text="Telefon" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="9">
+      <Label styleClass="input-description" text="Telefon" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="10">
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin></Label>
-      <Label styleClass="input-description" text="Aktiv" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="10">
+      <Label styleClass="input-description" text="Aktiv" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="11">
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin></Label>
-      <Label styleClass="input-description" text="Foto" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="11">
+      <Label styleClass="input-description" text="Foto" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="12">
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin></Label>
-      <Label styleClass="input-description" text="Beschreibung" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="12">
+      <Label styleClass="input-description" text="Beschreibung" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="13">
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin></Label>
+      <TextField fx:id="usernameTextField" layoutX="363.0" layoutY="157.0" maxWidth="385.0" onAction="#onAddBtnClick" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+      <TextField fx:id="titleTextField" layoutX="354.0" layoutY="182.0" maxWidth="385.0" onAction="#onAddBtnClick" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="3" GridPane.rowIndex="3" />
       <TextField fx:id="firstNameTextField" maxWidth="385.0" onAction="#onAddBtnClick" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets />
@@ -89,27 +93,28 @@
             <Insets />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="emailTextField" maxWidth="385.0" onAction="#onAddBtnClick" styleClass="input-form" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="8">
+      <ChoiceBox fx:id="authorizationChoiceBox" prefWidth="385.0" styleClass="input-form" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+      <TextField fx:id="emailTextField" maxWidth="385.0" onAction="#onAddBtnClick" styleClass="input-form" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="9">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="phoneNmbrTextField" maxWidth="385.0" onAction="#onAddBtnClick" styleClass="input-form" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="9">
+      <TextField fx:id="phoneNmbrTextField" maxWidth="385.0" onAction="#onAddBtnClick" styleClass="input-form" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="10">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="photoPathTextField" maxWidth="300.0" onAction="#onAddBtnClick" styleClass="input-form" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="11">
+      <TextField fx:id="photoPathTextField" maxWidth="300.0" onAction="#onAddBtnClick" styleClass="input-form" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="12">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </TextField>
-      <TextArea fx:id="descriptionTextArea" maxWidth="385.0" styleClass="input-form" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="12">
+      <TextArea fx:id="descriptionTextArea" maxWidth="385.0" styleClass="input-form" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="13">
          <GridPane.margin>
             <Insets bottom="10.0" top="10.0" />
          </GridPane.margin>
       </TextArea>
-      <Button mnemonicParsing="false" onAction="#onAbortBtnClick" text="ABBRECHEN" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="13">
+      <Button mnemonicParsing="false" onAction="#onAbortBtnClick" text="ABBRECHEN" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="14">
          <styleClass>
             <String fx:value="button-style" />
             <String fx:value="button-light" />
@@ -118,7 +123,7 @@
             <Insets right="10.0" />
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" onAction="#onAddBtnClick" text="HINZUFÜGEN" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="13">
+      <Button mnemonicParsing="false" onAction="#onAddBtnClick" text="HINZUFÜGEN" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="14">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
@@ -127,14 +132,14 @@
             <String fx:value="button-dark" />
          </styleClass>
       </Button>
-      <CheckBox fx:id="emailCheckBox" mnemonicParsing="false" text="Ausblenden" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
-      <CheckBox fx:id="phoneNmbrCheckBox" mnemonicParsing="false" text="Ausblenden" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
-      <CheckBox fx:id="activeCheckBox" mnemonicParsing="false" text="                    " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="10">
+      <CheckBox fx:id="emailCheckBox" mnemonicParsing="false" text="Ausblenden" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
+      <CheckBox fx:id="phoneNmbrCheckBox" mnemonicParsing="false" text="Ausblenden" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
+      <CheckBox fx:id="activeCheckBox" mnemonicParsing="false" text="                    " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="11">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </CheckBox>
-      <CheckBox fx:id="photoCheckBox" mnemonicParsing="false" text="Ausblenden" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
+      <CheckBox fx:id="photoCheckBox" mnemonicParsing="false" text="Ausblenden" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="12" />
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #211D5A;" GridPane.columnIndex="2" />
       <Pane prefHeight="90.0" prefWidth="40.0" style="-fx-background-color: #211D5A;" GridPane.columnIndex="4" />
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #211D5A;" />
@@ -143,21 +148,18 @@
             <Insets left="10.0" />
          </GridPane.margin>
       </Label>
-      <TextField fx:id="passwordTextField" layoutX="323.0" layoutY="157.0" maxWidth="385.0" onAction="#onAddBtnClick" styleClass="input-form" GridPane.columnIndex="3" GridPane.rowIndex="7" />
       <Label layoutX="109.0" layoutY="183.0" styleClass="input-description" text="Anrede" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin>
       </Label>
-      <TextField fx:id="titleTextField" layoutX="354.0" layoutY="182.0" maxWidth="385.0" onAction="#onAddBtnClick" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-      <ChoiceBox fx:id="authorizationChoiceBox" prefWidth="385.0" styleClass="input-form" GridPane.columnIndex="3" GridPane.rowIndex="6" />
       <Label layoutX="109.0" layoutY="194.0" styleClass="input-description" text="Authorization" GridPane.columnIndex="1" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin>
       </Label>
-      <CheckBox fx:id="descriptionCheckBox" layoutX="244.0" layoutY="414.0" mnemonicParsing="false" text="Ausblenden" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="12" />
-      <Button mnemonicParsing="false" onAction="#onFileBtnClick" style="-fx-background-color: #F2F4FF;" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="11">
+      <CheckBox fx:id="descriptionCheckBox" layoutX="244.0" layoutY="414.0" mnemonicParsing="false" text="Ausblenden" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="13" />
+      <Button mnemonicParsing="false" onAction="#onFileBtnClick" style="-fx-background-color: #F2F4FF;" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="12">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -174,6 +176,8 @@
             <Insets left="10.0" />
          </GridPane.margin>
       </Label>
-      <TextField fx:id="usernameTextField" layoutX="363.0" layoutY="157.0" maxWidth="385.0" onAction="#onAddBtnClick" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+      <Label fx:id="errorUsername" text="Text" textFill="#ff0707" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+      <Label fx:id="errorEmail" text="Text" textFill="RED" GridPane.columnIndex="3" GridPane.rowIndex="8" GridPane.valignment="BOTTOM" />
+      <PasswordField fx:id="passwordTextField" maxWidth="385.0" onAction="#onAddBtnClick" styleClass="input-form" GridPane.columnIndex="3" GridPane.rowIndex="7" />
    </children>
 </GridPane>

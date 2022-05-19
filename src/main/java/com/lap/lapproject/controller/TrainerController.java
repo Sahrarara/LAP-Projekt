@@ -3,6 +3,7 @@ package com.lap.lapproject.controller;
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.Trainer;
+import com.lap.lapproject.repos.UserRepositoryJDBC;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -56,10 +57,29 @@ public class TrainerController extends BaseController{
 
     @FXML
     private void onDeleteTrainerBtnClick(ActionEvent actionEvent) {
+        UserRepositoryJDBC userRepositoryJDBC = new UserRepositoryJDBC();
+        Trainer trainer = tableViewTrainer.getSelectionModel().getSelectedItem();
+        userRepositoryJDBC.deleteUser(trainer);
+        listModel.trainerList.remove(trainer);
     }
 
     @FXML
-    private void onSettingsBtnClick(ActionEvent actionEvent) {
+    private void onEditBtnClick(ActionEvent actionEvent) {
+        Stage stage = new Stage();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_TRAINER));
+        Scene scene = null;
+
+        try {
+            scene = new Scene(fxmlLoader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        stage.setTitle("Raum Management");
+        stage.setScene(scene);
+        stage.show();
+
     }
 
 
@@ -74,8 +94,9 @@ public class TrainerController extends BaseController{
         assert trainerBtnBar != null : "fx:id=\"trainerBtnBar\" was not injected: check your FXML file 'trainer.fxml'.";
 
         authorityVisibility();
-
         initTrainerTable();
+        //nimmt daten von tabele und befüllt das Formular
+        /* listModel.selectedProgramProperty().bind(tableViewTrainer.getSelectionModel().selectedItemProperty());*/
     }
 
     private void initTrainerTable() {

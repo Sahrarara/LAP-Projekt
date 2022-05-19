@@ -16,8 +16,12 @@ public interface UserRepository {
 
     List<Trainer> readAuthorization() throws SQLException;
 
-    void checkUniqueUsername(String username) throws SQLException;
+    boolean checkUniqueUsername(String username) throws SQLException;
 
     boolean checkUser(String username, String pass) throws SQLException;
+
+    void deleteUser(User user) throws SQLException;
+
+    void updateUser(User user) throws SQLException;
 
 }
