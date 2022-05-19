@@ -11,4 +11,6 @@ public interface BookingRepository {
     int addBooking(Booking booking) throws SQLException;
 
     void deleteBooking(Booking booking) throws SQLException;
+
+    int getBookingCountByProgramIdJoinLocationId(int LocationId) throws SQLException;
 }

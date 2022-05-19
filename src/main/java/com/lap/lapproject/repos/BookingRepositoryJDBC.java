@@ -27,6 +27,9 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
 
     private static final String DELETE_BOOKING_SQL_STRING = "DELETE FROM booking WHERE booking_id=?";
 
+    private static final String GET_COURSES_COUNT_BY_PROGRAM_ID_JOIN_LOCATION_ID_SQL_STRING = "SELECT COUNT(*) AS booking_count_by_location FROM booking JOIN rooms ON booking.room_id=rooms.room_id JOIN location ON location.location_id=rooms.location_id WHERE rooms.location_id =(?) ";
+
+
     @Override
     public ArrayList<Booking> readAll() throws SQLException {
         Connection connection = connect();
@@ -161,6 +164,26 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
         }
 
 
+    }
+
+    @Override
+    public int getBookingCountByProgramIdJoinLocationId(int locationId) {
+        Connection connection = connect();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        int roomsCountByLocationId = 0;
+        try {
+            preparedStatement = connection.prepareStatement(GET_COURSES_COUNT_BY_PROGRAM_ID_JOIN_LOCATION_ID_SQL_STRING );
+            preparedStatement.setInt(1, locationId);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                roomsCountByLocationId = resultSet.getInt("booking_count_by_location");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return roomsCountByLocationId;
     }
 
 

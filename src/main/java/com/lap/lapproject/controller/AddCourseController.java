@@ -53,10 +53,8 @@ public class AddCourseController extends BaseController {
             courseStartDatePicker.setValue(listModel.getSelectedCourse().getCourseStart());
             courseEndDatePicker.setValue(listModel.getSelectedCourse().getCourseEnd());
             groupSizeTextField.setText(String.valueOf(listModel.getSelectedCourse().getGroupSize()));
-
         }
     }
-
 
     @FXML
     private void onAbortBtnClick(ActionEvent actionEvent) {
