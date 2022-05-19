@@ -66,6 +66,10 @@ public class RoomsController extends BaseController {
 
         authorityVisibility();
         initTableRoom();
+
+        //TODO: add a Textfield ID and imageView ID in the fxml file for the searchbar and magnifying glass
+        //TODO: write the UsabilityMethod.changeListener method in here with the IDs of the searchbar and magnifying glass (you can look it up in ProgramController)
+
     }
 
     private void initTableRoom() {
