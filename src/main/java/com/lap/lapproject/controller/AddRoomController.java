@@ -1,5 +1,6 @@
 package com.lap.lapproject.controller;
 
+import com.lap.lapproject.utility.QuickAlert;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;

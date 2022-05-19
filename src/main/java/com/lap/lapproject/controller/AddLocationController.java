@@ -1,10 +1,9 @@
 package com.lap.lapproject.controller;
 
-import com.lap.lapproject.model.Equipment;
 import com.lap.lapproject.model.Location;
-import com.lap.lapproject.repos.EquipmentRepositoryJDBC;
 import com.lap.lapproject.repos.LocationRepositoryJDBC;
 
+import com.lap.lapproject.utility.QuickAlert;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;

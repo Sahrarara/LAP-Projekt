@@ -53,8 +53,8 @@ public class Program {
         this.programName.set(programName);
     }
 
-    @Override
+  /*  @Override
     public String toString() {
         return getProgramName();
-    }
+    }*/
 }

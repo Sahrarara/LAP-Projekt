@@ -3,7 +3,9 @@ package com.lap.lapproject.controller;
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.Location;
+import com.lap.lapproject.repos.BookingRepositoryJDBC;
 import com.lap.lapproject.repos.LocationRepositoryJDBC;
+import com.lap.lapproject.utility.QuickAlert;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -57,21 +59,40 @@ public class LocationController extends BaseController{
 
     @FXML
     private void onDeleteLocationBtnClick(ActionEvent actionEvent) {
+       // QuickAlert.showError("Möchten Sie dieses Standort sicher Löschen?");
         LocationRepositoryJDBC locationRepositoryJDBC = new LocationRepositoryJDBC();
+        BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
         int myIndex = tableViewLocation.getSelectionModel().getSelectedIndex();
 
-        Location location1 = tableViewLocation.getSelectionModel().getSelectedItem();
+        Location locationToDelete = tableViewLocation.getSelectionModel().getSelectedItem();
 
 
         try {
-            locationRepositoryJDBC.deleteLocation(location1);
-            listModel.locationList.remove(location1);
+            // check in DB how many bookings use the particular location
+            int bookingCountByLocation = bookingRepositoryJDBC.getBookingCountByProgramIdJoinLocationId(locationToDelete.getId());
 
+            if (bookingCountByLocation == 0) {
+
+                locationRepositoryJDBC.deleteLocation(locationToDelete);
+                listModel.locationList.remove(locationToDelete);
+            }else {
+                QuickAlert.showError("Dieses Location wird von einem Buchung benötigt! Sie können sie nicht löschen!Bearbeiten Sie zuerst Ihre Buhungen!");
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
 
     }
+
+
+
+
+
+
+
+
+
+
 
     @FXML
     private void onSettingsBtnClick(ActionEvent actionEvent) {

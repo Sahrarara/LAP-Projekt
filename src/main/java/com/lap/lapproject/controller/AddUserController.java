@@ -2,6 +2,7 @@ package com.lap.lapproject.controller;
 
 import com.lap.lapproject.model.Trainer;
 import com.lap.lapproject.repos.UserRepositoryJDBC;
+import com.lap.lapproject.utility.QuickAlert;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,9 +15,11 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class AddUserController extends BaseController{
+public class AddUserController extends BaseController {
     @FXML
     private TextField usernameTextField;
     @FXML
@@ -67,70 +70,60 @@ public class AddUserController extends BaseController{
         getCurrentStage().close();
     }
 
-    private Stage getCurrentStage(){
+    private Stage getCurrentStage() {
         return (Stage) firstNameTextField.getScene().getWindow();
     }
 
     @FXML
     private void onAddBtnClick(ActionEvent actionEvent) {
-        UserRepositoryJDBC userRepositoryJDBC = new UserRepositoryJDBC();
 
+        String username = usernameTextField.getText(); // TODO: EXISTIERT SCHON IN DB??
 
-        String user = usernameTextField.getText(); //TODO: EXISTIERT SCHON IN DB??
         boolean active = activeCheckBox.isSelected();
         String title = titleTextField.getText();
         String firstName = firstNameTextField.getText();
         String lastName = lastNameTextField.getText();
-        String password = passwordTextField.getText(); //TODO: HASHEN!!!
+        String password = passwordTextField.getText(); // TODO: HASHEN!!!
         String authorization = String.valueOf(authorizationChoiceBox.getValue());
         String description = descriptionTextArea.getText();
         String telephone = phoneNmbrTextField.getText();
         String email = emailTextField.getText(); //TODO: valid email regex?
+
+
         String photoPath = photoPathTextField.getText();
+
         boolean descriptionVisible = descriptionCheckBox.isSelected();
         boolean telephoneVisible = phoneNmbrCheckBox.isSelected();
         boolean emailVisible = emailCheckBox.isSelected();
         boolean photoVisible = photoCheckBox.isSelected();
 
 
+        //neue User in der datenbank speichern
+        UserRepositoryJDBC userRepositoryJDBC = new UserRepositoryJDBC();
+
+        //userRepositoryJDBC.checkUniqueUsername(username);
+        //validateEmail(email);
+        //checkPassword(password);
 
 
-        /*(username,active_status,title,first_name,last_name,password,authorization,description,
-        phone,email,photo,description_visable,phone_visable,email_visable,photo_visable) " +
-        "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";*/
-
-
-
-        /*Trainer trainer = new Trainer(user,active,title,firstName,lastName,password,authorization,description,telephone,
-                email,photoPath,descriptionVisible, telephoneVisible, emailVisible, photoVisible);*/
-        /*String username, String title, Boolean activeStatus*/
-
-        try {
-
-           /* InputStream inputStream = Files.newInputStream(path);
-            byte[] imageBytes = inputStream.readAllBytes();*/
-
-
-            Trainer trainer = new Trainer(user, title, active, firstName, lastName, password, authorization, description,
-                    telephone, email, convertToBytes(photoPath),descriptionVisible, telephoneVisible, emailVisible, photoVisible);
-            userRepositoryJDBC.add(trainer);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-//https://www.youtube.com/watch?v=TWVQ91ZLwrE
-
-       /* if (!user.isBlank() && !firstName.isBlank() && !lastName.isBlank()
+        if (!username.isBlank() && !firstName.isBlank() && !lastName.isBlank()
                 && !(authorizationChoiceBox.getValue() == null) &&
                 !password.isBlank() && !email.isBlank() && !telephone.isBlank()) {
             //TODO: Insert create new User function hier einfügen
+            try {
+                Trainer trainer = new Trainer(username, title, active, firstName, lastName, password,
+                        authorization, description,
+                        telephone, email, convertToBytes(photoPath), descriptionVisible, telephoneVisible, emailVisible, photoVisible);
+                userRepositoryJDBC.add(trainer);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
         } else {
             QuickAlert.showError("Bitte folgende Felder ausfüllen:\nNutzername\nVorname\nNachname\nAuthorization\npassword\ne-mail\nTelefon");
-        }*/
+        }
     }
-
 
 
     @FXML
@@ -158,16 +151,43 @@ public class AddUserController extends BaseController{
                         .collect(Collectors.toList()));
 
         authorizationChoiceBox.setItems(authorizationName);
-    }
 
-    private byte[] convertToBytes(Object object) throws IOException {
-        try (ByteArrayOutputStream bos = new ByteArrayOutputStream();
-             ObjectOutput out = new ObjectOutputStream(bos)) {
-            out.writeObject(object);
-            return bos.toByteArray();
-        }
 
     }
+
+    public byte[] convertToBytes(String pathToImage) throws IOException {
+        FileInputStream fileInputStream = new FileInputStream(pathToImage);
+        byte[] imageBytes = fileInputStream.readAllBytes();
+        return imageBytes;
+    }
+
+    //Email prüfen
+    public boolean validateEmail(String email) {
+        Pattern compile = Pattern.compile("[_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.([a-zA-Z]{2,}){1}");
+        Matcher matcher = compile.matcher(email);
+        System.out.println(matcher.matches());
+        System.out.println("EMAIL: ");
+        return true;
+    }
+
+
+    // 1 Großbuchstabe, 1 Kleinbuchstabe, 1 Ziffer, 1 Sonderzeichen enthält und eine Länge von mindestens 8 hat
+    // (Password Bedigungen)
+
+
+    public boolean checkPassword(String password) {
+        Pattern compile = Pattern.compile("^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\\W).*$");
+        Matcher matcher = compile.matcher(password);
+        System.out.println(matcher.matches());
+        System.out.println("PASSWORT: ");
+        return true;
+    }
+
+
+
+
+
+
 
 
 

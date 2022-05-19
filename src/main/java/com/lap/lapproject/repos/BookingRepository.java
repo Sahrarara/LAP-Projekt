@@ -1,10 +1,7 @@
 package com.lap.lapproject.repos;
 
 import com.lap.lapproject.model.Booking;
-import com.lap.lapproject.model.Course;
-
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public interface BookingRepository {
@@ -13,6 +10,8 @@ public interface BookingRepository {
     int addBooking(Booking booking) throws SQLException;
 
     void deleteBooking(Booking booking) throws SQLException;
+
+    int getBookingCountByProgramIdJoinLocationId(int LocationId) throws SQLException;
 
     void updateBooking(Booking booking) throws SQLException;
 

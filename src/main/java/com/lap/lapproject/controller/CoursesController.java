@@ -61,13 +61,11 @@ public class CoursesController extends BaseController{
         CourseRepositoryJDBC courseRepositoryJDBC = new CourseRepositoryJDBC();
         int myIndex = tableViewEvent.getSelectionModel().getSelectedIndex();
 
-        Course course1 = tableViewEvent.getSelectionModel().getSelectedItem();
-
+        Course courseToDelete = tableViewEvent.getSelectionModel().getSelectedItem();
 
         try {
-            courseRepositoryJDBC.deleteCourse(course1);
-            listModel.courseList.remove(course1);
-
+            courseRepositoryJDBC.deleteCourse(courseToDelete);
+            listModel.courseList.remove(courseToDelete);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
