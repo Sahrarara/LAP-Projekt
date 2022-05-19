@@ -12,4 +12,6 @@ module com.lap.lapproject {
     opens com.lap.lapproject.controller to javafx.fxml;
     exports com.lap.lapproject.application;
     opens com.lap.lapproject.application to javafx.fxml;
+    exports com.lap.lapproject.utility;
+    opens com.lap.lapproject.utility to javafx.fxml;
 }

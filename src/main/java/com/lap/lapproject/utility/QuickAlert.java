@@ -1,4 +1,4 @@
-package com.lap.lapproject.controller;
+package com.lap.lapproject.utility;
 
 import javafx.scene.control.Alert;
 

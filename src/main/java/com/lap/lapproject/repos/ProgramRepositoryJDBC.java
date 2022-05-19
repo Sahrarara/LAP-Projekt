@@ -79,6 +79,10 @@ public class ProgramRepositoryJDBC extends Repository implements ProgramReposito
         }
 
     }
+    //TODO: search function here
+    public void searchProgram(Program program) throws SQLException{
+        Connection connection = connect();
+    }
 
     @Override
     public void deleteProgram(Program program) throws SQLException {

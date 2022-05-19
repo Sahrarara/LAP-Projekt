@@ -1,7 +1,10 @@
 package com.lap.lapproject.repos;
 
+import com.lap.lapproject.application.BCrypt;
+import com.lap.lapproject.utility.QuickAlert;
 import com.lap.lapproject.model.*;
-import javafx.scene.control.Alert;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -11,8 +14,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserRepositoryJDBC extends Repository implements UserRepository {
-    //BEISPIEL???
-    private static final String SQL_STRING = "INSERT INTO users (user_id, username, photo) (?, ?, ?)";
+
+    private static final Logger logger = LoggerFactory.getLogger(UserRepositoryJDBC.class);
+
     //BEISPIEL??
     private static final String SQL_SELECT_WHERE_ID = "SELECT * WHERE id=?";
 
@@ -28,6 +32,8 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
     @Override
     public void add(User user) throws SQLException {
         Connection connection = connect();
+        ResultSet resultSet = null;
+        int generatedKey = 0;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(ADD_NEW_USER_SQL_STRING, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, user.getUsername());
@@ -35,7 +41,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             preparedStatement.setString(3, user.getTitle());
             preparedStatement.setString(4, user.getfName());
             preparedStatement.setString(5, user.getlName());
-            preparedStatement.setString(6, user.getUserPassword());
+            preparedStatement.setString(6, hashPassword(user.getUserPassword()));
             preparedStatement.setString(7, user.getAuthority());
             preparedStatement.setString(8, user.getDescription());
             preparedStatement.setString(9, user.getPhoneNmbr());
@@ -47,17 +53,22 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             preparedStatement.setBoolean(14, user.getEmailVisibility());
             preparedStatement.setBoolean(15, user.getPhotoVisibility());
 
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
+            resultSet = preparedStatement.getGeneratedKeys();
 
-          /*  try (ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
-                while (resultSet.next()) {
-                    int userId = resultSet.getInt("user_id");
-                    user.setId(userId);
-                }
-            }*/
+            while (resultSet.next()) {
+                generatedKey = resultSet.getInt(1);
+                user.setId(generatedKey);
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    //Passwort haschen
+    public String hashPassword(String password) {
+        return BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
 
@@ -75,7 +86,6 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
 
             while (rs.next()) {
                 Trainer authorization = new Trainer(rs.getString("authorization"));
-                //System.out.println(rs.getString("authorization"));
                 authorizationList.add(authorization);
             }
         } catch (SQLException e) {
@@ -99,15 +109,13 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
                 Trainer trainer = new Trainer(resultSet.getInt("user_id"), resultSet.getString("username"), resultSet.getString("first_name"),
                         resultSet.getString("last_name"), resultSet.getString("authorization"), resultSet.getString("email"), resultSet.getString(
                         "phone"), resultSet.getString("description"), resultSet.getBoolean("active_status"));
-               trainerList.add(trainer);
+                trainerList.add(trainer);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return trainerList;
     }
-
-
 
 
     //BEISPIEL??
@@ -140,28 +148,88 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
     }
 
 
-    //private static final String SELECT_USERNAME_PASSWORD_SQL_STRING = " SELECT * FROM users WHERE username = ? AND " +
-            //"password = ? AND active_status = '1'";
-    public static User checkUsernamePasswordActiveStatus(String username, String password) {
+    private static final String SELECT_USERNAME_PASSWORD_SQL_STRING = " SELECT * FROM users WHERE username=? AND active_status='1'";
+
+    //paswort entschlüßeln
+    private boolean checkPass(String plainPassword, String hashedPassword) {
+        return BCrypt.checkpw(plainPassword, hashedPassword);
+    }
+
+
+    @Override
+    public boolean checkUser(String username, String pass) {
+        Connection connection = connect();
+        if (connection == null) {
+            System.out.println("Check XAMPP");
+        }
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            preparedStatement = connection.prepareStatement(SELECT_USERNAME_PASSWORD_SQL_STRING);
+            preparedStatement.setString(1, username);
+            //preparedStatement.setString(2, pass);
+            resultSet = preparedStatement.executeQuery();
+
+            resultSet.next();
+
+           if (checkPass(pass, resultSet.getString("password"))){
+               //logger.info("pass: {}", "TRUE");
+               return true;
+           }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        //logger.info("pass:{}", "FALSE");
+        return false;
+    }
+
+
+
+
+    public static final String SELECT_USERS_SQL_STRING = "SELECT username FROM users";
+
+    @Override
+    public void checkUniqueUsername(String username) throws SQLException {
+        Connection connection = connect();
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            statement = connection.prepareStatement(SELECT_USERS_SQL_STRING);
+            resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                String usernameDatabase = resultSet.getString("username");
+                if (usernameDatabase.equals(username)) {
+                    System.out.println("USERNAME IS SAME");
+                    QuickAlert.showError("Benutzername bereits vergeben");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public User loginUser(String username) {
         Connection connection = connect();
         if (connection == null) {
             System.out.println("Check XAMPP");
         }
         String queryUsername =
                 "SELECT * from users WHERE " +
-                        "username = '" + username + "' AND " +
-                        "password = '" + password + "' AND " +
-                        "active_status = '1'";
+                        "username = '" + username + "'";
+
         PreparedStatement statement = null;
 
         //String query = "{call checkUsernamePasswordActive(?,?)}";
         ResultSet resultSet = null;
         //CallableStatement stmt = null;
-
         try {
             statement = connection.prepareStatement(queryUsername);
             resultSet = statement.executeQuery();
             while (resultSet.next()) {
+
                 int userid = resultSet.getInt("user_id");
                 String user = resultSet.getString("username");
                 String title = resultSet.getString("title");
@@ -200,37 +268,5 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
         }
         return null;
     }
-
-
-
-    public static boolean checkUniqueUsername(String username) {
-        Connection connection = connect();
-        String query = "SELECT * FROM `users` WHERE `username`= '" + username + "'\n";
-        PreparedStatement statement = null;
-
-        //String query = "{call checkUniqueUsername(?)}";
-        ResultSet resultSet = null;
-        //CallableStatement stmt = null;
-
-        Alert a = new Alert(Alert.AlertType.ERROR);
-        a.setHeaderText("Username already taken");
-        try {
-            //stmt = connection.prepareCall(query);
-            //stmt.setString(1, username);
-            //resultSet = stmt.executeQuery();
-            statement = connection.prepareStatement(query);
-            resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                System.out.println(resultSet.getString("username"));
-                if (resultSet.getString("username").equals(username))
-                    a.show();
-                return false;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return true;
-    }
-
 
 }

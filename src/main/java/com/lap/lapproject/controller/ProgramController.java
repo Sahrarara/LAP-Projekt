@@ -5,12 +5,14 @@ import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.Program;
 import com.lap.lapproject.repos.CourseRepositoryJDBC;
 import com.lap.lapproject.repos.ProgramRepositoryJDBC;
+import com.lap.lapproject.utility.UsabilityMethods;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -30,6 +32,11 @@ public class ProgramController extends BaseController {
     private TableView<Program> tableViewProgram;
     @FXML
     private TableColumn<Program, String> programColumn;
+    @FXML
+    private ImageView searchIcon;
+    @FXML
+    private TextField searchBar;
+
 
     @FXML
     private void onAddProgramBtnClick(ActionEvent actionEvent) {
@@ -80,6 +87,7 @@ public class ProgramController extends BaseController {
 
     @FXML
     private void onSearchBarClick(ActionEvent actionEvent) {
+
     }
 
     @FXML
@@ -115,6 +123,7 @@ public class ProgramController extends BaseController {
         initTableProgram();
         //nimmt daten von tabele und befüllt das Formular
         listModel.selectedProgramProperty().bind(tableViewProgram.getSelectionModel().selectedItemProperty());
+        UsabilityMethods.changeListener(searchBar, searchIcon);
 
     }
 

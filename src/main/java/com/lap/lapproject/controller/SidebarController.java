@@ -131,7 +131,7 @@ public class SidebarController extends BaseController {
     }
 
     private void setUsername() {
-        if (model.getLoggedInUser().getfName() != null) {
+        if (model.getLoggedInUser() != null) {
             nameLabel.setText(model.getLoggedInUser().getfName());
         } else {
             nameLabel.setText("Gast");

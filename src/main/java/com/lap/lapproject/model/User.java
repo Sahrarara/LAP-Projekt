@@ -37,6 +37,7 @@ public abstract class User {
                 String authority, String description, String phoneNmbr,
                 String email, byte[] photo, Boolean descriptionVisibility,
                 Boolean phoneNmbrVisibility, Boolean emailVisibility, Boolean photoVisibility) {
+        this.id = new SimpleIntegerProperty();
         this.username = new SimpleStringProperty(username);
         this.activeStatus = new SimpleBooleanProperty(activeStatus);
         this.title = new SimpleStringProperty(title);

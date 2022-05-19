@@ -4,6 +4,7 @@ import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.User;
 import com.lap.lapproject.repos.UserRepositoryJDBC;
+import com.lap.lapproject.utility.QuickAlert;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LoginController extends BaseController implements Initializable{
+public class LoginController extends BaseController implements Initializable {
 
 
     @FXML
@@ -34,11 +35,12 @@ public class LoginController extends BaseController implements Initializable{
 
     @FXML
     private void onLoginBtnClick(ActionEvent actionEvent) {
-        if (checkFieldsFilled()){
-            String username = usernameTF.getText();
-            String password = passwordTF.getText();
-            User user = UserRepositoryJDBC.checkUsernamePasswordActiveStatus(username, password);
-            if (user != null){
+        UserRepositoryJDBC userRepositoryJDBC = new UserRepositoryJDBC();
+        String username = usernameTF.getText();
+        String password = passwordTF.getText();
+        if (checkFieldsFilled() &&  userRepositoryJDBC.checkUser(username, password)) {
+            User user = userRepositoryJDBC.loginUser(username);
+            if (user != null) {
                 model.setLoggedInUser(user);
                 System.out.println("Login successful");
                 moveToMainPage();
@@ -48,6 +50,11 @@ public class LoginController extends BaseController implements Initializable{
             }
         }
     }
+
+
+
+
+
 
     private boolean checkFieldsFilled() {
         if (usernameTF.getText() == null || usernameTF.getText().isBlank() || passwordTF.getText() == null || passwordTF.getText().isBlank()) {
@@ -61,11 +68,11 @@ public class LoginController extends BaseController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        usernameTF.setText("capitanMarvel");
-        passwordTF.setText("carol123");
+        usernameTF.setText("dorota1"); /*capitanMarvel*/
+        passwordTF.setText("dorota1"); /*carol123*/
     }
 
-    private void moveToMainPage(){
+    private void moveToMainPage() {
         Stage currentStage = this.getCurrentStage();
         currentStage.close();
 
@@ -73,8 +80,8 @@ public class LoginController extends BaseController implements Initializable{
         Scene scene = null;
 
         try {
-            scene= new Scene(fxmlLoader.load());
-        } catch (IOException e){
+            scene = new Scene(fxmlLoader.load());
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -83,7 +90,7 @@ public class LoginController extends BaseController implements Initializable{
         currentStage.show();
     }
 
-    private Stage getCurrentStage(){
+    private Stage getCurrentStage() {
         return (Stage) usernameTF.getScene().getWindow();
     }
 
