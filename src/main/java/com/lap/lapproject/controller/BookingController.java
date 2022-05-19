@@ -18,6 +18,7 @@ import javafx.scene.control.TableView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import org.controlsfx.control.action.Action;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,6 +35,8 @@ public class BookingController {
 
     @FXML
     private Button deleteBookingBtn;
+    @FXML
+    private Button editBookingButton;
     @FXML
     private ButtonBar bookingBtnBar;
     @FXML
@@ -54,9 +57,13 @@ public class BookingController {
     private TableColumn<Booking, String> dateTimeEndColumn;
     @FXML
     private TableColumn<Booking, String> recurrenceRuleColumn;
+    @FXML
+    private TableColumn<Booking, String> courseNameColumn;
+
 
     @FXML
     private void onAddBookingBtnClick(ActionEvent actionEvent) {
+        tableViewBooking.getSelectionModel().select(null);
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_BOOKING));
         Scene scene = null;
@@ -75,23 +82,32 @@ public class BookingController {
 
     @FXML
     private void onDeleteBookingBtnClick(ActionEvent actionEvent) {
-
         Booking booking  = tableViewBooking.getSelectionModel().getSelectedItem();
-        //logger.info("selectedItem: {}", booking.getRoom());
-
         BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
         bookingRepositoryJDBC.deleteBooking(booking);
-        //logger.info("deleteBooking: {}", booking.getId());
         listModel.bookingList.remove(booking);
     }
 
     @FXML
-    private void onSettingsBtnClick(ActionEvent actionEvent) {
+    private void onEditBtnClick(ActionEvent actionEvent) {
+
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_BOOKING));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stage.setTitle("Raum Management");
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
     void initialize() {
         assert bookingBtnBar != null : "fx:id=\"bookingBtnBar\" was not injected: check your FXML file 'booking-view.fxml'.";
+        assert courseNameColumn != null : "fx:id=\"courseNameColumn\" was not injected: check your FXML file 'booking-view.fxml'.";
         assert dateFromColumn != null : "fx:id=\"dateFromColumn\" was not injected: check your FXML file 'booking-view.fxml'.";
         assert dateToColumn != null : "fx:id=\"dateToColumn\" was not injected: check your FXML file 'booking-view.fxml'.";
         assert dateTimeEndColumn != null : "fx:id=\"dateTimeEndColumn\" was not injected: check your FXML file 'booking-view.fxml'.";
@@ -104,6 +120,7 @@ public class BookingController {
         assert trainerColumn != null : "fx:id=\"trainerColumn\" was not injected: check your FXML file 'booking-view.fxml'.";
         authorityVisibility();
         initBookingTable();
+        // Damit werden alle Choice-Boxen mit Daten aus der selektierte Tabellenzeile befüllt:
         listModel.selectedBookingProperty().bind(tableViewBooking.getSelectionModel().selectedItemProperty());
     }
 
@@ -111,15 +128,24 @@ public class BookingController {
     public void initBookingTable() {
 
         tableViewBooking.setItems(listModel.bookingList);
+        courseNameColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getCourse().getCourseName()));
         locationColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getRoom().getLocation().getStreet()));
         roomColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getRoom().getRoomNumber()));
         trainerColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getTrainer().getfName() + " " +
                 dataFeatures.getValue().getTrainer().getlName()));
         recurrenceRuleColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getRecurrenceRule()));
-        dateFromColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getDateTimeStart().toString().substring(0, 10)));
-        dateToColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getDateTimeEnd().toString().substring(0, 10)));
-        dateTimeStartColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getDateTimeStart().toString().substring(11)));
-        dateTimeEndColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getDateTimeEnd().toString().substring(11)));
+
+        dateFromColumn.setCellValueFactory((dataFeatures) ->
+                new SimpleObjectProperty<>(dataFeatures.getValue().getDateTimeStart().toLocalDate().toString()));
+
+        dateToColumn.setCellValueFactory((dataFeatures) ->
+                new SimpleObjectProperty<>(dataFeatures.getValue().getDateTimeEnd().toLocalDate().toString()));
+
+        dateTimeStartColumn.setCellValueFactory((dataFeatures) ->
+                new SimpleObjectProperty<>(dataFeatures.getValue().getDateTimeStart().toLocalTime().toString().substring(0, 5)));
+
+        dateTimeEndColumn.setCellValueFactory((dataFeatures) ->
+                new SimpleObjectProperty<>(dataFeatures.getValue().getDateTimeEnd().toLocalTime().toString().substring(0, 5)));
     }
 
 

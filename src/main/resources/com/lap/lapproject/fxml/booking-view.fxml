@@ -53,7 +53,7 @@
                               <String fx:value="icon-trash" />
                            </styleClass>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#onSettingsBtnClick" prefHeight="30.0" prefWidth="60.0">
+                        <Button fx:id="editBookingButton" mnemonicParsing="false" onAction="#onEditBtnClick" prefHeight="30.0" prefWidth="60.0">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -87,14 +87,15 @@
                <children>
                   <TableView fx:id="tableViewBooking" layoutX="20.0" layoutY="23.0" prefHeight="386.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                      <columns>
-                        <TableColumn fx:id="locationColumn" minWidth="-1.0" prefWidth="120.0" text="Standort" />
-                        <TableColumn fx:id="roomColumn" minWidth="-1.0" text="Raum" />
-                        <TableColumn fx:id="trainerColumn" minWidth="-1.0" prefWidth="130.0" text="Vortragender" />
-                        <TableColumn fx:id="recurrenceRuleColumn" minWidth="-1.0" prefWidth="90.0" text="Serientermin" />
-                        <TableColumn fx:id="dateFromColumn" minWidth="-1.0" prefWidth="100.0" text="Datum von" />
-                        <TableColumn fx:id="dateToColumn" minWidth="-1.0" prefWidth="100.0" text="Datum bis" />
-                        <TableColumn fx:id="dateTimeStartColumn" minWidth="-1.0" prefWidth="70.0" text="Beginn" />
-                        <TableColumn fx:id="dateTimeEndColumn" minWidth="-1.0" prefWidth="70.0" text="Ende" />
+                        <TableColumn fx:id="courseNameColumn" minWidth="-1.0" prefWidth="90.0" text="Veranstaltung" />
+                        <TableColumn fx:id="locationColumn" minWidth="-1.0" prefWidth="105.0" text="Standort" />
+                        <TableColumn fx:id="roomColumn" minWidth="-1.0" prefWidth="70.0" text="Raum" />
+                        <TableColumn fx:id="trainerColumn" minWidth="-1.0" prefWidth="100.0" text="Vortragender" />
+                        <TableColumn fx:id="recurrenceRuleColumn" minWidth="-1.0" prefWidth="85.0" text="Serientermin" />
+                        <TableColumn fx:id="dateFromColumn" minWidth="-1.0" prefWidth="90.0" text="Datum von" />
+                        <TableColumn fx:id="dateToColumn" minWidth="-1.0" prefWidth="90.0" text="Datum bis" />
+                        <TableColumn fx:id="dateTimeStartColumn" minWidth="-1.0" prefWidth="65.0" text="Beginn" />
+                        <TableColumn fx:id="dateTimeEndColumn" minWidth="-1.0" prefWidth="65.0" text="Ende" />
                      </columns>
                   </TableView>
                </children>

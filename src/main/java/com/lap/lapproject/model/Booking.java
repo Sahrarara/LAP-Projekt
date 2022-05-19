@@ -17,6 +17,7 @@ public class Booking {
     private LocalDateTime dateTimeEnd;
     private String recurrenceRule;
     private User user;
+    private Location location;
 
 
 
@@ -39,8 +40,6 @@ public class Booking {
         this.dateTimeEnd = dateTimeEnd;
         this.recurrenceRule = recurrenceRule;
     }
-
-
 
     public Room getRoom() {
         return room;
@@ -105,4 +104,5 @@ public class Booking {
     public void setId(int id) {
         this.id = id;
     }
+
 }
