@@ -1,7 +1,7 @@
 package com.lap.lapproject.repos;
 
 import com.lap.lapproject.application.BCrypt;
-import com.lap.lapproject.controller.QuickAlert;
+import com.lap.lapproject.utility.QuickAlert;
 import com.lap.lapproject.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -225,13 +225,10 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
         //String query = "{call checkUsernamePasswordActive(?,?)}";
         ResultSet resultSet = null;
         //CallableStatement stmt = null;
-        logger.info("We're here 2");
         try {
             statement = connection.prepareStatement(queryUsername);
             resultSet = statement.executeQuery();
-            logger.info("We're here 2 before the while");
             while (resultSet.next()) {
-                logger.info("We're here 2 after the while");
 
                 int userid = resultSet.getInt("user_id");
                 String user = resultSet.getString("username");

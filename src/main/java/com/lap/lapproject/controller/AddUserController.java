@@ -1,8 +1,8 @@
 package com.lap.lapproject.controller;
 
-import com.lap.lapproject.application.BCrypt;
 import com.lap.lapproject.model.Trainer;
 import com.lap.lapproject.repos.UserRepositoryJDBC;
+import com.lap.lapproject.utility.QuickAlert;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

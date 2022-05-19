@@ -1,20 +1,16 @@
 package com.lap.lapproject.controller;
 
 import com.lap.lapproject.LoginApplication;
-import com.lap.lapproject.application.BCrypt;
 import com.lap.lapproject.application.Constants;
-import com.lap.lapproject.model.Trainer;
 import com.lap.lapproject.model.User;
-import com.lap.lapproject.repos.UserRepository;
 import com.lap.lapproject.repos.UserRepositoryJDBC;
+import com.lap.lapproject.utility.QuickAlert;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -72,8 +68,8 @@ public class LoginController extends BaseController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        usernameTF.setText(""); /*capitanMarvel*/
-        passwordTF.setText(""); /*carol123*/
+        usernameTF.setText("dorota1"); /*capitanMarvel*/
+        passwordTF.setText("dorota1"); /*carol123*/
     }
 
     private void moveToMainPage() {

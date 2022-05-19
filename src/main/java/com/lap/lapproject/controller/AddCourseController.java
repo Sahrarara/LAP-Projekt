@@ -4,6 +4,7 @@ import com.lap.lapproject.model.Course;
 import com.lap.lapproject.model.Program;
 import com.lap.lapproject.repos.CourseRepositoryJDBC;
 import com.lap.lapproject.repos.ProgramRepositoryJDBC;
+import com.lap.lapproject.utility.QuickAlert;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
