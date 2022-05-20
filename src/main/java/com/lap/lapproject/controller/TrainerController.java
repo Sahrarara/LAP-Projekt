@@ -39,6 +39,7 @@ public class TrainerController extends BaseController{
 
     @FXML
     private void onAddTrainerBtnClick(ActionEvent actionEvent) {
+        tableViewTrainer.getSelectionModel().select(null);
         Stage stage = new Stage();
 
         FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_TRAINER));
@@ -96,7 +97,7 @@ public class TrainerController extends BaseController{
         authorityVisibility();
         initTrainerTable();
         //nimmt daten von tabele und befüllt das Formular
-        /* listModel.selectedProgramProperty().bind(tableViewTrainer.getSelectionModel().selectedItemProperty());*/
+         listModel.selectedUserProperty().bind(tableViewTrainer.getSelectionModel().selectedItemProperty());
     }
 
     private void initTrainerTable() {

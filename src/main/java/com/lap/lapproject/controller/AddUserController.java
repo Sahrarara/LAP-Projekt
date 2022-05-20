@@ -1,5 +1,6 @@
 package com.lap.lapproject.controller;
 
+import com.lap.lapproject.application.BCrypt;
 import com.lap.lapproject.model.Trainer;
 import com.lap.lapproject.repos.UserRepositoryJDBC;
 import com.lap.lapproject.utility.QuickAlert;
@@ -8,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -72,12 +74,13 @@ public class AddUserController extends BaseController {
         getCurrentStage().close();
     }
 
+    @FXML
     private Stage getCurrentStage() {
         return (Stage) firstNameTextField.getScene().getWindow();
     }
 
     @FXML
-    private void onAddBtnClick(ActionEvent actionEvent) throws SQLException {
+    private void onAddBtnClick(ActionEvent actionEvent) throws SQLException, IOException {
         String username = usernameTextField.getText();
         boolean active = activeCheckBox.isSelected();
         String title = titleTextField.getText();
@@ -94,28 +97,65 @@ public class AddUserController extends BaseController {
         boolean emailVisible = emailCheckBox.isSelected();
         boolean photoVisible = photoCheckBox.isSelected();
 
-        checkUser(username);
-        validateEmail(email);
-
-
-        //emptyPath(photoPath);
 
         //neue User in der datenbank speichern
         UserRepositoryJDBC userRepositoryJDBC = new UserRepositoryJDBC();
+        Trainer trainer;
 
         if (!username.isBlank() && !firstName.isBlank() && !lastName.isBlank()
                 && !(authorizationChoiceBox.getValue() == null) &&
                 !password.isBlank() && !email.isBlank() && !telephone.isBlank()) {
-            try {
-                Trainer trainer = new Trainer(username, title, active, firstName, lastName, password,
-                        authorization, description,
-                        telephone, email, convertToBytes(photoPath), descriptionVisible, telephoneVisible, emailVisible, photoVisible);
-                userRepositoryJDBC.add(trainer);
-                listModel.trainerList.add(trainer);
-                getCurrentStage().close();
-            } catch (Exception e) {
-                e.printStackTrace();
+
+            if (listModel.getSelectedUser() == null) {
+                try {
+                    checkUser(username);
+                    validateEmail(email);
+                    trainer = new Trainer(username, title, active, firstName, lastName, password,
+                            authorization, description,
+                            telephone, email, convertToBytes(photoPath), descriptionVisible, telephoneVisible, emailVisible, photoVisible);
+                    userRepositoryJDBC.add(trainer);
+                    listModel.trainerList.add(trainer);
+                    getCurrentStage().close();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            } else {
+
+                trainer = listModel.getSelectedUser();
+                trainer.setUsername(usernameTextField.getText());
+                trainer.setActiveStatus(activeCheckBox.isSelected());
+                trainer.setTitle(titleTextField.getText());
+                trainer.setFirstName(firstNameTextField.getText());
+                trainer.setLastName(lastNameTextField.getText());
+
+
+                trainer.setUserPassword(passwordTextField.getText());
+
+
+                trainer.setAuthority(String.valueOf(authorizationChoiceBox.getValue()));
+                trainer.setPhoneNmbr(phoneNmbrTextField.getText());
+                trainer.setEmail(emailTextField.getText());
+
+                trainer.setPhoto(convertToBytes(photoPathTextField.getText()));
+
+
+                trainer.setDescriptionVisibility(descriptionCheckBox.isSelected());
+                trainer.setPhoneNmbrVisibility(phoneNmbrCheckBox.isSelected());
+                trainer.setEmailVisibility(emailCheckBox.isSelected());
+                trainer.setPhotoVisibility(photoCheckBox.isSelected());
+
+                try {
+                    userRepositoryJDBC.updateUser(trainer);
+                    listModel.trainerList.set(listModel.trainerList.indexOf(trainer), trainer);
+                    // getCurrentStage().close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
             }
+
 
         } else {
             QuickAlert.showError("Bitte folgende Felder ausfüllen:\nNutzername\nVorname\nNachname\nAuthorization\npassword\ne-mail\nTelefon");
@@ -143,9 +183,11 @@ public class AddUserController extends BaseController {
 
         fillChoiceBox();
         textLabelInvisible();
+        fillFormToUpdate();
 
     }
 
+    @FXML
     public void fillChoiceBox() {
         ObservableList<String> authorizationName = FXCollections.observableArrayList(
                 listModel.authorizationList.stream()
@@ -155,12 +197,14 @@ public class AddUserController extends BaseController {
         authorizationChoiceBox.setItems(authorizationName);
     }
 
+    @FXML
     public void textLabelInvisible() {
         //setzt Label auf unsichtbar
         errorUsername.setVisible(false);
         errorEmail.setVisible(false);
     }
 
+    @FXML
     public void checkUser(String username) throws SQLException {
         UserRepositoryJDBC userRepositoryJDBC = new UserRepositoryJDBC();
         if (userRepositoryJDBC.checkUniqueUsername(username)) {
@@ -171,6 +215,7 @@ public class AddUserController extends BaseController {
         }
     }
 
+    @FXML
     public byte[] convertToBytes(String pathToImage) throws IOException {
         FileInputStream fileInputStream = new FileInputStream(pathToImage);
         byte[] imageBytes = fileInputStream.readAllBytes();
@@ -179,6 +224,7 @@ public class AddUserController extends BaseController {
 
 
     //Email prüfen
+    @FXML
     public void validateEmail(String email) {
         Pattern compile = Pattern.compile("[_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.([a-zA-Z]{2,}){1}");
         Matcher matcher = compile.matcher(email);
@@ -194,14 +240,39 @@ public class AddUserController extends BaseController {
     // 1 Großbuchstabe, 1 Kleinbuchstabe, 1 Ziffer, 1 Sonderzeichen enthält und eine Länge von mindestens 8 hat
     // (Password Bedigungen)
     //TINA???
+    @FXML
     public boolean checkPassword(String password) {
         Pattern compile = Pattern.compile("^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\\W).*$");
         Matcher matcher = compile.matcher(password);
         return matcher.matches();
     }
 
+    @FXML
+    public void fillFormToUpdate() {
+        if (listModel.getSelectedUser() != null) {
+            usernameTextField.setText(listModel.getSelectedUser().getUsername());
+            titleTextField.setText(listModel.getSelectedUser().getTitle());
+            activeCheckBox.setSelected(listModel.getSelectedUser().getActiveStatus());
+            firstNameTextField.setText(listModel.getSelectedUser().getfName());
+            lastNameTextField.setText(listModel.getSelectedUser().getlName());
+            //passwordTextField.setText(listModel.getSelectedUser().getUserPassword());
+            authorizationChoiceBox.setValue(listModel.getSelectedUser().getAuthority());
+            descriptionTextArea.setText(listModel.getSelectedUser().getDescription());
+            phoneNmbrTextField.setText(listModel.getSelectedUser().getPhoneNmbr());
+            emailTextField.setText(listModel.getSelectedUser().getEmail());
+
+            //TODO: byte array auf pfad konvertieren
+
+//            photoPathTextField.setText(listModel.getSelectedUser().getPhoto().toString());
 
 
+            descriptionCheckBox.setSelected(listModel.getSelectedUser().getDescriptionVisibility());
+            phoneNmbrCheckBox.setSelected(listModel.getSelectedUser().getPhoneNmbrVisibility());
+            emailCheckBox.setSelected(listModel.getSelectedUser().getEmailVisibility());
+            photoCheckBox.setSelected(listModel.getSelectedUser().getPhotoVisibility());
+        }
+
+    }
 
 
 
