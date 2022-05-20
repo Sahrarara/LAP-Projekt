@@ -21,17 +21,13 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
     private static final String SQL_SELECT_WHERE_ID = "SELECT * WHERE id=?";
 
     private static final String SELECT_TRAINER_SQL_STRING = "SELECT * FROM users WHERE authorization='coach'";
-
     private static final String ADD_NEW_USER_SQL_STRING = "INSERT INTO users (username,active_status,title,first_name,last_name,password," +
             " authorization,description,phone,email, photo, description_visable, phone_visable, email_visable," +
             "photo_visable) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
     private static final String SELECT_AUTHORIZATION_SQL_STRING = "SELECT DISTINCT authorization FROM users";
     private static final String SELECT_USERNAME_PASSWORD_SQL_STRING = " SELECT * FROM users WHERE username=? AND active_status='1'";
     public static final String SELECT_USERS_SQL_STRING = "SELECT username FROM users";
-
     private static final String DELETE_USER_SQL_STRING = "DELETE FROM users WHERE user_id=?";
-
     private static final String UPDATE_USER_SQL_STRING = "UPDATE users SET username=?,active_status=?," +
             "title=?,first_name=?, last_name=?,password=?,authorization=?,description=?,phone=?,email=?,photo=?,description_visable=?,phone_visable=?,email_visable=?," +
             "photo_visable=? WHERE user_id=?";
@@ -54,6 +50,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             preparedStatement.setString(8, user.getDescription());
             preparedStatement.setString(9, user.getPhoneNmbr());
             preparedStatement.setString(10, user.getEmail());
+
             InputStream inputStream = null;
             if (user.getPhoto() != null) {
                 inputStream = new ByteArrayInputStream(user.getPhoto());
@@ -87,10 +84,12 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
     public void deleteUser(User user) {
         Connection connection = connect();
         PreparedStatement preparedStatement = null;
+
         try {
             preparedStatement = connection.prepareStatement(DELETE_USER_SQL_STRING);
             preparedStatement.setInt(1, user.getId());
             preparedStatement.executeUpdate();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -101,7 +100,6 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
     public void updateUser(User user) throws SQLException {
         Connection connection = connect();
         PreparedStatement preparedStatement = null;
-
         try {
             preparedStatement = connection.prepareStatement(UPDATE_USER_SQL_STRING);
             preparedStatement.setString(1, user.getUsername());
@@ -114,11 +112,13 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             preparedStatement.setString(8, user.getDescription());
             preparedStatement.setString(9, user.getPhoneNmbr());
             preparedStatement.setString(10, user.getEmail());
+
             InputStream inputStream = null;
             if (user.getPhoto() != null) {
                 inputStream = new ByteArrayInputStream(user.getPhoto());
             }
             preparedStatement.setBlob(11, inputStream);
+
             preparedStatement.setBoolean(12, user.getDescriptionVisibility());
             preparedStatement.setBoolean(13, user.getPhoneNmbrVisibility());
             preparedStatement.setBoolean(14, user.getEmailVisibility());
@@ -148,6 +148,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
                 Trainer authorization = new Trainer(rs.getString("authorization"));
                 authorizationList.add(authorization);
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -174,6 +175,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
                         resultSet.getBoolean("active_status"),
                         resultSet.getString("first_name"),
                         resultSet.getString("last_name"),
+                        resultSet.getString("password"),
                         resultSet.getString("authorization"),
                         resultSet.getString("description"),
                         resultSet.getString("phone"),
@@ -186,6 +188,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
                 );
                 trainerList.add(trainer);
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -198,15 +201,14 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
     public Optional<User> read(long id) throws SQLException {
         User user = null;
         try (PreparedStatement preparedStatement = connect().prepareStatement(SQL_SELECT_WHERE_ID)) {
-
             preparedStatement.setLong(1, id);
-
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 getUser(resultSet);
             }
         }
         return Optional.of(user);
     }
+
 
     //BEISPIEL??
     private User getUser(ResultSet resultSet) throws SQLException {
@@ -241,15 +243,14 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
         try {
             preparedStatement = connection.prepareStatement(SELECT_USERNAME_PASSWORD_SQL_STRING);
             preparedStatement.setString(1, username);
-            //preparedStatement.setString(2, pass);
             resultSet = preparedStatement.executeQuery();
 
             resultSet.next();
 
-           if (checkPass(pass, resultSet.getString("password"))){
-               //logger.info("pass: {}", "TRUE");
-               return true;
-           }
+            if (checkPass(pass, resultSet.getString("password"))) {
+                //logger.info("pass: {}", "TRUE");
+                return true;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -267,6 +268,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
         try {
             statement = connection.prepareStatement(SELECT_USERS_SQL_STRING);
             resultSet = statement.executeQuery();
+
             while (resultSet.next()) {
                 if (resultSet.getString("username").equals(username)) {
                     return true;
@@ -304,6 +306,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
                 String activeStatus = resultSet.getString("active_status");
                 String firstname = resultSet.getString("first_name");
                 String lastname = resultSet.getString("last_name");
+                String password = resultSet.getString("password");
                 String authority = resultSet.getString("authorization");
                 String description = resultSet.getString("description");
                 String phoneNmbr = resultSet.getString("phone");
@@ -318,13 +321,15 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
 
                     case "admin":
 
-                        Admin admin = new Admin(userid, user, title, Boolean.valueOf(activeStatus), firstname, lastname, authority, description,
+                        Admin admin = new Admin(userid, user, title, Boolean.valueOf(activeStatus), firstname,
+                                lastname, password,authority, description,
                                 phoneNmbr, email, photo, descriptionVisibility, phoneNmbrVisibility, emailVisibility, photoVisibility);
                         return admin;
 
                     case "coach":
 
-                        Trainer trainer = new Trainer(userid, user, title, Boolean.valueOf(activeStatus), firstname, lastname, authority, description,
+                        Trainer trainer = new Trainer(userid, user, title, Boolean.valueOf(activeStatus), firstname,
+                                lastname, password,authority, description,
                                 phoneNmbr, email, photo, descriptionVisibility, phoneNmbrVisibility, emailVisibility, photoVisibility);
                         return trainer;
                     default:
