@@ -25,7 +25,15 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
             "INSERT INTO booking(room_id, user_id, trainer_id, course_id, recurrence_rule, datetime_start, datetime_end)" +
                     " VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-    private static final String DELETE_BOOKING_SQL_STRING = "DELETE FROM booking WHERE booking_id=?";
+    private static final String DELETE_BOOKING_SQL_STRING = "DELETE FROM booking WHERE booking_id = ?";
+
+    private static final String UPDATE_BOOKING_SQL_STRING =
+            "UPDATE booking SET room_id=?, user_id=?, trainer_id=?, course_id=?," +
+                    "recurrence_rule=?, datetime_start=?, datetime_end=? WHERE booking_id=?";
+
+
+    private static final String GET_COURSES_COUNT_BY_PROGRAM_ID_JOIN_LOCATION_ID_SQL_STRING = "SELECT COUNT(*) AS booking_count_by_location FROM booking JOIN rooms ON booking.room_id=rooms.room_id JOIN location ON location.location_id=rooms.location_id WHERE rooms.location_id =(?) ";
+
 
     @Override
     public ArrayList<Booking> readAll() throws SQLException {
@@ -78,13 +86,8 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
                         resultSet.getString("course_name"));
 
 
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
-                String timeStart = resultSet.getString("course_start");
-                LocalDate courseStart = (LocalDate.parse(timeStart));
-
-                String timeEnd = resultSet.getString("course_end");
-                LocalDate courseEnd = (LocalDate.parse(timeEnd));
+                LocalDate courseStart = resultSet.getDate("course_start").toLocalDate();
+                LocalDate courseEnd = resultSet.getDate("course_end").toLocalDate();
 
 
                 Course course = new Course(
@@ -96,13 +99,12 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
                         resultSet.getInt("group_size"));
 
 
-                String datetimeStart = resultSet.getString("datetime_start");
-                LocalDateTime startTime = LocalDateTime.parse(datetimeStart, formatter);
+                LocalDateTime startTime = resultSet.getTimestamp("datetime_start").toLocalDateTime();
+                LocalDateTime endTime = resultSet.getTimestamp("datetime_end").toLocalDateTime();
 
-                String datetimeEnd = resultSet.getString("datetime_end");
-                LocalDateTime endTime = LocalDateTime.parse(datetimeEnd, formatter);
 
-                String recurrenceRule = resultSet.getString("recurrence_rule");
+                String recurrenceRuleFrequency = resultSet.getString("recurrence_rule");
+                String recurrenceRule = convertRecurrenceRuleFromFrequencyToText(recurrenceRuleFrequency);
 
                 Booking booking = new Booking(
                         resultSet.getInt("booking_id"),
@@ -129,7 +131,10 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
             preparedStatement.setInt(2, booking.getUser().getId());
             preparedStatement.setInt(3, booking.getTrainer().getId());
             preparedStatement.setInt(4, booking.getCourse().getId());
-            preparedStatement.setString(5, booking.getRecurrenceRule());
+
+            String recurrenceRuleFrequency = convertRecurrenceRuleFromTextToFrequency(booking.getRecurrenceRule());
+
+            preparedStatement.setString(5, recurrenceRuleFrequency);
             preparedStatement.setObject(6, booking.getDateTimeStart());
             preparedStatement.setObject(7, booking.getDateTimeEnd());
             preparedStatement.executeUpdate();
@@ -154,13 +159,100 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
         try {
             preparedStatement = connection.prepareStatement(DELETE_BOOKING_SQL_STRING);
             preparedStatement.setInt(1, booking.getId());
-            logger.info("bookingID: {}", booking.getId());
             preparedStatement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
 
 
+
+    @Override
+    public void updateBooking(Booking booking) {
+
+        Connection connection = connect();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(UPDATE_BOOKING_SQL_STRING);
+            preparedStatement.setInt(1, booking.getRoom().getId());
+            preparedStatement.setInt(2, booking.getUser().getId());
+            preparedStatement.setInt(3, booking.getTrainer().getId());
+            preparedStatement.setInt(4, booking.getCourse().getId());
+
+            String recurrenceRule = convertRecurrenceRuleFromTextToFrequency(booking.getRecurrenceRule());
+
+            preparedStatement.setString(5, recurrenceRule);
+            preparedStatement.setObject(6, booking.getDateTimeStart());
+            preparedStatement.setObject(7, booking.getDateTimeEnd());
+            preparedStatement.setInt(8, booking.getId());
+
+            logger.info("updated");
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    private String convertRecurrenceRuleFromTextToFrequency(String recurrenceRuleText) {
+        String recurrenceRule;
+        switch (recurrenceRuleText) {
+            case "täglich":
+                recurrenceRule = "RRULE:FREQ=DAILY";
+                break;
+            case "wöchentlich":
+                recurrenceRule = "RRULE:FREQ=WEEKLY";
+                break;
+            case "monatlich":
+                recurrenceRule = "RRULE:FREQ=MONTHLY";
+                break;
+            default:
+                recurrenceRule = "keiner";
+        }
+        return recurrenceRule;
+    }
+
+
+
+    private String convertRecurrenceRuleFromFrequencyToText(String recurrenceRuleFrequency) {
+        String recurrenceRule;
+        switch (recurrenceRuleFrequency) {
+            case "RRULE:FREQ=DAILY":
+                recurrenceRule = "täglich";
+                break;
+            case "RRULE:FREQ=WEEKLY":
+                recurrenceRule = "wöchentlich";
+                break;
+            case "RRULE:FREQ=MONTHLY":
+                recurrenceRule = "monatlich";
+                break;
+            default:
+                recurrenceRule = "keiner";
+        }
+        return recurrenceRule;
+    }
+
+    @Override
+    public int getBookingCountByProgramIdJoinLocationId(int locationId) {
+        Connection connection = connect();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        int roomsCountByLocationId = 0;
+        try {
+            preparedStatement = connection.prepareStatement(GET_COURSES_COUNT_BY_PROGRAM_ID_JOIN_LOCATION_ID_SQL_STRING );
+            preparedStatement.setInt(1, locationId);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                roomsCountByLocationId = resultSet.getInt("booking_count_by_location");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return roomsCountByLocationId;
     }
 
 

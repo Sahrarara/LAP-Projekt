@@ -12,5 +12,6 @@ public interface CourseRepository {
 
     void deleteCourse(Course course) throws SQLException;
     void updateCourse(Course course) throws SQLException;
+    int getCoursesCountByProgramId(int programId) throws SQLException;
 
 }

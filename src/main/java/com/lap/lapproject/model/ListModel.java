@@ -4,6 +4,7 @@ import com.lap.lapproject.repos.*;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +22,6 @@ public class ListModel {
     public  ObservableList<Booking> bookingList = FXCollections.observableArrayList();
     public ObservableList<Trainer> trainerList = FXCollections.observableArrayList();
     public ObservableList<Room> roomList = FXCollections.observableArrayList();
-
     public ObservableList<Trainer> authorizationList = FXCollections.observableArrayList();
 
 
@@ -59,7 +59,36 @@ public class ListModel {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        addListener();
+        //addAllListeners();
+
+
     }
+
+
+    public void addListener() {
+            bookingList.addListener(new ListChangeListener<Booking>() {
+            @Override
+            public void onChanged(ListChangeListener.Change<? extends Booking> change) {
+                while (change.next()) {
+
+                    if (change.wasReplaced()) {
+                        //...
+                    } else if (change.wasAdded()) {
+                        for (Booking booking : change.getAddedSubList()) {
+                            bookingRepositoryJDBC.addBooking(booking);
+                        }
+                    } else if (change.wasRemoved()) {
+                        // ...
+                    }
+                }
+            }
+        });
+
+    }
+
+
 
 
     public Program getSelectedProgram() {

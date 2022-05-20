@@ -27,6 +27,14 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             "photo_visable) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     private static final String SELECT_AUTHORIZATION_SQL_STRING = "SELECT DISTINCT authorization FROM users";
+    private static final String SELECT_USERNAME_PASSWORD_SQL_STRING = " SELECT * FROM users WHERE username=? AND active_status='1'";
+    public static final String SELECT_USERS_SQL_STRING = "SELECT username FROM users";
+
+    private static final String DELETE_USER_SQL_STRING = "DELETE FROM users WHERE user_id=?";
+
+    private static final String UPDATE_USER_SQL_STRING = "UPDATE users SET username=?,active_status=?," +
+            "title=?,first_name=?, last_name=?,password=?,authorization=?,description=?,phone=?,email=?,photo=?,description_visable=?,phone_visable=?,email_visable=?," +
+            "photo_visable=? WHERE user_id=?";
 
 
     @Override
@@ -46,7 +54,10 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             preparedStatement.setString(8, user.getDescription());
             preparedStatement.setString(9, user.getPhoneNmbr());
             preparedStatement.setString(10, user.getEmail());
-            InputStream inputStream = new ByteArrayInputStream(user.getPhoto());
+            InputStream inputStream = null;
+            if (user.getPhoto() != null) {
+                inputStream = new ByteArrayInputStream(user.getPhoto());
+            }
             preparedStatement.setBlob(11, inputStream);
             preparedStatement.setBoolean(12, user.getDescriptionVisibility());
             preparedStatement.setBoolean(13, user.getPhoneNmbrVisibility());
@@ -69,6 +80,55 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
     //Passwort haschen
     public String hashPassword(String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt());
+    }
+
+
+    @Override
+    public void deleteUser(User user) {
+        Connection connection = connect();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(DELETE_USER_SQL_STRING);
+            preparedStatement.setInt(1, user.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @Override
+    public void updateUser(User user) throws SQLException {
+        Connection connection = connect();
+        PreparedStatement preparedStatement = null;
+
+        try {
+            preparedStatement = connection.prepareStatement(UPDATE_USER_SQL_STRING);
+            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.setBoolean(2, user.getActiveStatus());
+            preparedStatement.setString(3, user.getTitle());
+            preparedStatement.setString(4, user.getfName());
+            preparedStatement.setString(5, user.getlName());
+            preparedStatement.setString(6, hashPassword(user.getUserPassword()));
+            preparedStatement.setString(7, user.getAuthority());
+            preparedStatement.setString(8, user.getDescription());
+            preparedStatement.setString(9, user.getPhoneNmbr());
+            preparedStatement.setString(10, user.getEmail());
+            InputStream inputStream = null;
+            if (user.getPhoto() != null) {
+                inputStream = new ByteArrayInputStream(user.getPhoto());
+            }
+            preparedStatement.setBlob(11, inputStream);
+            preparedStatement.setBoolean(12, user.getDescriptionVisibility());
+            preparedStatement.setBoolean(13, user.getPhoneNmbrVisibility());
+            preparedStatement.setBoolean(14, user.getEmailVisibility());
+            preparedStatement.setBoolean(15, user.getPhotoVisibility());
+            preparedStatement.setInt(16, user.getId());
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -106,9 +166,24 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             statement = connection.prepareStatement(SELECT_TRAINER_SQL_STRING);
             resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Trainer trainer = new Trainer(resultSet.getInt("user_id"), resultSet.getString("username"), resultSet.getString("first_name"),
-                        resultSet.getString("last_name"), resultSet.getString("authorization"), resultSet.getString("email"), resultSet.getString(
-                        "phone"), resultSet.getString("description"), resultSet.getBoolean("active_status"));
+
+                Trainer trainer = new Trainer(
+                        resultSet.getInt("user_id"),
+                        resultSet.getString("username"),
+                        resultSet.getString("title"),
+                        resultSet.getBoolean("active_status"),
+                        resultSet.getString("first_name"),
+                        resultSet.getString("last_name"),
+                        resultSet.getString("authorization"),
+                        resultSet.getString("description"),
+                        resultSet.getString("phone"),
+                        resultSet.getString("email"),
+                        resultSet.getBytes("photo"),
+                        resultSet.getBoolean("description_visable"),
+                        resultSet.getBoolean("phone_visable"),
+                        resultSet.getBoolean("email_visable"),
+                        resultSet.getBoolean("photo_visable")
+                );
                 trainerList.add(trainer);
             }
         } catch (SQLException e) {
@@ -148,8 +223,6 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
     }
 
 
-    private static final String SELECT_USERNAME_PASSWORD_SQL_STRING = " SELECT * FROM users WHERE username=? AND active_status='1'";
-
     //paswort entschlüßeln
     private boolean checkPass(String plainPassword, String hashedPassword) {
         return BCrypt.checkpw(plainPassword, hashedPassword);
@@ -185,12 +258,8 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
     }
 
 
-
-
-    public static final String SELECT_USERS_SQL_STRING = "SELECT username FROM users";
-
     @Override
-    public void checkUniqueUsername(String username) throws SQLException {
+    public boolean checkUniqueUsername(String username) throws SQLException {
         Connection connection = connect();
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -199,15 +268,14 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             statement = connection.prepareStatement(SELECT_USERS_SQL_STRING);
             resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                String usernameDatabase = resultSet.getString("username");
-                if (usernameDatabase.equals(username)) {
-                    System.out.println("USERNAME IS SAME");
-                    QuickAlert.showError("Benutzername bereits vergeben");
+                if (resultSet.getString("username").equals(username)) {
+                    return true;
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return false;
     }
 
 

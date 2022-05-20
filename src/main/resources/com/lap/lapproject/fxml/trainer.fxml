@@ -53,7 +53,7 @@
                               <String fx:value="icon-trash" />
                            </styleClass>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#onSettingsBtnClick" prefHeight="30.0" prefWidth="60.0">
+                        <Button mnemonicParsing="false" onAction="#onEditBtnClick" prefHeight="30.0" prefWidth="60.0">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

@@ -7,14 +7,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.sql.SQLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -50,6 +48,10 @@ public class AddUserController extends BaseController {
     private TextArea descriptionTextArea;
     @FXML
     private CheckBox descriptionCheckBox;
+    @FXML
+    private Label errorEmail;
+    @FXML
+    private Label errorUsername;
 
     @FXML
     private void onFileBtnClick(ActionEvent actionEvent) {
@@ -75,50 +77,45 @@ public class AddUserController extends BaseController {
     }
 
     @FXML
-    private void onAddBtnClick(ActionEvent actionEvent) {
-
-        String username = usernameTextField.getText(); // TODO: EXISTIERT SCHON IN DB??
-
+    private void onAddBtnClick(ActionEvent actionEvent) throws SQLException {
+        String username = usernameTextField.getText();
         boolean active = activeCheckBox.isSelected();
         String title = titleTextField.getText();
         String firstName = firstNameTextField.getText();
         String lastName = lastNameTextField.getText();
-        String password = passwordTextField.getText(); // TODO: HASHEN!!!
+        String password = passwordTextField.getText();
         String authorization = String.valueOf(authorizationChoiceBox.getValue());
         String description = descriptionTextArea.getText();
         String telephone = phoneNmbrTextField.getText();
-        String email = emailTextField.getText(); //TODO: valid email regex?
-
-
+        String email = emailTextField.getText();
         String photoPath = photoPathTextField.getText();
-
         boolean descriptionVisible = descriptionCheckBox.isSelected();
         boolean telephoneVisible = phoneNmbrCheckBox.isSelected();
         boolean emailVisible = emailCheckBox.isSelected();
         boolean photoVisible = photoCheckBox.isSelected();
 
+        checkUser(username);
+        validateEmail(email);
+
+
+        //emptyPath(photoPath);
 
         //neue User in der datenbank speichern
         UserRepositoryJDBC userRepositoryJDBC = new UserRepositoryJDBC();
 
-        //userRepositoryJDBC.checkUniqueUsername(username);
-        //validateEmail(email);
-        //checkPassword(password);
-
-
         if (!username.isBlank() && !firstName.isBlank() && !lastName.isBlank()
                 && !(authorizationChoiceBox.getValue() == null) &&
                 !password.isBlank() && !email.isBlank() && !telephone.isBlank()) {
-            //TODO: Insert create new User function hier einfügen
             try {
                 Trainer trainer = new Trainer(username, title, active, firstName, lastName, password,
                         authorization, description,
                         telephone, email, convertToBytes(photoPath), descriptionVisible, telephoneVisible, emailVisible, photoVisible);
                 userRepositoryJDBC.add(trainer);
+                listModel.trainerList.add(trainer);
+                getCurrentStage().close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
 
         } else {
             QuickAlert.showError("Bitte folgende Felder ausfüllen:\nNutzername\nVorname\nNachname\nAuthorization\npassword\ne-mail\nTelefon");
@@ -144,15 +141,34 @@ public class AddUserController extends BaseController {
         assert titleTextField != null : "fx:id=\"titleTextField\" was not injected: check your FXML file 'adduser-view.fxml'.";
         assert usernameTextField != null : "fx:id=\"usernameTextField\" was not injected: check your FXML file 'adduser-view.fxml'.";
 
+        fillChoiceBox();
+        textLabelInvisible();
 
+    }
+
+    public void fillChoiceBox() {
         ObservableList<String> authorizationName = FXCollections.observableArrayList(
                 listModel.authorizationList.stream()
                         .map(authorization -> authorization.getAuthority())
                         .collect(Collectors.toList()));
 
         authorizationChoiceBox.setItems(authorizationName);
+    }
 
+    public void textLabelInvisible() {
+        //setzt Label auf unsichtbar
+        errorUsername.setVisible(false);
+        errorEmail.setVisible(false);
+    }
 
+    public void checkUser(String username) throws SQLException {
+        UserRepositoryJDBC userRepositoryJDBC = new UserRepositoryJDBC();
+        if (userRepositoryJDBC.checkUniqueUsername(username)) {
+            errorUsername.setVisible(true);
+            errorUsername.setText("Benutzername existiert bereits");
+        } else {
+            errorUsername.setVisible(false);
+        }
     }
 
     public byte[] convertToBytes(String pathToImage) throws IOException {
@@ -161,26 +177,27 @@ public class AddUserController extends BaseController {
         return imageBytes;
     }
 
+
     //Email prüfen
-    public boolean validateEmail(String email) {
+    public void validateEmail(String email) {
         Pattern compile = Pattern.compile("[_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.([a-zA-Z]{2,}){1}");
         Matcher matcher = compile.matcher(email);
-        System.out.println(matcher.matches());
-        System.out.println("EMAIL: ");
-        return true;
+        if (!matcher.matches()) {
+            errorEmail.setVisible(true);
+            errorEmail.setText("Email nicht gültig");
+        } else {
+            errorEmail.setVisible(false);
+        }
     }
 
 
     // 1 Großbuchstabe, 1 Kleinbuchstabe, 1 Ziffer, 1 Sonderzeichen enthält und eine Länge von mindestens 8 hat
     // (Password Bedigungen)
-
-
+    //TINA???
     public boolean checkPassword(String password) {
         Pattern compile = Pattern.compile("^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\\W).*$");
         Matcher matcher = compile.matcher(password);
-        System.out.println(matcher.matches());
-        System.out.println("PASSWORT: ");
-        return true;
+        return matcher.matches();
     }
 
 

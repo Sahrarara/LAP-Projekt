@@ -78,7 +78,7 @@
             <Insets />
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" onAction="#onAddBtnClick" text="HINZUFÜGEN" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="15" GridPane.valignment="TOP">
+      <Button fx:id="addButton" mnemonicParsing="false" onAction="#onAddBtnClick" text="HINZUFÜGEN" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="15" GridPane.valignment="TOP">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>

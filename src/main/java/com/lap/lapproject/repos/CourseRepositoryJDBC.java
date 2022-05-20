@@ -11,7 +11,9 @@ public class CourseRepositoryJDBC extends Repository implements CourseRepository
             "group_size, name FROM courses JOIN programs WHERE courses.program_id=programs.program_id";
    private static final String ADD_NEW_COURSE_SQL_STRING = "INSERT INTO courses (course_name, course_start, course_end, program_id, group_size) VALUES (?, ?, ?, ?, ?)";
    private static final String DELETE_COURSE_SQL_STRING = "DELETE FROM courses WHERE course_id=?";
-    private static final String UPDATE_COURSE_SQL_STRING = "UPDATE courses SET course_name =?, course_start=?, course_end=?, program_id=?, group_size=? WHERE course_id=?";
+   private static final String UPDATE_COURSE_SQL_STRING = "UPDATE courses SET course_name =?, course_start=?, course_end=?, program_id=?, group_size=? WHERE course_id=?";
+   private static final String GET_COURSES_COUNT_BY_PROGRAM_ID_SQL_STRING = "SELECT COUNT(*) AS courses_count FROM courses WHERE program_id = (?)";
+
 
 
 
@@ -112,5 +114,25 @@ public class CourseRepositoryJDBC extends Repository implements CourseRepository
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public int getCoursesCountByProgramId(int programId) {
+        Connection connection = connect();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        int coursesCount = 0;
+        try {
+            preparedStatement = connection.prepareStatement(GET_COURSES_COUNT_BY_PROGRAM_ID_SQL_STRING );
+            preparedStatement.setInt(1, programId);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                coursesCount = resultSet.getInt("courses_count");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return coursesCount;
     }
 }
