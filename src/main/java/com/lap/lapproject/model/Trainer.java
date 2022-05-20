@@ -19,9 +19,9 @@ public class Trainer extends User {
 
     //UserRepositoryJDBC
     public Trainer(int id, String username, String title, Boolean activeStatus, String firstName, String lastName,
-                   String authority, String description, String phoneNmbr, String email, byte[] photo,
+                   String userPassword,String authority, String description, String phoneNmbr, String email, byte[] photo,
                    Boolean descriptionVisibility, Boolean phoneNmbrVisibility, Boolean emailVisibility, Boolean photoVisibility) {
-        super(id, username, title, activeStatus, firstName, lastName, authority, description, phoneNmbr,
+        super(id, username, title, activeStatus, firstName, lastName,userPassword, authority, description, phoneNmbr,
                 email, photo, descriptionVisibility, phoneNmbrVisibility, emailVisibility, photoVisibility);
     }
 
