@@ -9,10 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -35,6 +32,8 @@ public class TrainerController extends BaseController{
     private TableColumn<Trainer, String> phoneColumn;
     @FXML
     private TableColumn<Trainer, Boolean> activeStatusColumn;
+    @FXML
+    private ChoiceBox filterChoiceBox;
 
 
     @FXML
