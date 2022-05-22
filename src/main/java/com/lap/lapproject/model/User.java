@@ -33,7 +33,8 @@ public abstract class User {
     }
 
     // addUser konstruktor für Formular
-    public User(String username, String title, Boolean activeStatus,String firstName, String lastName, String userPassword,
+    public User(String username, String title, Boolean activeStatus,String firstName, String lastName,
+                String userPassword,
                 String authority, String description, String phoneNmbr,
                 String email, byte[] photo, Boolean descriptionVisibility,
                 Boolean phoneNmbrVisibility, Boolean emailVisibility, Boolean photoVisibility) {
@@ -69,6 +70,7 @@ public abstract class User {
 
     // UserRepositoryJDBC
     public User(int id, String username, String title, Boolean activeStatus,String firstName, String lastName,
+                String userPassword,
                 String authority, String description, String phoneNmbr,
                 String email, byte[] photo, Boolean descriptionVisibility,
                 Boolean phoneNmbrVisibility, Boolean emailVisibility, Boolean photoVisibility) {
@@ -78,6 +80,7 @@ public abstract class User {
         this.title = new SimpleStringProperty(title);
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
+        this.userPassword = new SimpleStringProperty(userPassword);
         this.authority = new SimpleStringProperty(authority);
         this.description = new SimpleStringProperty(description);
         this.phoneNmbr = new SimpleStringProperty(phoneNmbr);

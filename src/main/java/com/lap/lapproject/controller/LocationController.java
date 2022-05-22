@@ -36,6 +36,8 @@ public class LocationController extends BaseController{
     private TableColumn<Location, String> zipColumn;
     @FXML
     private TableColumn<Location, String> cityColumn;
+    @FXML
+    private ChoiceBox filterChoiceBox;
 
 
     @FXML

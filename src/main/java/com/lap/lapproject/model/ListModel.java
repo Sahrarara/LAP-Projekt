@@ -41,6 +41,7 @@ public class ListModel {
     private ObjectProperty<Booking> selectedBooking = new SimpleObjectProperty<>();
     private ObjectProperty<Location> selectedLocation = new SimpleObjectProperty<>();
     private ObjectProperty<Course> selectedCourse = new SimpleObjectProperty<>();
+    private ObjectProperty<Trainer> selectedUser = new SimpleObjectProperty<>();
 
 
 
@@ -141,4 +142,16 @@ public class ListModel {
         this.selectedCourse.set(selectedCourse);
     }
 
+
+    public Trainer getSelectedUser() {
+        return selectedUser.get();
+    }
+
+    public ObjectProperty<Trainer> selectedUserProperty() {
+        return selectedUser;
+    }
+
+    public void setSelectedUser(Trainer selectedUser) {
+        this.selectedUser.set(selectedUser);
+    }
 }
