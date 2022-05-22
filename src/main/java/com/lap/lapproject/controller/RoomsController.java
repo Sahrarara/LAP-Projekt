@@ -70,10 +70,13 @@ public class RoomsController extends BaseController {
 
     private void initTableRoom() {
         tableViewRoom.setItems(listModel.roomList);
+        for(Room r: listModel.roomList){
+            System.out.println(r.toString());
+        }
         roomNumberColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getRoomNumber()));
         sizeColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getSize()));
         streetColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getLocation().getStreet()));
-        equipmentColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getEquipment().getDescription()));
+        equipmentColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty(dataFeatures.getValue().getEquipmentAsString()));
     }
 
     private void authorityVisibility() {

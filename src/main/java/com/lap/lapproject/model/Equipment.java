@@ -45,4 +45,9 @@ public class Equipment {
     public void setDescription(String description) {
         this.description.set(description);
     }
+
+    @Override
+    public String toString() {
+        return getDescription();
+    }
 }
