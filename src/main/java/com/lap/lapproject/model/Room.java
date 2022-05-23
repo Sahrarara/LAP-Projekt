@@ -33,7 +33,7 @@ public class Room {
         this.equipments = equipments;
     }
 
-    @Override
+   /* @Override
     public String toString() {
         return "Room{" +
                 "id=" + id +
@@ -42,7 +42,7 @@ public class Room {
                 ", location=" + location +
                 ", equipment=" + equipments.toString() +
                 '}';
-    }
+    }*/
 
 
     public int getId() {
