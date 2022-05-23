@@ -55,6 +55,7 @@
     -fx-border-style: solid;
     -fx-border-width: 1px;
     -fx-border-color: rgba(33, 29, 90, 0.55);
+    -fx-background-color: white;
 }
 
 /*table view*/
@@ -106,11 +107,11 @@
 */
 
 .table-row-cell {
-    -fx-background-color: #F2F4FF;
+   -fx-background-color: #F2F4FF;
     -fx-background-insets: 0, 0 0 1 0;
     -fx-padding: 0.0em;
-    /*
-    -fx-border-color: #211D5A;
+
+    /*-fx-border-color: #211D5A;
     -fx-table-cell-border-color: #211D5A;*/
 }
 /*
@@ -132,6 +133,7 @@
 .table-view .virtual-flow .scroll-bar:horizontal .thumb {
     -fx-background-color: #211D5A;
 }
+
 
 
 .title-form {

@@ -103,7 +103,7 @@ public class AddBookingController extends BaseController {
                 Booking booking = new Booking(room, trainer, model.getLoggedInUser(), course, localDateTimeStart, localDateTimeEnd, recurrenceRule);
                 listModel.bookingList.add(booking);
 
-                moveToProgramPage();
+                moveToBookingPage();
 
             } else {
 
@@ -131,7 +131,7 @@ public class AddBookingController extends BaseController {
                 bookingRepositoryJDBC.updateBooking(selectedBooking);
                 listModel.bookingList.set(listModel.bookingList.indexOf(selectedBooking), selectedBooking);
 
-                moveToProgramPage();
+                moveToBookingPage();
             }
 
         } else {
@@ -200,7 +200,7 @@ public class AddBookingController extends BaseController {
         return (Stage) locationLabel.getScene().getWindow();
     }
 
-    private void moveToProgramPage() {
+    private void moveToBookingPage() {
         Stage currentStage = this.getCurrentStage();
         currentStage.close();
     }
