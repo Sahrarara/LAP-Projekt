@@ -23,7 +23,7 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
 
     private static final String ADD_NEW_ROOM_SQL_STRING = "INSERT INTO rooms(room_number, size, location_id)" + "VALUES (?,?,?)";
     private static final String SELECT_EQUIPMENT_ID_LIST = "SELECT * FROM equipment INNER JOIN rooms_equipment ON rooms_equipment.equipment_id=equipment.equipment_id WHERE rooms_equipment.room_id=(?) ";
-
+    private static final String DELETE_ROOM_SQL_STRING = "DELETE FROM rooms WHERE room_id=?";
 
     @Override
     public List<Room> readAll() {
@@ -103,6 +103,18 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
         return room;
     }
 
+    @Override
+    public void deleteRoom(Room room) throws SQLException {
+        Connection connection = connect();
+        PreparedStatement ps = null;
+        try {
+            ps = connection.prepareStatement(DELETE_ROOM_SQL_STRING);
+            ps.setInt(1, room.getId());
+            ps.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 

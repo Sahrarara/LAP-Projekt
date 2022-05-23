@@ -44,6 +44,7 @@ public class Room {
                 '}';
     }
 
+
     public int getId() {
         return id.get();
     }
@@ -59,6 +60,7 @@ public class Room {
     public int getRoomNumber() {
         return roomNumber.get();
     }
+
 
     public SimpleIntegerProperty roomNumberProperty() {
         return roomNumber;

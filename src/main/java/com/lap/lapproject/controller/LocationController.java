@@ -88,14 +88,6 @@ public class LocationController extends BaseController{
 
 
 
-
-
-
-
-
-
-
-
     @FXML
     private void onSettingsBtnClick(ActionEvent actionEvent) {
         Stage stage = new Stage();

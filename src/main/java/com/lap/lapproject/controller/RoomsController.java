@@ -2,7 +2,12 @@ package com.lap.lapproject.controller;
 
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
+import com.lap.lapproject.model.Location;
 import com.lap.lapproject.model.Room;
+import com.lap.lapproject.repos.BookingRepositoryJDBC;
+import com.lap.lapproject.repos.LocationRepositoryJDBC;
+import com.lap.lapproject.repos.RoomRepositoryJDBC;
+import com.lap.lapproject.utility.QuickAlert;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +17,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class RoomsController extends BaseController {
     @FXML
@@ -49,6 +55,29 @@ public class RoomsController extends BaseController {
 
     @FXML
     private void onDeleteRoomBtnClick(ActionEvent actionEvent) {
+        // QuickAlert.showError("Möchten Sie dieses Room sicher Löschen?");
+        RoomRepositoryJDBC roomRepositoryJDBC = new RoomRepositoryJDBC();
+        BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
+        int myIndex = tableViewRoom.getSelectionModel().getSelectedIndex();
+
+        Room roomToDelete = tableViewRoom.getSelectionModel().getSelectedItem();
+
+
+        try {
+            // check in DB how many bookings use the particular room
+            int bookingCountByRoom = bookingRepositoryJDBC.getBookingCountByRoomId(roomToDelete.getId());
+
+            if (bookingCountByRoom == 0) {
+
+                roomRepositoryJDBC.deleteRoom(roomToDelete);
+                listModel.roomList.remove(roomToDelete);
+            }else {
+                QuickAlert.showError("Dieses Raum wird für eine Buchung benötigt, Sie können es nicht löschen! Bearbeiten Sie zuerst Ihre Buchungen!");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
     }
 
     @FXML
