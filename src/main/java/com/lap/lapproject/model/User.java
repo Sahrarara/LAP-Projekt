@@ -93,6 +93,23 @@ public abstract class User {
     }
 
 
+//    public User(int id, String description, String phoneNmbr, String email, byte[] photo) {
+//        this.id = new SimpleIntegerProperty(id);
+//        this.description = new SimpleStringProperty(description);
+//        this.phoneNmbr = new SimpleStringProperty(phoneNmbr);
+//        this.email = new SimpleStringProperty(email);
+//        this.photo = photo;
+//    }
+
+    public User(int id, String description, String phoneNmbr, String email) {
+        this.id = new SimpleIntegerProperty(id);
+        this.description = new SimpleStringProperty(description);
+        this.phoneNmbr = new SimpleStringProperty(phoneNmbr);
+        this.email = new SimpleStringProperty(email);
+
+    }
+
+
     public int getId() {
         return id.get();
     }

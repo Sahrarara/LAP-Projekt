@@ -33,6 +33,8 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             "photo_visable=? WHERE user_id=?";
 
 
+
+
     @Override
     public void add(User user) throws SQLException {
         Connection connection = connect();
@@ -130,6 +132,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             e.printStackTrace();
         }
     }
+
 
 
     @Override
@@ -340,6 +343,38 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             e.printStackTrace();
         }
         return null;
+    }
+
+
+
+//    private static final String UPDATE_PROFILE_SQL_STRING = "UPDATE users SET description=?, phone=?, email=?, photo=? WHERE user_id=?";
+    private static final String UPDATE_PROFILE_SQL_STRING = "UPDATE users SET description=?, phone=?, email=? WHERE user_id=?";
+
+    @Override
+    public void updateUserProfile(User user) throws SQLException {
+
+        Connection connection = connect();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(UPDATE_PROFILE_SQL_STRING);
+
+            preparedStatement.setString(1, user.getDescription());
+            preparedStatement.setString(2, user.getPhoneNmbr());
+            preparedStatement.setString(3, user.getEmail());
+
+//            InputStream inputStream = null;
+//            if (user.getPhoto() != null) {
+//                inputStream = new ByteArrayInputStream(user.getPhoto());
+//                logger.info("inputStream: {}", user.getPhoto().length);
+//            }
+//            preparedStatement.setBlob(4, inputStream);
+            preparedStatement.setInt(4, user.getId());
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

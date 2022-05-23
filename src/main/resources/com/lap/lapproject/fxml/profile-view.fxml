@@ -147,8 +147,8 @@
                         </StackPane>
                         <StackPane alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
                            <children>
-                              <TextField fx:id="telephoneTextField" maxWidth="400.0" prefHeight="18.0" styleClass="input-form" stylesheets="@../css/application.css" />
-                              <Label fx:id="telephoneLabel">
+                              <TextField fx:id="phoneTextField" maxWidth="400.0" prefHeight="18.0" styleClass="input-form" stylesheets="@../css/application.css" />
+                              <Label fx:id="phoneLabel">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
