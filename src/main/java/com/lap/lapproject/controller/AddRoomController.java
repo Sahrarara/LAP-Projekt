@@ -1,24 +1,23 @@
 package com.lap.lapproject.controller;
 
-import com.lap.lapproject.model.Equipment;
-import com.lap.lapproject.model.Location;
-import com.lap.lapproject.model.Room;
-import com.lap.lapproject.model.RoomsEquipment;
+import com.lap.lapproject.model.*;
+import com.lap.lapproject.repos.CourseRepositoryJDBC;
+import com.lap.lapproject.repos.ProgramRepositoryJDBC;
 import com.lap.lapproject.repos.RoomRepositoryJDBC;
 import com.lap.lapproject.repos.RoomsEquipmentRepositoryJDBC;
 import com.lap.lapproject.utility.QuickAlert;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
-public class AddRoomController extends BaseController{
+public class AddRoomController extends BaseController {
     @FXML
     private TextField sizeTextField;
 
@@ -36,7 +35,6 @@ public class AddRoomController extends BaseController{
         assert roomNmbrTextField != null : "fx:id=\"roomNmbrTextField\" was not injected: check your FXML file 'addroom-view.fxml'.";
         assert sizeTextField != null : "fx:id=\"sizeTextField\" was not injected: check your FXML file 'addroom-view.fxml'.";
         assert locationChoiceBox != null : "fx:id=\"locationChoiceBox\" was not injected: check your FXML file 'addroom-view.fxml'.";
-        //assert equipmentComboBox != null : "fx:id=\"equipmentComboBox\" was not injected: check your FXML file 'addroom-view.fxml'.";
         assert listView != null : "fx:id=\"equipmentComboBox\" was not injected: check your FXML file 'addroom-view.fxml'.";
 
         locationChoiceBox.setItems(listModel.locationList);
@@ -44,7 +42,28 @@ public class AddRoomController extends BaseController{
         listView.setItems(listModel.equipmentList);
         listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
+
+        //Update logik
+        if (listModel.getSelectedRoom() != null) {
+            roomNmbrTextField.setText(String.valueOf(listModel.getSelectedRoom().getRoomNumber()));
+            sizeTextField.setText(String.valueOf(listModel.getSelectedRoom().getSize()));
+            locationChoiceBox.setValue(listModel.getSelectedRoom().getLocation());
+
+            listView.setItems(listModel.equipmentList);
+            System.out.println("Selected: " + listModel.getSelectedRoom().getEquipment());
+            //listView.setSelectionModel(listModel.getSelectedRoom().getEquipment());
+
+            List<Equipment> selectedEquipments = listModel.getSelectedRoom().getEquipment();
+            for (Equipment equipment : selectedEquipments) {
+                System.out.println("equipments list: :" + selectedEquipments);
+                int index = listModel.equipmentList.indexOf(equipment);
+                System.out.println("equipment index: "+ index + " for " + equipment);
+                listView.getSelectionModel().select(index);
+            }
+        }
     }
+
+
 
     @FXML
     private void onAbortBtnClick(ActionEvent actionEvent) {
@@ -52,55 +71,82 @@ public class AddRoomController extends BaseController{
     }
 
     @FXML
-    private void onAddBtnClick(ActionEvent actionEvent) {
+    private void onAddBtnClick(ActionEvent actionEvent) throws SQLException {
+        RoomRepositoryJDBC roomRepositoryJDBC = new RoomRepositoryJDBC();
+        RoomsEquipmentRepositoryJDBC roomsEquipmentRepositoryJDBC = new RoomsEquipmentRepositoryJDBC();
+
         String roomNbr = roomNmbrTextField.getText();
 
+        int roomNbrInt = Integer.parseInt(roomNmbrTextField.getText());
+        int roomSize = Integer.parseInt(sizeTextField.getText());
+        Location location = locationChoiceBox.getValue();
+        List<Equipment> equipments = listView.getSelectionModel().getSelectedItems(); //.getValue()
+
+
+        Room room = new Room(
+                0,
+                roomNbrInt,
+                roomSize,
+                location,
+                equipments);
+
+
+
         if (!roomNbr.isBlank() && !sizeTextField.getText().isBlank() && !(locationChoiceBox.getValue() == null) && !(listView.getItems() == null)) {
-            //TODO: insert create new Room function here
-            RoomRepositoryJDBC roomRepositoryJDBC = new RoomRepositoryJDBC();
-            RoomsEquipmentRepositoryJDBC roomsEquipmentRepositoryJDBC = new RoomsEquipmentRepositoryJDBC();
-            System.out.println("AddRoomController:: onAddBtnClick");
+            if (listModel.getSelectedRoom() == null) {
+                try {
+                    roomRepositoryJDBC.addRoom(room);
+                    List<Equipment> equipmentList = room.getEquipment();
 
-//            int roomId = roomRepositoryJDBC.getRoomIdByRoomNbr(roomNbr);
-            int roomNbrInt = Integer.parseInt(roomNmbrTextField.getText());
-            int roomSize = Integer.parseInt(sizeTextField.getText());
-            Location location = locationChoiceBox.getValue();
-            List<Equipment> equipments = listView.getSelectionModel().getSelectedItems(); //.getValue()
+                    for (Equipment equipment : equipmentList) {
 
-            try {
-                Room room = new Room(
-                        0,
-                        roomNbrInt,
-                        roomSize,
-                        location,
-                        equipments);
+                        RoomsEquipment roomsEquipmentToSave = new RoomsEquipment(room.getId(), equipment.getId());
+                        roomsEquipmentRepositoryJDBC.addRoomEquipmentRT(roomsEquipmentToSave);
 
-                roomRepositoryJDBC.addRoom(room);
+                    }
 
-                List<Equipment> equipmentList = room.getEquipment();
-                //List<RoomsEquipment> roomsEquipments = new ArrayList();
-                for (Equipment equipment : equipmentList){
-                    //roomsEquipments.add(
-                    //new RoomsEquipment(room.getId(), equipment.getId())
-                    //);
-                    RoomsEquipment roomsEquipmentToSave = new RoomsEquipment(room.getId(), equipment.getId());
-                    roomsEquipmentRepositoryJDBC.addRoomEquipmentRT(roomsEquipmentToSave);
+                    listModel.roomList.add(room);
+                    System.out.println("AddRoomController118::" + room.getRoomNumber());
 
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                moveToRoomPage();
+            } else {
+                //Update logik
+                room = listModel.getSelectedRoom();
+                room.setRoomNumber(Integer.parseInt(roomNmbrTextField.getText()));
+                room.setSize(Integer.parseInt(sizeTextField.getText()));
+                room.setLocation(locationChoiceBox.getValue());
+                room.setEquipment(listView.getSelectionModel().getSelectedItems());
+
+                List<Equipment> equipmentListOld = room.getEquipment();
+                List<Equipment> equipmentList = listView.getSelectionModel().getSelectedItems();
+                System.out.println("equipmentlist debug " + equipmentList);
+
+                for (Equipment equipment : equipmentListOld) {//delete old equipmentList
+                    RoomsEquipment roomsEquipmentToDelete = new RoomsEquipment(room.getId(), equipment.getId());
+
+                    roomsEquipmentRepositoryJDBC.deleteRoomEquipmentRT(roomsEquipmentToDelete);
                 }
 
-                listModel.roomList.add(room);
-                System.out.println("AddRoomController118::" + room.getRoomNumber());
+                for (Equipment equipment : equipmentList) {//add new equipmentList
+                    RoomsEquipment roomsEquipmentToSave = new RoomsEquipment(room.getId(), equipment.getId());
+                    System.out.println(roomsEquipmentToSave.getRoomsEquipmentId());
+                    roomsEquipmentRepositoryJDBC.addRoomEquipmentRT(roomsEquipmentToSave);
+                }
 
-            } catch (SQLException e) {
-                e.printStackTrace();
+
+                roomRepositoryJDBC.updateRoom(room);
+                listModel.roomList.set(listModel.roomList.indexOf(room), room);
+                moveToRoomPage();
             }
-            moveToRoomPage();
         } else {
             QuickAlert.showError("Bitte alle Felder ausfüllen");
         }
     }
 
-    private Stage getCurrentStage(){
+    private Stage getCurrentStage() {
         return (Stage) roomNmbrTextField.getScene().getWindow();
     }
 
@@ -108,5 +154,4 @@ public class AddRoomController extends BaseController{
         Stage currentStage = this.getCurrentStage();
         currentStage.close();
     }
-
 }

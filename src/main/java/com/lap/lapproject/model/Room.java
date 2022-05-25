@@ -24,6 +24,13 @@ public class Room {
         this.location = location;
     }
 
+    public Room(int roomNumber, int size, Location location ) {
+        this.roomNumber = new SimpleIntegerProperty(roomNumber);
+        this.size = new SimpleIntegerProperty(size);
+        this.location = location;
+        this.id = new SimpleIntegerProperty();
+    }
+
 
     public Room(int id, int roomNumber, int size, Location location, List<Equipment> equipments) {
         this.id = new SimpleIntegerProperty(id);
@@ -32,18 +39,6 @@ public class Room {
         this.location = location;
         this.equipments = equipments;
     }
-
-//    @Override
-//    public String toString() {
-//        return "Room{" +
-//                "id=" + id +
-//                ", roomNumber=" + roomNumber +
-//                ", size=" + size +
-//                ", location=" + location +
-//                ", equipment=" + equipments.toString() +
-//                '}';
-//    }
-
 
     @Override
     public String toString() {

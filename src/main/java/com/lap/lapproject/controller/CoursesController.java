@@ -83,6 +83,7 @@ public class CoursesController extends BaseController{
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("DEBUG: " + tableViewEvent.getSelectionModel().selectedItemProperty());
         listModel.selectedCourseProperty().bind(tableViewEvent.getSelectionModel().selectedItemProperty());
 
         stage.setTitle("Raum Management");
