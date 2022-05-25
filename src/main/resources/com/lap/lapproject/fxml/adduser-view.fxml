@@ -123,7 +123,7 @@
             <Insets right="10.0" />
          </GridPane.margin>
       </Button>
-      <Button mnemonicParsing="false" onAction="#onAddBtnClick" text="HINZUFÜGEN" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="14">
+      <Button fx:id="addAndSaveBtn" mnemonicParsing="false" onAction="#onAddBtnClick" text="HINZUFÜGEN" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="14">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>

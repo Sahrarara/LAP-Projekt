@@ -15,11 +15,13 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.sql.SQLException;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class AddUserController extends BaseController {
+    public Button addAndSaveBtn;
     @FXML
     private TextField usernameTextField;
     @FXML
@@ -81,6 +83,8 @@ public class AddUserController extends BaseController {
 
     @FXML
     private void onAddBtnClick(ActionEvent actionEvent) throws SQLException, IOException {
+        userSaveOrAdd();    //diese funktion hier wechselt nur je nach dem Text im Button zu der update oder add funktion
+    /*
         String username = usernameTextField.getText();
         boolean active = activeCheckBox.isSelected();
         String title = titleTextField.getText();
@@ -160,6 +164,27 @@ public class AddUserController extends BaseController {
         } else {
             QuickAlert.showError("Bitte folgende Felder ausfüllen:\nNutzername\nVorname\nNachname\nAuthorization\npassword\ne-mail\nTelefon");
         }
+    */
+    }
+
+    private void userSaveOrAdd() {
+        String btnText = addAndSaveBtn.getText().toLowerCase(Locale.ROOT);
+        switch (btnText){
+            case "hinzufügen":
+                addNewUser();
+                break;
+            case "speichern":
+                updateUser();
+                break;
+        }
+    }
+
+    private void updateUser() {
+        //TODO: hier die funktion um den User zu updaten
+    }
+
+    private void addNewUser() {
+        //TODO: hier die funktion um den User neu anzulegen
     }
 
 
@@ -195,6 +220,7 @@ public class AddUserController extends BaseController {
                         .collect(Collectors.toList()));
 
         authorizationChoiceBox.setItems(authorizationName);
+        addAndSaveBtn.setText("SPEICHERN");
     }
 
     @FXML
