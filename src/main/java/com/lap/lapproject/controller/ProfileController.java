@@ -13,15 +13,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
+
 
 public class ProfileController extends BaseController {
 
@@ -44,63 +46,56 @@ public class ProfileController extends BaseController {
     @FXML
     private TextArea descriptionTextArea;
     @FXML
-    private ImageView profileImageView;
-    @FXML
     private Button photoUploadButton;
-
-//    private byte[] bytesFromImage(String imageName) {
-//
-//        OutputStream outputStream = new ByteArrayOutputStream();
-//        byte[] array = imageName.getBytes();
-//        try {
-//            outputStream.write(array);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        byte[] bytes = ((ByteArrayOutputStream) outputStream).toByteArray();
-//        return bytes;
-//    }
-
-
-
-
-
-
-
+    @FXML
+    private Button editButton;
+    @FXML
+    private Button saveButton;
+    @FXML
+    private Circle circleView;
+    @FXML
+    private HBox updateEmailHBox;
+    @FXML
+    private HBox emailHBox;
+    @FXML
+    private HBox updatePhoneHBox;
+    @FXML
+    private HBox phoneHBox;
+    @FXML
+    private HBox updateDescriptionHBox;
+    @FXML
+    private HBox descriptionHBox;
 
 
     @FXML
     private void onSaveBtnClick(ActionEvent actionEvent) {
 
-        if(!(emailTextField.getText() == null) && !(phoneTextField.getText() == null)) {
+        saveButton.setVisible(false);
+        editButton.setVisible(true);
+
+        if(!(emailTextField.getText().isBlank()) && !(phoneTextField.getText().isBlank())) {
 
             int id = model.getLoggedInUser().getId();
+            byte[] newImage = model.getLoggedInUser().getPhoto();
             String newEmail = emailTextField.getText();
             String newPhone = phoneTextField.getText();
             String newDescription = descriptionTextArea.getText();
-            Image image = profileImageView.getImage();
-
 
             model.getLoggedInUser().setEmail(newEmail);
             model.getLoggedInUser().setPhoneNmbr(newPhone);
             model.getLoggedInUser().setDescription(newDescription);
-//            model.getLoggedInUser().setPhoto(image);
-//            profileImageView.getImage();
 
             UserRepositoryJDBC userRepositoryJDBC = new UserRepositoryJDBC();
             try {
-                userRepositoryJDBC.updateUserProfile(new Trainer(id, newDescription, newPhone, newEmail));
+                userRepositoryJDBC.updateUserProfile(new Trainer(id, newDescription, newPhone, newEmail, newImage));
 
             } catch (SQLException e) {
                 e.printStackTrace();
             }
 
             standardMode();
-            logger.info("updateUserProfile: {}", model.getLoggedInUser().getEmail());
+            initialize();
         }
-
-
-
 
 
     }
@@ -114,9 +109,10 @@ public class ProfileController extends BaseController {
         assert firstnameLabel != null : "fx:id=\"firstnameLabel\" was not injected: check your FXML file 'profile-view.fxml'.";
         assert lastnameLabel != null : "fx:id=\"lastnameLabel\" was not injected: check your FXML file 'profile-view.fxml'.";
         assert photoUploadButton != null : "fx:id=\"photoUploadButton\" was not injected: check your FXML file 'profile-view.fxml'.";
-        assert profileImageView != null : "fx:id=\"profileImageView\" was not injected: check your FXML file 'profile-view.fxml'.";
+        assert circleView != null : "fx:id=\"circleView\" was not injected: check your FXML file 'profile-view.fxml'.";
         assert phoneLabel != null : "fx:id=\"phoneLabel\" was not injected: check your FXML file 'profile-view.fxml'.";
         assert phoneTextField != null : "fx:id=\"phoneTextField\" was not injected: check your FXML file 'profile-view.fxml'.";
+
 
         standardMode();
         firstnameLabel.setText(model.getLoggedInUser().getfName());
@@ -124,7 +120,15 @@ public class ProfileController extends BaseController {
         emailLabel.setText(model.getLoggedInUser().getEmail());
         phoneLabel.setText(String.valueOf(model.getLoggedInUser().getPhoneNmbr()));
         descriptionLabel.setText(model.getLoggedInUser().getDescription());
-        profileImageView.setImage(imageFromBytes(model.getLoggedInUser().getPhoto()));
+
+        if(model.getLoggedInUser().getPhoto() != null) {
+            circleView.setFill(new ImagePattern(imageFromBytes(model.getLoggedInUser().getPhoto())));
+        }
+//        } else {
+//
+//            circleView.setFill(new ImagePattern());
+//        }
+
 
     }
 
@@ -157,8 +161,11 @@ public class ProfileController extends BaseController {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(getCurrentStage());
         try {
-            profileImageView.setImage(new Image(new FileInputStream(file)));
-            logger.info("File path: {}", file.getAbsolutePath());
+            if(file != null) {
+                circleView.setFill(new ImagePattern(new Image(new FileInputStream(file))));
+                model.getLoggedInUser().setPhoto(convertToBytes(file.getAbsolutePath()));
+            }
+
         } catch (IOException e) {
             System.err.println("File " + file.getAbsolutePath() + " not found");
         }
@@ -175,14 +182,25 @@ public class ProfileController extends BaseController {
     }
 
 
+    @FXML
+    public byte[] convertToBytes(String pathToImage) throws IOException {
+        FileInputStream fileInputStream = new FileInputStream(pathToImage);
+        return fileInputStream.readAllBytes();
+    }
+
+
     private void updateMode() {
-        emailLabel.setVisible(false);
-        phoneLabel.setVisible(false);
-        descriptionLabel.setVisible(false);
-        emailTextField.setVisible(true);
-        phoneTextField.setVisible(true);
-        descriptionTextArea.setVisible(true);
+        updateEmailHBox.setVisible(true);
+        updatePhoneHBox.setVisible(true);
+        updateDescriptionHBox.setVisible(true);
+        emailHBox.setVisible(false);
+        phoneHBox.setVisible(false);
+        descriptionHBox.setVisible(false);
+
         photoUploadButton.setVisible(true);
+        saveButton.setVisible(true);
+        editButton.setVisible(false);
+
         emailTextField.setText(model.getLoggedInUser().getEmail());
         phoneTextField.setText(String.valueOf(model.getLoggedInUser().getPhoneNmbr()));
         descriptionTextArea.setText(model.getLoggedInUser().getDescription());
@@ -190,13 +208,16 @@ public class ProfileController extends BaseController {
 
 
     private void standardMode() {
-        emailLabel.setVisible(true);
-        phoneLabel.setVisible(true);
-        descriptionLabel.setVisible(true);
-        emailTextField.setVisible(false);
-        phoneTextField.setVisible(false);
-        descriptionTextArea.setVisible(false);
+        updateEmailHBox.setVisible(false);
+        updatePhoneHBox.setVisible(false);
+        updateDescriptionHBox.setVisible(false);
+        emailHBox.setVisible(true);
+        phoneHBox.setVisible(true);
+        descriptionHBox.setVisible(true);
+
         photoUploadButton.setVisible(false);
+        saveButton.setVisible(false);
+        editButton.setVisible(true);
     }
 
 

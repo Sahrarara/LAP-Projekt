@@ -9,13 +9,14 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #211D5A;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.ProfileController">
@@ -33,176 +34,225 @@
             </AnchorPane>
             <AnchorPane>
                <children>
-                  <GridPane layoutX="40.0" prefHeight="481.0" prefWidth="704.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" prefWidth="20.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="230.5" minWidth="10.0" prefWidth="145.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="431.0" minWidth="10.0" prefWidth="399.5" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" prefWidth="20.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints prefHeight="0.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints prefHeight="100.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" prefHeight="100.0" vgrow="SOMETIMES" />
-                        <RowConstraints valignment="TOP" vgrow="SOMETIMES" />
-                    </rowConstraints>
+                  <StackPane prefHeight="554.0" prefWidth="800.0">
                      <children>
-                        <Label text="Vorname" textFill="#211d5a" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                           <GridPane.margin>
-                              <Insets left="10.0" />
-                           </GridPane.margin>
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Nachname" textFill="#211d5a" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                           <GridPane.margin>
-                              <Insets left="10.0" />
-                           </GridPane.margin>
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Foto" textFill="#211d5a" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                           <GridPane.margin>
-                              <Insets left="10.0" />
-                           </GridPane.margin>
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="E-Mail" textFill="#211d5a" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                           <GridPane.margin>
-                              <Insets left="10.0" />
-                           </GridPane.margin>
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Telefon" textFill="#211d5a" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                           <GridPane.margin>
-                              <Insets left="10.0" />
-                           </GridPane.margin>
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Beschreibung" textFill="#211d5a" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                           <GridPane.margin>
-                              <Insets left="10.0" />
-                           </GridPane.margin>
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="firstnameLabel" text="Vorname" textFill="#211d5a" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lastnameLabel" text="Nachname" textFill="#211d5a" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <StackPane alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="140.0" prefWidth="300.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                        <HBox>
                            <children>
-                              <ImageView fx:id="profileImageView" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/lapproject/images/GruppeBlau.png" />
-                                 </image>
-                                 <StackPane.margin>
-                                    <Insets />
-                                 </StackPane.margin>
-                              </ImageView>
-                              <Button fx:id="photoUploadButton" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onPhotoUploadBtnClick" prefHeight="40.0" prefWidth="180.0" styleClass="transparent-button" stylesheets="@../css/application.css" text="Lade ein Foto hoch" textFill="#5187f2" textOverrun="CLIP">
-                                 <StackPane.margin>
-                                    <Insets left="110.0" top="100.0" />
-                                 </StackPane.margin>
-                                 <font>
-                                    <Font name="System Bold" size="16.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="CLOSED_HAND" />
-                                 </cursor>
-                                 <opaqueInsets>
-                                    <Insets />
-                                 </opaqueInsets>
-                              </Button>
+                              <AnchorPane maxHeight="-Infinity" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Circle centerX="100.0" centerY="100.0" fill="DODGERBLUE" radius="90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="5.0" />
+                                    <Circle fx:id="circleView" centerX="100.0" centerY="100.0" fill="DODGERBLUE" radius="84.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" />
+                                    <Button fx:id="photoUploadButton" layoutX="18.0" layoutY="82.0" mnemonicParsing="false" onAction="#onPhotoUploadBtnClick" style="-fx-background-color: transparent;" text="Lade ein Foto hoch" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="16.0" />
+                                       </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="536.0" top="45.0" />
+                                 </HBox.margin>
+                              </AnchorPane>
                            </children>
-                        </StackPane>
-                        <StackPane alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                        </HBox>
+                        <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="545.0">
                            <children>
-                              <TextField fx:id="emailTextField" maxWidth="400.0" prefHeight="18.0" styleClass="input-form" stylesheets="@../css/application.css" />
-                              <Label fx:id="emailLabel">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
+                              <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="550.0">
+                                 <children>
+                                    <HBox prefHeight="50.0" prefWidth="200.0" spacing="72.0">
+                                       <children>
+                                          <Label text="Vorname" textFill="#211d5a">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font></Label>
+                                          <Label fx:id="firstnameLabel" text="Vorname" textFill="#211d5a">
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font></Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="50.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox prefHeight="50.0" prefWidth="200.0" spacing="60.0">
+                                       <children>
+                                          <Label text="Nachname" textFill="#211d5a">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font></Label>
+                                          <Label fx:id="lastnameLabel" text="Nachname" textFill="#211d5a">
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font></Label>
+                                       </children>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                    </HBox>
+                                    <StackPane prefHeight="50.0" prefWidth="200.0">
+                                       <children>
+                                          <HBox fx:id="updateEmailHBox" prefHeight="100.0" prefWidth="200.0" spacing="96.0">
+                                             <children>
+                                                <Label text="Email" textFill="#211d5a">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font></Label>
+                                                <TextField fx:id="emailTextField" prefWidth="320.0">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font></TextField>
+                                             </children>
+                                          </HBox>
+                                          <HBox fx:id="emailHBox" prefHeight="100.0" prefWidth="200.0" spacing="98.0">
+                                             <children>
+                                                <Label text="Email" textFill="#211d5a">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="emailLabel" text="Email" textFill="#211d5a">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane prefHeight="50.0" prefWidth="200.0">
+                                       <children>
+                                          <HBox fx:id="updatePhoneHBox" prefHeight="100.0" prefWidth="200.0" spacing="81.0">
+                                             <children>
+                                                <Label text="Telefon" textFill="#211d5a">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font></Label>
+                                                <TextField fx:id="phoneTextField" prefWidth="320.0">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font></TextField>
+                                             </children>
+                                          </HBox>
+                                          <HBox fx:id="phoneHBox" prefHeight="100.0" prefWidth="200.0" spacing="84.0">
+                                             <children>
+                                                <Label text="Telefon" textFill="#211d5a">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="phoneLabel" text="Telefon" textFill="#211d5a">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane maxWidth="-Infinity" prefHeight="100.0" prefWidth="500.0">
+                                       <children>
+                                          <HBox fx:id="updateDescriptionHBox" prefHeight="100.0" prefWidth="200.0" spacing="26.0">
+                                             <children>
+                                                <Label prefWidth="140.0" text="Beschreibung" textFill="#211d5a">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font></Label>
+                                                <TextArea fx:id="descriptionTextArea" prefHeight="200.0" prefWidth="400.0">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font></TextArea>
+                                             </children>
+                                          </HBox>
+                                          <HBox fx:id="descriptionHBox" prefHeight="100.0" prefWidth="200.0" spacing="41.0">
+                                             <children>
+                                                <Label text="Beschreibung" textFill="#211d5a">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="descriptionLabel" text="Beschreibung" textFill="#211d5a">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                    <AnchorPane prefHeight="100.0" prefWidth="500.0">
+                                       <children>
+                                          <GridPane prefHeight="100.0" prefWidth="500.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="180.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="150.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <Button fx:id="saveButton" mnemonicParsing="false" onAction="#onSaveBtnClick" prefWidth="120.0" text="SPEICHERN" textFill="WHITE" GridPane.columnIndex="1">
+                                                   <font>
+                                                      <Font name="Comic Sans MS" size="12.0" />
+                                                   </font>
+                                                   <styleClass>
+                                                      <String fx:value="button-dark" />
+                                                      <String fx:value="button-style" />
+                                                   </styleClass>
+                                                   <GridPane.margin>
+                                                      <Insets left="26.0" />
+                                                   </GridPane.margin>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Button>
+                                                <Button fx:id="editButton" mnemonicParsing="false" onAction="#onEditBtnClick" prefWidth="120.0" text="BEARBEITEN" textFill="WHITE" GridPane.columnIndex="1">
+                                                   <font>
+                                                      <Font name="Comic Sans MS" size="12.0" />
+                                                   </font>
+                                                   <styleClass>
+                                                      <String fx:value="button-dark" />
+                                                      <String fx:value="button-style" />
+                                                   </styleClass>
+                                                   <GridPane.margin>
+                                                      <Insets left="26.0" />
+                                                   </GridPane.margin>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Button>
+                                                <Button mnemonicParsing="false" onAction="#onChangePasswordBtnClick" text="PASSWORT ÄNDERN" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="Comic Sans MS" size="12.0" />
+                                                   </font>
+                                                   <styleClass>
+                                                      <String fx:value="button-light" />
+                                                      <String fx:value="button-style" />
+                                                   </styleClass>
+                                                   <GridPane.margin>
+                                                      <Insets left="183.0" />
+                                                   </GridPane.margin>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </Button>
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="50.0" top="20.0" />
+                                 </HBox.margin>
+                              </VBox>
                            </children>
-                        </StackPane>
-                        <StackPane alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
-                           <children>
-                              <TextField fx:id="phoneTextField" maxWidth="400.0" prefHeight="18.0" styleClass="input-form" stylesheets="@../css/application.css" />
-                              <Label fx:id="phoneLabel">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </StackPane>
-                        <StackPane alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="6">
-                           <children>
-                              <TextArea fx:id="descriptionTextArea" maxHeight="80.0" maxWidth="400.0" styleClass="input-form" stylesheets="@../css/application.css" />
-                              <Label fx:id="descriptionLabel">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </StackPane>
-                        <Button layoutX="575.0" layoutY="425.0" mnemonicParsing="false" onAction="#onChangePasswordBtnClick" text="PASSWORT ÄNDERN" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="TOP">
-                           <font>
-                              <Font name="Comic Sans MS" size="12.0" />
-                           </font>
-                           <styleClass>
-                              <String fx:value="button-light" />
-                              <String fx:value="button-style" />
-                           </styleClass>
-                           <GridPane.margin>
-                              <Insets bottom="10.0" right="18.0" top="63.0" />
-                           </GridPane.margin>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#onEditBtnClick" prefWidth="120.0" text="BEARBEITEN" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="7">
-                           <font>
-                              <Font name="Comic Sans MS" size="12.0" />
-                           </font>
-                           <styleClass>
-                              <String fx:value="button-light" />
-                              <String fx:value="button-style" />
-                           </styleClass>
-                           <GridPane.margin>
-                              <Insets bottom="10.0" left="150.0" top="63.0" />
-                           </GridPane.margin>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#onSaveBtnClick" prefWidth="120.0" text="SPEICHERN" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
-                           <font>
-                              <Font name="Comic Sans MS" size="12.0" />
-                           </font>
-                           <styleClass>
-                              <String fx:value="button-dark" />
-                              <String fx:value="button-style" />
-                           </styleClass>
-                           <GridPane.margin>
-                              <Insets bottom="10.0" right="32.0" top="63.0" />
-                           </GridPane.margin>
-                        </Button>
+                           <StackPane.margin>
+                              <Insets bottom="117.0" right="190.0" />
+                           </StackPane.margin>
+                        </HBox>
                      </children>
-                  </GridPane>
+                  </StackPane>
                </children>
             </AnchorPane>
          </items>

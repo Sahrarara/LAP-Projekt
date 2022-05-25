@@ -16,7 +16,7 @@ public class Admin extends Trainer {
     }
 
 
-    public Admin(int id, String description, String phoneNmbr, String email) {
-        super(id, description, phoneNmbr, email);
+    public Admin(int id, String description, String phoneNmbr, String email, byte[] photo) {
+        super(id, description, phoneNmbr, email, photo);
     }
 }

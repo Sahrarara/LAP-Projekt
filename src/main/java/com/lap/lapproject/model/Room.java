@@ -33,15 +33,21 @@ public class Room {
         this.equipments = equipments;
     }
 
+//    @Override
+//    public String toString() {
+//        return "Room{" +
+//                "id=" + id +
+//                ", roomNumber=" + roomNumber +
+//                ", size=" + size +
+//                ", location=" + location +
+//                ", equipment=" + equipments.toString() +
+//                '}';
+//    }
+
+
     @Override
     public String toString() {
-        return "Room{" +
-                "id=" + id +
-                ", roomNumber=" + roomNumber +
-                ", size=" + size +
-                ", location=" + location +
-                ", equipment=" + equipments.toString() +
-                '}';
+        return String.valueOf(getRoomNumber());
     }
 
 
