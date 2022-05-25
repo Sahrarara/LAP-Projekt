@@ -114,11 +114,7 @@ public class AddCourseController extends BaseController {
            } else {
                QuickAlert.showError("Bitte alle Felder ausfüllen");
            }
-
-
-
-
-               }
+    }
           // TODO check duplicate
 
 

@@ -1,5 +1,7 @@
 package com.lap.lapproject.model;
 
+import javafx.beans.property.SimpleIntegerProperty;
+
 public class RoomsEquipment {
     private int roomsEquipmentId;
     private int roomId;
