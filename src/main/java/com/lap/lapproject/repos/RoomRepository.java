@@ -11,5 +11,5 @@ public interface RoomRepository {
 
     Room addRoom(Room room) throws SQLException;
     void deleteRoom(Room room) throws SQLException;
-   // void updateRoom(Room room) throws SQLException;
+    void updateRoom(Room room) throws SQLException;
 }

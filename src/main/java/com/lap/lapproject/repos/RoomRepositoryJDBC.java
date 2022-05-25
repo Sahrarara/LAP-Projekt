@@ -1,9 +1,6 @@
 package com.lap.lapproject.repos;
 
-import com.lap.lapproject.model.Equipment;
-import com.lap.lapproject.model.ListModel;
-import com.lap.lapproject.model.Location;
-import com.lap.lapproject.model.Room;
+import com.lap.lapproject.model.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -24,6 +21,7 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
     private static final String ADD_NEW_ROOM_SQL_STRING = "INSERT INTO rooms(room_number, size, location_id)" + "VALUES (?,?,?)";
     private static final String SELECT_EQUIPMENT_ID_LIST = "SELECT * FROM equipment INNER JOIN rooms_equipment ON rooms_equipment.equipment_id=equipment.equipment_id WHERE rooms_equipment.room_id=(?) ";
     private static final String DELETE_ROOM_SQL_STRING = "DELETE FROM rooms WHERE room_id=?";
+    private static final String UPDATE_ROOM_SQL_STRING = "UPDATE rooms SET room_number =?, size=?, location_id=? WHERE room_id=? ";
 
     @Override
     public List<Room> readAll() {
@@ -36,7 +34,7 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
         ResultSet equipmentResultSet = null;
 
         try {
-            roomStatement = connection.prepareStatement(SELECT_ROOM_SQL_STRING );
+            roomStatement = connection.prepareStatement(SELECT_ROOM_SQL_STRING);
             roomResultSet = roomStatement.executeQuery();
 
             while (roomResultSet.next()) {
@@ -57,7 +55,7 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
                 /*ListView<Equipment> listView = new ListView<Equipment>((ObservableList<Equipment>) equipments);*/
                 equipmentStatement = connection.prepareStatement(SELECT_EQUIPMENT_ID_LIST);
                 equipmentStatement.setInt(1, room.getId());
-                equipmentResultSet= equipmentStatement.executeQuery();
+                equipmentResultSet = equipmentStatement.executeQuery();
 
                 while (equipmentResultSet.next()) {
                     Equipment equipment = new Equipment(
@@ -116,7 +114,21 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
         }
     }
 
+    @Override
+    public void updateRoom(Room room) throws SQLException {
+        Connection connection = connect();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(UPDATE_ROOM_SQL_STRING);
+            preparedStatement.setInt(1, room.getRoomNumber());
+            preparedStatement.setInt(2, room.getSize());
+            preparedStatement.setInt(3, room.getLocation().getId());
+            preparedStatement.setInt(4, room.getId());
+            preparedStatement.executeQuery();
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-
+    }
 }

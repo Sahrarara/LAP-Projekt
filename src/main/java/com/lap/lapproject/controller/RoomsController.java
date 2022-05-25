@@ -8,6 +8,7 @@ import com.lap.lapproject.repos.BookingRepositoryJDBC;
 import com.lap.lapproject.repos.LocationRepositoryJDBC;
 import com.lap.lapproject.repos.RoomRepositoryJDBC;
 import com.lap.lapproject.utility.QuickAlert;
+import com.lap.lapproject.utility.UsabilityMethods;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,9 +35,16 @@ public class RoomsController extends BaseController {
     @FXML
     private TableColumn<Room, String> equipmentColumn;
 
+    @FXML
+    private Button editRoomButton;
+
+    @FXML
+    private Button deleteBtn;
+
 
     @FXML
     private void onAddRoomBtnClick(ActionEvent actionEvent) {
+        tableViewRoom.getSelectionModel().select(null);
         Stage stage = new Stage();
 
         FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_ROOM));
@@ -80,9 +88,30 @@ public class RoomsController extends BaseController {
 
     }
 
+
     @FXML
     private void onSettingsBtnClick(ActionEvent actionEvent) {
+        System.out.println("Pressed Room settings");
+        Stage stage = new Stage();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_ROOM));
+        Scene scene = null;
+
+        try {
+            scene = new Scene(fxmlLoader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("DEBUG: " +tableViewRoom.getSelectionModel().selectedItemProperty());
+        listModel.selectedRoomProperty().bind(tableViewRoom.getSelectionModel().selectedItemProperty());
+
+
+        stage.setTitle("Raum Management");
+        stage.setScene(scene);
+        stage.show();
     }
+
+
 
     @FXML
     private void initialize() {
@@ -95,7 +124,9 @@ public class RoomsController extends BaseController {
 
         authorityVisibility();
         initTableRoom();
+        listModel.selectedRoomProperty().bind(tableViewRoom.getSelectionModel().selectedItemProperty());
     }
+
 
     private void initTableRoom() {
         tableViewRoom.setItems(listModel.roomList);
@@ -106,6 +137,7 @@ public class RoomsController extends BaseController {
         sizeColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getSize()));
         streetColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getLocation().getStreet()));
         equipmentColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty(dataFeatures.getValue().getEquipmentAsString()));
+
     }
 
     private void authorityVisibility() {
