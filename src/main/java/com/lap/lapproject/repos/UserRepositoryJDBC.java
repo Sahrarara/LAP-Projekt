@@ -25,6 +25,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             " authorization,description,phone,email, photo, description_visable, phone_visable, email_visable," +
             "photo_visable) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SELECT_AUTHORIZATION_SQL_STRING = "SELECT DISTINCT authorization FROM users";
+//    nicht passender und verwirrender Name, was wird selektiert?  es sollte das passwort selectiert werden dem namen zufolge
     private static final String SELECT_USERNAME_PASSWORD_SQL_STRING = " SELECT * FROM users WHERE username=? AND active_status='1'";
     public static final String SELECT_USERS_SQL_STRING = "SELECT username FROM users";
     private static final String DELETE_USER_SQL_STRING = "DELETE FROM users WHERE user_id=?";
