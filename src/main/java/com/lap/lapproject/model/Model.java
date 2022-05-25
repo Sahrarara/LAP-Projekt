@@ -7,8 +7,12 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import javafx.scene.image.Image;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class Model {
@@ -62,4 +66,7 @@ public class Model {
     public void setLoggedInUser(User loggedInUser) {
         this.loggedInUser.set(loggedInUser);
     }
+
+
+
 }

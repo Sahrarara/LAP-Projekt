@@ -35,4 +35,7 @@ public class Trainer extends User {
     }
 
 
+    public Trainer(int id, String description, String phoneNmbr, String email, byte[] photo) {
+        super(id, description, phoneNmbr, email, photo);
+    }
 }
