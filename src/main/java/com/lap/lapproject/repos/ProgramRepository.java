@@ -1,5 +1,6 @@
 package com.lap.lapproject.repos;
 
+import com.lap.lapproject.model.Course;
 import com.lap.lapproject.model.Program;
 
 import java.sql.SQLException;

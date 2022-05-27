@@ -3,8 +3,11 @@ package com.lap.lapproject.controller;
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.Course;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import com.lap.lapproject.repos.CourseRepositoryJDBC;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +17,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Optional;
+
 public class CoursesController extends BaseController{
+
+
     @FXML
     private ButtonBar coursesBtnBar;
 
@@ -62,11 +70,20 @@ public class CoursesController extends BaseController{
 
         Course courseToDelete = tableViewEvent.getSelectionModel().getSelectedItem();
 
-        try {
-            courseRepositoryJDBC.deleteCourse(courseToDelete);
-            listModel.courseList.remove(courseToDelete);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        //Alert CONFIRMATION TODO: wenn es möglich nur einen CONFIRMATION Alert für Alle DELETE
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText("Sind Sie sicher, dass Sie es löschen wollen?");
+        Optional<ButtonType> action = alert.showAndWait();
+        if(action.get() == ButtonType.OK) {
+
+            try {
+                courseRepositoryJDBC.deleteCourse(courseToDelete);
+                listModel.courseList.remove(courseToDelete);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
@@ -91,6 +108,8 @@ public class CoursesController extends BaseController{
         stage.show();
     }
 
+
+
     @FXML
     private void initialize() {
         assert tableViewEvent != null : "fx:id=\"tableViewEvent\" was not injected: check your FXML file 'events-view.fxml'.";
@@ -102,8 +121,10 @@ public class CoursesController extends BaseController{
         assert coursesBtnBar != null : "fx:id=\"coursesBtnBar\" was not injected: check your FXML file 'events-view.fxml'.";
 
         authorityVisibility();
-        //CourseRepositoryJDBC courseRepositoryJDBC = new CourseRepositoryJDBC();
+        CourseRepositoryJDBC courseRepositoryJDBC= new CourseRepositoryJDBC();
+        courseRepositoryJDBC.readAll();
         initEventTable();
+
 
         listModel.selectedCourseProperty().bind(tableViewEvent.getSelectionModel().selectedItemProperty());
 
@@ -114,6 +135,7 @@ public class CoursesController extends BaseController{
         courseNameColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getCourseName()));
         courseStartColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getCourseStart().toString().substring(0, 10)));
         courseEndColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getCourseEnd().toString().substring(0, 10)));
+        //programColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getProgram().getProgramName()));
         programColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getProgram().getProgramName()));
         groupSizeColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getGroupSize()));
     }

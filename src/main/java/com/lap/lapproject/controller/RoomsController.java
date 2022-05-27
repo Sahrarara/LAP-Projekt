@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class RoomsController extends BaseController {
     @FXML
@@ -70,6 +71,13 @@ public class RoomsController extends BaseController {
 
         Room roomToDelete = tableViewRoom.getSelectionModel().getSelectedItem();
 
+        //Alert CONFIRMATION TODO: wenn es möglich nur einen CONFIRMATION Alert für Alle DELETE
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText("Sind Sie sicher, dass Sie es löschen wollen?");
+        Optional<ButtonType> action = alert.showAndWait();
+        if (action.get() == ButtonType.OK) {
 
         try {
             // check in DB how many bookings use the particular room
@@ -79,14 +87,15 @@ public class RoomsController extends BaseController {
 
                 roomRepositoryJDBC.deleteRoom(roomToDelete);
                 listModel.roomList.remove(roomToDelete);
-            }else {
+            } else {
                 QuickAlert.showError("Dieses Raum wird für eine Buchung benötigt, Sie können es nicht löschen! Bearbeiten Sie zuerst Ihre Buchungen!");
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
     }
+
+}
 
 
     @FXML

@@ -2,6 +2,8 @@ package com.lap.lapproject.controller;
 
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
+import com.lap.lapproject.repos.CourseRepositoryJDBC;
+import com.lap.lapproject.repos.RoomRepositoryJDBC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -52,26 +54,31 @@ public class SidebarController extends BaseController {
 
     @FXML
     private void onLocationBtnClick(ActionEvent actionEvent) {
+        listModel.ListModel();
         model.setPathForDetailView(Constants.PATH_TO_FXML_LOCATION);
     }
 
     @FXML
     private void onUserBtnClick(ActionEvent actionEvent) {
+        listModel.ListModel();
         model.setPathForDetailView(Constants.PATH_TO_FXML_PROFILE);
     }
 
     @FXML
     private void onRoomBtnClick(ActionEvent actionEvent) {
+        listModel.ListModel();
         model.setPathForDetailView(Constants.PATH_TO_FXML_ROOM);
     }
 
     @FXML
     private void onCourseBtnClick(ActionEvent actionEvent) {
+        listModel.ListModel();
         model.setPathForDetailView(Constants.PATH_TO_FXML_COURSE);
     }
 
     @FXML
     private void onTrainerBtnClick(ActionEvent actionEvent) {
+        listModel.ListModel();
         model.setPathForDetailView(Constants.PATH_TO_FXML_TRAINER);
     }
 
@@ -82,21 +89,25 @@ public class SidebarController extends BaseController {
 
     @FXML
     private void onSearchBtnClick(ActionEvent actionEvent) {
+        listModel.ListModel();
         model.setPathForDetailView(Constants.PATH_TO_FXML_SEARCH);
     }
 
     @FXML
     private void onProgramBtnClick(ActionEvent actionEvent) {
+        listModel.ListModel();
         model.setPathForDetailView(Constants.PATH_TO_FXML_PROGRAM);
     }
 
     @FXML
     private void onEquipmentBtnClick(ActionEvent actionEvent) {
+        listModel.ListModel();
         model.setPathForDetailView(Constants.PATH_TO_FXML_EQUIPMENT);
     }
 
     @FXML
     private void onBookingBtnClick(ActionEvent actionEvent) {
+        listModel.ListModel();
         model.setPathForDetailView(Constants.PATH_TO_FXML_BOOKING);
     }
 

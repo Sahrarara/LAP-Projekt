@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class EquipmentController extends BaseController{
     @FXML
@@ -55,13 +56,20 @@ public class EquipmentController extends BaseController{
 
         Equipment equipment1 = tableViewEquipment.getSelectionModel().getSelectedItem();
 
+        //Alert CONFIRMATION TODO: wenn es möglich nur einen CONFIRMATION Alert für Alle DELETE
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText("Sind Sie sicher, dass Sie es löschen wollen?");
+        Optional<ButtonType> action = alert.showAndWait();
+        if(action.get() == ButtonType.OK) {
+            try {
+                equipmentRepositoryJDBC.deleteEquipment(equipment1);
+                listModel.equipmentList.remove(equipment1);
 
-        try {
-            equipmentRepositoryJDBC.deleteEquipment(equipment1);
-            listModel.equipmentList.remove(equipment1);
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 

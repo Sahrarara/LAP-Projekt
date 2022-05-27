@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import static com.lap.lapproject.controller.BaseController.listModel;
 import static com.lap.lapproject.controller.BaseController.model;
@@ -83,8 +84,16 @@ public class BookingController {
     private void onDeleteBookingBtnClick(ActionEvent actionEvent) {
         Booking booking  = tableViewBooking.getSelectionModel().getSelectedItem();
         BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
-        bookingRepositoryJDBC.deleteBooking(booking);
-        listModel.bookingList.remove(booking);
+        //Alert CONFIRMATION TODO: wenn es möglich nur einen CONFIRMATION Alert für Alle DELETE
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText("Sind Sie sicher, dass Sie es löschen wollen?");
+        Optional<ButtonType> action = alert.showAndWait();
+        if(action.get() == ButtonType.OK) {
+            bookingRepositoryJDBC.deleteBooking(booking);
+            listModel.bookingList.remove(booking);
+        }
     }
 
     @FXML
