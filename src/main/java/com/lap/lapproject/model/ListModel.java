@@ -86,9 +86,9 @@ public class ListModel {
 
                     if (change.wasReplaced()) {
                         //...
-                    } else if (change.wasAdded()) {
-                        for (Booking booking : change.getAddedSubList()) {
-                            bookingRepositoryJDBC.addBooking(booking);
+                    } else if (change.wasAdded()) {//gepr ob was geädert
+                        for (Booking booking : change.getAddedSubList()) { //liste für buch, ob was geadd ist
+                            bookingRepositoryJDBC.addBooking(booking); // add book zu repo
                         }
                     } else if (change.wasRemoved()) {
                         // ...

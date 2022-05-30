@@ -3,7 +3,9 @@ package com.lap.lapproject.controller;
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.Trainer;
+import com.lap.lapproject.repos.BookingRepositoryJDBC;
 import com.lap.lapproject.repos.UserRepositoryJDBC;
+import com.lap.lapproject.utility.QuickAlert;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -59,6 +61,7 @@ public class TrainerController extends BaseController{
     @FXML
     private void onDeleteTrainerBtnClick(ActionEvent actionEvent) {
         UserRepositoryJDBC userRepositoryJDBC = new UserRepositoryJDBC();
+        BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
         Trainer trainer = tableViewTrainer.getSelectionModel().getSelectedItem();
 
         //Alert CONFIRMATION TODO: wenn es möglich nur einen CONFIRMATION Alert für Alle DELETE
@@ -68,8 +71,17 @@ public class TrainerController extends BaseController{
         alert.setContentText("Sind Sie sicher, dass Sie es löschen wollen?");
         Optional<ButtonType> action = alert.showAndWait();
         if(action.get() == ButtonType.OK) {
-            userRepositoryJDBC.deleteUser(trainer);
-            listModel.trainerList.remove(trainer);
+            // check in DB how many bookings use the particular location
+            int bookingCountByTrainer = bookingRepositoryJDBC.getBookingCountByTrainerId(trainer.getId());
+
+            if (bookingCountByTrainer == 0) {
+
+                userRepositoryJDBC.deleteUser(trainer);
+                listModel.trainerList.remove(trainer);
+            } else {
+                QuickAlert.showError("Diese : er Trainer  wird für eine Buchung benötigt, Sie können sie:ihn nicht löschen! Bearbeiten Sie zuerst Ihre Buchungen!");
+            }
+
         }
     }
 
