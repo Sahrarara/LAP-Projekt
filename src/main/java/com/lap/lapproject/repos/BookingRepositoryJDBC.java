@@ -32,7 +32,8 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
                     "recurrence_rule=?, datetime_start=?, datetime_end=? WHERE booking_id=?";
 
 
-    private static final String GET_COURSES_COUNT_BY_PROGRAM_ID_JOIN_LOCATION_ID_SQL_STRING = "SELECT COUNT(*) AS booking_count_by_location FROM booking JOIN rooms ON booking.room_id=rooms.room_id JOIN location ON location.location_id=rooms.location_id WHERE rooms.location_id =(?) ";
+    private static final String GET_BOOKINGS_COUNT_BY_PROGRAM_ID_JOIN_LOCATION_ID_SQL_STRING = "SELECT COUNT(*) AS booking_count_by_location FROM booking JOIN rooms ON booking.room_id=rooms.room_id JOIN location ON location.location_id=rooms.location_id WHERE rooms.location_id =(?) ";
+    private static final String GET_BOOKINGS_COUNT_BY_ROOM_ID_SQL_STRING = "SELECT COUNT(*) AS rooms_count FROM booking WHERE room_id = (?) ";
 
 
     @Override
@@ -242,7 +243,7 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
         ResultSet resultSet = null;
         int roomsCountByLocationId = 0;
         try {
-            preparedStatement = connection.prepareStatement(GET_COURSES_COUNT_BY_PROGRAM_ID_JOIN_LOCATION_ID_SQL_STRING );
+            preparedStatement = connection.prepareStatement(GET_BOOKINGS_COUNT_BY_PROGRAM_ID_JOIN_LOCATION_ID_SQL_STRING );
             preparedStatement.setInt(1, locationId);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -253,6 +254,26 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
             e.printStackTrace();
         }
         return roomsCountByLocationId;
+    }
+
+    @Override
+    public int getBookingCountByRoomId(int roomId) {
+        Connection connection = connect();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        int bookingsCountByRoomId = 0;
+        try {
+            preparedStatement = connection.prepareStatement(GET_BOOKINGS_COUNT_BY_ROOM_ID_SQL_STRING );
+            preparedStatement.setInt(1, roomId);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                bookingsCountByRoomId = resultSet.getInt("rooms_count");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bookingsCountByRoomId;
     }
 
 

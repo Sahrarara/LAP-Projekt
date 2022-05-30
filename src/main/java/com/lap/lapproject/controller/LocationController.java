@@ -36,6 +36,8 @@ public class LocationController extends BaseController{
     private TableColumn<Location, String> zipColumn;
     @FXML
     private TableColumn<Location, String> cityColumn;
+    @FXML
+    private ChoiceBox filterChoiceBox;
 
 
     @FXML
@@ -76,21 +78,13 @@ public class LocationController extends BaseController{
                 locationRepositoryJDBC.deleteLocation(locationToDelete);
                 listModel.locationList.remove(locationToDelete);
             }else {
-                QuickAlert.showError("Dieses Location wird von einem Buchung benötigt! Sie können sie nicht löschen!Bearbeiten Sie zuerst Ihre Buhungen!");
+                QuickAlert.showError("Diese Location wird für eine Buchung benötigt, Sie können nicht löschen! Bearbeiten Sie zuerst Ihre Buchungen!");
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
 
     }
-
-
-
-
-
-
-
-
 
 
 

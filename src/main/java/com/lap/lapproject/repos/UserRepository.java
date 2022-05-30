@@ -24,4 +24,8 @@ public interface UserRepository {
 
     void updateUser(User user) throws SQLException;
 
+    void updateUserProfile(User user) throws SQLException;
+
+
+
 }

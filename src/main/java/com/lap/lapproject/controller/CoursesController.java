@@ -9,10 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -36,6 +33,8 @@ public class CoursesController extends BaseController{
     private TableColumn<Course, String> programColumn;
     @FXML
     private TableColumn<Course, Integer> groupSizeColumn;
+    @FXML
+    private ChoiceBox filterChoiceBox;
 
     @FXML
     private void onAddCourseBtnClick(ActionEvent actionEvent) {
@@ -84,6 +83,7 @@ public class CoursesController extends BaseController{
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("DEBUG: " + tableViewEvent.getSelectionModel().selectedItemProperty());
         listModel.selectedCourseProperty().bind(tableViewEvent.getSelectionModel().selectedItemProperty());
 
         stage.setTitle("Raum Management");

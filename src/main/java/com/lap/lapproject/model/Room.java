@@ -3,6 +3,9 @@ import javafx.beans.property.SimpleIntegerProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Room {
 
     private static final Logger log = LoggerFactory.getLogger(Room.class);
@@ -11,8 +14,7 @@ public class Room {
     private SimpleIntegerProperty roomNumber;
     private SimpleIntegerProperty size;
     private Location location;
-    private byte[] photo;
-    private Equipment equipment;
+    private List<Equipment> equipments;
 
 
     public Room(int id, int roomNumber, int size, Location location ) {
@@ -22,27 +24,27 @@ public class Room {
         this.location = location;
     }
 
+    public Room(int roomNumber, int size, Location location ) {
+        this.roomNumber = new SimpleIntegerProperty(roomNumber);
+        this.size = new SimpleIntegerProperty(size);
+        this.location = location;
+        this.id = new SimpleIntegerProperty();
+    }
 
-    public Room(int id, int roomNumber, int size, Location location, Equipment equipment) {
+
+    public Room(int id, int roomNumber, int size, Location location, List<Equipment> equipments) {
         this.id = new SimpleIntegerProperty(id);
         this.roomNumber = new SimpleIntegerProperty(roomNumber);
         this.size = new SimpleIntegerProperty(size);
         this.location = location;
-        this.equipment = equipment;
+        this.equipments = equipments;
     }
 
-    public Room(int roomNumber) {
-        this.roomNumber = new SimpleIntegerProperty(roomNumber);
+    @Override
+    public String toString() {
+        return String.valueOf(getRoomNumber());
     }
 
-    //TODO: photo, equipment
-    public Room(int roomNumber, int size, Location location, byte[] photo, Equipment equipment) {
-        this.roomNumber = new SimpleIntegerProperty(size);
-        this.size = new SimpleIntegerProperty(size);
-        this.location = location;
-        this.photo = photo;
-        this.equipment = equipment;
-    }
 
     public int getId() {
         return id.get();
@@ -59,6 +61,7 @@ public class Room {
     public int getRoomNumber() {
         return roomNumber.get();
     }
+
 
     public SimpleIntegerProperty roomNumberProperty() {
         return roomNumber;
@@ -80,13 +83,6 @@ public class Room {
         this.size.set(size);
     }
 
-    public byte[] getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
-    }
 
     public Location getLocation() {
         return location;
@@ -96,16 +92,18 @@ public class Room {
         this.location = location;
     }
 
-    public Equipment getEquipment() {
-        return equipment;
+    public List<Equipment> getEquipment() {
+        return equipments;
     }
 
-    public void setEquipment(Equipment equipment) {
-        this.equipment = equipment;
+    public void setEquipment(List<Equipment> equipments) {
+        this.equipments = equipments;
     }
 
-    @Override
-    public String toString() {
-        return String.valueOf(getRoomNumber());
+    public String getEquipmentAsString() {
+        if (equipments == null) {
+            return "";
+        }
+        return equipments.stream().map(equipment -> equipment.getDescription()).collect(Collectors.joining(", "));
     }
 }

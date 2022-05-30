@@ -3,8 +3,15 @@ package com.lap.lapproject.model;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.fxml.FXML;
+import javafx.scene.image.Image;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 public abstract class User {
 
@@ -91,6 +98,16 @@ public abstract class User {
         this.emailVisibility = new SimpleBooleanProperty(emailVisibility);
         this.photoVisibility = new SimpleBooleanProperty(photoVisibility);
     }
+
+    // ProfileController
+    public User(int id, String description, String phoneNmbr, String email, byte[] photo) {
+        this.id = new SimpleIntegerProperty(id);
+        this.description = new SimpleStringProperty(description);
+        this.phoneNmbr = new SimpleStringProperty(phoneNmbr);
+        this.email = new SimpleStringProperty(email);
+        this.photo = photo;
+    }
+
 
 
     public int getId() {
@@ -286,5 +303,9 @@ public abstract class User {
     public String toString() {
         return getfName() + " " + getlName();
     }
+
+
+
+
 
 }

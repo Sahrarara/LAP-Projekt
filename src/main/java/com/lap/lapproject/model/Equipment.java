@@ -45,4 +45,27 @@ public class Equipment {
     public void setDescription(String description) {
         this.description.set(description);
     }
+
+    @Override
+    public String toString() {
+        return getDescription();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o == null)
+        {
+            return false;
+        }
+        if (o == this)
+        {
+            return true;
+        }
+        if (getClass() != o.getClass())
+        {
+            return false;
+        }
+        Equipment e = (Equipment) o;
+        return (this.getId() == e.getId());
+    }
 }

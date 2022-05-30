@@ -25,12 +25,15 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             " authorization,description,phone,email, photo, description_visable, phone_visable, email_visable," +
             "photo_visable) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SELECT_AUTHORIZATION_SQL_STRING = "SELECT DISTINCT authorization FROM users";
+//    nicht passender und verwirrender Name, was wird selektiert?  es sollte das passwort selectiert werden dem namen zufolge
     private static final String SELECT_USERNAME_PASSWORD_SQL_STRING = " SELECT * FROM users WHERE username=? AND active_status='1'";
     public static final String SELECT_USERS_SQL_STRING = "SELECT username FROM users";
     private static final String DELETE_USER_SQL_STRING = "DELETE FROM users WHERE user_id=?";
     private static final String UPDATE_USER_SQL_STRING = "UPDATE users SET username=?,active_status=?," +
             "title=?,first_name=?, last_name=?,password=?,authorization=?,description=?,phone=?,email=?,photo=?,description_visable=?,phone_visable=?,email_visable=?," +
             "photo_visable=? WHERE user_id=?";
+
+    private static final String UPDATE_PROFILE_SQL_STRING = "UPDATE users SET description=?, phone=?, email=?, photo=? WHERE user_id=?";
 
 
     @Override
@@ -130,6 +133,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             e.printStackTrace();
         }
     }
+
 
 
     @Override
@@ -340,6 +344,35 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             e.printStackTrace();
         }
         return null;
+    }
+
+
+
+    @Override
+    public void updateUserProfile(User user) throws SQLException {
+
+        Connection connection = connect();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(UPDATE_PROFILE_SQL_STRING);
+
+            preparedStatement.setString(1, user.getDescription());
+            preparedStatement.setString(2, user.getPhoneNmbr());
+            preparedStatement.setString(3, user.getEmail());
+
+            InputStream inputStream = null;
+            if (user.getPhoto() != null) {
+                inputStream = new ByteArrayInputStream(user.getPhoto());
+
+            }
+            preparedStatement.setBlob(4, inputStream);
+            preparedStatement.setInt(5, user.getId());
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }
