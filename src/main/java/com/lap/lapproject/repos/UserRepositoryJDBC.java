@@ -25,7 +25,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             " authorization,description,phone,email, photo, description_visable, phone_visable, email_visable," +
             "photo_visable) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SELECT_AUTHORIZATION_SQL_STRING = "SELECT DISTINCT authorization FROM users";
-//    nicht passender und verwirrender Name, was wird selektiert?  es sollte das passwort selectiert werden dem namen zufolge
+    //    nicht passender und verwirrender Name, was wird selektiert?  es sollte das passwort selectiert werden dem namen zufolge
     private static final String SELECT_USERNAME_PASSWORD_SQL_STRING = " SELECT * FROM users WHERE username=? AND active_status='1'";
     public static final String SELECT_USERS_SQL_STRING = "SELECT username FROM users";
     private static final String DELETE_USER_SQL_STRING = "DELETE FROM users WHERE user_id=?";
@@ -110,7 +110,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             preparedStatement.setString(3, user.getTitle());
             preparedStatement.setString(4, user.getfName());
             preparedStatement.setString(5, user.getlName());
-            preparedStatement.setString(6, hashPassword(user.getUserPassword()));
+            preparedStatement.setString(6, user.getUserPassword());
             preparedStatement.setString(7, user.getAuthority());
             preparedStatement.setString(8, user.getDescription());
             preparedStatement.setString(9, user.getPhoneNmbr());
@@ -133,7 +133,6 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             e.printStackTrace();
         }
     }
-
 
 
     @Override
@@ -326,14 +325,14 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
                     case "admin":
 
                         Admin admin = new Admin(userid, user, title, Boolean.valueOf(activeStatus), firstname,
-                                lastname, password,authority, description,
+                                lastname, password, authority, description,
                                 phoneNmbr, email, photo, descriptionVisibility, phoneNmbrVisibility, emailVisibility, photoVisibility);
                         return admin;
 
                     case "coach":
 
                         Trainer trainer = new Trainer(userid, user, title, Boolean.valueOf(activeStatus), firstname,
-                                lastname, password,authority, description,
+                                lastname, password, authority, description,
                                 phoneNmbr, email, photo, descriptionVisibility, phoneNmbrVisibility, emailVisibility, photoVisibility);
                         return trainer;
                     default:
@@ -345,7 +344,6 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
         }
         return null;
     }
-
 
 
     @Override
