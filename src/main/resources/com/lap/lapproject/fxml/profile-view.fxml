@@ -40,9 +40,9 @@
                            <children>
                               <AnchorPane maxHeight="-Infinity" prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <Circle centerX="100.0" centerY="100.0" fill="DODGERBLUE" radius="90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="5.0" />
-                                    <Circle fx:id="circleView" centerX="100.0" centerY="100.0" fill="DODGERBLUE" radius="84.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" />
-                                    <Button fx:id="photoUploadButton" layoutX="18.0" layoutY="82.0" mnemonicParsing="false" onAction="#onPhotoUploadBtnClick" style="-fx-background-color: transparent;" text="Lade ein Foto hoch" textFill="WHITE">
+                                    <Circle centerX="100.0" centerY="100.0" fill="#211d5a" radius="90.0" stroke="#211d5a" strokeType="INSIDE" strokeWidth="5.0" />
+                                    <Circle fx:id="circleView" centerX="100.0" centerY="100.0" fill="#211d5a" radius="84.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" />
+                                    <Button fx:id="photoUploadButton" layoutX="31.0" layoutY="82.0" mnemonicParsing="false" onAction="#onPhotoUploadBtnClick" style="-fx-background-color: transparent;" text="Foto hochladen" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="16.0" />
                                        </font>
