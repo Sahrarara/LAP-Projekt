@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +25,7 @@ public class ListModel {
     public ObservableList<Room> roomList = FXCollections.observableArrayList();
     public ObservableList<Trainer> authorizationList = FXCollections.observableArrayList();
 
-
+    public FilteredList<Program> filteredProgramList = new FilteredList<Program>(programList);
 
     CourseRepositoryJDBC courseRepositoryJDBC = new CourseRepositoryJDBC();
     ProgramRepositoryJDBC programRepositoryJDBC = new ProgramRepositoryJDBC();
@@ -35,7 +36,9 @@ public class ListModel {
     RoomRepositoryJDBC roomRepositoryJDBC = new RoomRepositoryJDBC();
 
 
-//UPDATE Variable enthält den Wert des ausgewählten Elements
+
+
+    //UPDATE Variable enthält den Wert des ausgewählten Elements
     private ObjectProperty<Program> selectedProgram = new SimpleObjectProperty<>();
     private ObjectProperty<Equipment> selectedEquipment = new SimpleObjectProperty<>();
     private ObjectProperty<Booking> selectedBooking = new SimpleObjectProperty<>();
