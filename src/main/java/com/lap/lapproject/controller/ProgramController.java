@@ -6,7 +6,6 @@ import com.lap.lapproject.model.Program;
 import com.lap.lapproject.repos.CourseRepositoryJDBC;
 import com.lap.lapproject.repos.ProgramRepositoryJDBC;
 import com.lap.lapproject.utility.QuickAlert;
-import com.lap.lapproject.utility.UsabilityMethods;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -134,7 +133,7 @@ public class ProgramController extends BaseController {
         initTableProgram();
         //nimmt daten von tabele und befüllt das Formular
         listModel.selectedProgramProperty().bind(tableViewProgram.getSelectionModel().selectedItemProperty());
-        UsabilityMethods.changeListener(searchBar, searchIcon);
+//        UsabilityMethods.changeListener(searchBar, searchIcon);
 
     }
 

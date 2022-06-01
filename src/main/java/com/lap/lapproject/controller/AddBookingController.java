@@ -66,9 +66,7 @@ public class AddBookingController extends BaseController {
     @FXML
     private void onAddBtnClick(ActionEvent actionEvent) throws SQLException {
 
-        //TODO: Rework addbooking.fxml (eintägiger Kurs vs. wöchentlicher Kurs)
         //TODO: if Bedingung damit Booking nur angelegt wird wenn möglich
-        //TODO: Datum validieren
 
 
         BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
@@ -93,17 +91,40 @@ public class AddBookingController extends BaseController {
                 String recurrenceRule = String.valueOf(recurrenceChoiceBox.getValue());
 
                 LocalDate dateStart = startDatePicker.getValue();
-                LocalTime timeStart = timeStartTimeField.getValue();
-                LocalDateTime localDateTimeStart = LocalDateTime.of(dateStart, timeStart);
-
                 LocalDate dateEnd = endDatePicker.getValue();
+                LocalTime timeStart = timeStartTimeField.getValue();
                 LocalTime timeEnd = timeEndTimeField.getValue();
-                LocalDateTime localDateTimeEnd = LocalDateTime.of(dateEnd, timeEnd);
 
-                Booking booking = new Booking(room, trainer, model.getLoggedInUser(), course, localDateTimeStart, localDateTimeEnd, recurrenceRule);
-                listModel.bookingList.add(booking);
+                LocalDateTime localDateTimeStart = null;
+                LocalDateTime localDateTimeEnd = null;
 
-                moveToBookingPage();
+
+                // validate date
+
+                if (dateStart.compareTo(dateEnd) > 0) {
+                    System.out.println("dateStart is after dateEnd: NOT OK");
+                    QuickAlert.showError("Datum passt nicht. Bitte kontrollieren!");
+
+                } else if (dateStart.compareTo(dateEnd) < 0 || dateStart.compareTo(dateEnd) == 0) {
+                    System.out.println("dateStart is before dateEnd OR also dateStart is equal to dateEnd: OK");
+
+                    // validate time
+
+                    if(timeStart.compareTo(timeEnd) > 0 || timeStart.compareTo(timeEnd) == 0) {
+                        System.out.println("timeStart is after timeEnd: NOT OK");
+                        QuickAlert.showError("Uhrzeit passt nicht. Bitte kontrollieren!");
+
+                    } else if (timeStart.compareTo(timeEnd) < 0) {
+
+                        localDateTimeStart = LocalDateTime.of(dateStart, timeStart);
+                        localDateTimeEnd = LocalDateTime.of(dateEnd, timeEnd);
+                        Booking booking = new Booking(room, trainer, model.getLoggedInUser(), course, localDateTimeStart, localDateTimeEnd, recurrenceRule);
+                        listModel.bookingList.add(booking);
+                        moveToBookingPage();
+                    }
+
+                }
+
 
             } else {
 
@@ -116,22 +137,46 @@ public class AddBookingController extends BaseController {
                 selectedBooking.setCourse(courseNameChoiceBox.getValue());
 
                 LocalDate dateStart = startDatePicker.getValue();
-                LocalTime timeStart = timeStartTimeField.getValue();
-                LocalDateTime localDateTimeStart = LocalDateTime.of(dateStart, timeStart);
-
                 LocalDate dateEnd = endDatePicker.getValue();
+                LocalTime timeStart = timeStartTimeField.getValue();
                 LocalTime timeEnd = timeEndTimeField.getValue();
-                LocalDateTime localDateTimeEnd = LocalDateTime.of(dateEnd, timeEnd);
 
-                selectedBooking.setDateTimeStart(localDateTimeStart);
-                selectedBooking.setDateTimeEnd(localDateTimeEnd);
+                LocalDateTime localDateTimeStart;
+                LocalDateTime localDateTimeEnd;
 
                 selectedBooking.setRecurrenceRule(recurrenceChoiceBox.getValue());
 
-                bookingRepositoryJDBC.updateBooking(selectedBooking);
-                listModel.bookingList.set(listModel.bookingList.indexOf(selectedBooking), selectedBooking);
 
-                moveToBookingPage();
+                // validate date
+
+                if (dateStart.compareTo(dateEnd) > 0) {
+                    System.out.println("dateStart is after dateEnd: NOT OK");
+                    QuickAlert.showError("Datum passt nicht. Bitte kontrollieren!");
+
+                } else if (dateStart.compareTo(dateEnd) < 0 || dateStart.compareTo(dateEnd) == 0) {
+                    System.out.println("dateStart is before dateEnd OR also dateStart is equal to dateEnd: OK");
+
+                    // validate time
+
+                    if(timeStart.compareTo(timeEnd) > 0 || timeStart.compareTo(timeEnd) == 0) {
+                        System.out.println("timeStart is after timeEnd: NOT OK");
+                        QuickAlert.showError("Uhrzeit passt nicht. Bitte kontrollieren!");
+
+                    } else if (timeStart.compareTo(timeEnd) < 0) {
+
+                        localDateTimeStart = LocalDateTime.of(dateStart, timeStart);
+                        localDateTimeEnd = LocalDateTime.of(dateEnd, timeEnd);
+                        selectedBooking.setDateTimeStart(localDateTimeStart);
+                        selectedBooking.setDateTimeEnd(localDateTimeEnd);
+
+                        bookingRepositoryJDBC.updateBooking(selectedBooking);
+                        listModel.bookingList.set(listModel.bookingList.indexOf(selectedBooking), selectedBooking);
+
+                        moveToBookingPage();
+                    }
+                }
+
+
             }
 
         } else {
@@ -163,6 +208,10 @@ public class AddBookingController extends BaseController {
         if(listModel.getSelectedBooking() == null) {
             recurrenceChoiceBox.setValue("keiner");
         }
+
+
+        timeStartTimeField.setValue(LocalTime.of(7, 30));
+        timeEndTimeField.setValue(LocalTime.of(19, 30));
 
         locationChoiceBox.setItems(listModel.locationList);
         trainerChoiceBox.setItems(listModel.trainerList);

@@ -135,7 +135,7 @@
       </Button>
       <CheckBox fx:id="emailCheckBox" mnemonicParsing="false" text="Ausblenden" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
       <CheckBox fx:id="phoneNmbrCheckBox" mnemonicParsing="false" text="Ausblenden" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
-      <CheckBox fx:id="activeCheckBox" mnemonicParsing="false" text="                    " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="12">
+      <CheckBox fx:id="activeCheckBox" mnemonicParsing="false" text="                   " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="12">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
@@ -179,7 +179,9 @@
       </Label>
       <Label fx:id="errorUsername" text="Text" textFill="#ff0707" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
       <Label fx:id="errorEmail" text="Text" textFill="RED" GridPane.columnIndex="3" GridPane.rowIndex="9" GridPane.valignment="BOTTOM" />
-      <PasswordField fx:id="passwordTextField" maxWidth="385.0" onAction="#onAddBtnClick" styleClass="input-form" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+      <PasswordField fx:id="passwordTextFieldHidden" maxWidth="385.0" onAction="#onAddBtnClick" styleClass="input-form" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+      <TextField fx:id="passwordText" maxWidth="385.0" styleClass="input-form" GridPane.columnIndex="3" GridPane.rowIndex="8" />
       <Label fx:id="errorPassword" text="Text" textFill="RED" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+      <CheckBox fx:id="showPassword" mnemonicParsing="false" onAction="#changeVisibility" text=" Anzeigen  " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
    </children>
 </GridPane>

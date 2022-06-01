@@ -130,6 +130,9 @@ public class BookingController {
         initBookingTable();
         // Damit werden alle Choice-Boxen mit Daten aus der selektierte Tabellenzeile befüllt:
         listModel.selectedBookingProperty().bind(tableViewBooking.getSelectionModel().selectedItemProperty());
+
+        //TODO: add a Textfield ID and imageView ID in the fxml file for the searchbar and magnifying glass
+        //TODO: write the UsabilityMethod.changeListener method in here with the IDs of the searchbar and magnifying glass (you can look it up in ProgramController)
     }
 
 

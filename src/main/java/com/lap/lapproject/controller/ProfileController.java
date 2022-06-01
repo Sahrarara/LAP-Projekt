@@ -70,9 +70,6 @@ public class ProfileController extends BaseController {
     @FXML
     private void onSaveBtnClick(ActionEvent actionEvent) {
 
-        saveButton.setVisible(false);
-        editButton.setVisible(true);
-
         if(!(emailTextField.getText().isBlank()) && !(phoneTextField.getText().isBlank())) {
 
             int id = model.getLoggedInUser().getId();
@@ -123,11 +120,16 @@ public class ProfileController extends BaseController {
 
         if(model.getLoggedInUser().getPhoto() != null) {
             circleView.setFill(new ImagePattern(imageFromBytes(model.getLoggedInUser().getPhoto())));
+
+        } else {
+
+            try {
+                circleView.setFill(new ImagePattern(imageFromBytes(convertToBytes
+                        ("src/main/resources/com/lap/lapproject/images/lapproject/images/Sample_User_Icon.png"))));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-//        } else {
-//
-//            circleView.setFill(new ImagePattern());
-//        }
 
 
     }
