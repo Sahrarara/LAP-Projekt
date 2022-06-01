@@ -61,9 +61,9 @@ public class ChangePasswordController extends Repository {
     }
 
 
-    private boolean checkPass = BCrypt.checkpw(plainPassword, hashedPassword);
+    //private boolean checkPass = BCrypt.checkpw(plainPassword, hashedPassword);
 
-    private String hashPassword = BCrypt.hashpw()
+   // private String hashPassword = BCrypt.hashpw()
 
     private boolean checkIfPasswordIsInDatabase() {
         String var10000 = model.getLoggedInUser().getUsername();
@@ -74,7 +74,7 @@ public class ChangePasswordController extends Repository {
 
         String SELECT_PASSWORD_FROM_USERNAME = "SELECT * FROM users WHERE username = '" + var10000 + "' AND  password = '" + this.currentPasswordTF.getText() + "'";
 
-        try (PreparedStatement preparedStatement = connect().prepareStatement()){
+        /*try (PreparedStatement preparedStatement = connect().prepareStatement()){
 
         }
         try {
@@ -92,7 +92,7 @@ public class ChangePasswordController extends Repository {
             }
         } catch (SQLException var6) {
             var6.printStackTrace();
-        }
+        }*/
 
         System.out.println("bullshit");
         return false;

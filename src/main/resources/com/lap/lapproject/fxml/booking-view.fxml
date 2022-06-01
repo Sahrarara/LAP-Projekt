@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -13,6 +14,8 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #211D5A;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.BookingController">
@@ -72,7 +75,7 @@
                         <Insets />
                      </opaqueInsets>
                   </ButtonBar>
-                  <TextField fx:id="searchBar" layoutX="550.0" layoutY="91.0" onAction="#onSearchBarClick" prefHeight="37.0" prefWidth="200.0" promptText="         Suche..." styleClass="search-field" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="549.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="104.0">
+                  <TextField layoutX="550.0" layoutY="91.0" prefHeight="37.0" prefWidth="200.0" promptText="         Suche..." styleClass="search-field" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="549.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="104.0">
                      <opaqueInsets>
                         <Insets left="5.0" right="5.0" />
                      </opaqueInsets>

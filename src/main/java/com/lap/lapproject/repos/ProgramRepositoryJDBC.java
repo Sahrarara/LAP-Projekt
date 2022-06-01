@@ -5,6 +5,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+//import static com.lap.lapproject.controller.BaseController.listModel;
+
 
 public class ProgramRepositoryJDBC extends Repository implements ProgramRepository {
 
@@ -74,11 +76,14 @@ public class ProgramRepositoryJDBC extends Repository implements ProgramReposito
             preparedStatement.setLong(2, program.getId());
             preparedStatement.executeQuery();
 
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
     }
+
+
     //TODO: search function here
     public void searchProgram(Program program) throws SQLException{
         Connection connection = connect();

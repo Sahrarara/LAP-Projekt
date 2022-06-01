@@ -15,6 +15,8 @@ public interface BookingRepository {
 
     int getBookingCountByRoomId(int roomId) throws SQLException;
 
+    int getBookingCountByTrainerId(int trainerId) throws SQLException;
+
     void updateBooking(Booking booking) throws SQLException;
 
     //void updateBooking(int roomid, int trainerid, int userid, int locationid, int courseid, String recurrenceRule, LocalDateTime localDateTime_start, LocalDateTime localDateTime_end) throws SQLException;

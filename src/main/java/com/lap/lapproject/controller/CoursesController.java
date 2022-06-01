@@ -3,8 +3,11 @@ package com.lap.lapproject.controller;
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.Course;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import com.lap.lapproject.repos.CourseRepositoryJDBC;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,9 +17,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Optional;
+
 import java.util.Locale;
 
 public class CoursesController extends BaseController{
+
+
     @FXML
     private ButtonBar coursesBtnBar;
 
@@ -37,8 +45,6 @@ public class CoursesController extends BaseController{
     private TableColumn<Course, Integer> groupSizeColumn;
     @FXML
     private ChoiceBox filterChoiceBox;
-    @FXML
-    private TextField searchBar;
 
     @FXML
     private void onAddCourseBtnClick(ActionEvent actionEvent) {
@@ -116,7 +122,7 @@ public class CoursesController extends BaseController{
     }
 
     private void initEventTable() {
-        tableViewEvent.setItems(listModel.filteredCourseList);
+        tableViewEvent.setItems(listModel.courseList);
         courseNameColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getCourseName()));
         courseStartColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getCourseStart().toString().substring(0, 10)));
         courseEndColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getCourseEnd().toString().substring(0, 10)));
@@ -135,9 +141,5 @@ public class CoursesController extends BaseController{
                 coursesBtnBar.setVisible(false);
                 break;
         }
-    }
-
-    @FXML
-    private void onSearchBarClick(ActionEvent actionEvent) {listModel.filteredCourseList.setPredicate(course -> course.getCourseName().toLowerCase(Locale.ROOT).contains(searchBar.getText().toLowerCase(Locale.ROOT)));
     }
 }

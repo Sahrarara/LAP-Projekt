@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.Locale;
 
 public class ProgramController extends BaseController {
@@ -69,19 +70,28 @@ public class ProgramController extends BaseController {
 
         Program programToDelete = tableViewProgram.getSelectionModel().getSelectedItem();
 
-        try {
-            // check in DB how many courses use the particular program
-            int coursesCount = courseRepositoryJDBC.getCoursesCountByProgramId(programToDelete.getId());
+        //Alert CONFIRMATION TODO: wenn es möglich nur einen CONFIRMATION Alert für Alle DELETE
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText("Sind Sie sicher, dass Sie es löschen wollen?");
+        Optional<ButtonType> action = alert.showAndWait();
+        if(action.get() == ButtonType.OK) {
 
-            if (coursesCount == 0){
-                programRepositoryJDBC.deleteProgram(programToDelete);
-                listModel.programList.remove(programToDelete);
-            } else {
-                QuickAlert.showError("Dieses Program wird von einem Kurse benötigt! Sie können sie nicht löschen!");
+            try {
+                // check in DB how many courses use the particular program
+                int coursesCount = courseRepositoryJDBC.getCoursesCountByProgramId(programToDelete.getId());
+
+                if (coursesCount == 0) {
+                    programRepositoryJDBC.deleteProgram(programToDelete);
+                    listModel.programList.remove(programToDelete);
+                } else {
+                    QuickAlert.showError("Dieses Program wird von einem Kurse benötigt! Sie können sie nicht löschen!");
+                }
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
             }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
         }
 
     }
@@ -125,7 +135,7 @@ public class ProgramController extends BaseController {
         initTableProgram();
         //nimmt daten von tabele und befüllt das Formular
         listModel.selectedProgramProperty().bind(tableViewProgram.getSelectionModel().selectedItemProperty());
-        UsabilityMethods.changeListener(searchBar, searchIcon);
+//        UsabilityMethods.changeListener(searchBar, searchIcon);
 
     }
 

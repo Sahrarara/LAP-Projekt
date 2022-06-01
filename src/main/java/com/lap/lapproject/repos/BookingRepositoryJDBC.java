@@ -34,6 +34,7 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
 
     private static final String GET_BOOKINGS_COUNT_BY_PROGRAM_ID_JOIN_LOCATION_ID_SQL_STRING = "SELECT COUNT(*) AS booking_count_by_location FROM booking JOIN rooms ON booking.room_id=rooms.room_id JOIN location ON location.location_id=rooms.location_id WHERE rooms.location_id =(?) ";
     private static final String GET_BOOKINGS_COUNT_BY_ROOM_ID_SQL_STRING = "SELECT COUNT(*) AS rooms_count FROM booking WHERE room_id = (?) ";
+    private static final String GET_BOOKINGS_COUNT_BY_TRAINER_ID_SQL_STRING = "SELECT COUNT(*) AS trainer_count FROM booking WHERE trainer_id = (?) ";
 
 
     @Override
@@ -276,6 +277,25 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
         return bookingsCountByRoomId;
     }
 
+    @Override
+    public int getBookingCountByTrainerId(int trainerId) {
+        Connection connection = connect();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        int bookingsCountByTrainerId = 0;
+        try {
+            preparedStatement = connection.prepareStatement(GET_BOOKINGS_COUNT_BY_TRAINER_ID_SQL_STRING );
+            preparedStatement.setInt(1, trainerId);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                bookingsCountByTrainerId = resultSet.getInt("trainer_count");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bookingsCountByTrainerId;
+    }
 
 
 }

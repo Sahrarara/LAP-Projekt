@@ -58,7 +58,7 @@
     -fx-background-color: white;
 }
 
-/*table view*/
+/*table view--------*/
 .table-view{
     -fx-background-color: transparent;
     /*-fx-border-collapse:collapse;*/
@@ -68,8 +68,12 @@
     -fx-border-color: transparent;
     -fx-padding: 2 0 2 10px;
     -fx-alignment: center;
-
 }
+
+
+
+
+
 
 
 /*

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -13,6 +14,8 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #211D5A;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.RoomsController">
@@ -72,6 +75,37 @@
                         <Insets />
                      </opaqueInsets>
                   </ButtonBar>
+                  <HBox layoutX="545.0" layoutY="103.0" style="-fx-background-color: #fff;" styleClass="search-field">
+                     <children>
+                        <FontAwesomeIconView fill="#211d5aa8" glyphName="SEARCH" size="16">
+                           <HBox.margin>
+                              <Insets left="8.0" top="7.0" />
+                           </HBox.margin>
+                        </FontAwesomeIconView>
+                        <TextField prefHeight="30.0" prefWidth="155.0" promptText="Suche..." style="-fx-background-color: transparent;">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="370.0" layoutY="86.0">
+                     <children>
+                        <VBox>
+                           <children>
+                              <Label fx:id="filterChoiceBox1" text="Filtern nach">
+                                 <VBox.margin>
+                                    <Insets left="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <ChoiceBox prefHeight="30.0" prefWidth="170.0" styleClass="search-field" />
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                  </HBox>
                   <TextField fx:id="searchBar" layoutX="550.0" layoutY="91.0" onAction="#onSearchBarClick" prefHeight="37.0" prefWidth="200.0" promptText="         Suche..." styleClass="search-field" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="549.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="104.0" />
                   <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="559.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
                      <image>

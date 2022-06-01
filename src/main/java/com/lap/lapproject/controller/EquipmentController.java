@@ -13,7 +13,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Locale;
+import java.util.Optional;
 
 public class EquipmentController extends BaseController{
     @FXML
@@ -29,8 +29,6 @@ public class EquipmentController extends BaseController{
     private TableView<Equipment> tableViewEquipment;
     @FXML
     private TableColumn<Equipment, String> equipmentNameColumn;
-    @FXML
-    private TextField searchBar;
 
     @FXML
     private void onAddEquipmentBtnClick(ActionEvent actionEvent) {
@@ -58,13 +56,20 @@ public class EquipmentController extends BaseController{
 
         Equipment equipment1 = tableViewEquipment.getSelectionModel().getSelectedItem();
 
+        //Alert CONFIRMATION TODO: wenn es möglich nur einen CONFIRMATION Alert für Alle DELETE
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText("Sind Sie sicher, dass Sie es löschen wollen?");
+        Optional<ButtonType> action = alert.showAndWait();
+        if(action.get() == ButtonType.OK) {
+            try {
+                equipmentRepositoryJDBC.deleteEquipment(equipment1);
+                listModel.equipmentList.remove(equipment1);
 
-        try {
-            equipmentRepositoryJDBC.deleteEquipment(equipment1);
-            listModel.equipmentList.remove(equipment1);
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
@@ -87,7 +92,7 @@ public class EquipmentController extends BaseController{
     }
 
     @FXML
-    private void onSearchBarClick(ActionEvent actionEvent) {listModel.filteredEquipmentList.setPredicate(equipment -> equipment.getDescription().toLowerCase(Locale.ROOT).contains(searchBar.getText().toLowerCase(Locale.ROOT)));
+    private void onSearchBarClick(ActionEvent actionEvent) {
     }
 
     @FXML
@@ -111,7 +116,7 @@ public class EquipmentController extends BaseController{
     }
 
     private void initEquipmentTable() {
-        tableViewEquipment.setItems(listModel.filteredEquipmentList);
+        tableViewEquipment.setItems(listModel.equipmentList);
         equipmentNameColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getDescription()));
     }
 

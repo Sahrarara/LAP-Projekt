@@ -77,6 +77,8 @@ public class AddEquipmentController extends BaseController{
     }
 
 
+
+
     @FXML
     private void initialize() {
         //Update logik
