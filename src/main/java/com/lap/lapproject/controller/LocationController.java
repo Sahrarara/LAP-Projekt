@@ -15,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Locale;
 import java.util.Optional;
 
 public class LocationController extends BaseController{
@@ -39,6 +40,8 @@ public class LocationController extends BaseController{
     private TableColumn<Location, String> cityColumn;
     @FXML
     private ChoiceBox filterChoiceBox;
+    @FXML
+    private TextField searchBar;
 
 
     @FXML

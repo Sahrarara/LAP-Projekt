@@ -59,7 +59,9 @@ public class BookingController {
     @FXML
     private TableColumn<Booking, String> courseNameColumn;
     @FXML
-    private Label filterChoiceBox;
+    private ChoiceBox filterChoiceBox;
+    @FXML
+    private TextField searchBar;
 
 
     @FXML
@@ -131,7 +133,7 @@ public class BookingController {
 
     public void initBookingTable() {
 
-        tableViewBooking.setItems(listModel.bookingList);
+        tableViewBooking.setItems(listModel.filteredBookingList);
         courseNameColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getCourse().getCourseName()));
         locationColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getRoom().getLocation().getStreet()));
         roomColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getRoom().getRoomNumber()));
@@ -164,5 +166,11 @@ public class BookingController {
                 bookingBtnBar.setVisible(false);
                 break;
         }
+    }
+
+    @FXML
+    private void onSearchBarClick(ActionEvent actionEvent) {
+        listModel.filteredBookingList.setPredicate(booking -> booking.getCourse().toString().toLowerCase(Locale.ROOT).contains(searchBar.getText().toLowerCase(Locale.ROOT)));
+
     }
 }

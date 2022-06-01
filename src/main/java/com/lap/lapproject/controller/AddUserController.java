@@ -278,7 +278,7 @@ public class AddUserController extends BaseController {
     @FXML
     public void fillChoiceBox() {
         ObservableList<String> authorizationName = FXCollections.observableArrayList(
-                listModel.authorizationList.stream()
+                listModel.filteredAuthorizationList.stream()
                         .map(authorization -> authorization.getAuthority())
                         .collect(Collectors.toList()));
         authorizationChoiceBox.setItems(authorizationName);

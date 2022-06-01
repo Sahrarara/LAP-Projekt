@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Locale;
 import java.util.Optional;
 
 public class EquipmentController extends BaseController{
@@ -29,6 +30,8 @@ public class EquipmentController extends BaseController{
     private TableView<Equipment> tableViewEquipment;
     @FXML
     private TableColumn<Equipment, String> equipmentNameColumn;
+    @FXML
+    private TextField searchBar;
 
     @FXML
     private void onAddEquipmentBtnClick(ActionEvent actionEvent) {
@@ -92,7 +95,7 @@ public class EquipmentController extends BaseController{
     }
 
     @FXML
-    private void onSearchBarClick(ActionEvent actionEvent) {
+    private void onSearchBarClick(ActionEvent actionEvent) {listModel.filteredEquipmentList.setPredicate(equipment -> equipment.getDescription().toLowerCase(Locale.ROOT).contains(searchBar.getText().toLowerCase(Locale.ROOT)));
     }
 
     @FXML
@@ -116,7 +119,7 @@ public class EquipmentController extends BaseController{
     }
 
     private void initEquipmentTable() {
-        tableViewEquipment.setItems(listModel.equipmentList);
+        tableViewEquipment.setItems(listModel.filteredEquipmentList);
         equipmentNameColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getDescription()));
     }
 

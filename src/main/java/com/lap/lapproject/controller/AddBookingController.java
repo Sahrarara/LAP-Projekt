@@ -66,6 +66,7 @@ public class AddBookingController extends BaseController {
     @FXML
     private void onAddBtnClick(ActionEvent actionEvent) throws SQLException {
 
+        // TODO: Rework addbooking.fxml (eintägiger Kurs vs. wöchentlicher Kurs)
         //TODO: if Bedingung damit Booking nur angelegt wird wenn möglich
 
 
