@@ -4,7 +4,7 @@ import com.lap.lapproject.application.BCrypt;
 import com.lap.lapproject.utility.QuickAlert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.lap.lapproject.model.Trainer;
 import com.lap.lapproject.repos.UserRepositoryJDBC;
 import javafx.collections.FXCollections;

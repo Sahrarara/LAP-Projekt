@@ -114,7 +114,7 @@
                   <TableView fx:id="tableViewEvent" layoutX="20.0" layoutY="20.0" prefHeight="386.0" prefWidth="770.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                      <columns>
                         <TableColumn fx:id="courseNameColumn" minWidth="-1.0" prefWidth="125.5" text="Name" />
-                        <TableColumn fx:id="courseStartColumn" minWidth="-1.0" prefWidth="139.0" text="Kursbegin" />
+                        <TableColumn fx:id="courseStartColumn" minWidth="-1.0" prefWidth="139.0" text="Kursbeginn" />
                         <TableColumn fx:id="courseEndColumn" minWidth="-1.0" prefWidth="156.0" text="Kursende" />
                         <TableColumn fx:id="programColumn" minWidth="-1.0" prefWidth="190.0" text="Programm" />
                         <TableColumn fx:id="groupSizeColumn" prefWidth="146.5" text="Gruppengröße" />
