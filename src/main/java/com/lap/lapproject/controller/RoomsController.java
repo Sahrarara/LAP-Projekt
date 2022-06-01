@@ -40,6 +40,8 @@ public class RoomsController extends BaseController {
 
     @FXML
     private Button deleteBtn;
+    @FXML
+    private TextField searchBar;
 
 
     @FXML
@@ -129,7 +131,7 @@ public class RoomsController extends BaseController {
 
 
     private void initTableRoom() {
-        tableViewRoom.setItems(listModel.roomList);
+        tableViewRoom.setItems(listModel.filteredRoomList);
         for(Room r: listModel.roomList){
             System.out.println(r.toString());
         }
@@ -152,5 +154,9 @@ public class RoomsController extends BaseController {
                 roomsBtnBar.setVisible(false);
                 break;
         }
+    }
+
+    @FXML
+    private void onSearchBarClick(ActionEvent actionEvent) {listModel.filteredRoomList.setPredicate(room -> room.toString().contains(searchBar.getText()));
     }
 }

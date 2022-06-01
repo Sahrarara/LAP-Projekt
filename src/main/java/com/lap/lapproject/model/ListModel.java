@@ -25,7 +25,14 @@ public class ListModel {
     public ObservableList<Room> roomList = FXCollections.observableArrayList();
     public ObservableList<Trainer> authorizationList = FXCollections.observableArrayList();
 
+    public FilteredList<Course> filteredCourseList = new FilteredList<Course>(courseList);
     public FilteredList<Program> filteredProgramList = new FilteredList<Program>(programList);
+    public FilteredList<Equipment> filteredEquipmentList = new FilteredList<Equipment>(equipmentList);
+    public FilteredList<Location> filteredLocationList = new FilteredList<Location>(locationList);
+    public FilteredList<Booking> filteredBookingList = new FilteredList<Booking>(bookingList);
+    public FilteredList<Trainer> filteredTrainerList = new FilteredList<Trainer>(trainerList);
+    public FilteredList<Room> filteredRoomList = new FilteredList<Room>(roomList);
+    public FilteredList<Trainer> filteredAuthorizationList = new FilteredList<Trainer>(authorizationList);
 
     CourseRepositoryJDBC courseRepositoryJDBC = new CourseRepositoryJDBC();
     ProgramRepositoryJDBC programRepositoryJDBC = new ProgramRepositoryJDBC();

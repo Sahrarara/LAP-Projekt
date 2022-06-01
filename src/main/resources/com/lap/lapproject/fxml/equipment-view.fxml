@@ -71,7 +71,7 @@
                         <Insets />
                      </opaqueInsets>
                   </ButtonBar>
-                  <TextField layoutX="550.0" layoutY="91.0" onAction="#onSearchBarClick" prefHeight="37.0" prefWidth="200.0" promptText="         Suche..." styleClass="search-field" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="549.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="104.0">
+                  <TextField fx:id="searchBar" layoutX="550.0" layoutY="91.0" onAction="#onSearchBarClick" prefHeight="37.0" prefWidth="200.0" promptText="         Suche..." styleClass="search-field" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="549.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="104.0">
                      <opaqueInsets>
                         <Insets left="5.0" right="5.0" />
                      </opaqueInsets>

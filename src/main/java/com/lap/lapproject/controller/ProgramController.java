@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Locale;
 
 public class ProgramController extends BaseController {
     @FXML
@@ -88,7 +89,7 @@ public class ProgramController extends BaseController {
 
     @FXML
     private void onSearchBarClick(ActionEvent actionEvent) {
-
+        listModel.filteredProgramList.setPredicate(program -> program.getProgramName().toLowerCase(Locale.ROOT).contains(searchBar.getText().toLowerCase(Locale.ROOT)));
     }
 
     @FXML
@@ -129,7 +130,7 @@ public class ProgramController extends BaseController {
     }
 
     private void initTableProgram() {
-        tableViewProgram.setItems(listModel.programList);
+        tableViewProgram.setItems(listModel.filteredProgramList);
         programColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getProgramName()));
 
     }

@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Locale;
 
 
 public class TrainerController extends BaseController{
@@ -34,6 +35,8 @@ public class TrainerController extends BaseController{
     private TableColumn<Trainer, Boolean> activeStatusColumn;
     @FXML
     private ChoiceBox filterChoiceBox;
+    @FXML
+    private TextField searchBar;
 
 
     @FXML
@@ -100,7 +103,7 @@ public class TrainerController extends BaseController{
     }
 
     private void initTrainerTable() {
-        tableViewTrainer.setItems(listModel.trainerList);
+        tableViewTrainer.setItems(listModel.filteredTrainerList);
         firstNameColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getfName()));
         lastNameColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getlName()));
         emailColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getEmail()));
@@ -129,5 +132,9 @@ public class TrainerController extends BaseController{
                 trainerBtnBar.setVisible(false);
                 break;
         }
+    }
+
+    @FXML
+    private void onSearchBarClick(ActionEvent actionEvent) {listModel.filteredTrainerList.setPredicate(trainer -> trainer.getfName().toLowerCase(Locale.ROOT).contains(searchBar.getText().toLowerCase(Locale.ROOT)));
     }
 }

@@ -15,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Locale;
 
 public class LocationController extends BaseController{
     @FXML
@@ -38,6 +39,8 @@ public class LocationController extends BaseController{
     private TableColumn<Location, String> cityColumn;
     @FXML
     private ChoiceBox filterChoiceBox;
+    @FXML
+    private TextField searchBar;
 
 
     @FXML
@@ -135,7 +138,7 @@ public class LocationController extends BaseController{
     }
 
     public void initLocationTable() {
-        tableViewLocation.setItems(listModel.locationList);
+        tableViewLocation.setItems(listModel.filteredLocationList);
         streetColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getStreet()));
         zipColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getZipcode()));
         cityColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getCity()));
@@ -156,5 +159,7 @@ public class LocationController extends BaseController{
     }
 
 
-
+    @FXML
+    private void onSearchBarClick(ActionEvent actionEvent) {listModel.filteredLocationList.setPredicate(location -> location.getStreet().toLowerCase(Locale.ROOT).contains(searchBar.getText().toLowerCase(Locale.ROOT)));
+    }
 }
