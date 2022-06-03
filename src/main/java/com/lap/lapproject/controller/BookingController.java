@@ -173,4 +173,9 @@ public class BookingController {
         listModel.filteredBookingList.setPredicate(booking -> booking.getCourse().toString().toLowerCase(Locale.ROOT).contains(searchBar.getText().toLowerCase(Locale.ROOT)));
 
     }
+
+    @FXML
+    private void onCloseIconClick(ActionEvent actionEvent) {
+        searchBar.setText("");
+    }
 }

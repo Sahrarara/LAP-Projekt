@@ -6,6 +6,8 @@ module com.lap.lapproject {
     requires com.calendarfx.view;
     requires org.kordamp.ikonli.fontawesome;
 
+    requires spring.security.core;
+    requires spring.security.crypto;
 
     opens com.lap.lapproject to javafx.fxml;
     exports com.lap.lapproject;

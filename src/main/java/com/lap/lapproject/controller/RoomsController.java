@@ -8,7 +8,7 @@ import com.lap.lapproject.repos.BookingRepositoryJDBC;
 import com.lap.lapproject.repos.LocationRepositoryJDBC;
 import com.lap.lapproject.repos.RoomRepositoryJDBC;
 import com.lap.lapproject.utility.QuickAlert;
-import com.lap.lapproject.utility.UsabilityMethods;
+
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,6 +41,10 @@ public class RoomsController extends BaseController {
 
     @FXML
     private Button deleteBtn;
+    @FXML
+    private TextField searchBar;
+    @FXML
+    private ChoiceBox filterChoiceBox;
     @FXML
     private TextField searchBar;
 
@@ -167,5 +171,10 @@ public class RoomsController extends BaseController {
 
     @FXML
     private void onSearchBarClick(ActionEvent actionEvent) {listModel.filteredRoomList.setPredicate(room -> room.toString().contains(searchBar.getText()));
+    }
+
+    @FXML
+    private void onCloseIconClick(ActionEvent actionEvent) {
+        searchBar.setText("");
     }
 }

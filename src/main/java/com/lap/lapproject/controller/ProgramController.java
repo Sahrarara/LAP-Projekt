@@ -159,4 +159,8 @@ public class ProgramController extends BaseController {
     }
 
 
+    @FXML
+    private void onCloseIconClick(ActionEvent actionEvent) {
+        searchBar.setText("");
+    }
 }

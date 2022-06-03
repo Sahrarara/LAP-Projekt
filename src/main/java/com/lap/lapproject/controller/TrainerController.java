@@ -160,4 +160,9 @@ public class TrainerController extends BaseController{
     private void onSearchBarClick(ActionEvent actionEvent) {
         listModel.filteredTrainerList.setPredicate(trainer -> trainer.getfName().toLowerCase(Locale.ROOT).contains(searchBar.getText().toLowerCase(Locale.ROOT)));
     }
+
+    @FXML
+    private void onCloseIconClick(ActionEvent actionEvent) {
+        searchBar.setText("");
+    }
 }

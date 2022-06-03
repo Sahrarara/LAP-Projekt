@@ -23,8 +23,6 @@ import java.util.Optional;
 import java.util.Locale;
 
 public class CoursesController extends BaseController{
-
-
     @FXML
     private ButtonBar coursesBtnBar;
 
@@ -149,4 +147,9 @@ public class CoursesController extends BaseController{
     private void onSearchBarClick(ActionEvent actionEvent) {listModel.filteredCourseList.setPredicate(course -> course.getCourseName().toLowerCase(Locale.ROOT).contains(searchBar.getText().toLowerCase(Locale.ROOT)));
     }
 
+
+    @FXML
+    private void onCloseIconClick(ActionEvent actionEvent) {
+        searchBar.setText("");
+    }
 }
