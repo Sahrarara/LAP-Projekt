@@ -35,6 +35,8 @@ public class CoursesController extends BaseController{
     private TableColumn<Course, Integer> groupSizeColumn;
     @FXML
     private ChoiceBox filterChoiceBox;
+    @FXML
+    private TextField searchBar;
 
     @FXML
     private void onAddCourseBtnClick(ActionEvent actionEvent) {
@@ -131,5 +133,10 @@ public class CoursesController extends BaseController{
                 coursesBtnBar.setVisible(false);
                 break;
         }
+    }
+
+    @FXML
+    private void onCloseIconClick(ActionEvent actionEvent) {
+        searchBar.setText("");
     }
 }

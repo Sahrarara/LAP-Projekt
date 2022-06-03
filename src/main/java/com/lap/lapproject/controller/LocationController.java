@@ -38,6 +38,8 @@ public class LocationController extends BaseController{
     private TableColumn<Location, String> cityColumn;
     @FXML
     private ChoiceBox filterChoiceBox;
+    @FXML
+    private TextField searchBar;
 
 
     @FXML
@@ -156,5 +158,13 @@ public class LocationController extends BaseController{
     }
 
 
+    @FXML
+    private void onSearchBarClick(ActionEvent actionEvent) {
 
+    }
+
+    @FXML
+    private void onCloseIconClick(ActionEvent actionEvent) {
+        searchBar.setText("");
+    }
 }

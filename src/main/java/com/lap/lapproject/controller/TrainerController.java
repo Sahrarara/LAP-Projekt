@@ -34,6 +34,8 @@ public class TrainerController extends BaseController{
     private TableColumn<Trainer, Boolean> activeStatusColumn;
     @FXML
     private ChoiceBox filterChoiceBox;
+    @FXML
+    private TextField searchBar;
 
 
     @FXML
@@ -129,5 +131,15 @@ public class TrainerController extends BaseController{
                 trainerBtnBar.setVisible(false);
                 break;
         }
+    }
+
+    @FXML
+    private void onSearchBarClick(ActionEvent actionEvent) {
+
+    }
+
+    @FXML
+    private void onCloseIconClick(ActionEvent actionEvent) {
+        searchBar.setText("");
     }
 }

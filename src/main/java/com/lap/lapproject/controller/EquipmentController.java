@@ -28,6 +28,8 @@ public class EquipmentController extends BaseController{
     private TableView<Equipment> tableViewEquipment;
     @FXML
     private TableColumn<Equipment, String> equipmentNameColumn;
+    @FXML
+    private TextField searchBar;
 
     @FXML
     private void onAddEquipmentBtnClick(ActionEvent actionEvent) {
@@ -124,5 +126,10 @@ public class EquipmentController extends BaseController{
                 equipmentBtnBar.setVisible(false);
                 break;
         }
+    }
+
+    @FXML
+    private void onCloseIconClick(ActionEvent actionEvent) {
+        searchBar.setText("");
     }
 }

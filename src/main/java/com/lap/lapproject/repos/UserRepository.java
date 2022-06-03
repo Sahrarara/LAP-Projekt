@@ -26,6 +26,6 @@ public interface UserRepository {
 
     void updateUserProfile(User user) throws SQLException;
 
-
+    void updatePassword(String newHashPassword, int userID) throws SQLException;
 
 }

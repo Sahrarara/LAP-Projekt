@@ -5,8 +5,6 @@ import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.*;
 import com.lap.lapproject.repos.BookingRepositoryJDBC;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,14 +12,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Callback;
-import org.controlsfx.control.action.Action;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.time.LocalDateTime;
 
 import static com.lap.lapproject.controller.BaseController.listModel;
 import static com.lap.lapproject.controller.BaseController.model;
@@ -57,7 +51,7 @@ public class BookingController {
     @FXML
     private TableColumn<Booking, String> courseNameColumn;
     @FXML
-    private Label filterChoiceBox;
+    private TextField searchBar;
 
 
     @FXML
@@ -162,5 +156,15 @@ public class BookingController {
                 bookingBtnBar.setVisible(false);
                 break;
         }
+    }
+
+    @FXML
+    private void onSearchBarClick(ActionEvent actionEvent) {
+
+    }
+
+    @FXML
+    private void onCloseIconClick(ActionEvent actionEvent) {
+        searchBar.setText("");
     }
 }

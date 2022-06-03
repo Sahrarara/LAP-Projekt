@@ -3,6 +3,7 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ChoiceBox?>
@@ -82,23 +83,34 @@
                               <Insets left="8.0" top="7.0" />
                            </HBox.margin>
                         </FontAwesomeIconView>
-                        <TextField prefHeight="30.0" prefWidth="155.0" promptText="Suche..." style="-fx-background-color: transparent;">
+                        <TextField fx:id="searchBar" onAction="#onSearchBarClick" prefHeight="30.0" prefWidth="140.0" promptText="Suche..." style="-fx-background-color: transparent;">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
                         </TextField>
+                        <Button mnemonicParsing="false" onAction="#onCloseIconClick" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <FontAwesomeIconView fill="#201d576a" glyphName="CLOSE" size="16" smooth="false" tabSize="2" />
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <HBox.margin>
+                              <Insets top="3.0" />
+                           </HBox.margin>
+                        </Button>
                      </children>
                   </HBox>
                   <HBox layoutX="370.0" layoutY="86.0">
                      <children>
                         <VBox>
                            <children>
-                              <Label fx:id="filterChoiceBox1" text="Filtern nach">
+                              <Label text="Filtern nach">
                                  <VBox.margin>
                                     <Insets left="10.0" />
                                  </VBox.margin>
                               </Label>
-                              <ChoiceBox prefHeight="30.0" prefWidth="170.0" styleClass="search-field" />
+                              <ChoiceBox fx:id="filterChoiceBox" prefHeight="30.0" prefWidth="170.0" styleClass="search-field" />
                            </children>
                            <HBox.margin>
                               <Insets />
