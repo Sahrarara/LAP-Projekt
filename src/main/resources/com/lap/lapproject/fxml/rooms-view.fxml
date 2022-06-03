@@ -123,12 +123,12 @@
             <AnchorPane>
                <children>
                   <TableView fx:id="tableViewRoom" layoutX="229.0" layoutY="52.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
-                    <columns>
-                      <TableColumn fx:id="roomNumberColumn" minWidth="-1.0" prefWidth="123.5" text="Raumnummer" />
+                     <columns>
+                        <TableColumn fx:id="roomNumberColumn" minWidth="-1.0" prefWidth="123.5" text="Raumnummer" />
                         <TableColumn fx:id="sizeColumn" minWidth="-1.0" prefWidth="222.0" text="Raumgröße" />
                         <TableColumn fx:id="streetColumn" minWidth="-1.0" prefWidth="199.5" text="Standort" />
                         <TableColumn fx:id="equipmentColumn" prefWidth="212.0" text="Ausstattung" />
-                    </columns>
+                     </columns>
                   </TableView>
                </children>
             </AnchorPane>

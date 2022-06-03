@@ -2,7 +2,6 @@ package com.lap.lapproject.controller;
 
 import com.lap.lapproject.repos.Repository;
 
-
 import com.lap.lapproject.repos.UserRepositoryJDBC;
 import com.lap.lapproject.utility.PasswordSecurity;
 import com.lap.lapproject.utility.QuickAlert;
@@ -14,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import static com.lap.lapproject.controller.BaseController.model;
-
+import static com.lap.lapproject.model.Security.getSalt;
 
 public class ChangePasswordController extends Repository {
 
@@ -96,16 +95,5 @@ public class ChangePasswordController extends Repository {
     private Stage getCurrentStage(){
         return (Stage) currentPasswordTF.getScene().getWindow();
     }
-
-
-
-
-
-
-
-
-
-
-
 
 }

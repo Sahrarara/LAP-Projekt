@@ -25,7 +25,14 @@ public class ListModel {
     public ObservableList<Room> roomList = FXCollections.observableArrayList();
     public ObservableList<Trainer> authorizationList = FXCollections.observableArrayList();
 
+    public FilteredList<Course> filteredCourseList = new FilteredList<Course>(courseList);
     public FilteredList<Program> filteredProgramList = new FilteredList<Program>(programList);
+    public FilteredList<Equipment> filteredEquipmentList = new FilteredList<Equipment>(equipmentList);
+    public FilteredList<Location> filteredLocationList = new FilteredList<Location>(locationList);
+    public FilteredList<Booking> filteredBookingList = new FilteredList<Booking>(bookingList);
+    public FilteredList<Trainer> filteredTrainerList = new FilteredList<Trainer>(trainerList);
+    public FilteredList<Room> filteredRoomList = new FilteredList<Room>(roomList);
+    public FilteredList<Trainer> filteredAuthorizationList = new FilteredList<Trainer>(authorizationList);
 
     CourseRepositoryJDBC courseRepositoryJDBC = new CourseRepositoryJDBC();
     ProgramRepositoryJDBC programRepositoryJDBC = new ProgramRepositoryJDBC();
@@ -49,18 +56,27 @@ public class ListModel {
 
 
 
-    public ListModel() {
+    public void ListModel() {
 
         try {
-            courseList.addAll(courseRepositoryJDBC.readAll());
+            /*courseList.addAll(courseRepositoryJDBC.readAll());
             programList.addAll(programRepositoryJDBC.readProgram());
             equipmentList.addAll(equipmentRepositoryJDBC.readAll());
             locationList.addAll(locationRepositoryJDBC.readAll());
             bookingList.addAll(bookingRepositoryJDBC.readAll());
             trainerList.addAll(userRepositoryJDBC.readAllTrainer());
             roomList.addAll(roomRepositoryJDBC.readAll());
-            authorizationList.addAll(userRepositoryJDBC.readAuthorization());
+            authorizationList.addAll(userRepositoryJDBC.readAuthorization());*/
 
+            courseList.setAll(courseRepositoryJDBC.readAll());
+            programList.setAll(programRepositoryJDBC.readProgram());
+            equipmentList.setAll(equipmentRepositoryJDBC.readAll());
+            locationList.setAll(locationRepositoryJDBC.readAll());
+            bookingList.setAll(bookingRepositoryJDBC.readAll());
+            trainerList.setAll(userRepositoryJDBC.readAllTrainer());
+            roomList.setAll(roomRepositoryJDBC.readAll());
+            authorizationList.setAll(userRepositoryJDBC.readAuthorization());
+            //System.out.println("+++++ Fill All MODEL lists!!!!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -80,9 +96,9 @@ public class ListModel {
 
                     if (change.wasReplaced()) {
                         //...
-                    } else if (change.wasAdded()) {
-                        for (Booking booking : change.getAddedSubList()) {
-                            bookingRepositoryJDBC.addBooking(booking);
+                    } else if (change.wasAdded()) {//gepr ob was geädert
+                        for (Booking booking : change.getAddedSubList()) { //liste für buch, ob was geadd ist
+                            bookingRepositoryJDBC.addBooking(booking); // add book zu repo
                         }
                     } else if (change.wasRemoved()) {
                         // ...

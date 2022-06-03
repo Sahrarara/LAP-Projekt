@@ -15,7 +15,8 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
-
+import java.util.Locale;
+import java.util.Optional;
 public class LocationController extends BaseController{
     @FXML
     private ButtonBar locationBtnBar;
@@ -70,20 +71,28 @@ public class LocationController extends BaseController{
 
         Location locationToDelete = tableViewLocation.getSelectionModel().getSelectedItem();
 
+        //Alert CONFIRMATION TODO: wenn es möglich nur einen CONFIRMATION Alert für Alle DELETE
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText("Sind Sie sicher, dass Sie es löschen wollen?");
+        Optional<ButtonType> action = alert.showAndWait();
+        if(action.get() == ButtonType.OK) {
 
-        try {
-            // check in DB how many bookings use the particular location
-            int bookingCountByLocation = bookingRepositoryJDBC.getBookingCountByProgramIdJoinLocationId(locationToDelete.getId());
+            try {
+                // check in DB how many bookings use the particular location
+                int bookingCountByLocation = bookingRepositoryJDBC.getBookingCountByProgramIdJoinLocationId(locationToDelete.getId());
 
-            if (bookingCountByLocation == 0) {
+                if (bookingCountByLocation == 0) {
 
-                locationRepositoryJDBC.deleteLocation(locationToDelete);
-                listModel.locationList.remove(locationToDelete);
-            }else {
-                QuickAlert.showError("Diese Location wird für eine Buchung benötigt, Sie können nicht löschen! Bearbeiten Sie zuerst Ihre Buchungen!");
+                    locationRepositoryJDBC.deleteLocation(locationToDelete);
+                    listModel.locationList.remove(locationToDelete);
+                } else {
+                    QuickAlert.showError("Diese Location wird für eine Buchung benötigt, Sie können nicht löschen! Bearbeiten Sie zuerst Ihre Buchungen!");
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
         }
 
     }
@@ -137,7 +146,7 @@ public class LocationController extends BaseController{
     }
 
     public void initLocationTable() {
-        tableViewLocation.setItems(listModel.locationList);
+        tableViewLocation.setItems(listModel.filteredLocationList);
         streetColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getStreet()));
         zipColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getZipcode()));
         cityColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getCity()));
@@ -159,8 +168,7 @@ public class LocationController extends BaseController{
 
 
     @FXML
-    private void onSearchBarClick(ActionEvent actionEvent) {
-
+    private void onSearchBarClick(ActionEvent actionEvent) {listModel.filteredLocationList.setPredicate(location -> location.getStreet().toLowerCase(Locale.ROOT).contains(searchBar.getText().toLowerCase(Locale.ROOT)));
     }
 
     @FXML

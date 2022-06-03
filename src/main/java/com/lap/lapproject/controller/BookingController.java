@@ -5,6 +5,8 @@ import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.*;
 import com.lap.lapproject.repos.BookingRepositoryJDBC;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,10 +14,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Callback;
+import org.controlsfx.control.action.Action;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.Optional;
+import java.util.Locale;
 
 import static com.lap.lapproject.controller.BaseController.listModel;
 import static com.lap.lapproject.controller.BaseController.model;
@@ -50,6 +58,8 @@ public class BookingController {
     private TableColumn<Booking, String> recurrenceRuleColumn;
     @FXML
     private TableColumn<Booking, String> courseNameColumn;
+    @FXML
+    private ChoiceBox filterChoiceBox;
     @FXML
     private TextField searchBar;
 
@@ -123,7 +133,7 @@ public class BookingController {
 
     public void initBookingTable() {
 
-        tableViewBooking.setItems(listModel.bookingList);
+        tableViewBooking.setItems(listModel.filteredBookingList);
         courseNameColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getCourse().getCourseName()));
         locationColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getRoom().getLocation().getStreet()));
         roomColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getRoom().getRoomNumber()));
@@ -160,6 +170,7 @@ public class BookingController {
 
     @FXML
     private void onSearchBarClick(ActionEvent actionEvent) {
+        listModel.filteredBookingList.setPredicate(booking -> booking.getCourse().toString().toLowerCase(Locale.ROOT).contains(searchBar.getText().toLowerCase(Locale.ROOT)));
 
     }
 

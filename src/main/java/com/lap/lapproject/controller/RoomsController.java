@@ -2,10 +2,13 @@ package com.lap.lapproject.controller;
 
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
+import com.lap.lapproject.model.Location;
 import com.lap.lapproject.model.Room;
 import com.lap.lapproject.repos.BookingRepositoryJDBC;
+import com.lap.lapproject.repos.LocationRepositoryJDBC;
 import com.lap.lapproject.repos.RoomRepositoryJDBC;
 import com.lap.lapproject.utility.QuickAlert;
+
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,8 +16,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class RoomsController extends BaseController {
     @FXML
@@ -36,6 +41,8 @@ public class RoomsController extends BaseController {
 
     @FXML
     private Button deleteBtn;
+    @FXML
+    private TextField searchBar;
     @FXML
     private ChoiceBox filterChoiceBox;
     @FXML
@@ -70,6 +77,13 @@ public class RoomsController extends BaseController {
 
         Room roomToDelete = tableViewRoom.getSelectionModel().getSelectedItem();
 
+        //Alert CONFIRMATION TODO: wenn es möglich nur einen CONFIRMATION Alert für Alle DELETE
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText("Sind Sie sicher, dass Sie es löschen wollen?");
+        Optional<ButtonType> action = alert.showAndWait();
+        if (action.get() == ButtonType.OK) {
 
         try {
             // check in DB how many bookings use the particular room
@@ -79,14 +93,15 @@ public class RoomsController extends BaseController {
 
                 roomRepositoryJDBC.deleteRoom(roomToDelete);
                 listModel.roomList.remove(roomToDelete);
-            }else {
+            } else {
                 QuickAlert.showError("Dieses Raum wird für eine Buchung benötigt, Sie können es nicht löschen! Bearbeiten Sie zuerst Ihre Buchungen!");
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
     }
+
+}
 
 
     @FXML
@@ -129,7 +144,7 @@ public class RoomsController extends BaseController {
 
 
     private void initTableRoom() {
-        tableViewRoom.setItems(listModel.roomList);
+        tableViewRoom.setItems(listModel.filteredRoomList);
         for(Room r: listModel.roomList){
             System.out.println(r.toString());
         }
@@ -155,8 +170,7 @@ public class RoomsController extends BaseController {
     }
 
     @FXML
-    private void onSearchBarClick(ActionEvent actionEvent) {
-
+    private void onSearchBarClick(ActionEvent actionEvent) {listModel.filteredRoomList.setPredicate(room -> room.toString().contains(searchBar.getText()));
     }
 
     @FXML

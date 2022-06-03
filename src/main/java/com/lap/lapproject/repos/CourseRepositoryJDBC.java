@@ -97,6 +97,7 @@ public class CourseRepositoryJDBC extends Repository implements CourseRepository
             preparedStatement.setLong(6, course.getId());
             preparedStatement.executeQuery();
 
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

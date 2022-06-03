@@ -6,6 +6,7 @@ import com.lap.lapproject.model.Program;
 import com.lap.lapproject.repos.CourseRepositoryJDBC;
 import com.lap.lapproject.repos.ProgramRepositoryJDBC;
 import com.lap.lapproject.utility.QuickAlert;
+import com.lap.lapproject.utility.UsabilityMethods;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +18,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Optional;
+import java.util.Locale;
 
 public class ProgramController extends BaseController {
     @FXML
@@ -67,19 +70,28 @@ public class ProgramController extends BaseController {
 
         Program programToDelete = tableViewProgram.getSelectionModel().getSelectedItem();
 
-        try {
-            // check in DB how many courses use the particular program
-            int coursesCount = courseRepositoryJDBC.getCoursesCountByProgramId(programToDelete.getId());
+        //Alert CONFIRMATION TODO: wenn es möglich nur einen CONFIRMATION Alert für Alle DELETE
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText("Sind Sie sicher, dass Sie es löschen wollen?");
+        Optional<ButtonType> action = alert.showAndWait();
+        if(action.get() == ButtonType.OK) {
 
-            if (coursesCount == 0){
-                programRepositoryJDBC.deleteProgram(programToDelete);
-                listModel.programList.remove(programToDelete);
-            } else {
-                QuickAlert.showError("Dieses Program wird von einem Kurse benötigt! Sie können sie nicht löschen!");
+            try {
+                // check in DB how many courses use the particular program
+                int coursesCount = courseRepositoryJDBC.getCoursesCountByProgramId(programToDelete.getId());
+
+                if (coursesCount == 0) {
+                    programRepositoryJDBC.deleteProgram(programToDelete);
+                    listModel.programList.remove(programToDelete);
+                } else {
+                    QuickAlert.showError("Dieses Program wird von einem Kurse benötigt! Sie können sie nicht löschen!");
+                }
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
             }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
         }
 
     }
@@ -87,7 +99,7 @@ public class ProgramController extends BaseController {
 
     @FXML
     private void onSearchBarClick(ActionEvent actionEvent) {
-
+        listModel.filteredProgramList.setPredicate(program -> program.getProgramName().toLowerCase(Locale.ROOT).contains(searchBar.getText().toLowerCase(Locale.ROOT)));
     }
 
     @FXML
@@ -128,7 +140,7 @@ public class ProgramController extends BaseController {
     }
 
     private void initTableProgram() {
-        tableViewProgram.setItems(listModel.programList);
+        tableViewProgram.setItems(listModel.filteredProgramList);
         programColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getProgramName()));
 
     }
