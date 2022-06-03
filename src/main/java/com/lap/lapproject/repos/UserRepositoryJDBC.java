@@ -265,25 +265,36 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
     }
 
 
+
     @Override
     public boolean checkUniqueUsername(String username) throws SQLException {
         Connection connection = connect();
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 
+
         try {
             statement = connection.prepareStatement(SELECT_USERS_SQL_STRING);
             resultSet = statement.executeQuery();
+            ArrayList<String> usernamesFromDB = new ArrayList<>();
 
             while (resultSet.next()) {
-                if (resultSet.getString("username").equals(username)) {
-                    return true;
+                usernamesFromDB.add(resultSet.getString("username"));
+               // logger.info("usernamesfromdb: {}", resultSet.getString("username"));
+            }
+
+            for(String item : usernamesFromDB) {
+                if (item.equals(username)) {
+                    logger.info("neue username gibt schon in db");
+                    return false;
                 }
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return false;
+        logger.info("neue username gibt es nicht in db");
+        return true;
     }
 
 
