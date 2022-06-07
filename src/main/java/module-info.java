@@ -5,6 +5,7 @@ module com.lap.lapproject {
     requires org.slf4j;
     requires com.calendarfx.view;
     requires org.kordamp.ikonli.fontawesome;
+    requires java.desktop;
 
     requires spring.security.core;
     requires spring.security.crypto;

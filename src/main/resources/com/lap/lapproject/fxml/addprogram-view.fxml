@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane prefHeight="220.0" prefWidth="671.0" style="-fx-background-color: #F2F4FF;" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.AddProgramController">
+<GridPane prefHeight="220.0" prefWidth="671.0" style="-fx-background-color: #f9f7f6;" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.AddProgramController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="20.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="162.0" />
@@ -25,27 +25,31 @@
       <RowConstraints prefHeight="55.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <Pane minHeight="40.0" prefHeight="40.0" prefWidth="177.0" style="-fx-background-color: #211D5A;" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-      <Pane style="-fx-background-color: #211D5A;" GridPane.columnIndex="2">
+      <Pane minHeight="40.0" prefHeight="40.0" prefWidth="177.0" style="-fx-background-color: #101d2c;" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+      <Pane style="-fx-background-color: #101d2c;" GridPane.columnIndex="2">
          <children>
-            <Label layoutY="29.0" styleClass="title-form" text="PROGRAMM" textFill="WHITE">
+            <Label layoutY="29.0" style="-fx-text-fill: #c69963;" styleClass="title-form" text="PROGRAMM" textFill="#c69963">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <Label styleClass="input-description" text="Programmname" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+      <Label styleClass="input-description" text="Programmname" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
       </Label>
-      <TextField fx:id="programNameTextField" maxWidth="385.0" onAction="#onAddBtnClick" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+      <TextField fx:id="programNameTextField" maxWidth="400.0" onAction="#onAddBtnClick" prefHeight="31.0" prefWidth="400.0" style="-fx-border-radius: 50px; -fx-text-fill: #101d2c;" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
+         <styleClass>
+            <String fx:value="input-form" />
+            <String fx:value="button-light" />
+         </styleClass>
       </TextField>
-      <Button mnemonicParsing="false" onAction="#onAbortBtnClick" text="ABBRECHEN" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+      <Button mnemonicParsing="false" onAction="#onAbortBtnClick" prefWidth="126.0" text="ABBRECHEN" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
          <styleClass>
             <String fx:value="button-style" />
             <String fx:value="button-light" />
@@ -54,7 +58,7 @@
             <Insets right="15.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="addNewProgrammBtn" mnemonicParsing="false" onAction="#onAddBtnClick" text="HINZUFÜGEN" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+      <Button fx:id="addNewProgrammBtn" mnemonicParsing="false" onAction="#onAddBtnClick" prefWidth="126.0" text="HINZUFÜGEN" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets right="10.0" />
          </GridPane.margin>
@@ -63,7 +67,7 @@
             <String fx:value="button-dark" />
          </styleClass>
       </Button>
-      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #211D5A;" />
-      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #211D5A;" GridPane.columnIndex="3" />
+      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #101d2c;" />
+      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #101d2c;" GridPane.columnIndex="3" />
    </children>
 </GridPane>
