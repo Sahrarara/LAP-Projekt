@@ -39,7 +39,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
 
 
     @Override
-    public void add(User user) throws SQLException {
+    public void add(User user) {
         Connection connection = connect();
         ResultSet resultSet = null;
         int generatedKey = 0;
@@ -50,7 +50,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             preparedStatement.setString(3, user.getTitle());
             preparedStatement.setString(4, user.getfName());
             preparedStatement.setString(5, user.getlName());
-            preparedStatement.setString(6, hashPassword(user.getUserPassword()));
+            preparedStatement.setString(6, PasswordSecurity.hashPassword(user.getUserPassword()));
             preparedStatement.setString(7, user.getAuthority());
             preparedStatement.setString(8, user.getDescription());
             preparedStatement.setString(9, user.getPhoneNmbr());
@@ -102,7 +102,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
 
 
     @Override
-    public void updateUser(User user) throws SQLException {
+    public void updateUser(User user) {
         Connection connection = connect();
         PreparedStatement preparedStatement = null;
         try {
@@ -265,7 +265,6 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
     }
 
 
-
     @Override
     public boolean checkUniqueUsername(String username) throws SQLException {
         Connection connection = connect();
@@ -280,10 +279,10 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
 
             while (resultSet.next()) {
                 usernamesFromDB.add(resultSet.getString("username"));
-               // logger.info("usernamesfromdb: {}", resultSet.getString("username"));
+                // logger.info("usernamesfromdb: {}", resultSet.getString("username"));
             }
 
-            for(String item : usernamesFromDB) {
+            for (String item : usernamesFromDB) {
                 if (item.equals(username)) {
                     logger.info("neue username gibt schon in db");
                     return false;
@@ -404,7 +403,6 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             e.printStackTrace();
         }
     }
-
 
 
 }

@@ -63,7 +63,6 @@ public class TrainerController extends BaseController{
 
     @FXML
     private void onDeleteTrainerBtnClick(ActionEvent actionEvent) {
-        UserRepositoryJDBC userRepositoryJDBC = new UserRepositoryJDBC();
         BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
         Trainer trainer = tableViewTrainer.getSelectionModel().getSelectedItem();
 
@@ -79,7 +78,6 @@ public class TrainerController extends BaseController{
 
             if (bookingCountByTrainer == 0) {
 
-                userRepositoryJDBC.deleteUser(trainer);
                 listModel.trainerList.remove(trainer);
             } else {
                 QuickAlert.showError("Diese : er Trainer  wird für eine Buchung benötigt, Sie können sie:ihn nicht löschen! Bearbeiten Sie zuerst Ihre Buchungen!");
