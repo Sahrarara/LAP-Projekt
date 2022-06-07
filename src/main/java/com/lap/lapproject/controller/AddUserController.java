@@ -192,6 +192,8 @@ public class AddUserController extends BaseController {
                 trainer.setPhoneNmbr(phoneNmbrTextField.getText());
                 trainer.setEmail(emailTextField.getText());
 
+
+                //Photo
                 if (!photoPath.equals("")) {
                     trainer.setPhoto(convertToBytes(photoPath));
                 } else {

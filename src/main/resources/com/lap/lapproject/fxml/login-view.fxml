@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane prefWidth="676.0" style="-fx-background-color: #211D5A;" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.LoginController">
+<GridPane prefWidth="676.0" style="-fx-background-color: #101d2c;" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.LoginController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" prefWidth="104.5" />
       <ColumnConstraints hgrow="SOMETIMES" prefWidth="370.0" />
@@ -28,7 +28,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <GridPane style="-fx-background-color: F2F4FF; -fx-background-radius: 9;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <GridPane style="-fx-background-color: #f9f7f6; -fx-background-radius: 0;" GridPane.columnIndex="1" GridPane.rowIndex="1">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
         </columnConstraints>
@@ -40,26 +40,29 @@
             <RowConstraints prefHeight="15.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label prefHeight="56.0" prefWidth="240.0" styleClass="title-first" text="Willkommen" textFill="#211d5a" GridPane.halignment="CENTER">
-               <font>
-                  <Font size="36.0" />
-               </font>
-            </Label>
-            <TextField fx:id="usernameTF" onAction="#onLoginBtnClick" promptText="Benutzername" styleClass="input-form" GridPane.rowIndex="1">
+            <TextField fx:id="usernameTF" onAction="#onLoginBtnClick" promptText="Benutzername" style="-fx-border-radius: 50px; -fx-text-fill: #101d2c;" GridPane.rowIndex="1">
                <font>
                   <Font size="14.0" />
                </font>
                <GridPane.margin>
                   <Insets left="50.0" right="50.0" />
                </GridPane.margin>
+               <styleClass>
+                  <String fx:value="input-form" />
+                  <String fx:value="button-light" />
+               </styleClass>
             </TextField>
-            <PasswordField fx:id="passwordTF" onAction="#onLoginBtnClick" prefHeight="29.0" prefWidth="225.0" promptText="Passwort" styleClass="input-form" GridPane.rowIndex="2">
+            <PasswordField fx:id="passwordTF" onAction="#onLoginBtnClick" prefHeight="29.0" prefWidth="225.0" promptText="Passwort" style="-fx-border-radius: 50px; -fx-text-fill: #101d2c;" GridPane.rowIndex="2">
                <font>
                   <Font size="14.0" />
                </font>
                <GridPane.margin>
                   <Insets left="50.0" right="50.0" />
                </GridPane.margin>
+               <styleClass>
+                  <String fx:value="input-form" />
+                  <String fx:value="button-light" />
+               </styleClass>
             </PasswordField>
             <Button fx:id="forgotPasswordBtn" mnemonicParsing="false" onAction="#onforgotPasswordBtn" style="-fx-background-color: none;" styleClass="input-description" text="Passwort vergessen?" textFill="#211d5a" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
             <Button fx:id="skipBtn" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#onSkipBtnClick" prefHeight="36.0" prefWidth="141.0" text="ÜBERSPRINGEN" textFill="#211d5a" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="CENTER">
@@ -74,7 +77,7 @@
                   <Insets left="50.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="loginBtn" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#onLoginBtnClick" prefHeight="34.0" prefWidth="122.0" text="ANMELDEN" textFill="#f2f4ff" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <Button fx:id="loginBtn" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#onLoginBtnClick" prefHeight="34.0" prefWidth="141.0" text="ANMELDEN" textFill="#f2f4ff" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>

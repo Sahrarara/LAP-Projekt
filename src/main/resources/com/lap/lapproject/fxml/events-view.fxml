@@ -19,18 +19,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #211D5A;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.CoursesController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="930.0" prefWidth="1200.0" style="-fx-background-color: #211D5A;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.CoursesController">
    <children>
-      <SplitPane dividerPositions="0.23684210526315788" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="728.0" prefWidth="800.0" styleClass="split-pane-background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <SplitPane dividerPositions="0.23684210526315788" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="930.0" prefWidth="1200.0" styleClass="split-pane-background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <items>
             <AnchorPane>
                <children>
-                  <Label layoutX="76.0" layoutY="22.0" prefHeight="54.0" prefWidth="193.0" styleClass="title-first" text="KURSE" textFill="#201d592d">
+                  <Label layoutX="76.0" layoutY="22.0" prefHeight="58.0" prefWidth="337.0" styleClass="title-first" text="VERANSTALTUNG" textFill="#201d592d">
                      <font>
                         <Font name="Comic Sans MS" size="40.0" />
                      </font>
                   </Label>
-                  <ButtonBar fx:id="coursesBtnBar" buttonMinWidth="10.0" layoutX="294.0" layoutY="74.0" prefHeight="70.0" prefWidth="169.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="520.0" AnchorPane.topAnchor="74.0">
+                  <ButtonBar fx:id="coursesBtnBar" buttonMinWidth="10.0" layoutX="-339.0" layoutY="86.0" prefHeight="70.0" prefWidth="169.0" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="-339.0" AnchorPane.rightAnchor="919.0" AnchorPane.topAnchor="86.0">
                      <buttons>
                         <Button graphicTextGap="2.0" mnemonicParsing="false" onAction="#onAddCourseBtnClick" prefHeight="30.0" prefWidth="60.0">
                            <graphic>
@@ -76,7 +76,7 @@
                         <Insets />
                      </opaqueInsets>
                   </ButtonBar>
-                  <HBox layoutX="545.0" layoutY="103.0" style="-fx-background-color: #fff;" styleClass="search-field">
+                  <HBox layoutX="969.0" layoutY="35.0" style="-fx-background-color: #fff;" styleClass="search-field">
                      <children>
                         <FontAwesomeIconView fill="#211d5aa8" glyphName="SEARCH" size="16">
                            <HBox.margin>
@@ -93,31 +93,25 @@
                   <HBox layoutX="370.0" layoutY="86.0">
                      <children>
                         <VBox>
-                           <children>
-                              <Label fx:id="filterChoiceBox1" text="Filtern nach">
-                                 <VBox.margin>
-                                    <Insets left="10.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <ChoiceBox prefHeight="30.0" prefWidth="170.0" styleClass="search-field" />
-                           </children>
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
                         </VBox>
                      </children>
                   </HBox>
+                  <ChoiceBox layoutX="788.0" layoutY="36.0" prefHeight="30.0" prefWidth="170.0" styleClass="search-field" />
+                  <Label fx:id="filterChoiceBox1" layoutX="718.0" layoutY="44.0" text="Filtern nach" />
                </children>
             </AnchorPane>
             <AnchorPane>
                <children>
-                  <TableView fx:id="tableViewEvent" layoutX="20.0" layoutY="20.0" prefHeight="386.0" prefWidth="770.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                  <TableView fx:id="tableViewEvent" layoutX="3.0" prefHeight="667.0" prefWidth="1192.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="0.0">
                      <columns>
-                        <TableColumn fx:id="courseNameColumn" minWidth="-1.0" prefWidth="125.5" text="Name" />
-                        <TableColumn fx:id="courseStartColumn" minWidth="-1.0" prefWidth="139.0" text="Kursbeginn" />
-                        <TableColumn fx:id="courseEndColumn" minWidth="-1.0" prefWidth="156.0" text="Kursende" />
-                        <TableColumn fx:id="programColumn" minWidth="-1.0" prefWidth="190.0" text="Programm" />
-                        <TableColumn fx:id="groupSizeColumn" prefWidth="146.5" text="Gruppengröße" />
+                        <TableColumn fx:id="courseNameColumn" minWidth="-1.0" prefWidth="88.5" text="V-Nr." />
+                        <TableColumn fx:id="programColumn" minWidth="-1.0" prefWidth="439.5" text="Programm" />
+                        <TableColumn fx:id="courseStartColumn" minWidth="-1.0" prefWidth="226.0" text="Kursbeginn" />
+                        <TableColumn fx:id="courseEndColumn" minWidth="-1.0" prefWidth="233.0" text="Kursende" />
+                        <TableColumn fx:id="groupSizeColumn" prefWidth="201.0" text="Gruppengröße" />
                      </columns>
                   </TableView>
                </children>

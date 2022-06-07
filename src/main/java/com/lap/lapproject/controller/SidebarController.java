@@ -2,8 +2,6 @@ package com.lap.lapproject.controller;
 
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
-import com.lap.lapproject.repos.CourseRepositoryJDBC;
-import com.lap.lapproject.repos.RoomRepositoryJDBC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,11 +9,19 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
+
+import static com.lap.lapproject.controller.ProfileController.imageFromBytes;
 
 public class SidebarController extends BaseController {
 
@@ -48,13 +54,15 @@ public class SidebarController extends BaseController {
     private ImageView trainerIcon;
 
     @FXML
+    private Circle bannerImg;
+
+    @FXML
     void onDashboardButtonPressed(ActionEvent event) {
         model.setPathForDetailView(Constants.PATH_TO_FXML_DASHBOARD);
     }
 
     @FXML
     private void onLocationBtnClick(ActionEvent actionEvent) {
-        listModel.ListModel();
         model.setPathForDetailView(Constants.PATH_TO_FXML_LOCATION);
     }
 
@@ -95,13 +103,11 @@ public class SidebarController extends BaseController {
 
     @FXML
     private void onProgramBtnClick(ActionEvent actionEvent) {
-        listModel.ListModel();
         model.setPathForDetailView(Constants.PATH_TO_FXML_PROGRAM);
     }
 
     @FXML
     private void onEquipmentBtnClick(ActionEvent actionEvent) {
-        listModel.ListModel();
         model.setPathForDetailView(Constants.PATH_TO_FXML_EQUIPMENT);
     }
 
@@ -118,28 +124,39 @@ public class SidebarController extends BaseController {
     }
 
     @FXML
-    private void initialize() {
+    private void initialize() throws IOException {
+        assert bannerImg != null : "fx:id=\"bannerImg\" was not injected: check your FXML file 'sidebar-view.fxml'.";
         authorityVisibility();
         setUsername();
     }
 
-    private void authorityVisibility() {
+    private boolean authorityVisibility() throws IOException {
+        BufferedImage bImage = ImageIO.read(new FileInputStream("src/main/resources/com/lap/lapproject/images/lapproject/images/user.png"));
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ImageIO.write(bImage, "png", bos );
+        byte [] imageNoVisible = bos.toByteArray();
         String authority = model.getAuthority();
+
         switch (authority) {
             case "admin":
                 System.out.println("Admin privileges");
+                bannerImg.setFill(new ImagePattern(imageFromBytes(model.getLoggedInUser().getPhoto())));
                 break;
             case "coach":
                 System.out.println("Coach privileges");
+                bannerImg.setFill(new ImagePattern(imageFromBytes(model.getLoggedInUser().getPhoto())));
                 break;
             default:
                 System.out.println("Guest privileges");
                 logoutBtn.setText(" Zurück zum Login");
                 profileIcon.setVisible(false);
                 profileBtn.setVisible(false);
+                bannerImg.setFill(new ImagePattern(imageFromBytes(imageNoVisible)));
                 break;
         }
+        return false;
     }
+
 
     private void setUsername() {
         if (model.getLoggedInUser() != null) {

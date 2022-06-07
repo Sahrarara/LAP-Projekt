@@ -5,6 +5,7 @@ module com.lap.lapproject {
     requires org.slf4j;
     requires com.calendarfx.view;
     requires org.kordamp.ikonli.fontawesome;
+    requires java.desktop;
 
 
     opens com.lap.lapproject to javafx.fxml;

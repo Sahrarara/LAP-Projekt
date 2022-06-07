@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #F2F4FF;" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.AddCourseController">
+<GridPane prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #f9f7f6;" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.AddCourseController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" prefWidth="20.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="149.0" />
@@ -31,45 +31,49 @@
       <RowConstraints maxHeight="370.5" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <Pane minHeight="40.0" prefHeight="40.0" style="-fx-background-color: #211D5A;" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-      <Pane style="-fx-background-color: #211D5A;" GridPane.columnIndex="2">
+      <Pane minHeight="40.0" prefHeight="40.0" style="-fx-background-color: #101d2c;" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+      <Pane style="-fx-background-color: #101d2c;" GridPane.columnIndex="2">
          <children>
-            <Label layoutY="29.0" styleClass="title-form" text="KURSE" textFill="WHITE">
+            <Label layoutY="29.0" style="-fx-text-fill: #c69963; -fx-font-family: 'Lexend Deca'; -fx-letter-spacing: 2px;" styleClass="title-form" text="VERANSTALTUNG" textFill="#c69963">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <Label styleClass="input-description" text="Kursname" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+      <Label styleClass="input-description" text="Kursname" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
       </Label>
-      <Label styleClass="input-description" text="Program" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+      <Label styleClass="input-description" text="Program" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
       </Label>
-      <Label styleClass="input-description" text="Kursbeginn" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4">
+      <Label styleClass="input-description" text="Kursbeginn" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
       </Label>
-      <Label styleClass="input-description" text="Kursende" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5">
+      <Label styleClass="input-description" text="Kursende" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
       </Label>
-      <Label styleClass="input-description" text="Gruppengröße" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="6">
+      <Label styleClass="input-description" text="Gruppengröße" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
       </Label>
-      <TextField fx:id="courseNameTextField" maxWidth="385.0" onAction="#onAddBtnClick" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+      <TextField fx:id="courseNameTextField" maxWidth="385.0" onAction="#onAddBtnClick" prefHeight="18.0" style="-fx-border-radius: 50px; -fx-text-fill: #101d2c;" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
+         <styleClass>
+            <String fx:value="input-form" />
+            <String fx:value="button-light" />
+         </styleClass>
       </TextField>
       <Button mnemonicParsing="false" onAction="#onAbortBtnClick" text="ABBRECHEN" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="7">
          <styleClass>
@@ -89,11 +93,27 @@
             <String fx:value="button-dark" />
          </styleClass>
       </Button>
-      <ChoiceBox fx:id="courseChoiceBox" prefWidth="385.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-      <DatePicker fx:id="courseStartDatePicker" styleClass="input-form" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-      <DatePicker fx:id="courseEndDatePicker" layoutX="221.0" layoutY="225.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-      <TextField fx:id="groupSizeTextField" layoutX="221.0" layoutY="112.0" maxWidth="385.0" onAction="#onAddBtnClick" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #211D5A;" />
-      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #211D5A;" GridPane.columnIndex="3" />
+      <ChoiceBox fx:id="courseChoiceBox" prefWidth="385.0" style="-fx-border-radius: 50px; -fx-text-fill: #101d2c;" GridPane.columnIndex="2" GridPane.rowIndex="3">
+         <styleClass>
+            <String fx:value="input-form" />
+            <String fx:value="button-light" />
+         </styleClass></ChoiceBox>
+      <DatePicker fx:id="courseStartDatePicker" style="-fx-background-color: transparent; -fx-text-fill: #101d2c;" GridPane.columnIndex="2" GridPane.rowIndex="4">
+         <styleClass>
+            <String fx:value="input-form" />
+            <String fx:value="button-light" />
+         </styleClass></DatePicker>
+      <DatePicker fx:id="courseEndDatePicker" layoutX="221.0" layoutY="225.0" style="-fx-background-color: transparent; -fx-text-fill: #101d2c;" GridPane.columnIndex="2" GridPane.rowIndex="5">
+         <styleClass>
+            <String fx:value="input-form" />
+            <String fx:value="button-light" />
+         </styleClass></DatePicker>
+      <TextField fx:id="groupSizeTextField" layoutX="221.0" layoutY="112.0" maxWidth="385.0" onAction="#onAddBtnClick" prefHeight="18.0" style="-fx-border-radius: 50px; -fx-text-fill: #101d2c;" GridPane.columnIndex="2" GridPane.rowIndex="6">
+         <styleClass>
+            <String fx:value="input-form" />
+            <String fx:value="button-light" />
+         </styleClass></TextField>
+      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #101d2c;" />
+      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #101d2c;" GridPane.columnIndex="3" />
    </children>
 </GridPane>
