@@ -169,14 +169,14 @@
             <String fx:value="button-dark" />
          </styleClass>
       </Button>
-      <CheckBox fx:id="emailCheckBox" mnemonicParsing="false" text="Ausblenden" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
-      <CheckBox fx:id="phoneNmbrCheckBox" mnemonicParsing="false" text="Ausblenden" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
+      <CheckBox fx:id="emailCheckBox" mnemonicParsing="false" text=" Anzeigen  " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
+      <CheckBox fx:id="phoneNmbrCheckBox" mnemonicParsing="false" text=" Anzeigen  " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
       <CheckBox fx:id="activeCheckBox" mnemonicParsing="false" text="                   " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="12">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </CheckBox>
-      <CheckBox fx:id="photoCheckBox" mnemonicParsing="false" text="Ausblenden" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="13" />
+      <CheckBox fx:id="photoCheckBox" mnemonicParsing="false" text=" Anzeigen  " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="13" />
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #101d2c;" GridPane.columnIndex="2" />
       <Pane prefHeight="90.0" prefWidth="40.0" style="-fx-background-color: #101d2c;" GridPane.columnIndex="4" />
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #101d2c;" />
@@ -195,7 +195,7 @@
             <Insets left="10.0" />
          </GridPane.margin>
       </Label>
-      <CheckBox fx:id="descriptionCheckBox" layoutX="244.0" layoutY="414.0" mnemonicParsing="false" text="Ausblenden" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="14" />
+      <CheckBox fx:id="descriptionCheckBox" layoutX="244.0" layoutY="414.0" mnemonicParsing="false" text=" Anzeigen  " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="14" />
       <Button mnemonicParsing="false" onAction="#onFileBtnClick" prefHeight="28.0" prefWidth="0.0" style="-fx-background-color: #F2F4FF;" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="13">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
