@@ -9,10 +9,12 @@ import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
+import javafx.util.converter.LocalDateTimeStringConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 
@@ -56,17 +58,19 @@ public class CalenderController extends BaseController {
             model.bookings.forEach(booking -> {
                 if (booking.getCourse().getCourseName().equals(currentCourse)){
                     Entry<Booking> newEntry = new Entry<>(booking.getCourse().getProgram().getProgramName());
-                    System.out.println(booking.getCourse().getProgram().getProgramName());
-                    Interval interval = new Interval(booking.getDateTimeStart(), booking.getDateTimeEnd(), ZoneId.systemDefault());
-                    newEntry.setInterval(interval);
-                    if (!booking.getRecurrenceRule().equals("keiner")){
+                     if (!booking.getRecurrenceRule().equals("keiner")){
                         BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
-                        String RecurrenceRule = bookingRepositoryJDBC.convertRecurrenceRuleFromTextToFrequency(booking.getRecurrenceRule());
+                        String Date = booking.getDateTimeStart().toString().substring(0,10) + " " + booking.getDateTimeEnd().toString().substring(11,16);
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                        LocalDateTime dailytime = LocalDateTime.parse(Date, formatter);
+                        Interval interval = new Interval(booking.getDateTimeStart(), dailytime, ZoneId.systemDefault());
+                        newEntry.setInterval(interval);
+                        String recurrenceRule = bookingRepositoryJDBC.convertRecurrenceRuleFromTextToFrequency(booking.getRecurrenceRule());
                         String regexDate = booking.getDateTimeEnd().toString().replaceAll("[-:]","").substring(0,8);
-                        String newDate= regexDate.substring(0,8);
-                        System.out.println(newDate);
-                        System.out.println(regexDate);
-                        newEntry.setRecurrenceRule(RecurrenceRule + ";UNTIL=" + regexDate + ";");
+                        newEntry.setRecurrenceRule(recurrenceRule + ";UNTIL=" + regexDate + ";");
+                    } else {
+                        Interval interval = new Interval(booking.getDateTimeStart(), booking.getDateTimeEnd(), ZoneId.systemDefault());
+                        newEntry.setInterval(interval);
                     }
                     newCalendar.addEntry(newEntry);
                     }
