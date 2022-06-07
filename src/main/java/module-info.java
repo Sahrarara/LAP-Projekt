@@ -7,6 +7,8 @@ module com.lap.lapproject {
     requires org.kordamp.ikonli.fontawesome;
     requires java.desktop;
 
+    requires spring.security.core;
+    requires spring.security.crypto;
 
     opens com.lap.lapproject to javafx.fxml;
     exports com.lap.lapproject;

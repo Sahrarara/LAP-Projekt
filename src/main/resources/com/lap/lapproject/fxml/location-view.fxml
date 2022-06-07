@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="930.0" prefWidth="1200.0" style="-fx-background-color: #211D5A;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.LocationController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #211D5A;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.LocationController">
    <children>
       <SplitPane dividerPositions="0.23684210526315788" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="728.0" prefWidth="800.0" styleClass="split-pane-background" stylesheets="@../css/application.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
@@ -29,7 +29,7 @@
                         <Font name="Comic Sans MS" size="40.0" />
                      </font>
                   </Label>
-                  <ButtonBar fx:id="locationBtnBar" buttonMinWidth="10.0" layoutX="-338.0" layoutY="97.0" prefHeight="70.0" prefWidth="169.0" AnchorPane.bottomAnchor="-15.0" AnchorPane.leftAnchor="-338.0" AnchorPane.rightAnchor="918.0" AnchorPane.topAnchor="97.0">
+                  <ButtonBar fx:id="locationBtnBar" buttonMinWidth="10.0" layoutX="294.0" layoutY="74.0" prefHeight="70.0" prefWidth="169.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="520.0" AnchorPane.topAnchor="74.0">
                      <buttons>
                         <Button graphicTextGap="2.0" mnemonicParsing="false" onAction="#onAddLocationBtnClick" prefHeight="30.0" prefWidth="60.0">
                            <graphic>
@@ -75,7 +75,7 @@
                         <Insets />
                      </opaqueInsets>
                   </ButtonBar>
-                  <HBox layoutX="944.0" layoutY="48.0" style="-fx-background-color: #fff;" styleClass="search-field">
+                  <HBox layoutX="545.0" layoutY="103.0" style="-fx-background-color: #fff;" styleClass="search-field">
                      <children>
                         <FontAwesomeIconView fill="#211d5aa8" glyphName="SEARCH" size="16">
                            <HBox.margin>
@@ -92,23 +92,29 @@
                   <HBox layoutX="370.0" layoutY="86.0">
                      <children>
                         <VBox>
+                           <children>
+                              <Label text="Filtern nach">
+                                 <VBox.margin>
+                                    <Insets left="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <ChoiceBox fx:id="filterChoiceBox" prefHeight="30.0" prefWidth="170.0" styleClass="search-field" />
+                           </children>
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
                         </VBox>
                      </children>
                   </HBox>
-                  <ChoiceBox fx:id="filterChoiceBox" layoutX="758.0" layoutY="49.0" prefHeight="30.0" prefWidth="170.0" styleClass="search-field" />
-                  <Label layoutX="690.0" layoutY="55.0" text="Filtern nach" />
                </children>
             </AnchorPane>
             <AnchorPane>
                <children>
-                  <TableView fx:id="tableViewLocation" prefHeight="667.0" prefWidth="1192.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="tableViewLocation" layoutX="20.0" layoutY="20.0" prefHeight="386.0" prefWidth="770.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                      <columns>
-                        <TableColumn fx:id="streetColumn" minWidth="-1.0" prefWidth="431.0" text="Straße" />
-                        <TableColumn fx:id="zipColumn" prefWidth="337.5" text="PLZ" />
-                        <TableColumn fx:id="cityColumn" prefWidth="418.0" text="Ort" />
+                        <TableColumn fx:id="streetColumn" minWidth="-1.0" prefWidth="269.5" text="Straße" />
+                        <TableColumn fx:id="zipColumn" prefWidth="234.5" text="PLZ" />
+                        <TableColumn fx:id="cityColumn" prefWidth="253.0" text="Ort" />
                      </columns>
                   </TableView>
                </children>

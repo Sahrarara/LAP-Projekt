@@ -23,7 +23,7 @@
       <RowConstraints prefHeight="103.5" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <Label fx:id="adminKontaktLabel" alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="43.0" prefWidth="341.0" textFill="RED" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+      <Label fx:id="adminContactLabel" alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="43.0" prefWidth="341.0" textFill="RED" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
          <font>
             <Font size="18.0" />
          </font>
@@ -64,7 +64,7 @@
                   <String fx:value="button-light" />
                </styleClass>
             </PasswordField>
-            <Button fx:id="forgotPasswordBtn" mnemonicParsing="false" onAction="#onforgotPasswordBtn" style="-fx-background-color: none;" styleClass="input-description" text="Passwort vergessen?" textFill="#211d5a" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+            <Button fx:id="forgotPasswordBtn" mnemonicParsing="false" onAction="#onForgotPasswordBtn" style="-fx-background-color: none;" styleClass="input-description" text="Passwort vergessen?" textFill="#211d5a" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
             <Button fx:id="skipBtn" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#onSkipBtnClick" prefHeight="36.0" prefWidth="141.0" text="ÜBERSPRINGEN" textFill="#211d5a" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <opaqueInsets>
                   <Insets />

@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LoginController extends BaseController implements Initializable {
+public class LoginController extends BaseController implements Initializable{
 
 
     @FXML
@@ -31,30 +31,28 @@ public class LoginController extends BaseController implements Initializable {
     @FXML
     private Button forgotPasswordBtn;
     @FXML
-    private Label adminKontaktLabel;
+    private Label adminContactLabel;
 
     @FXML
     private void onLoginBtnClick(ActionEvent actionEvent) {
+
         UserRepositoryJDBC userRepositoryJDBC = new UserRepositoryJDBC();
+
         String username = usernameTF.getText();
         String password = passwordTF.getText();
+
         if (checkFieldsFilled() &&  userRepositoryJDBC.checkUser(username, password)) {
+
             User user = userRepositoryJDBC.loginUser(username);
+
             if (user != null) {
+
                 model.setLoggedInUser(user);
                 System.out.println("Login successful");
                 moveToMainPage();
-            } else {
-                QuickAlert.showError("Benutzername und/oder Passwort falsch!");
-                System.out.println("Login failed");
             }
         }
     }
-
-
-
-
-
 
     private boolean checkFieldsFilled() {
         if (usernameTF.getText() == null || usernameTF.getText().isBlank() || passwordTF.getText() == null || passwordTF.getText().isBlank()) {
@@ -72,7 +70,7 @@ public class LoginController extends BaseController implements Initializable {
         passwordTF.setText("dorota1"); /*carol123*/
     }
 
-    private void moveToMainPage() {
+    private void moveToMainPage(){
         Stage currentStage = this.getCurrentStage();
         currentStage.close();
 
@@ -80,8 +78,8 @@ public class LoginController extends BaseController implements Initializable {
         Scene scene = null;
 
         try {
-            scene = new Scene(fxmlLoader.load());
-        } catch (IOException e) {
+            scene= new Scene(fxmlLoader.load());
+        } catch (IOException e){
             e.printStackTrace();
         }
 
@@ -90,7 +88,7 @@ public class LoginController extends BaseController implements Initializable {
         currentStage.show();
     }
 
-    private Stage getCurrentStage() {
+    private Stage getCurrentStage(){
         return (Stage) usernameTF.getScene().getWindow();
     }
 
@@ -99,9 +97,9 @@ public class LoginController extends BaseController implements Initializable {
         moveToMainPage();
     }
 
-    public void onforgotPasswordBtn(ActionEvent actionEvent) {
+    public void onForgotPasswordBtn(ActionEvent actionEvent) {
         forgotPasswordBtn.setVisible(false);
-        adminKontaktLabel.setText("Bitte kontaktieren Sie Ihren Admin");
+        adminContactLabel.setText("Bitte kontaktieren Sie Ihren Admin");
     }
 
 }

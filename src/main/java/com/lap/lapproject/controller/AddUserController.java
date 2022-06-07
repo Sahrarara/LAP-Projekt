@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.sql.SQLException;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -199,6 +200,13 @@ public class AddUserController extends BaseController {
                 } else {
                     trainer.setPhoto(listModel.getSelectedUser().getPhoto());
                 }
+
+        String photoPath = file == null ? "" : file.getPath();
+        if (!photoPath.equals("")) {
+            trainer.setPhoto(convertToBytes(photoPath));
+        } else {
+            trainer.setPhoto(listModel.getSelectedUser().getPhoto());
+        }
 
                 trainer.setDescriptionVisibility(descriptionCheckBox.isSelected());
                 trainer.setPhoneNmbrVisibility(phoneNmbrCheckBox.isSelected());

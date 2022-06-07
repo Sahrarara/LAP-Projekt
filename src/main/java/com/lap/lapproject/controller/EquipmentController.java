@@ -136,4 +136,9 @@ public class EquipmentController extends BaseController{
                 break;
         }
     }
+
+    @FXML
+    private void onCloseIconClick(ActionEvent actionEvent) {
+        searchBar.setText("");
+    }
 }

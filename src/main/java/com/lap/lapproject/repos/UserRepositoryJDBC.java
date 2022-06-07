@@ -1,6 +1,7 @@
 package com.lap.lapproject.repos;
 
 import com.lap.lapproject.application.BCrypt;
+import com.lap.lapproject.utility.PasswordSecurity;
 import com.lap.lapproject.utility.QuickAlert;
 import com.lap.lapproject.model.*;
 import org.slf4j.Logger;
@@ -34,10 +35,11 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             "photo_visable=? WHERE user_id=?";
 
     private static final String UPDATE_PROFILE_SQL_STRING = "UPDATE users SET description=?, phone=?, email=?, photo=? WHERE user_id=?";
+    private static final String UPDATE_PASSWORD_SQL_STRING = "UPDATE `users` SET password = ?  WHERE `user_id` = ? ";
 
 
     @Override
-    public void add(User user) throws SQLException {
+    public void add(User user) {
         Connection connection = connect();
         ResultSet resultSet = null;
         int generatedKey = 0;
@@ -48,7 +50,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             preparedStatement.setString(3, user.getTitle());
             preparedStatement.setString(4, user.getfName());
             preparedStatement.setString(5, user.getlName());
-            preparedStatement.setString(6, hashPassword(user.getUserPassword()));
+            preparedStatement.setString(6, PasswordSecurity.hashPassword(user.getUserPassword()));
             preparedStatement.setString(7, user.getAuthority());
             preparedStatement.setString(8, user.getDescription());
             preparedStatement.setString(9, user.getPhoneNmbr());
@@ -100,7 +102,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
 
 
     @Override
-    public void updateUser(User user) throws SQLException {
+    public void updateUser(User user) {
         Connection connection = connect();
         PreparedStatement preparedStatement = null;
         try {
@@ -229,9 +231,9 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
 
 
     //paswort entschlüßeln
-    private boolean checkPass(String plainPassword, String hashedPassword) {
-        return BCrypt.checkpw(plainPassword, hashedPassword);
-    }
+//    private boolean checkPass(String plainPassword, String hashedPassword) { // outsourced in PasswordSecurity!!!
+//        return BCrypt.checkpw(plainPassword, hashedPassword);
+//    }
 
 
     @Override
@@ -250,14 +252,15 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
 
             resultSet.next();
 
-            if (checkPass(pass, resultSet.getString("password"))) {
-                //logger.info("pass: {}", "TRUE");
+            if (PasswordSecurity.checkPass(pass, resultSet.getString("password"))) {
+                logger.info("pass: {}", "TRUE");
                 return true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        //logger.info("pass:{}", "FALSE");
+        logger.info("pass:{}", "FALSE");
+        QuickAlert.showError("Benutzername und/oder Passwort falsch!");
         return false;
     }
 
@@ -268,19 +271,29 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 
+
         try {
             statement = connection.prepareStatement(SELECT_USERS_SQL_STRING);
             resultSet = statement.executeQuery();
+            ArrayList<String> usernamesFromDB = new ArrayList<>();
 
             while (resultSet.next()) {
-                if (resultSet.getString("username").equals(username)) {
-                    return true;
+                usernamesFromDB.add(resultSet.getString("username"));
+                // logger.info("usernamesfromdb: {}", resultSet.getString("username"));
+            }
+
+            for (String item : usernamesFromDB) {
+                if (item.equals(username)) {
+                    logger.info("neue username gibt schon in db");
+                    return false;
                 }
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return false;
+        logger.info("neue username gibt es nicht in db");
+        return true;
     }
 
 
@@ -372,5 +385,24 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             e.printStackTrace();
         }
     }
+
+
+    public void updatePassword(String newHashPassword, int userID) {
+        Connection connection = connect();
+        PreparedStatement preparedStatement = null;
+        try {
+            assert connection != null;
+            preparedStatement = connection.prepareStatement(UPDATE_PASSWORD_SQL_STRING);
+            preparedStatement.setString(1, newHashPassword);
+            preparedStatement.setInt(2, userID);
+            preparedStatement.executeUpdate();
+
+            logger.info("password updated");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

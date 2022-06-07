@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Locale;
 import java.util.Optional;
-
 public class LocationController extends BaseController{
     @FXML
     private ButtonBar locationBtnBar;
@@ -170,5 +169,10 @@ public class LocationController extends BaseController{
 
     @FXML
     private void onSearchBarClick(ActionEvent actionEvent) {listModel.filteredLocationList.setPredicate(location -> location.getStreet().toLowerCase(Locale.ROOT).contains(searchBar.getText().toLowerCase(Locale.ROOT)));
+    }
+
+    @FXML
+    private void onCloseIconClick(ActionEvent actionEvent) {
+        searchBar.setText("");
     }
 }
