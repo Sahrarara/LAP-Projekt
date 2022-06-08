@@ -22,8 +22,6 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
     private static final String SQL_SELECT_WHERE_ID = "SELECT * WHERE id=?";
 
     private static final String SELECT_TRAINER_SQL_STRING = "SELECT * FROM users WHERE authorization='coach'";
-    private static final String SELECT_ACTIVE_TRAINER_SQL_STRING = "SELECT * FROM users WHERE authorization='coach' AND active_status='1'";
-
     private static final String ADD_NEW_USER_SQL_STRING = "INSERT INTO users (username,active_status,title,first_name,last_name,password," +
             " authorization,description,phone,email, photo, description_visable, phone_visable, email_visable," +
             "photo_visable) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -53,6 +51,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             preparedStatement.setString(4, user.getfName());
             preparedStatement.setString(5, user.getlName());
 //            preparedStatement.setString(6, hashPassword(user.getUserPassword()));
+            preparedStatement.setString(6, PasswordSecurity.hashPassword(user.getUserPassword()));
             preparedStatement.setString(6, PasswordSecurity.hashPassword(user.getUserPassword()));
             preparedStatement.setString(7, user.getAuthority());
             preparedStatement.setString(8, user.getDescription());
@@ -105,7 +104,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
 
 
     @Override
-    public void updateUser(User user) throws SQLException {
+    public void updateUser(User user) throws SQLException{
         Connection connection = connect();
         PreparedStatement preparedStatement = null;
         try {
@@ -289,10 +288,10 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
 
             while (resultSet.next()) {
                 usernamesFromDB.add(resultSet.getString("username"));
-               // logger.info("usernamesfromdb: {}", resultSet.getString("username"));
+                // logger.info("usernamesfromdb: {}", resultSet.getString("username"));
             }
 
-            for(String item : usernamesFromDB) {
+            for (String item : usernamesFromDB) {
                 if (item.equals(username)) {
                     logger.info("neue username gibt schon in db");
                     return false;

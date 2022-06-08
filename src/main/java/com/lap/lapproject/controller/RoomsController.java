@@ -45,8 +45,7 @@ public class RoomsController extends BaseController {
     private TextField searchBar;
     @FXML
     private ChoiceBox filterChoiceBox;
-    @FXML
-    private TextField searchBar;
+
 
 
     @FXML

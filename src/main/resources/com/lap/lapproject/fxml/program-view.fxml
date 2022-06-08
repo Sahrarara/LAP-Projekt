@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #211D5A;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.ProgramController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="930.0" prefWidth="1200.0" style="-fx-background-color: #211D5A;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.ProgramController">
    <children>
       <SplitPane dividerPositions="0.23684210526315788" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="728.0" prefWidth="800.0" styleClass="split-pane-background" stylesheets="@../css/application.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
@@ -28,7 +28,7 @@
                         <Font name="Comic Sans MS" size="40.0" />
                      </font>
                   </Label>
-                  <ButtonBar fx:id="programBtnBar" buttonMinWidth="10.0" layoutX="294.0" layoutY="74.0" prefHeight="70.0" prefWidth="169.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="520.0" AnchorPane.topAnchor="74.0">
+                  <ButtonBar fx:id="programBtnBar" buttonMinWidth="10.0" layoutX="-341.0" layoutY="80.0" prefHeight="70.0" prefWidth="169.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="-341.0" AnchorPane.rightAnchor="921.0" AnchorPane.topAnchor="80.0">
                      <buttons>
                         <Button fx:id="addProgramBtn" graphicTextGap="2.0" mnemonicParsing="false" onAction="#onAddProgramBtnClick" prefHeight="30.0" prefWidth="60.0">
                            <graphic>
@@ -74,7 +74,7 @@
                         <Insets />
                      </opaqueInsets>
                   </ButtonBar>
-                  <HBox layoutX="545.0" layoutY="103.0" style="-fx-background-color: #fff;" styleClass="search-field">
+                  <HBox layoutX="975.0" layoutY="35.0" style="-fx-background-color: #fff;" styleClass="search-field">
                      <children>
                         <FontAwesomeIconView fill="#211d5aa8" glyphName="SEARCH" size="16">
                            <HBox.margin>
@@ -103,9 +103,9 @@
             </AnchorPane>
             <AnchorPane>
                <children>
-                  <TableView fx:id="tableViewProgram" layoutX="20.0" layoutY="23.0" prefHeight="386.0" prefWidth="770.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                  <TableView fx:id="tableViewProgram" prefHeight="667.0" prefWidth="1198.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <columns>
-                        <TableColumn fx:id="programColumn" prefWidth="757.0" text="Programmname" />
+                        <TableColumn fx:id="programColumn" prefWidth="1196.5" text="Programmname" />
                      </columns>
                   </TableView>
                </children>

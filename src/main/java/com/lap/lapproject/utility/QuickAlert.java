@@ -1,6 +1,10 @@
 package com.lap.lapproject.utility;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+
+import java.sql.SQLException;
+import java.util.Optional;
 
 public class QuickAlert {
     public static void showError(String message){
@@ -8,4 +12,6 @@ public class QuickAlert {
         a.setHeaderText(message);
         a.show();
     }
+
+
 }

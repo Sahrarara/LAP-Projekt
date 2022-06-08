@@ -72,7 +72,7 @@ public class AddBookingController extends BaseController {
         //TODO: if Bedingung damit Booking nur angelegt wird wenn möglich
 
 
-        BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
+//        BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
 
         if (!(locationChoiceBox.getValue() == null) &&
         !(courseNameChoiceBox.getValue() == null) &&
@@ -172,7 +172,7 @@ public class AddBookingController extends BaseController {
                         selectedBooking.setDateTimeStart(localDateTimeStart);
                         selectedBooking.setDateTimeEnd(localDateTimeEnd);
 
-                        bookingRepositoryJDBC.updateBooking(selectedBooking);
+                       // bookingRepositoryJDBC.updateBooking(selectedBooking);
                         listModel.bookingList.set(listModel.bookingList.indexOf(selectedBooking), selectedBooking);
 
                         moveToBookingPage();

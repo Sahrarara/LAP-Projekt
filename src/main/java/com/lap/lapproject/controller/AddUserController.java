@@ -75,8 +75,10 @@ public class AddUserController extends BaseController {
         // Öffnet einen Öffnen-Dialog
         file = fileChooser.showOpenDialog(getCurrentStage());
         try {
-            //zeigt Pfad ins Fenster
-            photoPathTextField.setText(file.getAbsolutePath());
+            if (file != null) {
+                //zeigt Pfad ins Fenster
+                photoPathTextField.setText(file.getAbsolutePath());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -111,8 +113,23 @@ public class AddUserController extends BaseController {
 
     @FXML
     private void onAddBtnClick(ActionEvent actionEvent) throws SQLException, IOException {
+        userAddOrUpdate();    //diese funktion hier wechselt nur je nach dem Text im Button zu der update oder add
+    }
 
-        //userSaveOrAdd();    //diese funktion hier wechselt nur je nach dem Text im Button zu der update oder add
+
+    private void userAddOrUpdate() throws SQLException, IOException {
+        String btnText = addAndSaveBtn.getText().toLowerCase(Locale.ROOT);
+        switch (btnText) {
+            case "hinzufügen":
+                addNewUser();
+                break;
+            case "speichern":
+                updateUser();
+                break;
+        }
+    }
+
+    private void addNewUser() throws SQLException, IOException {
         String username = usernameTextField.getText();
         boolean active = activeCheckBox.isSelected();
         String title = titleTextField.getText();
@@ -133,14 +150,38 @@ public class AddUserController extends BaseController {
 
 
         //neuen User im Datenbank speichern
-        UserRepositoryJDBC userRepositoryJDBC = new UserRepositoryJDBC();
-
+        //UserRepositoryJDBC userRepositoryJDBC = new UserRepositoryJDBC();
 
         if (!username.isBlank() && !firstName.isBlank() && !lastName.isBlank()
                 && !(authorizationChoiceBox.getValue() == null) &&
-                /* !password.isBlank() && */!email.isBlank() && !telephone.isBlank()
+                !password.isBlank() && !email.isBlank() && !telephone.isBlank()
         ) {
             if (listModel.getSelectedUser() == null) {
+                if (checkUser(username) && PasswordSecurity.isPasswordValid(password) && checkEmail(email)) {
+                    Trainer trainer = new Trainer(username, title, active, firstName, lastName, password,
+                            authorization, description, telephone, email,
+                            photoPath.equals("") ? null : convertToBytes(photoPath),
+                            descriptionVisible, telephoneVisible, emailVisible, photoVisible);
+                    // userRepositoryJDBC.add(trainer);
+                    listModel.trainerList.add(trainer);
+                    getCurrentStage().close();
+                }
+            }
+        } else {
+            QuickAlert.showError("Bitte folgende Felder ausfüllen:\nNutzername\nVorname\nNachname\nAuthorization\npassword\ne-mail\nTelefon");
+        }
+    }
+
+    private void updateUser() throws IOException, SQLException {
+
+        if (!usernameTextField.getText().isBlank() && !firstNameTextField.getText().isBlank() && !lastNameTextField.getText().isBlank()
+                && !(authorizationChoiceBox.getValue() == null) &&
+                !emailTextField.getText().isBlank() && !phoneNmbrTextField.getText().isBlank()
+        ) {
+            //if (listModel.getSelectedUser() != null) {
+
+            String newUsername = usernameTextField.getText();
+            String selectedUserUsername = listModel.getSelectedUser().getUsername();
                 if (checkUser(username) && PasswordSecurity.isPasswordValid(password, errorPassword) && checkEmail(email)) {
                     try {
                         Trainer trainer = new Trainer(username, title, active, firstName, lastName, password,
@@ -162,26 +203,27 @@ public class AddUserController extends BaseController {
                 String newUsername = usernameTextField.getText();
                 String selectedUserUsername = listModel.getSelectedUser().getUsername();
 
-                if (!newUsername.equals(selectedUserUsername)) {
-                    if (checkUser(usernameTextField.getText())) {
-                        setNewDataForTrainer();
-                    }
-                } else {
-                    if (checkEmail(emailTextField.getText())) {
-                        setNewDataForTrainer();
-                    }
-                    logger.info("NICHT FUNKTIONIERT");
+            if (!newUsername.equals(selectedUserUsername)) {
+                if (checkUser(usernameTextField.getText())) {
+                    setNewDataForTrainer();
                 }
+            } else {
+                if (checkEmail(emailTextField.getText())) {
+                    setNewDataForTrainer();
+                }
+                logger.info("nicht funktioniert");
             }
+
+            //}
+
         } else {
-            QuickAlert.showError("Bitte folgende Felder ausfüllen:\nNutzername\nVorname\nNachname\nAuthorization\npassword\ne-mail\nTelefon");
+            QuickAlert.showError("Bitte folgende Felder ausfüllen:\nNutzername\nVorname\nNachname\nAuthorization\ne-mail\nTelefon");
         }
 
 
     }
 
     public void setNewDataForTrainer() throws IOException {
-        UserRepositoryJDBC userRepositoryJDBC = new UserRepositoryJDBC();
         Trainer trainer = listModel.getSelectedUser();
         trainer.setUsername(usernameTextField.getText());
         trainer.setActiveStatus(activeCheckBox.isSelected());
@@ -227,9 +269,7 @@ public class AddUserController extends BaseController {
 
 
         try {
-
-            logger.info("SPEICHERN NACH UPDATE");
-            userRepositoryJDBC.updateUser(trainer);
+            logger.info("Speichern nach update");
             listModel.trainerList.set(listModel.trainerList.indexOf(trainer), trainer);
             getCurrentStage().close();
 
@@ -248,33 +288,6 @@ public class AddUserController extends BaseController {
         return imageBytes;
     }
 
-    private void userSaveOrAdd() throws SQLException {
-        String btnText = addAndSaveBtn.getText().toLowerCase(Locale.ROOT);
-        switch (btnText) {
-            case "hinzufügen":
-                // addNewUser();
-                break;
-            case "speichern":
-                //updateUser();
-                break;
-        }
-    }
-
-    private void addNewUser() throws SQLException {
-        //TODO: hier die funktion um den User neu anzulegen
-        // funktion
-    }
-
-    private void updateUser() {
-        //TODO: hier die funktion um den User zu updaten
-
-    }
-
-
-    //Passwort haschen
-//    public String hashPassword(String password) {
-//        return BCrypt.hashpw(password, BCrypt.gensalt());
-//    }
 
     @FXML
     void initialize() {
@@ -315,9 +328,9 @@ public class AddUserController extends BaseController {
     public void textLabelInvisible() {
         //setzt Label auf unsichtbar
         errorUsername.setVisible(false);
-        errorEmail.setVisible(false);
         errorPassword.setVisible(false);
         passwordText.setVisible(false);
+        errorEmail.setVisible(false);
     }
 
     //Prüft, ob Username schon in Datenbank vorhanden ist
@@ -344,8 +357,8 @@ public class AddUserController extends BaseController {
         Pattern compile = Pattern.compile("[_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.([a-zA-Z]{2,}){1}");
         Matcher matcher = compile.matcher(email);
         boolean isEmailTrue = matcher.matches();
-        if (!isEmailTrue) {
-
+        if (!matcher.matches()) {
+            logger.info("ICH BIN HIER");
             errorEmail.setVisible(true);
             errorEmail.setText("Email nicht gültig");
             return false;
@@ -353,35 +366,6 @@ public class AddUserController extends BaseController {
             errorEmail.setVisible(false);
             return true;
         }
-    }
-
-
-    @FXML
-    public boolean checkUserForUpdate(String newUsername, String oldUsername) throws SQLException {
-        boolean isUsernameTrue = true;
-        if (!newUsername.equals(oldUsername)) {
-            logger.info("DIE SIND NICHT GLEICH (USERNAME)");
-            isUsernameTrue = checkUser(newUsername);
-            logger.info("CHECKUSERUPDATE DRIN {} ", isUsernameTrue);
-        }/* else {
-            logger.info("USERNAMES SIND GLEICH");
-        }*/
-        //logger.info("VARIABLE AM ENDE CHECKUSERUPDATE{} ", isUsernameTrue);
-        return isUsernameTrue;
-    }
-
-    @FXML
-    public boolean checkEmailForUpdate(String newEmail, String oldEmail) {
-        boolean emailTrue = false;
-        if (!newEmail.equals(oldEmail)) {
-            emailTrue = checkEmail(newEmail);
-//            logger.info("checkEmailForUpdate DRIN {} ", emailTrue);
-//            logger.info("DIE SIND NICHT GLEICH (EMAIL)");
-        } else {
-//            logger.info("EMAILS SIND GLEICH");
-        }
-//        logger.info("VARIABLE AM ENDE CheckEmailForUpdate  {}", emailTrue);
-        return emailTrue;
     }
 
 

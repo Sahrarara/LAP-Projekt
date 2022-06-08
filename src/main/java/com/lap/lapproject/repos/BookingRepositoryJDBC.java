@@ -18,7 +18,8 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
             " JOIN courses ON booking.course_id=courses.course_id" +
             " JOIN rooms ON booking.room_id=rooms.room_id" +
             " JOIN users ON booking.trainer_id=users.user_id" +
-            " JOIN location ON rooms.location_id=location.location_id;";
+            " JOIN location ON rooms.location_id=location.location_id" +
+            " JOIN programs ON courses.program_id=programs.program_id;";
     //TODO: join rooms_equipment
 
     private static final String ADD_NEW_BOOKING_SQL_STRING =
@@ -88,7 +89,7 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
 
                 Program program = new Program(
                         resultSet.getInt("program_id"),
-                        resultSet.getString("course_name"));
+                        resultSet.getString("name"));
 
 
                 LocalDate courseStart = resultSet.getDate("course_start").toLocalDate();
@@ -138,8 +139,6 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
             preparedStatement.setInt(2, booking.getUser().getId());
             preparedStatement.setInt(3, booking.getTrainer().getId());
             preparedStatement.setInt(4, booking.getCourse().getId());
-
-            logger.info("trainer-id: {}", booking.getTrainer().getId());
 
             String recurrenceRuleFrequency = convertRecurrenceRuleFromTextToFrequency(booking.getRecurrenceRule());
 
@@ -226,6 +225,7 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
                 break;
             default:
                 recurrenceRule = "keiner";
+                break;
         }
         return recurrenceRule;
     }

@@ -12,8 +12,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.Optional;
@@ -40,6 +47,11 @@ public class TrainerController extends BaseController{
     private ChoiceBox filterChoiceBox;
     @FXML
     private TextField searchBar;
+    @FXML
+    private TableColumn<Trainer, ImageView> trainerImg;
+    @FXML
+    private TableColumn<Trainer, String> descriptionColumn;
+
 
 
     @FXML
@@ -63,7 +75,6 @@ public class TrainerController extends BaseController{
 
     @FXML
     private void onDeleteTrainerBtnClick(ActionEvent actionEvent) {
-        UserRepositoryJDBC userRepositoryJDBC = new UserRepositoryJDBC();
         BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
         Trainer trainer = tableViewTrainer.getSelectionModel().getSelectedItem();
 
@@ -79,7 +90,6 @@ public class TrainerController extends BaseController{
 
             if (bookingCountByTrainer == 0) {
 
-                userRepositoryJDBC.deleteUser(trainer);
                 listModel.trainerList.remove(trainer);
             } else {
                 QuickAlert.showError("Diese : er Trainer  wird für eine Buchung benötigt, Sie können sie:ihn nicht löschen! Bearbeiten Sie zuerst Ihre Buchungen!");
@@ -109,7 +119,8 @@ public class TrainerController extends BaseController{
 
 
     @FXML
-    private void initialize() {
+    private void initialize() throws IOException {
+        assert trainerImg != null : "fx:id=\"bannerImg\" was not injected: check your FXML file 'trainer.fxml'.";
         assert tableViewTrainer != null : "fx:id=\"tableViewTrainer\" was not injected: check your FXML file 'trainer.fxml'.";
         assert emailColumn != null : "fx:id=\"emailColumn\" was not injected: check your FXML file 'trainer.fxml'.";
         assert firstNameColumn != null : "fx:id=\"firstNameColumn\" was not injected: check your FXML file 'trainer.fxml'.";
@@ -124,14 +135,39 @@ public class TrainerController extends BaseController{
          listModel.selectedUserProperty().bind(tableViewTrainer.getSelectionModel().selectedItemProperty());
     }
 
-    private void initTrainerTable() {
-        tableViewTrainer.setItems(listModel.filteredTrainerList);
-        firstNameColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getfName()));
-        lastNameColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getlName()));
-        emailColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getEmail()));
-        phoneColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getPhoneNmbr()));
+    private void initTrainerTable() throws IOException {
+        BufferedImage bImage = ImageIO.read(new FileInputStream("src/main/resources/com/lap/lapproject/images/lapproject/images/user.png"));
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ImageIO.write(bImage, "png", bos );
+        byte [] imageNoVisible = bos.toByteArray();
+        String notVisibleText = " ";
+
+        tableViewTrainer.setItems(listModel.trainerList);
+        trainerImg.setPrefWidth(200);
+
+         if(model.getLoggedInUser().getPhoto() != null) {
+        trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream(DataFeatures.getValue().getPhotoVisibility() ? DataFeatures.getValue().getPhoto() : imageNoVisible), 140, 200, false, false)))));
+        //trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream(DataFeatures.getValue().getPhotoVisibility() ? DataFeatures.getValue().getPhoto() : imageNoVisible), 140, 200, false, false)))));
+        //trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream(DataFeatures.getValue().getPhoto()), 140, 200, false, false)))));
+       }else {
+            trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream(imageNoVisible), 140, 200, false, false)))));
+        }
+
+        //trainerImg.setCellValueFactory((DataFeatures -> (ObservableValue<Byte>) new ImageView(String.valueOf(DataFeatures.getValue().getPhoto()))));
+        firstNameColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getfName() + " " + dataFeatures.getValue().getlName()));
+        descriptionColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getDescriptionVisibility() ? dataFeatures.getValue().getDescription() : notVisibleText));
+        emailColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getEmailVisibility() ? dataFeatures.getValue().getEmail() : notVisibleText));
+
+
+        phoneColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getPhoneNmbrVisibility() ? dataFeatures.getValue().getPhoneNmbr() : notVisibleText ));
+
         activeStatusColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getActiveStatus()));
 
+
+        /*if(model.getLoggedInUser().getPhoto() != null) {
+            trainerImg.setFill(new ImagePattern(imageFromBytes(model.getLoggedInUser().getPhoto())));
+            listModel.ListModel();
+        }*/
         //wechsselt boolean Value auf Text ja oder nein
         activeStatusColumn.setCellFactory(col -> new TableCell<Trainer, Boolean>() {
             @Override

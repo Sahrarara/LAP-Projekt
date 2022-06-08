@@ -78,8 +78,8 @@ public class BookingController {
         FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_BOOKING));
         Scene scene = null;
         try {
-            scene = new Scene(fxmlLoader.load());
-        } catch (IOException e) {
+            scene= new Scene(fxmlLoader.load());
+        } catch (IOException e){
             e.printStackTrace();
         }
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -89,11 +89,12 @@ public class BookingController {
     }
 
 
+
     @FXML
     private void onDeleteBookingBtnClick(ActionEvent actionEvent) throws SQLException {
         Booking booking = tableViewBooking.getSelectionModel().getSelectedItem();
-        BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
-        bookingRepositoryJDBC.deleteBooking(booking);
+        //BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
+        //bookingRepositoryJDBC.deleteBooking(booking);
         listModel.bookingList.remove(booking);
     }
 
@@ -142,7 +143,6 @@ public class BookingController {
         //TODO: add a Textfield ID and imageView ID in the fxml file for the searchbar and magnifying glass
         //TODO: write the UsabilityMethod.changeListener method in here with the IDs of the searchbar and magnifying glass (you can look it up in ProgramController)
     }
-
 
 
     public void initBookingTable() {
@@ -223,7 +223,6 @@ public class BookingController {
         tableViewBooking.setItems(filteredList);
 
     }
-
 
     @FXML
     private void onCloseIconClick(ActionEvent actionEvent) {
