@@ -67,6 +67,8 @@ public class AddUserController extends BaseController {
     private Label errorEmail;
     @FXML
     File file;
+    @FXML
+    private Label errorNoPhotoInDB;
 
 
     @FXML
@@ -244,10 +246,20 @@ public class AddUserController extends BaseController {
             trainer.setPhoto(listModel.getSelectedUser().getPhoto());
         }
 
+
+
         trainer.setDescriptionVisibility(descriptionCheckBox.isSelected());
         trainer.setPhoneNmbrVisibility(phoneNmbrCheckBox.isSelected());
         trainer.setEmailVisibility(emailCheckBox.isSelected());
         trainer.setPhotoVisibility(photoCheckBox.isSelected());
+
+
+
+        /*if (photoCheckBox.isSelected() && !photoPath.equals("")) {
+            trainer.setPhotoVisibility(photoCheckBox.isSelected());
+        }else {
+            QuickAlert.showError("kein Foto in DB!");
+        }*/
 
 
         try {
@@ -275,8 +287,10 @@ public class AddUserController extends BaseController {
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
+
+
     @FXML
-    void initialize() {
+    void initialize() throws IOException {
         assert activeCheckBox != null : "fx:id=\"activeCheckBox\" was not injected: check your FXML file 'adduser-view.fxml'.";
         assert authorizationChoiceBox != null : "fx:id=\"authorizationChoiceBox\" was not injected: check your FXML file 'adduser-view.fxml'.";
         assert descriptionCheckBox != null : "fx:id=\"descriptionCheckBox\" was not injected: check your FXML file 'adduser-view.fxml'.";
@@ -296,9 +310,11 @@ public class AddUserController extends BaseController {
         fillChoiceBox();
         textLabelInvisible();
         fillFormToUpdate();
+        checkImageInDB();
 
 
     }
+
 
     //Befüllt ChoiceBox mit authorization
     @FXML
@@ -365,6 +381,34 @@ public class AddUserController extends BaseController {
             return false;
         } else {
             errorEmail.setVisible(false);
+            return true;
+        }
+    }
+
+
+   /*public  boolean checkImageInDB() throws IOException {
+        Trainer trainer = listModel.getSelectedUser();
+        String photoPath = file == null ? "" : file.getPath();
+        if (!photoPath.equals("")) {
+            trainer.setPhoto(convertToBytes(photoPath));
+            System.out.println("kein Foto in DB");
+            return false;
+        } else {
+            trainer.setPhoto(listModel.getSelectedUser().getPhoto());
+            System.out.println("Foto ist da!");
+            return true;
+        }
+    }*/
+
+    //prüft ob ein Foto in DB vorhanden ist
+    public  boolean checkImageInDB() throws IOException {
+
+        if (listModel.getSelectedUser().getPhoto() == null) {
+            errorNoPhotoInDB.setVisible(true);
+            errorNoPhotoInDB.setText("User Foto in DatenBanken ist nicht vorhanden!");
+            return false;
+        } else {
+            errorNoPhotoInDB.setVisible(false);
             return true;
         }
     }

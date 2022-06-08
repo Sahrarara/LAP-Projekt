@@ -114,16 +114,16 @@
                   <Label layoutX="716.0" layoutY="55.0" text="Filtern nach" />
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="710.0" prefWidth="1233.0">
+            <AnchorPane prefHeight="707.0" prefWidth="1190.0">
                <children>
-                  <TableView fx:id="tableViewTrainer" fixedCellSize="0.0" layoutX="5.0" prefHeight="667.0" prefWidth="1229.0" style="-fx-text-fill: white;" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="tableViewTrainer" fixedCellSize="0.0" layoutX="9.0" prefHeight="667.0" prefWidth="1224.0" style="-fx-text-fill: white;" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="0.0">
                      <columns>
-                        <TableColumn fx:id="trainerImg" prefWidth="205.0" style="-fx-text-fill: white; -fx-padding-left: 10px;" text="Foto" />
-                        <TableColumn fx:id="firstNameColumn" prefWidth="221.0" text="Name" />
+                        <TableColumn fx:id="trainerImg" prefWidth="210.5" style="-fx-text-fill: white; -fx-padding-left: 10px;" text="Foto" />
+                        <TableColumn fx:id="firstNameColumn" prefWidth="215.5" text="Name" />
                         <TableColumn fx:id="activeStatusColumn" maxWidth="275.5" minWidth="0.0" prefWidth="59.0" text="Aktiv" />
                         <TableColumn fx:id="emailColumn" prefWidth="215.5" text="E-Mail" />
                         <TableColumn fx:id="phoneColumn" minWidth="0.0" prefWidth="201.5" text="Telefon" />
-                        <TableColumn fx:id="descriptionColumn" prefWidth="319.5" text="Zusatztext" />
+                        <TableColumn fx:id="descriptionColumn" prefWidth="346.5" text="Zusatztext" />
                      </columns>
                      <opaqueInsets>
                         <Insets />

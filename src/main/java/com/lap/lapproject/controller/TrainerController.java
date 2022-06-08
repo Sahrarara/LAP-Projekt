@@ -145,15 +145,12 @@ public class TrainerController extends BaseController{
         tableViewTrainer.setItems(listModel.trainerList);
         trainerImg.setPrefWidth(200);
 
-         if(model.getLoggedInUser().getPhoto() != null) {
-        trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream(DataFeatures.getValue().getPhotoVisibility() ? DataFeatures.getValue().getPhoto() : imageNoVisible), 140, 200, false, false)))));
-        //trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream(DataFeatures.getValue().getPhotoVisibility() ? DataFeatures.getValue().getPhoto() : imageNoVisible), 140, 200, false, false)))));
-        //trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream(DataFeatures.getValue().getPhoto()), 140, 200, false, false)))));
-       }else {
+        if(model.getLoggedInUser().getPhoto() != null) {
+            trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream(DataFeatures.getValue().getPhotoVisibility() ? DataFeatures.getValue().getPhoto() : imageNoVisible), 140, 200, false, false)))));
+        }else {
             trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream(imageNoVisible), 140, 200, false, false)))));
         }
 
-        //trainerImg.setCellValueFactory((DataFeatures -> (ObservableValue<Byte>) new ImageView(String.valueOf(DataFeatures.getValue().getPhoto()))));
         firstNameColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getfName() + " " + dataFeatures.getValue().getlName()));
         descriptionColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getDescriptionVisibility() ? dataFeatures.getValue().getDescription() : notVisibleText));
         emailColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getEmailVisibility() ? dataFeatures.getValue().getEmail() : notVisibleText));
@@ -164,10 +161,14 @@ public class TrainerController extends BaseController{
         activeStatusColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getActiveStatus()));
 
 
-        /*if(model.getLoggedInUser().getPhoto() != null) {
-            trainerImg.setFill(new ImagePattern(imageFromBytes(model.getLoggedInUser().getPhoto())));
+      /*  if(model.getLoggedInUser().getPhoto() != null) {
+            trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream(DataFeatures.getValue().getPhotoVisibility() ? DataFeatures.getValue().getPhoto() : imageNoVisible), 140, 200, false, false)))));
             listModel.ListModel();
+        } else {
+        trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream(DataFeatures.getValue().getPhoto() : imageNoVisible), 140, 200, false, false)))));
         }*/
+
+
         //wechsselt boolean Value auf Text ja oder nein
         activeStatusColumn.setCellFactory(col -> new TableCell<Trainer, Boolean>() {
             @Override
