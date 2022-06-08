@@ -29,6 +29,8 @@ public class RoomsEquipmentRepositoryJDBC extends Repository implements RoomsEqu
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
         return roomsEquipment;
     }
@@ -43,6 +45,8 @@ public class RoomsEquipmentRepositoryJDBC extends Repository implements RoomsEqu
             ps.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
     }
 

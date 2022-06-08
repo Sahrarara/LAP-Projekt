@@ -1,6 +1,6 @@
 package com.lap.lapproject.controller;
 
-import com.lap.lapproject.application.BCrypt;
+import com.lap.lapproject.utility.PasswordSecurity;
 import com.lap.lapproject.utility.QuickAlert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -141,7 +141,7 @@ public class AddUserController extends BaseController {
                 /* !password.isBlank() && */!email.isBlank() && !telephone.isBlank()
         ) {
             if (listModel.getSelectedUser() == null) {
-                if (checkUser(username) && checkPassword(password) && checkEmail(email)) {
+                if (checkUser(username) && PasswordSecurity.isPasswordValid(password, errorPassword) && checkEmail(email)) {
                     try {
                         Trainer trainer = new Trainer(username, title, active, firstName, lastName, password,
                                 authorization, description, telephone, email,
@@ -191,7 +191,7 @@ public class AddUserController extends BaseController {
 
         if (!showPassword.isSelected()) {
             if (!passwordTextFieldHidden.getText().isBlank()) {
-                trainer.setUserPassword(hashPassword(passwordTextFieldHidden.getText()));
+                trainer.setUserPassword(PasswordSecurity.hashPassword(passwordTextFieldHidden.getText()));
                 //  logger.info("PASSWOR DHIDDEN{}", " " + passwordTextFieldHidden.getText());
             } else {
                 trainer.setUserPassword(listModel.getSelectedUser().getUserPassword());
@@ -199,7 +199,7 @@ public class AddUserController extends BaseController {
             }
         } else {
             if (!passwordText.getText().isBlank()) {
-                trainer.setUserPassword(hashPassword(passwordText.getText()));
+                trainer.setUserPassword(PasswordSecurity.hashPassword(passwordText.getText()));
                 // logger.info("PASSWORD PLAINTEXT{}", " " + passwordText.getText());
             } else {
                 trainer.setUserPassword(listModel.getSelectedUser().getUserPassword());
@@ -272,9 +272,9 @@ public class AddUserController extends BaseController {
 
 
     //Passwort haschen
-    public String hashPassword(String password) {
-        return BCrypt.hashpw(password, BCrypt.gensalt());
-    }
+//    public String hashPassword(String password) {
+//        return BCrypt.hashpw(password, BCrypt.gensalt());
+//    }
 
     @FXML
     void initialize() {
@@ -336,20 +336,6 @@ public class AddUserController extends BaseController {
         }
     }
 
-    //1 Großbuchstabe, 1 Kleinbuchstabe, 1 Ziffer, 1 Sonderzeichen enthält und eine Länge von mindestens 8 hat
-    @FXML
-    public boolean checkPassword(String password) {
-        Pattern compile = Pattern.compile("^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\\W).*$");
-        Matcher matcher = compile.matcher(password);
-        if (!matcher.matches()) {
-            errorPassword.setVisible(true);
-            errorPassword.setText("8 Zeichen,1 Großbuchstabe, 1 Kleinbuchstabe, 1 Ziffer, 1 Sonderzeichen");
-            return false;
-        } else {
-            errorPassword.setVisible(false);
-            return true;
-        }
-    }
 
 
     //Email validieren

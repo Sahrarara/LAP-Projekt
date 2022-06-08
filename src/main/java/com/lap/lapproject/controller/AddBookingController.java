@@ -5,6 +5,7 @@ import com.lap.lapproject.model.*;
 import com.lap.lapproject.repos.*;
 
 import com.lap.lapproject.utility.QuickAlert;
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,6 +24,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 
 public class AddBookingController extends BaseController {
@@ -214,9 +216,18 @@ public class AddBookingController extends BaseController {
         timeStartTimeField.setValue(LocalTime.of(7, 30));
         timeEndTimeField.setValue(LocalTime.of(19, 30));
 
-        locationChoiceBox.setItems(listModel.locationList);
-        trainerChoiceBox.setItems(listModel.trainerList);
+
         courseNameChoiceBox.setItems(listModel.courseList);
+        locationChoiceBox.setItems(listModel.locationList);
+
+        // just add active trainer to the choice box
+        listModel.activeTrainerList.clear();
+        for(Trainer trainer : listModel.trainerList) {
+            if(trainer.getActiveStatus()) {
+                listModel.activeTrainerList.add(trainer);
+            }
+        }
+        trainerChoiceBox.setItems(listModel.activeTrainerList);
 
 
         FilteredList<Room> roomFilteredList = new FilteredList<>(listModel.roomList);

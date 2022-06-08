@@ -24,7 +24,7 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
     private static final String UPDATE_ROOM_SQL_STRING = "UPDATE rooms SET room_number =?, size=?, location_id=? WHERE room_id=? ";
 
     @Override
-    public List<Room> readAll() {
+    public List<Room> readAll() throws SQLException {
         Connection connection = connect();
         List<Room> roomList = new ArrayList<>();
 
@@ -71,6 +71,8 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
 
         return roomList;
@@ -111,6 +113,8 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
             ps.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
     }
 
@@ -128,6 +132,8 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
 
     }

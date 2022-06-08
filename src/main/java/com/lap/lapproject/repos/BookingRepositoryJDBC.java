@@ -17,7 +17,7 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
     private static final String SELECT_BOOKING_SQL_STRING = "SELECT * FROM `booking` " +
             " JOIN courses ON booking.course_id=courses.course_id" +
             " JOIN rooms ON booking.room_id=rooms.room_id" +
-            " JOIN users ON booking.user_id=users.user_id" +
+            " JOIN users ON booking.trainer_id=users.user_id" +
             " JOIN location ON rooms.location_id=location.location_id;";
     //TODO: join rooms_equipment
 
@@ -72,7 +72,7 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
 
 
                 Trainer trainer = new Trainer(
-                        resultSet.getInt("user_id"),
+                        resultSet.getInt("trainer_id"),
                         resultSet.getString("username"),
                         resultSet.getString("first_name"),
                         resultSet.getString("last_name"),
@@ -81,6 +81,9 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
                         resultSet.getString("phone"),
                         resultSet.getString("description"),
                         resultSet.getBoolean("active_status"));
+                logger.info("trainer aus db: {}", resultSet.getInt("trainer_id") +
+                        resultSet.getString("first_name"));
+
 
 
                 Program program = new Program(
@@ -115,13 +118,15 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
         return bookingList;
     }
 
 
 
-    public int addBooking(Booking booking) {
+    public int addBooking(Booking booking) throws SQLException {
         Connection connection = connect();
         ResultSet resultSet = null;
         PreparedStatement preparedStatement = null;
@@ -133,6 +138,8 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
             preparedStatement.setInt(2, booking.getUser().getId());
             preparedStatement.setInt(3, booking.getTrainer().getId());
             preparedStatement.setInt(4, booking.getCourse().getId());
+
+            logger.info("trainer-id: {}", booking.getTrainer().getId());
 
             String recurrenceRuleFrequency = convertRecurrenceRuleFromTextToFrequency(booking.getRecurrenceRule());
 
@@ -149,13 +156,15 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
         return generatedKey;
     }
 
 
 
-    public void deleteBooking(Booking booking) {
+    public void deleteBooking(Booking booking) throws SQLException {
         Connection connection = connect();
         PreparedStatement preparedStatement = null;
         try {
@@ -164,13 +173,15 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
             preparedStatement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
     }
 
 
 
     @Override
-    public void updateBooking(Booking booking) {
+    public void updateBooking(Booking booking) throws SQLException {
 
         Connection connection = connect();
         PreparedStatement preparedStatement = null;
@@ -194,6 +205,8 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
     }
 
@@ -238,7 +251,7 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
     }
 
     @Override
-    public int getBookingCountByProgramIdJoinLocationId(int locationId) {
+    public int getBookingCountByProgramIdJoinLocationId(int locationId) throws SQLException {
         Connection connection = connect();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -253,12 +266,14 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
         return roomsCountByLocationId;
     }
 
     @Override
-    public int getBookingCountByRoomId(int roomId) {
+    public int getBookingCountByRoomId(int roomId) throws SQLException {
         Connection connection = connect();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -273,12 +288,14 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
         return bookingsCountByRoomId;
     }
 
     @Override
-    public int getBookingCountByTrainerId(int trainerId) {
+    public int getBookingCountByTrainerId(int trainerId) throws SQLException {
         Connection connection = connect();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -293,6 +310,8 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
         return bookingsCountByTrainerId;
     }

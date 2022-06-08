@@ -15,7 +15,7 @@ public class EquipmentRepositoryJDBC extends Repository implements EquipmentRepo
     private static final String DELETE_EQUIPMENT_SQL_STRING = "DELETE FROM equipment WHERE equipment_id=?";
 
     @Override
-    public List<Equipment> readAll() {
+    public List<Equipment> readAll() throws SQLException {
         Connection connection = connect();
         List<Equipment> equipmentList = new ArrayList<>();
         PreparedStatement statement = null;
@@ -32,6 +32,8 @@ public class EquipmentRepositoryJDBC extends Repository implements EquipmentRepo
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
         return equipmentList;
     }
@@ -57,6 +59,8 @@ public class EquipmentRepositoryJDBC extends Repository implements EquipmentRepo
 
         } catch (SQLException e ) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
 
         return generatedKey;
@@ -75,6 +79,8 @@ public class EquipmentRepositoryJDBC extends Repository implements EquipmentRepo
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
 
     }
@@ -89,6 +95,8 @@ public class EquipmentRepositoryJDBC extends Repository implements EquipmentRepo
             preparedStatement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
     }
 

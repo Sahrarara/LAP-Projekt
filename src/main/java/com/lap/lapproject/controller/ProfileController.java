@@ -17,6 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -146,6 +147,7 @@ public class ProfileController extends BaseController {
         } catch (IOException e){
             e.printStackTrace();
         }
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Raum Management");
         stage.setScene(scene);
         stage.show();

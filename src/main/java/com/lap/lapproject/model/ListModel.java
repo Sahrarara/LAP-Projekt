@@ -22,6 +22,7 @@ public class ListModel {
     public  ObservableList<Location> locationList = FXCollections.observableArrayList();
     public  ObservableList<Booking> bookingList = FXCollections.observableArrayList();
     public ObservableList<Trainer> trainerList = FXCollections.observableArrayList();
+    public ObservableList<Trainer> activeTrainerList = FXCollections.observableArrayList();
     public ObservableList<Room> roomList = FXCollections.observableArrayList();
     public ObservableList<Trainer> authorizationList = FXCollections.observableArrayList();
 
@@ -98,7 +99,11 @@ public class ListModel {
                         //...
                     } else if (change.wasAdded()) {//gepr ob was geädert
                         for (Booking booking : change.getAddedSubList()) { //liste für buch, ob was geadd ist
-                            bookingRepositoryJDBC.addBooking(booking); // add book zu repo
+                            try {
+                                bookingRepositoryJDBC.addBooking(booking); // add book zu repo
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
                         }
                     } else if (change.wasRemoved()) {
                         // ...
@@ -166,14 +171,13 @@ public class ListModel {
     public Trainer getSelectedUser() {
         return selectedUser.get();
     }
-
     public ObjectProperty<Trainer> selectedUserProperty() {
         return selectedUser;
     }
-
     public void setSelectedUser(Trainer selectedUser) {
         this.selectedUser.set(selectedUser);
     }
+
 
     public Room getSelectedRoom() {
         return selectedRoom.get();
