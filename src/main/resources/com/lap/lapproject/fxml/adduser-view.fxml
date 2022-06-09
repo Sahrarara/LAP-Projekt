@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane prefHeight="800.0" prefWidth="841.0" style="-fx-background-color: #f9f7f6;" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.AddUserController">
+<GridPane prefHeight="800.0" prefWidth="841.0" style="-fx-background-color: #f9f7f6;" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.AddUserController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" prefWidth="80.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="112.0" prefWidth="112.0" />
@@ -201,9 +201,9 @@
          </GridPane.margin>
       </Label>
       <CheckBox fx:id="descriptionCheckBox" layoutX="244.0" layoutY="414.0" mnemonicParsing="false" text=" Anzeigen  " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="15" />
-      <Button mnemonicParsing="false" onAction="#onFileBtnClick" prefHeight="28.0" prefWidth="0.0" style="-fx-background-color: #F2F4FF;" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="14">
+      <Button mnemonicParsing="false" onAction="#onFileBtnClick" prefHeight="42.0" prefWidth="44.0" style="-fx-background-color: #F9F7F6;" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="14">
          <graphic>
-            <ImageView fitHeight="30.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="20.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/lapproject/images/PenB.png" />
                </image>
