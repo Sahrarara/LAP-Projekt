@@ -182,7 +182,6 @@ public class AddUserController extends BaseController {
                 !emailTextField.getText().isBlank() && !phoneNmbrTextField.getText().isBlank()
         ) {
             //if (listModel.getSelectedUser() != null) {
-
             String newUsername = usernameTextField.getText();
             String selectedUserUsername = listModel.getSelectedUser().getUsername();
 
@@ -202,11 +201,10 @@ public class AddUserController extends BaseController {
         } else {
             QuickAlert.showError("Bitte folgende Felder ausfüllen:\nNutzername\nVorname\nNachname\nAuthorization\ne-mail\nTelefon");
         }
-
     }
 
-
     public void setNewDataForTrainer() throws IOException {
+        checkImageInDB();
         Trainer trainer = listModel.getSelectedUser();
 
         trainer.setUsername(usernameTextField.getText());
@@ -246,34 +244,20 @@ public class AddUserController extends BaseController {
             trainer.setPhoto(listModel.getSelectedUser().getPhoto());
         }
 
-
-
+        trainer.setDescription(descriptionTextArea.getText());
         trainer.setDescriptionVisibility(descriptionCheckBox.isSelected());
         trainer.setPhoneNmbrVisibility(phoneNmbrCheckBox.isSelected());
         trainer.setEmailVisibility(emailCheckBox.isSelected());
         trainer.setPhotoVisibility(photoCheckBox.isSelected());
 
-
-
-        /*if (photoCheckBox.isSelected() && !photoPath.equals("")) {
-            trainer.setPhotoVisibility(photoCheckBox.isSelected());
-        }else {
-            QuickAlert.showError("kein Foto in DB!");
-        }*/
-
-
         try {
             logger.info("Speichern nach update");
             listModel.trainerList.set(listModel.trainerList.indexOf(trainer), trainer);
             getCurrentStage().close();
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
-
 
     @FXML
     public byte[] convertToBytes(String pathToImage) throws IOException {
@@ -312,7 +296,6 @@ public class AddUserController extends BaseController {
         fillFormToUpdate();
         checkImageInDB();
 
-
     }
 
 
@@ -334,6 +317,9 @@ public class AddUserController extends BaseController {
         errorPassword.setVisible(false);
         passwordText.setVisible(false);
         errorEmail.setVisible(false);
+
+        errorNoPhotoInDB.setVisible(false);
+
     }
 
     //Prüft, ob Username schon in Datenbank vorhanden ist
@@ -385,33 +371,22 @@ public class AddUserController extends BaseController {
         }
     }
 
-
-   /*public  boolean checkImageInDB() throws IOException {
-        Trainer trainer = listModel.getSelectedUser();
-        String photoPath = file == null ? "" : file.getPath();
-        if (!photoPath.equals("")) {
-            trainer.setPhoto(convertToBytes(photoPath));
-            System.out.println("kein Foto in DB");
-            return false;
-        } else {
-            trainer.setPhoto(listModel.getSelectedUser().getPhoto());
-            System.out.println("Foto ist da!");
-            return true;
-        }
-    }*/
-
     //prüft ob ein Foto in DB vorhanden ist
     public  boolean checkImageInDB() throws IOException {
-
-        if (listModel.getSelectedUser().getPhoto() == null) {
-            errorNoPhotoInDB.setVisible(true);
-            errorNoPhotoInDB.setText("User Foto in DatenBanken ist nicht vorhanden!");
-            return false;
-        } else {
-            errorNoPhotoInDB.setVisible(false);
-            return true;
+        while (listModel.getSelectedUser() != null){
+            if (listModel.getSelectedUser().getPhoto() == null) {
+                System.out.println("foto empty");
+                errorNoPhotoInDB.setVisible(true);
+                errorNoPhotoInDB.setText("User Foto in DatenBanken ist nicht vorhanden!");
+                return false;
+            } else {
+                errorNoPhotoInDB.setVisible(false);
+                return true;
+            }
         }
+        return true;
     }
+
 
 
     //Befüllt das Formular für Update Function

@@ -86,8 +86,8 @@ public class BookingController {
     @FXML
     private void onDeleteBookingBtnClick(ActionEvent actionEvent) {
         Booking booking  = tableViewBooking.getSelectionModel().getSelectedItem();
-      //  BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
-        //bookingRepositoryJDBC.deleteBooking(booking);
+        //BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
+        // bookingRepositoryJDBC.deleteBooking(booking);
         listModel.bookingList.remove(booking);
     }
 

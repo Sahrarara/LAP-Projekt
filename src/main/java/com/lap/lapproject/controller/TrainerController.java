@@ -143,20 +143,17 @@ public class TrainerController extends BaseController{
         String notVisibleText = " ";
 
         tableViewTrainer.setItems(listModel.trainerList);
-        trainerImg.setPrefWidth(200);
+        //trainerImg.setPrefWidth(200);
 
-        if(model.getLoggedInUser().getPhoto() != null) {
-            trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream(DataFeatures.getValue().getPhotoVisibility() ? DataFeatures.getValue().getPhoto() : imageNoVisible), 140, 200, false, false)))));
-        }else {
-            trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream(imageNoVisible), 140, 200, false, false)))));
-        }
+        trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream((DataFeatures.getValue().getPhotoVisibility() || (model.getAuthority().equals("admin") && DataFeatures.getValue().getPhoto() != null)) ? DataFeatures.getValue().getPhoto() : imageNoVisible), 140, 200, false, false)))));
+
 
         firstNameColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getfName() + " " + dataFeatures.getValue().getlName()));
-        descriptionColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getDescriptionVisibility() ? dataFeatures.getValue().getDescription() : notVisibleText));
-        emailColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getEmailVisibility() ? dataFeatures.getValue().getEmail() : notVisibleText));
+        descriptionColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>((dataFeatures.getValue().getDescriptionVisibility() || model.getAuthority().equals("admin")) ? dataFeatures.getValue().getDescription() : notVisibleText));
+        emailColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>((dataFeatures.getValue().getEmailVisibility() || model.getAuthority().equals("admin")) ? dataFeatures.getValue().getEmail() : notVisibleText));
 
 
-        phoneColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getPhoneNmbrVisibility() ? dataFeatures.getValue().getPhoneNmbr() : notVisibleText ));
+        phoneColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>((dataFeatures.getValue().getPhoneNmbrVisibility() || model.getAuthority().equals("admin"))  ? dataFeatures.getValue().getPhoneNmbr() : notVisibleText ));
 
         activeStatusColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getActiveStatus()));
 

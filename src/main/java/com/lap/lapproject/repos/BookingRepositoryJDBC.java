@@ -20,6 +20,13 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
             " JOIN users ON booking.user_id=users.user_id" +
             " JOIN location ON rooms.location_id=location.location_id" +
             " JOIN programs ON courses.program_id=programs.program_id;";
+
+    /*private static final String SELECT_BOOKING_SQL_STRING = "SELECT * FROM `booking` " +
+            " JOIN courses ON booking.course_id=courses.course_id" +
+            " JOIN rooms ON booking.room_id=rooms.room_id" +
+            " JOIN users ON booking.trainer_id=users.user_id" +
+            " JOIN location ON rooms.location_id=location.location_id" +
+            " JOIN programs ON courses.program_id=programs.program_id";*/
     //TODO: join rooms_equipment
 
     private static final String ADD_NEW_BOOKING_SQL_STRING =

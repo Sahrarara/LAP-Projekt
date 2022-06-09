@@ -118,15 +118,15 @@
                <children>
                   <TableView fx:id="tableViewBooking" prefHeight="513.0" prefWidth="798.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <columns>
-                        <TableColumn fx:id="courseNameColumn" minWidth="-1.0" prefWidth="109.5" text="V-Nr." />
-                        <TableColumn fx:id="locationColumn" minWidth="-1.0" prefWidth="137.0" text="Standort" />
-                        <TableColumn fx:id="roomColumn" minWidth="-1.0" prefWidth="66.0" text="Raum" />
-                        <TableColumn fx:id="trainerColumn" minWidth="-1.0" prefWidth="133.5" text="Vortragender" />
-                        <TableColumn fx:id="recurrenceRuleColumn" minWidth="-1.0" prefWidth="159.0" text="Serientermin" />
-                        <TableColumn fx:id="dateFromColumn" minWidth="-1.0" prefWidth="126.0" text="Datum von" />
-                        <TableColumn fx:id="dateToColumn" minWidth="-1.0" prefWidth="161.0" text="Datum bis" />
-                        <TableColumn fx:id="dateTimeStartColumn" minWidth="-1.0" prefWidth="129.5" text="Beginn" />
-                        <TableColumn fx:id="dateTimeEndColumn" minWidth="-1.0" prefWidth="173.0" text="Ende" />
+                        <TableColumn fx:id="courseNameColumn" minWidth="-1.0" prefWidth="101.0" text="V-Nr." />
+                        <TableColumn fx:id="locationColumn" minWidth="-1.0" prefWidth="198.5" text="Standort" />
+                        <TableColumn fx:id="roomColumn" minWidth="-1.0" prefWidth="73.5" text="Raum" />
+                        <TableColumn fx:id="trainerColumn" minWidth="-1.0" prefWidth="236.0" text="Vortragender" />
+                        <TableColumn fx:id="recurrenceRuleColumn" minWidth="-1.0" prefWidth="143.5" text="Serientermin" />
+                        <TableColumn fx:id="dateFromColumn" minWidth="-1.0" prefWidth="115.5" text="Datum von" />
+                        <TableColumn fx:id="dateToColumn" minWidth="-1.0" prefWidth="111.5" text="Datum bis" />
+                        <TableColumn fx:id="dateTimeStartColumn" minWidth="-1.0" prefWidth="112.5" text="Beginn" />
+                        <TableColumn fx:id="dateTimeEndColumn" minWidth="-1.0" prefWidth="102.5" text="Ende" />
                      </columns>
                   </TableView>
                </children>

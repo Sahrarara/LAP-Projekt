@@ -2,6 +2,8 @@ package com.lap.lapproject.controller;
 
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
+import com.lap.lapproject.repos.CourseRepositoryJDBC;
+import com.lap.lapproject.repos.UserRepositoryJDBC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -68,25 +70,27 @@ public class SidebarController extends BaseController {
 
     @FXML
     private void onUserBtnClick(ActionEvent actionEvent) {
-        listModel.ListModel();
+       // listModel.ListModel();
         model.setPathForDetailView(Constants.PATH_TO_FXML_PROFILE);
     }
 
     @FXML
     private void onRoomBtnClick(ActionEvent actionEvent) {
-        listModel.ListModel();
+        //listModel.ListModel();
         model.setPathForDetailView(Constants.PATH_TO_FXML_ROOM);
     }
 
     @FXML
     private void onCourseBtnClick(ActionEvent actionEvent) {
-        listModel.ListModel();
+        //CourseRepositoryJDBC courseRepositoryJDBC = new CourseRepositoryJDBC();
+        //listModel.courseList.setAll(courseRepositoryJDBC.readAll());
+        //listModel.ListModel();
         model.setPathForDetailView(Constants.PATH_TO_FXML_COURSE);
     }
 
     @FXML
     private void onTrainerBtnClick(ActionEvent actionEvent) {
-        listModel.ListModel();
+        //listModel.ListModel();
         model.setPathForDetailView(Constants.PATH_TO_FXML_TRAINER);
     }
 
@@ -97,7 +101,7 @@ public class SidebarController extends BaseController {
 
     @FXML
     private void onSearchBtnClick(ActionEvent actionEvent) {
-        listModel.ListModel();
+        //listModel.ListModel();
         model.setPathForDetailView(Constants.PATH_TO_FXML_SEARCH);
     }
 
@@ -113,7 +117,7 @@ public class SidebarController extends BaseController {
 
     @FXML
     private void onBookingBtnClick(ActionEvent actionEvent) {
-        listModel.ListModel();
+        //listModel.ListModel();
         model.setPathForDetailView(Constants.PATH_TO_FXML_BOOKING);
     }
 
