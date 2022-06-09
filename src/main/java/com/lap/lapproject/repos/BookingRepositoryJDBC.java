@@ -43,7 +43,6 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
         Connection connection = connect();
         ArrayList<Booking> bookingList = new ArrayList<>();
 
-
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 

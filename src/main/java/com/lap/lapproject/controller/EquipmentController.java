@@ -5,6 +5,7 @@ import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.Equipment;
 import com.lap.lapproject.model.Room;
 import com.lap.lapproject.repos.EquipmentRepositoryJDBC;
+import com.lap.lapproject.repos.RoomRepositoryJDBC;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -57,6 +58,8 @@ public class EquipmentController extends BaseController{
 
     @FXML
     private void onDeleteBtnClick(ActionEvent actionEvent) {
+        RoomRepositoryJDBC roomRepositoryJDBC = new RoomRepositoryJDBC();
+
         EquipmentRepositoryJDBC equipmentRepositoryJDBC = new EquipmentRepositoryJDBC();
         int myIndex = tableViewEquipment.getSelectionModel().getSelectedIndex();
 
@@ -72,6 +75,8 @@ public class EquipmentController extends BaseController{
             try {
                 equipmentRepositoryJDBC.deleteEquipment(equipment1);
                 listModel.equipmentList.remove(equipment1);
+
+                listModel.roomList.setAll(roomRepositoryJDBC.readAll());
 
             } catch (SQLException ex) {
                 ex.printStackTrace();

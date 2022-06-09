@@ -38,6 +38,8 @@ public class TrainerController extends BaseController {
 
     @FXML
     private ButtonBar trainerBtnBar;
+
+
     @FXML
     private TableView<Trainer> tableViewTrainer;
     @FXML
@@ -60,6 +62,7 @@ public class TrainerController extends BaseController {
     private TableColumn<Trainer, String> descriptionColumn;
 
 
+
     @FXML
     private void onAddTrainerBtnClick(ActionEvent actionEvent) {
         tableViewTrainer.getSelectionModel().select(null);
@@ -80,7 +83,7 @@ public class TrainerController extends BaseController {
     }
 
     @FXML
-    private void onDeleteTrainerBtnClick(ActionEvent actionEvent) throws SQLException {
+    private void onDeleteTrainerBtnClick(ActionEvent actionEvent) {
         BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
         Trainer trainer = tableViewTrainer.getSelectionModel().getSelectedItem();
 
@@ -90,7 +93,7 @@ public class TrainerController extends BaseController {
         alert.setHeaderText(null);
         alert.setContentText("Sind Sie sicher, dass Sie es löschen wollen?");
         Optional<ButtonType> action = alert.showAndWait();
-        if (action.get() == ButtonType.OK) {
+        if(action.get() == ButtonType.OK) {
             // check in DB how many bookings use the particular location
             int bookingCountByTrainer = bookingRepositoryJDBC.getBookingCountByTrainerId(trainer.getId());
 
@@ -138,42 +141,40 @@ public class TrainerController extends BaseController {
         authorityVisibility();
         initTrainerTable();
         //nimmt daten von tabele und befüllt das Formular
-        listModel.selectedUserProperty().bind(tableViewTrainer.getSelectionModel().selectedItemProperty());
+         listModel.selectedUserProperty().bind(tableViewTrainer.getSelectionModel().selectedItemProperty());
     }
 
     private void initTrainerTable() throws IOException {
         BufferedImage bImage = ImageIO.read(new FileInputStream("src/main/resources/com/lap/lapproject/images/lapproject/images/user.png"));
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        ImageIO.write(bImage, "png", bos);
-        byte[] imageNoVisible = bos.toByteArray();
+        ImageIO.write(bImage, "png", bos );
+        byte [] imageNoVisible = bos.toByteArray();
         String notVisibleText = " ";
 
         tableViewTrainer.setItems(listModel.trainerList);
-        trainerImg.setPrefWidth(200);
+        //trainerImg.setPrefWidth(200);
 
-        if (model.getLoggedInUser().getPhoto() != null) {
-            trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream(DataFeatures.getValue().getPhotoVisibility() ? DataFeatures.getValue().getPhoto() : imageNoVisible), 140, 200, false, false)))));
-            //trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream(DataFeatures.getValue().getPhotoVisibility() ? DataFeatures.getValue().getPhoto() : imageNoVisible), 140, 200, false, false)))));
-            //trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream(DataFeatures.getValue().getPhoto()), 140, 200, false, false)))));
-        } else {
-            trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream(imageNoVisible), 140, 200, false, false)))));
-        }
+        trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream((DataFeatures.getValue().getPhotoVisibility() || (model.getAuthority().equals("admin") && DataFeatures.getValue().getPhoto() != null)) ? DataFeatures.getValue().getPhoto() : imageNoVisible), 140, 200, false, false)))));
 
-        //trainerImg.setCellValueFactory((DataFeatures -> (ObservableValue<Byte>) new ImageView(String.valueOf(DataFeatures.getValue().getPhoto()))));
+
         firstNameColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getfName() + " " + dataFeatures.getValue().getlName()));
-        descriptionColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getDescriptionVisibility() ? dataFeatures.getValue().getDescription() : notVisibleText));
-        emailColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getEmailVisibility() ? dataFeatures.getValue().getEmail() : notVisibleText));
+        descriptionColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>((dataFeatures.getValue().getDescriptionVisibility() || model.getAuthority().equals("admin")) ? dataFeatures.getValue().getDescription() : notVisibleText));
+        emailColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>((dataFeatures.getValue().getEmailVisibility() || model.getAuthority().equals("admin")) ? dataFeatures.getValue().getEmail() : notVisibleText));
 
 
-        phoneColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getPhoneNmbrVisibility() ? dataFeatures.getValue().getPhoneNmbr() : notVisibleText));
+        phoneColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>((dataFeatures.getValue().getPhoneNmbrVisibility() || model.getAuthority().equals("admin"))  ? dataFeatures.getValue().getPhoneNmbr() : notVisibleText ));
 
         activeStatusColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getActiveStatus()));
 
 
-        /*if(model.getLoggedInUser().getPhoto() != null) {
-            trainerImg.setFill(new ImagePattern(imageFromBytes(model.getLoggedInUser().getPhoto())));
+      /*  if(model.getLoggedInUser().getPhoto() != null) {
+            trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream(DataFeatures.getValue().getPhotoVisibility() ? DataFeatures.getValue().getPhoto() : imageNoVisible), 140, 200, false, false)))));
             listModel.ListModel();
+        } else {
+        trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream(DataFeatures.getValue().getPhoto() : imageNoVisible), 140, 200, false, false)))));
         }*/
+
+
         //wechsselt boolean Value auf Text ja oder nein
         activeStatusColumn.setCellFactory(col -> new TableCell<Trainer, Boolean>() {
             @Override
@@ -197,7 +198,6 @@ public class TrainerController extends BaseController {
                 break;
         }
     }
-
 
     @FXML
     private void onSearchBarClick(ActionEvent actionEvent) {
@@ -225,31 +225,8 @@ public class TrainerController extends BaseController {
         tableViewTrainer.setItems(filteredList);
     }
 
-
     @FXML
     private void onCloseIconClick(ActionEvent actionEvent) {
         searchBar.setText("");
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

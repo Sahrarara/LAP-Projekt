@@ -1,8 +1,10 @@
 package com.lap.lapproject.controller;
 
 import com.lap.lapproject.model.Location;
+import com.lap.lapproject.repos.BookingRepositoryJDBC;
 import com.lap.lapproject.repos.LocationRepositoryJDBC;
 
+import com.lap.lapproject.repos.RoomRepositoryJDBC;
 import com.lap.lapproject.utility.QuickAlert;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,6 +29,9 @@ public class AddLocationController extends BaseController {
 
     @FXML
     private void onAddBtnClick(ActionEvent actionEvent) throws SQLException {
+        RoomRepositoryJDBC roomRepositoryJDBC= new RoomRepositoryJDBC();
+        BookingRepositoryJDBC bookingRepositoryJDBC= new BookingRepositoryJDBC();
+
         String street = streetNameTextField.getText();
         String zip = zipCodeTextField.getText();
         String city = locationNameTextField.getText();
@@ -43,6 +48,7 @@ public class AddLocationController extends BaseController {
                     locationRepositoryJDBC.addLocation(location);//Location is added to a list
                     listModel.locationList.add(location);
                     locationRepositoryJDBC.readAll();
+                    listModel.roomList.setAll(roomRepositoryJDBC.readAll());
 
                 } catch (SQLException e) {
                     e.printStackTrace();
@@ -56,6 +62,9 @@ public class AddLocationController extends BaseController {
                 location.setCity(locationNameTextField.getText());
                 locationRepositoryJDBC.updateLocation(location);
                 listModel.locationList.set(listModel.locationList.indexOf(location), location);
+
+                listModel.roomList.setAll(roomRepositoryJDBC.readAll());
+                listModel.bookingList.setAll(bookingRepositoryJDBC.readAll());
                 moveToLocationPage();
             }
         } else {

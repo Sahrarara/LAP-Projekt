@@ -5,6 +5,7 @@ import com.lap.lapproject.model.Program;
 import com.lap.lapproject.repos.CourseRepositoryJDBC;
 import com.lap.lapproject.repos.ProgramRepositoryJDBC;
 import com.lap.lapproject.utility.QuickAlert;
+import com.lap.lapproject.utility.UsabilityMethods;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
 
 
@@ -68,6 +70,38 @@ public class AddCourseController extends BaseController {
 
         System.out.println("AddCourseController:: onAddBtnClick");
         String courseName = courseNameTextField.getText();
+
+
+        // Datum validieren
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
+        String courseStartDateAsText = courseStartDatePicker.getEditor().getText().strip().replaceAll("-", ".");
+        String courseEndDateAsText = courseEndDatePicker.getEditor().getText().strip().replaceAll("-", ".");
+
+        if (courseStartDateAsText.isEmpty() || courseEndDateAsText.isEmpty()) {
+            QuickAlert.showError("Bitte alle Datum Felder ausfüllen!");
+            return;
+        }
+
+        if (!UsabilityMethods.isDDMMYYYYDate(courseStartDateAsText) || !UsabilityMethods.isDDMMYYYYDate(courseEndDateAsText)) {
+            QuickAlert.showError("Bitte geben Datum in dd.mm.yyyy Format");
+            return;
+        }
+
+        LocalDate courseStart = LocalDate.parse(courseStartDateAsText, formatter);
+        LocalDate courseEnd = LocalDate.parse(courseEndDateAsText, formatter);
+        LocalDate today = LocalDate.now();
+
+        if (courseEnd.compareTo(courseStart) < 0 || courseStart.isBefore(today)) {
+            QuickAlert.showError("Kursbegin ist nach dem Kursend oder in der Vergangenheit. Bitte Datum überprüfen!");
+            return;
+        }
+
+        if (courseChoiceBox.getValue() == null) {
+            QuickAlert.showError("Bitte Programm wählen!");
+            return;
+        }
+
         String programName = courseChoiceBox.getValue().toString();
         Program program = programRepositoryJDBC.getProgramByProgramName(programName);
         if (program == null) {
@@ -75,8 +109,6 @@ public class AddCourseController extends BaseController {
         }
         int programId = program.getId();
 
-        LocalDate courseStart = courseStartDatePicker.getValue();
-        LocalDate courseEnd = courseEndDatePicker.getValue();
         int groupSize = Integer.parseInt(groupSizeTextField.getText());
 
         Course course = new Course(
@@ -85,7 +117,7 @@ public class AddCourseController extends BaseController {
                 courseStart.atStartOfDay().toLocalDate(),
                 courseEnd.atStartOfDay().toLocalDate(),
                 groupSize);
-       if (!courseNameTextField.getText().isBlank() && !courseChoiceBox.getValue().toString().isBlank() && !(courseStartDatePicker.getValue() == null) && !(courseEndDatePicker.getValue() == null) && !groupSizeTextField.getText().isBlank()) {
+       if (!courseNameTextField.getText().isBlank() && !courseChoiceBox.getValue().toString().isBlank() && !(courseStart == null) && !(courseEnd == null) && !groupSizeTextField.getText().isBlank()) {
            if (listModel.getSelectedCourse() == null) {
                System.out.println("AddCourseController:: onAddBtnClick");
 

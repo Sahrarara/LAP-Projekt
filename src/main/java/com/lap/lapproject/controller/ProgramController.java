@@ -108,6 +108,7 @@ public class ProgramController extends BaseController {
 
         try {
             scene = new Scene(fxmlLoader.load());
+
         } catch (IOException e) {
             e.printStackTrace();
         }

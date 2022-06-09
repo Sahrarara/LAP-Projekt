@@ -54,7 +54,7 @@ public class ListModel {
     private ObjectProperty<Room> selectedRoom = new SimpleObjectProperty<>();
 
 
-    public void ListModel() {
+    public ListModel() {
 
         try {
             /*courseList.addAll(courseRepositoryJDBC.readAll());
@@ -126,6 +126,47 @@ public class ListModel {
             }
         });
     }
+
+   /* public void addListenerForProgram() {
+        programList.addListener(new ListChangeListener<Program>() {
+            @Override
+            public void onChanged(ListChangeListener.Change<? extends Program> change) {
+                while (change.next()) {
+
+                    if (change.wasReplaced()) {//gepr ob was updated
+                        for (Program program : change.getAddedSubList()) { //liste für buch, ob was updated ist
+                            try {
+                                programRepositoryJDBC.updateProgram(program);
+                                courseRepositoryJDBC.readAll();
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                    } else if (change.wasAdded()) {//gepr ob was geadd
+                        for (Program program : change.getAddedSubList()) { //liste für buch, ob was geadd ist
+                            try {
+                                programRepositoryJDBC.addProgram(program); // add book zu repo
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    } else if (change.wasRemoved()) {//gepr ob was deleted
+                        for (Program program : change.getRemoved()) { //liste für buch, ob was gelöscht ist
+                            try {
+                                programRepositoryJDBC.deleteProgram(program); // delete from repo
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }*/
+
+
+
 
     public void addListenerForUser() {
         trainerList.addListener(new ListChangeListener<Trainer>() {

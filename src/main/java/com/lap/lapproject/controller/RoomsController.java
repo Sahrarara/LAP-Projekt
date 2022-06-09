@@ -5,6 +5,7 @@ import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.Location;
 import com.lap.lapproject.model.Room;
 import com.lap.lapproject.repos.BookingRepositoryJDBC;
+import com.lap.lapproject.repos.CourseRepositoryJDBC;
 import com.lap.lapproject.repos.LocationRepositoryJDBC;
 import com.lap.lapproject.repos.RoomRepositoryJDBC;
 import com.lap.lapproject.utility.QuickAlert;
@@ -74,6 +75,9 @@ public class RoomsController extends BaseController {
         // QuickAlert.showError("Möchten Sie dieses Room sicher Löschen?");
         RoomRepositoryJDBC roomRepositoryJDBC = new RoomRepositoryJDBC();
         BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
+
+        CourseRepositoryJDBC courseRepositoryJDBC = new CourseRepositoryJDBC();
+
         int myIndex = tableViewRoom.getSelectionModel().getSelectedIndex();
 
         Room roomToDelete = tableViewRoom.getSelectionModel().getSelectedItem();
@@ -94,6 +98,8 @@ public class RoomsController extends BaseController {
 
                 roomRepositoryJDBC.deleteRoom(roomToDelete);
                 listModel.roomList.remove(roomToDelete);
+
+                listModel.courseList.setAll(courseRepositoryJDBC.readAll());
             } else {
                 QuickAlert.showError("Dieses Raum wird für eine Buchung benötigt, Sie können es nicht löschen! Bearbeiten Sie zuerst Ihre Buchungen!");
             }

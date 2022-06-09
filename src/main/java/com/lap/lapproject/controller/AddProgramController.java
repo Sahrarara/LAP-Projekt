@@ -1,6 +1,7 @@
 package com.lap.lapproject.controller;
 
 import com.lap.lapproject.model.Program;
+import com.lap.lapproject.repos.CourseRepositoryJDBC;
 import com.lap.lapproject.repos.ProgramRepositoryJDBC;
 import com.lap.lapproject.utility.QuickAlert;
 import javafx.event.ActionEvent;
@@ -21,6 +22,8 @@ public class AddProgramController extends BaseController {
 
     @FXML
     private void onAddBtnClick(ActionEvent actionEvent) throws SQLException {
+        CourseRepositoryJDBC courseRepositoryJDBC = new CourseRepositoryJDBC();
+
         Program program = new Program(programNameTextField.getText());
         ProgramRepositoryJDBC programRepositoryJDBC = new ProgramRepositoryJDBC();
 
@@ -36,6 +39,8 @@ public class AddProgramController extends BaseController {
                     //programRepositoryJDBC.readProgram();         //Programlist in programview is generated from
                     // scratch
                     listModel.programList.add(program);
+                    programRepositoryJDBC.readProgram();
+                    listModel.courseList.setAll(courseRepositoryJDBC.readAll());
 
 
                 } catch (SQLException e) {
@@ -49,6 +54,8 @@ public class AddProgramController extends BaseController {
                 programRepositoryJDBC.updateProgram(program);
                 listModel.programList.set(listModel.programList.indexOf(program), program);
                 moveToProgramPage();
+                listModel.courseList.setAll(courseRepositoryJDBC.readAll());
+
             }
         } else {
             QuickAlert.showError("Bitte Programmnamen angeben");

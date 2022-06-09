@@ -67,6 +67,8 @@ public class AddUserController extends BaseController {
     private Label errorEmail;
     @FXML
     File file;
+    @FXML
+    private Label errorNoPhotoInDB;
 
 
     @FXML
@@ -83,6 +85,7 @@ public class AddUserController extends BaseController {
             e.printStackTrace();
         }
     }
+
 
     @FXML
     private void onAbortBtnClick(ActionEvent actionEvent) {
@@ -172,8 +175,6 @@ public class AddUserController extends BaseController {
         }
     }
 
-
-
     private void updateUser() throws IOException, SQLException {
 
         if (!usernameTextField.getText().isBlank() && !firstNameTextField.getText().isBlank() && !lastNameTextField.getText().isBlank()
@@ -181,7 +182,6 @@ public class AddUserController extends BaseController {
                 !emailTextField.getText().isBlank() && !phoneNmbrTextField.getText().isBlank()
         ) {
             //if (listModel.getSelectedUser() != null) {
-
             String newUsername = usernameTextField.getText();
             String selectedUserUsername = listModel.getSelectedUser().getUsername();
 
@@ -201,11 +201,11 @@ public class AddUserController extends BaseController {
         } else {
             QuickAlert.showError("Bitte folgende Felder ausfüllen:\nNutzername\nVorname\nNachname\nAuthorization\ne-mail\nTelefon");
         }
-
     }
-    
+
 
     public void setNewDataForTrainer() throws IOException {
+        checkImageInDB();
         Trainer trainer = listModel.getSelectedUser();
         trainer.setUsername(usernameTextField.getText());
         trainer.setActiveStatus(activeCheckBox.isSelected());
@@ -244,24 +244,20 @@ public class AddUserController extends BaseController {
             trainer.setPhoto(listModel.getSelectedUser().getPhoto());
         }
 
+        trainer.setDescription(descriptionTextArea.getText());
         trainer.setDescriptionVisibility(descriptionCheckBox.isSelected());
         trainer.setPhoneNmbrVisibility(phoneNmbrCheckBox.isSelected());
         trainer.setEmailVisibility(emailCheckBox.isSelected());
         trainer.setPhotoVisibility(photoCheckBox.isSelected());
 
-
         try {
             logger.info("Speichern nach update");
             listModel.trainerList.set(listModel.trainerList.indexOf(trainer), trainer);
             getCurrentStage().close();
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
-
 
     @FXML
     public byte[] convertToBytes(String pathToImage) throws IOException {
@@ -271,8 +267,10 @@ public class AddUserController extends BaseController {
     }
 
 
+
+
     @FXML
-    void initialize() {
+    void initialize() throws IOException {
         assert activeCheckBox != null : "fx:id=\"activeCheckBox\" was not injected: check your FXML file 'adduser-view.fxml'.";
         assert authorizationChoiceBox != null : "fx:id=\"authorizationChoiceBox\" was not injected: check your FXML file 'adduser-view.fxml'.";
         assert descriptionCheckBox != null : "fx:id=\"descriptionCheckBox\" was not injected: check your FXML file 'adduser-view.fxml'.";
@@ -292,8 +290,10 @@ public class AddUserController extends BaseController {
         fillChoiceBox();
         textLabelInvisible();
         fillFormToUpdate();
+        checkImageInDB();
 
     }
+
 
     //Befüllt ChoiceBox mit authorization
     @FXML
@@ -313,6 +313,9 @@ public class AddUserController extends BaseController {
         errorPassword.setVisible(false);
         passwordText.setVisible(false);
         errorEmail.setVisible(false);
+
+        errorNoPhotoInDB.setVisible(false);
+
     }
 
     //Prüft, ob Username schon in Datenbank vorhanden ist
@@ -349,6 +352,23 @@ public class AddUserController extends BaseController {
             return true;
         }
     }
+
+    //prüft ob ein Foto in DB vorhanden ist
+    public  boolean checkImageInDB() throws IOException {
+        while (listModel.getSelectedUser() != null){
+            if (listModel.getSelectedUser().getPhoto() == null) {
+                System.out.println("foto empty");
+                errorNoPhotoInDB.setVisible(true);
+                errorNoPhotoInDB.setText("User Foto in DatenBanken ist nicht vorhanden!");
+                return false;
+            } else {
+                errorNoPhotoInDB.setVisible(false);
+                return true;
+            }
+        }
+        return true;
+    }
+
 
 
     //Befüllt das Formular für Update Function
