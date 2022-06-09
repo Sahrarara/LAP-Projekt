@@ -83,7 +83,7 @@ public class TrainerController extends BaseController {
     }
 
     @FXML
-    private void onDeleteTrainerBtnClick(ActionEvent actionEvent) {
+    private void onDeleteTrainerBtnClick(ActionEvent actionEvent) throws SQLException {
         BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
         Trainer trainer = tableViewTrainer.getSelectionModel().getSelectedItem();
 
