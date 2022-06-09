@@ -193,7 +193,7 @@ public class AddUserController extends BaseController {
                 if (checkEmail(emailTextField.getText())) {
                     setNewDataForTrainer();
                 }
-                logger.info("nicht funktioniert");
+                logger.info("Das hat nicht funktioniert");
             }
 
             //}
@@ -251,7 +251,7 @@ public class AddUserController extends BaseController {
         trainer.setPhotoVisibility(photoCheckBox.isSelected());
 
         try {
-            logger.info("Speichern nach update");
+            logger.info("Speichern nach Update");
             listModel.trainerList.set(listModel.trainerList.indexOf(trainer), trainer);
             getCurrentStage().close();
         } catch (Exception e) {
@@ -359,7 +359,7 @@ public class AddUserController extends BaseController {
             if (listModel.getSelectedUser().getPhoto() == null) {
                 System.out.println("foto empty");
                 errorNoPhotoInDB.setVisible(true);
-                errorNoPhotoInDB.setText("User Foto in DatenBanken ist nicht vorhanden!");
+                errorNoPhotoInDB.setText("Das Foto ist nicht in der Datenbank gespeichert!");
                 return false;
             } else {
                 errorNoPhotoInDB.setVisible(false);
