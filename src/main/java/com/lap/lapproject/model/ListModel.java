@@ -93,22 +93,33 @@ public class ListModel {
             public void onChanged(ListChangeListener.Change<? extends Booking> change) {
                 while (change.next()) {
 
-                    if (change.wasReplaced()) {//gepr ob was updated
-                        for (Booking booking : change.getAddedSubList()) { //liste für buch, ob was updated ist
-                            bookingRepositoryJDBC.updateBooking(booking); // update book in repo
-                        }
-
-                    } else if (change.wasAdded()) {//gepr ob was geadd
-                        for (Booking booking : change.getAddedSubList()) { //liste für buch, ob was geadd ist
+                    if (change.wasReplaced()) {
+                        for (Booking booking : change.getAddedSubList()) {
                             try {
-                                bookingRepositoryJDBC.addBooking(booking); // add book zu repo
+                                bookingRepositoryJDBC.updateBooking(booking);
+                                log.info("from addListenerForBooking: {}", "booking updated");
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
                         }
-                    } else if (change.wasRemoved()) {//gepr ob was deleted
-                        for (Booking booking : change.getRemoved()) { //liste für buch, ob was gelöscht ist
-                            bookingRepositoryJDBC.deleteBooking(booking); // delete from repo
+
+                    } else if (change.wasAdded()) {
+                        for (Booking booking : change.getAddedSubList()) {
+                            try {
+                                bookingRepositoryJDBC.addBooking(booking);
+                                log.info("from addListenerForBooking: {}", "booking added");
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    } else if (change.wasRemoved()) {
+                        for (Booking booking : change.getRemoved()) {
+                            try {
+                                bookingRepositoryJDBC.deleteBooking(booking);
+                                log.info("from addListenerForBooking: {}", "booking deleted");
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                 }
@@ -123,15 +134,27 @@ public class ListModel {
                 while (change.next()) {
                     if (change.wasReplaced()) {
                         for (Trainer trainer : change.getAddedSubList()) {
+                            try {
                                 userRepositoryJDBC.updateUser(trainer);
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
                         }
                     } else if (change.wasAdded()) {
                         for (Trainer trainer : change.getAddedSubList()) {
+                            try {
                                 userRepositoryJDBC.add(trainer);
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
                         }
                     } else if (change.wasRemoved()) {
                         for (Trainer trainer : change.getRemoved()) {
-                            userRepositoryJDBC.deleteUser(trainer);
+                            try {
+                                userRepositoryJDBC.deleteUser(trainer);
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                 }
@@ -143,11 +166,9 @@ public class ListModel {
     public Program getSelectedProgram() {
         return selectedProgram.get();
     }
-
     public ObjectProperty<Program> selectedProgramProperty() {
         return selectedProgram;
     }
-
     public void setSelectedProgram(Program selectedProgram) {
         this.selectedProgram.set(selectedProgram);
     }
@@ -156,11 +177,9 @@ public class ListModel {
     public Equipment getSelectedEquipment() {
         return selectedEquipment.get();
     }
-
     public ObjectProperty<Equipment> selectedEquipmentProperty() {
         return selectedEquipment;
     }
-
     public void setSelectedEquipment(Equipment selectedEquipment) {
         this.selectedEquipment.set(selectedEquipment);
     }
@@ -169,11 +188,9 @@ public class ListModel {
     public Booking getSelectedBooking() {
         return selectedBooking.get();
     }
-
     public ObjectProperty<Booking> selectedBookingProperty() {
         return selectedBooking;
     }
-
     public void setSelectedBooking(Booking selectedBooking) {
         this.selectedBooking.set(selectedBooking);
     }
@@ -182,11 +199,9 @@ public class ListModel {
     public Location getSelectedLocation() {
         return selectedLocation.get();
     }
-
     public ObjectProperty<Location> selectedLocationProperty() {
         return selectedLocation;
     }
-
     public void setSelectedLocation(Location selectedLocation) {
         this.selectedLocation.set(selectedLocation);
     }
@@ -195,11 +210,9 @@ public class ListModel {
     public Course getSelectedCourse() {
         return selectedCourse.get();
     }
-
     public ObjectProperty<Course> selectedCourseProperty() {
         return selectedCourse;
     }
-
     public void setSelectedCourse(Course selectedCourse) {
         this.selectedCourse.set(selectedCourse);
     }
@@ -219,11 +232,9 @@ public class ListModel {
     public Room getSelectedRoom() {
         return selectedRoom.get();
     }
-
     public ObjectProperty<Room> selectedRoomProperty() {
         return selectedRoom;
     }
-
     public void setSelectedRoom(Room selectedRoom) {
         this.selectedRoom.set(selectedRoom);
     }
@@ -232,7 +243,6 @@ public class ListModel {
     public ObservableList<Program> getProgramList() {
         return programList;
     }
-
     public void setProgramList(ObservableList<Program> programList) {
         this.programList = programList;
     }

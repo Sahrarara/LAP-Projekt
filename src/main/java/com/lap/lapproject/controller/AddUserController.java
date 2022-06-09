@@ -172,6 +172,8 @@ public class AddUserController extends BaseController {
         }
     }
 
+
+
     private void updateUser() throws IOException, SQLException {
 
         if (!usernameTextField.getText().isBlank() && !firstNameTextField.getText().isBlank() && !lastNameTextField.getText().isBlank()
@@ -182,26 +184,6 @@ public class AddUserController extends BaseController {
 
             String newUsername = usernameTextField.getText();
             String selectedUserUsername = listModel.getSelectedUser().getUsername();
-                if (checkUser(username) && PasswordSecurity.isPasswordValid(password, errorPassword) && checkEmail(email)) {
-                    try {
-                        Trainer trainer = new Trainer(username, title, active, firstName, lastName, password,
-                                authorization, description, telephone, email,
-                                photoPath.equals("") ? null : convertToBytes(photoPath),
-                                descriptionVisible, telephoneVisible, emailVisible, photoVisible);
-                        userRepositoryJDBC.add(trainer);
-                        listModel.trainerList.add(trainer);
-                        //getCurrentStage().close();
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-
-            } else {
-                //user update
-//                Trainer trainer = listModel.getSelectedUser();
-                String newUsername = usernameTextField.getText();
-                String selectedUserUsername = listModel.getSelectedUser().getUsername();
 
             if (!newUsername.equals(selectedUserUsername)) {
                 if (checkUser(usernameTextField.getText())) {
@@ -220,8 +202,8 @@ public class AddUserController extends BaseController {
             QuickAlert.showError("Bitte folgende Felder ausfüllen:\nNutzername\nVorname\nNachname\nAuthorization\ne-mail\nTelefon");
         }
 
-
     }
+    
 
     public void setNewDataForTrainer() throws IOException {
         Trainer trainer = listModel.getSelectedUser();

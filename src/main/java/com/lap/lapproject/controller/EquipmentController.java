@@ -3,8 +3,11 @@ package com.lap.lapproject.controller;
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.Equipment;
+import com.lap.lapproject.model.Room;
 import com.lap.lapproject.repos.EquipmentRepositoryJDBC;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -94,9 +97,7 @@ public class EquipmentController extends BaseController{
         stage.show();
     }
 
-    @FXML
-    private void onSearchBarClick(ActionEvent actionEvent) {listModel.filteredEquipmentList.setPredicate(equipment -> equipment.getDescription().toLowerCase(Locale.ROOT).contains(searchBar.getText().toLowerCase(Locale.ROOT)));
-    }
+
 
     @FXML
     private void initialize() {
@@ -114,8 +115,7 @@ public class EquipmentController extends BaseController{
 
         listModel.selectedEquipmentProperty().bind(tableViewEquipment.getSelectionModel().selectedItemProperty());
 
-        //TODO: add a Textfield ID and imageView ID in the fxml file for the searchbar and magnifying glass
-        //TODO: write the UsabilityMethod.changeListener method in here with the IDs of the searchbar and magnifying glass (you can look it up in ProgramController)
+
     }
 
     private void initEquipmentTable() {
@@ -136,6 +136,27 @@ public class EquipmentController extends BaseController{
                 break;
         }
     }
+
+
+
+    @FXML
+    private void onSearchBarClick(ActionEvent actionEvent) {
+
+        String searchTerm = searchBar.getText();
+        ObservableList<Equipment> filteredList = FXCollections.observableArrayList();
+
+        if (searchTerm.equals("")) {
+            filteredList = listModel.equipmentList;
+        } else {
+            for (Equipment elem : listModel.equipmentList) {
+                if (elem.getDescription().toUpperCase().contains(searchTerm.toUpperCase())) {
+                    filteredList.add(elem);
+                }
+            }
+        }
+        tableViewEquipment.setItems(filteredList);
+    }
+
 
     @FXML
     private void onCloseIconClick(ActionEvent actionEvent) {

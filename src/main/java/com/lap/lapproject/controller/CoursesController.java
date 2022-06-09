@@ -6,7 +6,9 @@ import com.lap.lapproject.model.Course;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import com.lap.lapproject.repos.CourseRepositoryJDBC;
+import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,7 +24,7 @@ import java.util.Optional;
 
 import java.util.Locale;
 
-public class CoursesController extends BaseController{
+public class CoursesController extends BaseController {
     @FXML
     private ButtonBar coursesBtnBar;
 
@@ -143,8 +145,32 @@ public class CoursesController extends BaseController{
         }
     }
 
+//    @FXML
+//    private void onSearchBarClick(ActionEvent actionEvent) {
+//        listModel.filteredCourseList.setPredicate(
+//                course -> course.getCourseName().toLowerCase(Locale.ROOT).contains(searchBar.getText().toLowerCase(Locale.ROOT)));
+//    }
+
     @FXML
-    private void onSearchBarClick(ActionEvent actionEvent) {listModel.filteredCourseList.setPredicate(course -> course.getCourseName().toLowerCase(Locale.ROOT).contains(searchBar.getText().toLowerCase(Locale.ROOT)));
+    private void onSearchBarClick(ActionEvent actionEvent) {
+        String searchTerm = searchBar.getText();
+        ObservableList<Course> filteredList = FXCollections.observableArrayList();
+        if (searchTerm.equals("")) {
+            filteredList = listModel.courseList;
+        } else {
+            for (Course elem : listModel.courseList) {
+                if (
+                        elem.getCourseName().toUpperCase().contains(searchTerm.toUpperCase())
+                                || elem.getProgram().getProgramName().toUpperCase().contains(searchTerm.toUpperCase())
+                                || elem.getCourseStart().toString().contains(searchTerm)
+                                || elem.getCourseEnd().toString().contains(searchTerm)
+                                || String.valueOf(elem.getGroupSize()).contains(searchTerm)
+                ) {
+                    filteredList.add(elem);
+                }
+            }
+        }
+        tableViewEvent.setItems(filteredList);
     }
 
 
@@ -153,3 +179,19 @@ public class CoursesController extends BaseController{
         searchBar.setText("");
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

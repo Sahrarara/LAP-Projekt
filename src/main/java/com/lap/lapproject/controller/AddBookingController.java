@@ -123,6 +123,7 @@ public class AddBookingController extends BaseController {
                         localDateTimeEnd = LocalDateTime.of(dateEnd, timeEnd);
                         Booking booking = new Booking(room, trainer, model.getLoggedInUser(), course, localDateTimeStart, localDateTimeEnd, recurrenceRule);
                         listModel.bookingList.add(booking);
+                        logger.info("from AddBookingController-Add Methode: {}", "booking Added");
                         moveToBookingPage();
                     }
 
@@ -174,7 +175,7 @@ public class AddBookingController extends BaseController {
 
                        // bookingRepositoryJDBC.updateBooking(selectedBooking);
                         listModel.bookingList.set(listModel.bookingList.indexOf(selectedBooking), selectedBooking);
-
+                        logger.info("from BookingController-update Methode: {}", "booking updated");
                         moveToBookingPage();
                     }
                 }

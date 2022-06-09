@@ -7,17 +7,21 @@ import com.lap.lapproject.repos.BookingRepositoryJDBC;
 import com.lap.lapproject.repos.LocationRepositoryJDBC;
 import com.lap.lapproject.utility.QuickAlert;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Locale;
 import java.util.Optional;
-public class LocationController extends BaseController{
+
+public class LocationController extends BaseController {
     @FXML
     private ButtonBar locationBtnBar;
 
@@ -64,7 +68,7 @@ public class LocationController extends BaseController{
 
     @FXML
     private void onDeleteLocationBtnClick(ActionEvent actionEvent) {
-       // QuickAlert.showError("Möchten Sie dieses Standort sicher Löschen?");
+        // QuickAlert.showError("Möchten Sie dieses Standort sicher Löschen?");
         LocationRepositoryJDBC locationRepositoryJDBC = new LocationRepositoryJDBC();
         BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
         int myIndex = tableViewLocation.getSelectionModel().getSelectedIndex();
@@ -77,7 +81,7 @@ public class LocationController extends BaseController{
         alert.setHeaderText(null);
         alert.setContentText("Sind Sie sicher, dass Sie es löschen wollen?");
         Optional<ButtonType> action = alert.showAndWait();
-        if(action.get() == ButtonType.OK) {
+        if (action.get() == ButtonType.OK) {
 
             try {
                 // check in DB how many bookings use the particular location
@@ -96,7 +100,6 @@ public class LocationController extends BaseController{
         }
 
     }
-
 
 
     @FXML
@@ -138,7 +141,7 @@ public class LocationController extends BaseController{
         LocationRepositoryJDBC locationRepo = new LocationRepositoryJDBC();
         //locationRepo.getLocation();
         initLocationTable();
-         listModel.selectedLocationProperty().bind(tableViewLocation.getSelectionModel().selectedItemProperty());
+        listModel.selectedLocationProperty().bind(tableViewLocation.getSelectionModel().selectedItemProperty());
 
 
         //TODO: add a Textfield ID and imageView ID in the fxml file for the searchbar and magnifying glass
@@ -168,7 +171,23 @@ public class LocationController extends BaseController{
 
 
     @FXML
-    private void onSearchBarClick(ActionEvent actionEvent) {listModel.filteredLocationList.setPredicate(location -> location.getStreet().toLowerCase(Locale.ROOT).contains(searchBar.getText().toLowerCase(Locale.ROOT)));
+    private void onSearchBarClick(ActionEvent actionEvent) {
+
+        String searchTerm = searchBar.getText();
+        ObservableList<Location> filteredList = FXCollections.observableArrayList();
+
+        if (searchTerm.equals("")) {
+            filteredList = listModel.locationList;
+        } else {
+            for (Location elem : listModel.locationList) {
+                if (elem.getStreet().toUpperCase().contains(searchTerm.toUpperCase())
+                        || elem.getZipcode().toUpperCase().contains(searchTerm.toUpperCase())
+                        || elem.getCity().toUpperCase().contains(searchTerm.toUpperCase())) {
+                    filteredList.add(elem);
+                }
+            }
+        }
+        tableViewLocation.setItems(filteredList);
     }
 
     @FXML
@@ -176,3 +195,32 @@ public class LocationController extends BaseController{
         searchBar.setText("");
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

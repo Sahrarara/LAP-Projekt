@@ -2,12 +2,15 @@ package com.lap.lapproject.controller;
 
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
+import com.lap.lapproject.model.Equipment;
 import com.lap.lapproject.model.Program;
 import com.lap.lapproject.repos.CourseRepositoryJDBC;
 import com.lap.lapproject.repos.ProgramRepositoryJDBC;
 import com.lap.lapproject.utility.QuickAlert;
 //import com.lap.lapproject.utility.UsabilityMethods;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,8 +38,6 @@ public class ProgramController extends BaseController {
     private TableView<Program> tableViewProgram;
     @FXML
     private TableColumn<Program, String> programColumn;
-    @FXML
-    private ImageView searchIcon;
     @FXML
     private TextField searchBar;
 
@@ -97,10 +98,6 @@ public class ProgramController extends BaseController {
     }
 
 
-    @FXML
-    private void onSearchBarClick(ActionEvent actionEvent) {
-        listModel.filteredProgramList.setPredicate(program -> program.getProgramName().toLowerCase(Locale.ROOT).contains(searchBar.getText().toLowerCase(Locale.ROOT)));
-    }
 
     @FXML
     private void onEditBtnClick(ActionEvent actionEvent) {
@@ -156,6 +153,26 @@ public class ProgramController extends BaseController {
                 programBtnBar.setVisible(false);
                 break;
         }
+    }
+
+
+
+    @FXML
+    private void onSearchBarClick(ActionEvent actionEvent) {
+
+        String searchTerm = searchBar.getText();
+        ObservableList<Program> filteredList = FXCollections.observableArrayList();
+
+        if (searchTerm.equals("")) {
+            filteredList = listModel.programList;
+        } else {
+            for (Program elem : listModel.programList) {
+                if (elem.getProgramName().toUpperCase().contains(searchTerm.toUpperCase())) {
+                    filteredList.add(elem);
+                }
+            }
+        }
+        tableViewProgram.setItems(filteredList);
     }
 
 

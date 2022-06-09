@@ -7,7 +7,6 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -111,8 +110,6 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <ChoiceBox layoutX="788.0" layoutY="36.0" prefHeight="30.0" prefWidth="170.0" styleClass="search-field" />
-                  <Label fx:id="filterChoiceBox1" layoutX="718.0" layoutY="44.0" text="Filtern nach" />
                </children>
             </AnchorPane>
             <AnchorPane>

@@ -10,6 +10,8 @@ import com.lap.lapproject.repos.RoomRepositoryJDBC;
 import com.lap.lapproject.utility.QuickAlert;
 
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -168,12 +170,53 @@ public class RoomsController extends BaseController {
         }
     }
 
+
+
     @FXML
-    private void onSearchBarClick(ActionEvent actionEvent) {listModel.filteredRoomList.setPredicate(room -> room.toString().contains(searchBar.getText()));
+    private void onSearchBarClick(ActionEvent actionEvent) {
+
+        String searchTerm = searchBar.getText();
+        ObservableList<Room> filteredList = FXCollections.observableArrayList();
+
+        if (searchTerm.equals("")) {
+            filteredList = listModel.roomList;
+        } else {
+            for (Room elem : listModel.roomList) {
+                if (String.valueOf(elem.getRoomNumber()).contains(searchTerm)
+                        || String.valueOf(elem.getSize()).contains(searchTerm)
+                        || elem.getLocation().toString().toUpperCase().contains(searchTerm.toUpperCase())
+                        || elem.getEquipment().toString().toUpperCase().contains(searchTerm.toUpperCase())
+                ) {
+                    filteredList.add(elem);
+                }
+            }
+        }
+        tableViewRoom.setItems(filteredList);
     }
+
+
 
     @FXML
     private void onCloseIconClick(ActionEvent actionEvent) {
         searchBar.setText("");
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
