@@ -3,6 +3,7 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
@@ -74,7 +75,7 @@
                         <Insets />
                      </opaqueInsets>
                   </ButtonBar>
-                  <HBox layoutX="960.0" layoutY="49.0" style="-fx-background-color: #fff;" styleClass="search-field">
+                  <HBox layoutX="924.0" layoutY="35.0" prefHeight="32.0" prefWidth="196.0" style="-fx-background-color: #fff;" styleClass="search-field">
                      <children>
                         <FontAwesomeIconView fill="#211d5aa8" glyphName="SEARCH" size="16">
                            <HBox.margin>
@@ -86,6 +87,17 @@
                               <Insets />
                            </opaqueInsets>
                         </TextField>
+                        <Button fx:id="closeIconButton" mnemonicParsing="false" onAction="#onCloseIconClick" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <FontAwesomeIconView fill="#201d576a" glyphName="CLOSE" size="16" smooth="false" tabSize="2" />
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <HBox.margin>
+                              <Insets top="3.0" />
+                           </HBox.margin>
+                        </Button>
                      </children>
                   </HBox>
                   <HBox layoutX="796.0" layoutY="33.0">

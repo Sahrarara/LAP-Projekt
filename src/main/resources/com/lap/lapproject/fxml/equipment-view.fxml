@@ -74,7 +74,7 @@
                         <Insets />
                      </opaqueInsets>
                   </ButtonBar>
-                  <HBox layoutX="969.0" layoutY="42.0" style="-fx-background-color: #fff;" styleClass="search-field">
+                  <HBox layoutX="935.0" layoutY="35.0" style="-fx-background-color: #fff;" styleClass="search-field">
                      <children>
                         <FontAwesomeIconView fill="#211d5aa8" glyphName="SEARCH" size="16">
                            <HBox.margin>
@@ -86,7 +86,7 @@
                               <Insets />
                            </opaqueInsets>
                         </TextField>
-                        <Button mnemonicParsing="false" onAction="#onCloseIconClick" style="-fx-background-color: transparent;">
+                        <Button fx:id="closeIconButton" mnemonicParsing="false" onAction="#onCloseIconClick" style="-fx-background-color: transparent;">
                            <graphic>
                               <FontAwesomeIconView fill="#201d576a" glyphName="CLOSE" size="16" smooth="false" tabSize="2" />
                            </graphic>

@@ -24,7 +24,7 @@
          <items>
             <AnchorPane>
                <children>
-                  <Label layoutX="76.0" layoutY="22.0" prefHeight="56.0" prefWidth="176.0" styleClass="title-first" text="BUCHEN" textFill="#201d592d">
+                  <Label layoutX="67.0" layoutY="22.0" prefHeight="56.0" prefWidth="176.0" styleClass="title-first" text="BUCHEN" textFill="#201d592d">
                      <font>
                         <Font name="Comic Sans MS" size="40.0" />
                      </font>
@@ -75,7 +75,7 @@
                         <Insets />
                      </opaqueInsets>
                   </ButtonBar>
-                  <HBox layoutX="975.0" layoutY="35.0" style="-fx-background-color: #fff;" styleClass="search-field">
+                  <HBox layoutX="928.0" layoutY="35.0" style="-fx-background-color: #fff;" styleClass="search-field">
                      <children>
                         <FontAwesomeIconView fill="#211d5aa8" glyphName="SEARCH" size="16">
                            <HBox.margin>

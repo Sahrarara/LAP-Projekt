@@ -6,6 +6,7 @@ import com.lap.lapproject.model.Equipment;
 import com.lap.lapproject.model.Room;
 import com.lap.lapproject.repos.EquipmentRepositoryJDBC;
 import com.lap.lapproject.repos.RoomRepositoryJDBC;
+import com.lap.lapproject.utility.UsabilityMethods;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -36,6 +37,8 @@ public class EquipmentController extends BaseController{
     private TableColumn<Equipment, String> equipmentNameColumn;
     @FXML
     private TextField searchBar;
+    @FXML
+    private Button closeIconButton;
 
     @FXML
     private void onAddEquipmentBtnClick(ActionEvent actionEvent) {
@@ -113,14 +116,13 @@ public class EquipmentController extends BaseController{
         assert equipmentBtnBar != null : "fx:id=\"equipmentBtnBar\" was not injected: check your FXML file 'equipment-view.fxml'.";
         assert settingsBtn != null : "fx:id=\"settingsBtn\" was not injected: check your FXML file 'equipment-view.fxml'.";
 
+        closeIconButton.setVisible(false);
+        UsabilityMethods.changeListener(searchBar, closeIconButton);
+
         authorityVisibility();
         initEquipmentTable();
 
-
-
         listModel.selectedEquipmentProperty().bind(tableViewEquipment.getSelectionModel().selectedItemProperty());
-
-
     }
 
     private void initEquipmentTable() {
