@@ -15,7 +15,7 @@ public class LocationRepositoryJDBC extends Repository implements LocationReposi
     private static final String UPDATE_LOCATION_SQL_STRING = "UPDATE location SET street=?, zip=?, city=? WHERE location_id=?";
 
     @Override
-    public List<Location> readAll() {
+    public List<Location> readAll() throws SQLException {
         Connection connection = connect();
         List<Location> locationList = new ArrayList<>();
         PreparedStatement statement = null;
@@ -32,6 +32,8 @@ public class LocationRepositoryJDBC extends Repository implements LocationReposi
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
         return locationList;
     }
@@ -61,6 +63,8 @@ public class LocationRepositoryJDBC extends Repository implements LocationReposi
 
         } catch (SQLException e ) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
 
         return generatedKey;
@@ -81,6 +85,8 @@ public class LocationRepositoryJDBC extends Repository implements LocationReposi
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
     }
 
@@ -95,6 +101,8 @@ public class LocationRepositoryJDBC extends Repository implements LocationReposi
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
     }
 

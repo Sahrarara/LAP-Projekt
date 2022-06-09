@@ -2,6 +2,7 @@ package com.lap.lapproject.controller;
 
 import com.lap.lapproject.model.Equipment;
 import com.lap.lapproject.repos.EquipmentRepositoryJDBC;
+import com.lap.lapproject.repos.RoomRepositoryJDBC;
 import com.lap.lapproject.utility.QuickAlert;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,6 +25,8 @@ public class AddEquipmentController extends BaseController{
         Equipment equipment= new Equipment(nameTextField.getText());
         EquipmentRepositoryJDBC equipmentRepositoryJDBC = new EquipmentRepositoryJDBC();
 
+        RoomRepositoryJDBC roomRepositoryJDBC= new RoomRepositoryJDBC();
+
 
         if (!nameTextField.getText().isBlank()) {     //method is only used if textfield is not empty
 
@@ -34,7 +37,7 @@ public class AddEquipmentController extends BaseController{
                     equipmentRepositoryJDBC.addEquipment(equipment);  //Equipment is added to a list. equipmenzview list
 
                     listModel.equipmentList.add(equipment);
-                    //equipmentRepositoryJDBC.readAll();
+                    listModel.roomList.setAll(roomRepositoryJDBC.readAll());
 
 
                 } catch (SQLException e) {
@@ -48,6 +51,8 @@ public class AddEquipmentController extends BaseController{
                 equipmentRepositoryJDBC.updateEquipment(equipment);
                 listModel.equipmentList.set(listModel.equipmentList.indexOf(equipment), equipment);
                 moveToEquipmentPage();
+
+                listModel.roomList.setAll(roomRepositoryJDBC.readAll());
             }
         } else {
             QuickAlert.showError("Bitte den Namen des Geräts/der Ausrüstung angeben");

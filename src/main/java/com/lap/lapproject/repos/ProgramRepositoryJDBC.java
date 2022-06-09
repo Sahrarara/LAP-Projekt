@@ -36,6 +36,8 @@ public class ProgramRepositoryJDBC extends Repository implements ProgramReposito
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
         return programList;
     }
@@ -60,6 +62,8 @@ public class ProgramRepositoryJDBC extends Repository implements ProgramReposito
             
         } catch (SQLException e ) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
 
         return generatedKey;
@@ -79,6 +83,8 @@ public class ProgramRepositoryJDBC extends Repository implements ProgramReposito
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
 
     }
@@ -99,12 +105,14 @@ public class ProgramRepositoryJDBC extends Repository implements ProgramReposito
             preparedStatement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
     }
 
 
     @Override
-    public Program getProgramByProgramName(String programName) {
+    public Program getProgramByProgramName(String programName) throws SQLException {
         Connection connection = connect();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -119,6 +127,8 @@ public class ProgramRepositoryJDBC extends Repository implements ProgramReposito
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
         return program;
     }

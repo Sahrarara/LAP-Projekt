@@ -5,11 +5,14 @@ import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.Location;
 import com.lap.lapproject.model.Room;
 import com.lap.lapproject.repos.BookingRepositoryJDBC;
+import com.lap.lapproject.repos.CourseRepositoryJDBC;
 import com.lap.lapproject.repos.LocationRepositoryJDBC;
 import com.lap.lapproject.repos.RoomRepositoryJDBC;
 import com.lap.lapproject.utility.QuickAlert;
 
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -72,6 +75,9 @@ public class RoomsController extends BaseController {
         // QuickAlert.showError("Möchten Sie dieses Room sicher Löschen?");
         RoomRepositoryJDBC roomRepositoryJDBC = new RoomRepositoryJDBC();
         BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
+
+        CourseRepositoryJDBC courseRepositoryJDBC = new CourseRepositoryJDBC();
+
         int myIndex = tableViewRoom.getSelectionModel().getSelectedIndex();
 
         Room roomToDelete = tableViewRoom.getSelectionModel().getSelectedItem();
@@ -92,6 +98,8 @@ public class RoomsController extends BaseController {
 
                 roomRepositoryJDBC.deleteRoom(roomToDelete);
                 listModel.roomList.remove(roomToDelete);
+
+                listModel.courseList.setAll(courseRepositoryJDBC.readAll());
             } else {
                 QuickAlert.showError("Dieses Raum wird für eine Buchung benötigt, Sie können es nicht löschen! Bearbeiten Sie zuerst Ihre Buchungen!");
             }
@@ -168,12 +176,53 @@ public class RoomsController extends BaseController {
         }
     }
 
+
+
     @FXML
-    private void onSearchBarClick(ActionEvent actionEvent) {listModel.filteredRoomList.setPredicate(room -> room.toString().contains(searchBar.getText()));
+    private void onSearchBarClick(ActionEvent actionEvent) {
+
+        String searchTerm = searchBar.getText();
+        ObservableList<Room> filteredList = FXCollections.observableArrayList();
+
+        if (searchTerm.equals("")) {
+            filteredList = listModel.roomList;
+        } else {
+            for (Room elem : listModel.roomList) {
+                if (String.valueOf(elem.getRoomNumber()).contains(searchTerm)
+                        || String.valueOf(elem.getSize()).contains(searchTerm)
+                        || elem.getLocation().toString().toUpperCase().contains(searchTerm.toUpperCase())
+                        || elem.getEquipment().toString().toUpperCase().contains(searchTerm.toUpperCase())
+                ) {
+                    filteredList.add(elem);
+                }
+            }
+        }
+        tableViewRoom.setItems(filteredList);
     }
+
+
 
     @FXML
     private void onCloseIconClick(ActionEvent actionEvent) {
         searchBar.setText("");
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

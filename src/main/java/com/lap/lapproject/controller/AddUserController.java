@@ -1,6 +1,6 @@
 package com.lap.lapproject.controller;
 
-import com.lap.lapproject.application.BCrypt;
+import com.lap.lapproject.utility.PasswordSecurity;
 import com.lap.lapproject.utility.QuickAlert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,6 +67,8 @@ public class AddUserController extends BaseController {
     private Label errorEmail;
     @FXML
     File file;
+    @FXML
+    private Label errorNoPhotoInDB;
 
 
     @FXML
@@ -158,7 +160,7 @@ public class AddUserController extends BaseController {
                 !password.isBlank() && !email.isBlank() && !telephone.isBlank()
         ) {
             if (listModel.getSelectedUser() == null) {
-                if (checkUser(username) && checkPassword(password) && checkEmail(email)) {
+                if (checkUser(username) && PasswordSecurity.isPasswordValid(password) && checkEmail(email)) {
                     Trainer trainer = new Trainer(username, title, active, firstName, lastName, password,
                             authorization, description, telephone, email,
                             photoPath.equals("") ? null : convertToBytes(photoPath),
@@ -180,7 +182,6 @@ public class AddUserController extends BaseController {
                 !emailTextField.getText().isBlank() && !phoneNmbrTextField.getText().isBlank()
         ) {
             //if (listModel.getSelectedUser() != null) {
-
             String newUsername = usernameTextField.getText();
             String selectedUserUsername = listModel.getSelectedUser().getUsername();
 
@@ -200,13 +201,12 @@ public class AddUserController extends BaseController {
         } else {
             QuickAlert.showError("Bitte folgende Felder ausfüllen:\nNutzername\nVorname\nNachname\nAuthorization\ne-mail\nTelefon");
         }
-
     }
 
 
     public void setNewDataForTrainer() throws IOException {
+        checkImageInDB();
         Trainer trainer = listModel.getSelectedUser();
-
         trainer.setUsername(usernameTextField.getText());
         trainer.setActiveStatus(activeCheckBox.isSelected());
         trainer.setTitle(titleTextField.getText());
@@ -215,7 +215,7 @@ public class AddUserController extends BaseController {
 
         if (!showPassword.isSelected()) {
             if (!passwordTextFieldHidden.getText().isBlank()) {
-                trainer.setUserPassword(hashPassword(passwordTextFieldHidden.getText()));
+                trainer.setUserPassword(PasswordSecurity.hashPassword(passwordTextFieldHidden.getText()));
                 //  logger.info("PASSWOR DHIDDEN{}", " " + passwordTextFieldHidden.getText());
             } else {
                 trainer.setUserPassword(listModel.getSelectedUser().getUserPassword());
@@ -223,7 +223,7 @@ public class AddUserController extends BaseController {
             }
         } else {
             if (!passwordText.getText().isBlank()) {
-                trainer.setUserPassword(hashPassword(passwordText.getText()));
+                trainer.setUserPassword(PasswordSecurity.hashPassword(passwordText.getText()));
                 // logger.info("PASSWORD PLAINTEXT{}", " " + passwordText.getText());
             } else {
                 trainer.setUserPassword(listModel.getSelectedUser().getUserPassword());
@@ -244,24 +244,20 @@ public class AddUserController extends BaseController {
             trainer.setPhoto(listModel.getSelectedUser().getPhoto());
         }
 
+        trainer.setDescription(descriptionTextArea.getText());
         trainer.setDescriptionVisibility(descriptionCheckBox.isSelected());
         trainer.setPhoneNmbrVisibility(phoneNmbrCheckBox.isSelected());
         trainer.setEmailVisibility(emailCheckBox.isSelected());
         trainer.setPhotoVisibility(photoCheckBox.isSelected());
 
-
         try {
             logger.info("Speichern nach update");
             listModel.trainerList.set(listModel.trainerList.indexOf(trainer), trainer);
             getCurrentStage().close();
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
-
 
     @FXML
     public byte[] convertToBytes(String pathToImage) throws IOException {
@@ -270,13 +266,11 @@ public class AddUserController extends BaseController {
         return imageBytes;
     }
 
-    //Passwort haschen
-    public String hashPassword(String password) {
-        return BCrypt.hashpw(password, BCrypt.gensalt());
-    }
+
+
 
     @FXML
-    void initialize() {
+    void initialize() throws IOException {
         assert activeCheckBox != null : "fx:id=\"activeCheckBox\" was not injected: check your FXML file 'adduser-view.fxml'.";
         assert authorizationChoiceBox != null : "fx:id=\"authorizationChoiceBox\" was not injected: check your FXML file 'adduser-view.fxml'.";
         assert descriptionCheckBox != null : "fx:id=\"descriptionCheckBox\" was not injected: check your FXML file 'adduser-view.fxml'.";
@@ -296,9 +290,10 @@ public class AddUserController extends BaseController {
         fillChoiceBox();
         textLabelInvisible();
         fillFormToUpdate();
-
+        checkImageInDB();
 
     }
+
 
     //Befüllt ChoiceBox mit authorization
     @FXML
@@ -318,6 +313,9 @@ public class AddUserController extends BaseController {
         errorPassword.setVisible(false);
         passwordText.setVisible(false);
         errorEmail.setVisible(false);
+
+        errorNoPhotoInDB.setVisible(false);
+
     }
 
     //Prüft, ob Username schon in Datenbank vorhanden ist
@@ -336,20 +334,6 @@ public class AddUserController extends BaseController {
         }
     }
 
-    //1 Großbuchstabe, 1 Kleinbuchstabe, 1 Ziffer, 1 Sonderzeichen enthält und eine Länge von mindestens 8 hat
-    @FXML
-    public boolean checkPassword(String password) {
-        Pattern compile = Pattern.compile("^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\\W).*$");
-        Matcher matcher = compile.matcher(password);
-        if (!matcher.matches()) {
-            errorPassword.setVisible(true);
-            errorPassword.setText("8 Zeichen,1 Großbuchstabe, 1 Kleinbuchstabe, 1 Ziffer, 1 Sonderzeichen");
-            return false;
-        } else {
-            errorPassword.setVisible(false);
-            return true;
-        }
-    }
 
 
     //Email validieren
@@ -368,6 +352,23 @@ public class AddUserController extends BaseController {
             return true;
         }
     }
+
+    //prüft ob ein Foto in DB vorhanden ist
+    public  boolean checkImageInDB() throws IOException {
+        while (listModel.getSelectedUser() != null){
+            if (listModel.getSelectedUser().getPhoto() == null) {
+                System.out.println("foto empty");
+                errorNoPhotoInDB.setVisible(true);
+                errorNoPhotoInDB.setText("User Foto in DatenBanken ist nicht vorhanden!");
+                return false;
+            } else {
+                errorNoPhotoInDB.setVisible(false);
+                return true;
+            }
+        }
+        return true;
+    }
+
 
 
     //Befüllt das Formular für Update Function

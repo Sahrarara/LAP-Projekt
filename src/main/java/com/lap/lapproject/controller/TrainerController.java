@@ -2,11 +2,14 @@ package com.lap.lapproject.controller;
 
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
+import com.lap.lapproject.model.Room;
 import com.lap.lapproject.model.Trainer;
 import com.lap.lapproject.repos.BookingRepositoryJDBC;
 import com.lap.lapproject.repos.UserRepositoryJDBC;
 import com.lap.lapproject.utility.QuickAlert;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +18,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -22,11 +27,15 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Locale;
 import java.util.Optional;
 
 
-public class TrainerController extends BaseController{
+public class TrainerController extends BaseController {
+
+    private static final Logger logger = LoggerFactory.getLogger(TrainerController.class);
+
     @FXML
     private ButtonBar trainerBtnBar;
 
@@ -74,7 +83,7 @@ public class TrainerController extends BaseController{
     }
 
     @FXML
-    private void onDeleteTrainerBtnClick(ActionEvent actionEvent) {
+    private void onDeleteTrainerBtnClick(ActionEvent actionEvent) throws SQLException {
         BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
         Trainer trainer = tableViewTrainer.getSelectionModel().getSelectedItem();
 
@@ -143,31 +152,29 @@ public class TrainerController extends BaseController{
         String notVisibleText = " ";
 
         tableViewTrainer.setItems(listModel.trainerList);
-        trainerImg.setPrefWidth(200);
+        //trainerImg.setPrefWidth(200);
 
-         if(model.getLoggedInUser().getPhoto() != null) {
-        trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream(DataFeatures.getValue().getPhotoVisibility() ? DataFeatures.getValue().getPhoto() : imageNoVisible), 140, 200, false, false)))));
-        //trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream(DataFeatures.getValue().getPhotoVisibility() ? DataFeatures.getValue().getPhoto() : imageNoVisible), 140, 200, false, false)))));
-        //trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream(DataFeatures.getValue().getPhoto()), 140, 200, false, false)))));
-       }else {
-            trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream(imageNoVisible), 140, 200, false, false)))));
-        }
+        trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream((DataFeatures.getValue().getPhotoVisibility() || (model.getAuthority().equals("admin") && DataFeatures.getValue().getPhoto() != null)) ? DataFeatures.getValue().getPhoto() : imageNoVisible), 140, 200, false, false)))));
 
-        //trainerImg.setCellValueFactory((DataFeatures -> (ObservableValue<Byte>) new ImageView(String.valueOf(DataFeatures.getValue().getPhoto()))));
+
         firstNameColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getfName() + " " + dataFeatures.getValue().getlName()));
-        descriptionColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getDescriptionVisibility() ? dataFeatures.getValue().getDescription() : notVisibleText));
-        emailColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getEmailVisibility() ? dataFeatures.getValue().getEmail() : notVisibleText));
+        descriptionColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>((dataFeatures.getValue().getDescriptionVisibility() || model.getAuthority().equals("admin")) ? dataFeatures.getValue().getDescription() : notVisibleText));
+        emailColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>((dataFeatures.getValue().getEmailVisibility() || model.getAuthority().equals("admin")) ? dataFeatures.getValue().getEmail() : notVisibleText));
 
 
-        phoneColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getPhoneNmbrVisibility() ? dataFeatures.getValue().getPhoneNmbr() : notVisibleText ));
+        phoneColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>((dataFeatures.getValue().getPhoneNmbrVisibility() || model.getAuthority().equals("admin"))  ? dataFeatures.getValue().getPhoneNmbr() : notVisibleText ));
 
         activeStatusColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getActiveStatus()));
 
 
-        /*if(model.getLoggedInUser().getPhoto() != null) {
-            trainerImg.setFill(new ImagePattern(imageFromBytes(model.getLoggedInUser().getPhoto())));
+      /*  if(model.getLoggedInUser().getPhoto() != null) {
+            trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream(DataFeatures.getValue().getPhotoVisibility() ? DataFeatures.getValue().getPhoto() : imageNoVisible), 140, 200, false, false)))));
             listModel.ListModel();
+        } else {
+        trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream(DataFeatures.getValue().getPhoto() : imageNoVisible), 140, 200, false, false)))));
         }*/
+
+
         //wechsselt boolean Value auf Text ja oder nein
         activeStatusColumn.setCellFactory(col -> new TableCell<Trainer, Boolean>() {
             @Override
@@ -194,7 +201,28 @@ public class TrainerController extends BaseController{
 
     @FXML
     private void onSearchBarClick(ActionEvent actionEvent) {
-        listModel.filteredTrainerList.setPredicate(trainer -> trainer.getfName().toLowerCase(Locale.ROOT).contains(searchBar.getText().toLowerCase(Locale.ROOT)));
+
+        String searchTerm = searchBar.getText();
+        ObservableList<Trainer> filteredList = FXCollections.observableArrayList();
+
+        if (searchTerm.equals("")) {
+            filteredList = listModel.trainerList;
+        } else {
+            for (Trainer elem : listModel.trainerList) {
+
+                if (elem.getfName().toUpperCase().contains(searchTerm.toUpperCase())
+                        || elem.getlName().toUpperCase().contains(searchTerm.toUpperCase())
+                        || elem.getEmail().toUpperCase().contains(searchTerm.toUpperCase())
+                        || elem.getPhoneNmbr().contains(searchTerm)
+//                        || (elem.getActiveStatus() && searchTerm.equalsIgnoreCase("ja"))
+//                        || (!elem.getActiveStatus() && searchTerm.equalsIgnoreCase("nein"))
+
+                ) {
+                    filteredList.add(elem);
+                }
+            }
+        }
+        tableViewTrainer.setItems(filteredList);
     }
 
     @FXML

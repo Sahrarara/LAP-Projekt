@@ -1,12 +1,12 @@
 package com.lap.lapproject.repos;
 
-import com.lap.lapproject.application.BCrypt;
 import com.lap.lapproject.utility.PasswordSecurity;
 import com.lap.lapproject.utility.QuickAlert;
 import com.lap.lapproject.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.swing.*;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.sql.*;
@@ -39,7 +39,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
 
 
     @Override
-    public void add(User user) {
+    public void add(User user) throws SQLException {
         Connection connection = connect();
         ResultSet resultSet = null;
         int generatedKey = 0;
@@ -50,6 +50,8 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             preparedStatement.setString(3, user.getTitle());
             preparedStatement.setString(4, user.getfName());
             preparedStatement.setString(5, user.getlName());
+//            preparedStatement.setString(6, hashPassword(user.getUserPassword()));
+            preparedStatement.setString(6, PasswordSecurity.hashPassword(user.getUserPassword()));
             preparedStatement.setString(6, PasswordSecurity.hashPassword(user.getUserPassword()));
             preparedStatement.setString(7, user.getAuthority());
             preparedStatement.setString(8, user.getDescription());
@@ -76,17 +78,15 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
     }
 
-    //Passwort haschen
-    public String hashPassword(String password) {
-        return BCrypt.hashpw(password, BCrypt.gensalt());
-    }
 
 
     @Override
-    public void deleteUser(User user) {
+    public void deleteUser(User user) throws SQLException {
         Connection connection = connect();
         PreparedStatement preparedStatement = null;
 
@@ -97,12 +97,14 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
     }
 
 
     @Override
-    public void updateUser(User user) {
+    public void updateUser(User user) throws SQLException{
         Connection connection = connect();
         PreparedStatement preparedStatement = null;
         try {
@@ -133,6 +135,8 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
     }
 
@@ -156,13 +160,15 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
         return authorizationList;
     }
 
 
     @Override
-    public List<Trainer> readAllTrainer() {
+    public List<Trainer> readAllTrainer() throws SQLException {
         Connection connection = connect();
         List<Trainer> trainerList = new ArrayList<>();
         PreparedStatement statement = null;
@@ -196,6 +202,8 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
         return trainerList;
     }
@@ -230,14 +238,9 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
     }
 
 
-    //paswort entschlüßeln
-//    private boolean checkPass(String plainPassword, String hashedPassword) { // outsourced in PasswordSecurity!!!
-//        return BCrypt.checkpw(plainPassword, hashedPassword);
-//    }
-
 
     @Override
-    public boolean checkUser(String username, String pass) {
+    public boolean checkUser(String username, String pass) throws SQLException {
         Connection connection = connect();
         if (connection == null) {
             System.out.println("Check XAMPP");
@@ -258,11 +261,17 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
         logger.info("pass:{}", "FALSE");
-        QuickAlert.showError("Benutzername und/oder Passwort falsch!");
+
+        JOptionPane.showMessageDialog(null, "Benutzername und/oder Passwort falsch!",
+                "Warnung", JOptionPane.ERROR_MESSAGE, null);
+
         return false;
     }
+
 
 
     @Override
@@ -291,13 +300,15 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
 
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
         logger.info("neue username gibt es nicht in db");
         return true;
     }
 
 
-    public User loginUser(String username) {
+    public User loginUser(String username) throws SQLException {
         Connection connection = connect();
         if (connection == null) {
             System.out.println("Check XAMPP");
@@ -354,6 +365,8 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
         return null;
     }
@@ -383,11 +396,13 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
     }
 
 
-    public void updatePassword(String newHashPassword, int userID) {
+    public void updatePassword(String newHashPassword, int userID) throws SQLException {
         Connection connection = connect();
         PreparedStatement preparedStatement = null;
         try {
@@ -401,8 +416,11 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
     }
+
 
 
 }

@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane prefHeight="714.0" prefWidth="841.0" style="-fx-background-color: #f9f7f6;" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.AddUserController">
+<GridPane prefHeight="800.0" prefWidth="841.0" style="-fx-background-color: #f9f7f6;" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.AddUserController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" prefWidth="80.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="112.0" prefWidth="112.0" />
@@ -27,20 +27,21 @@
    </columnConstraints>
    <rowConstraints>
       <RowConstraints maxHeight="222.0" minHeight="10.0" percentHeight="0.0" prefHeight="77.5" vgrow="SOMETIMES" />
-      <RowConstraints prefHeight="3.0" vgrow="SOMETIMES" />
-      <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
-      <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
-      <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
-      <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
-      <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="17.5" minHeight="15.0" prefHeight="15.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="38.0" minHeight="36.5" prefHeight="38.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="17.5" minHeight="16.0" prefHeight="16.0" vgrow="SOMETIMES" />
-      <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="42.5" minHeight="36.5" prefHeight="39.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="27.5" minHeight="21.5" prefHeight="25.0" vgrow="SOMETIMES" />
-      <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="322.5" minHeight="10.0" prefHeight="72.5" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="27.0" minHeight="0.0" prefHeight="23.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="55.0" minHeight="32.0" prefHeight="40.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="49.0" minHeight="17.0" prefHeight="38.5" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="47.5" minHeight="10.0" prefHeight="47.5" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="48.5" minHeight="6.5" prefHeight="48.5" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="44.5" minHeight="5.0" prefHeight="38.5" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="28.5" minHeight="0.0" prefHeight="18.5" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="55.0" minHeight="21.0" prefHeight="47.5" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="33.5" minHeight="0.5" prefHeight="20.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="58.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="64.5" minHeight="8.5" prefHeight="48.5" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="52.5" minHeight="0.0" prefHeight="20.5" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="45.0" minHeight="0.0" prefHeight="22.5" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="110.0" minHeight="45.0" prefHeight="52.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="322.5" minHeight="10.0" prefHeight="157.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="370.5" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
@@ -74,11 +75,11 @@
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin></Label>
-      <Label styleClass="input-description" text="Foto" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="13">
+      <Label styleClass="input-description" text="Foto" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="14">
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin></Label>
-      <Label styleClass="input-description" text="Beschreibung" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="14">
+      <Label styleClass="input-description" text="Beschreibung" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="15">
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin></Label>
@@ -133,7 +134,7 @@
             <String fx:value="button-light" />
          </styleClass>
       </TextField>
-      <TextField fx:id="photoPathTextField" maxWidth="309.0" onAction="#onAddBtnClick" prefHeight="31.0" prefWidth="262.0" style="-fx-border-radius: 50px; -fx-text-fill: #101d2c;" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="13">
+      <TextField fx:id="photoPathTextField" maxWidth="300.0" onAction="#onAddBtnClick" prefHeight="31.0" prefWidth="271.0" style="-fx-border-radius: 50px; -fx-text-fill: #101d2c;" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="14">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
@@ -142,7 +143,7 @@
             <String fx:value="button-light" />
          </styleClass>
       </TextField>
-      <TextArea fx:id="descriptionTextArea" maxWidth="403.0" prefHeight="75.0" prefWidth="403.0" style="-fx-border-radius: 5px; -fx-text-fill: #101d2c; -fx-background-color: #f9f7f6;" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="14">
+      <TextArea fx:id="descriptionTextArea" maxWidth="403.0" prefHeight="75.0" prefWidth="403.0" style="-fx-border-radius: 5px; -fx-text-fill: #101d2c; -fx-background-color: #f9f7f6;" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="15">
          <GridPane.margin>
             <Insets bottom="10.0" top="10.0" />
          </GridPane.margin>
@@ -151,7 +152,7 @@
             <String fx:value="button-light" />
          </styleClass>
       </TextArea>
-      <Button mnemonicParsing="false" onAction="#onAbortBtnClick" prefWidth="128.0" text="ABBRECHEN" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="15">
+      <Button mnemonicParsing="false" onAction="#onAbortBtnClick" prefWidth="128.0" text="ABBRECHEN" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="16">
          <styleClass>
             <String fx:value="button-style" />
             <String fx:value="button-light" />
@@ -160,7 +161,7 @@
             <Insets right="20.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="addAndSaveBtn" mnemonicParsing="false" onAction="#onAddBtnClick" prefHeight="36.0" prefWidth="128.0" text="HINZUFÜGEN" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="15">
+      <Button fx:id="addAndSaveBtn" mnemonicParsing="false" onAction="#onAddBtnClick" prefHeight="36.0" prefWidth="128.0" text="HINZUFÜGEN" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="16">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
@@ -176,7 +177,8 @@
             <Insets />
          </GridPane.margin>
       </CheckBox>
-      <CheckBox fx:id="photoCheckBox" mnemonicParsing="false" text=" Anzeigen  " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="13" />
+      <CheckBox fx:id="photoCheckBox" mnemonicParsing="false" text=" Anzeigen  " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="14" />
+      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #101d2c;" />
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #101d2c;" GridPane.columnIndex="2" />
       <Pane prefHeight="90.0" prefWidth="40.0" style="-fx-background-color: #101d2c;" GridPane.columnIndex="4" />
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #101d2c;" />
@@ -195,8 +197,8 @@
             <Insets left="10.0" />
          </GridPane.margin>
       </Label>
-      <CheckBox fx:id="descriptionCheckBox" layoutX="244.0" layoutY="414.0" mnemonicParsing="false" text=" Anzeigen  " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="14" />
-      <Button mnemonicParsing="false" onAction="#onFileBtnClick" prefHeight="28.0" prefWidth="0.0" style="-fx-background-color: #F9F7F6;" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="13">
+      <CheckBox fx:id="descriptionCheckBox" layoutX="244.0" layoutY="414.0" mnemonicParsing="false" text=" Anzeigen  " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="15" />
+      <Button mnemonicParsing="false" onAction="#onFileBtnClick" prefHeight="28.0" prefWidth="0.0" style="-fx-background-color: #F2F4FF;" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="14">
          <graphic>
             <ImageView fitHeight="32.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                <image>

@@ -18,7 +18,7 @@ public class CourseRepositoryJDBC extends Repository implements CourseRepository
 
 
     @Override
-    public List<Course> readAll() {
+    public List<Course> readAll() throws SQLException {
         Connection connection = connect();
         List<Course> courses = new ArrayList<>();
 
@@ -45,6 +45,8 @@ public class CourseRepositoryJDBC extends Repository implements CourseRepository
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
 
         return courses;
@@ -78,6 +80,8 @@ public class CourseRepositoryJDBC extends Repository implements CourseRepository
 
         } catch (SQLException e ) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
 
         return generatedKey;
@@ -100,6 +104,8 @@ public class CourseRepositoryJDBC extends Repository implements CourseRepository
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
 
     }
@@ -114,11 +120,13 @@ public class CourseRepositoryJDBC extends Repository implements CourseRepository
             preparedStatement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
     }
 
     @Override
-    public int getCoursesCountByProgramId(int programId) {
+    public int getCoursesCountByProgramId(int programId) throws SQLException {
         Connection connection = connect();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -133,6 +141,8 @@ public class CourseRepositoryJDBC extends Repository implements CourseRepository
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
         }
         return coursesCount;
     }

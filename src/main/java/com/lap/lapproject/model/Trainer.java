@@ -39,3 +39,24 @@ public class Trainer extends User {
         super(id, description, phoneNmbr, email, photo);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -40,6 +40,11 @@
             </Label>
          </children>
       </Pane>
+      <TextField fx:id="roomNmbrTextField" maxWidth="419.0" onAction="#onAddBtnClick" prefHeight="31.0" prefWidth="419.0" style="-fx-border-radius: 50px; -fx-text-fill: #101d2c;" GridPane.columnIndex="2" GridPane.rowIndex="2">
+         <styleClass>
+            <String fx:value="input-form" />
+            <String fx:value="button-light" />
+         </styleClass></TextField>
       <Label styleClass="input-description" text="Standort" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="20.0" />
@@ -92,13 +97,8 @@
             <Insets left="20.0" />
          </GridPane.margin>
       </Label>
-      <TextField fx:id="roomNmbrTextField" maxWidth="419.0" onAction="#onAddBtnClick" prefHeight="31.0" prefWidth="419.0" style="-fx-border-radius: 50px; -fx-text-fll: #101d2c;" GridPane.columnIndex="2" GridPane.rowIndex="2">
-         <styleClass>
-            <String fx:value="input-form" />
-            <String fx:value="button-light" />
-         </styleClass></TextField>
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #101d2c;" />
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #101d2c;" GridPane.columnIndex="3" />
-      <ListView fx:id="listView" prefHeight="49.0" prefWidth="390.0" style="-fx-border-radius: 10px; -fx-text-fill: #101d2c;" styleClass="button-light" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+      <ListView fx:id="listView" prefHeight="49.0" prefWidth="390.0" style="-fx-border-radius: 2px; -fx-text-fill: #101d2c;" styleClass="button-light" GridPane.columnIndex="2" GridPane.rowIndex="5" />
    </children>
 </GridPane>

@@ -7,6 +7,10 @@ import com.lap.lapproject.repos.BookingRepositoryJDBC;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +26,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Locale;
 
@@ -51,17 +56,17 @@ public class BookingController {
     @FXML
     private TableColumn<Booking, String> dateToColumn;
     @FXML
-    private TableColumn<Booking, String> dateTimeStartColumn;
-    @FXML
-    private TableColumn<Booking, String> dateTimeEndColumn;
+    private TableColumn<Booking, String> dateTimeColumn;
     @FXML
     private TableColumn<Booking, String> recurrenceRuleColumn;
     @FXML
     private TableColumn<Booking, String> courseNameColumn;
     @FXML
-    private ChoiceBox filterChoiceBox;
-    @FXML
     private TextField searchBar;
+    @FXML
+    private Button closeIconButton;
+
+
 
 
     @FXML
@@ -71,8 +76,8 @@ public class BookingController {
         FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_BOOKING));
         Scene scene = null;
         try {
-            scene= new Scene(fxmlLoader.load());
-        } catch (IOException e){
+            scene = new Scene(fxmlLoader.load());
+        } catch (IOException e) {
             e.printStackTrace();
         }
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -110,35 +115,39 @@ public class BookingController {
     @FXML
     void initialize() {
         assert bookingBtnBar != null : "fx:id=\"bookingBtnBar\" was not injected: check your FXML file 'booking-view.fxml'.";
+        assert closeIconButton != null : "fx:id=\"closeIconButton\" was not injected: check your FXML file 'booking-view.fxml'.";
         assert courseNameColumn != null : "fx:id=\"courseNameColumn\" was not injected: check your FXML file 'booking-view.fxml'.";
         assert dateFromColumn != null : "fx:id=\"dateFromColumn\" was not injected: check your FXML file 'booking-view.fxml'.";
+        assert dateTimeColumn != null : "fx:id=\"dateTimeColumn\" was not injected: check your FXML file 'booking-view.fxml'.";
         assert dateToColumn != null : "fx:id=\"dateToColumn\" was not injected: check your FXML file 'booking-view.fxml'.";
-        assert dateTimeEndColumn != null : "fx:id=\"dateTimeEndColumn\" was not injected: check your FXML file 'booking-view.fxml'.";
-        assert dateTimeStartColumn != null : "fx:id=\"dateTimeStartColumn\" was not injected: check your FXML file 'booking-view.fxml'.";
         assert deleteBookingBtn != null : "fx:id=\"deleteBookingBtn\" was not injected: check your FXML file 'booking-view.fxml'.";
+        assert editBookingButton != null : "fx:id=\"editBookingButton\" was not injected: check your FXML file 'booking-view.fxml'.";
         assert locationColumn != null : "fx:id=\"locationColumn\" was not injected: check your FXML file 'booking-view.fxml'.";
         assert recurrenceRuleColumn != null : "fx:id=\"recurrenceRuleColumn\" was not injected: check your FXML file 'booking-view.fxml'.";
         assert roomColumn != null : "fx:id=\"roomColumn\" was not injected: check your FXML file 'booking-view.fxml'.";
+        assert searchBar != null : "fx:id=\"searchBar\" was not injected: check your FXML file 'booking-view.fxml'.";
         assert tableViewBooking != null : "fx:id=\"tableViewBooking\" was not injected: check your FXML file 'booking-view.fxml'.";
         assert trainerColumn != null : "fx:id=\"trainerColumn\" was not injected: check your FXML file 'booking-view.fxml'.";
+
+        //TODO: add changeListener to searchbar for close-icon visibility!!!!
+        closeIconButton.setVisible(false);
         authorityVisibility();
         initBookingTable();
         // Damit werden alle Choice-Boxen mit Daten aus der selektierte Tabellenzeile befüllt:
         listModel.selectedBookingProperty().bind(tableViewBooking.getSelectionModel().selectedItemProperty());
-
-        //TODO: add a Textfield ID and imageView ID in the fxml file for the searchbar and magnifying glass
-        //TODO: write the UsabilityMethod.changeListener method in here with the IDs of the searchbar and magnifying glass (you can look it up in ProgramController)
     }
 
 
-    public void initBookingTable() {
 
-        tableViewBooking.setItems(listModel.filteredBookingList);
+    public void initBookingTable() {
+        tableViewBooking.setItems(listModel.bookingList);
         courseNameColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getCourse().getCourseName()));
         locationColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getRoom().getLocation().getStreet()));
         roomColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getRoom().getRoomNumber()));
+
         trainerColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getTrainer().getfName() + " " +
                 dataFeatures.getValue().getTrainer().getlName()));
+
         recurrenceRuleColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getRecurrenceRule()));
 
         dateFromColumn.setCellValueFactory((dataFeatures) ->
@@ -147,12 +156,11 @@ public class BookingController {
         dateToColumn.setCellValueFactory((dataFeatures) ->
                 new SimpleObjectProperty<>(dataFeatures.getValue().getDateTimeEnd().toLocalDate().toString()));
 
-        dateTimeStartColumn.setCellValueFactory((dataFeatures) ->
-                new SimpleObjectProperty<>(dataFeatures.getValue().getDateTimeStart().toLocalTime().toString().substring(0, 5)));
-
-        dateTimeEndColumn.setCellValueFactory((dataFeatures) ->
-                new SimpleObjectProperty<>(dataFeatures.getValue().getDateTimeEnd().toLocalTime().toString().substring(0, 5)));
+        dateTimeColumn.setCellValueFactory((dataFeatures) ->
+                new SimpleObjectProperty<>(dataFeatures.getValue().getDateTimeStart().toLocalTime().toString().substring(0, 5)
+                        + " - " + dataFeatures.getValue().getDateTimeEnd().toLocalTime().toString().substring(0, 5)));
     }
+
 
 
     private void authorityVisibility() {
@@ -168,14 +176,48 @@ public class BookingController {
         }
     }
 
+
+
     @FXML
     private void onSearchBarClick(ActionEvent actionEvent) {
-        listModel.filteredBookingList.setPredicate(booking -> booking.getCourse().toString().toLowerCase(Locale.ROOT).contains(searchBar.getText().toLowerCase(Locale.ROOT)));
+        String searchTerm = searchBar.getText();
+        ObservableList<Booking> filteredList = FXCollections.observableArrayList();
 
+        if (searchTerm.equals("")) {
+            filteredList = listModel.bookingList;
+
+        } else {
+
+            for (Booking elem : listModel.bookingList) {
+                if (
+                        elem.getCourse().toString().toUpperCase().contains(searchTerm.toUpperCase())
+                                || elem.getTrainer().getfName().toUpperCase().contains(searchTerm.toUpperCase())
+                                || elem.getTrainer().getlName().toUpperCase().contains(searchTerm.toUpperCase())
+                                || String.valueOf(elem.getRoom().getRoomNumber()).contains(searchTerm)
+                                || elem.getRoom().getLocation().getStreet().toUpperCase().contains(searchTerm.toUpperCase())
+                                || elem.getRecurrenceRule().toUpperCase().contains(searchTerm.toUpperCase())
+                                || elem.getDateTimeStart().toLocalDate().toString().contains(searchTerm)
+                                || elem.getDateTimeEnd().toLocalDate().toString().contains(searchTerm)
+                                || elem.getDateTimeStart().toLocalTime().toString().contains(searchTerm)
+                                || elem.getDateTimeEnd().toLocalTime().toString().contains(searchTerm)
+                ) {
+                    filteredList.add(elem);
+                }
+            }
+        }
+        tableViewBooking.setItems(filteredList);
     }
+
+
 
     @FXML
     private void onCloseIconClick(ActionEvent actionEvent) {
         searchBar.setText("");
     }
+
+
+
+
+
+
 }

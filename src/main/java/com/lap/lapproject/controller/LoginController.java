@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class LoginController extends BaseController implements Initializable{
@@ -34,7 +35,7 @@ public class LoginController extends BaseController implements Initializable{
     private Label adminContactLabel;
 
     @FXML
-    private void onLoginBtnClick(ActionEvent actionEvent) {
+    private void onLoginBtnClick(ActionEvent actionEvent) throws SQLException {
 
         UserRepositoryJDBC userRepositoryJDBC = new UserRepositoryJDBC();
 
@@ -67,7 +68,7 @@ public class LoginController extends BaseController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         usernameTF.setText("dorota1"); /*capitanMarvel*/
-        passwordTF.setText("dorota1"); /*carol123*/
+        passwordTF.setText("#1Dorota"); /*carol123*/
     }
 
     private void moveToMainPage(){

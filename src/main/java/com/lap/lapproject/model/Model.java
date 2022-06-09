@@ -20,17 +20,21 @@ public class Model {
     private static final Logger log = LoggerFactory.getLogger(Model.class);
 
     public ArrayList<Booking> bookings = new ArrayList<>();
+    public ArrayList<Course> courses = new ArrayList<>();
     public ArrayList<Entry<Booking>> bookingEntries = new ArrayList<>();
 
     private BookingRepositoryJDBC bookingRepo = new BookingRepositoryJDBC();
+    private CourseRepositoryJDBC courseRepo = new CourseRepositoryJDBC();
 
     public Model() {
         try {
             bookings.addAll(bookingRepo.readAll());
+            courses.addAll(courseRepo.readAll());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
     private StringProperty pathForDetailView = new SimpleStringProperty();
 
