@@ -2,7 +2,6 @@ package com.lap.lapproject.controller;
 
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
-import com.lap.lapproject.model.Equipment;
 import com.lap.lapproject.model.Program;
 import com.lap.lapproject.repos.CourseRepositoryJDBC;
 import com.lap.lapproject.repos.ProgramRepositoryJDBC;
@@ -10,14 +9,12 @@ import com.lap.lapproject.utility.QuickAlert;
 //import com.lap.lapproject.utility.UsabilityMethods;
 import com.lap.lapproject.utility.UsabilityMethods;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -141,7 +138,8 @@ public class ProgramController extends BaseController {
     }
 
     private void initTableProgram() {
-        tableViewProgram.setItems(listModel.filteredProgramList);
+        tableViewProgram.setItems(listModel.sortedProgramList);
+        listModel.sortedProgramList.comparatorProperty().bind(tableViewProgram.comparatorProperty());
         programColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getProgramName()));
 
     }
@@ -162,21 +160,8 @@ public class ProgramController extends BaseController {
 
 
     @FXML
-    private void onSearchBarClick(ActionEvent actionEvent) {
-
-        String searchTerm = searchBar.getText();
-        ObservableList<Program> filteredList = FXCollections.observableArrayList();
-
-        if (searchTerm.equals("")) {
-            filteredList = listModel.programList;
-        } else {
-            for (Program elem : listModel.programList) {
-                if (elem.getProgramName().toUpperCase().contains(searchTerm.toUpperCase())) {
-                    filteredList.add(elem);
-                }
-            }
-        }
-        tableViewProgram.setItems(filteredList);
+    private void onSearchBarClick(KeyEvent actionEvent) {
+        listModel.filteredProgramList.setPredicate(program -> program.getProgramName().toLowerCase(Locale.ROOT).contains(searchBar.getText().toLowerCase(Locale.ROOT)));
     }
 
 
