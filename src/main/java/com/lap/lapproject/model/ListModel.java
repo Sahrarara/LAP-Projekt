@@ -82,6 +82,7 @@ public class ListModel {
         //addAllListeners();
         addListenerForBooking();
         addListenerForUser();
+        //addListenerForProgram();
 
 
     }
@@ -127,7 +128,7 @@ public class ListModel {
         });
     }
 
-   /* public void addListenerForProgram() {
+   /*public void addListenerForProgram() {
         programList.addListener(new ListChangeListener<Program>() {
             @Override
             public void onChanged(ListChangeListener.Change<? extends Program> change) {
@@ -138,6 +139,7 @@ public class ListModel {
                             try {
                                 programRepositoryJDBC.updateProgram(program);
                                 courseRepositoryJDBC.readAll();
+                                courseList.setAll(courseRepositoryJDBC.readAll());
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
@@ -177,6 +179,7 @@ public class ListModel {
                         for (Trainer trainer : change.getAddedSubList()) {
                             try {
                                 userRepositoryJDBC.updateUser(trainer);
+                                bookingList.setAll(bookingRepositoryJDBC.readAll());
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }

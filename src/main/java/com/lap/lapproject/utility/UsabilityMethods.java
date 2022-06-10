@@ -13,6 +13,17 @@ public class UsabilityMethods {
         Matcher matcher = pattern.matcher(ddMMYYYY);
         return matcher.find();
     }
+    public static boolean isNumber(String input) {
+        Pattern pattern = Pattern.compile("\\d");
+        Matcher matcher = pattern.matcher(input);
+        return matcher.find();
+    }
+
+    public static boolean isPLZ4(String plz) {
+        Pattern pattern = Pattern.compile("^\\d{4}$");
+        Matcher matcher = pattern.matcher(plz);
+        return matcher.find();
+    }
 
 
 

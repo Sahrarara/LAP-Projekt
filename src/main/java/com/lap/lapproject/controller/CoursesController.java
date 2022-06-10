@@ -73,12 +73,20 @@ public class CoursesController extends BaseController {
         int myIndex = tableViewEvent.getSelectionModel().getSelectedIndex();
 
         Course courseToDelete = tableViewEvent.getSelectionModel().getSelectedItem();
+        //Alert CONFIRMATION
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText("Sind Sie sicher, dass Sie es löschen wollen?");
+        Optional<ButtonType> action = alert.showAndWait();
+        if (action.get() == ButtonType.OK) {
 
-        try {
-            courseRepositoryJDBC.deleteCourse(courseToDelete);
-            listModel.courseList.remove(courseToDelete);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+            try {
+                courseRepositoryJDBC.deleteCourse(courseToDelete);
+                listModel.courseList.remove(courseToDelete);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 

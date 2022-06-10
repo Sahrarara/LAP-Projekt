@@ -1,11 +1,9 @@
 package com.lap.lapproject.controller;
 
 import com.lap.lapproject.model.*;
-import com.lap.lapproject.repos.CourseRepositoryJDBC;
-import com.lap.lapproject.repos.ProgramRepositoryJDBC;
-import com.lap.lapproject.repos.RoomRepositoryJDBC;
-import com.lap.lapproject.repos.RoomsEquipmentRepositoryJDBC;
+import com.lap.lapproject.repos.*;
 import com.lap.lapproject.utility.QuickAlert;
+import com.lap.lapproject.utility.UsabilityMethods;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -72,13 +70,35 @@ public class AddRoomController extends BaseController {
 
     @FXML
     private void onAddBtnClick(ActionEvent actionEvent) throws SQLException {
+
         RoomRepositoryJDBC roomRepositoryJDBC = new RoomRepositoryJDBC();
         RoomsEquipmentRepositoryJDBC roomsEquipmentRepositoryJDBC = new RoomsEquipmentRepositoryJDBC();
+        BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
 
         String roomNbr = roomNmbrTextField.getText();
+        String roomSizeString = sizeTextField.getText();
+
+        //check if Room Number INT
+        if (!UsabilityMethods.isNumber(roomNbr)) {
+            QuickAlert.showError("Bitte geben Raumnummer in Zahlen");
+            return;
+        }
+
+        //check if Room Size INT
+        if (!UsabilityMethods.isNumber(roomNbr)) {
+            QuickAlert.showError("Bitte geben Raumnummer in Zahlen");
+            return;
+        }
+
+        //check if Room Size INT
+        if (!UsabilityMethods.isNumber(roomSizeString)) {
+            QuickAlert.showError("Bitte geben Raumgröße in Zahlen");
+            return;
+        }
 
         int roomNbrInt = Integer.parseInt(roomNmbrTextField.getText());
         int roomSize = Integer.parseInt(sizeTextField.getText());
+
         Location location = locationChoiceBox.getValue();
         List<Equipment> equipments = listView.getSelectionModel().getSelectedItems(); //.getValue()
 
@@ -107,6 +127,8 @@ public class AddRoomController extends BaseController {
 
                     listModel.roomList.add(room);
                     System.out.println("AddRoomController118::" + room.getRoomNumber());
+
+                    listModel.bookingList.setAll(bookingRepositoryJDBC.readAll());
 
                 } catch (SQLException e) {
                     e.printStackTrace();
@@ -139,6 +161,8 @@ public class AddRoomController extends BaseController {
 
                 roomRepositoryJDBC.updateRoom(room);
                 listModel.roomList.set(listModel.roomList.indexOf(room), room);
+
+                listModel.bookingList.setAll(bookingRepositoryJDBC.readAll());
                 moveToRoomPage();
             }
         } else {

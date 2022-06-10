@@ -93,7 +93,17 @@ public class BookingController {
         Booking booking  = tableViewBooking.getSelectionModel().getSelectedItem();
       //  BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
         //bookingRepositoryJDBC.deleteBooking(booking);
-        listModel.bookingList.remove(booking);
+
+
+        //Alert CONFIRMATION
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setHeaderText(null);
+        alert.setContentText("Sind Sie sicher, dass Sie es löschen wollen?");
+        Optional<ButtonType> action = alert.showAndWait();
+        if (action.get() == ButtonType.OK) {
+            listModel.bookingList.remove(booking);
+        }
     }
 
     @FXML
