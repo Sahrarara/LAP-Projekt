@@ -3,6 +3,7 @@ package com.lap.lapproject.controller;
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.Course;
+import com.lap.lapproject.utility.UsabilityMethods;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import com.lap.lapproject.repos.CourseRepositoryJDBC;
@@ -47,6 +48,8 @@ public class CoursesController extends BaseController {
     private ChoiceBox filterChoiceBox;
     @FXML
     private TextField searchBar;
+    @FXML
+    private Button closeIconButton;
 
     @FXML
     private void onAddCourseBtnClick(ActionEvent actionEvent) {
@@ -121,14 +124,14 @@ public class CoursesController extends BaseController {
         assert groupSizeColumn != null : "fx:id=\"groupSizeColumn\" was not injected: check your FXML file 'events-view.fxml'.";
         assert coursesBtnBar != null : "fx:id=\"coursesBtnBar\" was not injected: check your FXML file 'events-view.fxml'.";
 
+        closeIconButton.setVisible(false);
+        UsabilityMethods.changeListener(searchBar, closeIconButton);
+
         authorityVisibility();
         //CourseRepositoryJDBC courseRepositoryJDBC = new CourseRepositoryJDBC();
         initEventTable();
 
         listModel.selectedCourseProperty().bind(tableViewEvent.getSelectionModel().selectedItemProperty());
-
-        //TODO: add a Textfield ID and imageView ID in the fxml file for the searchbar and magnifying glass
-        //TODO: write the UsabilityMethod.changeListener method in here with the IDs of the searchbar and magnifying glass (you can look it up in ProgramController)
     }
 
     private void initEventTable() {
@@ -153,11 +156,7 @@ public class CoursesController extends BaseController {
         }
     }
 
-//    @FXML
-//    private void onSearchBarClick(ActionEvent actionEvent) {
-//        listModel.filteredCourseList.setPredicate(
-//                course -> course.getCourseName().toLowerCase(Locale.ROOT).contains(searchBar.getText().toLowerCase(Locale.ROOT)));
-//    }
+
 
     @FXML
     private void onSearchBarClick(ActionEvent actionEvent) {

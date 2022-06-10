@@ -6,6 +6,7 @@ import com.lap.lapproject.model.Location;
 import com.lap.lapproject.repos.BookingRepositoryJDBC;
 import com.lap.lapproject.repos.LocationRepositoryJDBC;
 import com.lap.lapproject.utility.QuickAlert;
+import com.lap.lapproject.utility.UsabilityMethods;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -45,6 +46,8 @@ public class LocationController extends BaseController {
     private ChoiceBox filterChoiceBox;
     @FXML
     private TextField searchBar;
+    @FXML
+    private Button closeIconButton;
 
 
     @FXML
@@ -131,21 +134,17 @@ public class LocationController extends BaseController {
         assert deleteLocationBtn != null : "fx:id=\"deleteLocationBtn\" was not injected: check your FXML file 'location-view.fxml'.";
         assert settingsLocationBtn != null : "fx:id=\"settingsLocationBtn\" was not injected: check your FXML file 'location-view.fxml'.";
 
-        //authorityVisibility();
-        //LocationRepositoryJDBC locationRepo = new LocationRepositoryJDBC();
-        ////locationRepo.getLocation();
-        //initLocationTable();
-
+        closeIconButton.setVisible(false);
+        UsabilityMethods.changeListener(searchBar, closeIconButton);
 
         authorityVisibility();
-        LocationRepositoryJDBC locationRepo = new LocationRepositoryJDBC();
-        //locationRepo.getLocation();
         initLocationTable();
+
+        //LocationRepositoryJDBC locationRepo = new LocationRepositoryJDBC();
+        //locationRepo.getLocation();
+
         listModel.selectedLocationProperty().bind(tableViewLocation.getSelectionModel().selectedItemProperty());
 
-
-        //TODO: add a Textfield ID and imageView ID in the fxml file for the searchbar and magnifying glass
-        //TODO: write the UsabilityMethod.changeListener method in here with the IDs of the searchbar and magnifying glass (you can look it up in ProgramController)
     }
 
     public void initLocationTable() {

@@ -4,6 +4,7 @@ import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.*;
 import com.lap.lapproject.repos.BookingRepositoryJDBC;
+import com.lap.lapproject.utility.UsabilityMethods;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -139,10 +140,12 @@ public class BookingController {
         assert tableViewBooking != null : "fx:id=\"tableViewBooking\" was not injected: check your FXML file 'booking-view.fxml'.";
         assert trainerColumn != null : "fx:id=\"trainerColumn\" was not injected: check your FXML file 'booking-view.fxml'.";
 
-        //TODO: add changeListener to searchbar for close-icon visibility!!!!
         closeIconButton.setVisible(false);
+        UsabilityMethods.changeListener(searchBar, closeIconButton);
+
         authorityVisibility();
         initBookingTable();
+
         // Damit werden alle Choice-Boxen mit Daten aus der selektierte Tabellenzeile befüllt:
         listModel.selectedBookingProperty().bind(tableViewBooking.getSelectionModel().selectedItemProperty());
     }

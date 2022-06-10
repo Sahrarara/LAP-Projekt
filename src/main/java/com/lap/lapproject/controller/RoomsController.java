@@ -10,6 +10,7 @@ import com.lap.lapproject.repos.LocationRepositoryJDBC;
 import com.lap.lapproject.repos.RoomRepositoryJDBC;
 import com.lap.lapproject.utility.QuickAlert;
 
+import com.lap.lapproject.utility.UsabilityMethods;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -48,7 +49,8 @@ public class RoomsController extends BaseController {
     private TextField searchBar;
     @FXML
     private ChoiceBox filterChoiceBox;
-
+    @FXML
+    private Button closeIconButton;
 
 
     @FXML
@@ -143,6 +145,9 @@ public class RoomsController extends BaseController {
         assert streetColumn != null : "fx:id=\"streetColumn\" was not injected: check your FXML file 'rooms-view.fxml'.";
         assert equipmentColumn != null : "fx:id=\"equipmentColumn\" was not injected: check your FXML file 'rooms-view.fxml'.";
         assert roomsBtnBar != null : "fx:id=\"roomsBtnBar\" was not injected: check your FXML file 'rooms-view.fxml'.";
+
+        closeIconButton.setVisible(false);
+        UsabilityMethods.changeListener(searchBar, closeIconButton);
 
         authorityVisibility();
         initTableRoom();

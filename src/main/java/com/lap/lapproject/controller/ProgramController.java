@@ -8,6 +8,7 @@ import com.lap.lapproject.repos.CourseRepositoryJDBC;
 import com.lap.lapproject.repos.ProgramRepositoryJDBC;
 import com.lap.lapproject.utility.QuickAlert;
 //import com.lap.lapproject.utility.UsabilityMethods;
+import com.lap.lapproject.utility.UsabilityMethods;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -33,13 +34,14 @@ public class ProgramController extends BaseController {
     private Button settingsBtn;
     @FXML
     private ButtonBar programBtnBar;
-
     @FXML
     private TableView<Program> tableViewProgram;
     @FXML
     private TableColumn<Program, String> programColumn;
     @FXML
     private TextField searchBar;
+    @FXML
+    private Button closeIconButton;
 
 
     @FXML
@@ -128,12 +130,13 @@ public class ProgramController extends BaseController {
         assert programBtnBar != null : "fx:id=\"programBtnBar\" was not injected: check your FXML file 'program-view.fxml'.";
         assert settingsBtn != null : "fx:id=\"settingsBtn\" was not injected: check your FXML file 'program-view.fxml'.";
 
+        closeIconButton.setVisible(false);
+        UsabilityMethods.changeListener(searchBar, closeIconButton);
 
         authorityVisibility();
         initTableProgram();
         //nimmt daten von tabele und befüllt das Formular
         listModel.selectedProgramProperty().bind(tableViewProgram.getSelectionModel().selectedItemProperty());
-//        UsabilityMethods.changeListener(searchBar, searchIcon);
 
     }
 

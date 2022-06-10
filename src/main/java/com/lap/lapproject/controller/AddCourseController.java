@@ -81,12 +81,12 @@ public class AddCourseController extends BaseController {
         String courseEndDateAsText = courseEndDatePicker.getEditor().getText().strip().replaceAll("-", ".");
 
         if (courseStartDateAsText.isEmpty() || courseEndDateAsText.isEmpty()) {
-            QuickAlert.showError("Bitte alle Datum Felder ausfüllen!");
+            QuickAlert.showError("Bitte alle Zeiten ausfüllen!");
             return;
         }
 
         if (!UsabilityMethods.isDDMMYYYYDate(courseStartDateAsText) || !UsabilityMethods.isDDMMYYYYDate(courseEndDateAsText)) {
-            QuickAlert.showError("Bitte geben Datum in dd.mm.yyyy Format");
+            QuickAlert.showError("Bitte das Datum im dd.mm.yyyy Format angeben");
             return;
         }
 
@@ -95,7 +95,7 @@ public class AddCourseController extends BaseController {
         LocalDate today = LocalDate.now();
 
         if (courseEnd.compareTo(courseStart) < 0 || courseStart.isBefore(today)) {
-            QuickAlert.showError("Kursbegin ist nach dem Kursend oder in der Vergangenheit. Bitte Datum überprüfen!");
+            QuickAlert.showError("Kursbegin ist nach dem Kursende oder in der Vergangenheit. Bitte das Datum überprüfen!");
             return;
         }
 
