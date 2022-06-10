@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,6 +36,15 @@ public class ListModel {
     public FilteredList<Room> filteredRoomList = new FilteredList<Room>(roomList);
     public FilteredList<Trainer> filteredAuthorizationList = new FilteredList<Trainer>(authorizationList);
 
+    public SortedList<Course> sortedCourseList = new SortedList<Course>(filteredCourseList);
+    public SortedList<Program> sortedProgramList = new SortedList<Program>(filteredProgramList);
+    public SortedList<Equipment> sortedEquipmentList = new SortedList<Equipment>(filteredEquipmentList);
+    public SortedList<Location> sortedLocationList = new SortedList<Location>(filteredLocationList);
+    public SortedList<Booking> sortedBookingList = new SortedList<Booking>(filteredBookingList);
+    public SortedList<Trainer> sortedTrainerList = new SortedList<Trainer>(filteredTrainerList);
+    public SortedList<Room> sortedRoomList = new SortedList<Room>(filteredRoomList);
+    public SortedList<Trainer> sortedAuthorizationList = new SortedList<Trainer>(filteredAuthorizationList);
+
     CourseRepositoryJDBC courseRepositoryJDBC = new CourseRepositoryJDBC();
     ProgramRepositoryJDBC programRepositoryJDBC = new ProgramRepositoryJDBC();
     EquipmentRepositoryJDBC equipmentRepositoryJDBC = new EquipmentRepositoryJDBC();
@@ -42,6 +52,8 @@ public class ListModel {
     BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
     UserRepositoryJDBC userRepositoryJDBC = new UserRepositoryJDBC();
     RoomRepositoryJDBC roomRepositoryJDBC = new RoomRepositoryJDBC();
+
+
 
 
     //UPDATE Variable enthält den Wert des ausgewählten Elements
