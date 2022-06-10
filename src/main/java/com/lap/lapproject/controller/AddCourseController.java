@@ -2,6 +2,7 @@ package com.lap.lapproject.controller;
 
 import com.lap.lapproject.model.Course;
 import com.lap.lapproject.model.Program;
+import com.lap.lapproject.repos.BookingRepositoryJDBC;
 import com.lap.lapproject.repos.CourseRepositoryJDBC;
 import com.lap.lapproject.repos.ProgramRepositoryJDBC;
 import com.lap.lapproject.utility.QuickAlert;
@@ -67,6 +68,7 @@ public class AddCourseController extends BaseController {
     private void onAddBtnClick(ActionEvent actionEvent) throws SQLException {
         CourseRepositoryJDBC courseRepo = new CourseRepositoryJDBC();
         ProgramRepositoryJDBC programRepositoryJDBC = new ProgramRepositoryJDBC();
+        BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
 
         System.out.println("AddCourseController:: onAddBtnClick");
         String courseName = courseNameTextField.getText();
@@ -79,12 +81,12 @@ public class AddCourseController extends BaseController {
         String courseEndDateAsText = courseEndDatePicker.getEditor().getText().strip().replaceAll("-", ".");
 
         if (courseStartDateAsText.isEmpty() || courseEndDateAsText.isEmpty()) {
-            QuickAlert.showError("Bitte alle Datum Felder ausfüllen!");
+            QuickAlert.showError("Bitte alle Zeiten ausfüllen!");
             return;
         }
 
         if (!UsabilityMethods.isDDMMYYYYDate(courseStartDateAsText) || !UsabilityMethods.isDDMMYYYYDate(courseEndDateAsText)) {
-            QuickAlert.showError("Bitte geben Datum in dd.mm.yyyy Format");
+            QuickAlert.showError("Bitte das Datum im dd.mm.yyyy Format angeben");
             return;
         }
 
@@ -93,9 +95,11 @@ public class AddCourseController extends BaseController {
         LocalDate today = LocalDate.now();
 
         if (courseEnd.compareTo(courseStart) < 0 || courseStart.isBefore(today)) {
-            QuickAlert.showError("Kursbegin ist nach dem Kursend oder in der Vergangenheit. Bitte Datum überprüfen!");
+            QuickAlert.showError("Kursbegin ist nach dem Kursende oder in der Vergangenheit. Bitte das Datum überprüfen!");
             return;
         }
+
+
 
         if (courseChoiceBox.getValue() == null) {
             QuickAlert.showError("Bitte Programm wählen!");
@@ -125,6 +129,8 @@ public class AddCourseController extends BaseController {
 
             courseRepo.addCourse(course);
             listModel.courseList.add(course);
+
+            listModel.bookingList.setAll(bookingRepositoryJDBC.readAll());//update booking
             courseRepo.readAll();
                    } catch (SQLException e) {
                        e.printStackTrace();
@@ -134,13 +140,17 @@ public class AddCourseController extends BaseController {
                    //Update logik
                    course = listModel.getSelectedCourse();
                    course.setCourseName(courseNameTextField.getText());
-                   course.setCourseStart(courseStartDatePicker.getValue());
-                   course.setCourseEnd(courseEndDatePicker.getValue());
+                   //course.setCourseStart(courseStartDatePicker.getValue());
+               //course.setCourseEnd(courseEndDatePicker.getValue());
+                   course.setCourseStart(courseStart);
+                   course.setCourseEnd(courseEnd);
                    course.setProgram(programRepositoryJDBC.getProgramByProgramName((String) courseChoiceBox.getValue()));
                    //course.setProgram((Program) courseChoiceBox.getValue()); //--empfelung vom Hr.Öller statt zeile oben
                    course.setGroupSize(Integer.parseInt(groupSizeTextField.getText()));
                    courseRepo.updateCourse(course);
                    listModel.courseList.set(listModel.courseList.indexOf(course), course);
+
+                   listModel.bookingList.setAll(bookingRepositoryJDBC.readAll());
                    moveToCoursePage();
                }
            } else {

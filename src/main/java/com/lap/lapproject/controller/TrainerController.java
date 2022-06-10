@@ -7,6 +7,7 @@ import com.lap.lapproject.model.Trainer;
 import com.lap.lapproject.repos.BookingRepositoryJDBC;
 import com.lap.lapproject.repos.UserRepositoryJDBC;
 import com.lap.lapproject.utility.QuickAlert;
+import com.lap.lapproject.utility.UsabilityMethods;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -45,22 +46,19 @@ public class TrainerController extends BaseController {
     @FXML
     private TableColumn<Trainer, String> firstNameColumn;
     @FXML
-    private TableColumn<Trainer, String> lastNameColumn;
-    @FXML
     private TableColumn<Trainer, String> emailColumn;
     @FXML
     private TableColumn<Trainer, String> phoneColumn;
     @FXML
     private TableColumn<Trainer, Boolean> activeStatusColumn;
     @FXML
-    private ChoiceBox filterChoiceBox;
-    @FXML
     private TextField searchBar;
     @FXML
     private TableColumn<Trainer, ImageView> trainerImg;
     @FXML
     private TableColumn<Trainer, String> descriptionColumn;
-
+    @FXML
+    private Button closeIconButton;
 
 
     @FXML
@@ -133,10 +131,12 @@ public class TrainerController extends BaseController {
         assert tableViewTrainer != null : "fx:id=\"tableViewTrainer\" was not injected: check your FXML file 'trainer.fxml'.";
         assert emailColumn != null : "fx:id=\"emailColumn\" was not injected: check your FXML file 'trainer.fxml'.";
         assert firstNameColumn != null : "fx:id=\"firstNameColumn\" was not injected: check your FXML file 'trainer.fxml'.";
-        assert lastNameColumn != null : "fx:id=\"lastNameColumn\" was not injected: check your FXML file 'trainer.fxml'.";
         assert phoneColumn != null : "fx:id=\"phoneColumn\" was not injected: check your FXML file 'trainer.fxml'.";
         assert activeStatusColumn != null : "fx:id=\"activeStatusColumn\" was not injected: check your FXML file 'trainer.fxml'.";
         assert trainerBtnBar != null : "fx:id=\"trainerBtnBar\" was not injected: check your FXML file 'trainer.fxml'.";
+
+        closeIconButton.setVisible(false);
+        UsabilityMethods.changeListener(searchBar, closeIconButton);
 
         authorityVisibility();
         initTrainerTable();

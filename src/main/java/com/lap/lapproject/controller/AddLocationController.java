@@ -6,6 +6,7 @@ import com.lap.lapproject.repos.LocationRepositoryJDBC;
 
 import com.lap.lapproject.repos.RoomRepositoryJDBC;
 import com.lap.lapproject.utility.QuickAlert;
+import com.lap.lapproject.utility.UsabilityMethods;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -36,6 +37,17 @@ public class AddLocationController extends BaseController {
         String zip = zipCodeTextField.getText();
         String city = locationNameTextField.getText();
 
+        //check if zip INT
+        if (!UsabilityMethods.isNumber(zip)) {
+            QuickAlert.showError("Bitte überprüfen Sie  Zipcode. PLZ soll 4 stellige Zahl sein!");
+            return;
+        }
+        //check if zip 4 numbers
+        if (!UsabilityMethods.isPLZ4(zip) ){
+            QuickAlert.showError("Bitte überprüfen Sie  Zipcode. PLZ soll 4 stellige Zahl sein!");
+            return;
+        }
+
         Location location = new Location(street, zip, city);
         LocationRepositoryJDBC locationRepositoryJDBC = new LocationRepositoryJDBC();
 
@@ -48,7 +60,9 @@ public class AddLocationController extends BaseController {
                     locationRepositoryJDBC.addLocation(location);//Location is added to a list
                     listModel.locationList.add(location);
                     locationRepositoryJDBC.readAll();
-                    listModel.roomList.setAll(roomRepositoryJDBC.readAll());
+
+                    listModel.roomList.setAll(roomRepositoryJDBC.readAll());//update roomList
+                    listModel.bookingList.setAll(bookingRepositoryJDBC.readAll());//update bookingList
 
                 } catch (SQLException e) {
                     e.printStackTrace();

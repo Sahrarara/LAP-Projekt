@@ -40,7 +40,7 @@ public class AddProgramController extends BaseController {
                     // scratch
                     listModel.programList.add(program);
                     programRepositoryJDBC.readProgram();
-                    listModel.courseList.setAll(courseRepositoryJDBC.readAll());
+                    //listModel.courseList.setAll(courseRepositoryJDBC.readAll());
 
 
                 } catch (SQLException e) {
@@ -54,7 +54,7 @@ public class AddProgramController extends BaseController {
                 programRepositoryJDBC.updateProgram(program);
                 listModel.programList.set(listModel.programList.indexOf(program), program);
                 moveToProgramPage();
-                listModel.courseList.setAll(courseRepositoryJDBC.readAll());
+                //listModel.courseList.setAll(courseRepositoryJDBC.readAll());
 
             }
         } else {

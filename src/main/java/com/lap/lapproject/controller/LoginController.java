@@ -68,7 +68,7 @@ public class LoginController extends BaseController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         usernameTF.setText("dorota1"); /*capitanMarvel*/
-        passwordTF.setText("dorota1"); /*carol123*/
+        passwordTF.setText("#123Dorota"); /*carol123*/
     }
 
     private void moveToMainPage(){
