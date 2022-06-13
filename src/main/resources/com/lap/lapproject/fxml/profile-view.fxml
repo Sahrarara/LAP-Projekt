@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import java.lang.String?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
@@ -42,17 +43,26 @@
                                  <children>
                                     <Circle centerX="100.0" centerY="100.0" fill="#211d5a" layoutX="200.0" radius="130.0" stroke="#211d5a" strokeType="INSIDE" strokeWidth="5.0" />
                                     <Circle fx:id="circleView" centerX="100.0" centerY="100.0" fill="#211d5a" layoutX="200.0" radius="130.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" />
-                                    <Button fx:id="photoUploadButton" layoutX="231.0" layoutY="82.0" mnemonicParsing="false" onAction="#onPhotoUploadBtnClick" style="-fx-background-color: transparent;" text="Foto hochladen" textFill="WHITE">
+                                    <Button fx:id="photoUploadButton" layoutX="222.0" layoutY="81.0" mnemonicParsing="false" onAction="#onPhotoUploadBtnClick" style="-fx-background-color: transparent;" text="Foto hochladen" textFill="WHITE">
                                        <font>
-                                          <Font name="System Bold" size="16.0" />
+                                          <Font name="System Bold" size="18.0" />
                                        </font>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
+                                    <Circle fx:id="photoDeleteCircle" fill="WHITE" layoutX="378.0" radius="20.0" stroke="#c69963" strokeType="INSIDE" strokeWidth="3.0" />
+                                    <Button fx:id="photoDeleteButton" layoutX="362.0" layoutY="-14.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onPhotoDeleteButtonClick" prefHeight="15.0" prefWidth="15.0" style="-fx-background-color: transparent;">
+                                       <graphic>
+                                          <FontAwesomeIconView fill="#211d5a" glyphName="CLOSE" size="20" tabSize="0" />
+                                       </graphic>
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </Button>
                                  </children>
                                  <HBox.margin>
-                                    <Insets left="536.0" top="45.0" />
+                                    <Insets left="532.0" top="73.0" />
                                  </HBox.margin>
                                  <padding>
                                     <Insets left="50.0" />
@@ -79,16 +89,31 @@
                                           <Insets top="50.0" />
                                        </VBox.margin>
                                     </HBox>
-                                    <HBox prefHeight="50.0" prefWidth="200.0" spacing="60.0">
+                                    <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0" prefWidth="600.0" spacing="60.0">
                                        <children>
-                                          <Label text="Nachname" textFill="#211d5a">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font></Label>
-                                          <Label fx:id="lastnameLabel" text="Nachname" textFill="#211d5a">
-                                             <font>
-                                                <Font name="System Bold" size="16.0" />
-                                             </font></Label>
+                                          <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0" prefWidth="600.0">
+                                             <children>
+                                                <HBox maxWidth="-Infinity" prefHeight="100.0" prefWidth="600.0" spacing="62.0">
+                                                   <children>
+                                                      <Label text="Nachname" textFill="#211d5a">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="lastnameLabel" text="Nachname" textFill="#211d5a">
+                                                         <font>
+                                                            <Font name="System Bold" size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                                <Label fx:id="emailNoticeLabel" text="email" textFill="#ee0404">
+                                                   <VBox.margin>
+                                                      <Insets left="135.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                             </children>
+                                          </VBox>
                                        </children>
                                        <opaqueInsets>
                                           <Insets />
@@ -96,16 +121,31 @@
                                     </HBox>
                                     <StackPane prefHeight="50.0" prefWidth="200.0">
                                        <children>
-                                          <HBox fx:id="updateEmailHBox" prefHeight="100.0" prefWidth="200.0" spacing="96.0">
+                                          <HBox fx:id="updateEmailHBox" spacing="96.0">
                                              <children>
-                                                <Label text="Email" textFill="#211d5a">
-                                                   <font>
-                                                      <Font size="16.0" />
-                                                   </font></Label>
-                                                <TextField fx:id="emailTextField" prefHeight="29.0" prefWidth="366.0">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font></TextField>
+                                                <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="600.0">
+                                                   <children>
+                                                      <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="600.0" spacing="96.0">
+                                                         <children>
+                                                            <Label text="Email" textFill="#211d5a">
+                                                               <font>
+                                                                  <Font size="16.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <TextField fx:id="emailTextField" prefHeight="29.0" prefWidth="364.0">
+                                                               <font>
+                                                                  <Font size="14.0" />
+                                                               </font>
+                                                            </TextField>
+                                                         </children>
+                                                      </HBox>
+                                                      <Label fx:id="phoneNoticeLabel" maxHeight="-Infinity" text="phone" textFill="#e20808">
+                                                         <VBox.margin>
+                                                            <Insets left="135.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
                                              </children>
                                           </HBox>
                                           <HBox fx:id="emailHBox" prefHeight="100.0" prefWidth="200.0" spacing="98.0">

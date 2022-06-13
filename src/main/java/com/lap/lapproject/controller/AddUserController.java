@@ -2,6 +2,7 @@ package com.lap.lapproject.controller;
 
 import com.lap.lapproject.utility.PasswordSecurity;
 import com.lap.lapproject.utility.QuickAlert;
+import com.lap.lapproject.utility.UsabilityMethods;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -160,7 +161,7 @@ public class AddUserController extends BaseController {
                 !password.isBlank() && !email.isBlank() && !telephone.isBlank()
         ) {
             if (listModel.getSelectedUser() == null) {
-                if (checkUser(username) && PasswordSecurity.isPasswordValid(password) && checkEmail(email)) {
+                if (checkUser(username) && PasswordSecurity.isPasswordValid(password, errorPassword) && UsabilityMethods.isEmailValid(email)) {
                     Trainer trainer = new Trainer(username, title, active, firstName, lastName, password,
                             authorization, description, telephone, email,
                             photoPath.equals("") ? null : convertToBytes(photoPath),
@@ -190,7 +191,7 @@ public class AddUserController extends BaseController {
                     setNewDataForTrainer();
                 }
             } else {
-                if (checkEmail(emailTextField.getText())) {
+                if (UsabilityMethods.isEmailValid(emailTextField.getText())) {
                     setNewDataForTrainer();
                 }
                 logger.info("Das hat nicht funktioniert");
@@ -337,21 +338,21 @@ public class AddUserController extends BaseController {
 
 
     //Email validieren
-    @FXML
-    public boolean checkEmail(String email) {
-        Pattern compile = Pattern.compile("[_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.([a-zA-Z]{2,}){1}");
-        Matcher matcher = compile.matcher(email);
-        boolean isEmailTrue = matcher.matches();
-        if (!matcher.matches()) {
-            logger.info("ICH BIN HIER");
-            errorEmail.setVisible(true);
-            errorEmail.setText("Email nicht gültig");
-            return false;
-        } else {
-            errorEmail.setVisible(false);
-            return true;
-        }
-    }
+//    @FXML
+//    public boolean checkEmail(String email) {
+//        Pattern compile = Pattern.compile("[_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.([a-zA-Z]{2,}){1}");
+//        Matcher matcher = compile.matcher(email);
+//        boolean isEmailTrue = matcher.matches();
+//        if (!matcher.matches()) {
+//            logger.info("ICH BIN HIER");
+//            errorEmail.setVisible(true);
+//            errorEmail.setText("Email nicht gültig");
+//            return false;
+//        } else {
+//            errorEmail.setVisible(false);
+//            return true;
+//        }
+//    }
 
     //prüft ob ein Foto in DB vorhanden ist
     public  boolean checkImageInDB() throws IOException {

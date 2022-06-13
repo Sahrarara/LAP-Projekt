@@ -5,6 +5,7 @@ import com.lap.lapproject.model.*;
 import com.lap.lapproject.repos.*;
 
 import com.lap.lapproject.utility.QuickAlert;
+import com.lap.lapproject.utility.UsabilityMethods;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
@@ -18,6 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
+import javax.swing.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -53,10 +55,8 @@ public class AddBookingController extends BaseController {
     private ChoiceBox<Course> courseNameChoiceBox;
     @FXML
     private ChoiceBox<Location> locationChoiceBox;
-
-    //TODO: how to change the button name in update mode??
     @FXML
-    private Button addButton;
+    private Label locationNameLabel;
 
 
     @FXML
@@ -71,116 +71,32 @@ public class AddBookingController extends BaseController {
         // TODO: Rework addbooking.fxml (eintägiger Kurs vs. wöchentlicher Kurs)
         //TODO: if Bedingung damit Booking nur angelegt wird wenn möglich
 
-
 //        BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
 
+//        String startDate = startDatePicker.getEditor().getText().strip().replaceAll("-", ".");
+//        startDatePicker.getEditor().getText().isEmpty();
+
         if (!(locationChoiceBox.getValue() == null) &&
-        !(courseNameChoiceBox.getValue() == null) &&
-        !(trainerChoiceBox.getValue() == null) &&
-        !(roomNumberChoiceBox.getValue() == null) &&
-        !(recurrenceChoiceBox.getValue() == null) &&
-        !(startDatePicker.getValue() == null) &&
-        !(endDatePicker.getValue() == null) &&
-        !(timeStartTimeField.getValue() == null) &&
-        !(timeEndTimeField.getValue() == null)){
-
-            if(listModel.getSelectedBooking() == null) {
-
-                //add new booking
-
-                Room room = roomNumberChoiceBox.getValue();
-                Trainer trainer = trainerChoiceBox.getValue();
-                Course course = courseNameChoiceBox.getValue();
-                String recurrenceRule = String.valueOf(recurrenceChoiceBox.getValue());
-
-                LocalDate dateStart = startDatePicker.getValue();
-                LocalDate dateEnd = endDatePicker.getValue();
-                LocalTime timeStart = timeStartTimeField.getValue();
-                LocalTime timeEnd = timeEndTimeField.getValue();
-
-                LocalDateTime localDateTimeStart = null;
-                LocalDateTime localDateTimeEnd = null;
+                !(courseNameChoiceBox.getValue() == null) &&
+                !(trainerChoiceBox.getValue() == null) &&
+                !(roomNumberChoiceBox.getValue() == null) &&
+                !(recurrenceChoiceBox.getValue() == null) &&
 
 
-                // validate date
+//                !(startDatePicker.getEditor().getText()).isEmpty() &&
+//                !(endDatePicker.getEditor().getText()).isEmpty() &&
 
-                if (dateStart.compareTo(dateEnd) > 0) {
-                    System.out.println("dateStart is after dateEnd: NOT OK");
-                    QuickAlert.showError("Datum passt nicht. Bitte kontrollieren!");
-
-                } else if (dateStart.compareTo(dateEnd) < 0 || dateStart.compareTo(dateEnd) == 0) {
-                    System.out.println("dateStart is before dateEnd OR also dateStart is equal to dateEnd: OK");
-
-                    // validate time
-
-                    if(timeStart.compareTo(timeEnd) > 0 || timeStart.compareTo(timeEnd) == 0) {
-                        System.out.println("timeStart is after timeEnd: NOT OK");
-                        QuickAlert.showError("Uhrzeit passt nicht. Bitte kontrollieren!");
-
-                    } else if (timeStart.compareTo(timeEnd) < 0) {
-
-                        localDateTimeStart = LocalDateTime.of(dateStart, timeStart);
-                        localDateTimeEnd = LocalDateTime.of(dateEnd, timeEnd);
-                        Booking booking = new Booking(room, trainer, model.getLoggedInUser(), course, localDateTimeStart, localDateTimeEnd, recurrenceRule);
-                        listModel.bookingList.add(booking);
-                        logger.info("from AddBookingController-Add Methode: {}", "booking Added");
-                        moveToBookingPage();
-                    }
-
-                }
+                !(startDatePicker.getValue() == null) &&
+                !(endDatePicker.getValue() == null) &&
 
 
+                !(timeStartTimeField.getValue().toString().substring(0, 5).equals(LocalTime.now().toString().substring(0,5))) &&
+                !(timeEndTimeField.getValue().toString().substring(0, 5).equals(LocalTime.now().toString().substring(0,5)))) {
+
+            if (listModel.getSelectedBooking() == null) {
+                addNewBooking();
             } else {
-
-                //update selected booking
-
-                Booking selectedBooking = listModel.getSelectedBooking();
-                selectedBooking.setRoom(roomNumberChoiceBox.getValue());
-                selectedBooking.setUser(model.getLoggedInUser());
-                selectedBooking.setTrainer(trainerChoiceBox.getValue());
-                selectedBooking.setCourse(courseNameChoiceBox.getValue());
-
-                LocalDate dateStart = startDatePicker.getValue();
-                LocalDate dateEnd = endDatePicker.getValue();
-                LocalTime timeStart = timeStartTimeField.getValue();
-                LocalTime timeEnd = timeEndTimeField.getValue();
-
-                LocalDateTime localDateTimeStart;
-                LocalDateTime localDateTimeEnd;
-
-                selectedBooking.setRecurrenceRule(recurrenceChoiceBox.getValue());
-
-
-                // validate date
-
-                if (dateStart.compareTo(dateEnd) > 0) {
-                    System.out.println("dateStart is after dateEnd: NOT OK");
-                    QuickAlert.showError("Datum passt nicht. Bitte kontrollieren!");
-
-                } else if (dateStart.compareTo(dateEnd) < 0 || dateStart.compareTo(dateEnd) == 0) {
-                    System.out.println("dateStart is before dateEnd OR also dateStart is equal to dateEnd: OK");
-
-                    // validate time
-
-                    if(timeStart.compareTo(timeEnd) > 0 || timeStart.compareTo(timeEnd) == 0) {
-                        System.out.println("timeStart is after timeEnd: NOT OK");
-                        QuickAlert.showError("Uhrzeit passt nicht. Bitte kontrollieren!");
-
-                    } else if (timeStart.compareTo(timeEnd) < 0) {
-
-                        localDateTimeStart = LocalDateTime.of(dateStart, timeStart);
-                        localDateTimeEnd = LocalDateTime.of(dateEnd, timeEnd);
-                        selectedBooking.setDateTimeStart(localDateTimeStart);
-                        selectedBooking.setDateTimeEnd(localDateTimeEnd);
-
-                       // bookingRepositoryJDBC.updateBooking(selectedBooking);
-                        listModel.bookingList.set(listModel.bookingList.indexOf(selectedBooking), selectedBooking);
-                        logger.info("from BookingController-update Methode: {}", "booking updated");
-                        moveToBookingPage();
-                    }
-                }
-
-
+                updateSelectedBooking();
             }
 
         } else {
@@ -188,6 +104,98 @@ public class AddBookingController extends BaseController {
         }
     }
 
+
+    private void addNewBooking() {
+
+        logger.info("timeStartTimeField.getValue(): {}", timeStartTimeField.getValue() + "/" + LocalTime.now());
+        logger.info("timeEndTimeField.getValue(): {}", timeEndTimeField.getValue());
+
+        Room room = roomNumberChoiceBox.getValue();
+        Trainer trainer = trainerChoiceBox.getValue();
+        Course course = courseNameChoiceBox.getValue();
+        String recurrenceRule = String.valueOf(recurrenceChoiceBox.getValue());
+
+        LocalDate dateStart = startDatePicker.getValue();
+        LocalDate dateEnd = endDatePicker.getValue();
+
+        LocalTime timeStart = timeStartTimeField.getValue();
+        LocalTime timeEnd = timeEndTimeField.getValue();
+
+        LocalDateTime localDateTimeStart = null;
+        LocalDateTime localDateTimeEnd = null;
+
+
+        // validate date
+
+        if (dateStart.compareTo(dateEnd) > 0 ) {
+            JOptionPane.showMessageDialog(null, "Datum passt nicht. Bitte kontrollieren!",
+                    "Warnung", JOptionPane.ERROR_MESSAGE, null);
+
+        } else {
+
+            // validate time
+
+            if (timeStart.compareTo(timeEnd) > 0 || timeStart.compareTo(timeEnd) == 0) {
+                JOptionPane.showMessageDialog(null, "Uhrzeit passt nicht. Bitte kontrollieren!",
+                        "Warnung", JOptionPane.ERROR_MESSAGE, null);
+
+            } else {
+                localDateTimeStart = LocalDateTime.of(dateStart, timeStart);
+                localDateTimeEnd = LocalDateTime.of(dateEnd, timeEnd);
+                Booking booking = new Booking(room, trainer, model.getLoggedInUser(), course, localDateTimeStart, localDateTimeEnd, recurrenceRule);
+                listModel.bookingList.add(booking);
+
+                moveToBookingPage();
+            }
+        }
+    }
+
+
+    private void updateSelectedBooking() {
+
+        Booking selectedBooking = listModel.getSelectedBooking();
+
+        selectedBooking.setRoom(roomNumberChoiceBox.getValue());
+        selectedBooking.setUser(model.getLoggedInUser());
+        selectedBooking.setTrainer(trainerChoiceBox.getValue());
+        selectedBooking.setCourse(courseNameChoiceBox.getValue());
+
+        LocalDate dateStart = startDatePicker.getValue();
+        LocalDate dateEnd = endDatePicker.getValue();
+        LocalTime timeStart = timeStartTimeField.getValue();
+        LocalTime timeEnd = timeEndTimeField.getValue();
+
+        LocalDateTime localDateTimeStart;
+        LocalDateTime localDateTimeEnd;
+
+        selectedBooking.setRecurrenceRule(recurrenceChoiceBox.getValue());
+
+        // validate date
+        if (dateStart.compareTo(dateEnd) > 0) {
+
+            JOptionPane.showMessageDialog(null, "Datum passt nicht. Bitte kontrollieren!",
+                    "Warnung", JOptionPane.ERROR_MESSAGE, null);
+        } else {
+
+            // validate time
+
+            if (timeStart.compareTo(timeEnd) > 0 || timeStart.compareTo(timeEnd) == 0) {
+
+                JOptionPane.showMessageDialog(null, "Uhrzeit passt nicht. Bitte kontrollieren!",
+                        "Warnung", JOptionPane.ERROR_MESSAGE, null);
+            } else {
+
+                localDateTimeStart = LocalDateTime.of(dateStart, timeStart);
+                localDateTimeEnd = LocalDateTime.of(dateEnd, timeEnd);
+                selectedBooking.setDateTimeStart(localDateTimeStart);
+                selectedBooking.setDateTimeEnd(localDateTimeEnd);
+
+                // bookingRepositoryJDBC.updateBooking(selectedBooking);
+                listModel.bookingList.set(listModel.bookingList.indexOf(selectedBooking), selectedBooking);
+                moveToBookingPage();
+            }
+        }
+    }
 
 
     @FXML
@@ -203,62 +211,81 @@ public class AddBookingController extends BaseController {
         assert timeStartTimeField != null : "fx:id=\"timeStartTimeField\" was not injected: check your FXML file 'addbooking-view.fxml'.";
         assert roomNumberChoiceBox != null : "fx:id=\"roomNumberChoiceBox\" was not injected: check your FXML file 'addbooking-view.fxml'.";
         assert trainerChoiceBox != null : "fx:id=\"trainerChoiceBox\" was not injected: check your FXML file 'addbooking-view.fxml'.";
+        assert locationNameLabel != null : "fx:id=\"locationNameLabel\" was not injected: check your FXML file 'addbooking-view.fxml'.";
+
+        locationNameLabel.setVisible(false);
 
         bookerLabel.setText(model.getLoggedInUser().getfName() + " " + model.getLoggedInUser().getlName());
+
+        courseNameChoiceBox.setItems(listModel.courseList);
+        locationChoiceBox.setItems(listModel.locationList);
+        fillActiveTrainerToChoiceBox();
+        fillRecurrenceRuleChoiceBox();
+        fillRoomChoiceBox();
+
+//        timeStartTimeField.setValue(null);
+//        timeEndTimeField.setValue(null);
+
+
+        if (listModel.getSelectedBooking() != null) {
+            fillChoiceBoxesForUpdate();
+        }
+
+    }
+
+
+    private void fillChoiceBoxesForUpdate() {
+
+        locationChoiceBox.setVisible(false);
+        locationNameLabel.setVisible(true);
+        locationNameLabel.setText(listModel.getSelectedBooking().getRoom().getLocation().getStreet());
+
+        locationChoiceBox.setValue(listModel.getSelectedBooking().getRoom().getLocation());
+        courseNameChoiceBox.setValue(listModel.getSelectedBooking().getCourse());
+        trainerChoiceBox.setValue(listModel.getSelectedBooking().getTrainer());
+        roomNumberChoiceBox.setValue(listModel.getSelectedBooking().getRoom());
+        recurrenceChoiceBox.setValue(listModel.getSelectedBooking().getRecurrenceRule());
+        startDatePicker.setValue(LocalDate.from(listModel.getSelectedBooking().getDateTimeStart()));
+        endDatePicker.setValue(LocalDate.from(listModel.getSelectedBooking().getDateTimeEnd()));
+        timeStartTimeField.setValue(listModel.getSelectedBooking().getDateTimeStart().toLocalTime());
+        timeEndTimeField.setValue(listModel.getSelectedBooking().getDateTimeEnd().toLocalTime());
+    }
+
+
+    private void fillRecurrenceRuleChoiceBox() {
         recurrenceChoiceBox.getItems().add("keiner");
         recurrenceChoiceBox.getItems().add("täglich");
         recurrenceChoiceBox.getItems().add("wöchentlich");
         recurrenceChoiceBox.getItems().add("monatlich");
-        if(listModel.getSelectedBooking() == null) {
+        if (listModel.getSelectedBooking() == null) {
             recurrenceChoiceBox.setValue("keiner");
         }
+    }
 
 
-        timeStartTimeField.setValue(LocalTime.of(7, 30));
-        timeEndTimeField.setValue(LocalTime.of(19, 30));
-
-
-        courseNameChoiceBox.setItems(listModel.courseList);
-        locationChoiceBox.setItems(listModel.locationList);
-
-        // just add active trainer to the choice box
+    private void fillActiveTrainerToChoiceBox() {
         listModel.activeTrainerList.clear();
-        for(Trainer trainer : listModel.trainerList) {
-            if(trainer.getActiveStatus()) {
+        for (Trainer trainer : listModel.trainerList) {
+            if (trainer.getActiveStatus()) {
                 listModel.activeTrainerList.add(trainer);
             }
         }
         trainerChoiceBox.setItems(listModel.activeTrainerList);
+    }
 
 
+    private void fillRoomChoiceBox() {
         FilteredList<Room> roomFilteredList = new FilteredList<>(listModel.roomList);
         roomNumberChoiceBox.setItems(listModel.roomList);
 
         locationChoiceBox.getSelectionModel().selectedItemProperty().addListener((Observable, oldValue, newValue) -> {
             roomFilteredList.setPredicate(room -> room.getLocation().getStreet().equals(locationChoiceBox.getValue().getStreet()));
-
         });
         roomNumberChoiceBox.setItems(roomFilteredList);
-
-
-        if (listModel.getSelectedBooking() != null) {
-            locationChoiceBox.setValue(listModel.getSelectedBooking().getRoom().getLocation());
-            courseNameChoiceBox.setValue(listModel.getSelectedBooking().getCourse());
-            trainerChoiceBox.setValue(listModel.getSelectedBooking().getTrainer());
-            roomNumberChoiceBox.setValue(listModel.getSelectedBooking().getRoom());
-            recurrenceChoiceBox.setValue(listModel.getSelectedBooking().getRecurrenceRule());
-            startDatePicker.setValue(LocalDate.from(listModel.getSelectedBooking().getDateTimeStart()));
-            endDatePicker.setValue(LocalDate.from(listModel.getSelectedBooking().getDateTimeEnd()));
-            timeStartTimeField.setValue(listModel.getSelectedBooking().getDateTimeStart().toLocalTime());
-            timeEndTimeField.setValue(listModel.getSelectedBooking().getDateTimeEnd().toLocalTime());
-        }
-
-
     }
 
 
-
-    private Stage getCurrentStage(){
+    private Stage getCurrentStage() {
         return (Stage) locationLabel.getScene().getWindow();
     }
 
@@ -268,3 +295,23 @@ public class AddBookingController extends BaseController {
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
