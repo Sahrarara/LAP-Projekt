@@ -41,9 +41,7 @@ public class UsabilityMethods {
     }
 
     public static boolean isPhoneNumberValid(String phoneNumber) {
-
         Pattern p = Pattern.compile("^\\+(?:[0-9] ?){6,14}[0-9]$");
-
         Matcher m = p.matcher(phoneNumber);
         if (m.find() && m.group().equals(phoneNumber)) {
             return true;
@@ -56,17 +54,12 @@ public class UsabilityMethods {
     public static boolean isEmailValid(String email) {
         Pattern compile = Pattern.compile("[_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.([a-zA-Z]{2,}){1}");
         Matcher matcher = compile.matcher(email);
-
-        if (!matcher.matches()) {
-            return false;
-        }
-        return true;
+        return matcher.matches();
     }
 
 
     public static void changeListenerForPhoneNr(TextField textField, Label label) {
         textField.textProperty().addListener(((observable, oldValue, newValue) -> {
-
             if (!UsabilityMethods.isPhoneNumberValid(newValue)) {
                 label.setText("Bitte dieses Format verwenden: +43 1234567");
                 label.setVisible(true);
@@ -79,7 +72,6 @@ public class UsabilityMethods {
 
     public static void changeListenerForEmail(TextField textField, Label label) {
         textField.textProperty().addListener(((observable, oldValue, newValue) -> {
-
             if (!UsabilityMethods.isEmailValid(newValue)) {
                 if (!textField.getText().equals("")) {
                     label.setText("Bsp. 'max@gmail.com'");
@@ -90,5 +82,8 @@ public class UsabilityMethods {
             }
         }));
     }
+
+
+
 
 }

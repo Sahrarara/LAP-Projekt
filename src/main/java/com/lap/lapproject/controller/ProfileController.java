@@ -26,6 +26,9 @@ import org.slf4j.LoggerFactory;
 import javax.swing.*;
 import java.io.*;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Locale;
 
 
 public class ProfileController extends BaseController {
@@ -165,6 +168,16 @@ public class ProfileController extends BaseController {
     }
 
 
+    @FXML
+    private void onEditBtnClick(ActionEvent actionEvent) {
+        updateMode();
+    }
+
+    @FXML
+    private void onAbortBtnClick(ActionEvent actionEvent) {
+        standardMode();
+    }
+
 
     @FXML
     private void onChangePasswordBtnClick(ActionEvent actionEvent) {
@@ -183,44 +196,45 @@ public class ProfileController extends BaseController {
     }
 
 
-
-    @FXML
-    private void onEditBtnClick(ActionEvent actionEvent) {
-        updateMode();
-    }
-
-    @FXML
-    private void onAbortBtnClick(ActionEvent actionEvent) {
-        standardMode();
-    }
-
     @FXML
     private void onPhotoUploadBtnClick(ActionEvent actionEvent) {
+
+        String[] extensionList = {"jpg", "jpeg", "gif", "png", "tif", "tiff", "bmp"};
+
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(getCurrentStage());
-        try {
-            if (file != null) {
-                circleView.setFill(new ImagePattern(new Image(new FileInputStream(file))));
-                model.getLoggedInUser().setPhoto(convertToBytes(file.getAbsolutePath()));
-            }
 
+        int index = file.getAbsolutePath().lastIndexOf('.');
+
+        try {
+            if (index > 0) {
+                String extension = file.getAbsolutePath().substring(index + 1).toLowerCase(Locale.ROOT);
+
+                if (Arrays.asList(extensionList).contains(extension)) {
+                    circleView.setFill(new ImagePattern(new Image(new FileInputStream(file))));
+                    model.getLoggedInUser().setPhoto(convertToBytes(file.getAbsolutePath()));
+                    System.out.println("File extension is: " + extension);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Es können folgende Dateiformate hochgeladen werden: \n" +
+                                    "JPG, JPEG, GIF, PNG, TIF, TIFF, BMP",
+                            "Warnung", JOptionPane.WARNING_MESSAGE, null);
+                }
+            }
         } catch (IOException e) {
             System.err.println("File " + file.getAbsolutePath() + " not found");
         }
     }
 
 
-
     @FXML
     private void onPhotoDeleteButtonClick(ActionEvent actionEvent) {
-        circleView.setFill(new ImagePattern(imageFromBytes( model.getLoggedInUser().getPhoto())));
+        circleView.setFill(new ImagePattern(imageFromBytes(model.getLoggedInUser().getPhoto())));
         try {
             model.getLoggedInUser().setPhoto(convertToBytes("src/main/resources/com/lap/lapproject/images/lapproject/images/user.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
 
 
     public static Image imageFromBytes(byte[] photoBytes) {
@@ -238,7 +252,6 @@ public class ProfileController extends BaseController {
         FileInputStream fileInputStream = new FileInputStream(pathToImage);
         return fileInputStream.readAllBytes();
     }
-
 
 
     private void updateMode() {
@@ -263,7 +276,6 @@ public class ProfileController extends BaseController {
 
         UsabilityMethods.changeListenerForPhoneNr(phoneTextField, phoneNoticeLabel);
         UsabilityMethods.changeListenerForEmail(emailTextField, emailNoticeLabel);
-
     }
 
 
