@@ -4,7 +4,6 @@ import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.Trainer;
 import com.lap.lapproject.repos.UserRepositoryJDBC;
-import com.lap.lapproject.utility.PasswordSecurity;
 import com.lap.lapproject.utility.UsabilityMethods;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -77,6 +76,10 @@ public class ProfileController extends BaseController {
     private Label emailNoticeLabel;
     @FXML
     private Circle photoDeleteCircle;
+    @FXML
+    private Button changePasswordButton;
+    @FXML
+    private Button abortButton;
 
 
     @FXML
@@ -115,19 +118,30 @@ public class ProfileController extends BaseController {
 
     @FXML
     void initialize() {
+        assert abortButton != null : "fx:id=\"abortButton\" was not injected: check your FXML file 'profile-view.fxml'.";
+        assert changePasswordButton != null : "fx:id=\"changePasswordButton\" was not injected: check your FXML file 'profile-view.fxml'.";
+        assert circleView != null : "fx:id=\"circleView\" was not injected: check your FXML file 'profile-view.fxml'.";
+        assert descriptionHBox != null : "fx:id=\"descriptionHBox\" was not injected: check your FXML file 'profile-view.fxml'.";
         assert descriptionLabel != null : "fx:id=\"descriptionLabel\" was not injected: check your FXML file 'profile-view.fxml'.";
         assert descriptionTextArea != null : "fx:id=\"descriptionTextArea\" was not injected: check your FXML file 'profile-view.fxml'.";
+        assert editButton != null : "fx:id=\"editButton\" was not injected: check your FXML file 'profile-view.fxml'.";
+        assert emailHBox != null : "fx:id=\"emailHBox\" was not injected: check your FXML file 'profile-view.fxml'.";
         assert emailLabel != null : "fx:id=\"emailLabel\" was not injected: check your FXML file 'profile-view.fxml'.";
+        assert emailNoticeLabel != null : "fx:id=\"emailNoticeLabel\" was not injected: check your FXML file 'profile-view.fxml'.";
         assert emailTextField != null : "fx:id=\"emailTextField\" was not injected: check your FXML file 'profile-view.fxml'.";
         assert firstnameLabel != null : "fx:id=\"firstnameLabel\" was not injected: check your FXML file 'profile-view.fxml'.";
         assert lastnameLabel != null : "fx:id=\"lastnameLabel\" was not injected: check your FXML file 'profile-view.fxml'.";
-        assert photoUploadButton != null : "fx:id=\"photoUploadButton\" was not injected: check your FXML file 'profile-view.fxml'.";
-        assert circleView != null : "fx:id=\"circleView\" was not injected: check your FXML file 'profile-view.fxml'.";
+        assert phoneHBox != null : "fx:id=\"phoneHBox\" was not injected: check your FXML file 'profile-view.fxml'.";
         assert phoneLabel != null : "fx:id=\"phoneLabel\" was not injected: check your FXML file 'profile-view.fxml'.";
-        assert phoneTextField != null : "fx:id=\"phoneTextField\" was not injected: check your FXML file 'profile-view.fxml'.";
         assert phoneNoticeLabel != null : "fx:id=\"phoneNoticeLabel\" was not injected: check your FXML file 'profile-view.fxml'.";
+        assert phoneTextField != null : "fx:id=\"phoneTextField\" was not injected: check your FXML file 'profile-view.fxml'.";
         assert photoDeleteButton != null : "fx:id=\"photoDeleteButton\" was not injected: check your FXML file 'profile-view.fxml'.";
         assert photoDeleteCircle != null : "fx:id=\"photoDeleteCircle\" was not injected: check your FXML file 'profile-view.fxml'.";
+        assert photoUploadButton != null : "fx:id=\"photoUploadButton\" was not injected: check your FXML file 'profile-view.fxml'.";
+        assert saveButton != null : "fx:id=\"saveButton\" was not injected: check your FXML file 'profile-view.fxml'.";
+        assert updateDescriptionHBox != null : "fx:id=\"updateDescriptionHBox\" was not injected: check your FXML file 'profile-view.fxml'.";
+        assert updateEmailHBox != null : "fx:id=\"updateEmailHBox\" was not injected: check your FXML file 'profile-view.fxml'.";
+        assert updatePhoneHBox != null : "fx:id=\"updatePhoneHBox\" was not injected: check your FXML file 'profile-view.fxml'.";
 
 
         standardMode();
@@ -141,7 +155,6 @@ public class ProfileController extends BaseController {
             circleView.setFill(new ImagePattern(imageFromBytes(model.getLoggedInUser().getPhoto())));
 
         } else {
-
             try {
                 circleView.setFill(new ImagePattern(imageFromBytes(convertToBytes
                         ("src/main/resources/com/lap/lapproject/images/lapproject/images/Sample_User_Icon.png"))));
@@ -149,9 +162,8 @@ public class ProfileController extends BaseController {
                 e.printStackTrace();
             }
         }
-
-
     }
+
 
 
     @FXML
@@ -172,12 +184,15 @@ public class ProfileController extends BaseController {
 
 
 
-
     @FXML
     private void onEditBtnClick(ActionEvent actionEvent) {
         updateMode();
     }
 
+    @FXML
+    private void onAbortBtnClick(ActionEvent actionEvent) {
+        standardMode();
+    }
 
     @FXML
     private void onPhotoUploadBtnClick(ActionEvent actionEvent) {
@@ -198,8 +213,6 @@ public class ProfileController extends BaseController {
 
     @FXML
     private void onPhotoDeleteButtonClick(ActionEvent actionEvent) {
-        //TODO: delete photo from circle and DB
-
         circleView.setFill(new ImagePattern(imageFromBytes( model.getLoggedInUser().getPhoto())));
         try {
             model.getLoggedInUser().setPhoto(convertToBytes("src/main/resources/com/lap/lapproject/images/lapproject/images/user.png"));
@@ -239,13 +252,14 @@ public class ProfileController extends BaseController {
         photoUploadButton.setVisible(true);
         photoDeleteButton.setVisible(true);
         photoDeleteCircle.setVisible(true);
+        abortButton.setVisible(true);
+        changePasswordButton.setVisible(false);
         saveButton.setVisible(true);
         editButton.setVisible(false);
 
         emailTextField.setText(model.getLoggedInUser().getEmail());
         phoneTextField.setText(String.valueOf(model.getLoggedInUser().getPhoneNmbr()));
         descriptionTextArea.setText(model.getLoggedInUser().getDescription());
-
 
         UsabilityMethods.changeListenerForPhoneNr(phoneTextField, phoneNoticeLabel);
         UsabilityMethods.changeListenerForEmail(emailTextField, emailNoticeLabel);
@@ -267,6 +281,8 @@ public class ProfileController extends BaseController {
         phoneNoticeLabel.setVisible(false);
         emailNoticeLabel.setVisible(false);
 
+        abortButton.setVisible(false);
+        changePasswordButton.setVisible(true);
         saveButton.setVisible(false);
         editButton.setVisible(true);
     }
