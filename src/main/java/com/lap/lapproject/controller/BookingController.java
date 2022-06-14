@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -28,12 +29,6 @@ public class BookingController {
 
     private static final Logger logger = LoggerFactory.getLogger(BookingController.class);
 
-    @FXML
-    private Button deleteBookingBtn;
-    @FXML
-    private Button editBookingButton;
-    @FXML
-    private ButtonBar bookingBtnBar;
     @FXML
     private TableView<Booking> tableViewBooking;
     @FXML
@@ -56,8 +51,12 @@ public class BookingController {
     private TextField searchBar;
     @FXML
     private Button closeIconButton;
-
-
+    @FXML
+    private ButtonBar bookingBtnBarForCoachBookingList;
+    @FXML
+    private HBox bookingBtnBarForCoach;
+    @FXML
+    private ButtonBar bookingBtnBarForAdmin;
 
 
     @FXML
@@ -78,11 +77,10 @@ public class BookingController {
     }
 
 
-
     @FXML
     private void onDeleteBookingBtnClick(ActionEvent actionEvent) {
-        Booking booking  = tableViewBooking.getSelectionModel().getSelectedItem();
-      //  BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
+        Booking booking = tableViewBooking.getSelectionModel().getSelectedItem();
+        //  BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
         //bookingRepositoryJDBC.deleteBooking(booking);
 
 
@@ -99,7 +97,6 @@ public class BookingController {
 
     @FXML
     private void onEditBtnClick(ActionEvent actionEvent) {
-
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_BOOKING));
         Scene scene = null;
@@ -115,14 +112,14 @@ public class BookingController {
 
     @FXML
     void initialize() {
-        assert bookingBtnBar != null : "fx:id=\"bookingBtnBar\" was not injected: check your FXML file 'booking-view.fxml'.";
+        assert bookingBtnBarForAdmin != null : "fx:id=\"bookingBtnBarForAdmin\" was not injected: check your FXML file 'booking-view.fxml'.";
+        assert bookingBtnBarForCoach != null : "fx:id=\"bookingBtnBarForCoach\" was not injected: check your FXML file 'booking-view.fxml'.";
+        assert bookingBtnBarForCoachBookingList != null : "fx:id=\"bookingBtnBarForCoachBookingList\" was not injected: check your FXML file 'booking-view.fxml'.";
         assert closeIconButton != null : "fx:id=\"closeIconButton\" was not injected: check your FXML file 'booking-view.fxml'.";
         assert courseNameColumn != null : "fx:id=\"courseNameColumn\" was not injected: check your FXML file 'booking-view.fxml'.";
         assert dateFromColumn != null : "fx:id=\"dateFromColumn\" was not injected: check your FXML file 'booking-view.fxml'.";
         assert dateTimeColumn != null : "fx:id=\"dateTimeColumn\" was not injected: check your FXML file 'booking-view.fxml'.";
         assert dateToColumn != null : "fx:id=\"dateToColumn\" was not injected: check your FXML file 'booking-view.fxml'.";
-        assert deleteBookingBtn != null : "fx:id=\"deleteBookingBtn\" was not injected: check your FXML file 'booking-view.fxml'.";
-        assert editBookingButton != null : "fx:id=\"editBookingButton\" was not injected: check your FXML file 'booking-view.fxml'.";
         assert locationColumn != null : "fx:id=\"locationColumn\" was not injected: check your FXML file 'booking-view.fxml'.";
         assert recurrenceRuleColumn != null : "fx:id=\"recurrenceRuleColumn\" was not injected: check your FXML file 'booking-view.fxml'.";
         assert roomColumn != null : "fx:id=\"roomColumn\" was not injected: check your FXML file 'booking-view.fxml'.";
@@ -139,7 +136,6 @@ public class BookingController {
         // Damit werden alle Choice-Boxen mit Daten aus der selektierte Tabellenzeile befüllt:
         listModel.selectedBookingProperty().bind(tableViewBooking.getSelectionModel().selectedItemProperty());
     }
-
 
 
     public void initBookingTable() {
@@ -165,20 +161,44 @@ public class BookingController {
     }
 
 
-
     private void authorityVisibility() {
         String authority = model.getAuthority();
         switch (authority) {
             case "admin":
+                bookingBtnBarForCoach.setVisible(false);
+                bookingBtnBarForCoachBookingList.setVisible(false);
                 break;
             case "coach":
+                bookingBtnBarForAdmin.setVisible(false);
+                bookingBtnBarForCoachBookingList.setVisible(false);
                 break;
             default:
-                bookingBtnBar.setVisible(false);
-                break;
+                bookingBtnBarForAdmin.setVisible(false);
+                bookingBtnBarForCoach.setVisible(false);
+                bookingBtnBarForCoachBookingList.setVisible(false);
         }
     }
 
+
+
+    @FXML
+    private void onToMyListButtonClick(ActionEvent actionEvent) {
+        logger.info("Eingeloggte User: {}", model.getLoggedInUser().getId() + " " + model.getLoggedInUser().getUsername());
+
+        listModel.filteredBookingListForTrainer.setPredicate(booking -> booking.getTrainer().getId() == model.getLoggedInUser().getId());
+        tableViewBooking.setItems(listModel.filteredBookingListForTrainer);
+        bookingBtnBarForCoach.setVisible(false);
+        bookingBtnBarForCoachBookingList.setVisible(true);
+    }
+
+
+
+    @FXML
+    private void onBackToListBtnClick(ActionEvent actionEvent) {
+        tableViewBooking.setItems(listModel.bookingList);
+        bookingBtnBarForCoach.setVisible(true);
+        bookingBtnBarForCoachBookingList.setVisible(false);
+    }
 
 
     @FXML

@@ -75,8 +75,8 @@ public class Course {
     public int getGroupSize() {return groupSize.get();
     }
 
-    public SimpleIntegerProperty groupSizeProperty() {
-        return groupSize;
+    public String groupSizeProperty() {
+        return String.valueOf(groupSize);
     }
 
     public void setGroupSize(int groupSize) {

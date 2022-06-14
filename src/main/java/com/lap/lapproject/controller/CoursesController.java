@@ -160,9 +160,10 @@ public class CoursesController extends BaseController {
         String searchTerm = searchBar.getText().toLowerCase(Locale.ROOT);
 
         listModel.filteredCourseList.setPredicate(course -> (course.getCourseName().toLowerCase(Locale.ROOT).contains(searchTerm))
-                || course.getProgram().toString().toLowerCase(Locale.ROOT).contains(searchTerm)
+                || course.getProgram().getProgramName().toLowerCase(Locale.ROOT).contains(searchTerm)
                 || course.getCourseStart().toString().toLowerCase(Locale.ROOT).contains(searchTerm)
-                || course.getCourseEnd().toString().toLowerCase(Locale.ROOT).contains(searchTerm));
+                || course.getCourseEnd().toString().toLowerCase(Locale.ROOT).contains(searchTerm)
+                || course.groupSizeProperty().toLowerCase(Locale.ROOT).contains(searchTerm));
     }
 
 

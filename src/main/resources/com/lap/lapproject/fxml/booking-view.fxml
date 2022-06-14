@@ -15,7 +15,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #211D5A;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.BookingController">
@@ -29,52 +29,166 @@
                         <Font name="Comic Sans MS" size="40.0" />
                      </font>
                   </Label>
-                  <ButtonBar fx:id="bookingBtnBar" buttonMinWidth="10.0" layoutX="-349.0" layoutY="104.0" prefHeight="70.0" prefWidth="169.0" AnchorPane.bottomAnchor="-22.0" AnchorPane.leftAnchor="-349.0" AnchorPane.rightAnchor="929.0" AnchorPane.topAnchor="104.0">
-                     <buttons>
-                        <Button graphicTextGap="2.0" mnemonicParsing="false" onAction="#onAddBookingBtnClick" prefHeight="30.0" prefWidth="60.0">
-                           <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/lapproject/images/PlusTW.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <styleClass>
-                              <String fx:value="icon-background" />
-                              <String fx:value="icon-plus" />
-                           </styleClass>
-                        </Button>
-                        <Button fx:id="deleteBookingBtn" mnemonicParsing="false" onAction="#onDeleteBookingBtnClick" prefHeight="30.0" prefWidth="60.0">
-                           <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/lapproject/images/DeleteTW.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <styleClass>
-                              <String fx:value="icon-background" />
-                              <String fx:value="icon-trash" />
-                           </styleClass>
-                        </Button>
-                        <Button fx:id="editBookingButton" mnemonicParsing="false" onAction="#onEditBtnClick" prefHeight="30.0" prefWidth="60.0">
-                           <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/lapproject/images/pen_Icon_white.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <styleClass>
-                              <String fx:value="icon-background" />
-                              <String fx:value="icon-gear" />
-                           </styleClass>
-                        </Button>
-                     </buttons>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </ButtonBar>
+                  <StackPane layoutX="34.0" layoutY="153.0" prefHeight="50.0" prefWidth="320.0">
+                     <children>
+                        <ButtonBar fx:id="bookingBtnBarForAdmin" buttonMinWidth="10.0" maxWidth="-Infinity" prefWidth="400.0">
+                           <buttons>
+                              <Button graphicTextGap="2.0" mnemonicParsing="false" onAction="#onAddBookingBtnClick" prefHeight="30.0" prefWidth="60.0">
+                                 <graphic>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/lapproject/images/PlusTW.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <styleClass>
+                                    <String fx:value="icon-background" />
+                                    <String fx:value="icon-plus" />
+                                 </styleClass>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#onDeleteBookingBtnClick" prefHeight="30.0" prefWidth="60.0">
+                                 <graphic>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/lapproject/images/DeleteTW.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <styleClass>
+                                    <String fx:value="icon-background" />
+                                    <String fx:value="icon-trash" />
+                                 </styleClass>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#onEditBtnClick" prefHeight="30.0" prefWidth="60.0">
+                                 <graphic>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/lapproject/images/pen_Icon_white.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <styleClass>
+                                    <String fx:value="icon-background" />
+                                    <String fx:value="icon-gear" />
+                                 </styleClass>
+                              </Button>
+                           </buttons>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <StackPane.margin>
+                              <Insets right="84.0" />
+                           </StackPane.margin>
+
+                        </ButtonBar>
+                        <HBox fx:id="bookingBtnBarForCoach">
+                           <children>
+                              <Button graphicTextGap="2.0" mnemonicParsing="false" onAction="#onAddBookingBtnClick" prefHeight="30.0" prefWidth="60.0">
+                                 <graphic>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/lapproject/images/PlusTW.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <styleClass>
+                                    <String fx:value="icon-background" />
+                                    <String fx:value="icon-plus" />
+                                 </styleClass>
+                                 <HBox.margin>
+                                    <Insets left="35.0" right="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#onToMyListButtonClick" prefHeight="30.0" prefWidth="130.0" text="zu meiner Liste" textAlignment="CENTER" textFill="WHITE">
+                                 <styleClass>
+                                    <String fx:value="icon-background" />
+                                    <String fx:value="icon-gear" />
+                                 </styleClass>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <StackPane.margin>
+                              <Insets top="10.0" />
+                           </StackPane.margin>
+                        </HBox>
+                        <ButtonBar fx:id="bookingBtnBarForCoachBookingList" buttonMinWidth="10.0" maxWidth="-Infinity" prefWidth="400.0">
+                           <buttons>
+                              <Button graphicTextGap="2.0" mnemonicParsing="false" onAction="#onAddBookingBtnClick" prefHeight="30.0" prefWidth="60.0">
+                                 <graphic>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/lapproject/images/PlusTW.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <styleClass>
+                                    <String fx:value="icon-background" />
+                                    <String fx:value="icon-plus" />
+                                 </styleClass>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#onDeleteBookingBtnClick" prefHeight="30.0" prefWidth="60.0">
+                                 <graphic>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/lapproject/images/DeleteTW.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <styleClass>
+                                    <String fx:value="icon-background" />
+                                    <String fx:value="icon-trash" />
+                                 </styleClass>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#onEditBtnClick" prefHeight="30.0" prefWidth="60.0">
+                                 <graphic>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/lapproject/images/pen_Icon_white.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <styleClass>
+                                    <String fx:value="icon-background" />
+                                    <String fx:value="icon-trash" />
+                                 </styleClass>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#onBackToListBtnClick" prefHeight="30.0" prefWidth="60.0">
+                                 <styleClass>
+                                    <String fx:value="icon-background" />
+                                    <String fx:value="icon-gear" />
+                                 </styleClass>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <graphic>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/lapproject/images/arrow-left.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </buttons>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <StackPane.margin>
+                              <Insets right="14.0" />
+                           </StackPane.margin>
+                        </ButtonBar>
+                     </children>
+                  </StackPane>
                   <HBox layoutX="928.0" layoutY="35.0" style="-fx-background-color: #fff;" styleClass="search-field">
                      <children>
                         <FontAwesomeIconView fill="#211d5aa8" glyphName="SEARCH" size="16">
@@ -98,15 +212,6 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                     </children>
-                  </HBox>
-                  <HBox layoutX="370.0" layoutY="86.0">
-                     <children>
-                        <VBox>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </VBox>
                      </children>
                   </HBox>
                </children>

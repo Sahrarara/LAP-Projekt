@@ -34,6 +34,10 @@ public abstract class User {
     private SimpleBooleanProperty emailVisibility;
     private SimpleBooleanProperty photoVisibility;
 
+    protected User(int id) {
+        this.id = new SimpleIntegerProperty(id);
+    }
+
     //konstruktor für choiceBox befüllen in Formular addUser
     public User(String authority) {
         this.authority = new SimpleStringProperty(authority);

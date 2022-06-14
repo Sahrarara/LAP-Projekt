@@ -21,10 +21,11 @@ public class Booking {
 
 
 
-    public Booking(int id, Room room, Trainer trainer, Course course, LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd, String recurrenceRule) {
+    public Booking(int id, Room room, Trainer trainer,  User user, Course course, LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd, String recurrenceRule) {
         this.id = id;
         this.room = room;
         this.trainer = trainer;
+        this.user = user;
         this.course = course;
         this.dateTimeStart = dateTimeStart;
         this.dateTimeEnd = dateTimeEnd;
