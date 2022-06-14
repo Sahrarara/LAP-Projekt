@@ -3,34 +3,24 @@ package com.lap.lapproject.controller;
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.*;
-import com.lap.lapproject.repos.BookingRepositoryJDBC;
 import com.lap.lapproject.utility.UsabilityMethods;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Callback;
-import org.controlsfx.control.action.Action;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Optional;
-import java.util.Locale;
 
 import static com.lap.lapproject.controller.BaseController.listModel;
 import static com.lap.lapproject.controller.BaseController.model;
@@ -119,7 +109,6 @@ public class BookingController {
         stage.setScene(scene);
         stage.show();
     }
-
 
     @FXML
     void initialize() {
@@ -213,7 +202,7 @@ public class BookingController {
 
 
     @FXML
-    private void onSearchBarClick(ActionEvent actionEvent) {
+    private void onSearchBarClick(KeyEvent actionEvent) {
         String searchTerm = searchBar.getText();
         ObservableList<Booking> filteredList = FXCollections.observableArrayList();
 
@@ -243,10 +232,15 @@ public class BookingController {
     }
 
 
+
     @FXML
     private void onCloseIconClick(ActionEvent actionEvent) {
         searchBar.setText("");
     }
+
+
+
+
 
 
 }

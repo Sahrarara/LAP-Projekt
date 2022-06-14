@@ -75,8 +75,8 @@ public class Room {
         return size.get();
     }
 
-    public SimpleIntegerProperty sizeProperty() {
-        return size;
+    public String sizeProperty() {
+        return String.valueOf(size);
     }
 
     public void setSize(int size) {
