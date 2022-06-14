@@ -32,10 +32,9 @@ public class CourseRepositoryJDBC extends Repository implements CourseRepository
             while (resultSet.next()) {
 
                 //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                String timeStart = resultSet.getString("course_start");
-                LocalDate courseStart = LocalDate.parse(timeStart);
-                String timeEnd = resultSet.getString("course_end");
-                LocalDate courseEnd = LocalDate.parse(timeEnd);
+
+                LocalDate courseStart = resultSet.getDate("course_start").toLocalDate();
+                LocalDate courseEnd = resultSet.getDate("course_end").toLocalDate();
 
 
                 Course course = new Course(resultSet.getInt("course_id"), resultSet.getString("course_name"),
