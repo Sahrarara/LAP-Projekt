@@ -3,7 +3,6 @@ package com.lap.lapproject.controller;
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.Equipment;
-import com.lap.lapproject.model.Room;
 import com.lap.lapproject.repos.EquipmentRepositoryJDBC;
 import com.lap.lapproject.repos.RoomRepositoryJDBC;
 import com.lap.lapproject.utility.UsabilityMethods;
@@ -15,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -126,7 +126,8 @@ public class EquipmentController extends BaseController{
     }
 
     private void initEquipmentTable() {
-        tableViewEquipment.setItems(listModel.filteredEquipmentList);
+        tableViewEquipment.setItems(listModel.sortedEquipmentList);
+        listModel.sortedEquipmentList.comparatorProperty().bind(tableViewEquipment.comparatorProperty());
         equipmentNameColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getDescription()));
     }
 
@@ -147,21 +148,8 @@ public class EquipmentController extends BaseController{
 
 
     @FXML
-    private void onSearchBarClick(ActionEvent actionEvent) {
-
-        String searchTerm = searchBar.getText();
-        ObservableList<Equipment> filteredList = FXCollections.observableArrayList();
-
-        if (searchTerm.equals("")) {
-            filteredList = listModel.equipmentList;
-        } else {
-            for (Equipment elem : listModel.equipmentList) {
-                if (elem.getDescription().toUpperCase().contains(searchTerm.toUpperCase())) {
-                    filteredList.add(elem);
-                }
-            }
-        }
-        tableViewEquipment.setItems(filteredList);
+    private void onSearchBarClick(KeyEvent actionEvent) {
+        listModel.filteredEquipmentList.setPredicate(equipment -> equipment.getDescription().toLowerCase(Locale.ROOT).contains(searchBar.getText().toLowerCase(Locale.ROOT)));
     }
 
 

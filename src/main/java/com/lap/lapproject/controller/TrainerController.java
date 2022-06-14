@@ -201,10 +201,10 @@ public class TrainerController extends BaseController {
     private void onSearchBarClick(KeyEvent actionEvent) {
         String searchTerm = searchBar.getText().toLowerCase(Locale.ROOT);
 
-        listModel.filteredTrainerList.setPredicate(trainer -> (trainer.getfName().contains(searchTerm))
-                || trainer.getlName().contains(searchTerm)
-                || trainer.getEmail().contains(searchTerm)
-                || trainer.getPhoneNmbr().contains(searchTerm));
+        listModel.filteredTrainerList.setPredicate(trainer -> (trainer.getfName().toLowerCase(Locale.ROOT).contains(searchTerm))
+                || trainer.getlName().toLowerCase(Locale.ROOT).contains(searchTerm)
+                || trainer.getEmail().toLowerCase(Locale.ROOT).contains(searchTerm)
+                || trainer.getPhoneNmbr().toLowerCase(Locale.ROOT).contains(searchTerm));
         /*
         String searchTerm = searchBar.getText();
         ObservableList<Trainer> filteredList = FXCollections.observableArrayList();

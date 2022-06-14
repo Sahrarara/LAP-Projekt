@@ -4,23 +4,18 @@ import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.Course;
 import com.lap.lapproject.utility.UsabilityMethods;
-import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import com.lap.lapproject.repos.CourseRepositoryJDBC;
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
-import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Optional;
 
 import java.util.Locale;
@@ -135,7 +130,8 @@ public class CoursesController extends BaseController {
     }
 
     private void initEventTable() {
-        tableViewEvent.setItems(listModel.filteredCourseList);
+        tableViewEvent.setItems(listModel.sortedCourseList);
+        listModel.sortedCourseList.comparatorProperty().bind(tableViewEvent.comparatorProperty());
         courseNameColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getCourseName()));
         courseStartColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getCourseStart().toString().substring(0, 10)));
         courseEndColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getCourseEnd().toString().substring(0, 10)));
@@ -159,25 +155,14 @@ public class CoursesController extends BaseController {
 
 
     @FXML
-    private void onSearchBarClick(ActionEvent actionEvent) {
-        String searchTerm = searchBar.getText();
-        ObservableList<Course> filteredList = FXCollections.observableArrayList();
-        if (searchTerm.equals("")) {
-            filteredList = listModel.courseList;
-        } else {
-            for (Course elem : listModel.courseList) {
-                if (
-                        elem.getCourseName().toUpperCase().contains(searchTerm.toUpperCase())
-                                || elem.getProgram().getProgramName().toUpperCase().contains(searchTerm.toUpperCase())
-                                || elem.getCourseStart().toString().contains(searchTerm)
-                                || elem.getCourseEnd().toString().contains(searchTerm)
-                                || String.valueOf(elem.getGroupSize()).contains(searchTerm)
-                ) {
-                    filteredList.add(elem);
-                }
-            }
-        }
-        tableViewEvent.setItems(filteredList);
+    private void onSearchBarClick(KeyEvent actionEvent) {
+
+        String searchTerm = searchBar.getText().toLowerCase(Locale.ROOT);
+
+        listModel.filteredCourseList.setPredicate(course -> (course.getCourseName().toLowerCase(Locale.ROOT).contains(searchTerm))
+                || course.getProgram().toString().toLowerCase(Locale.ROOT).contains(searchTerm)
+                || course.getCourseStart().toString().toLowerCase(Locale.ROOT).contains(searchTerm)
+                || course.getCourseEnd().toString().toLowerCase(Locale.ROOT).contains(searchTerm));
     }
 
 
