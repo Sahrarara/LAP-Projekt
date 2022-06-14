@@ -2,15 +2,11 @@ package com.lap.lapproject.controller;
 
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
-import com.lap.lapproject.model.Room;
 import com.lap.lapproject.model.Trainer;
 import com.lap.lapproject.repos.BookingRepositoryJDBC;
-import com.lap.lapproject.repos.UserRepositoryJDBC;
 import com.lap.lapproject.utility.QuickAlert;
 import com.lap.lapproject.utility.UsabilityMethods;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -151,7 +148,8 @@ public class TrainerController extends BaseController {
         byte [] imageNoVisible = bos.toByteArray();
         String notVisibleText = " ";
 
-        tableViewTrainer.setItems(listModel.trainerList);
+        tableViewTrainer.setItems(listModel.sortedTrainerList);
+        listModel.sortedTrainerList.comparatorProperty().bind(tableViewTrainer.comparatorProperty());
         //trainerImg.setPrefWidth(200);
 
         trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream((DataFeatures.getValue().getPhotoVisibility() || (model.getAuthority().equals("admin") && DataFeatures.getValue().getPhoto() != null)) ? DataFeatures.getValue().getPhoto() : imageNoVisible), 140, 200, false, false)))));
@@ -200,8 +198,14 @@ public class TrainerController extends BaseController {
     }
 
     @FXML
-    private void onSearchBarClick(ActionEvent actionEvent) {
+    private void onSearchBarClick(KeyEvent actionEvent) {
+        String searchTerm = searchBar.getText().toLowerCase(Locale.ROOT);
 
+        listModel.filteredTrainerList.setPredicate(trainer -> (trainer.getfName().contains(searchTerm))
+                || trainer.getlName().contains(searchTerm)
+                || trainer.getEmail().contains(searchTerm)
+                || trainer.getPhoneNmbr().contains(searchTerm));
+        /*
         String searchTerm = searchBar.getText();
         ObservableList<Trainer> filteredList = FXCollections.observableArrayList();
 
@@ -221,8 +225,8 @@ public class TrainerController extends BaseController {
                     filteredList.add(elem);
                 }
             }
-        }
-        tableViewTrainer.setItems(filteredList);
+            */
+
     }
 
     @FXML

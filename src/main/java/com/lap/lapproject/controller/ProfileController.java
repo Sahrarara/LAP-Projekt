@@ -4,6 +4,8 @@ import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.Trainer;
 import com.lap.lapproject.repos.UserRepositoryJDBC;
+import com.lap.lapproject.utility.PasswordSecurity;
+import com.lap.lapproject.utility.UsabilityMethods;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +24,7 @@ import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.swing.*;
 import java.io.*;
 import java.sql.SQLException;
 
@@ -49,6 +52,8 @@ public class ProfileController extends BaseController {
     @FXML
     private Button photoUploadButton;
     @FXML
+    private Button photoDeleteButton;
+    @FXML
     private Button editButton;
     @FXML
     private Button saveButton;
@@ -66,12 +71,19 @@ public class ProfileController extends BaseController {
     private HBox updateDescriptionHBox;
     @FXML
     private HBox descriptionHBox;
+    @FXML
+    private Label phoneNoticeLabel;
+    @FXML
+    private Label emailNoticeLabel;
+    @FXML
+    private Circle photoDeleteCircle;
 
 
     @FXML
     private void onSaveBtnClick(ActionEvent actionEvent) {
 
-        if(!(emailTextField.getText().isBlank()) && !(phoneTextField.getText().isBlank())) {
+        if (!(emailTextField.getText().isBlank()) && UsabilityMethods.isEmailValid(emailTextField.getText()) &&
+                !(phoneTextField.getText().isBlank()) && UsabilityMethods.isPhoneNumberValid(phoneTextField.getText())) {
 
             int id = model.getLoggedInUser().getId();
             byte[] newImage = model.getLoggedInUser().getPhoto();
@@ -93,8 +105,11 @@ public class ProfileController extends BaseController {
 
             standardMode();
             initialize();
-        }
+        } else {
 
+            JOptionPane.showMessageDialog(null, "Bitte alle Felder korrekt ausfüllen",
+                    "Warnung", JOptionPane.ERROR_MESSAGE, null);
+        }
 
     }
 
@@ -110,6 +125,9 @@ public class ProfileController extends BaseController {
         assert circleView != null : "fx:id=\"circleView\" was not injected: check your FXML file 'profile-view.fxml'.";
         assert phoneLabel != null : "fx:id=\"phoneLabel\" was not injected: check your FXML file 'profile-view.fxml'.";
         assert phoneTextField != null : "fx:id=\"phoneTextField\" was not injected: check your FXML file 'profile-view.fxml'.";
+        assert phoneNoticeLabel != null : "fx:id=\"phoneNoticeLabel\" was not injected: check your FXML file 'profile-view.fxml'.";
+        assert photoDeleteButton != null : "fx:id=\"photoDeleteButton\" was not injected: check your FXML file 'profile-view.fxml'.";
+        assert photoDeleteCircle != null : "fx:id=\"photoDeleteCircle\" was not injected: check your FXML file 'profile-view.fxml'.";
 
 
         standardMode();
@@ -119,7 +137,7 @@ public class ProfileController extends BaseController {
         phoneLabel.setText(String.valueOf(model.getLoggedInUser().getPhoneNmbr()));
         descriptionLabel.setText(model.getLoggedInUser().getDescription());
 
-        if(model.getLoggedInUser().getPhoto() != null) {
+        if (model.getLoggedInUser().getPhoto() != null) {
             circleView.setFill(new ImagePattern(imageFromBytes(model.getLoggedInUser().getPhoto())));
 
         } else {
@@ -136,15 +154,14 @@ public class ProfileController extends BaseController {
     }
 
 
-
     @FXML
     private void onChangePasswordBtnClick(ActionEvent actionEvent) {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CHANGE_PASSWORD));
         Scene scene = null;
         try {
-            scene= new Scene(fxmlLoader.load());
-        } catch (IOException e){
+            scene = new Scene(fxmlLoader.load());
+        } catch (IOException e) {
             e.printStackTrace();
         }
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -152,6 +169,8 @@ public class ProfileController extends BaseController {
         stage.setScene(scene);
         stage.show();
     }
+
+
 
 
     @FXML
@@ -165,7 +184,7 @@ public class ProfileController extends BaseController {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(getCurrentStage());
         try {
-            if(file != null) {
+            if (file != null) {
                 circleView.setFill(new ImagePattern(new Image(new FileInputStream(file))));
                 model.getLoggedInUser().setPhoto(convertToBytes(file.getAbsolutePath()));
             }
@@ -176,9 +195,24 @@ public class ProfileController extends BaseController {
     }
 
 
+
+    @FXML
+    private void onPhotoDeleteButtonClick(ActionEvent actionEvent) {
+        //TODO: delete photo from circle and DB
+
+        circleView.setFill(new ImagePattern(imageFromBytes( model.getLoggedInUser().getPhoto())));
+        try {
+            model.getLoggedInUser().setPhoto(convertToBytes("src/main/resources/com/lap/lapproject/images/lapproject/images/user.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
     public static Image imageFromBytes(byte[] photoBytes) {
         Image image = null;
-        if(photoBytes != null && photoBytes.length > 0) {
+        if (photoBytes != null && photoBytes.length > 0) {
             InputStream inputStream = new ByteArrayInputStream(photoBytes);
             image = new Image(inputStream);
         }
@@ -193,6 +227,7 @@ public class ProfileController extends BaseController {
     }
 
 
+
     private void updateMode() {
         updateEmailHBox.setVisible(true);
         updatePhoneHBox.setVisible(true);
@@ -202,12 +237,19 @@ public class ProfileController extends BaseController {
         descriptionHBox.setVisible(false);
 
         photoUploadButton.setVisible(true);
+        photoDeleteButton.setVisible(true);
+        photoDeleteCircle.setVisible(true);
         saveButton.setVisible(true);
         editButton.setVisible(false);
 
         emailTextField.setText(model.getLoggedInUser().getEmail());
         phoneTextField.setText(String.valueOf(model.getLoggedInUser().getPhoneNmbr()));
         descriptionTextArea.setText(model.getLoggedInUser().getDescription());
+
+
+        UsabilityMethods.changeListenerForPhoneNr(phoneTextField, phoneNoticeLabel);
+        UsabilityMethods.changeListenerForEmail(emailTextField, emailNoticeLabel);
+
     }
 
 
@@ -220,6 +262,11 @@ public class ProfileController extends BaseController {
         descriptionHBox.setVisible(true);
 
         photoUploadButton.setVisible(false);
+        photoDeleteButton.setVisible(false);
+        photoDeleteCircle.setVisible(false);
+        phoneNoticeLabel.setVisible(false);
+        emailNoticeLabel.setVisible(false);
+
         saveButton.setVisible(false);
         editButton.setVisible(true);
     }
@@ -228,4 +275,6 @@ public class ProfileController extends BaseController {
     private Stage getCurrentStage() {
         return (Stage) firstnameLabel.getScene().getWindow();
     }
+
+
 }

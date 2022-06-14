@@ -82,7 +82,7 @@
                               <Insets left="8.0" top="7.0" />
                            </HBox.margin>
                         </FontAwesomeIconView>
-                        <TextField fx:id="searchBar" onAction="#onSearchBarClick" prefHeight="30.0" prefWidth="140.0" promptText="Suche..." style="-fx-background-color: transparent;">
+                        <TextField fx:id="searchBar" onKeyTyped="#onSearchBarClick" prefHeight="30.0" prefWidth="140.0" promptText="Suche..." style="-fx-background-color: transparent;">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
