@@ -242,8 +242,10 @@ public class ProfileController extends BaseController {
         if (photoBytes != null && photoBytes.length > 0) {
             InputStream inputStream = new ByteArrayInputStream(photoBytes);
             image = new Image(inputStream);
+
         }
         return image;
+
     }
 
 

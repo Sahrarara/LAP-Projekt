@@ -144,11 +144,20 @@ public class SidebarController extends BaseController {
         switch (authority) {
             case "admin":
                 System.out.println("Admin privileges");
-                bannerImg.setFill(new ImagePattern(imageFromBytes(model.getLoggedInUser().getPhoto())));
+                if(model.getLoggedInUser().getPhoto() != null) {
+                    bannerImg.setFill(new ImagePattern(imageFromBytes(model.getLoggedInUser().getPhoto())));
+                } else {
+                    bannerImg.setFill(new ImagePattern(imageFromBytes(imageNoVisible)));
+                }
                 break;
             case "coach":
                 System.out.println("Coach privileges");
-                bannerImg.setFill(new ImagePattern(imageFromBytes(model.getLoggedInUser().getPhoto())));
+
+                if(model.getLoggedInUser().getPhoto() != null) {
+                    bannerImg.setFill(new ImagePattern(imageFromBytes(model.getLoggedInUser().getPhoto())));
+                } else {
+                    bannerImg.setFill(new ImagePattern(imageFromBytes(imageNoVisible)));
+                }
                 break;
             default:
                 System.out.println("Guest privileges");

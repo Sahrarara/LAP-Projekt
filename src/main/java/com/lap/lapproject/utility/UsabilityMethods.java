@@ -1,13 +1,21 @@
 package com.lap.lapproject.utility;
 
+import com.lap.lapproject.controller.BaseController;
+import com.lap.lapproject.model.ListModel;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static com.lap.lapproject.controller.ProfileController.imageFromBytes;
 
 public class UsabilityMethods {
 
@@ -82,8 +90,6 @@ public class UsabilityMethods {
             }
         }));
     }
-
-
 
 
 }
