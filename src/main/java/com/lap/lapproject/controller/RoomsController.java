@@ -2,27 +2,25 @@ package com.lap.lapproject.controller;
 
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
-import com.lap.lapproject.model.Location;
 import com.lap.lapproject.model.Room;
 import com.lap.lapproject.repos.BookingRepositoryJDBC;
 import com.lap.lapproject.repos.CourseRepositoryJDBC;
-import com.lap.lapproject.repos.LocationRepositoryJDBC;
 import com.lap.lapproject.repos.RoomRepositoryJDBC;
 import com.lap.lapproject.utility.QuickAlert;
 
 import com.lap.lapproject.utility.UsabilityMethods;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Locale;
 import java.util.Optional;
 
 public class RoomsController extends BaseController {
@@ -156,7 +154,8 @@ public class RoomsController extends BaseController {
 
 
     private void initTableRoom() {
-        tableViewRoom.setItems(listModel.filteredRoomList);
+        tableViewRoom.setItems(listModel.sortedRoomList);
+        listModel.sortedRoomList.comparatorProperty().bind(tableViewRoom.comparatorProperty());
         for(Room r: listModel.roomList){
             System.out.println(r.toString());
         }
@@ -184,25 +183,14 @@ public class RoomsController extends BaseController {
 
 
     @FXML
-    private void onSearchBarClick(ActionEvent actionEvent) {
+    private void onSearchBarClick(KeyEvent actionEvent) {
 
-        String searchTerm = searchBar.getText();
-        ObservableList<Room> filteredList = FXCollections.observableArrayList();
+        String searchTerm = searchBar.getText().toLowerCase(Locale.ROOT);
 
-        if (searchTerm.equals("")) {
-            filteredList = listModel.roomList;
-        } else {
-            for (Room elem : listModel.roomList) {
-                if (String.valueOf(elem.getRoomNumber()).contains(searchTerm)
-                        || String.valueOf(elem.getSize()).contains(searchTerm)
-                        || elem.getLocation().toString().toUpperCase().contains(searchTerm.toUpperCase())
-                        || elem.getEquipment().toString().toUpperCase().contains(searchTerm.toUpperCase())
-                ) {
-                    filteredList.add(elem);
-                }
-            }
-        }
-        tableViewRoom.setItems(filteredList);
+        listModel.filteredRoomList.setPredicate(room -> (room.toString().contains(searchTerm))
+                || room.sizeProperty().toLowerCase(Locale.ROOT).contains(searchTerm)
+                || room.getLocation().getStreet().toLowerCase(Locale.ROOT).contains(searchTerm)
+                || room.getEquipmentAsString().toLowerCase(Locale.ROOT).contains(searchTerm));
     }
 
 

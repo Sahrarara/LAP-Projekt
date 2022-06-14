@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -148,7 +149,8 @@ public class LocationController extends BaseController {
     }
 
     public void initLocationTable() {
-        tableViewLocation.setItems(listModel.filteredLocationList);
+        tableViewLocation.setItems(listModel.sortedLocationList);
+        listModel.sortedLocationList.comparatorProperty().bind(tableViewLocation.comparatorProperty());
         streetColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getStreet()));
         zipColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getZipcode()));
         cityColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getCity()));
@@ -170,23 +172,13 @@ public class LocationController extends BaseController {
 
 
     @FXML
-    private void onSearchBarClick(ActionEvent actionEvent) {
+    private void onSearchBarClick(KeyEvent actionEvent) {
 
-        String searchTerm = searchBar.getText();
-        ObservableList<Location> filteredList = FXCollections.observableArrayList();
+        String searchTerm = searchBar.getText().toLowerCase(Locale.ROOT);
 
-        if (searchTerm.equals("")) {
-            filteredList = listModel.locationList;
-        } else {
-            for (Location elem : listModel.locationList) {
-                if (elem.getStreet().toUpperCase().contains(searchTerm.toUpperCase())
-                        || elem.getZipcode().toUpperCase().contains(searchTerm.toUpperCase())
-                        || elem.getCity().toUpperCase().contains(searchTerm.toUpperCase())) {
-                    filteredList.add(elem);
-                }
-            }
-        }
-        tableViewLocation.setItems(filteredList);
+        listModel.filteredLocationList.setPredicate(location -> (location.getStreet().toLowerCase(Locale.ROOT).contains(searchTerm))
+                || location.getZipcode().toLowerCase(Locale.ROOT).contains(searchTerm)
+                || location.getCity().toLowerCase(Locale.ROOT).contains(searchTerm));
     }
 
     @FXML
