@@ -223,8 +223,8 @@ public class AddBookingController extends BaseController {
         fillRecurrenceRuleChoiceBox();
         fillRoomChoiceBox();
 
-//        timeStartTimeField.setValue(null);
-//        timeEndTimeField.setValue(null);
+        timeStartTimeField.setValue(LocalTime.of(7, 30));
+        timeEndTimeField.setValue(LocalTime.of(19, 30));
 
 
         if (listModel.getSelectedBooking() != null) {
@@ -286,7 +286,7 @@ public class AddBookingController extends BaseController {
 
 
     private Stage getCurrentStage() {
-        return (Stage) locationLabel.getScene().getWindow();
+        return (Stage) courseNameChoiceBox.getScene().getWindow();
     }
 
     private void moveToBookingPage() {

@@ -12,6 +12,10 @@ public class Trainer extends User {
         super(authority);
     }
 
+    public Trainer(int id) {
+        super(id);
+    }
+
     //BookingRepositoryJDBC
     public Trainer(int id, String username, String firstName, String lastName, String authority, String email, String phoneNmbr, String description, Boolean activeStatus) {
         super(id, username, firstName, lastName, authority, email, phoneNmbr, description, activeStatus);

@@ -52,6 +52,7 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
             resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
+//                int booker = resultSet.getInt("user_id");
 
 
                 Location location = new Location(
@@ -82,10 +83,8 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
                         resultSet.getString("phone"),
                         resultSet.getString("description"),
                         resultSet.getBoolean("active_status"));
-                logger.info("trainer aus db: {}", resultSet.getInt("trainer_id") +
-                        resultSet.getString("first_name"));
 
-
+                User user = new Trainer(resultSet.getInt("user_id"));
 
                 Program program = new Program(
                         resultSet.getInt("program_id"),
@@ -114,7 +113,7 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
 
                 Booking booking = new Booking(
                         resultSet.getInt("booking_id"),
-                        room, trainer, course, startTime, endTime, recurrenceRule);
+                        room, trainer, user, course, startTime, endTime, recurrenceRule);
                 bookingList.add(booking);
             }
         } catch (SQLException e) {
@@ -198,8 +197,6 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
             preparedStatement.setObject(7, booking.getDateTimeEnd());
             preparedStatement.setInt(8, booking.getId());
 
-            logger.info("updated");
-
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -250,6 +247,8 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
         return recurrenceRule;
     }
 
+
+
     @Override
     public int getBookingCountByProgramIdJoinLocationId(int locationId) throws SQLException {
         Connection connection = connect();
@@ -272,6 +271,8 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
         return roomsCountByLocationId;
     }
 
+
+
     @Override
     public int getBookingCountByRoomId(int roomId) throws SQLException {
         Connection connection = connect();
@@ -293,6 +294,8 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
         }
         return bookingsCountByRoomId;
     }
+
+
 
     @Override
     public int getBookingCountByTrainerId(int trainerId) throws SQLException {
