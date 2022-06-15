@@ -25,7 +25,7 @@ public class UsabilityMethods {
         return matcher.find();
     }
     public static boolean isNumber(String input) {
-        Pattern pattern = Pattern.compile("\\d");
+        Pattern pattern = Pattern.compile("[a-zA-Z]");
         Matcher matcher = pattern.matcher(input);
         return matcher.find();
     }

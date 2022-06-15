@@ -18,20 +18,20 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="930.0" prefWidth="1200.0" style="-fx-background-color: #211D5A;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.RoomsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="930.0" prefWidth="1200.0" style="-fx-background-color: #f9f7f6;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.TrainerController">
    <children>
-      <SplitPane dividerPositions="0.23684210526315788" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="728.0" prefWidth="800.0" styleClass="split-pane-background" stylesheets="@../css/application.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <SplitPane dividerPositions="0.23684210526315788" layoutX="10.0" layoutY="40.0" orientation="VERTICAL" prefHeight="728.0" prefWidth="850.0" styleClass="split-pane-background" stylesheets="@../css/application.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-50.0" AnchorPane.topAnchor="0.0">
          <items>
-            <AnchorPane>
+            <AnchorPane prefHeight="171.0" prefWidth="805.0">
                <children>
-                  <Label layoutX="76.0" layoutY="22.0" prefHeight="54.0" prefWidth="193.0" styleClass="title-first" text="RÄUME" textFill="#201d592d">
+                  <Label layoutX="76.0" layoutY="22.0" prefHeight="54.0" prefWidth="193.0" styleClass="title-first" text="TRAINER" textFill="#201d592d">
                      <font>
                         <Font name="Comic Sans MS" size="40.0" />
                      </font>
                   </Label>
-                  <ButtonBar fx:id="roomsBtnBar" buttonMinWidth="10.0" layoutX="-337.0" layoutY="86.0" prefHeight="70.0" prefWidth="169.0" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="-337.0" AnchorPane.rightAnchor="917.0" AnchorPane.topAnchor="86.0">
+                  <ButtonBar fx:id="trainerBtnBar" buttonMinWidth="10.0" layoutX="-390.0" layoutY="75.0" prefHeight="70.0" prefWidth="169.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="-390.0" AnchorPane.rightAnchor="970.0" AnchorPane.topAnchor="75.0">
                      <buttons>
-                        <Button graphicTextGap="2.0" mnemonicParsing="false" onAction="#onAddRoomBtnClick" prefHeight="30.0" prefWidth="60.0">
+                        <Button graphicTextGap="2.0" mnemonicParsing="false" onAction="#onAddTrainerBtnClick" prefHeight="30.0" prefWidth="60.0">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -44,7 +44,7 @@
                               <String fx:value="icon-plus" />
                            </styleClass>
                         </Button>
-                        <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#onDeleteRoomBtnClick" prefHeight="30.0" prefWidth="60.0">
+                        <Button mnemonicParsing="false" onAction="#onDeleteTrainerBtnClick" prefHeight="30.0" prefWidth="60.0">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -57,7 +57,7 @@
                               <String fx:value="icon-trash" />
                            </styleClass>
                         </Button>
-                        <Button fx:id="editRoomButton" mnemonicParsing="false" onAction="#onSettingsBtnClick" prefHeight="30.0" prefWidth="60.0">
+                        <Button mnemonicParsing="false" onAction="#onEditBtnClick" prefHeight="30.0" prefWidth="60.0">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -75,7 +75,7 @@
                         <Insets />
                      </opaqueInsets>
                   </ButtonBar>
-                  <HBox layoutX="929.0" layoutY="35.0" style="-fx-background-color: #fff;" styleClass="search-field">
+                  <HBox layoutX="931.0" layoutY="35.0" style="-fx-background-color: #fff;" styleClass="search-field">
                      <children>
                         <FontAwesomeIconView fill="#211d5aa8" glyphName="SEARCH" size="16">
                            <HBox.margin>
@@ -111,15 +111,23 @@
                   </HBox>
                </children>
             </AnchorPane>
-            <AnchorPane>
+            <AnchorPane prefHeight="707.0" prefWidth="1190.0">
                <children>
-                  <TableView fx:id="tableViewRoom" layoutY="40.0" prefHeight="667.0" prefWidth="1198.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                  <TableView fx:id="tableViewTrainer" fixedCellSize="0.0" layoutX="-1.0" prefHeight="667.0" prefWidth="1248.0" style="-fx-text-fill: white;" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
                      <columns>
-                        <TableColumn fx:id="roomNumberColumn" minWidth="-1.0" prefWidth="108.5" text="R-Nr." />
-                        <TableColumn fx:id="sizeColumn" minWidth="-1.0" prefWidth="237.0" text="Raumgröße" />
-                        <TableColumn fx:id="streetColumn" minWidth="-1.0" prefWidth="270.5" text="Standort" />
-                        <TableColumn fx:id="equipmentColumn" prefWidth="580.0" text="Ausstattung" />
+                        <TableColumn fx:id="trainerImg" prefWidth="210.5" style="-fx-text-fill: white; -fx-padding-left: 10px;" text="Foto" />
+                        <TableColumn fx:id="firstNameColumn" prefWidth="215.5" text="Name" />
+                        <TableColumn fx:id="activeStatusColumn" maxWidth="275.5" minWidth="0.0" prefWidth="59.0" text="Aktiv" />
+                        <TableColumn fx:id="emailColumn" prefWidth="215.5" text="E-Mail" />
+                        <TableColumn fx:id="phoneColumn" minWidth="0.0" prefWidth="201.5" text="Telefon" />
+                        <TableColumn fx:id="descriptionColumn" prefWidth="346.5" text="Zusatztext" />
                      </columns>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <cursor>
+                        <Cursor fx:constant="DISAPPEAR" />
+                     </cursor>
                   </TableView>
                </children>
             </AnchorPane>

@@ -38,8 +38,8 @@ public class AddLocationController extends BaseController {
         String city = locationNameTextField.getText();
 
         //check if zip INT
-        if (!UsabilityMethods.isNumber(zip)) {
-            QuickAlert.showError("Bitte überprüfen Sie  Zipcode. PLZ soll 4 stellige Zahl sein!");
+        if (UsabilityMethods.isNumber(zip)) {
+            QuickAlert.showError("Bitte überprüfen Sie  Zipcode. PLZ soll Zahl sein!");
             return;
         }
         //check if zip 4 numbers

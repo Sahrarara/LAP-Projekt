@@ -78,20 +78,20 @@ public class AddRoomController extends BaseController {
         String roomNbr = roomNmbrTextField.getText();
         String roomSizeString = sizeTextField.getText();
 
-        //check if Room Number INT
+        /*//check if Room Number INT
         if (!UsabilityMethods.isNumber(roomNbr)) {
+            QuickAlert.showError("Bitte geben Raumnummer in Zahlen");
+            return;
+        }*/
+
+       //check if Room Number INT
+        if (UsabilityMethods.isNumber(roomNbr)) {
             QuickAlert.showError("Bitte geben Raumnummer in Zahlen");
             return;
         }
 
         //check if Room Size INT
-        if (!UsabilityMethods.isNumber(roomNbr)) {
-            QuickAlert.showError("Bitte geben Raumnummer in Zahlen");
-            return;
-        }
-
-        //check if Room Size INT
-        if (!UsabilityMethods.isNumber(roomSizeString)) {
+        if (UsabilityMethods.isNumber(roomSizeString)) {
             QuickAlert.showError("Bitte geben Raumgröße in Zahlen");
             return;
         }
