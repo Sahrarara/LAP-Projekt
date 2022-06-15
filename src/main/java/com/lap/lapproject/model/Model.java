@@ -2,6 +2,7 @@ package com.lap.lapproject.model;
 
 import com.calendarfx.model.Entry;
 import com.lap.lapproject.repos.*;
+import com.lap.lapproject.utility.UsabilityMethods;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
