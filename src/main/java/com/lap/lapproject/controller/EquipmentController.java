@@ -5,6 +5,7 @@ import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.Equipment;
 import com.lap.lapproject.repos.EquipmentRepositoryJDBC;
 import com.lap.lapproject.repos.RoomRepositoryJDBC;
+import com.lap.lapproject.utility.QuickAlert;
 import com.lap.lapproject.utility.UsabilityMethods;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -16,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Locale;
@@ -61,48 +63,54 @@ public class EquipmentController extends BaseController{
 
     @FXML
     private void onDeleteBtnClick(ActionEvent actionEvent) {
-        RoomRepositoryJDBC roomRepositoryJDBC = new RoomRepositoryJDBC();
+        if (listModel.getSelectedEquipment() != null) {
+            RoomRepositoryJDBC roomRepositoryJDBC = new RoomRepositoryJDBC();
+            EquipmentRepositoryJDBC equipmentRepositoryJDBC = new EquipmentRepositoryJDBC();
+            int myIndex = tableViewEquipment.getSelectionModel().getSelectedIndex();
+            Equipment equipment1 = tableViewEquipment.getSelectionModel().getSelectedItem();
 
-        EquipmentRepositoryJDBC equipmentRepositoryJDBC = new EquipmentRepositoryJDBC();
-        int myIndex = tableViewEquipment.getSelectionModel().getSelectedIndex();
+            //Alert CONFIRMATION TODO: wenn es möglich nur einen CONFIRMATION Alert für Alle DELETE
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Sind Sie sicher, dass Sie es löschen wollen?");
+            Optional<ButtonType> action = alert.showAndWait();
+            if (action.get() == ButtonType.OK) {
+                try {
+                    equipmentRepositoryJDBC.deleteEquipment(equipment1);
+                    listModel.equipmentList.remove(equipment1);
 
-        Equipment equipment1 = tableViewEquipment.getSelectionModel().getSelectedItem();
+                    listModel.roomList.setAll(roomRepositoryJDBC.readAll());
 
-        //Alert CONFIRMATION TODO: wenn es möglich nur einen CONFIRMATION Alert für Alle DELETE
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmation Dialog");
-        alert.setHeaderText(null);
-        alert.setContentText("Sind Sie sicher, dass Sie es löschen wollen?");
-        Optional<ButtonType> action = alert.showAndWait();
-        if(action.get() == ButtonType.OK) {
-            try {
-                equipmentRepositoryJDBC.deleteEquipment(equipment1);
-                listModel.equipmentList.remove(equipment1);
-
-                listModel.roomList.setAll(roomRepositoryJDBC.readAll());
-
-            } catch (SQLException ex) {
-                ex.printStackTrace();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
             }
+            }else {
+            QuickAlert.showInfo("Bitte gewünschte Zeile markieren");
         }
     }
 
     @FXML
     private void onSettingsBtnClick(ActionEvent actionEvent) {
-        Stage stage = new Stage();
+        if (listModel.getSelectedEquipment() != null) {
+            Stage stage = new Stage();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_EQUIPMENT));
-        Scene scene = null;
+            FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_EQUIPMENT));
+            Scene scene = null;
 
-        try {
-            scene = new Scene(fxmlLoader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
+            try {
+                scene = new Scene(fxmlLoader.load());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            stage.setTitle("Raum Management");
+            stage.setScene(scene);
+            stage.show();
+        } else {
+            QuickAlert.showInfo("Bitte gewünschte Zeile markieren");
         }
-
-        stage.setTitle("Raum Management");
-        stage.setScene(scene);
-        stage.show();
     }
 
 

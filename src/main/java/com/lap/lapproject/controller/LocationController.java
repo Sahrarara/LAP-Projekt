@@ -53,6 +53,7 @@ public class LocationController extends BaseController {
 
     @FXML
     private void onAddLocationBtnClick(ActionEvent actionEvent) {
+
         tableViewLocation.getSelectionModel().select(null);
         Stage stage = new Stage();
 
@@ -72,56 +73,64 @@ public class LocationController extends BaseController {
 
     @FXML
     private void onDeleteLocationBtnClick(ActionEvent actionEvent) {
-        // QuickAlert.showError("Möchten Sie dieses Standort sicher Löschen?");
-        LocationRepositoryJDBC locationRepositoryJDBC = new LocationRepositoryJDBC();
-        BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
-        int myIndex = tableViewLocation.getSelectionModel().getSelectedIndex();
+        if (listModel.getSelectedLocation() != null) {
 
-        Location locationToDelete = tableViewLocation.getSelectionModel().getSelectedItem();
+            // QuickAlert.showError("Möchten Sie dieses Standort sicher Löschen?");
+            LocationRepositoryJDBC locationRepositoryJDBC = new LocationRepositoryJDBC();
+            BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
+            int myIndex = tableViewLocation.getSelectionModel().getSelectedIndex();
 
-        //Alert CONFIRMATION
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmation Dialog");
-        alert.setHeaderText(null);
-        alert.setContentText("Sind Sie sicher, dass Sie es löschen wollen?");
-        Optional<ButtonType> action = alert.showAndWait();
-        if (action.get() == ButtonType.OK) {
+            Location locationToDelete = tableViewLocation.getSelectionModel().getSelectedItem();
 
-            try {
-                // check in DB how many bookings use the particular location
-                int bookingCountByLocation = bookingRepositoryJDBC.getBookingCountByProgramIdJoinLocationId(locationToDelete.getId());
+            //Alert CONFIRMATION
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Sind Sie sicher, dass Sie es löschen wollen?");
+            Optional<ButtonType> action = alert.showAndWait();
+            if (action.get() == ButtonType.OK) {
 
-                if (bookingCountByLocation == 0) {
+                try {
+                    // check in DB how many bookings use the particular location
+                    int bookingCountByLocation = bookingRepositoryJDBC.getBookingCountByProgramIdJoinLocationId(locationToDelete.getId());
 
-                    locationRepositoryJDBC.deleteLocation(locationToDelete);
-                    listModel.locationList.remove(locationToDelete);
-                } else {
-                    QuickAlert.showError("Diese Location wird für eine Buchung benötigt, Sie können nicht löschen! Bearbeiten Sie zuerst Ihre Buchungen!");
+                    if (bookingCountByLocation == 0) {
+
+                        locationRepositoryJDBC.deleteLocation(locationToDelete);
+                        listModel.locationList.remove(locationToDelete);
+                    } else {
+                        QuickAlert.showError("Diese Location wird für eine Buchung benötigt, Sie können nicht löschen! Bearbeiten Sie zuerst Ihre Buchungen!");
+                    }
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
                 }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
             }
+        }else {
+            QuickAlert.showInfo("Bitte gewünschte Zeile markieren");
         }
-
     }
 
 
     @FXML
     private void onSettingsBtnClick(ActionEvent actionEvent) {
-        Stage stage = new Stage();
+        if (listModel.getSelectedProgram() != null) {
+            Stage stage = new Stage();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_LOCATION));
-        Scene scene = null;
+            FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_LOCATION));
+            Scene scene = null;
 
-        try {
-            scene = new Scene(fxmlLoader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
+            try {
+                scene = new Scene(fxmlLoader.load());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            stage.setTitle("Raum Management");
+            stage.setScene(scene);
+            stage.show();
+        } else {
+            QuickAlert.showInfo("Bitte gewünschte Zeile markieren");
         }
-
-        stage.setTitle("Raum Management");
-        stage.setScene(scene);
-        stage.show();
     }
 
 

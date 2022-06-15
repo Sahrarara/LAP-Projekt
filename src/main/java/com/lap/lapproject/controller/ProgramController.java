@@ -65,56 +65,65 @@ public class ProgramController extends BaseController {
 
     @FXML
     private void onDeleteBtnClick(ActionEvent actionEvent) {
-        ProgramRepositoryJDBC programRepositoryJDBC = new ProgramRepositoryJDBC();
-        CourseRepositoryJDBC courseRepositoryJDBC = new CourseRepositoryJDBC();
+        if (listModel.getSelectedProgram() != null) {
 
-        Program programToDelete = tableViewProgram.getSelectionModel().getSelectedItem();
+            ProgramRepositoryJDBC programRepositoryJDBC = new ProgramRepositoryJDBC();
+            CourseRepositoryJDBC courseRepositoryJDBC = new CourseRepositoryJDBC();
 
-        //Alert CONFIRMATION TODO: wenn es möglich nur einen CONFIRMATION Alert für Alle DELETE
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmation Dialog");
-        alert.setHeaderText(null);
-        alert.setContentText("Sind Sie sicher, dass Sie es löschen wollen?");
-        Optional<ButtonType> action = alert.showAndWait();
-        if(action.get() == ButtonType.OK) {
+            Program programToDelete = tableViewProgram.getSelectionModel().getSelectedItem();
 
-            try {
-                // check in DB how many courses use the particular program
-                int coursesCount = courseRepositoryJDBC.getCoursesCountByProgramId(programToDelete.getId());
+            //Alert CONFIRMATION TODO: wenn es möglich nur einen CONFIRMATION Alert für Alle DELETE
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Sind Sie sicher, dass Sie es löschen wollen?");
+            Optional<ButtonType> action = alert.showAndWait();
+            if(action.get() == ButtonType.OK) {
 
-                if (coursesCount == 0) {
-                    programRepositoryJDBC.deleteProgram(programToDelete);
-                    listModel.programList.remove(programToDelete);
-                } else {
-                    QuickAlert.showError("Dieses Program wird von einem Kurse benötigt! Sie können sie nicht löschen!");
+                try {
+                    // check in DB how many courses use the particular program
+                    int coursesCount = courseRepositoryJDBC.getCoursesCountByProgramId(programToDelete.getId());
+
+                    if (coursesCount == 0) {
+                        programRepositoryJDBC.deleteProgram(programToDelete);
+                        listModel.programList.remove(programToDelete);
+                    } else {
+                        QuickAlert.showError("Dieses Program wird von einem Kurse benötigt! Sie können sie nicht löschen!");
+                    }
+
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
                 }
-
-            } catch (SQLException ex) {
-                ex.printStackTrace();
             }
+            }else {
+            QuickAlert.showInfo("Bitte gewünschte Zeile markieren");
         }
-
     }
 
 
 
     @FXML
     private void onEditBtnClick(ActionEvent actionEvent) {
-        Stage stage = new Stage();
+        if (listModel.getSelectedProgram() != null) {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_PROGRAM));
-        Scene scene = null;
+            Stage stage = new Stage();
 
-        try {
-            scene = new Scene(fxmlLoader.load());
+            FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_PROGRAM));
+            Scene scene = null;
 
-        } catch (IOException e) {
-            e.printStackTrace();
+            try {
+                scene = new Scene(fxmlLoader.load());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            stage.setTitle("Raum Management");
+            stage.setScene(scene);
+            stage.show();
+        } else {
+            QuickAlert.showInfo("Bitte gewünschte Zeile markieren");
         }
-
-        stage.setTitle("Raum Management");
-        stage.setScene(scene);
-        stage.show();
     }
 
 
