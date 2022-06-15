@@ -13,4 +13,9 @@
       <module name="LAP-Project" target="17" />
     </bytecodeTargetLevel>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="LAP-Project" options="--add-exports javafx.fxml/com.sun.javafx.fxml.builder=com.lap.lapproject" />
+    </option>
+  </component>
 </project>

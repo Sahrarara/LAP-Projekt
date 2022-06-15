@@ -104,6 +104,7 @@ public class ProfileController extends BaseController {
             UserRepositoryJDBC userRepositoryJDBC = new UserRepositoryJDBC();
             try {
                 userRepositoryJDBC.updateUserProfile(new Trainer(id, newDescription, newPhone, newEmail, newImage));
+              // SidebarController.bannerImg.setFill(new ImagePattern(imageFromBytes(model.getLoggedInUser().getPhoto())));
 
             } catch (SQLException e) {
                 e.printStackTrace();

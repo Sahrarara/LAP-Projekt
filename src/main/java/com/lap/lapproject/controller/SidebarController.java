@@ -4,6 +4,7 @@ import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.repos.CourseRepositoryJDBC;
 import com.lap.lapproject.repos.UserRepositoryJDBC;
+import com.sun.javafx.fxml.builder.JavaFXSceneBuilder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -134,7 +135,7 @@ public class SidebarController extends BaseController {
         setUsername();
     }
 
-    private boolean authorityVisibility() throws IOException {
+    public boolean authorityVisibility() throws IOException {
         BufferedImage bImage = ImageIO.read(new FileInputStream("src/main/resources/com/lap/lapproject/images/lapproject/images/user.png"));
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         ImageIO.write(bImage, "png", bos );
