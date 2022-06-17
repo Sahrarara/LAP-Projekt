@@ -12,6 +12,11 @@ public class QuickAlert {
         a.setHeaderText(message);
         a.show();
     }
+    public static void showInfo(String message){
+        Alert a = new Alert(Alert.AlertType.INFORMATION);
+        a.setHeaderText(message);
+        a.show();
+    }
 
 
 }

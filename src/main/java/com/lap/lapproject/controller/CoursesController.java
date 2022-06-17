@@ -3,6 +3,7 @@ package com.lap.lapproject.controller;
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.Course;
+import com.lap.lapproject.utility.QuickAlert;
 import com.lap.lapproject.utility.UsabilityMethods;
 import javafx.beans.property.SimpleObjectProperty;
 import com.lap.lapproject.repos.CourseRepositoryJDBC;
@@ -67,46 +68,53 @@ public class CoursesController extends BaseController {
 
     @FXML
     private void onDeleteCourseBtnClick(ActionEvent actionEvent) {
-        CourseRepositoryJDBC courseRepositoryJDBC = new CourseRepositoryJDBC();
-        int myIndex = tableViewEvent.getSelectionModel().getSelectedIndex();
+        if(listModel.getSelectedCourse() != null) {
+            CourseRepositoryJDBC courseRepositoryJDBC = new CourseRepositoryJDBC();
+            int myIndex = tableViewEvent.getSelectionModel().getSelectedIndex();
 
-        Course courseToDelete = tableViewEvent.getSelectionModel().getSelectedItem();
-        //Alert CONFIRMATION
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmation Dialog");
-        alert.setHeaderText(null);
-        alert.setContentText("Sind Sie sicher, dass Sie es löschen wollen?");
-        Optional<ButtonType> action = alert.showAndWait();
-        if (action.get() == ButtonType.OK) {
-
-            try {
-                courseRepositoryJDBC.deleteCourse(courseToDelete);
-                listModel.courseList.remove(courseToDelete);
-            } catch (SQLException ex) {
-                ex.printStackTrace();
+            Course courseToDelete = tableViewEvent.getSelectionModel().getSelectedItem();
+            //Alert CONFIRMATION
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Sind Sie sicher, dass Sie es löschen wollen?");
+            Optional<ButtonType> action = alert.showAndWait();
+            if (action.get() == ButtonType.OK) {
+                try {
+                    courseRepositoryJDBC.deleteCourse(courseToDelete);
+                    listModel.courseList.remove(courseToDelete);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
+        }else {
+            QuickAlert.showInfo("Bitte gewünschte Zeile markieren");
         }
     }
 
     @FXML
     private void onSettingsBtnClick(ActionEvent actionEvent) {
-        System.out.println("Pressed Course settings");
-        Stage stage = new Stage();
+        if (listModel.getSelectedCourse() != null) {
+            System.out.println("Pressed Course settings");
+            Stage stage = new Stage();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_COURSE));
-        Scene scene = null;
+            FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_COURSE));
+            Scene scene = null;
 
-        try {
-            scene = new Scene(fxmlLoader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
+            try {
+                scene = new Scene(fxmlLoader.load());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("DEBUG: " + tableViewEvent.getSelectionModel().selectedItemProperty());
+            listModel.selectedCourseProperty().bind(tableViewEvent.getSelectionModel().selectedItemProperty());
+
+            stage.setTitle("Raum Management");
+            stage.setScene(scene);
+            stage.show();
+        } else {
+            QuickAlert.showInfo("Bitte gewünschte Zeile markieren");
         }
-        System.out.println("DEBUG: " + tableViewEvent.getSelectionModel().selectedItemProperty());
-        listModel.selectedCourseProperty().bind(tableViewEvent.getSelectionModel().selectedItemProperty());
-
-        stage.setTitle("Raum Management");
-        stage.setScene(scene);
-        stage.show();
     }
 
     @FXML
