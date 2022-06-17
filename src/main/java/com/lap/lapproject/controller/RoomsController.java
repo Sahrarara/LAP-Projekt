@@ -1,32 +1,41 @@
 package com.lap.lapproject.controller;
 
-import com.lap.lapproject.LoginApplication;
+
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.Room;
 import com.lap.lapproject.repos.BookingRepositoryJDBC;
 import com.lap.lapproject.repos.CourseRepositoryJDBC;
 import com.lap.lapproject.repos.RoomRepositoryJDBC;
+import com.lap.lapproject.utility.ChangeScene;
 import com.lap.lapproject.utility.QuickAlert;
 
 import com.lap.lapproject.utility.UsabilityMethods;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
+
 import java.sql.SQLException;
 import java.util.Locale;
 import java.util.Optional;
 
 public class RoomsController extends BaseController {
+    private static final Logger logger = LoggerFactory.getLogger(AddRoomController.class);
+
     @FXML
     private ButtonBar roomsBtnBar;
-
+    @FXML
+    private Button editRoomButton;
+    @FXML
+    private Button deleteBtn;
+    @FXML
+    private TextField searchBar;
+    @FXML
+    private Button closeIconButton;
     @FXML
     private TableView<Room> tableViewRoom;
     @FXML
@@ -38,36 +47,13 @@ public class RoomsController extends BaseController {
     @FXML
     private TableColumn<Room, String> equipmentColumn;
 
-    @FXML
-    private Button editRoomButton;
-
-    @FXML
-    private Button deleteBtn;
-    @FXML
-    private TextField searchBar;
-    @FXML
-    private ChoiceBox filterChoiceBox;
-    @FXML
-    private Button closeIconButton;
-
 
     @FXML
     private void onAddRoomBtnClick(ActionEvent actionEvent) {
         tableViewRoom.getSelectionModel().select(null);
-        Stage stage = new Stage();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_ROOM));
-        Scene scene = null;
-
-        try {
-            scene = new Scene(fxmlLoader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        stage.setTitle("Raum Management");
-        stage.setScene(scene);
-        stage.show();
+        ChangeScene stage = new ChangeScene();
+        stage.moveToNextStage(Constants.PATH_TO_FXML_CREATE_NEW_ROOM);
     }
 
     @FXML
@@ -78,7 +64,6 @@ public class RoomsController extends BaseController {
 
         CourseRepositoryJDBC courseRepositoryJDBC = new CourseRepositoryJDBC();
 
-        int myIndex = tableViewRoom.getSelectionModel().getSelectedIndex();
 
         Room roomToDelete = tableViewRoom.getSelectionModel().getSelectedItem();
 
@@ -90,49 +75,33 @@ public class RoomsController extends BaseController {
         Optional<ButtonType> action = alert.showAndWait();
         if (action.get() == ButtonType.OK) {
 
-        try {
-            // check in DB how many bookings use the particular room
-            int bookingCountByRoom = bookingRepositoryJDBC.getBookingCountByRoomId(roomToDelete.getId());
+            try {
+                // check in DB how many bookings use the particular room
+                int bookingCountByRoom = bookingRepositoryJDBC.getBookingCountByRoomId(roomToDelete.getId());
 
-            if (bookingCountByRoom == 0) {
+                if (bookingCountByRoom == 0) {
 
-                roomRepositoryJDBC.deleteRoom(roomToDelete);
-                listModel.roomList.remove(roomToDelete);
+                    roomRepositoryJDBC.deleteRoom(roomToDelete);
+                    listModel.roomList.remove(roomToDelete);
 
-                listModel.courseList.setAll(courseRepositoryJDBC.readAll());
-            } else {
-                QuickAlert.showError("Dieses Raum wird für eine Buchung benötigt, Sie können es nicht löschen! Bearbeiten Sie zuerst Ihre Buchungen!");
+                    listModel.courseList.setAll(courseRepositoryJDBC.readAll());
+                } else {
+                    QuickAlert.showError("Dieses Raum wird für eine Buchung benötigt, Sie können es nicht löschen!" +
+                            "\n" + "Bearbeiten Sie zuerst Ihre Buchungen!");
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
         }
-    }
 
-}
+    }
 
 
     @FXML
-    private void onSettingsBtnClick(ActionEvent actionEvent) {
-        System.out.println("Pressed Room settings");
-        Stage stage = new Stage();
-
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_ROOM));
-        Scene scene = null;
-
-        try {
-            scene = new Scene(fxmlLoader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println("DEBUG: " +tableViewRoom.getSelectionModel().selectedItemProperty());
-        listModel.selectedRoomProperty().bind(tableViewRoom.getSelectionModel().selectedItemProperty());
-
-
-        stage.setTitle("Raum Management");
-        stage.setScene(scene);
-        stage.show();
+    private void onEditRoomBtnClick(ActionEvent actionEvent) {
+        ChangeScene stage = new ChangeScene();
+        stage.moveToNextStage(Constants.PATH_TO_FXML_CREATE_NEW_ROOM);
     }
-
 
 
     @FXML
@@ -147,6 +116,7 @@ public class RoomsController extends BaseController {
         closeIconButton.setVisible(false);
         UsabilityMethods.changeListener(searchBar, closeIconButton);
 
+
         authorityVisibility();
         initTableRoom();
         listModel.selectedRoomProperty().bind(tableViewRoom.getSelectionModel().selectedItemProperty());
@@ -156,9 +126,7 @@ public class RoomsController extends BaseController {
     private void initTableRoom() {
         tableViewRoom.setItems(listModel.sortedRoomList);
         listModel.sortedRoomList.comparatorProperty().bind(tableViewRoom.comparatorProperty());
-        for(Room r: listModel.roomList){
-            System.out.println(r.toString());
-        }
+
         roomNumberColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getRoomNumber()));
         sizeColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getSize()));
         streetColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getLocation().getStreet()));
@@ -180,8 +148,6 @@ public class RoomsController extends BaseController {
         }
     }
 
-
-
     @FXML
     private void onSearchBarClick(KeyEvent actionEvent) {
 
@@ -192,7 +158,6 @@ public class RoomsController extends BaseController {
                 || room.getLocation().getStreet().toLowerCase(Locale.ROOT).contains(searchTerm)
                 || room.getEquipmentAsString().toLowerCase(Locale.ROOT).contains(searchTerm));
     }
-
 
 
     @FXML

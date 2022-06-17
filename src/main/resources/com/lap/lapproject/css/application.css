@@ -201,9 +201,9 @@
     -fx-background-color: #fff;
 }
 
-.Lexend Deca{
+/*.Lexend Deca{
     -fx-font-family: 'Lexend Deca';
-}
+}*/
 
 .button-style {
     -fx-font-family: 'Lexend Deca';
@@ -245,6 +245,19 @@
 #bannerImg {
     -fx-width: 97;
     -fx-height: auto;
+}
+
+
+/*dynamische elemente*/
+.button-close {
+        -fx-background-color: transparent;
+        -fx-border-width: 1;
+        -fx-text-fill: gray;
+        -fx-font-weight: bold;
+}
+
+.button-close:hover {
+    -fx-text-fill: red;
 }
 
 
