@@ -9,6 +9,7 @@ import com.lap.lapproject.utility.QuickAlert;
 import com.lap.lapproject.utility.UsabilityMethods;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -21,6 +22,8 @@ public class AddLocationController extends BaseController {
     private TextField zipCodeTextField;
     @FXML
     private TextField locationNameTextField;
+    @FXML
+    private Label locationZipNoticeLabel;
 
 
     @FXML
@@ -36,17 +39,6 @@ public class AddLocationController extends BaseController {
         String street = streetNameTextField.getText();
         String zip = zipCodeTextField.getText();
         String city = locationNameTextField.getText();
-
-        //check if zip INT
-        if (UsabilityMethods.isNumber(zip)) {
-            QuickAlert.showError("Bitte überprüfen Sie  Zipcode. PLZ soll Zahl sein!");
-            return;
-        }
-        //check if zip 4 numbers
-        if (!UsabilityMethods.isPLZ4(zip) ){
-            QuickAlert.showError("Bitte überprüfen Sie  Zipcode. PLZ soll 4 stellige Zahl sein!");
-            return;
-        }
 
         Location location = new Location(street, zip, city);
         LocationRepositoryJDBC locationRepositoryJDBC = new LocationRepositoryJDBC();
@@ -99,6 +91,8 @@ public class AddLocationController extends BaseController {
 
     @FXML
     private void initialize() {
+        locationZipNoticeLabel.setVisible(false);
+        UsabilityMethods.changeListenerForZip(zipCodeTextField, locationZipNoticeLabel);//!
         System.out.println("AddLocationController:: initialize");
         //Update logik
         if (listModel.getSelectedLocation() != null) {
@@ -108,4 +102,5 @@ public class AddLocationController extends BaseController {
         }
     }
 }
+//UsabilityMethods.changeListenerForZip(zipCodeTextField, locationZipNoticeLabel);//!
 

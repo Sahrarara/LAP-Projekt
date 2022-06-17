@@ -2,9 +2,12 @@ package com.lap.lapproject.utility;
 
 import com.lap.lapproject.controller.BaseController;
 import com.lap.lapproject.model.ListModel;
+import com.lap.lapproject.model.Program;
+import com.lap.lapproject.repos.ProgramRepositoryJDBC;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -25,7 +28,7 @@ public class UsabilityMethods {
         return matcher.find();
     }
     public static boolean isNumber(String input) {
-        Pattern pattern = Pattern.compile("[a-zA-Z]");
+        Pattern pattern = Pattern.compile("^\\d+$");
         Matcher matcher = pattern.matcher(input);
         return matcher.find();
     }
@@ -91,5 +94,51 @@ public class UsabilityMethods {
         }));
     }
 
+    public static void changeListenerForNumber(TextField textField, Label label) {
+        textField.textProperty().addListener(((observable, oldValue, newValue) -> {
+            if (!UsabilityMethods.isNumber(newValue)) {
+                if (!textField.getText().equals("")) {
+                    label.setText("Bitte geben Sie nur Zahlen!");
+                    label.setVisible(true);
+                }
+            } else {
+                label.setVisible(false);
+            }
+        }));
+    }
+
+    public static void changeListenerForZip(TextField textField, Label label) {
+        textField.textProperty().addListener(((observable, oldValue, newValue) -> {
+            if (!UsabilityMethods.isPLZ4(newValue)) {
+                if (!textField.getText().equals("")) {
+                    label.setText("Bitte geben Sie ein 4 Stellige Zahl!");
+                    label.setVisible(true);
+                }
+            } else {
+                label.setVisible(false);
+            }
+        }));
+    }
+
+    public static void changeListenerInputText(TextField textField, Label label) {
+        textField.textProperty().addListener(((observable, oldValue, newValue) -> {
+            if (!newValue.isBlank()){
+                label.setVisible(false);
+            } else {
+                label.setVisible(false);
+            }
+        }));
+    }
+    public static void changeListenerDataPicker(DatePicker datePicker, Label label) {
+        datePicker.valueProperty().addListener(((observable, oldValue, newValue) -> {
+                label.setVisible(false);
+
+        }));
+    }
+
+    public static void  addMessage(Label label, String text) {
+        label.setText(text);
+        label.setVisible(true);
+    }
 
 }

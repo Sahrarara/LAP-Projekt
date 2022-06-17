@@ -20,10 +20,11 @@
    </columnConstraints>
    <rowConstraints>
       <RowConstraints maxHeight="222.0" minHeight="10.0" percentHeight="0.0" prefHeight="77.5" vgrow="SOMETIMES" />
-      <RowConstraints prefHeight="5.0" vgrow="SOMETIMES" />
-      <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
-      <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
-      <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="30.5" minHeight="18.0" prefHeight="18.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="57.0" minHeight="21.0" prefHeight="41.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="57.0" minHeight="11.5" prefHeight="15.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="82.0" minHeight="37.0" prefHeight="37.5" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="70.0" minHeight="27.0" prefHeight="69.5" vgrow="SOMETIMES" />
       <RowConstraints prefHeight="70.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
@@ -42,12 +43,13 @@
             <Insets left="20.0" />
          </GridPane.margin>
       </Label>
-      <Label styleClass="input-description" text="Postleitzahl" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+      <Label styleClass="input-description" text="Postleitzahl" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
       </Label>
-      <Label styleClass="input-description" text="Ort" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4">
+      <Label fx:id="locationZipNoticeLabel" text="zip text" textFill="#ee0404" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+      <Label styleClass="input-description" text="Ort" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
@@ -57,7 +59,7 @@
             <Insets />
          </GridPane.margin>
       </TextField>
-      <Button mnemonicParsing="false" onAction="#onAbortBtnClick" text="ABBRECHEN" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+      <Button mnemonicParsing="false" onAction="#onAbortBtnClick" text="ABBRECHEN" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6">
          <styleClass>
             <String fx:value="button-style" />
             <String fx:value="button-light" />
@@ -66,7 +68,7 @@
             <Insets right="30.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="addNewLocationBtn" mnemonicParsing="false" onAction="#onAddBtnClick" text="HINZUFÜGEN" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+      <Button fx:id="addNewLocationBtn" mnemonicParsing="false" onAction="#onAddBtnClick" text="HINZUFÜGEN" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets right="25.0" />
          </GridPane.margin>
@@ -75,8 +77,8 @@
             <String fx:value="button-dark" />
          </styleClass>
       </Button>
-      <TextField fx:id="zipCodeTextField" layoutX="221.0" layoutY="126.0" maxWidth="385.0" onAction="#onAddBtnClick" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-      <TextField fx:id="locationNameTextField" layoutX="221.0" layoutY="126.0" maxWidth="385.0" onAction="#onAddBtnClick" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+      <TextField fx:id="zipCodeTextField" layoutX="221.0" layoutY="126.0" maxWidth="385.0" onAction="#onAddBtnClick" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+      <TextField fx:id="locationNameTextField" layoutX="221.0" layoutY="126.0" maxWidth="385.0" onAction="#onAddBtnClick" prefHeight="18.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.rowIndex="5" />
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #101d2c;" />
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #101d2c;" GridPane.columnIndex="3" />
    </children>

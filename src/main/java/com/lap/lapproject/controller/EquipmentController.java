@@ -79,7 +79,7 @@ public class EquipmentController extends BaseController{
                 equipmentRepositoryJDBC.deleteEquipment(equipment1);
                 listModel.equipmentList.remove(equipment1);
 
-                listModel.roomList.setAll(roomRepositoryJDBC.readAll());
+                listModel.roomList.setAll(roomRepositoryJDBC.readAll());// TODO: put later to ListModel
 
             } catch (SQLException ex) {
                 ex.printStackTrace();
