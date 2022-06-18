@@ -19,7 +19,9 @@ import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.swing.*;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 import static com.lap.lapproject.controller.BaseController.listModel;
@@ -57,6 +59,11 @@ public class BookingController {
     private HBox bookingBtnBarForCoach;
     @FXML
     private ButtonBar bookingBtnBarForAdmin;
+    @FXML
+    private Button deleteButton;
+    @FXML
+    private Button editButton;
+
 
 
     @FXML
@@ -77,37 +84,50 @@ public class BookingController {
     }
 
 
+
     @FXML
     private void onDeleteBookingBtnClick(ActionEvent actionEvent) {
-        Booking booking = tableViewBooking.getSelectionModel().getSelectedItem();
-        //  BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
-        //bookingRepositoryJDBC.deleteBooking(booking);
+        if(listModel.getSelectedBooking() != null) {
+            Booking booking = tableViewBooking.getSelectionModel().getSelectedItem();
+            //  BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
+            //bookingRepositoryJDBC.deleteBooking(booking);
 
-
-        //Alert CONFIRMATION
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmation Dialog");
-        alert.setHeaderText(null);
-        alert.setContentText("Sind Sie sicher, dass Sie es löschen wollen?");
-        Optional<ButtonType> action = alert.showAndWait();
-        if (action.get() == ButtonType.OK) {
-            listModel.bookingList.remove(booking);
+            //Alert CONFIRMATION
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Sind Sie sicher, dass Sie es löschen wollen?");
+            Optional<ButtonType> action = alert.showAndWait();
+            if (action.get() == ButtonType.OK) {
+                listModel.bookingList.remove(booking);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Bitte gewünschte Zeile markieren",
+                    "Info", JOptionPane.INFORMATION_MESSAGE, null);
         }
+
     }
 
     @FXML
     private void onEditBtnClick(ActionEvent actionEvent) {
-        Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_BOOKING));
-        Scene scene = null;
-        try {
-            scene = new Scene(fxmlLoader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(listModel.getSelectedBooking() != null) {
+            Stage stage = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_BOOKING));
+            Scene scene = null;
+            try {
+                scene = new Scene(fxmlLoader.load());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Raum Management");
+            stage.setScene(scene);
+            stage.show();
+        } else {
+            JOptionPane.showMessageDialog(null, "Bitte gewünschte Zeile markieren",
+                    "Info", JOptionPane.INFORMATION_MESSAGE, null);
         }
-        stage.setTitle("Raum Management");
-        stage.setScene(scene);
-        stage.show();
+
     }
 
     @FXML
@@ -138,6 +158,7 @@ public class BookingController {
     }
 
 
+
     public void initBookingTable() {
         tableViewBooking.setItems(listModel.bookingList);
         courseNameColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getCourse().getCourseName()));
@@ -150,15 +171,18 @@ public class BookingController {
         recurrenceRuleColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getRecurrenceRule()));
 
         dateFromColumn.setCellValueFactory((dataFeatures) ->
-                new SimpleObjectProperty<>(dataFeatures.getValue().getDateTimeStart().toLocalDate().toString()));
+                new SimpleObjectProperty<>(dataFeatures.getValue().getDateTimeStart().toLocalDate().
+                        format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).replaceAll("-", ".")));
 
         dateToColumn.setCellValueFactory((dataFeatures) ->
-                new SimpleObjectProperty<>(dataFeatures.getValue().getDateTimeEnd().toLocalDate().toString()));
+                new SimpleObjectProperty<>(dataFeatures.getValue().getDateTimeEnd().toLocalDate().
+                        format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).replaceAll("-", ".")));
 
         dateTimeColumn.setCellValueFactory((dataFeatures) ->
                 new SimpleObjectProperty<>(dataFeatures.getValue().getDateTimeStart().toLocalTime().toString().substring(0, 5)
                         + " - " + dataFeatures.getValue().getDateTimeEnd().toLocalTime().toString().substring(0, 5)));
     }
+
 
 
     private void authorityVisibility() {

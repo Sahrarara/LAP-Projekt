@@ -35,15 +35,15 @@
             </AnchorPane>
             <AnchorPane prefHeight="732.0" prefWidth="1198.0">
                <children>
-                  <StackPane prefHeight="554.0" prefWidth="1034.0">
+                  <StackPane layoutX="14.0" prefHeight="554.0" prefWidth="1034.0">
                      <children>
                         <HBox layoutX="200.0" prefHeight="554.0" prefWidth="925.0">
                            <children>
                               <AnchorPane layoutX="200.0" maxHeight="-Infinity" prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <Circle centerX="100.0" centerY="100.0" fill="#211d5a" layoutX="200.0" radius="130.0" stroke="#211d5a" strokeType="INSIDE" strokeWidth="5.0" />
-                                    <Circle fx:id="circleView" centerX="100.0" centerY="100.0" fill="#211d5a" layoutX="200.0" radius="130.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" />
-                                    <Button fx:id="photoUploadButton" layoutX="222.0" layoutY="81.0" mnemonicParsing="false" onAction="#onPhotoUploadBtnClick" style="-fx-background-color: transparent;" text="Foto hochladen" textFill="WHITE">
+                                    <Circle centerX="100.0" centerY="100.0" fill="#211d5a" layoutX="200.0" layoutY="20.0" radius="130.0" stroke="#211d5a" strokeType="INSIDE" strokeWidth="5.0" />
+                                    <Circle fx:id="circleView" centerX="100.0" centerY="100.0" fill="#211d5a" layoutX="200.0" layoutY="20.0" radius="130.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" />
+                                    <Button fx:id="photoUploadButton" layoutX="222.0" layoutY="101.0" mnemonicParsing="false" onAction="#onPhotoUploadBtnClick" style="-fx-background-color: transparent;" text="Foto hochladen" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="18.0" />
                                        </font>
@@ -51,8 +51,8 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </Button>
-                                    <Circle fx:id="photoDeleteCircle" fill="WHITE" layoutX="378.0" radius="20.0" stroke="#c69963" strokeType="INSIDE" strokeWidth="3.0" />
-                                    <Button fx:id="photoDeleteButton" layoutX="362.0" layoutY="-14.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onPhotoDeleteButtonClick" prefHeight="15.0" prefWidth="15.0" style="-fx-background-color: transparent;">
+                                    <Circle fx:id="photoDeleteCircle" fill="WHITE" layoutX="378.0" layoutY="20.0" radius="20.0" stroke="#c69963" strokeType="INSIDE" strokeWidth="3.0" />
+                                    <Button fx:id="photoDeleteButton" layoutX="362.0" layoutY="6.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#onPhotoDeleteButtonClick" prefHeight="15.0" prefWidth="15.0" style="-fx-background-color: transparent;">
                                        <graphic>
                                           <FontAwesomeIconView fill="#211d5a" glyphName="CLOSE" size="20" tabSize="0" />
                                        </graphic>
@@ -79,11 +79,13 @@
                                           <Label text="Vorname" textFill="#211d5a">
                                              <font>
                                                 <Font size="16.0" />
-                                             </font></Label>
+                                             </font>
+                                          </Label>
                                           <Label fx:id="firstnameLabel" text="Vorname" textFill="#211d5a">
                                              <font>
                                                 <Font name="System Bold" size="16.0" />
-                                             </font></Label>
+                                             </font>
+                                          </Label>
                                        </children>
                                        <VBox.margin>
                                           <Insets top="50.0" />
@@ -171,11 +173,13 @@
                                                 <Label text="Telefon" textFill="#211d5a">
                                                    <font>
                                                       <Font size="16.0" />
-                                                   </font></Label>
+                                                   </font>
+                                                </Label>
                                                 <TextField fx:id="phoneTextField" prefHeight="29.0" prefWidth="365.0">
                                                    <font>
                                                       <Font size="14.0" />
-                                                   </font></TextField>
+                                                   </font>
+                                                </TextField>
                                              </children>
                                           </HBox>
                                           <HBox fx:id="phoneHBox" prefHeight="45.0" prefWidth="484.0" spacing="84.0">
@@ -201,11 +205,13 @@
                                                 <Label prefWidth="140.0" text="Zusatztext" textFill="#211d5a">
                                                    <font>
                                                       <Font size="16.0" />
-                                                   </font></Label>
+                                                   </font>
+                                                </Label>
                                                 <TextArea fx:id="descriptionTextArea" prefHeight="200.0" prefWidth="400.0">
                                                    <font>
                                                       <Font size="14.0" />
-                                                   </font></TextArea>
+                                                   </font>
+                                                </TextArea>
                                              </children>
                                           </HBox>
                                           <HBox fx:id="descriptionHBox" prefHeight="100.0" prefWidth="200.0" spacing="41.0">

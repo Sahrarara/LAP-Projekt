@@ -68,30 +68,13 @@ public class AddBookingController extends BaseController {
     @FXML
     private void onAddBtnClick(ActionEvent actionEvent) throws SQLException {
 
-        // TODO: Rework addbooking.fxml (eintägiger Kurs vs. wöchentlicher Kurs)
         //TODO: if Bedingung damit Booking nur angelegt wird wenn möglich
 
-//        BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
-
-//        String startDate = startDatePicker.getEditor().getText().strip().replaceAll("-", ".");
-//        startDatePicker.getEditor().getText().isEmpty();
-
-        if (!(locationChoiceBox.getValue() == null) &&
-                !(courseNameChoiceBox.getValue() == null) &&
-                !(trainerChoiceBox.getValue() == null) &&
-                !(roomNumberChoiceBox.getValue() == null) &&
-                !(recurrenceChoiceBox.getValue() == null) &&
-
-
-//                !(startDatePicker.getEditor().getText()).isEmpty() &&
-//                !(endDatePicker.getEditor().getText()).isEmpty() &&
-
-                !(startDatePicker.getValue() == null) &&
-                !(endDatePicker.getValue() == null) &&
-
-
-                !(timeStartTimeField.getValue().toString().substring(0, 5).equals(LocalTime.now().toString().substring(0,5))) &&
-                !(timeEndTimeField.getValue().toString().substring(0, 5).equals(LocalTime.now().toString().substring(0,5)))) {
+        if (locationChoiceBox.getValue() != null && courseNameChoiceBox.getValue() != null &&
+                trainerChoiceBox.getValue() != null && roomNumberChoiceBox.getValue() != null &&
+                recurrenceChoiceBox.getValue() != null && startDatePicker.getValue() != null &&
+                endDatePicker.getValue() != null && timeStartTimeField.getValue() != null &&
+                timeEndTimeField.getValue() != null) {
 
             if (listModel.getSelectedBooking() == null) {
                 addNewBooking();
@@ -107,7 +90,7 @@ public class AddBookingController extends BaseController {
 
     private void addNewBooking() {
 
-        logger.info("timeStartTimeField.getValue(): {}", timeStartTimeField.getValue() + "/" + LocalTime.now());
+        logger.info("timeStartTimeField.getValue(): {}", timeStartTimeField.getValue().toString().substring(0,5) + "------" + LocalTime.now());
         logger.info("timeEndTimeField.getValue(): {}", timeEndTimeField.getValue());
 
         Room room = roomNumberChoiceBox.getValue();
@@ -127,15 +110,17 @@ public class AddBookingController extends BaseController {
 
         // validate date
 
-        if (dateStart.compareTo(dateEnd) > 0 ) {
+        if (dateStart.compareTo(dateEnd) > 0 || dateStart.isBefore(LocalDate.now()) || dateEnd.isBefore(LocalDate.now())) {
             JOptionPane.showMessageDialog(null, "Datum passt nicht. Bitte kontrollieren!",
                     "Warnung", JOptionPane.ERROR_MESSAGE, null);
+
 
         } else {
 
             // validate time
 
             if (timeStart.compareTo(timeEnd) > 0 || timeStart.compareTo(timeEnd) == 0) {
+
                 JOptionPane.showMessageDialog(null, "Uhrzeit passt nicht. Bitte kontrollieren!",
                         "Warnung", JOptionPane.ERROR_MESSAGE, null);
 
@@ -179,7 +164,9 @@ public class AddBookingController extends BaseController {
 
             // validate time
 
-            if (timeStart.compareTo(timeEnd) > 0 || timeStart.compareTo(timeEnd) == 0) {
+            if (timeStart.compareTo(timeEnd) > 0 || timeStart.compareTo(timeEnd) == 0 ||
+                    (!timeStart.equals(LocalTime.now()) && !timeEnd.equals(LocalTime.now()))
+            ) {
 
                 JOptionPane.showMessageDialog(null, "Uhrzeit passt nicht. Bitte kontrollieren!",
                         "Warnung", JOptionPane.ERROR_MESSAGE, null);
@@ -223,8 +210,8 @@ public class AddBookingController extends BaseController {
         fillRecurrenceRuleChoiceBox();
         fillRoomChoiceBox();
 
-        timeStartTimeField.setValue(LocalTime.of(7, 30));
-        timeEndTimeField.setValue(LocalTime.of(19, 30));
+//        timeStartTimeField.setValue(LocalTime.of(7, 30));
+//        timeEndTimeField.setValue(LocalTime.of(19, 30));
 
 
         if (listModel.getSelectedBooking() != null) {
