@@ -389,7 +389,10 @@ public class AddUserController extends BaseController {
             descriptionCheckBox.setSelected(listModel.getSelectedUser().getDescriptionVisibility());
             phoneNmbrCheckBox.setSelected(listModel.getSelectedUser().getPhoneNmbrVisibility());
             emailCheckBox.setSelected(listModel.getSelectedUser().getEmailVisibility());
-            photoCheckBox.setSelected(listModel.getSelectedUser().getPhotoVisibility());
+            if (model.getLoggedInUser().getPhoto() != null) {
+                //trainer.setPhotoVisibility(photoCheckBox.isSelected());
+                photoCheckBox.setSelected(listModel.getSelectedUser().getPhotoVisibility());
+            }
         }
 
     }
