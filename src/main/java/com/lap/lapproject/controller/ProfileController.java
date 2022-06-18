@@ -157,11 +157,13 @@ public class ProfileController extends BaseController {
 
         if (model.getLoggedInUser().getPhoto() != null) {
             circleView.setFill(new ImagePattern(imageFromBytes(model.getLoggedInUser().getPhoto())));
-
+            listModel.setUserImgProperty(imageFromBytes(model.getLoggedInUser().getPhoto()));
         } else {
             try {
                 circleView.setFill(new ImagePattern(imageFromBytes(convertToBytes
                         ("src/main/resources/com/lap/lapproject/images/lapproject/images/Sample_User_Icon.png"))));
+                listModel.setUserImgProperty(imageFromBytes(convertToBytes
+                        ("src/main/resources/com/lap/lapproject/images/lapproject/images/Sample_User_Icon.png")));
             } catch (IOException e) {
                 e.printStackTrace();
             }

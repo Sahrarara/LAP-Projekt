@@ -133,6 +133,7 @@ public class SidebarController extends BaseController {
         assert bannerImg != null : "fx:id=\"bannerImg\" was not injected: check your FXML file 'sidebar-view.fxml'.";
         authorityVisibility();
         setUsername();
+        listModel.addListenerForUserImage(bannerImg);
     }
 
     public boolean authorityVisibility() throws IOException {
