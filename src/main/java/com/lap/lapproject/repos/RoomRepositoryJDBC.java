@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RoomRepositoryJDBC extends Repository implements RoomRepository {
-
     private static final Logger logger = LoggerFactory.getLogger(AddRoomController.class);
 
     private static final String SELECT_ROOM_SQL_STRING = "SELECT * FROM rooms JOIN location ON rooms.location_id = location.location_id";
@@ -20,7 +19,8 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
             " VALUES (?,?)";
     private static final String DELETE_ROOM_SQL_STRING = "DELETE FROM rooms WHERE room_id=?";
     private static final String UPDATE_ROOM_SQL_STRING = "UPDATE rooms SET room_number =?, size=?, location_id=? WHERE room_id=? ";
-
+    private static final String DELETE_EQUIPMENT_ROOM_RT = "DELETE FROM rooms_equipment WHERE room_id=? AND " +
+            "equipment_id=?";
 
     @Override
     public List<Room> readAll() throws SQLException {
@@ -91,12 +91,14 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
             ps.setInt(2, room.getSize());
             ps.setInt(3, room.getLocation().getId());
             ps.executeUpdate();
+
             logger.info("Room added to DB: {} ", room.getRoomNumber());
 
             rs = ps.getGeneratedKeys();
             while (rs.next()) {
                 roomKey = rs.getInt(1);
                 room.setId((roomKey));
+
                 logger.info("New room saved in DB with ID: " + roomKey);
             }
             ps.close();
@@ -107,7 +109,7 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
                 ps.setInt(1, room.getId());
                 ps.setInt(2, equipmentId.getId());
                 ps.executeUpdate();
-
+                /* addEquipment( room,  equipmentId);*/
 
                 logger.info("New equipments added to DB: {}", equipmentId);
 
@@ -132,6 +134,7 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
             ps.setInt(1, room.getId());
             ps.setInt(2, equipment.getId());
             ps.executeUpdate();
+
             logger.info("Add just equipment to DB :{}", equipment);
 
         } catch (SQLException e) {
@@ -140,8 +143,7 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
             if (connection != null) connection.close();
         }
     }
-    private static final String DELETE_EQUIPMENT_ROOM_RT = "DELETE FROM rooms_equipment WHERE room_id=? AND " +
-            "equipment_id=?";
+
 
     @Override
     public void deleteEquipment(Room room, Equipment equipment) throws SQLException {
@@ -152,7 +154,7 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
 
             ps = connection.prepareStatement(DELETE_EQUIPMENT_ROOM_RT);
             ps.setInt(1, room.getId());
-            ps.setInt(2,equipment.getId());
+            ps.setInt(2, equipment.getId());
             ps.executeUpdate();
 
             logger.info("Delete just equipment in DB :{}", equipment);
@@ -207,11 +209,7 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
         } finally {
             if (connection != null) connection.close();
         }
-
     }
-
-
-
 
 
 }

@@ -30,6 +30,7 @@ public class Room {
         this.equipments = equipments;
     }
 
+
     public int getId() {
         return id.get();
     }
@@ -73,7 +74,7 @@ public class Room {
     public void setLocation(Location location) {
         this.location = location;
     }
-    
+
     public List<Equipment> getEquipments() {
         return equipments;
     }

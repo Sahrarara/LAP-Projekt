@@ -1,6 +1,5 @@
 package com.lap.lapproject.controller;
 
-
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.Room;
 import com.lap.lapproject.repos.BookingRepositoryJDBC;
@@ -17,7 +16,6 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 
 import java.sql.SQLException;
 import java.util.Locale;
@@ -93,7 +91,6 @@ public class RoomsController extends BaseController {
                 ex.printStackTrace();
             }
         }
-
     }
 
 
