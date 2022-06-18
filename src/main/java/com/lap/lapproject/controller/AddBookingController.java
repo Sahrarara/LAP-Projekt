@@ -90,9 +90,6 @@ public class AddBookingController extends BaseController {
 
     private void addNewBooking() {
 
-        logger.info("timeStartTimeField.getValue(): {}", timeStartTimeField.getValue().toString().substring(0,5) + "------" + LocalTime.now());
-        logger.info("timeEndTimeField.getValue(): {}", timeEndTimeField.getValue());
-
         Room room = roomNumberChoiceBox.getValue();
         Trainer trainer = trainerChoiceBox.getValue();
         Course course = courseNameChoiceBox.getValue();
@@ -107,31 +104,12 @@ public class AddBookingController extends BaseController {
         LocalDateTime localDateTimeStart = null;
         LocalDateTime localDateTimeEnd = null;
 
-
-        // validate date
-
-        if (dateStart.compareTo(dateEnd) > 0 || dateStart.isBefore(LocalDate.now()) || dateEnd.isBefore(LocalDate.now())) {
-            JOptionPane.showMessageDialog(null, "Datum passt nicht. Bitte kontrollieren!",
-                    "Warnung", JOptionPane.ERROR_MESSAGE, null);
-
-
-        } else {
-
-            // validate time
-
-            if (timeStart.compareTo(timeEnd) > 0 || timeStart.compareTo(timeEnd) == 0) {
-
-                JOptionPane.showMessageDialog(null, "Uhrzeit passt nicht. Bitte kontrollieren!",
-                        "Warnung", JOptionPane.ERROR_MESSAGE, null);
-
-            } else {
-                localDateTimeStart = LocalDateTime.of(dateStart, timeStart);
-                localDateTimeEnd = LocalDateTime.of(dateEnd, timeEnd);
-                Booking booking = new Booking(room, trainer, model.getLoggedInUser(), course, localDateTimeStart, localDateTimeEnd, recurrenceRule);
-                listModel.bookingList.add(booking);
-
-                moveToBookingPage();
-            }
+        if (isValidDateTimeForAddBooking(dateStart, dateEnd, timeStart, timeEnd)) {
+            localDateTimeStart = LocalDateTime.of(dateStart, timeStart);
+            localDateTimeEnd = LocalDateTime.of(dateEnd, timeEnd);
+            Booking booking = new Booking(room, trainer, model.getLoggedInUser(), course, localDateTimeStart, localDateTimeEnd, recurrenceRule);
+            listModel.bookingList.add(booking);
+            moveToBookingPage();
         }
     }
 
@@ -155,32 +133,15 @@ public class AddBookingController extends BaseController {
 
         selectedBooking.setRecurrenceRule(recurrenceChoiceBox.getValue());
 
-        // validate date
-        if (dateStart.compareTo(dateEnd) > 0) {
+        if (isValidDateTimeForUpdateBooking(dateStart, dateEnd, timeStart, timeEnd)) {
+            localDateTimeStart = LocalDateTime.of(dateStart, timeStart);
+            localDateTimeEnd = LocalDateTime.of(dateEnd, timeEnd);
+            selectedBooking.setDateTimeStart(localDateTimeStart);
+            selectedBooking.setDateTimeEnd(localDateTimeEnd);
 
-            JOptionPane.showMessageDialog(null, "Datum passt nicht. Bitte kontrollieren!",
-                    "Warnung", JOptionPane.ERROR_MESSAGE, null);
-        } else {
-
-            // validate time
-
-            if (timeStart.compareTo(timeEnd) > 0 || timeStart.compareTo(timeEnd) == 0 ||
-                    (!timeStart.equals(LocalTime.now()) && !timeEnd.equals(LocalTime.now()))
-            ) {
-
-                JOptionPane.showMessageDialog(null, "Uhrzeit passt nicht. Bitte kontrollieren!",
-                        "Warnung", JOptionPane.ERROR_MESSAGE, null);
-            } else {
-
-                localDateTimeStart = LocalDateTime.of(dateStart, timeStart);
-                localDateTimeEnd = LocalDateTime.of(dateEnd, timeEnd);
-                selectedBooking.setDateTimeStart(localDateTimeStart);
-                selectedBooking.setDateTimeEnd(localDateTimeEnd);
-
-                // bookingRepositoryJDBC.updateBooking(selectedBooking);
-                listModel.bookingList.set(listModel.bookingList.indexOf(selectedBooking), selectedBooking);
-                moveToBookingPage();
-            }
+            // bookingRepositoryJDBC.updateBooking(selectedBooking);
+            listModel.bookingList.set(listModel.bookingList.indexOf(selectedBooking), selectedBooking);
+            moveToBookingPage();
         }
     }
 
@@ -210,8 +171,8 @@ public class AddBookingController extends BaseController {
         fillRecurrenceRuleChoiceBox();
         fillRoomChoiceBox();
 
-//        timeStartTimeField.setValue(LocalTime.of(7, 30));
-//        timeEndTimeField.setValue(LocalTime.of(19, 30));
+        timeStartTimeField.setValue(LocalTime.of(7, 30));
+        timeEndTimeField.setValue(LocalTime.of(19, 30));
 
 
         if (listModel.getSelectedBooking() != null) {
@@ -269,6 +230,34 @@ public class AddBookingController extends BaseController {
             roomFilteredList.setPredicate(room -> room.getLocation().getStreet().equals(locationChoiceBox.getValue().getStreet()));
         });
         roomNumberChoiceBox.setItems(roomFilteredList);
+    }
+
+    private boolean isValidDateTimeForUpdateBooking(LocalDate dateStart, LocalDate dateEnd, LocalTime timeStart, LocalTime timeEnd) {
+        if (dateStart.compareTo(dateEnd) > 0) {
+            QuickAlert.showError("Datum passt nicht. Bitte kontrollieren!");
+            return false;
+        } else {
+            if (timeStart.compareTo(timeEnd) > 0 || timeStart.compareTo(timeEnd) == 0) {
+                QuickAlert.showError("Uhrzeit passt nicht. Bitte kontrollieren!");
+                return false;
+            }
+            return true;
+        }
+    }
+
+
+    private boolean isValidDateTimeForAddBooking(LocalDate dateStart, LocalDate dateEnd, LocalTime timeStart, LocalTime timeEnd) {
+        if (dateStart.compareTo(dateEnd) > 0 || dateStart.isBefore(LocalDate.now()) || dateEnd.isBefore(LocalDate.now())) {
+            QuickAlert.showError("Datum passt nicht. Bitte kontrollieren!");
+            return false;
+        } else {
+            if (timeStart.compareTo(timeEnd) > 0 || timeStart.compareTo(timeEnd) == 0 ||
+                    (timeStart.equals(LocalTime.of(7, 30)) && timeEnd.equals(LocalTime.of(19, 30)))) {
+                QuickAlert.showError("Uhrzeit passt nicht. Bitte kontrollieren!");
+                return false;
+            }
+            return true;
+        }
     }
 
 

@@ -28,6 +28,8 @@ public class ListModel {
     public ObservableList<Trainer> authorizationList = FXCollections.observableArrayList();
 
 
+    public FilteredList<Booking> filteredListForComboBox = new FilteredList<>(bookingList);
+
     public FilteredList<Course> filteredCourseList = new FilteredList<Course>(courseList);
     public FilteredList<Program> filteredProgramList = new FilteredList<Program>(programList);
     public FilteredList<Equipment> filteredEquipmentList = new FilteredList<Equipment>(equipmentList);
