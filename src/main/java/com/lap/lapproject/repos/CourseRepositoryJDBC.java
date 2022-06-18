@@ -13,7 +13,7 @@ public class CourseRepositoryJDBC extends Repository implements CourseRepository
    private static final String DELETE_COURSE_SQL_STRING = "DELETE FROM courses WHERE course_id=?";
    private static final String UPDATE_COURSE_SQL_STRING = "UPDATE courses SET course_name =?, course_start=?, course_end=?, program_id=?, group_size=? WHERE course_id=?";
    private static final String GET_COURSES_COUNT_BY_PROGRAM_ID_SQL_STRING = "SELECT COUNT(*) AS courses_count FROM courses WHERE program_id = (?)";
-
+   private static final String GET_COURSE_COUNT_BY_UNIQUE_COURSE_NAME_SQL_STRING = "SELECT COUNT(*) AS unique_course_count FROM courses WHERE course_name = (?) ";
 
 
 
@@ -32,10 +32,9 @@ public class CourseRepositoryJDBC extends Repository implements CourseRepository
             while (resultSet.next()) {
 
                 //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                String timeStart = resultSet.getString("course_start");
-                LocalDate courseStart = LocalDate.parse(timeStart);
-                String timeEnd = resultSet.getString("course_end");
-                LocalDate courseEnd = LocalDate.parse(timeEnd);
+
+                LocalDate courseStart = resultSet.getDate("course_start").toLocalDate();
+                LocalDate courseEnd = resultSet.getDate("course_end").toLocalDate();
 
 
                 Course course = new Course(resultSet.getInt("course_id"), resultSet.getString("course_name"),
@@ -145,5 +144,27 @@ public class CourseRepositoryJDBC extends Repository implements CourseRepository
             if (connection != null) connection.close();
         }
         return coursesCount;
+    }
+
+    // check unique courseName in DB
+    public int getCourseCountByCourseName(String courseName) throws SQLException {
+        Connection connection = connect();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        int courseCount = 0;
+        try {
+            preparedStatement = connection.prepareStatement(GET_COURSE_COUNT_BY_UNIQUE_COURSE_NAME_SQL_STRING );
+            preparedStatement.setString(1, courseName);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                courseCount = resultSet.getInt("unique_course_count");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
+        }
+        return courseCount;
     }
 }

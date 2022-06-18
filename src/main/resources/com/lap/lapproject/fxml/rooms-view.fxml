@@ -113,7 +113,7 @@
             </AnchorPane>
             <AnchorPane>
                <children>
-                  <TableView fx:id="tableViewRoom" layoutX="-2.0" prefHeight="667.0" prefWidth="1198.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="tableViewRoom" layoutY="40.0" prefHeight="667.0" prefWidth="1198.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
                      <columns>
                         <TableColumn fx:id="roomNumberColumn" minWidth="-1.0" prefWidth="108.5" text="R-Nr." />
                         <TableColumn fx:id="sizeColumn" minWidth="-1.0" prefWidth="237.0" text="Raumgröße" />

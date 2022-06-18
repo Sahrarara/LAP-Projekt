@@ -1,0 +1,1777 @@
+[33mcommit 9ec434d4828a52db95b9fac5f52f6a64f5fb34ab[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Merge: b89e388 51c4b9b
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Fri Jun 10 13:17:00 2022 +0200
+
+    Merge branch 'main' of https://github.com/Sahrarara/LAP-Projekt
+
+[33mcommit b89e388feb1542c6ced1faa2bc5a0e5b17d7e120[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Fri Jun 10 13:09:49 2022 +0200
+
+    fixed location and room numbers; add convercation windows to delete
+
+[33mcommit 51c4b9befcdecb6f54579e19652f13adb2f984d8[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Azra Vgc <azra.vgc@gmail.com>
+Date:   Fri Jun 10 11:18:57 2022 +0200
+
+    changed sidebar buttons
+
+[33mcommit 50bd831daeccc10a3adb93cc666aa49efe541d9e[m
+Author: Azra Vgc <azra.vgc@gmail.com>
+Date:   Fri Jun 10 10:59:48 2022 +0200
+
+    add new equipment icon
+
+[33mcommit 145e2916a11e26d5d45f1186eb2cf8e218123eda[m
+Merge: f2ebd81 5d61288
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Thu Jun 9 13:34:07 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit f2ebd8144e3d5499b31b5932bd4c74b52b54d793[m
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Thu Jun 9 13:33:55 2022 +0200
+
+    Added changeListener to searchbar for close-icon visibility, Edited searchbar position
+
+[33mcommit 5d61288cba1921df47b21cf5adf73a3a170bb27b[m
+Merge: 5cb0b49 54cdee1
+Author: Daniela Fuchs <fuchs.daniela@drei.at>
+Date:   Thu Jun 9 11:51:13 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit 5cb0b4924d009fb163c93660e290972b8c9c529c[m
+Author: Daniela Fuchs <fuchs.daniela@drei.at>
+Date:   Thu Jun 9 11:50:57 2022 +0200
+
+    Rechtschreibung und changePW.fxml andere Farbe
+
+[33mcommit 54cdee13ecbdceb3768e912f8a27a57a46e465b3[m
+Author: Azra Vgc <azra.vgc@gmail.com>
+Date:   Thu Jun 9 10:46:27 2022 +0200
+
+    deleted target
+
+[33mcommit 2b7aa7bf0221e73d7ea69f42138fd83bcac6e898[m
+Author: Azra Vgc <azra.vgc@gmail.com>
+Date:   Thu Jun 9 10:45:06 2022 +0200
+
+    final version colored icons and changes in adduser-view.fxml
+
+[33mcommit 1a608dd1d501d2ab292e99d6ca1ab9e6674f88ec[m
+Merge: da620a3 92adc39
+Author: Azra Vgc <azra.vgc@gmail.com>
+Date:   Thu Jun 9 10:21:23 2022 +0200
+
+    Merge remote-tracking branch 'origin/main' into main
+    
+    # Conflicts:
+    #       src/main/resources/com/lap/lapproject/fxml/adduser-view.fxml
+    #       src/main/resources/com/lap/lapproject/images/lapproject/images/PenB.png
+
+[33mcommit da620a3f4eb7d1afe3d236c64e0a116be4bb6ca1[m
+Author: Azra Vgc <azra.vgc@gmail.com>
+Date:   Thu Jun 9 10:16:26 2022 +0200
+
+    changed uploaded icon adduser-view.fxml and the others icon colored sidebar
+
+[33mcommit 92adc3976d64c3538966295aba4ea44fe283d33d[m
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Thu Jun 9 09:57:54 2022 +0200
+
+    Edited booking-view.fxml, Added SQL-Exception to "TrainerController"
+
+[33mcommit aff8ebf15116a36a8bfda8a267e5e5abae1754a4[m
+Merge: 03023cc 60cb182
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Thu Jun 9 09:50:30 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+    
+    # Conflicts:
+    #       src/main/java/com/lap/lapproject/controller/AddUserController.java
+    #       src/main/java/com/lap/lapproject/controller/BookingController.java
+    #       src/main/java/com/lap/lapproject/controller/LoginController.java
+    #       src/main/java/com/lap/lapproject/controller/TrainerController.java
+    #       src/main/java/com/lap/lapproject/repos/BookingRepositoryJDBC.java
+    #       src/main/resources/com/lap/lapproject/fxml/booking-view.fxml
+
+[33mcommit 03023ccf8d844cf0b771d557bed0daa22c799a95[m
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Thu Jun 9 09:39:22 2022 +0200
+
+    Edited "ChangePasswordController" and "PasswordSecurity",
+    Added Modality to "ProfileController",
+    Added list of activeTrainer to choice-box in "AddBookingController",
+    Deleted "Security.java" and "BCrypt.java",
+    Added "connection.close()" to all repositories,
+    QuickAlert replaced by JOptionPane in "AddUserController" and "ChangePasswordController",
+    Fixed the bug in AddBookingController by column "Vortragende" and prevent multiple display of data,
+    Added filter function to all Controller for searchBar
+
+[33mcommit 60cb182adc252e9871ed6ade69bc1629486d843b[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Thu Jun 9 09:16:29 2022 +0200
+
+    add regex to Class UsabilityMethods
+
+[33mcommit de69411b3065a0ad23dfbae317fb2425aaf27780[m
+Merge: f05c91a ce8afea
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Wed Jun 8 18:38:27 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+    
+    # Conflicts:
+    #       LAP-Project.iml
+    #       src/main/java/com/lap/lapproject/controller/AddUserController.java
+    #       src/main/java/com/lap/lapproject/controller/BookingController.java
+    #       src/main/java/com/lap/lapproject/repos/BookingRepositoryJDBC.java
+    #       src/main/java/com/lap/lapproject/repos/UserRepositoryJDBC.java
+
+[33mcommit f05c91adecd84a729b92e1ecb7d6d5569262f0b5[m
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Wed Jun 8 18:22:42 2022 +0200
+
+    Edited "ChangePasswordController" and "PasswordSecurity",
+    Added Modality to "ProfileController",
+    Added list of activeTrainer to choice-box in "AddBookingController",
+    Deleted "Security.java" and "BCrypt.java",
+    Added "connection.close()" to all repositories,
+    QuickAlert replaced by JOptionPane in "AddUserController" and "ChangePasswordController",
+    Fixed the bug in AddBookingController by column "Vortragende" and prevent multiple display of data
+
+[33mcommit c544773a9d030490928af5e63f5e4ceb59fdd82b[m
+Merge: 36edef1 ce8afea
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Wed Jun 8 11:14:19 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit 36edef1afa0a1486a4983231235bb0e0d6c5bed0[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Wed Jun 8 11:13:55 2022 +0200
+
+    add error text to check user image in data base
+
+[33mcommit ce8afea095b58c9a1b22eeb4680d7d71d49ef3df[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Tue Jun 7 14:35:10 2022 +0200
+
+    Calender is working
+
+[33mcommit 37b55108d9d0d88724f4c589e98b2342e15a1692[m
+Merge: 0150488 672a2bf
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Tue Jun 7 11:59:03 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit 015048892c681b7647273613e33f538ba03a10e4[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Tue Jun 7 11:58:43 2022 +0200
+
+    EntryList for CalenderControlleris now working
+
+[33mcommit 672a2bfbb3fe0fb0adb2a60f174886133e79e22b[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Tue Jun 7 10:34:15 2022 +0200
+
+    changed somedescriptions in  addUser.fxml
+
+[33mcommit 96d4232169410b4ceb74ef387b0f48b67eeeaf27[m
+Merge: e28988d 5cee514
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Tue Jun 7 09:28:33 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+    
+    # Conflicts:
+    #       src/main/java/com/lap/lapproject/controller/AddUserController.java
+    #       src/main/resources/com/lap/lapproject/fxml/location-view.fxml
+
+[33mcommit e28988df6a090f35dbc6f48ae75e7edb9b513c1f[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Tue Jun 7 09:13:25 2022 +0200
+
+    changed all fxml files + changed TrainerListe(add Photo and one more column
+
+[33mcommit 5cee514b8a126974f29847aa5d7b4b322662833d[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Tue Jun 7 09:00:47 2022 +0200
+
+    AddUser updated, Listener for User and Booking added,
+
+[33mcommit 6268c580f04d3b451fd3a50529f322a536bb2b92[m
+Merge: ac66df7 89c101a
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Fri Jun 3 18:17:51 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit ac66df7c715ac2aa03377b1022a48a21056c053a[m
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Fri Jun 3 18:17:35 2022 +0200
+
+    Added ActionEvent to the searchTextField
+
+[33mcommit 89c101a98713aeb19e47f6f00c27b07365ef564d[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Fri Jun 3 13:35:49 2022 +0200
+
+    UserRepositoryJDBC checkUniqueUsername changed
+
+[33mcommit 78906f210e53251472df70d44cee21cfa10b24cd[m
+Merge: 9b49f4b 0ee7fc9
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Fri Jun 3 13:21:41 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit 0ee7fc923c2df51a08eacfa33e5defcd092f8392[m
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Fri Jun 3 13:17:10 2022 +0200
+
+    Added PasswortSecurity class
+
+[33mcommit 9b49f4bfc628551c3d91ce91e0679335cf713423[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Fri Jun 3 13:08:58 2022 +0200
+
+    user update
+
+[33mcommit 33b605e5cc6463a4b4caf233f18fb1c879174174[m
+Merge: 8e9a441 72aabd2
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Fri Jun 3 12:46:33 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+    
+    # Conflicts:
+    #       LAP-Project.iml
+    #       src/main/java/com/lap/lapproject/controller/BookingController.java
+    #       src/main/java/com/lap/lapproject/controller/ChangePasswordController.java
+    #       src/main/java/com/lap/lapproject/controller/CoursesController.java
+    #       src/main/java/com/lap/lapproject/controller/LocationController.java
+    #       src/main/java/com/lap/lapproject/controller/RoomsController.java
+    #       src/main/java/com/lap/lapproject/controller/TrainerController.java
+    #       src/main/resources/com/lap/lapproject/fxml/booking-view.fxml
+    #       src/main/resources/com/lap/lapproject/fxml/equipment-view.fxml
+    #       src/main/resources/com/lap/lapproject/fxml/events-view.fxml
+    #       src/main/resources/com/lap/lapproject/fxml/location-view.fxml
+    #       src/main/resources/com/lap/lapproject/fxml/program-view.fxml
+    #       src/main/resources/com/lap/lapproject/fxml/rooms-view.fxml
+    #       src/main/resources/com/lap/lapproject/fxml/trainer.fxml
+
+[33mcommit 8e9a4413a17a0358c43b4ad32f813a6ae60fb42d[m
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Fri Jun 3 12:23:32 2022 +0200
+
+    Added change-user-password functionality in user-profile --> ChangePasswordController, Added dependency/ Libraries for BCrypt, Added close-icon to the searchbars on fxml-files, Added functionality to the close-icons in Controllers, edited LoginController
+
+[33mcommit 72aabd2f3704e34079ff63c0fae43e12a92dc983[m
+Author: nainisimran <74864652+nainisimran@users.noreply.github.com>
+Date:   Wed Jun 1 13:04:44 2022 +0200
+
+    filter function now working
+
+[33mcommit 85b90ab99f8ed1eb973b66245b0a389838fc2f51[m
+Merge: fb88106 803ef3b
+Author: nainisimran <74864652+nainisimran@users.noreply.github.com>
+Date:   Wed Jun 1 10:11:04 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+    
+    # Conflicts:
+    #       src/main/java/com/lap/lapproject/controller/BookingController.java
+    #       src/main/java/com/lap/lapproject/controller/CoursesController.java
+    #       src/main/java/com/lap/lapproject/controller/EquipmentController.java
+    #       src/main/java/com/lap/lapproject/controller/LocationController.java
+    #       src/main/java/com/lap/lapproject/controller/ProgramController.java
+    #       src/main/java/com/lap/lapproject/controller/TrainerController.java
+    #       src/main/resources/com/lap/lapproject/fxml/booking-view.fxml
+    #       src/main/resources/com/lap/lapproject/fxml/equipment-view.fxml
+    #       src/main/resources/com/lap/lapproject/fxml/events-view.fxml
+    #       src/main/resources/com/lap/lapproject/fxml/location-view.fxml
+    #       src/main/resources/com/lap/lapproject/fxml/rooms-view.fxml
+    #       src/main/resources/com/lap/lapproject/fxml/trainer.fxml
+
+[33mcommit fb88106ed71dad20c0f2f8a20bb65acb65a685fd[m
+Author: nainisimran <74864652+nainisimran@users.noreply.github.com>
+Date:   Wed Jun 1 09:57:47 2022 +0200
+
+    Filtered Function created
+
+[33mcommit 803ef3b9b629496526872539796d3f192d569fe9[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Wed Jun 1 07:19:51 2022 +0200
+
+    push-commit
+
+[33mcommit 5405b1dc35e29374c89371bdf34199042ab3e4e7[m
+Merge: c6dfbc2 f071c36
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Wed Jun 1 07:13:02 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit f071c361c8efdb329c4609c82229f1a5a44df9e2[m
+Merge: 1c2df38 b66b2cb
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Tue May 31 15:00:02 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit b66b2cb60185e433e4e766be2a5835535bbfb6c1[m
+Merge: b953ad8 69909a9
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Tue May 31 14:58:34 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit b953ad8f72b7ad072ac7dd78a761241bc12f8d55[m
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Tue May 31 14:58:02 2022 +0200
+
+    validate date and time in "AddBooking", added standard image in "ProfileController", Edited search field in all fxml files
+
+[33mcommit 1c2df38ad407caedc0fc2bec5665a7399c634210[m
+Merge: 314c33d 69909a9
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Tue May 31 14:54:35 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit 314c33dd038919d7cb4c81b9fa575be021d646ad[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Tue May 31 14:54:21 2022 +0200
+
+    form for addUser
+
+[33mcommit 69909a965236cc2953bbf7011dec3d4465256a7a[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Tue May 31 11:38:33 2022 +0200
+
+    added a filtered program list
+
+[33mcommit 68993be45feb598fe54053e819d9d4c45abc8039[m
+Merge: 4743a5a 1824ac3
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Tue May 31 10:53:54 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit 4743a5a9c25ecaa0b78a1714b23ef1b08c26495c[m
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Tue May 31 10:53:19 2022 +0200
+
+    validate date and time in "AddBooking", added standard image in "ProfileController"
+
+[33mcommit c6dfbc2d228cedd6c3ffa3828b35593ec8e732ff[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Mon May 30 13:55:52 2022 +0200
+
+    fixed function deleteTrainer()
+
+[33mcommit 6b9112f0ac783dec518bef963254425b18d2cae4[m
+Merge: ec423e6 1824ac3
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Mon May 30 09:36:14 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+    
+    # Conflicts:
+    #       src/main/java/com/lap/lapproject/controller/RoomsController.java
+
+[33mcommit 5e5dfbd61081cb01b4ba5f03d4f584fa97708444[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Fri May 27 19:29:56 2022 +0200
+
+    fixed update change & Alert Delete Confirmation
+
+[33mcommit 1824ac3e19d226cedd69e2527499d95b68d2bd77[m
+Author: NepaConfus <tina.thurner@gmx.net>
+Date:   Wed May 25 14:52:04 2022 +0200
+
+    try of fixing the passwordChange
+
+[33mcommit 8a24bb7c4c2dc30ca435cc025269bf22b2586683[m
+Merge: e27f9b4 18a19aa
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Wed May 25 14:33:32 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit 18a19aaa20864fe594d7e01bc3dfce69b53b2038[m
+Merge: 52c7013 5b1ee36
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Wed May 25 14:31:02 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+    
+    # Conflicts:
+    #       src/main/java/com/lap/lapproject/model/Room.java
+
+[33mcommit 52c7013ad67f94ae4b674357d8dfd680090a0aec[m
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Wed May 25 14:29:36 2022 +0200
+
+    Added sql query and profile-update methode in UserRepositoryJDBC, Added new constructor in User/Admin/Trainer classes, Edited profile-view.fxml, Finished and adjusted ProfileController
+
+[33mcommit e27f9b4afc92f10725f422344017f5f64e3896ab[m
+Merge: 13a2222 5b1ee36
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Wed May 25 14:20:36 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit 13a2222c30899c782410106148fbd07daef5e8a9[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Wed May 25 14:19:03 2022 +0200
+
+    add user form
+
+[33mcommit 5b1ee36822d1f39960bbd7b81c37020b0fd0bc81[m
+Merge: d80e6ad 1977587
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Wed May 25 13:57:29 2022 +0200
+
+    Merge branch 'main' of https://github.com/Sahrarara/LAP-Projekt
+
+[33mcommit d80e6adc041d1f235e21f768710a392daefc7227[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Wed May 25 13:57:16 2022 +0200
+
+     made funktion roomUpdate()
+
+[33mcommit 1977587c07061d2cd167d5470db3ecc87367251f[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Wed May 25 09:41:02 2022 +0200
+
+    switch funktion added für add or update User
+
+[33mcommit c97dc63b1873c3a068befa8f535cfbf57b333a3c[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Mon May 23 16:47:39 2022 +0200
+
+    comment out toString() in Room
+
+[33mcommit 910b75f499c3d91ae2ea46afdfa25410beaf6999[m
+Merge: 4dffbac a7aedd4
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Mon May 23 11:53:03 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit 4dffbac16f50caaa7347291f33011cfcba56ed68[m
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Mon May 23 11:52:39 2022 +0200
+
+    continue working on profile update
+
+[33mcommit a7aedd4da109c9103802622347c3158e4c422f38[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Mon May 23 09:42:06 2022 +0200
+
+    change in booking funktion mooveToProgramPage() to moove To BookingPage()
+
+[33mcommit f018823f5952116bdb8a0ffee5e591b426e18382[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Sun May 22 19:35:38 2022 +0200
+
+    added function addRoom(), changed Room Constructor, created class RoomEquipment, created repos RoomsEquipmentRepository & RoomsEquipmentRepositoraJDBC
+
+[33mcommit e453bbc0444940086f311960e7e65a4f51c9004c[m
+Merge: c2007dd 7d0f519
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Sun May 22 16:28:40 2022 +0200
+
+    Merge branch 'main' of https://github.com/Sahrarara/LAP-Projekt
+
+[33mcommit c2007dd55ca76d50ef758227bf340af6effbf1dc[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Sun May 22 16:28:30 2022 +0200
+
+    fixed bug in SELECT_ROOM_SQL_STRING
+
+[33mcommit 7d0f519edf449f6c868a88e6f31ef32d96488eb2[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Fri May 20 14:24:31 2022 +0200
+
+    Update user
+
+[33mcommit ec423e66d2209855696d3490a5b274289872bad6[m
+Merge: 237aa75 a7d4634
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Fri May 20 12:58:39 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit ea9815b1f19f1ea1292d47d1e36606c3096a27c4[m
+Merge: 690c9de a7d4634
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Fri May 20 11:46:22 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit 690c9deded5a2b229dc3d7fceb3048edb6862523[m
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Fri May 20 11:44:57 2022 +0200
+
+    starts with "profileController", edited "profile-view.fxml", added css for transparent button
+
+[33mcommit a7d4634d1999d1a45610cc675fd5847094ac07ef[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Fri May 20 11:40:15 2022 +0200
+
+    Update user
+
+[33mcommit 237aa75eff510ad5e25a33fa80828e2746845281[m
+Merge: 0d59c3b d7eba2f
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Fri May 20 11:17:43 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+    
+    # Conflicts:
+    #       src/main/java/com/lap/lapproject/controller/TrainerController.java
+
+[33mcommit d7eba2f9cb8ae1737cd1a71adf15023b7f171a46[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Thu May 19 16:35:04 2022 +0200
+
+    Add user form
+
+[33mcommit 699946ab8eb9a4753b52f5ec50afd09da784c0eb[m
+Merge: 6fb285d 3c69cf3
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Thu May 19 14:40:39 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+    
+    # Conflicts:
+    #       src/main/java/com/lap/lapproject/repos/BookingRepository.java
+
+[33mcommit 6fb285d82de32ec4f950420bbf16c91c5569cfbe[m
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Thu May 19 14:39:23 2022 +0200
+
+    booking update, adjusted localdatetime, added changeListener in ListModel
+
+[33mcommit 3c69cf374bcfb06474c0907e89b78ef4dea71075[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Thu May 19 14:15:45 2022 +0200
+
+    delete Location is done
+
+[33mcommit 0d59c3b3acada3bae7cb817b259549bc1be09c8f[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Thu May 19 13:07:39 2022 +0200
+
+    added TODOs in Controller classes
+
+[33mcommit 99a74261ab69b6272d43069bb7e57dbf782a6232[m
+Merge: 8ef08f7 dc5800e
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Thu May 19 11:03:46 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit dc5800ed9d3f9cf5307f54f47a1d5ca7e2b46cfd[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Thu May 19 09:44:50 2022 +0200
+
+    Created new package with usability methods
+
+[33mcommit a52896c238eb4c14ad975cf20d62f722b71cc086[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Tue May 17 13:41:12 2022 +0200
+
+    add user width hash password
+
+[33mcommit 8ef08f74593076dbd65a6566c7f187f77a9410f0[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Mon May 16 23:49:05 2022 +0200
+
+    add bei delete program check if some courses use this program
+
+[33mcommit bc93674ba551fcf13aee1721304f69b3058975f5[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Mon May 16 21:09:12 2022 +0200
+
+    fixed course apdate
+
+[33mcommit b3e4ff31bae13ec9a510bbc6acd07f349bb9317a[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Mon May 16 13:03:53 2022 +0200
+
+    add user
+
+[33mcommit 335878112848cd220571dd6fabf9c322077bb037[m
+Merge: 3112f26 fb2e2b3
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Mon May 16 11:16:46 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+    
+    # Conflicts:
+    #       src/main/java/com/lap/lapproject/model/Program.java
+
+[33mcommit 3112f268a244a9e6c0fdfdea186ca738f1f94b89[m
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Mon May 16 11:14:10 2022 +0200
+
+    edited constructors in User-, Trainer- and Admin class, deleted UserData, Edited UserRepositoryJDBC, added toString methode to the Program class
+
+[33mcommit fb2e2b3fb2574e8b78e35f9ddae9782c725f895a[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Mon May 16 10:40:38 2022 +0200
+
+    fixed course update
+
+[33mcommit d7f6ccb82bffcba9e5664f17e51aae1ecfa2c304[m
+Merge: 507b9bd 48200cd
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Mon May 16 10:08:41 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+    
+    # Conflicts:
+    #       src/main/java/com/lap/lapproject/controller/CoursesController.java
+    #       src/main/java/com/lap/lapproject/repos/BookingRepositoryJDBC.java
+    #       target/classes/com/lap/lapproject/controller/AddBookingController.class
+    #       target/classes/com/lap/lapproject/controller/BookingController.class
+    #       target/classes/com/lap/lapproject/controller/ChangePasswordController.class
+    #       target/classes/com/lap/lapproject/controller/CoursesController.class
+    #       target/classes/com/lap/lapproject/controller/EquipmentController.class
+    #       target/classes/com/lap/lapproject/controller/LocationController.class
+    #       target/classes/com/lap/lapproject/controller/LoginController.class
+    #       target/classes/com/lap/lapproject/controller/ProfileController.class
+    #       target/classes/com/lap/lapproject/controller/ProgramController.class
+    #       target/classes/com/lap/lapproject/controller/RoomsController.class
+    #       target/classes/com/lap/lapproject/controller/SidebarController.class
+    #       target/classes/com/lap/lapproject/controller/TrainerController.class
+    #       target/classes/com/lap/lapproject/model/Admin.class
+    #       target/classes/com/lap/lapproject/model/Booking.class
+    #       target/classes/com/lap/lapproject/model/ListModel.class
+    #       target/classes/com/lap/lapproject/model/Model.class
+    #       target/classes/com/lap/lapproject/model/Trainer.class
+    #       target/classes/com/lap/lapproject/model/User.class
+    #       target/classes/com/lap/lapproject/repos/BookingRepository.class
+    #       target/classes/com/lap/lapproject/repos/BookingRepositoryJDBC.class
+    #       target/classes/com/lap/lapproject/repos/Repository.class
+    #       target/classes/com/lap/lapproject/repos/RoomRepositoryJDBC.class
+    #       target/classes/com/lap/lapproject/repos/UserRepositoryJDBC.class
+    #       target/classes/module-info.class
+
+[33mcommit c7abb8e4bf97c8f73f9822e4ad8436f4c2f5eabd[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Mon May 16 09:29:54 2022 +0200
+
+    add function toString in Program
+
+[33mcommit 507b9bd855314ada798a573baab6ed3dd5acaa25[m
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Mon May 16 09:26:35 2022 +0200
+
+    edited constructors in User-, Trainer- and Admin class, deleted UserData, Edited UserRepositoryJDBC, added toString methode to the Program class
+
+[33mcommit 48200cdb19a27ba42e60cb0d09110e6d97c19bde[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Fri May 13 20:55:10 2022 +0200
+
+    fixed bug in course update logic in Course inizialise
+
+[33mcommit 31736ac2919d0ae6be3562eb5913a8bb50afeffe[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Fri May 13 20:46:06 2022 +0200
+
+    fixed EndDate Column in inizialize CourseSController
+
+[33mcommit e72fe7523dc81f9d5e41de802a0cc8b63e8cb57a[m
+Merge: b518822 1d3ac82
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Fri May 13 20:29:38 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit b518822fb125472717d0fdde427190df416fb51c[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Fri May 13 20:29:15 2022 +0200
+
+    update course, delete course, changed data typ in constructor Course
+
+[33mcommit c465fad0d69455628c20b2485e2250a02c64fa23[m
+Merge: f4025d3 1d3ac82
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Thu May 12 13:52:06 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+    
+    # Conflicts:
+    #       src/main/java/com/lap/lapproject/model/User.java
+
+[33mcommit f4025d3f8544974684cbd1d36ab4e6de859df7dc[m
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Thu May 12 13:45:57 2022 +0200
+
+    edited sql-query by RoomRepository, edited Booking
+
+[33mcommit 1d3ac82b09b98b183b6b2e0f7e9bfcd8b1495bd3[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Thu May 12 13:42:29 2022 +0200
+
+    changed user handling
+
+[33mcommit 0728e6096876eba0f3f75ed260b49798da240078[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Thu May 12 11:00:21 2022 +0200
+
+    improve addBtn in Location and Equipment
+
+[33mcommit d95e02c070866230c9fbcc66ac8a2a8334fbca9e[m
+Merge: 031c6ee f9b5bac
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Thu May 12 10:14:02 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit 95b237bea0a85d868b87e8127b8fd1fa2740f033[m
+Merge: a344a96 f9b5bac
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Thu May 12 09:43:48 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+    
+    # Conflicts:
+    #       src/main/java/com/lap/lapproject/model/ListModel.java
+
+[33mcommit a344a96f753ea94211675af3a5338f75127966ba[m
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Thu May 12 09:39:56 2022 +0200
+
+    edited somethings by Booking
+
+[33mcommit f9b5bac67c2134bb550edb1bc3ca746a06a49c75[m
+Merge: 86cd1ae 00d51c2
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Thu May 12 09:33:21 2022 +0200
+
+    merge: Personas and changed to Booking, UserData...
+
+[33mcommit 031c6ee85081f04f2883cb836c9f1c38ba1790e9[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Wed May 11 22:44:51 2022 +0200
+
+    AddUser Form
+
+[33mcommit 86cd1aed1b4256147c98c1535bbdb998c55eb7f5[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Wed May 11 11:41:17 2022 +0200
+
+    target
+
+[33mcommit 00d51c20fa18048e0da86c870acc3ce7d2721d54[m
+Merge: 768535e 5b4f9bc
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Wed May 11 11:27:58 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit 768535e6bd3489f271466150ed8c96789a5dce1d[m
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Wed May 11 11:27:24 2022 +0200
+
+    edited SQl-query in RoomRepository
+
+[33mcommit d778c78b549520bb57cdd832bd9793d31992e1c6[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Wed May 11 10:42:33 2022 +0200
+
+    location delete/update; equipment add/delete/update
+
+[33mcommit 5b4f9bc46646b4603c6f977eb573e91335585962[m
+Author: Connytschiwa <Oegger14@gmail.com>
+Date:   Wed May 11 10:19:19 2022 +0200
+
+    New Personas added
+
+[33mcommit 2b6386d79cbe27349fb123c13a227f3e04740802[m
+Merge: 85e00dd 88dd733
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Tue May 10 22:06:41 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit 85e00dd2c34d1457989c190060b3a65d1b28bc6f[m
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Tue May 10 14:50:24 2022 +0200
+
+    Add Booking Form
+
+[33mcommit 88dd7332e0a5e5d22755641f4653a1166a0b20a6[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Mon May 9 14:48:36 2022 +0200
+
+    made Equipment delete and update
+
+[33mcommit 647d8810f74d1c09d48bc0342c37d4c006dc7d3a[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Mon May 9 14:23:43 2022 +0200
+
+    add Equipment into BD
+
+[33mcommit f613cfcddcc7396121a3872d870d9191f01b1912[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Mon May 9 11:51:10 2022 +0200
+
+    Code Refactor
+
+[33mcommit ae36d4b5a17f0d0875a43392c58136fff010e562[m
+Merge: b20e470 1f2cf58
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Fri May 6 20:20:18 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit 1f2cf5876cbb6de432be5bc78efd45b963768987[m
+Author: NepaConfus <tina.thurner@gmx.net>
+Date:   Fri May 6 13:31:08 2022 +0200
+
+    edit ChangePasswordController.java
+
+[33mcommit 4e9d832adc338c148b7c765a666d00cac764d97d[m
+Author: NepaConfus <tina.thurner@gmx.net>
+Date:   Fri May 6 13:07:28 2022 +0200
+
+    checkIfPasswordIsInDatabase function added
+
+[33mcommit 1ec6a0cd9b24b8640ef6875f5a4836f1c55e7eaa[m
+Author: Daniela Fuchs <fuchs.daniela@drei.at>
+Date:   Fri May 6 11:53:45 2022 +0200
+
+    renamed eventscontroller to coursescontroller
+
+[33mcommit a6787ff5a8fdfe69ff1a47d8ddbb6ac464f241bd[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Fri May 6 11:22:39 2022 +0200
+
+    added logger
+
+[33mcommit 19f94bd92b3cf50ea03b855ef74129717bb9c0df[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Fri May 6 11:00:18 2022 +0200
+
+    add alert window to addCourses
+
+[33mcommit b20e47033c0da7b84f4c390bd387dc445f205be6[m
+Merge: 506fb67 6526d8f
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Fri May 6 10:42:37 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit 6526d8fa8f348a58a734ceffbe1170f6bafa9d44[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Fri May 6 10:41:41 2022 +0200
+
+    add course,constructor change localDate to localTadeTime(in course end),variable localdate  in construktor change wil Camel on ex couseName instead coursename
+
+[33mcommit 506fb6797d9c1eb95f976871c8c7a3936b9e3341[m
+Merge: dc6305b ab9a99b
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Wed May 4 13:27:21 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit ab9a99b89eadeaf788e251cb0b602e2ba0a39607[m
+Author: Mona Sharif <sharif.monara@gmail.com>
+Date:   Wed May 4 13:25:21 2022 +0200
+
+    Buchung: mit Tabelle und Inhalt erweitert
+
+[33mcommit dc6305bc3cb25fe1c7c26f145ed98aa65439475a[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Wed May 4 10:45:10 2022 +0200
+
+    css
+
+[33mcommit daf77c45179c112bc0499254bed6b7bf9e425101[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Tue May 3 22:46:24 2022 +0200
+
+    last commit ---> :(
+
+[33mcommit bb5d61382220fa2eaa7ebf565b9af4f6643a06a9[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Tue May 3 22:15:22 2022 +0200
+
+    list clear added
+
+[33mcommit aca88faa2ff70ea5f90cebb94ced4eae970d1d41[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Tue May 3 22:10:35 2022 +0200
+
+    phone number in table
+
+[33mcommit 396e6c0b54d8f9c9ed51f924a6fdd8678661787a[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Tue May 3 21:13:56 2022 +0200
+
+    row mark
+
+[33mcommit a7f29d4c2bbe70004994a68c84ad849e190799b2[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Tue May 3 20:50:12 2022 +0200
+
+    checkBox deleted
+
+[33mcommit 70d93aabe866a778fe3f56bbe867c258c0a9ae88[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Tue May 3 19:29:41 2022 +0200
+
+    All Add Controller and changePassword controller only need the crud functionality now
+
+[33mcommit 83183aff75edb47ec51063769b6e02dc3be2cb57[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Tue May 3 13:07:28 2022 +0200
+
+    initial view after login is search-view
+
+[33mcommit 5caf1dae9cb5d9370fcdfc27bc909a7b92a6fa95[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Tue May 3 11:49:44 2022 +0200
+
+    addLocationController revised
+
+[33mcommit f5dab29235d046fcab401fb3052943625499a614[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Tue May 3 11:32:09 2022 +0200
+
+    Login Alerts changed to QuickAlert
+
+[33mcommit 78810126e0974ca62f3d8a06c44e3c13556f9e01[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Tue May 3 11:28:51 2022 +0200
+
+    made a quickAlert class
+
+[33mcommit ffeef241c0c848a788707d94355e8ec26e6938be[m
+Merge: e7665d3 1c5c797
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Tue May 3 11:19:59 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit 1c5c7970fc35a61902fcce58447e52910f984929[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Tue May 3 11:19:13 2022 +0200
+
+    fill table
+
+[33mcommit e7665d39d92a5e875f841f98b4ff92697e0f4f77[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Tue May 3 11:18:49 2022 +0200
+
+    addProgramController revised
+
+[33mcommit c600213edc28b142aff9a4a8365294e799c9adec[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Tue May 3 10:06:11 2022 +0200
+
+    click event for checkbox
+
+[33mcommit 8305946842e2286a4ce8d9fbd9ae3df2b8f7701e[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Tue May 3 09:48:53 2022 +0200
+
+    add course repos und JDBS repo
+
+[33mcommit 59992b42c66441c74ac2857b46160f08c4f5eaf5[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Tue May 3 09:24:54 2022 +0200
+
+    call function added
+
+[33mcommit ffa092c6d00aac386f0204e9a5fb166d68abde8f[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Tue May 3 08:46:02 2022 +0200
+
+    repos
+
+[33mcommit 7926c09e482870dc8966eb62f5cf9cf8b2609221[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Tue May 3 00:56:04 2022 +0200
+
+    database changes
+
+[33mcommit 86be5b0cce72b5d437eaa0b0960f479d777e30ad[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Mon May 2 13:02:33 2022 +0200
+
+    add program
+
+[33mcommit c0878f1436c013e70fc5de6381072e35303fde7e[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Mon May 2 12:57:06 2022 +0200
+
+    add program
+
+[33mcommit fc9af4dc92c24be0e935f78f21f363ffa52ad440[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Mon May 2 11:48:30 2022 +0200
+
+    add standort
+
+[33mcommit 6357ed8ed456f54dbb7a379c3badaaac7cc8d4b0[m
+Author: Nataliya Okunska <nataliya.okunska@gmail.com>
+Date:   Mon May 2 11:44:22 2022 +0200
+
+    add standort
+
+[33mcommit fc387dbbe27136e46a387b83162cd99c8f1b33ac[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Fri Apr 29 14:31:37 2022 +0200
+
+    TODO made in programJDBC
+
+[33mcommit 90fc4f188e838997dbeb24fb15911cca7b65f257[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Fri Apr 29 14:25:56 2022 +0200
+
+    create Program Repository added
+
+[33mcommit 02dc549065059d2051d87f3f460be2b05a98f069[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Fri Apr 29 11:18:09 2022 +0200
+
+    id to Program, Room, Location added
+
+[33mcommit 0dd1082d2ea66b706f4bee52c1b5a16b7e00638c[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Fri Apr 29 10:25:48 2022 +0200
+
+    equipment-view.fxml columns changed
+
+[33mcommit 4870f4f06a054e9cc874009f2b8307af5e1e5888[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Fri Apr 29 10:19:51 2022 +0200
+
+    non responsive added
+
+[33mcommit 0a7e638dcec55a626c640fadc60e2e2fce3b7cf7[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Fri Apr 29 09:25:49 2022 +0200
+
+    addequipment-view.fxml textfield deleted
+
+[33mcommit 327e685431cfc1e300fa6a136b7869bfe670b84a[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Thu Apr 28 23:13:56 2022 +0200
+
+    Fixed duplicate data issue
+
+[33mcommit f807658967bef83783660f6204cd572a91137033[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Thu Apr 28 23:01:17 2022 +0200
+
+    -fx-cursor error deleted
+
+[33mcommit b29ad75630c9f2c56e7fbe59175d47b603bea0cc[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Thu Apr 28 14:28:43 2022 +0200
+
+    static string added as query
+
+[33mcommit d38ee4a72fe51d1bffead948622c4aa100a09586[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Thu Apr 28 14:13:50 2022 +0200
+
+    Repositories package added, database package deleted
+
+[33mcommit 135841de7a76ba5dc513fcc337211c4c2a5fd03f[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Thu Apr 28 10:42:14 2022 +0200
+
+    repos package
+
+[33mcommit d01b0df929d2392b9aada650344a4de8e74b599c[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Wed Apr 27 23:08:50 2022 +0200
+
+    room table, program table, location table filled, button Buchen added
+
+[33mcommit 6cea43c6629eade03710a97b25d3354a930c728c[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Tue Apr 26 22:15:21 2022 +0200
+
+    trainer.fxml
+
+[33mcommit 771af256f2a8897090f0154cab691422698c382e[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Tue Apr 26 22:04:54 2022 +0200
+
+    login-view.fxml changed
+
+[33mcommit dc42fc2cd3be2c31275b0fe5f136a0360767b6d9[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Tue Apr 26 22:03:30 2022 +0200
+
+    plus icon changed
+
+[33mcommit cb3433bd87b32e8ee46e40d9f7609c8dddf2a55f[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Tue Apr 26 21:56:32 2022 +0200
+
+    cosmetic changes
+
+[33mcommit f02b80c0dc111a1bc5fb06e71b41a4957c0dc53b[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Tue Apr 26 11:26:18 2022 +0200
+
+    contructors are now on top of the class
+
+[33mcommit d0347b30575b2bd73354279f68eb5ccf4cc6a265[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Tue Apr 26 10:34:03 2022 +0200
+
+    screenflow works for different users different
+
+[33mcommit 3b357ae2468de74dd2aa4d808c6b577d59c3ca14[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Tue Apr 26 10:25:50 2022 +0200
+
+    added id's in fxml
+
+[33mcommit 87f3e459154789a0319851c0a41bc8bd91b24aa2[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Tue Apr 26 09:50:39 2022 +0200
+
+    finished screenflow
+
+[33mcommit dd177a4d0ca1d3d053719b8e15321ef0f6d6e043[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Tue Apr 26 09:46:31 2022 +0200
+
+    Screenflow completed
+
+[33mcommit 9af349702c0454e9d35752c83a4a91fbb69cd013[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Tue Apr 26 09:05:03 2022 +0200
+
+    screen flow for program-view.fxml,search-view.fxml, equipment-view.fxml added
+
+[33mcommit 59abf6674fc210dd98a165ecfc08e1610054d41d[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Tue Apr 26 09:04:52 2022 +0200
+
+    screen flow for program-view.fxml,search-view.fxml, equipment-view.fxml added
+
+[33mcommit 4ca95ff33934dc617b8b4873829d2f116ab971bd[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Tue Apr 26 09:04:39 2022 +0200
+
+    screen flow for program-view.fxml,search-view.fxml, equipment-view.fxml added
+
+[33mcommit 25d82912cb1dcbf3e85fe68c8b8d258ad494f333[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Mon Apr 25 15:02:03 2022 +0200
+
+    worked a lot on calendar
+
+[33mcommit 46f7416bc163d5f959e0d4636c9b8b4234e99482[m
+Merge: f81c582 15dd574
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Mon Apr 25 10:06:35 2022 +0200
+
+    Merge branch 'main' of https://github.com/Sahrarara/LAP-Projekt
+
+[33mcommit f81c582b9b6d55bf0929382aaf814c2b2e99871c[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Mon Apr 25 10:06:27 2022 +0200
+
+    changes
+
+[33mcommit 15dd574738285bd5ebd79837f407cb21d7f3d6e4[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Mon Apr 25 00:19:11 2022 +0200
+
+    search-view.fxml added, icons changed, sidebar-view.fxml changed,word "hinzufügen" from forms deleted
+
+[33mcommit c2714f348648ef02e1c5f42f2c120a3ece0cf4e2[m
+Author: Daniela Fuchs <fuchs.daniela@drei.at>
+Date:   Fri Apr 22 11:54:47 2022 +0200
+
+    login-view correction
+
+[33mcommit a87a8ba8880a797b6df46cf243a858dee022f8fc[m
+Merge: 636612e ae3911b
+Author: Daniela Fuchs <fuchs.daniela@drei.at>
+Date:   Fri Apr 22 09:33:41 2022 +0200
+
+    fuck you
+
+[33mcommit 636612e5c6b721a1fcf00f3ed96353d15b1bdb1f[m
+Author: Daniela Fuchs <fuchs.daniela@drei.at>
+Date:   Fri Apr 22 09:31:51 2022 +0200
+
+    forgot password added
+
+[33mcommit ae3911be8b0208a4a9a260488fcf22d39ec927c2[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Wed Apr 20 22:58:17 2022 +0200
+
+    addbooking-view.fxml, adduser-view.fxml, booking-view.fxml changed
+
+[33mcommit 975cde28b8d7163a408c80d8b6ac1f73b2867191[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Wed Apr 20 22:25:21 2022 +0200
+
+    css file updated,
+    added: changepassword-view.fxml and controller, equipment-view.fxml and controller, program-view.fxml and cotroller
+
+[33mcommit a7a7b6f01ac6135e741e7f06d8c4494e27f792ea[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Wed Apr 20 14:02:00 2022 +0200
+
+    authority visibility method added
+
+[33mcommit ae1bbf7c122b3c7193c64063f012899c12697a17[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Wed Apr 20 13:35:38 2022 +0200
+
+    ids for buttons and icons
+
+[33mcommit 65c000b552f843cbca877136c956ee49623d5ddc[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Wed Apr 20 11:59:49 2022 +0200
+
+    screenflow works 80%
+
+[33mcommit 67250a7b40d85a9379d7d915662a53ba9cfdcd4b[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Wed Apr 20 11:45:13 2022 +0200
+
+    added id's and btn actions to adduser-view.fxml
+
+[33mcommit db7c0a24c33d8483da46dbb0a11804c4688a018e[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Wed Apr 20 11:38:11 2022 +0200
+
+    added id's and onActions in addcourse/equipment/location/program/room.fxml
+
+[33mcommit 1db935121b5785c28d6294b74a5b47f8e2a4d713[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Wed Apr 20 11:02:06 2022 +0200
+
+    add/delete/setting button added to booking/events/location/rooms view.fxml
+
+[33mcommit 193206879fce1fb6788be07c63946e20e932f926[m
+Merge: 990802d 1fbc470
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Wed Apr 20 10:35:20 2022 +0200
+
+    Merge branch 'main' of https://github.com/Sahrarara/LAP-Projekt
+
+[33mcommit 990802ddefedb3fa1f69ae93914653a90bae19f4[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Wed Apr 20 10:35:11 2022 +0200
+
+    events-view works again
+
+[33mcommit 1fbc470f624f50844e7189658f1575963e5821e0[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Wed Apr 20 10:20:05 2022 +0200
+
+    rooms-view.fxml  path changed
+
+[33mcommit 81569549f64dfe1af28f2c2b363d5c719f78602e[m
+Merge: ce72b9f b2568fd
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Wed Apr 20 10:13:25 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+    
+    # Conflicts:
+    #       src/main/resources/com/lap/lapproject/fxml/rooms-view.fxml
+
+[33mcommit ce72b9fa3f12da0ed7db30d1850bd03921d1b15e[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Wed Apr 20 10:11:36 2022 +0200
+
+    rooms-view.fxml  changed
+
+[33mcommit b2568fd6103e8a0c09c11ea1551dbc8a6ddb7d69[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Wed Apr 20 10:03:54 2022 +0200
+
+    rooms-view is weird
+
+[33mcommit 0397ea3a422736e3b3273d7ef0934f2595f31a1e[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Wed Apr 20 09:57:08 2022 +0200
+
+    some weird rooms-view shenanigans
+
+[33mcommit 9a3b9fe9cfb8d6817080466005ee588662dd08db[m
+Author: Sahrarara <74914665+Sahrarara@users.noreply.github.com>
+Date:   Wed Apr 20 09:50:34 2022 +0200
+
+    Update and rename EventsViewController.java to EventsController.java
+
+[33mcommit 00fe9290dbbbc1a109738e38653bc789ef5ef8e6[m
+Author: Sahrarara <74914665+Sahrarara@users.noreply.github.com>
+Date:   Wed Apr 20 09:49:29 2022 +0200
+
+    Update and rename addBookingController.java to AddBookingController.java
+
+[33mcommit 269d4b824e3cc7d6d99260f3f2ac9740fc7290ae[m
+Author: Sahrarara <74914665+Sahrarara@users.noreply.github.com>
+Date:   Wed Apr 20 09:48:52 2022 +0200
+
+    Update and rename BookingControllerTwo.java to BookingController.java
+
+[33mcommit f5e5f43f464d06b9a82d42480ee4be5fa907f738[m
+Author: Sahrarara <74914665+Sahrarara@users.noreply.github.com>
+Date:   Wed Apr 20 09:48:08 2022 +0200
+
+    Rename booking2-view.fxml to booking-view.fxml
+
+[33mcommit 1534d80393d55628d4a58407e0f4e798567c473c[m
+Author: Sahrarara <74914665+Sahrarara@users.noreply.github.com>
+Date:   Wed Apr 20 09:47:51 2022 +0200
+
+    Rename booking-view.fxml to addbooking-view.fxml
+
+[33mcommit 8c465470e79fde5f3abb297c4f3719ea3054628d[m
+Author: Sahrarara <74914665+Sahrarara@users.noreply.github.com>
+Date:   Wed Apr 20 09:47:08 2022 +0200
+
+    Rename BookingController.java to addBookingController.java
+
+[33mcommit 204ee35baf567ceb17cf39a5802292ab6d421c4c[m
+Author: Sahrarara <74914665+Sahrarara@users.noreply.github.com>
+Date:   Wed Apr 20 09:46:30 2022 +0200
+
+    Delete SearchController.java
+
+[33mcommit 74aa6e7bb03b326d3294387527b13780a4dd3c32[m
+Author: Sahrarara <74914665+Sahrarara@users.noreply.github.com>
+Date:   Wed Apr 20 09:46:22 2022 +0200
+
+    Delete CoreDataController.java
+
+[33mcommit 4e71d2aadcbb593f26e91a9e692456ece96abd15[m
+Merge: 6f66f4d c64d8c1
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Wed Apr 20 09:45:07 2022 +0200
+
+    Merge branch 'main' of https://github.com/Sahrarara/LAP-Projekt
+
+[33mcommit 6f66f4da38a27f54e7e6da94d1b3cb40be73cc4e[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Wed Apr 20 09:44:45 2022 +0200
+
+    Database stuff
+
+[33mcommit c64d8c1dbdf05368907ad007fa0fc61d4de09488[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Wed Apr 20 09:14:58 2022 +0200
+
+    events-view.fxml table name changed
+
+[33mcommit 884d8b649ee76bba0552ebeb222f35fd5473bace[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Tue Apr 19 22:46:58 2022 +0200
+
+    booking-view.fxml changed
+
+[33mcommit 8920d33110ceb51074b9df8ccf5f6e95c349bb5f[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Tue Apr 19 22:45:56 2022 +0200
+
+    addlocation-view.fxml, adduser-view.fxml, profile-view.fxml, ProfileController.java added and changed
+
+[33mcommit a03372cbb959568b0020d882a0991d25678555eb[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Tue Apr 19 13:49:10 2022 +0200
+
+    improved forms, events-view.fxml and location-view.fxml changed
+
+[33mcommit 99dd77c9aed99c6e47e9c01b059bc8230cd97d7e[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Tue Apr 19 13:48:51 2022 +0200
+
+    improved forms, events-view.fxml and location-view.fxml changed
+
+[33mcommit 2a4c06bdec915247d18cf679b2fd96a9fbd4677f[m
+Author: Sahrarara <74914665+Sahrarara@users.noreply.github.com>
+Date:   Tue Apr 19 10:54:17 2022 +0200
+
+    Delete trainer_dashboard.fxml
+
+[33mcommit 4b0fcb76cb9e92d9b6547cea94c572046e6110f9[m
+Author: Sahrarara <74914665+Sahrarara@users.noreply.github.com>
+Date:   Tue Apr 19 10:54:08 2022 +0200
+
+    Delete trainer_bearbeiten.fxml
+
+[33mcommit 14fcf3f47e8ea6f2630171d6fd31ed53780d5667[m
+Author: Sahrarara <74914665+Sahrarara@users.noreply.github.com>
+Date:   Tue Apr 19 10:53:59 2022 +0200
+
+    Delete search-view.fxml
+
+[33mcommit 1d012af17e0feeb67005ab737df1f5c093af1c9b[m
+Author: Sahrarara <74914665+Sahrarara@users.noreply.github.com>
+Date:   Tue Apr 19 10:53:32 2022 +0200
+
+    Rename standort.fxml to location-view.fxml
+
+[33mcommit cfc644bfc738c98701de8dd7806cd3dd959def89[m
+Author: Sahrarara <74914665+Sahrarara@users.noreply.github.com>
+Date:   Tue Apr 19 10:52:44 2022 +0200
+
+    Delete groups-view.fxml
+
+[33mcommit 18f18072a62f942cf28deffa146a28b8adc44562[m
+Author: Sahrarara <74914665+Sahrarara@users.noreply.github.com>
+Date:   Tue Apr 19 10:51:58 2022 +0200
+
+    Delete dashboard-view.fxml
+
+[33mcommit 1ccb600dc01261c464f3e61db2ed08d7c24edf88[m
+Author: Sahrarara <74914665+Sahrarara@users.noreply.github.com>
+Date:   Tue Apr 19 10:51:33 2022 +0200
+
+    Delete coreData-view.fxml
+
+[33mcommit 41dc597100ce46a5655dde67ca2661473a8c3bf4[m
+Merge: d716afa 5165d1e
+Author: Daniela Fuchs <fuchs.daniela@drei.at>
+Date:   Tue Apr 19 10:25:27 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit d716aface81f36873eb02869ba1fe5322ba13aa7[m
+Author: Daniela Fuchs <fuchs.daniela@drei.at>
+Date:   Tue Apr 19 10:21:54 2022 +0200
+
+    yes
+
+[33mcommit 5165d1ec64c168a1de1857fe8d4820c107bd58de[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Tue Apr 19 10:19:48 2022 +0200
+
+    gotcha
+
+[33mcommit 0726ea3bdcef8f6bdbb6691f5a5d5dad84fb297d[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Tue Apr 19 10:19:20 2022 +0200
+
+    test
+
+[33mcommit 902b5467d5be109e97a98346f8d083dc8f153d8a[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Tue Apr 19 10:17:57 2022 +0200
+
+    deleted unnecessary fxml files
+
+[33mcommit 57777a7136ec27aeaa4cd3915c8d920014f9b707[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Fri Apr 15 12:12:17 2022 +0200
+
+    more ids in fxml
+
+[33mcommit a1d176f7a8ef964e6d4c16b40d0029d53e8ac8a4[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Fri Apr 15 09:16:03 2022 +0200
+
+    added ids and abort functions to fxml popup windows
+
+[33mcommit 3a1ad5ab01a0d73615d49b5331019a42f5483586[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Thu Apr 14 12:35:32 2022 +0200
+
+    Made popup window for adding new trainer
+
+[33mcommit 71df5066e574bacdcd140afb363384e916cbc754[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Thu Apr 14 10:47:57 2022 +0200
+
+    Kurse button works now
+
+[33mcommit 697d7d4489a1cafcaba69de45b5097efaed44b2a[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Wed Apr 13 23:36:02 2022 +0200
+
+    new files and controller created:
+    addcourse-view.fxml, addequipment-view.fxml, addlocation-view.fxml, addroom-view.fxml, addprogram-view.fxml
+    modification files: css, addUser-view.fxml, booking-view.fxml (not completed!!), events-view.fxml
+
+[33mcommit e5fe74301f6a31d9a2258e9fde20d3652e31bc9a[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Wed Apr 13 13:53:15 2022 +0200
+
+    adduser-view changes
+    application.css changes (design for rooms-view.fxml)
+    events-view.fxml changes
+    rooms-view.fxml changes correct structure for file
+
+[33mcommit e697bb156c3275078ae3427ef4e4aa14e92064b1[m
+Author: nainisimran <74864652+nainisimran@users.noreply.github.com>
+Date:   Wed Apr 13 13:33:48 2022 +0200
+
+    fxml updated groups-view.fxml, rooms-view.fxml, standort.fxml, trainer_bearbeiten.fxml,trainer_dashboard.fxml
+
+[33mcommit fe947403300ed4c25fbe3d1870c42a7409ea5cf8[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Wed Apr 13 08:58:30 2022 +0200
+
+    Sidebar: Added Kalender Button. Removed Gruppe and made it Trainer Button
+
+[33mcommit 1af05aa5a6384eed8940d445ec793ec83fdcbd4e[m
+Merge: 44b3797 89d801d
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Wed Apr 13 08:34:01 2022 +0200
+
+    Merge branch 'main' of https://github.com/Sahrarara/LAP-Projekt
+
+[33mcommit 44b37973d9c22128c7002565d31a1b4e87184046[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Wed Apr 13 08:33:34 2022 +0200
+
+    made a controller for profile-view.fxml
+
+[33mcommit 89d801decdadae39f7bc080e089a9d3ec4677be5[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Wed Apr 13 00:51:11 2022 +0200
+
+    addUser-view.fxml, controller and css modification
+
+[33mcommit bb88d5db6fa303c920ae1c50bc51da97002a6e21[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Tue Apr 12 13:27:02 2022 +0200
+
+    events-view.fxml created
+
+[33mcommit 6ab580ca92551b483999bd3f66f5e82768de66ce[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Tue Apr 12 12:40:02 2022 +0200
+
+    added profile-view.fxml
+
+[33mcommit 296c809e4f05c1df1d00917f22717633993ff0d4[m
+Merge: d579121 7eb6b6d
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Tue Apr 12 11:36:15 2022 +0200
+
+    Merge remote-tracking branch 'origin/main'
+
+[33mcommit d5791213bf89d5e10a6370688aec0424dfb86bc2[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Tue Apr 12 11:36:06 2022 +0200
+
+    untrackte files
+
+[33mcommit 7eb6b6da26104f9240f01271afbd79841855c6f0[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Tue Apr 12 11:18:01 2022 +0200
+
+    logout Button works for guest login
+
+[33mcommit bd3c1c475d90d67264788abc60b0fe83889743b1[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Tue Apr 12 10:52:39 2022 +0200
+
+    added fxml path constants. Linked all buttons with paths. Only fxml needs to be done now
+
+[33mcommit 942f4e973ce344c5a890cba36385f24bd77331be[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Tue Apr 12 10:44:37 2022 +0200
+
+    Trainer Screenflow works now. New path to Login in Constants
+
+[33mcommit 021393c681ea9f1286d0b927e1ac5e2b045c44aa[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Tue Apr 12 10:39:28 2022 +0200
+
+    added Trainer button in sidebar
+
+[33mcommit ffc8adf235eda80380dd346d0965e8bb07305a0b[m
+Author: Dorota Figas <dfigas13@gmail.com>
+Date:   Mon Apr 11 23:30:07 2022 +0200
+
+    css file modification
+    sidebar-view.fxml modification
+    trainer.fxml modification
+    Controllers for fxml files connected
+
+[33mcommit 57a2e5bd70965e3073ee7031803287960b6c8749[m
+Author: Daniela Fuchs <fuchs.daniela@drei.at>
+Date:   Fri Apr 8 14:30:55 2022 +0200
+
+    farben und icons
+
+[33mcommit cce74d9d646f148c4d59d2d415bc973303648012[m
+Merge: e68bd86 2d31e36
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Fri Apr 8 09:16:31 2022 +0200
+
+    merge
+
+[33mcommit e68bd86d7382c651cabbc37d4413709e935e8d5f[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Fri Apr 8 09:12:07 2022 +0200
+
+    changing Stage view is now possible
+
+[33mcommit 2d31e3657a683d3f256447dc1fe739c131180929[m
+Author: nainisimran <74864652+nainisimran@users.noreply.github.com>
+Date:   Thu Apr 7 23:00:24 2022 +0200
+
+    fxml updated
+
+[33mcommit 031d844b9391133f841365542c0553a41c32bb66[m
+Merge: 9334ef8 e87ebef
+Author: Daniela Fuchs <fuchs.daniela@drei.at>
+Date:   Thu Apr 7 12:03:42 2022 +0200
+
+    Merge branch 'main' of https://github.com/Sahrarara/LAP-Projekt
+
+[33mcommit 9334ef8e4e38a5311dde4cb2ad86ea77c404195a[m
+Author: Daniela Fuchs <fuchs.daniela@drei.at>
+Date:   Thu Apr 7 12:03:12 2022 +0200
+
+    farben blau
+
+[33mcommit 3f0d5f76d3c9d5e517078bbeca4917deebd92385[m
+Author: Daniela Fuchs <fuchs.daniela@drei.at>
+Date:   Thu Apr 7 11:36:03 2022 +0200
+
+    user farbe
+
+[33mcommit e87ebefe8a0e7c4335d4bbff365bbd592c67e46a[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Thu Apr 7 11:20:42 2022 +0200
+
+    moved groups-view to the fxml directory
+
+[33mcommit f26962625c86cf92d63c8046400a0cb39bb2004c[m
+Merge: 9db7206 696548a
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Thu Apr 7 11:18:01 2022 +0200
+
+    merged login-view and icons
+
+[33mcommit 9db72060cc0e711b6961d89168c8f05983f82cfa[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Thu Apr 7 11:14:56 2022 +0200
+
+    fixed login-view
+
+[33mcommit 696548a71aba8831b58d515b76b5fb6b5dd4e19a[m
+Author: nainisimran <74864652+nainisimran@users.noreply.github.com>
+Date:   Thu Apr 7 11:12:19 2022 +0200
+
+    icons updated
+
+[33mcommit c138f1a46260e657f01483c772856d03c9d9df52[m
+Author: Daniela Fuchs <fuchs.daniela@drei.at>
+Date:   Thu Apr 7 10:47:04 2022 +0200
+
+    buttons
+
+[33mcommit f92d63606f78b5786b3fc7ca8c71a10003838b2d[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Thu Apr 7 10:27:39 2022 +0200
+
+    added bigscreen controller, login-view leads to bigscreen.fxml
+
+[33mcommit 7f9d96364a136e8f47b2c87818d2f68857bffd0b[m
+Author: Daniela Fuchs <fuchs.daniela@drei.at>
+Date:   Wed Apr 6 13:12:53 2022 +0200
+
+    farbe geändert
+
+[33mcommit 53da662743ed2f3aa11e1b45acff4e6f11e97394[m
+Author: nainisimran <74864652+nainisimran@users.noreply.github.com>
+Date:   Wed Apr 6 12:01:19 2022 +0200
+
+    fxml-files update
+
+[33mcommit 9451d96842fd1d4cdba51b32d6e3b9fa202cc889[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Wed Mar 30 14:23:17 2022 +0200
+
+    Added classes. Lots of classes.
+
+[33mcommit d6491d472ad8ea5afd55783e301e311eca6fa037[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Wed Mar 30 09:39:57 2022 +0200
+
+    Added guest Login to Login-view
+
+[33mcommit 898d7366d5aee2d4454424dcaa94e53e084e28cc[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Wed Mar 30 08:42:50 2022 +0200
+
+    config file updates
+
+[33mcommit d969cdea93b4f813921c4e0e6a1de980b9a662a1[m
+Merge: 8c80fb2 5c1ea88
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Tue Mar 29 15:00:10 2022 +0200
+
+    Merge branch 'main' of https://github.com/Sahrarara/LAP-Projekt
+
+[33mcommit 8c80fb2ee0acc33bcb8ae2c609dc4a1e55a29999[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Tue Mar 29 14:59:54 2022 +0200
+
+    maybe fixes?
+
+[33mcommit 5c1ea88b28d8a8e9e2a9966521fc0c7794523df6[m
+Author: Daniela Fuchs <fuchs.daniela@drei.at>
+Date:   Tue Mar 29 14:46:40 2022 +0200
+
+    changed UserModel
+
+[33mcommit ae66cc0affb6cb5e7da18a525935530694938d53[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Tue Mar 29 14:39:36 2022 +0200
+
+    Added methods in login-controller
+
+[33mcommit c7342428d4f7596072b72abee36149eaa5c088de[m
+Author: nainisimran <74864652+nainisimran@users.noreply.github.com>
+Date:   Tue Mar 29 13:47:11 2022 +0200
+
+    fxml-login-page
+
+[33mcommit b6b862443047ed2e49f0fce6a089f8ddbc2d16d3[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Tue Mar 29 12:42:15 2022 +0200
+
+    pom file changed for database connection. Added Constants Class
+
+[33mcommit 3738adf1db76af37ed7aacd2dc8323d364d41c14[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Tue Mar 29 09:56:15 2022 +0200
+
+    Added basic function in Database Utility and made a UserModel class
+
+[33mcommit 6ef5923fc2ece8083de91179a46ab28a7307067b[m
+Author: Connytschiwa <Oegger14@gmail.com>
+Date:   Tue Mar 29 09:54:11 2022 +0200
+
+    Personas eingefügt
+
+[33mcommit 5bbc550977ddf98f5d79f7604a54c2043446d379[m
+Author: Sahrarara <sarah.e.git@gmail.com>
+Date:   Mon Mar 28 14:31:30 2022 +0200
+
+    initial commit

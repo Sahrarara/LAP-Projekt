@@ -220,7 +220,6 @@ public class ListModel {
         });
     }
 
-
     public Program getSelectedProgram() {
         return selectedProgram.get();
     }

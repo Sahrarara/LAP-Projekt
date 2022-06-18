@@ -13,6 +13,7 @@ public class EquipmentRepositoryJDBC extends Repository implements EquipmentRepo
     private static final String ADD_NEW_EQUIPMENT_SQL_STRING = "INSERT INTO equipment (equipment_description) VALUES (?)";
     private static final String UPDATE_EQUIPMENT_SQL_STRING = "UPDATE equipment SET equipment_description =? WHERE equipment_id=?";
     private static final String DELETE_EQUIPMENT_SQL_STRING = "DELETE FROM equipment WHERE equipment_id=?";
+    private static final String GET_EQUIPMENT_COUNT_BY_UNIQUE_EQUIPMENT_DESCRIPTION_SQL_STRING = "SELECT COUNT(*) AS unique_equipment_count FROM equipment WHERE equipment_description = (?) ";
 
     @Override
     public List<Equipment> readAll() throws SQLException {
@@ -98,6 +99,28 @@ public class EquipmentRepositoryJDBC extends Repository implements EquipmentRepo
         } finally {
             if (connection != null) connection.close();
         }
+    }
+
+    // check unique equipmentDescription in DB
+    public int getEquipmentCountByEquipmentDescription(String equipmentDescription) throws SQLException {
+        Connection connection = connect();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        int equipmentsCount = 0;
+        try {
+            preparedStatement = connection.prepareStatement(GET_EQUIPMENT_COUNT_BY_UNIQUE_EQUIPMENT_DESCRIPTION_SQL_STRING );
+            preparedStatement.setString(1, equipmentDescription);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                equipmentsCount = resultSet.getInt("unique_equipment_count");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
+        }
+        return equipmentsCount;
     }
 
 }
