@@ -49,6 +49,8 @@ public class LocationController extends BaseController {
     private TextField searchBar;
     @FXML
     private Button closeIconButton;
+    @FXML
+    private Button addLocationBtn;
 
 
     @FXML
@@ -105,7 +107,7 @@ public class LocationController extends BaseController {
                     ex.printStackTrace();
                 }
             }
-        }else {
+        } else {
             QuickAlert.showInfo("Bitte gewünschte Zeile markieren");
         }
     }
@@ -113,7 +115,7 @@ public class LocationController extends BaseController {
 
     @FXML
     private void onSettingsBtnClick(ActionEvent actionEvent) {
-        if (listModel.getSelectedProgram() != null) {
+        if (listModel.getSelectedLocation() != null) {
             Stage stage = new Stage();
 
             FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_LOCATION));
@@ -136,13 +138,17 @@ public class LocationController extends BaseController {
 
     @FXML
     private void initialize() {
-        assert tableViewLocation != null : "fx:id=\"tableViewLocation\" was not injected: check your FXML file 'location-view.fxml'.";
-        assert streetColumn != null : "fx:id=\"streetColumn\" was not injected: check your FXML file 'location-view.fxml'.";
-        assert zipColumn != null : "fx:id=\"zipColumn\" was not injected: check your FXML file 'location-view.fxml'.";
+
+        assert addLocationBtn != null : "fx:id=\"addLocationBtn\" was not injected: check your FXML file 'location-view.fxml'.";
         assert cityColumn != null : "fx:id=\"cityColumn\" was not injected: check your FXML file 'location-view.fxml'.";
-        assert locationBtnBar != null : "fx:id=\"locationBtnBar\" was not injected: check your FXML file 'location-view.fxml'.";
+        assert closeIconButton != null : "fx:id=\"closeIconButton\" was not injected: check your FXML file 'location-view.fxml'.";
         assert deleteLocationBtn != null : "fx:id=\"deleteLocationBtn\" was not injected: check your FXML file 'location-view.fxml'.";
+        assert locationBtnBar != null : "fx:id=\"locationBtnBar\" was not injected: check your FXML file 'location-view.fxml'.";
+        assert searchBar != null : "fx:id=\"searchBar\" was not injected: check your FXML file 'location-view.fxml'.";
         assert settingsLocationBtn != null : "fx:id=\"settingsLocationBtn\" was not injected: check your FXML file 'location-view.fxml'.";
+        assert streetColumn != null : "fx:id=\"streetColumn\" was not injected: check your FXML file 'location-view.fxml'.";
+        assert tableViewLocation != null : "fx:id=\"tableViewLocation\" was not injected: check your FXML file 'location-view.fxml'.";
+        assert zipColumn != null : "fx:id=\"zipColumn\" was not injected: check your FXML file 'location-view.fxml'.";
 
         closeIconButton.setVisible(false);
         UsabilityMethods.changeListener(searchBar, closeIconButton);

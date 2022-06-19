@@ -202,7 +202,7 @@ public class ProfileController extends BaseController {
     @FXML
     private void onPhotoUploadBtnClick(ActionEvent actionEvent) {
 
-        String[] extensionList = {"jpg", "jpeg", "gif", "png", "tif", "tiff", "bmp"};
+        String[] extensionList = {"jpg", "jpeg", "gif", "png"};
 
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(getCurrentStage());
@@ -219,7 +219,7 @@ public class ProfileController extends BaseController {
                     System.out.println("File extension is: " + extension);
                 } else {
                     JOptionPane.showMessageDialog(null, "Es können folgende Dateiformate hochgeladen werden: \n" +
-                                    "JPG, JPEG, GIF, PNG, TIF, TIFF, BMP",
+                                    "JPG, JPEG, GIF, PNG",
                             "Warnung", JOptionPane.WARNING_MESSAGE, null);
                 }
             }
