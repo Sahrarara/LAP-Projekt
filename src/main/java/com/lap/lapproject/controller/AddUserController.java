@@ -299,11 +299,11 @@ public class AddUserController extends BaseController {
     //Befüllt ChoiceBox mit authorization
     @FXML
     public void fillChoiceBox() {
-        ObservableList<String> authorizationName = FXCollections.observableArrayList(
-                listModel.filteredAuthorizationList.stream()
-                        .map(authorization -> authorization.getAuthority())
-                        .collect(Collectors.toList()));
-        authorizationChoiceBox.setItems(authorizationName);
+            ObservableList<String> authorizationName = FXCollections.observableArrayList(
+                    listModel.filteredAuthorizationList.stream()
+                            .map(authorization -> authorization.getAuthority())
+                            .collect(Collectors.toList()));
+            authorizationChoiceBox.setItems(authorizationName);
     }
 
     // Macht Text Feldär unsichtbar
@@ -389,10 +389,7 @@ public class AddUserController extends BaseController {
             descriptionCheckBox.setSelected(listModel.getSelectedUser().getDescriptionVisibility());
             phoneNmbrCheckBox.setSelected(listModel.getSelectedUser().getPhoneNmbrVisibility());
             emailCheckBox.setSelected(listModel.getSelectedUser().getEmailVisibility());
-            if (model.getLoggedInUser().getPhoto() != null) {
-                //trainer.setPhotoVisibility(photoCheckBox.isSelected());
-                photoCheckBox.setSelected(listModel.getSelectedUser().getPhotoVisibility());
-            }
+            photoCheckBox.setSelected(listModel.getSelectedUser().getPhotoVisibility());
         }
 
     }

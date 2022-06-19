@@ -31,7 +31,7 @@
                   </Label>
                   <ButtonBar fx:id="roomsBtnBar" buttonMinWidth="10.0" layoutX="-337.0" layoutY="86.0" prefHeight="70.0" prefWidth="169.0" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="-337.0" AnchorPane.rightAnchor="917.0" AnchorPane.topAnchor="86.0">
                      <buttons>
-                        <Button graphicTextGap="2.0" mnemonicParsing="false" onAction="#onAddRoomBtnClick" prefHeight="30.0" prefWidth="60.0">
+                        <Button fx:id="addRoomButton" graphicTextGap="2.0" mnemonicParsing="false" onAction="#onAddRoomBtnClick" prefHeight="30.0" prefWidth="60.0">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -113,7 +113,7 @@
             </AnchorPane>
             <AnchorPane>
                <children>
-                  <TableView fx:id="tableViewRoom" layoutY="40.0" prefHeight="667.0" prefWidth="1198.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                  <TableView fx:id="tableViewRoom" prefHeight="667.0" prefWidth="1198.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <columns>
                         <TableColumn fx:id="roomNumberColumn" minWidth="-1.0" prefWidth="108.5" text="R-Nr." />
                         <TableColumn fx:id="sizeColumn" minWidth="-1.0" prefWidth="237.0" text="Raumgröße" />

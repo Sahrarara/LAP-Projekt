@@ -32,7 +32,7 @@
                   </Label>
                   <ButtonBar fx:id="coursesBtnBar" buttonMinWidth="10.0" layoutX="-339.0" layoutY="86.0" prefHeight="70.0" prefWidth="169.0" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="-339.0" AnchorPane.rightAnchor="919.0" AnchorPane.topAnchor="86.0">
                      <buttons>
-                        <Button graphicTextGap="2.0" mnemonicParsing="false" onAction="#onAddCourseBtnClick" prefHeight="30.0" prefWidth="60.0">
+                        <Button fx:id="addCourseBtn" graphicTextGap="2.0" mnemonicParsing="false" onAction="#onAddCourseBtnClick" prefHeight="30.0" prefWidth="60.0">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

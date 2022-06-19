@@ -27,6 +27,10 @@ public class CoursesController extends BaseController {
 
     @FXML
     private Button settingsCourseBtn;
+    @FXML
+    private Button addCourseBtn;
+    @FXML
+    private Button deleteCourseBtn;
 
     @FXML
     private TableView<Course> tableViewEvent;
@@ -126,6 +130,9 @@ public class CoursesController extends BaseController {
         assert programColumn != null : "fx:id=\"programColumn\" was not injected: check your FXML file 'events-view.fxml'.";
         assert groupSizeColumn != null : "fx:id=\"groupSizeColumn\" was not injected: check your FXML file 'events-view.fxml'.";
         assert coursesBtnBar != null : "fx:id=\"coursesBtnBar\" was not injected: check your FXML file 'events-view.fxml'.";
+        assert settingsCourseBtn != null : "fx:id=\"settingsCourseBtn\" was not injected: check your FXML file 'events-view.fxml'.";
+        assert deleteCourseBtn != null : "fx:id=\"deleteCourseBtn\" was not injected: check your FXML file 'events-view.fxml'.";
+        assert addCourseBtn != null : "fx:id=\"addCourseBtn\" was not injected: check your FXML file 'events-view.fxml'.";
 
         closeIconButton.setVisible(false);
         UsabilityMethods.changeListener(searchBar, closeIconButton);

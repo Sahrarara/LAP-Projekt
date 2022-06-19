@@ -132,15 +132,20 @@ public class AddCourseController extends BaseController {
         }
         int programId = program.getId();
 
-        int groupSize = Integer.parseInt(groupSizeTextField.getText());
 
-        Course course = new Course(
-                courseName,
-                new Program(programId, programName),
-                courseStart.atStartOfDay().toLocalDate(),
-                courseEnd.atStartOfDay().toLocalDate(),
-                groupSize);
-       if (!courseNameTextField.getText().isBlank() && !courseChoiceBox.getValue().toString().isBlank() && !(courseStart == null) && !(courseEnd == null) && !groupSizeTextField.getText().isBlank()) {
+       if (!courseNameTextField.getText().isBlank()
+               && !courseChoiceBox.getValue().toString().isBlank()
+               && !(courseStart == null) && !(courseEnd == null)
+               && !groupSizeTextField.getText().isBlank()) {
+           int groupSize = Integer.parseInt(groupSizeTextField.getText());
+
+           Course course = new Course(
+                   courseName,
+                   new Program(programId, programName),
+                   courseStart.atStartOfDay().toLocalDate(),
+                   courseEnd.atStartOfDay().toLocalDate(),
+                   groupSize);
+
            int courseUniqueNameCount;
            courseUniqueNameCount = courseRepo.getCourseCountByCourseName(courseNameTextField.getText());
            if (listModel.getSelectedCourse() == null) {

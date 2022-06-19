@@ -1,5 +1,6 @@
 package com.lap.lapproject.repos;
 
+import com.lap.lapproject.model.ListModel;
 import com.lap.lapproject.utility.PasswordSecurity;
 import com.lap.lapproject.utility.QuickAlert;
 import com.lap.lapproject.model.*;
@@ -13,6 +14,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 
 public class UserRepositoryJDBC extends Repository implements UserRepository {
 
@@ -66,8 +68,11 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             preparedStatement.setBoolean(12, user.getDescriptionVisibility());
             preparedStatement.setBoolean(13, user.getPhoneNmbrVisibility());
             preparedStatement.setBoolean(14, user.getEmailVisibility());
-            preparedStatement.setBoolean(15, user.getPhotoVisibility());
-
+            if (user.getPhoto() != null) {
+                preparedStatement.setBoolean(15, user.getPhotoVisibility());
+            }else {
+                QuickAlert.showError("Bitte foto!");
+            }
             preparedStatement.executeUpdate();
             resultSet = preparedStatement.getGeneratedKeys();
 
@@ -139,7 +144,11 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             if (connection != null) connection.close();
         }
     }
-
+/*if (listModel.getSelectedUser().getPhoto() != null){
+                trainer.setPhotoVisibility(photoCheckBox.isSelected());
+            } else {
+                QuickAlert.showError("Bitte Foto hochladen!!");
+            }*/
 
     @Override
     public List<Trainer> readAuthorization() throws SQLException {

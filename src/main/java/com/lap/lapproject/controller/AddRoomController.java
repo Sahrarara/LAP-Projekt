@@ -88,28 +88,35 @@ public class AddRoomController extends BaseController {
         BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
 
 
-        String roomNbr = roomNmbrTextField.getText();
+        String roomNbrString = roomNmbrTextField.getText();
         String roomSizeString = sizeTextField.getText();
 
-        int roomNbrInt = Integer.parseInt(roomNmbrTextField.getText());
-        int roomSize = Integer.parseInt(sizeTextField.getText());
-
-        int roomUniqueNumberCount = roomRepositoryJDBC.getRoomCountByRoomNumber(roomNbrInt);
-
-        Location location = locationChoiceBox.getValue();
-        List<Equipment> equipments = listView.getSelectionModel().getSelectedItems(); //.getValue()
-
-
-        Room room = new Room(
-                0,
-                roomNbrInt,
-                roomSize,
-                location,
-                equipments);
 
 
 
-        if (!roomNbr.isBlank() && !sizeTextField.getText().isBlank() && !(locationChoiceBox.getValue() == null) && !(listView.getItems() == null)) {
+
+        if (!roomNbrString.isBlank()
+                && !sizeTextField.getText().isBlank()
+                && !(locationChoiceBox.getValue() == null)
+                && !(listView.getItems() == null)) {
+
+            int roomNbrInt = Integer.parseInt(roomNbrString);
+            int roomSize = Integer.parseInt(roomSizeString);
+
+            int roomUniqueNumberCount = roomRepositoryJDBC.getRoomCountByRoomNumber(roomNbrInt);
+
+            Location location = locationChoiceBox.getValue();
+            List<Equipment> equipments = listView.getSelectionModel().getSelectedItems(); //.getValue()
+
+
+            Room room = new Room(
+                    0,
+                    roomNbrInt,
+                    roomSize,
+                    location,
+                    equipments);
+
+
             if (listModel.getSelectedRoom() == null) {
                 try {
                     // check if this room is already in DB
