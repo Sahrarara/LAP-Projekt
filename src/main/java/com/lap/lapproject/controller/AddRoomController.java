@@ -47,7 +47,7 @@ public class AddRoomController extends BaseController {
     @FXML
     private ComboBox<Equipment> equipmentComboBox;
     private ObservableList<Equipment> equipmentPerList = FXCollections.observableArrayList();
-    private ObservableList<Equipment> equipmentList = FXCollections.observableArrayList();
+    private ArrayList<Equipment> equipmentList = new ArrayList<>();
 
     RoomRepositoryJDBC roomRepositoryJDBC = new RoomRepositoryJDBC();
     //BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
@@ -82,6 +82,7 @@ public class AddRoomController extends BaseController {
             labelLocation.setText(listModel.getSelectedRoom().getLocation().getStreet());
 
             generateItemDynamicToUpdate(equipmentPerList);
+
         }
     }
 
@@ -90,7 +91,9 @@ public class AddRoomController extends BaseController {
         if (listModel.getSelectedRoom() != null) {
 //             teil der update logik
             if (listModel.getSelectedRoom().getEquipments() != null) {
+
                 equipmentPerList.setAll(listModel.getSelectedRoom().getEquipments());
+
             }
         }
 
@@ -109,7 +112,6 @@ public class AddRoomController extends BaseController {
                             try {
                                 // add to database
                                 roomRepositoryJDBC.addEquipment(room, equipment);
-
 
                             } catch (SQLException ex) {
                                 throw new RuntimeException(ex);
@@ -135,7 +137,9 @@ public class AddRoomController extends BaseController {
 
     private void generateItemDynamicToUpdate(List<Equipment> equipmentList) {
         for (Equipment equipment : equipmentList) {
+
             generateItemDynamic(equipment, equipmentList);
+
         }
     }
 
@@ -175,21 +179,29 @@ public class AddRoomController extends BaseController {
         logger.info("SELECT CALLED: {}", equipmentComboBox.getSelectionModel().getSelectedItem().getDescription());
         if (listModel.getSelectedRoom() != null) {
 
-            if (!checkDoubleItem(equipmentPerList, equipmentComboBox.getSelectionModel().getSelectedItem().getDescription())) {
+
+            if (!checkDoubleItemInList(equipmentPerList, equipmentComboBox.getSelectionModel().getSelectedItem().getDescription())) {
+                ArrayList<Equipment> myEquipment = new ArrayList<>();
+
                 equipmentPerList.add(equipmentComboBox.getSelectionModel().getSelectedItem()); // ListChangeListemer: INSERT
+                myEquipment.add(equipmentComboBox.getSelectionModel().getSelectedItem());
+
+                generateItemDynamicToUpdate(myEquipment);
+                System.out.println("ELEMENT NOT SAME");
 
             } else {
-                logger.info("Item exists!");
+                logger.info("Item exists in the list!");
             }
 
         } else {
 
-            if (!checkDoubleItem(equipmentList, equipmentComboBox.getSelectionModel().getSelectedItem().getDescription())) {
+            if (!checkDoubleItemInList(equipmentList,
+                    equipmentComboBox.getSelectionModel().getSelectedItem().getDescription())) {
                 equipmentList.add(equipmentComboBox.getSelectionModel().getSelectedItem());
                 generateItemDynamicToAdd(equipmentComboBox.getSelectionModel().getSelectedItem(), equipmentList);
 
             } else {
-                logger.info("Item exists!");
+                logger.info("Item exists in the list!");
             }
         }
     }
@@ -199,7 +211,7 @@ public class AddRoomController extends BaseController {
         generateItemDynamic(equipment, equipmentList);
     }
 
-    private boolean checkDoubleItem(List<Equipment> equipmentList, String equipmentName) {
+    private boolean checkDoubleItemInList(List<Equipment> equipmentList, String equipmentName) {
         boolean result = false;
         for (Equipment equipment : equipmentList) {
             if (equipmentName.equals(equipment.getDescription())) {
@@ -240,6 +252,7 @@ public class AddRoomController extends BaseController {
                 try {
 
                     roomRepositoryJDBC.addRoomEquipment(room);
+
                     listModel.roomList.add(room);
 
                     //listModel.bookingList.setAll(bookingRepositoryJDBC.readAll());
@@ -269,8 +282,9 @@ public class AddRoomController extends BaseController {
 
         roomRepositoryJDBC.updateRoom(room);
 
-        listModel.roomList.set(listModel.roomList.indexOf(room), room);
 
+        //listModel.roomList.setAll(roomRepositoryJDBC.readAll());
+        listModel.roomList.set(listModel.roomList.indexOf(room), room);
         // listModel.bookingList.setAll(bookingRepositoryJDBC.readAll());
         moveToRoomPage();
     }
@@ -287,7 +301,7 @@ public class AddRoomController extends BaseController {
             Equipment item = equipmentList.get(i);
             if (item.getDescription().equals(label.getText())) {
                 equipmentList.remove(item); // ListChangeListener: DELETE
-                logger.info("DELETED ELEMENT: {}", item.getDescription());
+                logger.info("Deleted item: {}", item.getDescription());
             }
         }
     }

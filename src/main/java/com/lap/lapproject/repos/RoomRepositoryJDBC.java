@@ -106,7 +106,7 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
             for (Equipment equipmentId : room.getEquipments()) {
 
                 ps = connection.prepareStatement(ADD_EQUIPMENT_SQL_STRING);
-                ps.setInt(1, room.getId());
+                ps.setInt(1, roomKey);
                 ps.setInt(2, equipmentId.getId());
                 ps.executeUpdate();
                 /* addEquipment( room,  equipmentId);*/
@@ -135,7 +135,7 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
             ps.setInt(2, equipment.getId());
             ps.executeUpdate();
 
-            logger.info("Add just equipment to DB :{}", equipment);
+            logger.info("Add equipment to DB :{}", equipment);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -157,7 +157,7 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
             ps.setInt(2, equipment.getId());
             ps.executeUpdate();
 
-            logger.info("Delete just equipment in DB :{}", equipment);
+            logger.info("Delete equipment in DB :{}", equipment);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -202,7 +202,7 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
             preparedStatement.setInt(4, room.getId());
             preparedStatement.executeUpdate();
 
-            logger.info("Room updated in DB: {}", room.getId());
+            logger.info("Room updated in DB: {}", room.getRoomNumber());
 
         } catch (SQLException e) {
             e.printStackTrace();
