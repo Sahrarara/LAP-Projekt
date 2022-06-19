@@ -6,10 +6,7 @@ import com.lap.lapproject.model.Program;
 import com.lap.lapproject.repos.ProgramRepositoryJDBC;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
@@ -132,6 +129,13 @@ public class UsabilityMethods {
     public static void changeListenerDataPicker(DatePicker datePicker, Label label) {
         datePicker.valueProperty().addListener(((observable, oldValue, newValue) -> {
                 label.setVisible(false);
+
+        }));
+    }
+
+    public static void changeListenerCheckBox(TextField textField, CheckBox checkBox) {
+        textField.textProperty().addListener(((observable, oldValue, newValue) -> {
+            checkBox.setVisible(true);
 
         }));
     }
