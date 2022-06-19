@@ -34,6 +34,9 @@ public class AddRoomController extends BaseController {
     private VBox vBoxId;
     @FXML
     private HBox hBox;
+
+    @FXML
+    private HBox hBoxTest;
     @FXML
     private Label dynamicField;
     @FXML
@@ -157,6 +160,7 @@ public class AddRoomController extends BaseController {
         label.setText(equipment.getDescription());
         hBox1.getChildren().addAll(button, label);
         vBoxId.getChildren().addAll(hBox1);
+        //hBoxTest.getChildren().addAll(hBox1);
 
         EventHandler<MouseEvent> mouseEventHandler = e -> {
 
@@ -187,7 +191,6 @@ public class AddRoomController extends BaseController {
                 myEquipment.add(equipmentComboBox.getSelectionModel().getSelectedItem());
 
                 generateItemDynamicToUpdate(myEquipment);
-                System.out.println("ELEMENT NOT SAME");
 
             } else {
                 logger.info("Item exists in the list!");
