@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 public class BookingRepositoryJDBC extends Repository implements BookingRepository {
 
@@ -37,7 +38,21 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
     private static final String GET_BOOKINGS_COUNT_BY_ROOM_ID_SQL_STRING = "SELECT COUNT(*) AS rooms_count FROM booking WHERE room_id = (?) ";
     private static final String GET_BOOKINGS_COUNT_BY_TRAINER_ID_SQL_STRING = "SELECT COUNT(*) AS trainer_count FROM booking WHERE trainer_id = (?) ";
 
+    //Negin Konstant____________________________________________________
+    private static final String SELECT_COLLISION_SQL_STRING = "SELECT room_id FROM booking\n" +
+            " WHERE \n" +
+            " ((datetime_start <= ? AND ? < datetime_end)\n" +
+            " OR (datetime_start < ? AND ? <= datetime_end)\n" +
+            " OR (? <= datetime_start AND datetime_start < ?))\n";
 
+
+    private static final String SELECT_IS_ROOM_FREE_SQL_STRING = SELECT_COLLISION_SQL_STRING + " AND room_id = ?";
+
+
+
+    private  static final String SELECT_FREE_ROOMS ="SELECT * FROM rooms WHERE room_id NOT IN (" + SELECT_COLLISION_SQL_STRING + ")";
+
+    /* ______________________________________________________________ */
     @Override
     public ArrayList<Booking> readAll() throws SQLException {
         Connection connection = connect();
@@ -318,6 +333,97 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
         }
         return bookingsCountByTrainerId;
     }
+
+
+
+    //  Negin auf datenbank zugreifen________________________________________
+    @Override
+    public List<Room> findFreeRoomsByTime(LocalDateTime startTime, LocalDateTime endTime) {
+        // https://devwl.pl/booking-appointments-sql-how-to-check-if-the-appointment-is-already-booked-in-mysql-mariadb-booking-collision-detection/
+        logger.info("findFreeRoomsByTime");
+        logger.info(SELECT_FREE_ROOMS);
+        Connection connection = connect();
+        PreparedStatement preparedStatement = null;
+        List<Room> freeRomms = new ArrayList<Room>();
+        try {
+            preparedStatement = connection.prepareStatement(SELECT_FREE_ROOMS);
+            preparedStatement.setTimestamp(1, Timestamp.valueOf(startTime));
+            preparedStatement.setTimestamp(2, Timestamp.valueOf(startTime));
+            preparedStatement.setTimestamp(3, Timestamp.valueOf(endTime));
+            preparedStatement.setTimestamp(4, Timestamp.valueOf(endTime));
+            preparedStatement.setTimestamp(5, Timestamp.valueOf(startTime));
+            preparedStatement.setTimestamp(6, Timestamp.valueOf(endTime));
+            ResultSet resultSet = preparedStatement.executeQuery();
+            logger.info(preparedStatement.toString());
+            logger.info(Timestamp.valueOf(startTime).toString());
+            logger.info(Timestamp.valueOf(startTime).toString());
+            logger.info(Timestamp.valueOf(endTime).toString());
+            logger.info(Timestamp.valueOf(endTime).toString());
+            logger.info(Timestamp.valueOf(startTime).toString());
+            logger.info(Timestamp.valueOf(endTime).toString());
+            while (resultSet.next()) {
+                Room room;
+                room = new Room(resultSet.getInt("room_id"),
+                        resultSet.getInt("room_number"),
+                        resultSet.getInt("size"),
+                        new Location(1 ,"1" ,"1","1" ));
+
+                logger.info(room.toString());
+                freeRomms.add(room);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return freeRomms;
+    }
+
+    @Override
+    public Boolean isRoomFree(int roomId, LocalDateTime startTime, LocalDateTime endTime) {
+        logger.info("isRoomFree");
+        logger.info(SELECT_IS_ROOM_FREE_SQL_STRING);
+        Connection connection = connect();
+        PreparedStatement preparedStatement = null;
+
+        try {
+            preparedStatement = connection.prepareStatement(SELECT_IS_ROOM_FREE_SQL_STRING);
+            preparedStatement.setTimestamp(1, Timestamp.valueOf(startTime));
+            preparedStatement.setTimestamp(2, Timestamp.valueOf(startTime));
+            preparedStatement.setTimestamp(3, Timestamp.valueOf(endTime));
+            preparedStatement.setTimestamp(4, Timestamp.valueOf(endTime));
+            preparedStatement.setTimestamp(5, Timestamp.valueOf(startTime));
+            preparedStatement.setTimestamp(6, Timestamp.valueOf(endTime));
+            preparedStatement.setInt(7, roomId);
+
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            logger.info(preparedStatement.toString());
+            logger.info(Timestamp.valueOf(startTime).toString());
+            logger.info(Timestamp.valueOf(startTime).toString());
+            logger.info(Timestamp.valueOf(endTime).toString());
+            logger.info(Timestamp.valueOf(endTime).toString());
+            logger.info(Timestamp.valueOf(startTime).toString());
+            logger.info(Timestamp.valueOf(endTime).toString());
+            logger.info("roomId: " + roomId);
+
+            if (resultSet.next()) {
+                return false;
+            } else {
+                return true;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+//..............................................................
+
+
 
 
 }
