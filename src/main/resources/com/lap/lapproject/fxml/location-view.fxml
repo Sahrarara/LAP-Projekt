@@ -15,7 +15,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="930.0" prefWidth="1200.0" style="-fx-background-color: #211D5A;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.LocationController">
@@ -31,9 +30,9 @@
                   </Label>
                   <ButtonBar fx:id="locationBtnBar" buttonMinWidth="10.0" layoutX="-339.0" layoutY="80.0" prefHeight="70.0" prefWidth="169.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="-339.0" AnchorPane.rightAnchor="919.0" AnchorPane.topAnchor="80.0">
                      <buttons>
-                        <Button graphicTextGap="2.0" mnemonicParsing="false" onAction="#onAddLocationBtnClick" prefHeight="30.0" prefWidth="60.0">
+                        <Button fx:id="addLocationBtn" graphicTextGap="2.0" mnemonicParsing="false" onAction="#onAddLocationBtnClick" prefHeight="30.0" prefWidth="60.0">
                            <graphic>
-                              <ImageView fx:id="addLocationBtn" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../images/lapproject/images/PlusTW.png" />
                                  </image>
@@ -98,15 +97,6 @@
                               <Insets top="3.0" />
                            </HBox.margin>
                         </Button>
-                     </children>
-                  </HBox>
-                  <HBox layoutX="796.0" layoutY="33.0">
-                     <children>
-                        <VBox>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </VBox>
                      </children>
                   </HBox>
                </children>
