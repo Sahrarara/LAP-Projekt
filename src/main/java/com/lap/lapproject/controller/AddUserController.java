@@ -361,7 +361,7 @@ public class AddUserController extends BaseController {
     //prüft ob ein Foto in DB vorhanden ist
     public  boolean checkImageInDB() throws IOException {
         while (listModel.getSelectedUser() != null){
-            if (listModel.getSelectedUser().getPhoto() == null) {
+            if (listModel.getSelectedUser().getPhoto() == null && !listModel.getSelectedUser().getPhotoVisibility()) {
                 System.out.println("foto empty");
                 errorNoPhotoInDB.setVisible(true);
                 errorNoPhotoInDB.setText("Es gibt kein Foto von dem User in  Datenbank gespeichert!");

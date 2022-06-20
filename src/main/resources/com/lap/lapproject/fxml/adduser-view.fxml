@@ -39,8 +39,8 @@
       <RowConstraints maxHeight="58.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="64.5" minHeight="8.5" prefHeight="48.5" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="52.5" minHeight="0.0" prefHeight="20.5" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="45.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="110.0" minHeight="45.0" prefHeight="56.5" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="45.0" minHeight="0.0" prefHeight="22.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="110.0" minHeight="32.0" prefHeight="34.5" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="322.5" minHeight="10.0" prefHeight="102.5" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="370.5" minHeight="10.0" prefHeight="122.5" vgrow="SOMETIMES" />
    </rowConstraints>
@@ -183,7 +183,7 @@
       <Pane prefHeight="78.0" prefWidth="140.0" style="-fx-background-color: #101d2c;" GridPane.columnIndex="4" />
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f9f7f6;" GridPane.columnIndex="3" GridPane.rowIndex="13">
          <children>
-            <Label fx:id="errorNoPhotoInDB" layoutY="-8.0" prefHeight="17.0" prefWidth="35.0" text="Text" textFill="#f50606" />
+            <Label fx:id="errorNoPhotoInDB" layoutX="3.0" layoutY="-8.0" prefHeight="17.0" prefWidth="369.0" text="Text" textFill="#f50606" />
          </children></Pane>
       <Label layoutX="98.0" layoutY="158.0" styleClass="input-description" text="Passwort" textFill="#101d2c" GridPane.columnIndex="1" GridPane.rowIndex="8">
          <GridPane.margin>

@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane prefHeight="800.0" prefWidth="841.0" style="-fx-background-color: #f9f7f6;" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.AddUserController">
+<GridPane prefHeight="800.0" prefWidth="841.0" style="-fx-background-color: #f9f7f6;" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lap.lapproject.controller.AddUserController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" prefWidth="80.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="112.0" prefWidth="112.0" />
@@ -39,10 +39,10 @@
       <RowConstraints maxHeight="58.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="64.5" minHeight="8.5" prefHeight="48.5" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="52.5" minHeight="0.0" prefHeight="20.5" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="45.0" minHeight="0.0" prefHeight="22.5" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="110.0" minHeight="45.0" prefHeight="52.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="322.5" minHeight="10.0" prefHeight="157.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="370.5" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="45.0" minHeight="0.0" prefHeight="22.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="110.0" minHeight="32.0" prefHeight="34.5" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="322.5" minHeight="10.0" prefHeight="102.5" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="370.5" minHeight="10.0" prefHeight="122.5" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
       <Pane minHeight="40.0" prefHeight="78.0" prefWidth="150.0" style="-fx-background-color: #101d2c;" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
@@ -180,10 +180,10 @@
       <CheckBox fx:id="photoCheckBox" mnemonicParsing="false" text=" Anzeigen  " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="14" />
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #101d2c;" />
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #101d2c;" GridPane.columnIndex="2" />
-      <Pane prefHeight="90.0" prefWidth="40.0" style="-fx-background-color: #101d2c;" GridPane.columnIndex="4" />
+      <Pane prefHeight="78.0" prefWidth="140.0" style="-fx-background-color: #101d2c;" GridPane.columnIndex="4" />
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f9f7f6;" GridPane.columnIndex="3" GridPane.rowIndex="13">
          <children>
-            <Label fx:id="errorNoPhotoInDB" layoutX="12.0" layoutY="4.0" text="Text" textFill="#f50606" />
+            <Label fx:id="errorNoPhotoInDB" layoutX="3.0" layoutY="-8.0" prefHeight="17.0" prefWidth="369.0" text="Text" textFill="#f50606" />
          </children></Pane>
       <Label layoutX="98.0" layoutY="158.0" styleClass="input-description" text="Passwort" textFill="#101d2c" GridPane.columnIndex="1" GridPane.rowIndex="8">
          <GridPane.margin>
