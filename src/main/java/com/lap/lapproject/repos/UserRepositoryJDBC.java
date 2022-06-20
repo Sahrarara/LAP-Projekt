@@ -36,7 +36,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             "title=?,first_name=?, last_name=?,password=?,authorization=?,description=?,phone=?,email=?,photo=?,description_visable=?,phone_visable=?,email_visable=?," +
             "photo_visable=? WHERE user_id=?";
 
-    private static final String UPDATE_PROFILE_SQL_STRING = "UPDATE users SET description=?, phone=?, email=?, photo=? WHERE user_id=?";
+    private static final String UPDATE_PROFILE_SQL_STRING = "UPDATE users SET description=?, phone=?, email=?, photo=?, photo_visable=? WHERE user_id=?";
     private static final String UPDATE_PASSWORD_SQL_STRING = "UPDATE `users` SET password = ?  WHERE `user_id` = ? ";
 
 
@@ -399,7 +399,8 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
 
             }
             preparedStatement.setBlob(4, inputStream);
-            preparedStatement.setInt(5, user.getId());
+            preparedStatement.setBoolean(5, user.getPhotoVisibility());
+            preparedStatement.setInt(6, user.getId());
 
             preparedStatement.executeUpdate();
 

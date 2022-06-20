@@ -96,14 +96,23 @@ public abstract class User {
         this.photoVisibility = new SimpleBooleanProperty(photoVisibility);
     }
 
-    // ProfileController
+   /* // ProfileController
     public User(int id, String description, String phoneNmbr, String email, byte[] photo) {
         this.id = new SimpleIntegerProperty(id);
         this.description = new SimpleStringProperty(description);
         this.phoneNmbr = new SimpleStringProperty(phoneNmbr);
         this.email = new SimpleStringProperty(email);
         this.photo = photo;
-    }
+    }*/
+   // ProfileController //TODO
+   public User(int id, String description, String phoneNmbr, String email, byte[] photo, Boolean photoVisibility) {
+       this.id = new SimpleIntegerProperty(id);
+       this.description = new SimpleStringProperty(description);
+       this.phoneNmbr = new SimpleStringProperty(phoneNmbr);
+       this.email = new SimpleStringProperty(email);
+       this.photo = photo;
+       this.photoVisibility = new SimpleBooleanProperty(photoVisibility);
+   }
 
 
 
