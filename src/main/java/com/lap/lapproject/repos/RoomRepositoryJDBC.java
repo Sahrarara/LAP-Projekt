@@ -21,6 +21,7 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
     private static final String UPDATE_ROOM_SQL_STRING = "UPDATE rooms SET room_number =?, size=?, location_id=? WHERE room_id=? ";
     private static final String DELETE_EQUIPMENT_ROOM_RT = "DELETE FROM rooms_equipment WHERE room_id=? AND " +
             "equipment_id=?";
+    private static final String GET_ROOM_COUNT_BY_UNIQUE_ROOM_NUMBER_SQL_STRING = "SELECT COUNT(*) AS unique_room_count FROM rooms WHERE room_number = (?) ";
 
     @Override
     public List<Room> readAll() throws SQLException {
@@ -209,6 +210,28 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
         } finally {
             if (connection != null) connection.close();
         }
+    }
+
+
+    public int getRoomCountByRoomNumber(int roomNumber) throws SQLException {
+        Connection connection = connect();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        int roomCount = 0;
+        try {
+            preparedStatement = connection.prepareStatement(GET_ROOM_COUNT_BY_UNIQUE_ROOM_NUMBER_SQL_STRING  );
+            preparedStatement.setInt(1, roomNumber);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                roomCount = resultSet.getInt("unique_room_count");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
+        }
+        return roomCount;
     }
 
 

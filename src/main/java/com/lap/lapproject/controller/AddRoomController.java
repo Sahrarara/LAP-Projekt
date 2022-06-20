@@ -36,8 +36,6 @@ public class AddRoomController extends BaseController {
     private HBox hBox;
 
     @FXML
-    private HBox hBoxTest;
-    @FXML
     private Label dynamicField;
     @FXML
     private TextField sizeTextField;
@@ -48,12 +46,16 @@ public class AddRoomController extends BaseController {
     @FXML
     private Label labelLocation;
     @FXML
+    private Label roomNumberNoticeLabel;
+    @FXML
+    private Label roomSizeNoticeLabel;
+    @FXML
     private ComboBox<Equipment> equipmentComboBox;
     private ObservableList<Equipment> equipmentPerList = FXCollections.observableArrayList();
     private ArrayList<Equipment> equipmentList = new ArrayList<>();
 
     RoomRepositoryJDBC roomRepositoryJDBC = new RoomRepositoryJDBC();
-    //BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
+    BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
 
 
     @FXML
@@ -64,6 +66,12 @@ public class AddRoomController extends BaseController {
 
         fillDropDownElements();
         labelLocation.setVisible(false);
+        roomNumberNoticeLabel.setVisible(false);
+        roomSizeNoticeLabel.setVisible(false);
+
+        UsabilityMethods.changeListenerForNumber(roomNmbrTextField, roomNumberNoticeLabel);//!
+        UsabilityMethods.changeListenerForNumber(sizeTextField, roomSizeNoticeLabel);//!
+
 
         addListenerForEquipmentList();
 
@@ -231,39 +239,35 @@ public class AddRoomController extends BaseController {
         String roomNbr = roomNmbrTextField.getText();
         String roomSizeString = sizeTextField.getText();
 
-        //check if Room Number INT
-        if (!UsabilityMethods.isNumber(roomNbr)) {
-            QuickAlert.showError("Bitte geben Raumnummer in Zahlen");
-            return;
-        }
-
-        //check if Room Size INT
-        if (!UsabilityMethods.isNumber(roomSizeString)) {
-            QuickAlert.showError("Bitte geben Raumgröße in Zahlen");
-            return;
-        }
-
-        int roomNbrInt = Integer.parseInt(roomNmbrTextField.getText());
-        int roomSize = Integer.parseInt(sizeTextField.getText());
-        Location location = locationChoiceBox.getValue();
-
-        Room room = new Room(0, roomNbrInt, roomSize, location, equipmentList);
-
 
         if (!roomNbr.isBlank() && !sizeTextField.getText().isBlank() && !(locationChoiceBox.getValue() == null) && !(equipmentComboBox.getItems() == null)) {
             if (listModel.getSelectedRoom() == null) {
-                try {
+
+                int roomNbrInt = Integer.parseInt(roomNmbrTextField.getText());
+                int roomUniqueNumberCount = roomRepositoryJDBC.getRoomCountByRoomNumber(roomNbrInt);
+                int roomSize = Integer.parseInt(sizeTextField.getText());
+                Location location = locationChoiceBox.getValue();
+
+                Room room = new Room(0, roomNbrInt, roomSize, location, equipmentList);
+
+
+                /*  try {*/
+                if (roomUniqueNumberCount == 0) {
+
 
                     roomRepositoryJDBC.addRoomEquipment(room);
-
                     listModel.roomList.add(room);
 
-                    //listModel.bookingList.setAll(bookingRepositoryJDBC.readAll());
+                    listModel.bookingList.setAll(bookingRepositoryJDBC.readAll());
                     moveToRoomPage();
 
-                } catch (SQLException e) {
-                    e.printStackTrace();
+                } else {
+                    UsabilityMethods.addMessage(roomNumberNoticeLabel, "Dieser Raumnummer existiert schon!");
                 }
+
+            /*    } catch (SQLException e) {
+                    e.printStackTrace();
+                }*/
             } else {
 
                 updateRoomEquipment();

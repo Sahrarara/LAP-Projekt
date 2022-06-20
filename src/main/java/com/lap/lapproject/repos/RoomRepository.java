@@ -19,4 +19,5 @@ public interface RoomRepository {
     void deleteEquipment(Room room, Equipment equipment) throws SQLException;
 
     void addEquipment(Room room, Equipment equipment) throws SQLException;
+    int getRoomCountByRoomNumber(int roomNumber) throws SQLException;
 }
