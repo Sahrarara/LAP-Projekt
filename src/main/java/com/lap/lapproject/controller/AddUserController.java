@@ -272,6 +272,7 @@ public class AddUserController extends BaseController {
 
     @FXML
     void initialize() throws IOException {
+        photoCheckBox.setVisible(false);
         assert activeCheckBox != null : "fx:id=\"activeCheckBox\" was not injected: check your FXML file 'adduser-view.fxml'.";
         assert authorizationChoiceBox != null : "fx:id=\"authorizationChoiceBox\" was not injected: check your FXML file 'adduser-view.fxml'.";
         assert descriptionCheckBox != null : "fx:id=\"descriptionCheckBox\" was not injected: check your FXML file 'adduser-view.fxml'.";
@@ -293,17 +294,20 @@ public class AddUserController extends BaseController {
         fillFormToUpdate();
         checkImageInDB();
 
+        UsabilityMethods.changeListenerInputText(photoPathTextField, errorNoPhotoInDB);
+        UsabilityMethods.changeListenerCheckBox(photoPathTextField, photoCheckBox);
+
     }
 
 
     //Befüllt ChoiceBox mit authorization
     @FXML
     public void fillChoiceBox() {
-        ObservableList<String> authorizationName = FXCollections.observableArrayList(
-                listModel.filteredAuthorizationList.stream()
-                        .map(authorization -> authorization.getAuthority())
-                        .collect(Collectors.toList()));
-        authorizationChoiceBox.setItems(authorizationName);
+            ObservableList<String> authorizationName = FXCollections.observableArrayList(
+                    listModel.filteredAuthorizationList.stream()
+                            .map(authorization -> authorization.getAuthority())
+                            .collect(Collectors.toList()));
+            authorizationChoiceBox.setItems(authorizationName);
     }
 
     // Macht Text Feldär unsichtbar
@@ -357,13 +361,15 @@ public class AddUserController extends BaseController {
     //prüft ob ein Foto in DB vorhanden ist
     public  boolean checkImageInDB() throws IOException {
         while (listModel.getSelectedUser() != null){
-            if (listModel.getSelectedUser().getPhoto() == null) {
+            if (listModel.getSelectedUser().getPhoto() == null && !listModel.getSelectedUser().getPhotoVisibility()) {
                 System.out.println("foto empty");
                 errorNoPhotoInDB.setVisible(true);
-                errorNoPhotoInDB.setText("Das Foto ist nicht in der Datenbank gespeichert!");
+                errorNoPhotoInDB.setText("Es gibt kein Foto von dem User in  Datenbank gespeichert!");
+                photoCheckBox.setVisible(false);
                 return false;
             } else {
                 errorNoPhotoInDB.setVisible(false);
+                photoCheckBox.setVisible(true);
                 return true;
             }
         }

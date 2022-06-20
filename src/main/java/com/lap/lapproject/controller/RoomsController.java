@@ -50,6 +50,8 @@ public class RoomsController extends BaseController {
     private ChoiceBox filterChoiceBox;
     @FXML
     private Button closeIconButton;
+    @FXML
+    private Button addRoomButton;
 
 
     @FXML
@@ -121,6 +123,9 @@ public class RoomsController extends BaseController {
         assert streetColumn != null : "fx:id=\"streetColumn\" was not injected: check your FXML file 'rooms-view.fxml'.";
         assert equipmentColumn != null : "fx:id=\"equipmentColumn\" was not injected: check your FXML file 'rooms-view.fxml'.";
         assert roomsBtnBar != null : "fx:id=\"roomsBtnBar\" was not injected: check your FXML file 'rooms-view.fxml'.";
+        assert addRoomButton != null : "fx:id=\"addRoomButton\" was not injected: check your FXML file 'rooms-view.fxml'.";
+        assert deleteBtn != null : "fx:id=\"deleteBtn\" was not injected: check your FXML file 'rooms-view.fxml'.";
+        assert editRoomButton != null : "fx:id=\"editRoomButton\" was not injected: check your FXML file 'rooms-view.fxml'.";
 
         closeIconButton.setVisible(false);
         UsabilityMethods.changeListener(searchBar, closeIconButton);

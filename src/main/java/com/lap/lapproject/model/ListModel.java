@@ -3,11 +3,16 @@ package com.lap.lapproject.model;
 import com.lap.lapproject.repos.*;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,7 +62,8 @@ public class ListModel {
     UserRepositoryJDBC userRepositoryJDBC = new UserRepositoryJDBC();
     RoomRepositoryJDBC roomRepositoryJDBC = new RoomRepositoryJDBC();
 
-
+    // automatically update photo in sidebar
+    private ObjectProperty<Image> userImgProperty = new SimpleObjectProperty<>();
 
 
     //UPDATE Variable enthält den Wert des ausgewählten Elements
@@ -103,6 +109,14 @@ public class ListModel {
 
     }
 
+    public void addListenerForUserImage(Circle bannerImg) {
+        userImgProperty.addListener(new ChangeListener<Image>() {
+            @Override
+            public void changed(ObservableValue<? extends Image> observableValue, Image image, Image t1) {
+                bannerImg.setFill(new ImagePattern(userImgProperty.get()));
+            }
+        });
+    }
 
     public void addListenerForBooking() {
         bookingList.addListener(new ListChangeListener<Booking>() {
@@ -305,4 +319,7 @@ public class ListModel {
     public void setProgramList(ObservableList<Program> programList) {
         this.programList = programList;
     }
+
+    public Image getCurrentUserImage() { return userImgProperty.get(); }
+    public void setUserImgProperty(Image userImage) { this.userImgProperty.set(userImage); }
 }
