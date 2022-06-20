@@ -61,34 +61,37 @@ public class EquipmentController extends BaseController{
     }
 
     @FXML
-    private void onDeleteBtnClick(ActionEvent actionEvent) {
-        RoomRepositoryJDBC roomRepositoryJDBC = new RoomRepositoryJDBC();
+    private void onDeleteBtnClick(ActionEvent actionEvent) throws SQLException {
+        if (listModel.getSelectedEquipment() != null) {
+            RoomRepositoryJDBC roomRepositoryJDBC = new RoomRepositoryJDBC();
 
-        EquipmentRepositoryJDBC equipmentRepositoryJDBC = new EquipmentRepositoryJDBC();
-        int myIndex = tableViewEquipment.getSelectionModel().getSelectedIndex();
+            EquipmentRepositoryJDBC equipmentRepositoryJDBC = new EquipmentRepositoryJDBC();
+            int myIndex = tableViewEquipment.getSelectionModel().getSelectedIndex();
 
-        Equipment equipment1 = tableViewEquipment.getSelectionModel().getSelectedItem();
+            Equipment equipment1 = tableViewEquipment.getSelectionModel().getSelectedItem();
 
-        //Alert CONFIRMATION TODO: wenn es möglich nur einen CONFIRMATION Alert für Alle DELETE
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmation Dialog");
-        alert.setHeaderText(null);
-        alert.setContentText("Sind Sie sicher, dass Sie es löschen wollen?");
-        Optional<ButtonType> action = alert.showAndWait();
-        if(action.get() == ButtonType.OK) {
-            try {
+            //Alert CONFIRMATION TODO: wenn es möglich nur einen CONFIRMATION Alert für Alle DELETE
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Sind Sie sicher, dass Sie es löschen wollen?");
+            Optional<ButtonType> action = alert.showAndWait();
+            if (action.get() == ButtonType.OK) {
+                try {
                 equipmentRepositoryJDBC.deleteEquipment(equipment1);
                 listModel.equipmentList.remove(equipment1);
 
                 listModel.roomList.setAll(roomRepositoryJDBC.readAll());// TODO: put later to ListModel
 
-            } catch (SQLException ex) {
-                ex.printStackTrace();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
             }
-            }else {
-            QuickAlert.showInfo("Bitte gewünschte Zeile markieren");
+            } else {
+                QuickAlert.showInfo("Bitte gewünschte Zeile markieren");
+            }
         }
-    }
+
 
     @FXML
     private void onSettingsBtnClick(ActionEvent actionEvent) {
