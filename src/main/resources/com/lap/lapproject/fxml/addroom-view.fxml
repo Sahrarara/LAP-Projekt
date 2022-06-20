@@ -35,11 +35,10 @@
       <RowConstraints prefHeight="45.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #101d2c;" />
       <Pane minHeight="40.0" prefHeight="40.0" style="-fx-background-color: #101d2c;" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
       <Pane style="-fx-background-color: #101d2c;" GridPane.columnIndex="2">
          <children>
-            <Label alignment="CENTER" layoutY="29.0" style="-fx-text-fill: #c69963;" styleClass="title-form" text="RÄUME" textFill="#c69963">
+            <Label layoutY="29.0" style="-fx-text-fill: #c69963;" styleClass="title-form" text="RÄUME" textFill="#c69963">
                <font>
                   <Font size="24.0" />
                </font>
@@ -93,7 +92,16 @@
             <Insets left="20.0" />
          </GridPane.margin>
       </Label>
-      <Button fx:id="onAbbortBtn" mnemonicParsing="false" onAction="#onAbortBtnClick" prefWidth="126.0" text="ABBRECHEN" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8">
+      <TextField fx:id="sizeTextField" maxWidth="425.0" onAction="#onAddBtnClick" prefHeight="31.0" prefWidth="425.0" style="-fx-border-radius: 50px; -fx-text-fill: #101d2c;" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="4">
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin>
+         <styleClass>
+            <String fx:value="input-form" />
+            <String fx:value="button-light" />
+         </styleClass>
+      </TextField>
+      <Button fx:id="onAbbortBtn" mnemonicParsing="false" onAction="#onAbortBtnClick" prefWidth="126.0" text="ABBRECHEN" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6">
          <styleClass>
             <String fx:value="button-style" />
             <String fx:value="button-light" />
@@ -102,7 +110,7 @@
             <Insets />
          </GridPane.margin>
       </Button>
-      <Button fx:id="addRoomBtn" mnemonicParsing="false" onAction="#onAddBtnClick" prefWidth="126.0" text="HINZUFÜGEN" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="8">
+      <Button fx:id="addRoomBtn" mnemonicParsing="false" onAction="#onAddBtnClick" prefWidth="126.0" text="HINZUFÜGEN" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>

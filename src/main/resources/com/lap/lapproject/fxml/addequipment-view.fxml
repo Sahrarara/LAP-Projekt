@@ -69,5 +69,6 @@
       </Button>
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #101d2c;" />
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #101d2c;" GridPane.columnIndex="3" />
+      <Label fx:id="equipmentNameNoticeLabel" text="Ausstattungsname text" textFill="#fc0505" GridPane.columnIndex="2" GridPane.rowIndex="1" />
    </children>
 </GridPane>

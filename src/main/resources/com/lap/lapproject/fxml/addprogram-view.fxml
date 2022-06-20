@@ -26,6 +26,7 @@
    </rowConstraints>
    <children>
       <Pane minHeight="40.0" prefHeight="40.0" prefWidth="177.0" style="-fx-background-color: #101d2c;" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+      <Label fx:id="programNameNoticeLabel" text="program name" textFill="#f20505" GridPane.columnIndex="2" GridPane.rowIndex="1" />
       <Pane style="-fx-background-color: #101d2c;" GridPane.columnIndex="2">
          <children>
             <Label layoutY="29.0" style="-fx-text-fill: #c69963;" styleClass="title-form" text="PROGRAMM" textFill="#c69963">

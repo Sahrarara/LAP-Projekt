@@ -17,6 +17,7 @@ import javafx.scene.input.KeyEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Locale;
 import java.util.Optional;
@@ -26,14 +27,7 @@ public class RoomsController extends BaseController {
 
     @FXML
     private ButtonBar roomsBtnBar;
-    @FXML
-    private Button editRoomButton;
-    @FXML
-    private Button deleteBtn;
-    @FXML
-    private TextField searchBar;
-    @FXML
-    private Button closeIconButton;
+
     @FXML
     private TableView<Room> tableViewRoom;
     @FXML
@@ -44,6 +38,18 @@ public class RoomsController extends BaseController {
     private TableColumn<Room, String> streetColumn;
     @FXML
     private TableColumn<Room, String> equipmentColumn;
+
+    @FXML
+    private Button editRoomButton;
+
+    @FXML
+    private Button deleteBtn;
+    @FXML
+    private TextField searchBar;
+    @FXML
+    private ChoiceBox filterChoiceBox;
+    @FXML
+    private Button closeIconButton;
 
 
     @FXML
@@ -56,22 +62,25 @@ public class RoomsController extends BaseController {
 
     @FXML
     private void onDeleteRoomBtnClick(ActionEvent actionEvent) {
-        // QuickAlert.showError("Möchten Sie dieses Room sicher Löschen?");
-        RoomRepositoryJDBC roomRepositoryJDBC = new RoomRepositoryJDBC();
-        BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
+        if (listModel.getSelectedRoom() != null) {
 
-        CourseRepositoryJDBC courseRepositoryJDBC = new CourseRepositoryJDBC();
+            // QuickAlert.showError("Möchten Sie dieses Room sicher Löschen?");
+            RoomRepositoryJDBC roomRepositoryJDBC = new RoomRepositoryJDBC();
+            BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
 
+            CourseRepositoryJDBC courseRepositoryJDBC = new CourseRepositoryJDBC();
 
-        Room roomToDelete = tableViewRoom.getSelectionModel().getSelectedItem();
+            int myIndex = tableViewRoom.getSelectionModel().getSelectedIndex();
 
-        //Alert CONFIRMATION TODO: wenn es möglich nur einen CONFIRMATION Alert für Alle DELETE
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmation Dialog");
-        alert.setHeaderText(null);
-        alert.setContentText("Sind Sie sicher, dass Sie es löschen wollen?");
-        Optional<ButtonType> action = alert.showAndWait();
-        if (action.get() == ButtonType.OK) {
+            Room roomToDelete = tableViewRoom.getSelectionModel().getSelectedItem();
+
+            //Alert CONFIRMATION TODO: wenn es möglich nur einen CONFIRMATION Alert für Alle DELETE
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Sind Sie sicher, dass Sie es löschen wollen?");
+            Optional<ButtonType> action = alert.showAndWait();
+            if (action.get() == ButtonType.OK) {
 
             try {
                 // check in DB how many bookings use the particular room
@@ -84,14 +93,16 @@ public class RoomsController extends BaseController {
 
                     listModel.courseList.setAll(courseRepositoryJDBC.readAll());
                 } else {
-                    QuickAlert.showError("Dieses Raum wird für eine Buchung benötigt, Sie können es nicht löschen!" +
-                            "\n" + "Bearbeiten Sie zuerst Ihre Buchungen!");
+                    QuickAlert.showError("Dieses Raum wird für eine Buchung benötigt, Sie können es nicht löschen! Bearbeiten Sie zuerst Ihre Buchungen!");
                 }
             } catch (SQLException ex) {
                 ex.printStackTrace();
+                }
             }
-        }
+            }else {
+            QuickAlert.showInfo("Bitte gewünschte Zeile markieren");
     }
+}
 
 
     @FXML
@@ -99,6 +110,7 @@ public class RoomsController extends BaseController {
         ChangeScene stage = new ChangeScene();
         stage.moveToNextStage(Constants.PATH_TO_FXML_CREATE_NEW_ROOM);
     }
+
 
 
     @FXML
@@ -145,6 +157,8 @@ public class RoomsController extends BaseController {
         }
     }
 
+
+
     @FXML
     private void onSearchBarClick(KeyEvent actionEvent) {
 
@@ -155,6 +169,7 @@ public class RoomsController extends BaseController {
                 || room.getLocation().getStreet().toLowerCase(Locale.ROOT).contains(searchTerm)
                 || room.getEquipmentAsString().toLowerCase(Locale.ROOT).contains(searchTerm));
     }
+
 
 
     @FXML

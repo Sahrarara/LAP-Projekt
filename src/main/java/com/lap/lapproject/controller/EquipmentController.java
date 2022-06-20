@@ -5,6 +5,7 @@ import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.Equipment;
 import com.lap.lapproject.repos.EquipmentRepositoryJDBC;
 import com.lap.lapproject.repos.RoomRepositoryJDBC;
+import com.lap.lapproject.utility.QuickAlert;
 import com.lap.lapproject.utility.UsabilityMethods;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -79,30 +80,36 @@ public class EquipmentController extends BaseController{
                 equipmentRepositoryJDBC.deleteEquipment(equipment1);
                 listModel.equipmentList.remove(equipment1);
 
-                listModel.roomList.setAll(roomRepositoryJDBC.readAll());
+                listModel.roomList.setAll(roomRepositoryJDBC.readAll());// TODO: put later to ListModel
 
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
+            }else {
+            QuickAlert.showInfo("Bitte gewünschte Zeile markieren");
         }
     }
 
     @FXML
     private void onSettingsBtnClick(ActionEvent actionEvent) {
-        Stage stage = new Stage();
+        if (listModel.getSelectedEquipment() != null) {
+            Stage stage = new Stage();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_EQUIPMENT));
-        Scene scene = null;
+            FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_EQUIPMENT));
+            Scene scene = null;
 
-        try {
-            scene = new Scene(fxmlLoader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
+            try {
+                scene = new Scene(fxmlLoader.load());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            stage.setTitle("Raum Management");
+            stage.setScene(scene);
+            stage.show();
+        } else {
+            QuickAlert.showInfo("Bitte gewünschte Zeile markieren");
         }
-
-        stage.setTitle("Raum Management");
-        stage.setScene(scene);
-        stage.show();
     }
 
 

@@ -104,6 +104,7 @@ public class ProfileController extends BaseController {
             UserRepositoryJDBC userRepositoryJDBC = new UserRepositoryJDBC();
             try {
                 userRepositoryJDBC.updateUserProfile(new Trainer(id, newDescription, newPhone, newEmail, newImage));
+              // SidebarController.bannerImg.setFill(new ImagePattern(imageFromBytes(model.getLoggedInUser().getPhoto())));
 
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -199,7 +200,7 @@ public class ProfileController extends BaseController {
     @FXML
     private void onPhotoUploadBtnClick(ActionEvent actionEvent) {
 
-        String[] extensionList = {"jpg", "jpeg", "gif", "png", "tif", "tiff", "bmp"};
+        String[] extensionList = {"jpg", "jpeg", "gif", "png"};
 
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(getCurrentStage());
@@ -216,7 +217,7 @@ public class ProfileController extends BaseController {
                     System.out.println("File extension is: " + extension);
                 } else {
                     JOptionPane.showMessageDialog(null, "Es können folgende Dateiformate hochgeladen werden: \n" +
-                                    "JPG, JPEG, GIF, PNG, TIF, TIFF, BMP",
+                                    "JPG, JPEG, GIF, PNG",
                             "Warnung", JOptionPane.WARNING_MESSAGE, null);
                 }
             }
@@ -242,8 +243,10 @@ public class ProfileController extends BaseController {
         if (photoBytes != null && photoBytes.length > 0) {
             InputStream inputStream = new ByteArrayInputStream(photoBytes);
             image = new Image(inputStream);
+
         }
         return image;
+
     }
 
 

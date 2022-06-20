@@ -79,31 +79,36 @@ public class TrainerController extends BaseController {
 
     @FXML
     private void onDeleteTrainerBtnClick(ActionEvent actionEvent) throws SQLException {
-        BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
-        Trainer trainer = tableViewTrainer.getSelectionModel().getSelectedItem();
+        if (listModel.getSelectedUser() != null) {
 
-        //Alert CONFIRMATION TODO: wenn es möglich nur einen CONFIRMATION Alert für Alle DELETE
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmation Dialog");
-        alert.setHeaderText(null);
-        alert.setContentText("Sind Sie sicher, dass Sie es löschen wollen?");
-        Optional<ButtonType> action = alert.showAndWait();
-        if(action.get() == ButtonType.OK) {
-            // check in DB how many bookings use the particular location
-            int bookingCountByTrainer = bookingRepositoryJDBC.getBookingCountByTrainerId(trainer.getId());
+            BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
+            Trainer trainer = tableViewTrainer.getSelectionModel().getSelectedItem();
 
-            if (bookingCountByTrainer == 0) {
+            //Alert CONFIRMATION TODO: wenn es möglich nur einen CONFIRMATION Alert für Alle DELETE
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Sind Sie sicher, dass Sie es löschen wollen?");
+            Optional<ButtonType> action = alert.showAndWait();
+            if (action.get() == ButtonType.OK) {
+                // check in DB how many bookings use the particular location
+                int bookingCountByTrainer = bookingRepositoryJDBC.getBookingCountByTrainerId(trainer.getId());
 
-                listModel.trainerList.remove(trainer);
-            } else {
-                QuickAlert.showError("Diese : er Trainer  wird für eine Buchung benötigt, Sie können sie:ihn nicht löschen! Bearbeiten Sie zuerst Ihre Buchungen!");
+                if (bookingCountByTrainer == 0) {
+
+                    listModel.trainerList.remove(trainer);
+                } else {
+                    QuickAlert.showError("Diese : er Trainer  wird für eine Buchung benötigt, Sie können sie:ihn nicht löschen! Bearbeiten Sie zuerst Ihre Buchungen!");
+                }
             }
-
+            }else {
+            QuickAlert.showInfo("Bitte gewünschte Zeile markieren");
         }
     }
 
     @FXML
     private void onEditBtnClick(ActionEvent actionEvent) {
+        if (listModel.getSelectedUser() != null) {
         Stage stage = new Stage();
 
         FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_TRAINER));
@@ -118,7 +123,9 @@ public class TrainerController extends BaseController {
         stage.setTitle("Raum Management");
         stage.setScene(scene);
         stage.show();
-
+        } else {
+            QuickAlert.showInfo("Bitte gewünschte Zeile markieren");
+        }
     }
 
 

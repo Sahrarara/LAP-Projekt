@@ -9,8 +9,7 @@ public interface EquipmentRepository {
     List<Equipment> readAll() throws SQLException;
     int addEquipment(Equipment equipment) throws SQLException;
 
-
     void updateEquipment(Equipment equipment) throws SQLException;
     void deleteEquipment(Equipment equipment) throws SQLException;
-
+    int getEquipmentCountByEquipmentDescription(String equipmentDescription) throws SQLException;
 }

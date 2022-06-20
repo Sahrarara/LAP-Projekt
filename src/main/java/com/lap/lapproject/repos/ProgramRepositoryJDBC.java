@@ -19,6 +19,7 @@ public class ProgramRepositoryJDBC extends Repository implements ProgramReposito
     private static final String DELETE_PROGRAM_SQL_STRING =
             "DELETE FROM programs WHERE program_id=?" /* + "UPDATE rooms_equipment SET equipment_id = null WHERE program_id=?"*/;
 
+    private static final String GET_PROGRAM_COUNT_BY_UNIQUE_PROGRAM_NAME_SQL_STRING = "SELECT COUNT(*) AS unique_program_count FROM programs WHERE name = (?) ";
 
     @Override
     public List<Program> readProgram() throws SQLException {
@@ -131,6 +132,28 @@ public class ProgramRepositoryJDBC extends Repository implements ProgramReposito
             if (connection != null) connection.close();
         }
         return program;
+    }
+
+    // check unique programName in DB
+    public int getProgramsCountByProgramName(String programName) throws SQLException {
+        Connection connection = connect();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        int programCount = 0;
+        try {
+            preparedStatement = connection.prepareStatement(GET_PROGRAM_COUNT_BY_UNIQUE_PROGRAM_NAME_SQL_STRING );
+            preparedStatement.setString(1, programName);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                programCount = resultSet.getInt("unique_program_count");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) connection.close();
+        }
+        return programCount;
     }
 
 }

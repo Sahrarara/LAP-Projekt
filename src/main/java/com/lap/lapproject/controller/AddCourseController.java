@@ -1,6 +1,7 @@
 package com.lap.lapproject.controller;
 
 import com.lap.lapproject.model.Course;
+import com.lap.lapproject.model.ListModel;
 import com.lap.lapproject.model.Program;
 import com.lap.lapproject.repos.BookingRepositoryJDBC;
 import com.lap.lapproject.repos.CourseRepositoryJDBC;
@@ -13,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -23,6 +25,9 @@ import java.util.stream.Collectors;
 
 
 public class AddCourseController extends BaseController {
+    CourseRepositoryJDBC courseRepo = new CourseRepositoryJDBC();
+    ProgramRepositoryJDBC programRepositoryJDBC = new ProgramRepositoryJDBC();
+    BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
     @FXML
     private TextField courseNameTextField;
     @FXML
@@ -33,12 +38,31 @@ public class AddCourseController extends BaseController {
     private DatePicker courseEndDatePicker;
     @FXML
     private TextField groupSizeTextField;
+    @FXML
+    private Label courseSizeNoticeLable;
+    @FXML
+    private Label checkDateNoticeLable;
+    @FXML
+    private Label courseUniqueNameNoticeLable;
+
 
 
     @FXML
     private void initialize() {
         assert courseChoiceBox != null : "fx:id=\"programColumn\" was not injected: check your FXML file 'events-view.fxml'.";
+        assert courseSizeNoticeLable != null : "fx:id=\"courseSizeNoticeLable\" was not injected: check your FXML file 'events-view.fxml'.";
+        assert checkDateNoticeLable != null : "fx:id=\"checkDateNoticeLable\" was not injected: check your FXML file 'events-view.fxml'.";
+        assert courseUniqueNameNoticeLable != null : "fx:id=\"courseUniqueNameNoticeLable\" was not injected: check your FXML file 'events-view.fxml'.";
         System.out.println("AddCourseController:: initialize");
+
+        checkDateNoticeLable.setVisible(false);
+        courseSizeNoticeLable.setVisible(false);
+        courseUniqueNameNoticeLable.setVisible(false);
+        UsabilityMethods.changeListenerForNumber(groupSizeTextField, courseSizeNoticeLable);//!
+        UsabilityMethods.changeListenerInputText(courseNameTextField, courseUniqueNameNoticeLable);
+        UsabilityMethods.changeListenerDataPicker(courseStartDatePicker, checkDateNoticeLable);
+        UsabilityMethods.changeListenerDataPicker(courseEndDatePicker, checkDateNoticeLable);
+
 
         //Liste der ChoiceBox hinzufügen
         ObservableList<String> programNames = FXCollections.observableArrayList(
@@ -47,10 +71,11 @@ public class AddCourseController extends BaseController {
                         .collect(Collectors.toList()));
 
         courseChoiceBox.setItems(programNames);
-        //courseChoiceBox.setItems(listModel.programList);//empfelung vom Hr.Öller statt: courseChoiceBox.setItems(programNames);
 
         //Update logik
         if (listModel.getSelectedCourse() != null) {
+            String newCourseName = courseNameTextField.getText();
+            String selectedCourseName = listModel.getSelectedCourse().getCourseName();
             courseNameTextField.setText(listModel.getSelectedCourse().getCourseName());
             courseChoiceBox.setValue(listModel.getSelectedCourse().getProgram().getProgramName());
             courseStartDatePicker.setValue(listModel.getSelectedCourse().getCourseStart());
@@ -66,9 +91,6 @@ public class AddCourseController extends BaseController {
 
     @FXML
     private void onAddBtnClick(ActionEvent actionEvent) throws SQLException {
-        CourseRepositoryJDBC courseRepo = new CourseRepositoryJDBC();
-        ProgramRepositoryJDBC programRepositoryJDBC = new ProgramRepositoryJDBC();
-        BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
 
         System.out.println("AddCourseController:: onAddBtnClick");
         String courseName = courseNameTextField.getText();
@@ -80,22 +102,19 @@ public class AddCourseController extends BaseController {
         String courseStartDateAsText = courseStartDatePicker.getEditor().getText().strip().replaceAll("-", ".");
         String courseEndDateAsText = courseEndDatePicker.getEditor().getText().strip().replaceAll("-", ".");
 
-        if (courseStartDateAsText.isEmpty() || courseEndDateAsText.isEmpty()) {
-            QuickAlert.showError("Bitte alle Zeiten ausfüllen!");
-            return;
-        }
 
         if (!UsabilityMethods.isDDMMYYYYDate(courseStartDateAsText) || !UsabilityMethods.isDDMMYYYYDate(courseEndDateAsText)) {
-            QuickAlert.showError("Bitte das Datum im dd.mm.yyyy Format angeben");
+            UsabilityMethods.addMessage(checkDateNoticeLable, "Bitte das Datum im dd.mm.yyyy Format angeben!");
             return;
         }
-
         LocalDate courseStart = LocalDate.parse(courseStartDateAsText, formatter);
         LocalDate courseEnd = LocalDate.parse(courseEndDateAsText, formatter);
+
         LocalDate today = LocalDate.now();
 
-        if (courseEnd.compareTo(courseStart) < 0 || courseStart.isBefore(today)) {
-            QuickAlert.showError("Kursbegin ist nach dem Kursende oder in der Vergangenheit. Bitte das Datum überprüfen!");
+
+        if (courseEnd.compareTo(courseStart) < 0 ) {
+            UsabilityMethods.addMessage(checkDateNoticeLable, "Kursbeginn ist nach dem Kursende!");
             return;
         }
 
@@ -122,42 +141,49 @@ public class AddCourseController extends BaseController {
                 courseEnd.atStartOfDay().toLocalDate(),
                 groupSize);
        if (!courseNameTextField.getText().isBlank() && !courseChoiceBox.getValue().toString().isBlank() && !(courseStart == null) && !(courseEnd == null) && !groupSizeTextField.getText().isBlank()) {
+           int courseUniqueNameCount;
+           courseUniqueNameCount = courseRepo.getCourseCountByCourseName(courseNameTextField.getText());
            if (listModel.getSelectedCourse() == null) {
-               System.out.println("AddCourseController:: onAddBtnClick");
+               if (courseStart.isBefore(today)) {
+                   UsabilityMethods.addMessage(checkDateNoticeLable, "Kursbeginn ist in der Vergangenheit!");
+                   return;
+               }
 
-               try {
-
-            courseRepo.addCourse(course);
-            listModel.courseList.add(course);
-
-            listModel.bookingList.setAll(bookingRepositoryJDBC.readAll());//update booking
-            courseRepo.readAll();
+               if (courseUniqueNameCount == 0) { // check if this course is already in DB
+                   try {
+                       courseRepo.addCourse(course);
+                       listModel.courseList.add(course);
+                       listModel.bookingList.setAll(bookingRepositoryJDBC.readAll());//update booking
+                       courseRepo.readAll();
+                       moveToCoursePage();
                    } catch (SQLException e) {
                        e.printStackTrace();
                    }
-                   moveToCoursePage();
                } else {
-                   //Update logik
-                   course = listModel.getSelectedCourse();
-                   course.setCourseName(courseNameTextField.getText());
-                   //course.setCourseStart(courseStartDatePicker.getValue());
-               //course.setCourseEnd(courseEndDatePicker.getValue());
-                   course.setCourseStart(courseStart);
-                   course.setCourseEnd(courseEnd);
-                   course.setProgram(programRepositoryJDBC.getProgramByProgramName((String) courseChoiceBox.getValue()));
-                   //course.setProgram((Program) courseChoiceBox.getValue()); //--empfelung vom Hr.Öller statt zeile oben
-                   course.setGroupSize(Integer.parseInt(groupSizeTextField.getText()));
-                   courseRepo.updateCourse(course);
-                   listModel.courseList.set(listModel.courseList.indexOf(course), course);
-
-                   listModel.bookingList.setAll(bookingRepositoryJDBC.readAll());
-                   moveToCoursePage();
+                   UsabilityMethods.addMessage(courseUniqueNameNoticeLable, "So ein Veranstaltungsname existiert schon in DB!");
                }
+
            } else {
+               //Update logik
+               course = listModel.getSelectedCourse();
+               //if
+               String newCourseName = courseNameTextField.getText();
+               String selectedCourseName = listModel.getSelectedCourse().getCourseName();
+
+               if (!newCourseName.equals(selectedCourseName)) {
+                   if (courseRepo.getCourseCountByCourseName(newCourseName) == 0) {
+                       updateCourse();
+                   }else {
+                       UsabilityMethods.addMessage(courseUniqueNameNoticeLable, "So ein Veranstaltungsname existiert schon in DB!");
+                   }
+               }else {
+                   updateCourse();
+               }
+           }
+       } else {
                QuickAlert.showError("Bitte alle Felder ausfüllen");
            }
     }
-          // TODO check duplicate
 
 
     private Stage getCurrentStage() {
@@ -167,6 +193,22 @@ public class AddCourseController extends BaseController {
     private void moveToCoursePage() {
         Stage currentStage = this.getCurrentStage();
         currentStage.close();
+    }
+
+
+    private void updateCourse() throws SQLException {
+        LocalDate courseStart = LocalDate.parse(courseStartDatePicker.getEditor().getText().strip().replaceAll("-", "."), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        LocalDate courseEnd = LocalDate.parse(courseEndDatePicker.getEditor().getText().strip().replaceAll("-", "."), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        listModel.getSelectedCourse().setCourseName(courseNameTextField.getText());
+        listModel.getSelectedCourse().setCourseStart(courseStart);
+        listModel.getSelectedCourse().setCourseEnd(courseEnd);
+        listModel.getSelectedCourse().setProgram(programRepositoryJDBC.getProgramByProgramName((String) courseChoiceBox.getValue()));
+        listModel.getSelectedCourse().setGroupSize(Integer.parseInt(groupSizeTextField.getText()));
+        courseRepo.updateCourse(listModel.getSelectedCourse());
+        listModel.courseList.set(listModel.courseList.indexOf(listModel.getSelectedCourse()), listModel.getSelectedCourse());
+        moveToCoursePage();
+
+        listModel.bookingList.setAll(bookingRepositoryJDBC.readAll()); // TODO: put later to ListModel
     }
 }
 
