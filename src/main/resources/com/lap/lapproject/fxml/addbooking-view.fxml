@@ -191,18 +191,6 @@
          </styleClass>
       </Button>
 
-      //negin.........................................
-
-      <Button mnemonicParsing="false" onAction="#onFindFreeRoomsBtnClick" prefHeight="38.0" prefWidth="138.0" text="Finde freie Räume" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="15" GridPane.valignment="TOP">
-         <styleClass>
-            <String fx:value="button-style" />
-            <String fx:value="button-light" />
-         </styleClass>
-         <GridPane.margin>
-            <Insets right="30.0" />
-         </GridPane.margin>
-      </Button>
-      //.............................................
       <Pane prefHeight="90.0" prefWidth="40.0" style="-fx-background-color: #101d2c;" GridPane.columnIndex="3" />
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #101d2c;" />
    </children>

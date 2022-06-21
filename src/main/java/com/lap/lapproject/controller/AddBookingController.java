@@ -108,10 +108,14 @@ public class AddBookingController extends BaseController {
         if (isValidDateTimeForAddBooking(dateStart, dateEnd, timeStart, timeEnd)) {
             localDateTimeStart = LocalDateTime.of(dateStart, timeStart);
             localDateTimeEnd = LocalDateTime.of(dateEnd, timeEnd);
+
+
             //Negin...................................
             BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
             if (bookingRepositoryJDBC.isRoomFree(room.getId(), localDateTimeStart, localDateTimeEnd)) {
 //..................................
+
+
             Booking booking = new Booking(room, trainer, model.getLoggedInUser(), course, localDateTimeStart, localDateTimeEnd, recurrenceRule);
             listModel.bookingList.add(booking);
             moveToBookingPage();
@@ -282,35 +286,7 @@ public class AddBookingController extends BaseController {
         Stage currentStage = this.getCurrentStage();
         currentStage.close();
     }
-    //Negin..........................infxml hinzu......................
-    public void onFindFreeRoomsBtnClick(ActionEvent event) {
-        //ToDo
-        // Date != null;
-        // Time != null;
-        BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
 
-        LocalDate dateStart = startDatePicker.getValue();
-        LocalDate dateEnd = endDatePicker.getValue();
-        LocalTime timeStart = timeStartTimeField.getValue();
-        LocalTime timeEnd = timeEndTimeField.getValue();
-
-        LocalDateTime localDateTimeStart;
-        LocalDateTime localDateTimeEnd;
-
-        localDateTimeStart = LocalDateTime.of(dateStart, timeStart);
-
-        localDateTimeEnd = LocalDateTime.of(dateEnd, timeEnd);
-
-        List<Room> freeRooms = bookingRepositoryJDBC.findFreeRoomsByTime(localDateTimeStart, localDateTimeEnd);
-        if (freeRooms.isEmpty()){
-            QuickAlert.showError("Keine freien Räume  gefunden");
-        }else{
-            String freeRoomsString = String.join(", ", freeRooms.toString());
-            QuickAlert.showInfo(" Folgende Räume sind frei:\n"+ freeRoomsString);
-
-        }
-    }
-    //................................................................
 
 }
 

@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -33,7 +34,7 @@
                         <RowConstraints minHeight="25.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Label styleClass="search-view-font-color" text="Datum" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+                        <Label prefWidth="75.0" styleClass="search-view-font-color" text="Datum Start" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
                            <GridPane.margin>
                               <Insets left="12.0" />
                            </GridPane.margin>
@@ -41,11 +42,13 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <ChoiceBox fx:id="dateSearchChoiceBox" layoutX="10.0" layoutY="85.0" prefWidth="180.0" styleClass="input-form" GridPane.halignment="CENTER">
+                        <DatePicker fx:id="startDatePicker" layoutX="10.0" layoutY="85.0" onAction="#onSetStartDate" prefWidth="180.0" styleClass="input-form" GridPane.halignment="CENTER">
                            <GridPane.margin>
                               <Insets top="30.0" />
-                           </GridPane.margin></ChoiceBox>
-                        <ChoiceBox fx:id="startTimeSearchChoiceBox" prefWidth="180.0" styleClass="input-form" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                           </GridPane.margin></DatePicker>
+
+
+                        <ChoiceBox fx:id="startTimeSearchChoiceBox" prefWidth="90.0" styleClass="input-form" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                            <GridPane.margin>
                               <Insets top="30.0" />
                            </GridPane.margin></ChoiceBox>
@@ -57,7 +60,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <ChoiceBox fx:id="endTimeSearchChoiceBox" prefWidth="180.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                        <ChoiceBox fx:id="endTimeSearchChoiceBox" prefWidth="90.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                            <GridPane.margin>
                               <Insets top="30.0" />
                            </GridPane.margin></ChoiceBox>
@@ -71,6 +74,13 @@
                         </Label>
                      </children>
                   </GridPane>
+
+                  <DatePicker fx:id="endDatePicker" layoutX="113.0" layoutY="169.0" onAction="#onSetEndDate" prefHeight="20.0" prefWidth="180.0" styleClass="input-form" />
+                  <Label layoutX="10.0" layoutY="173.0" prefHeight="20.0" prefWidth="90.0" styleClass="search-view-font-color" text="Datum Ende">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
             <AnchorPane>
