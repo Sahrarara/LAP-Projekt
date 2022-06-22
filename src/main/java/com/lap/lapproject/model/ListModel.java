@@ -104,7 +104,9 @@ public class ListModel {
         //addAllListeners();
         addListenerForBooking();
         addListenerForUser();
-        //addListenerForProgram();
+        addListenerForProgram();
+        addListenerForEquipment();
+        addListenerForLocation();
 
 
     }
@@ -148,6 +150,126 @@ public class ListModel {
                             try {
                                 bookingRepositoryJDBC.deleteBooking(booking);
                                 log.info("from addListenerForBooking: {}", "booking deleted");
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    public void addListenerForProgram() {
+        programList.addListener(new ListChangeListener<Program>() {
+            @Override
+            public void onChanged(ListChangeListener.Change<? extends Program> change) {
+                while (change.next()) {
+
+                    if (change.wasReplaced()) {
+                        for (Program program : change.getAddedSubList()) {
+                            try {
+                                programRepositoryJDBC.updateProgram(program);
+                                log.info("from addListenerForProgram: {}", "program updated");
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                    } else if (change.wasAdded()) {
+                        for (Program program : change.getAddedSubList()) {
+                            try {
+                                programRepositoryJDBC.addProgram(program);  //Program is added to a list. programview list
+                                log.info("from addListenerForProgram: {}" , "program added");
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    } else if (change.wasRemoved()) {
+                        for (Program program : change.getRemoved()) {
+                            try {
+                                programRepositoryJDBC.deleteProgram(program);
+                                log.info("from addListenerForProgram: {}", "program deleted");
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    public void addListenerForEquipment() {
+        equipmentList.addListener(new ListChangeListener<Equipment>() {
+            @Override
+            public void onChanged(ListChangeListener.Change<? extends Equipment> change) {
+                while (change.next()) {
+
+                    if (change.wasReplaced()) {
+                        for (Equipment equipment : change.getAddedSubList()) {
+                            try {
+                                equipmentRepositoryJDBC.updateEquipment(equipment);
+                                log.info("from addListenerForEquipment: {}", "equipment updated");
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                    } else if (change.wasAdded()) {
+                        for (Equipment equipment : change.getAddedSubList()) {
+                            try {
+                                equipmentRepositoryJDBC.addEquipment(equipment);  //Equipment is added to a list. equipmenzview list
+                                log.info("from addListenerForEquipment: {}", "equipment added");
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    } else if (change.wasRemoved()) {
+                        for (Equipment equipment : change.getRemoved()) {
+                            try {
+                                equipmentRepositoryJDBC.deleteEquipment(equipment);
+                                log.info("from addListenerForEquipment: {}", "equipment deleted");
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    public void addListenerForLocation() {
+        locationList.addListener(new ListChangeListener<Location>() {
+            @Override
+            public void onChanged(ListChangeListener.Change<? extends Location> change) {
+                while (change.next()) {
+
+                    if (change.wasReplaced()) {
+                        for (Location location : change.getAddedSubList()) {
+                            try {
+                                locationRepositoryJDBC.updateLocation(location);
+                                log.info("from addListenerForLocation: {}", "location updated");
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                    } else if (change.wasAdded()) {
+                        for (Location location : change.getAddedSubList()) {
+                            try {
+                                locationRepositoryJDBC.addLocation(location);  //Equipment is added to a list. equipmenzview list
+                                log.info("from addListenerForLocation: {}", "location added");
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    } else if (change.wasRemoved()) {
+                        for (Location location : change.getRemoved()) {
+                            try {
+                                locationRepositoryJDBC.deleteLocation(location);
+                                log.info("from addListenerForLocation: {}", "location deleted");
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }

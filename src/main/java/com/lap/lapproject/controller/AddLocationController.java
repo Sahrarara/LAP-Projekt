@@ -49,7 +49,7 @@ public class AddLocationController extends BaseController {
                 System.out.println("AddLocationController:: onAddBtnClick");
 
                 try {
-                    locationRepositoryJDBC.addLocation(location);//Location is added to a list
+//                    locationRepositoryJDBC.addLocation(location);//Location is added to a list
                     listModel.locationList.add(location);
                     locationRepositoryJDBC.readAll();
 
