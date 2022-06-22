@@ -31,6 +31,8 @@ public class CalenderController extends BaseController {
     private void loadCalendarFXViewInBorderPaneCenter() {
 
 
+
+
         CalendarSource myCalendarSource = new CalendarSource("My Calendars");
 
 
@@ -50,6 +52,8 @@ public class CalenderController extends BaseController {
             Calendar newCalendar = new Calendar(coursename);
         });
         */
+
+        calendarView.getCalendarSources().get(0).getCalendars().get(0).setReadOnly(true);
 
         model.courses.forEach(course -> {
             String currentCourse = course.getCourseName();
@@ -75,6 +79,7 @@ public class CalenderController extends BaseController {
                     newCalendar.addEntry(newEntry);
                     }
             });
+            newCalendar.setReadOnly(true);
             myCalendarSource.getCalendars().add(newCalendar);
 
         });
