@@ -1,29 +1,38 @@
 package com.lap.lapproject.controller;
 
+import java.io.IOException;
 import java.net.URL;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 import com.calendarfx.view.TimeField;
+import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.ListModel;
 import com.lap.lapproject.model.Room;
 import com.lap.lapproject.repos.*;
 import com.lap.lapproject.utility.QuickAlert;
+import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 
 import static com.lap.lapproject.controller.BaseController.listModel;
 import static com.lap.lapproject.model.ListModel.*;
+import static javafx.application.Application.launch;
 
 public class SearchController {
 
@@ -55,13 +64,16 @@ public class SearchController {
         assert endDatePicker != null : "fx:id=\"endDatePicker\" was not injected: check your FXML file 'search-view.fxml'.";
         assert endTimeSearchChoiceBox != null : "fx:id=\"endTimeSearchChoiceBox\" was not injected: check your FXML file 'search-view.fxml'.";
         assert startTimeSearchChoiceBox != null : "fx:id=\"startTimeSearchChoiceBox\" was not injected: check your FXML file 'search-view.fxml'.";
-
-        endDatePicker.setDisable(true);
-        startTimeSearchChoiceBox.setDisable(true);
-        endTimeSearchChoiceBox.setDisable(true);
+//Negin........................................................
 
 
 
+         String[] time = {"08:00","09:00","16:00"};
+
+        startTimeSearchChoiceBox.getItems().addAll(time);
+
+        endTimeSearchChoiceBox.getItems().addAll(time);
+//..............................................
         // get all existing programs from DB
         ProgramRepositoryJDBC programRepositoryJDBC = new ProgramRepositoryJDBC();
         UserRepositoryJDBC userRepo = new UserRepositoryJDBC();
@@ -78,9 +90,12 @@ public class SearchController {
         BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
 
         LocalDate dateStart = startDatePicker.getValue();
-        LocalDate dateEnd = startDatePicker.getValue();
-        LocalTime timeStart = LocalTime.of(9,0);//startTimeSearchChoiceBox.getValue();//
-        LocalTime timeEnd = LocalTime.of(18,0);//endTimeSearchChoiceBox.getValue();//
+        LocalDate dateEnd = endDatePicker.getValue();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        LocalTime timeStart = LocalTime.parse(startTimeSearchChoiceBox.getValue(),formatter);
+        LocalTime timeEnd = LocalTime.parse(endTimeSearchChoiceBox.getValue(),formatter);
 
         LocalDateTime localDateTimeStart;
         LocalDateTime localDateTimeEnd;
@@ -100,17 +115,10 @@ public class SearchController {
         }
     }
 
-    public void onSetStartDate(ActionEvent event) {
-        endDatePicker.setDisable(false);
+    public void onfindFreeRumBtnClick(ActionEvent event) {
+
         findFreeRooms();
     }
 
-    public void onSetEndDate(ActionEvent event) {
-        startTimeSearchChoiceBox.setDisable(false);
-    }
-
-    public void onSetStartTime(ActionEvent event) {
-        endTimeSearchChoiceBox.setDisable(false);
-    }
     //................................................................
 }
