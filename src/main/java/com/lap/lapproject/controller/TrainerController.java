@@ -159,8 +159,9 @@ public class TrainerController extends BaseController {
         listModel.sortedTrainerList.comparatorProperty().bind(tableViewTrainer.comparatorProperty());
         //trainerImg.setPrefWidth(200);
 
-        trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream((DataFeatures.getValue().getPhotoVisibility() || (model.getAuthority().equals("admin") && DataFeatures.getValue().getPhoto() != null)) ? DataFeatures.getValue().getPhoto() : imageNoVisible), 140, 200, false, false)))));
-
+        //trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream((DataFeatures.getValue().getPhotoVisibility() || (model.getAuthority().equals("admin") && DataFeatures.getValue().getPhoto() != null)) ? DataFeatures.getValue().getPhoto() : imageNoVisible), 140, 200, false, false)))));
+        //TODO changed
+        trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream((DataFeatures.getValue().getPhotoVisibility() || (model.getAuthority().equals("admin") && DataFeatures.getValue().getPhoto() != null)) ? (DataFeatures.getValue().getPhoto() != null ? DataFeatures.getValue().getPhoto() : imageNoVisible) : imageNoVisible), 140, 200, false, false)))));
 
         firstNameColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getfName() + " " + dataFeatures.getValue().getlName()));
         descriptionColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>((dataFeatures.getValue().getDescriptionVisibility() || model.getAuthority().equals("admin")) ? dataFeatures.getValue().getDescription() : notVisibleText));

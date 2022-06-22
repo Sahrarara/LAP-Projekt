@@ -34,6 +34,7 @@ import java.util.Locale;
 public class ProfileController extends BaseController {
 
     private static final Logger logger = LoggerFactory.getLogger(ProfileController.class);
+    UserRepositoryJDBC userRepositoryJDBC = new UserRepositoryJDBC();
 
     @FXML
     private Label firstnameLabel;
@@ -86,7 +87,7 @@ public class ProfileController extends BaseController {
 
 
     @FXML
-    private void onSaveBtnClick(ActionEvent actionEvent) {
+    private void onSaveBtnClick(ActionEvent actionEvent) throws SQLException {
 
         if (!(emailTextField.getText().isBlank()) && UsabilityMethods.isEmailValid(emailTextField.getText()) &&
                 !(phoneTextField.getText().isBlank()) && UsabilityMethods.isPhoneNumberValid(phoneTextField.getText())) {
@@ -100,10 +101,10 @@ public class ProfileController extends BaseController {
             model.getLoggedInUser().setEmail(newEmail);
             model.getLoggedInUser().setPhoneNmbr(newPhone);
             model.getLoggedInUser().setDescription(newDescription);
-
+            Boolean photoVisibility = model.getLoggedInUser().getPhotoVisibility();
             UserRepositoryJDBC userRepositoryJDBC = new UserRepositoryJDBC();
             try {
-                userRepositoryJDBC.updateUserProfile(new Trainer(id, newDescription, newPhone, newEmail, newImage));
+                userRepositoryJDBC.updateUserProfile(new Trainer(id, newDescription, newPhone, newEmail, newImage, photoVisibility));
               // SidebarController.bannerImg.setFill(new ImagePattern(imageFromBytes(model.getLoggedInUser().getPhoto())));
 
             } catch (SQLException e) {
@@ -121,7 +122,7 @@ public class ProfileController extends BaseController {
     }
 
     @FXML
-    void initialize() {
+    void initialize() throws SQLException {
         assert abortButton != null : "fx:id=\"abortButton\" was not injected: check your FXML file 'profile-view.fxml'.";
         assert changePasswordButton != null : "fx:id=\"changePasswordButton\" was not injected: check your FXML file 'profile-view.fxml'.";
         assert circleView != null : "fx:id=\"circleView\" was not injected: check your FXML file 'profile-view.fxml'.";
@@ -158,12 +159,14 @@ public class ProfileController extends BaseController {
         if (model.getLoggedInUser().getPhoto() != null) {
             circleView.setFill(new ImagePattern(imageFromBytes(model.getLoggedInUser().getPhoto())));
             listModel.setUserImgProperty(imageFromBytes(model.getLoggedInUser().getPhoto()));
+            listModel.trainerList.setAll(userRepositoryJDBC.readAllTrainer());//TODO: put later to ListModel
         } else {
             try {
                 circleView.setFill(new ImagePattern(imageFromBytes(convertToBytes
-                        ("src/main/resources/com/lap/lapproject/images/lapproject/images/Sample_User_Icon.png"))));
+                        ("src/main/resources/com/lap/lapproject/images/lapproject/images/user.png"))));
                 listModel.setUserImgProperty(imageFromBytes(convertToBytes
-                        ("src/main/resources/com/lap/lapproject/images/lapproject/images/Sample_User_Icon.png")));
+                        ("src/main/resources/com/lap/lapproject/images/lapproject/images/user.png")));
+                listModel.trainerList.setAll(userRepositoryJDBC.readAllTrainer());//TODO: put later to ListModel
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -230,13 +233,12 @@ public class ProfileController extends BaseController {
 
 
     @FXML
-    private void onPhotoDeleteButtonClick(ActionEvent actionEvent) {
-        circleView.setFill(new ImagePattern(imageFromBytes(model.getLoggedInUser().getPhoto())));
-        try {
-            model.getLoggedInUser().setPhoto(convertToBytes("src/main/resources/com/lap/lapproject/images/lapproject/images/user.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private void onPhotoDeleteButtonClick(ActionEvent actionEvent) throws IOException, SQLException {
+        circleView.setFill(new ImagePattern(imageFromBytes(convertToBytes
+                ("src/main/resources/com/lap/lapproject/images/lapproject/images/user.png"))));
+        model.getLoggedInUser().setPhoto(null);
+
+        listModel.trainerList.setAll(userRepositoryJDBC.readAllTrainer());//TODO: put later to ListModel
     }
 
 
