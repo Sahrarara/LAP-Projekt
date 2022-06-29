@@ -3,10 +3,13 @@ package com.lap.lapproject.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Time;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -65,14 +68,22 @@ public class SearchController {
         assert endTimeSearchChoiceBox != null : "fx:id=\"endTimeSearchChoiceBox\" was not injected: check your FXML file 'search-view.fxml'.";
         assert startTimeSearchChoiceBox != null : "fx:id=\"startTimeSearchChoiceBox\" was not injected: check your FXML file 'search-view.fxml'.";
 //Negin........................................................
+        ArrayList<String> times = new ArrayList<String>();
 
+        for (int i = 7; i <= 17; i++) {
 
+            DecimalFormat df = new DecimalFormat("00");
+            String iFormatted = df.format(i);
+            times.add(iFormatted + ":00");
+            times.add(iFormatted + ":15");
+            times.add(iFormatted + ":30");
+            times.add(iFormatted + ":45");
 
-         String[] time = {"08:00","09:00","16:00"};
+        }
 
-        startTimeSearchChoiceBox.getItems().addAll(time);
+                startTimeSearchChoiceBox.getItems().addAll(times);
+                endTimeSearchChoiceBox.getItems().addAll(times);
 
-        endTimeSearchChoiceBox.getItems().addAll(time);
 //..............................................
         // get all existing programs from DB
         ProgramRepositoryJDBC programRepositoryJDBC = new ProgramRepositoryJDBC();
@@ -87,6 +98,9 @@ public class SearchController {
         //ToDo
         // Date != null;
         // Time != null;
+
+
+
         BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
 
         LocalDate dateStart = startDatePicker.getValue();
