@@ -1,43 +1,32 @@
 package com.lap.lapproject.controller;
 
-import java.io.IOException;
 import java.net.URL;
-import java.sql.Time;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
-import com.calendarfx.view.TimeField;
-import com.lap.lapproject.application.Constants;
-import com.lap.lapproject.model.ListModel;
 import com.lap.lapproject.model.Room;
 import com.lap.lapproject.repos.*;
 import com.lap.lapproject.utility.QuickAlert;
-import javafx.application.Application;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.stage.Stage;
+import javafx.scene.control.cell.PropertyValueFactory;
 
-import static com.lap.lapproject.controller.BaseController.listModel;
-import static com.lap.lapproject.model.ListModel.*;
 import static javafx.application.Application.launch;
 
 public class SearchController {
+
 
     @FXML
     private DatePicker startDatePicker;
@@ -45,20 +34,34 @@ public class SearchController {
     @FXML
     private DatePicker endDatePicker;
 
-
-
     @FXML
     private ChoiceBox<String>  startTimeSearchChoiceBox;
 
     @FXML
     private ChoiceBox<String> endTimeSearchChoiceBox;
 
+
+    // Attribute
+    RoomsController model = new RoomsController();
+
+    //Tablle
     @FXML
     private TableView<Room> tableViewRoom;
     @FXML
     private TableColumn<Room, Integer> roomNumberColumn;
+    @FXML
+    private  TableColumn<Room,Integer> sizeColumn;
+    @FXML
+    private TableColumn<Room,Integer> streetColumn;
+    @FXML
+    private TableColumn<Room,Integer> equipmentColumn;
 
-    public SearchController() {
+
+
+ /*   @Override
+ public void initialize(URL location, ResourceBundle resources) {
+    }*/
+    public   SearchController() {
     }
 
     @FXML
@@ -67,6 +70,13 @@ public class SearchController {
         assert endDatePicker != null : "fx:id=\"endDatePicker\" was not injected: check your FXML file 'search-view.fxml'.";
         assert endTimeSearchChoiceBox != null : "fx:id=\"endTimeSearchChoiceBox\" was not injected: check your FXML file 'search-view.fxml'.";
         assert startTimeSearchChoiceBox != null : "fx:id=\"startTimeSearchChoiceBox\" was not injected: check your FXML file 'search-view.fxml'.";
+        //TableView konfigurieren:
+
+        roomNumberColumn.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
+        sizeColumn.setCellValueFactory(new PropertyValueFactory<>("size"));
+        //streetColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
+        //equipmentColumn.setCellValueFactory(new PropertyValueFactory<>("equipments"));
+
 //Negin........................................................
         ArrayList<String> times = new ArrayList<String>();
 
@@ -122,17 +132,16 @@ public class SearchController {
         if (freeRooms.isEmpty()){
             QuickAlert.showError("Keine freien Räume  gefunden");
         }else{
-            String freeRoomsString = String.join(", ", freeRooms.toString());
-            QuickAlert.showInfo(" Folgende Räume sind frei:\n"+ freeRoomsString);
-
+            tableViewRoom.getItems().clear();
             tableViewRoom.getItems().addAll(freeRooms);
         }
     }
 
     public void onfindFreeRumBtnClick(ActionEvent event) {
-
         findFreeRooms();
     }
+
+
 
     //................................................................
 }

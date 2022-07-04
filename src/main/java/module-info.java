@@ -23,4 +23,5 @@ module com.lap.lapproject {
 
 //Negin
     exports com.lap.lapproject.repos to junit;
+    opens com.lap.lapproject.model to javafx.base;
 }
