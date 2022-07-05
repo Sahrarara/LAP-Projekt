@@ -4,7 +4,6 @@ import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.repos.CourseRepositoryJDBC;
 import com.lap.lapproject.repos.UserRepositoryJDBC;
-import com.sun.javafx.fxml.builder.JavaFXSceneBuilder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.awt.print.Book;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -19,6 +20,8 @@ import java.util.ArrayList;
 public class Model {
 
     private static final Logger log = LoggerFactory.getLogger(Model.class);
+
+    public BookingModel bookingModel;
 
     public ArrayList<Booking> bookings = new ArrayList<>();
     public ArrayList<Course> courses = new ArrayList<>();
@@ -31,11 +34,11 @@ public class Model {
         try {
             bookings.addAll(bookingRepo.readAll());
             courses.addAll(courseRepo.readAll());
+            bookingModel = new BookingModel(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 
     private StringProperty pathForDetailView = new SimpleStringProperty();
 
@@ -71,6 +74,8 @@ public class Model {
     public void setLoggedInUser(User loggedInUser) {
         this.loggedInUser.set(loggedInUser);
     }
+
+    public BookingModel getBookingModel(){ return bookingModel; }
 
 
 
