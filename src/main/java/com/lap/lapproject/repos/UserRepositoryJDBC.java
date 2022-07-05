@@ -68,11 +68,8 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             preparedStatement.setBoolean(12, user.getDescriptionVisibility());
             preparedStatement.setBoolean(13, user.getPhoneNmbrVisibility());
             preparedStatement.setBoolean(14, user.getEmailVisibility());
-            if (user.getPhoto() != null) {
-                preparedStatement.setBoolean(15, user.getPhotoVisibility());
-            }else {
-                QuickAlert.showError("Bitte foto!");
-            }
+            preparedStatement.setBoolean(15, user.getPhotoVisibility());
+
             preparedStatement.executeUpdate();
             resultSet = preparedStatement.getGeneratedKeys();
 

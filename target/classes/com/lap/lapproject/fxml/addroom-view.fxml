@@ -27,7 +27,9 @@
       <RowConstraints maxHeight="222.0" minHeight="10.0" percentHeight="0.0" prefHeight="77.5" vgrow="SOMETIMES" />
       <RowConstraints prefHeight="1.0" vgrow="SOMETIMES" />
       <RowConstraints prefHeight="20.0" vgrow="SOMETIMES" />
+      <RowConstraints prefHeight="0.0" vgrow="SOMETIMES" />
       <RowConstraints prefHeight="20.0" vgrow="SOMETIMES" />
+      <RowConstraints prefHeight="0.0" vgrow="SOMETIMES" />
       <RowConstraints prefHeight="20.0" vgrow="SOMETIMES" />
       <RowConstraints prefHeight="20.0" vgrow="SOMETIMES" />
       <RowConstraints prefHeight="0.0" vgrow="SOMETIMES" />
@@ -62,12 +64,12 @@
             </Label>
          </children>
       </StackPane>
-      <TextField fx:id="roomNmbrTextField" onAction="#onAddBtnClick" style="-fx-border-radius: 50px; -fx-text-fill: #101d2c;" GridPane.columnIndex="2" GridPane.rowIndex="3">
+      <TextField fx:id="roomNmbrTextField" onAction="#onAddBtnClick" style="-fx-border-radius: 50px; -fx-text-fill: #101d2c;" GridPane.columnIndex="2" GridPane.rowIndex="4">
          <styleClass>
             <String fx:value="input-form" />
             <String fx:value="button-light" />
          </styleClass></TextField>
-      <TextField fx:id="sizeTextField" onAction="#onAddBtnClick" style="-fx-border-radius: 50px; -fx-text-fill: #101d2c;" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="4">
+      <TextField fx:id="sizeTextField" onAction="#onAddBtnClick" style="-fx-border-radius: 50px; -fx-text-fill: #101d2c;" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
@@ -77,23 +79,23 @@
          </styleClass>
       </TextField>
 
-      <ComboBox fx:id="equipmentComboBox" onAction="#select" prefWidth="423.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+      <ComboBox fx:id="equipmentComboBox" onAction="#select" prefWidth="423.0" styleClass="input-form" GridPane.columnIndex="2" GridPane.rowIndex="7" />
       <Label styleClass="input-description" text="Standort" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
       </Label>
-      <Label styleClass="input-description" text="Größe" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4">
+      <Label styleClass="input-description" text="Größe" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
       </Label>
-      <Label styleClass="input-description" text="Ausstattung" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5">
+      <Label styleClass="input-description" text="Ausstattung" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="7">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
       </Label>
-      <Button fx:id="onAbbortBtn" mnemonicParsing="false" onAction="#onAbortBtnClick" prefWidth="126.0" text="ABBRECHEN" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8">
+      <Button fx:id="onAbbortBtn" mnemonicParsing="false" onAction="#onAbortBtnClick" prefWidth="126.0" text="ABBRECHEN" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="10">
          <styleClass>
             <String fx:value="button-style" />
             <String fx:value="button-light" />
@@ -102,7 +104,7 @@
             <Insets />
          </GridPane.margin>
       </Button>
-      <Button fx:id="addRoomBtn" mnemonicParsing="false" onAction="#onAddBtnClick" prefWidth="126.0" text="HINZUFÜGEN" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="8">
+      <Button fx:id="addRoomBtn" mnemonicParsing="false" onAction="#onAddBtnClick" prefWidth="126.0" text="HINZUFÜGEN" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="10">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
@@ -111,12 +113,12 @@
             <String fx:value="button-dark" />
          </styleClass>
       </Button>
-      <Label styleClass="input-description" text="Raumnummer" textFill="#101d2c" GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <Label styleClass="input-description" text="Raumnummer" textFill="#101d2c" GridPane.columnIndex="1" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
       </Label>
-      <HBox fx:id="hBox" prefHeight="21.0" prefWidth="420.0" GridPane.columnIndex="2" GridPane.rowIndex="6">
+      <HBox fx:id="hBox" prefHeight="21.0" prefWidth="420.0" GridPane.columnIndex="2" GridPane.rowIndex="8">
          <children>
             <Label fx:id="dynamicField" styleClass="dynamic-button" stylesheets="@../css/application.css" text="Gewählte Elemente">
                <graphic>
@@ -125,6 +127,8 @@
             </Label>
          </children>
       </HBox>
-      <VBox fx:id="vBoxId" prefHeight="106.0" prefWidth="419.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+      <VBox fx:id="vBoxId" prefHeight="106.0" prefWidth="419.0" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+      <Label fx:id="roomNumberNoticeLabel" text="Raumnummer text" textFill="#f70505" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+      <Label fx:id="roomSizeNoticeLabel" text="Raumgrösse text" textFill="#f80707" GridPane.columnIndex="2" GridPane.rowIndex="5" />
    </children>
 </GridPane>

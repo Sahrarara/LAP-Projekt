@@ -55,7 +55,7 @@ public class AddEquipmentController extends BaseController{
                     int equipmentUniqueDescriptionCount = equipmentRepositoryJDBC.getEquipmentCountByEquipmentDescription(nameTextField.getText());
 
                     if (equipmentUniqueDescriptionCount == 0) {
-                    equipmentRepositoryJDBC.addEquipment(equipment);  //Equipment is added to a list. equipmenzview list
+//                    equipmentRepositoryJDBC.addEquipment(equipment);  //Equipment is added to a list. equipmenzview list
 
                         listModel.equipmentList.add(equipment);
                         listModel.roomList.setAll(roomRepositoryJDBC.readAll()); //TODO: put later to ListModel
@@ -105,7 +105,7 @@ public class AddEquipmentController extends BaseController{
 
     private  void updateEquipment() throws SQLException {
         listModel.getSelectedEquipment().setDescription(nameTextField.getText());
-        equipmentRepositoryJDBC.updateEquipment(listModel.getSelectedEquipment());
+//        equipmentRepositoryJDBC.updateEquipment(listModel.getSelectedEquipment());
         listModel.equipmentList.set(listModel.equipmentList.indexOf(listModel.getSelectedEquipment()), listModel.getSelectedEquipment());
         moveToEquipmentPage();
 
