@@ -15,6 +15,10 @@ public class Repository {
     public static final String dbUser = "root";
     public static final String dbPw = "";
 
+    /**
+     * Stellt eine Verbindung zur Datenbank mit einer try...Catch abfrage her, damit ein Error aufgefangen werden kann
+     * @return
+     */
     protected static Connection connect() {
         Connection connection;
         try {

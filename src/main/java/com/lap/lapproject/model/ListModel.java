@@ -18,6 +18,9 @@ import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
 
+/**
+ *
+ */
 public class ListModel {
 
     private static final Logger log = LoggerFactory.getLogger(ListModel.class);
@@ -75,7 +78,9 @@ public class ListModel {
     private ObjectProperty<Trainer> selectedUser = new SimpleObjectProperty<>();
     private ObjectProperty<Room> selectedRoom = new SimpleObjectProperty<>();
 
-
+    /**
+     *
+     */
     public ListModel() {
 
         try {
@@ -111,6 +116,10 @@ public class ListModel {
 
     }
 
+    /**
+     *
+     * @param bannerImg
+     */
     public void addListenerForUserImage(Circle bannerImg) {
         userImgProperty.addListener(new ChangeListener<Image>() {
             @Override
@@ -120,6 +129,9 @@ public class ListModel {
         });
     }
 
+    /**
+     *
+     */
     public void addListenerForBooking() {
         bookingList.addListener(new ListChangeListener<Booking>() {
             @Override
@@ -160,6 +172,9 @@ public class ListModel {
         });
     }
 
+    /**
+     *
+     */
     public void addListenerForProgram() {
         programList.addListener(new ListChangeListener<Program>() {
             @Override
@@ -200,6 +215,9 @@ public class ListModel {
         });
     }
 
+    /**
+     *
+     */
     public void addListenerForEquipment() {
         equipmentList.addListener(new ListChangeListener<Equipment>() {
             @Override
@@ -240,6 +258,9 @@ public class ListModel {
         });
     }
 
+    /**
+     *
+     */
     public void addListenerForLocation() {
         locationList.addListener(new ListChangeListener<Location>() {
             @Override
@@ -320,8 +341,9 @@ public class ListModel {
     }*/
 
 
-
-
+    /**
+     *
+     */
     public void addListenerForUser() {
         trainerList.addListener(new ListChangeListener<Trainer>() {
             @Override

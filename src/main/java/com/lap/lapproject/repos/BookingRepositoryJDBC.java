@@ -248,7 +248,12 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
     }
 
 
-
+    /**
+     *
+     * @param locationId
+     * @return
+     * @throws SQLException
+     */
     @Override
     public int getBookingCountByProgramIdJoinLocationId(int locationId) throws SQLException {
         Connection connection = connect();

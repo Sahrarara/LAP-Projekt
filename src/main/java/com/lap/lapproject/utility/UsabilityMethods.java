@@ -17,6 +17,16 @@ import java.util.regex.Pattern;
 
 import static com.lap.lapproject.controller.ProfileController.imageFromBytes;
 
+/**
+ * Diese Klasse Anwendungsmethoden, prüft ob:
+ *  - ein Datum oder Uhrzeit in der korrekten Form steht
+ *  - die Nummern eingabe korrekt ist
+ *  - die Postleitzahl vier stellen hat
+ *  - den Zustand des Close-Buttons
+ *  - ob die Telefonnummer oder die Email valide ist
+ *  - gibt die Benötigte Information um Felder Korrekt auszufüllen
+ *
+ */
 public class UsabilityMethods {
 
     public static boolean isDDMMYYYYDate(String ddMMYYYY) {

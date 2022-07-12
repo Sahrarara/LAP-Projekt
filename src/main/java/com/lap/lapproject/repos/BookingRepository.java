@@ -4,6 +4,9 @@ import com.lap.lapproject.model.Booking;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Das BookingRepository Interface erstellt Methoden welche SQLExceptions werfen können, welche in der Klasse BookingRepositoryJDBC benötigt werden.
+ */
 public interface BookingRepository {
 
     ArrayList<Booking> readAll() throws SQLException;

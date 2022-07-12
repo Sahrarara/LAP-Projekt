@@ -13,6 +13,9 @@ import javafx.stage.Stage;
 
 import java.sql.SQLException;
 
+/**
+ * Diese Klasse extends BaseController und fügt dem Equipment (Klasse Equipment) einen String der Datenbank hinzu oder updated einen bereits vorhandenen String
+ */
 public class AddEquipmentController extends BaseController{
     EquipmentRepositoryJDBC equipmentRepositoryJDBC = new EquipmentRepositoryJDBC();
     RoomRepositoryJDBC roomRepositoryJDBC = new RoomRepositoryJDBC();
@@ -21,6 +24,9 @@ public class AddEquipmentController extends BaseController{
     @FXML
     private Label equipmentNameNoticeLabel;
 
+    /**
+     * Diese Methode prüft das TextFeld ob der Name bereits existiert und setzt die Sichtbarketi des Informations-String auf false
+     */
     @FXML
     private void initialize() {
         equipmentNameNoticeLabel.setVisible(false);
@@ -32,14 +38,25 @@ public class AddEquipmentController extends BaseController{
         }
     }
 
+    /**
+     * Schließt die aktuelle gestagete Anwendung
+     * @param actionEvent
+     */
     @FXML
     private void onAbortBtnClick(ActionEvent actionEvent) {
         getCurrentStage().close();
     }
 
+    /**
+     * Diese Methode fügt der EquipmentListe eine weitere Ausstattung hinzu, dabei wird abgefragt ob der Name der Ausstattung bereits existiert
+     * wenn nicht, dann wird der Name der Datenbank hinzugefügt. Ist der Name bereits in der Datenbank existent, wird ein Label mit der Information, dass der Name schon vorhanden ist, aufgerufen
+     * Im anderen Fall wird der Name des Equipments in der Datenbank upgedated.
+     * @param actionEvent es wird kein Parameter übergeben
+     * @throws SQLException wenn das Element bereits existiert
+     */
     @FXML
     private void onAddBtnClick(ActionEvent actionEvent) throws SQLException {
-        Equipment equipment= new Equipment(nameTextField.getText());
+        Equipment equipment = new Equipment(nameTextField.getText());
         EquipmentRepositoryJDBC equipmentRepositoryJDBC = new EquipmentRepositoryJDBC();
 
         RoomRepositoryJDBC roomRepositoryJDBC= new RoomRepositoryJDBC();
@@ -91,18 +108,26 @@ public class AddEquipmentController extends BaseController{
         }
     }
 
-
+    /**
+     * holt sich den String aus dem Textfield
+     * @return
+     */
     private Stage getCurrentStage(){
         return (Stage) nameTextField.getScene().getWindow();
     }
 
-
+    /**
+     * Schließt die aktuelle Anwendung ( macht im Prinzip das gleiche wie der onAbortBtnClick() )
+     */
     private void moveToEquipmentPage() {
         Stage currentStage = this.getCurrentStage();
         currentStage.close();
     }
 
-
+    /**
+     * Fügt den String vom Textfield durch das ListModel in die Datenbank ein, löscht den String aus dem Textfeld wieder und schließt die Anwendung.
+     * @throws SQLException
+     */
     private  void updateEquipment() throws SQLException {
         listModel.getSelectedEquipment().setDescription(nameTextField.getText());
 //        equipmentRepositoryJDBC.updateEquipment(listModel.getSelectedEquipment());

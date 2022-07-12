@@ -29,14 +29,16 @@ import java.sql.SQLException;
 import java.util.Locale;
 import java.util.Optional;
 
-
+/**
+ * Diese Klasse extends BaseController.
+ * Über das Interface kann mit dieser Klasse ein Trainer(Coach) hinzugefügt oder upgedated werden.
+ */
 public class TrainerController extends BaseController {
 
     private static final Logger logger = LoggerFactory.getLogger(TrainerController.class);
 
     @FXML
     private ButtonBar trainerBtnBar;
-
 
     @FXML
     private TableView<Trainer> tableViewTrainer;
@@ -57,7 +59,10 @@ public class TrainerController extends BaseController {
     @FXML
     private Button closeIconButton;
 
-
+    /**
+     * 
+     * @param actionEvent
+     */
     @FXML
     private void onAddTrainerBtnClick(ActionEvent actionEvent) {
         tableViewTrainer.getSelectionModel().select(null);

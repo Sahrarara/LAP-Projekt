@@ -23,7 +23,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
 
-
+/**
+ * Diese Klasse extends die Klasse BaseController es wird ein neuer Kurs erstellt oder upgedated, dabei werden die Daten entweder in die zuständigen Datenbank-klassen gesendet oder über diese abgefragt
+ */
 public class AddCourseController extends BaseController {
     CourseRepositoryJDBC courseRepo = new CourseRepositoryJDBC();
     ProgramRepositoryJDBC programRepositoryJDBC = new ProgramRepositoryJDBC();
@@ -46,7 +48,9 @@ public class AddCourseController extends BaseController {
     private Label courseUniqueNameNoticeLable;
 
 
-
+    /**
+     * Prüft den Zustand der Course -ChoiceBox, -Textfields und -DatePicker, wenn es bereits einen Kurs gibt dann werden die Felder befüllt
+     */
     @FXML
     private void initialize() {
         assert courseChoiceBox != null : "fx:id=\"programColumn\" was not injected: check your FXML file 'events-view.fxml'.";
@@ -84,17 +88,27 @@ public class AddCourseController extends BaseController {
         }
     }
 
+    /**
+     * Schließt die AddCourse-Anwendung wieder
+     * @param actionEvent
+     */
     @FXML
     private void onAbortBtnClick(ActionEvent actionEvent) {
         getCurrentStage().close();
     }
 
+    /**
+     * Beim ausführen diese Aktion wird der Kursname, Art des Programms bzw. Veranstaltung Kursdatum und Gruppengröße hinzugefügt
+     * dabei wird geprüft ob der Kursname bereits existiert, ob das Datum der korrekten Form entspricht und Kursbeginn nicht nach Kursende steht und sich somit nicht überschneiden.
+     * Die Felder dürfen nicht leer sein
+     * @param actionEvent
+     * @throws SQLException - wenn nicht alle Felder ausgefüllt sind
+     */
     @FXML
     private void onAddBtnClick(ActionEvent actionEvent) throws SQLException {
 
         System.out.println("AddCourseController:: onAddBtnClick");
         String courseName = courseNameTextField.getText();
-
 
         // Datum validieren
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
@@ -102,23 +116,18 @@ public class AddCourseController extends BaseController {
         String courseStartDateAsText = courseStartDatePicker.getEditor().getText().strip().replaceAll("-", ".");
         String courseEndDateAsText = courseEndDatePicker.getEditor().getText().strip().replaceAll("-", ".");
 
-
         if (!UsabilityMethods.isDDMMYYYYDate(courseStartDateAsText) || !UsabilityMethods.isDDMMYYYYDate(courseEndDateAsText)) {
             UsabilityMethods.addMessage(checkDateNoticeLable, "Bitte das Datum im dd.mm.yyyy Format angeben!");
             return;
         }
         LocalDate courseStart = LocalDate.parse(courseStartDateAsText, formatter);
         LocalDate courseEnd = LocalDate.parse(courseEndDateAsText, formatter);
-
         LocalDate today = LocalDate.now();
-
 
         if (courseEnd.compareTo(courseStart) < 0 ) {
             UsabilityMethods.addMessage(checkDateNoticeLable, "Kursbeginn ist nach dem Kursende!");
             return;
         }
-
-
 
         if (courseChoiceBox.getValue() == null) {
             QuickAlert.showError("Bitte Programm wählen!");
@@ -131,7 +140,6 @@ public class AddCourseController extends BaseController {
             QuickAlert.showError("Program wurde nicht gefunden");
         }
         int programId = program.getId();
-
 
        if (!courseNameTextField.getText().isBlank()
                && !courseChoiceBox.getValue().toString().isBlank()
@@ -190,17 +198,27 @@ public class AddCourseController extends BaseController {
            }
     }
 
-
+    /**
+     * Der aktuelle Status des Fensters wird erfasst
+     * @return
+     */
     private Stage getCurrentStage() {
         return (Stage) groupSizeTextField.getScene().getWindow();
     }
 
+    /**
+     * Schließt das aktuelle Fenster
+     */
     private void moveToCoursePage() {
         Stage currentStage = this.getCurrentStage();
         currentStage.close();
     }
 
-
+    /**
+     * Updated alle Felder und fügt die geänderten Einträge in der DatenBank ein.
+     * Am Ende wird die Anwendung mit moveToCoursePage() wieder geschlossen.
+     * @throws SQLException
+     */
     private void updateCourse() throws SQLException {
         LocalDate courseStart = LocalDate.parse(courseStartDatePicker.getEditor().getText().strip().replaceAll("-", "."), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         LocalDate courseEnd = LocalDate.parse(courseEndDatePicker.getEditor().getText().strip().replaceAll("-", "."), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
