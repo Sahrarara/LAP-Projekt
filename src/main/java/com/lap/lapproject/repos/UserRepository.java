@@ -28,4 +28,6 @@ public interface UserRepository {
 
     void updatePassword(String newHashPassword, int userID) throws SQLException;
 
+    boolean checkUniqueEmailAdresse(String emailAdresse);
+
 }

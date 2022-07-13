@@ -154,14 +154,12 @@ public class AddUserController extends BaseController {
 
 
         //neuen User im Datenbank speichern
-        //UserRepositoryJDBC userRepositoryJDBC = new UserRepositoryJDBC();
-
         if (!username.isBlank() && !firstName.isBlank() && !lastName.isBlank()
                 && !(authorizationChoiceBox.getValue() == null) &&
                 !password.isBlank() && !email.isBlank() && !telephone.isBlank()
         ) {
             if (listModel.getSelectedUser() == null) {
-                if (checkUser(username) && PasswordSecurity.isPasswordValid(password, errorPassword) && UsabilityMethods.isEmailValid(email)) {
+                if (checkUser(username) && PasswordSecurity.isPasswordValid(password, errorPassword) && UsabilityMethods.isEmailValid(email) && checkEmail(email)) {
                     Trainer trainer = new Trainer(username, title, active, firstName, lastName, password,
                             authorization, description, telephone, email,
                             photoPath.equals("") ? null : convertToBytes(photoPath),
@@ -323,13 +321,14 @@ public class AddUserController extends BaseController {
 
     }
 
-    //Prüft, ob Username schon in Datenbank vorhanden ist
+    UserRepositoryJDBC userRepositoryJDBC = new UserRepositoryJDBC();
+    /**
+     *Prüft, ob Username schon in Datenbank vorhanden ist
+     */
     @FXML
     public boolean checkUser(String username) throws SQLException {
 
-        UserRepositoryJDBC userRepositoryJDBC = new UserRepositoryJDBC();
         if (userRepositoryJDBC.checkUniqueUsername(username)) {
-//            logger.info("newUsername is unique: {}", userRepositoryJDBC.checkUniqueUsername(username));
             errorUsername.setVisible(false);
             return true;
         } else {
@@ -339,26 +338,21 @@ public class AddUserController extends BaseController {
         }
     }
 
+    public boolean checkEmail(String email){
+        if (userRepositoryJDBC.checkUniqueEmailAdresse(email)) {
+            errorEmail.setVisible(false);
+            return true;
+        } else {
+            errorEmail.setVisible(true);
+            errorEmail.setText("EmailAdresse existiert bereits");
+            return false;
+        }
+    }
 
 
-    //Email validieren
-//    @FXML
-//    public boolean checkEmail(String email) {
-//        Pattern compile = Pattern.compile("[_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.([a-zA-Z]{2,}){1}");
-//        Matcher matcher = compile.matcher(email);
-//        boolean isEmailTrue = matcher.matches();
-//        if (!matcher.matches()) {
-//            logger.info("ICH BIN HIER");
-//            errorEmail.setVisible(true);
-//            errorEmail.setText("Email nicht gültig");
-//            return false;
-//        } else {
-//            errorEmail.setVisible(false);
-//            return true;
-//        }
-//    }
-
-    //prüft ob ein Foto in DB vorhanden ist
+    /**
+     *  prüft ob ein Foto in DB vorhanden ist
+     */
     public  boolean checkImageInDB() throws IOException {
         while (listModel.getSelectedUser() != null){
             if (listModel.getSelectedUser().getPhoto() == null && !listModel.getSelectedUser().getPhotoVisibility()) {
@@ -377,8 +371,9 @@ public class AddUserController extends BaseController {
     }
 
 
-
-    //Befüllt das Formular für Update Function
+    /**
+     * Befüllt das Formular für Update Function
+     */
     @FXML
     public void fillFormToUpdate() {
         if (listModel.getSelectedUser() != null) {
