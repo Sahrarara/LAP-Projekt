@@ -28,7 +28,10 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-
+// TODO: check time and recurance for none daily weekly or monthly. so that "keine" can´t have more than 1 day
+/**
+ * Diese Klasse extends BasseController. Sie wird genutzt um eine Buchung zu erstellen oder upzudaten, dabei werden die Daten an die dafür zuständigen JDBC klassen gesendet
+ */
 public class AddBookingController extends BaseController {
 
     private static final Logger logger = LoggerFactory.getLogger(AddBookingController.class);
@@ -58,13 +61,21 @@ public class AddBookingController extends BaseController {
     @FXML
     private Label locationNameLabel;
 
-
+    /**
+     * Schließt die Anwendung wieder
+     * @param actionEvent
+     */
     @FXML
     private void onAbortBtnClick(ActionEvent actionEvent) {
         getCurrentStage().close();
     }
 
-
+    /**
+     *  Wenn alle Felder Ausgefüllt sind, wird eine Buchung mit addNewBooking() angelegt.
+     *  Wenn die Buchung editiert wird, wird updateSelectedBooking() ausgeführt.
+     * @param actionEvent
+     * @throws SQLException wenn nicht alle Felder ausgefüllt sind
+     */
     @FXML
     private void onAddBtnClick(ActionEvent actionEvent) throws SQLException {
 
@@ -88,6 +99,12 @@ public class AddBookingController extends BaseController {
     }
 
 
+    /**
+     * Sammelt die angegebenen Daten( Raumnummer, Trainer, Kursname, die Art des sich wiederholenden Termins (recurenceChoiseBox),
+     * Starttag, Endtag, Startzeit, Endzeit) für die Buchung aus den ChoiceBoxen, DatePicker und TimeField und
+     * fügt den Value(Innhalt) über die Klasse Booking hinzu welcher durch eine observableListArray, der bookingList,
+     * über das ListModel an das BookingRepositoryJDBC() geschickt un in der DatenBank eingefügt wird.
+     */
     private void addNewBooking() {
 
         Room room = roomNumberChoiceBox.getValue();
@@ -113,7 +130,9 @@ public class AddBookingController extends BaseController {
         }
     }
 
-
+    /**
+     * Es werden die Daten aus der Datenbank gelesen, die neuen Daten in die Datenbank eingetragen und die Anwedung geschlossen.
+     */
     private void updateSelectedBooking() {
 
         Booking selectedBooking = listModel.getSelectedBooking();
@@ -145,7 +164,10 @@ public class AddBookingController extends BaseController {
         }
     }
 
-
+    /**
+     *Prüft den Zustand der InputFelder des AddBookingControllers und befüllt die ChoiceBoxes mit den standart Werten,
+     * wenn es kein SelectedBooking ist. Sonst wird die Methode fillChoiceBoxesForUpdate() aufgerufen.
+     */
     @FXML
     void initialize() {
         assert bookerLabel != null : "fx:id=\"bookerLabel\" was not injected: check your FXML file 'addbooking-view.fxml'.";
@@ -181,7 +203,10 @@ public class AddBookingController extends BaseController {
 
     }
 
-
+    /**
+     * Befüllt die leeren ChoiceBoxes mit den Daten ( Standort, Raumnummer, Kursname, Trainername, Serientermin,
+     * Startdatum, Enddatum, Startzeit, Endzeit)
+     */
     private void fillChoiceBoxesForUpdate() {
 
         locationChoiceBox.setVisible(false);
@@ -200,6 +225,10 @@ public class AddBookingController extends BaseController {
     }
 
 
+    /**
+     * Befüllt die ChoiceBox des Serientermin mit Wiederholungsarten.
+     * Die Standardeinstellung ist "keiner"
+     */
     private void fillRecurrenceRuleChoiceBox() {
         recurrenceChoiceBox.getItems().add("keiner");
         recurrenceChoiceBox.getItems().add("täglich");
@@ -210,7 +239,9 @@ public class AddBookingController extends BaseController {
         }
     }
 
-
+    /**
+     * Befüllt die ChoiceBox des Vortragenden von der Klasse Trainer mit einen Trainer
+     */
     private void fillActiveTrainerToChoiceBox() {
         listModel.activeTrainerList.clear();
         for (Trainer trainer : listModel.trainerList) {
@@ -221,7 +252,9 @@ public class AddBookingController extends BaseController {
         trainerChoiceBox.setItems(listModel.activeTrainerList);
     }
 
-
+    /**
+     * Befüllt die ChoiceBox für Raumnummer, mit einer Raumnummer
+     */
     private void fillRoomChoiceBox() {
         FilteredList<Room> roomFilteredList = new FilteredList<>(listModel.roomList);
         roomNumberChoiceBox.setItems(listModel.roomList);
@@ -232,6 +265,15 @@ public class AddBookingController extends BaseController {
         roomNumberChoiceBox.setItems(roomFilteredList);
     }
 
+    /**
+     * Prüft Startdatum und Enddatum auf 0 (darf nicht 0 sein)
+     * und Startzeit und Endzeit auf 0 (darf nicht 0 sein) beim Updaten des Datepicker und Timefield
+     * @param dateStart initialisiertes Startdatum
+     * @param dateEnd initialisiertes Enddatum
+     * @param timeStart initialisierte Startzeit
+     * @param timeEnd initialisierte Endzeit
+     * @return true wenn das Datum und die Uhrzeit passend ausgefüllt sind
+     */
     private boolean isValidDateTimeForUpdateBooking(LocalDate dateStart, LocalDate dateEnd, LocalTime timeStart, LocalTime timeEnd) {
         if (dateStart.compareTo(dateEnd) > 0) {
             QuickAlert.showError("Datum passt nicht. Bitte kontrollieren!");
@@ -245,7 +287,15 @@ public class AddBookingController extends BaseController {
         }
     }
 
-
+    /**
+     * Prüft Startdatum und Enddatum auf 0 (darf nicht 0 sein)
+     * und Startzeit und Endzeit auf 0 (darf nicht 0 sein) beim Erstellen eines Zeitraumes im Datepicker und Timefield
+     * @param dateStart initialisiertes Startdatum
+     * @param dateEnd initialisiertes Enddatum
+     * @param timeStart initialisierte Startzeit
+     * @param timeEnd initialisierte Endzeit
+     * @return true wenn das Datum und die Uhrzeit passend ausgefüllt sind
+     */
     private boolean isValidDateTimeForAddBooking(LocalDate dateStart, LocalDate dateEnd, LocalTime timeStart, LocalTime timeEnd) {
         if (dateStart.compareTo(dateEnd) > 0 || dateStart.isBefore(LocalDate.now()) || dateEnd.isBefore(LocalDate.now())) {
             QuickAlert.showError("Datum passt nicht. Bitte kontrollieren!");
@@ -260,11 +310,18 @@ public class AddBookingController extends BaseController {
         }
     }
 
-
+    //TODO: Bei Mona nachfragen wegen der Methode
+    /**
+     * Holt sich das aktuelle Fenster
+     * @return
+     */
     private Stage getCurrentStage() {
         return (Stage) courseNameChoiceBox.getScene().getWindow();
     }
 
+    /**
+     * Schließt das Staged Fenster
+     */
     private void moveToBookingPage() {
         Stage currentStage = this.getCurrentStage();
         currentStage.close();
