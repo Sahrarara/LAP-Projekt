@@ -70,7 +70,12 @@ public class BookingModel {
             return emptyRooms;
     }
 
-
+    /**
+     * Prüft die Ansicht für jeden Kursnamen mit einer Buchung aus der Datenbank und fragt jeden Kurs nach einer Buchung ab.
+     * Jede Buchung, welche aus der Datenbank gelesen wird, wird nach der RecurranceRule befragt.
+     * Die sich wiederholenden Kurse werden mit Regex in einen lesbaren String gewandelt, um diese im Kalender anzuzeigen.
+     * Wenn der Kurs nur einmalig ist, wird er ohne umwandlung in den Kalender eingetragen, da das Startdatum auch das Enddatum ist.
+     */
     public void loadBookingIntoCalendar(){
 
         calendarSource = new CalendarSource("My Calendars");

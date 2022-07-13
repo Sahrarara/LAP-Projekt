@@ -24,7 +24,7 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
     private static final String GET_ROOM_COUNT_BY_UNIQUE_ROOM_NUMBER_SQL_STRING = "SELECT COUNT(*) AS unique_room_count FROM rooms WHERE room_number = (?) ";
 
     @Override
-    public List<Room> readAll() throws SQLException {
+    public List<Room> readAll()  {
         Connection connection = connect();
         List<Room> roomList = new ArrayList<>();
 
@@ -71,7 +71,13 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            if (connection != null) connection.close();
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
         return roomList;

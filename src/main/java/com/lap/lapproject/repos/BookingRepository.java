@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Das BookingRepository Interface erstellt leere Methoden welche zum Teil schon im vorhinein Warnen das sie SQLExceptions werfen können, diese Methoden werden hauptsächlich in der Klasse BookingRepositoryJDBC gefunden.
+ * Das BookingRepository Interface erstellt die leeren Methoden addBooking(), deleteBooking(), getBookingCountByProgramIdJoinLocationId(), getBookingCountByRoomId(), getBookingCountByTrainerId(), updateBooking(), die ListMethode getBookingsByTimeWindow() und readAll() beide erwarten die Klasse Booking ales Element,
+ * diese Methoden müssen in der Klasse die dieses Interface implementiert definiert werden.
  */
 public interface BookingRepository {
 

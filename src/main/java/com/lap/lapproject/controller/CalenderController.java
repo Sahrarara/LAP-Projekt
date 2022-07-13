@@ -18,12 +18,17 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-
+/**
+ * Diese Klasse extends BaseController
+ */
 public class CalenderController extends BaseController {
     private static final Logger log = LoggerFactory.getLogger(CalenderController.class);
     @FXML
     private BorderPane borderCalender;
 
+    /**
+     * Ruft die loadCalendarFXViewInBorderPaneCenter() Methode auf welche die Ansicht im Kalender prüft
+     */
     @FXML
     private void initialize() {
         loadCalendarFXViewInBorderPaneCenter();
@@ -49,6 +54,12 @@ public class CalenderController extends BaseController {
         calendarView.setRequestedTime(LocalTime.now());
 
         Thread updateTimeThread = new Thread("Calendar: Update Time Thread") {
+
+            /**
+             * ist eine nested Methode
+             * solange sie wahr ist wird die lokale Zeit und das lokale datum im Kalender gesetzt
+             * es wird außerdem versucht alle 10 Sekunden upzudaten, falls nicht, wird eine InterruptedException geworfen
+             */
             @Override
             public void run() {
                 while (true) {

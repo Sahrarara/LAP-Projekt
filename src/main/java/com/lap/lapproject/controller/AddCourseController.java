@@ -23,7 +23,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
 
-
+/**
+ * Diese Klasse extends die Klasse BaseController es wird ein neuer Kurs erstellt oder upgedated, dabei werden die Daten entweder in die zuständigen Datenbank-klassen gesendet oder über diese abgefragt
+ */
 public class AddCourseController extends BaseController {
     CourseRepositoryJDBC courseRepo = new CourseRepositoryJDBC();
     ProgramRepositoryJDBC programRepositoryJDBC = new ProgramRepositoryJDBC();
@@ -45,8 +47,9 @@ public class AddCourseController extends BaseController {
     @FXML
     private Label courseUniqueNameNoticeLable;
 
-
-
+    /**
+     * Prüft den Zustand der Course -ChoiceBox, -Textfields und -DatePicker, wenn es bereits einen Kurs gibt dann werden die Felder befüllt
+     */
     @FXML
     private void initialize() {
         assert courseChoiceBox != null : "fx:id=\"programColumn\" was not injected: check your FXML file 'events-view.fxml'.";
@@ -84,11 +87,22 @@ public class AddCourseController extends BaseController {
         }
     }
 
+    /**
+     * Schließt die AddCourse-Anwendung wieder
+     * @param actionEvent
+     */
     @FXML
     private void onAbortBtnClick(ActionEvent actionEvent) {
         getCurrentStage().close();
     }
 
+    /**
+     * Beim ausführen diese Aktion wird der Kursname, Art des Programms bzw. Veranstaltung Kursdatum und Gruppengröße hinzugefügt
+     * dabei wird geprüft ob der Kursname bereits existiert, ob das Datum der korrekten Form entspricht und Kursbeginn nicht nach Kursende steht und sich somit nicht überschneiden.
+     * Die Felder dürfen nicht leer sein
+     * @param actionEvent
+     * @throws SQLException - wenn nicht alle Felder ausgefüllt sind
+     */
     @FXML
     private void onAddBtnClick(ActionEvent actionEvent) throws SQLException {
 
@@ -190,17 +204,27 @@ public class AddCourseController extends BaseController {
            }
     }
 
-
+    /**
+     * Der aktuelle Status des Fensters wird erfasst, hier wird durch das groupSizeTextField erkannt welches Fenster gemeint ist
+     * @return
+     */
     private Stage getCurrentStage() {
         return (Stage) groupSizeTextField.getScene().getWindow();
     }
 
+    /**
+     * Schließt das aktuelle Fenster
+     */
     private void moveToCoursePage() {
         Stage currentStage = this.getCurrentStage();
         currentStage.close();
     }
 
-
+    /**
+     * Updated alle Felder und fügt die geänderten Einträge in der DatenBank ein.
+     * Am Ende wird die Anwendung mit moveToCoursePage() wieder geschlossen.
+     * @throws SQLException
+     */
     private void updateCourse() throws SQLException {
         LocalDate courseStart = LocalDate.parse(courseStartDatePicker.getEditor().getText().strip().replaceAll("-", "."), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         LocalDate courseEnd = LocalDate.parse(courseEndDatePicker.getEditor().getText().strip().replaceAll("-", "."), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
