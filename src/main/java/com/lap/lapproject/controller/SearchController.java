@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 import com.lap.lapproject.model.Room;
 import com.lap.lapproject.repos.*;
 import com.lap.lapproject.utility.QuickAlert;
+import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -52,7 +53,7 @@ public class SearchController {
     @FXML
     private  TableColumn<Room,Integer> sizeColumn;
     @FXML
-    private TableColumn<Room,Integer> streetColumn;
+    private TableColumn<Room,String> streetColumn;
     @FXML
     private TableColumn<Room,Integer> equipmentColumn;
 
@@ -74,6 +75,8 @@ public class SearchController {
 
         roomNumberColumn.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
         sizeColumn.setCellValueFactory(new PropertyValueFactory<>("size"));
+        streetColumn.setCellValueFactory(
+                cell -> Bindings.selectString(cell.getValue().getLocation(),"street"));
         //streetColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
         //equipmentColumn.setCellValueFactory(new PropertyValueFactory<>("equipments"));
 

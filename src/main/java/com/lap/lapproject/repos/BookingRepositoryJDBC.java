@@ -50,7 +50,7 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
 
 
 
-    private  static final String SELECT_FREE_ROOMS ="SELECT * FROM rooms WHERE room_id NOT IN (" + SELECT_COLLISION_SQL_STRING + ")";
+    private  static final String SELECT_FREE_ROOMS ="SELECT * FROM rooms JOIN location ON location.location_id = rooms.location_id WHERE room_id NOT IN (" + SELECT_COLLISION_SQL_STRING + ")";
 
     /* ______________________________________________________________ */
     @Override
@@ -346,6 +346,7 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
         PreparedStatement preparedStatement = null;
         List<Room> freeRomms = new ArrayList<Room>();
         try {
+            //Sql Abfrage
             preparedStatement = connection.prepareStatement(SELECT_FREE_ROOMS);
             preparedStatement.setTimestamp(1, Timestamp.valueOf(startTime));
             preparedStatement.setTimestamp(2, Timestamp.valueOf(startTime));
@@ -362,11 +363,15 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
             logger.info(Timestamp.valueOf(startTime).toString());
             logger.info(Timestamp.valueOf(endTime).toString());
             while (resultSet.next()) {
-                Room room;
+                Room room = null;
                 room = new Room(resultSet.getInt("room_id"),
                         resultSet.getInt("room_number"),
                         resultSet.getInt("size"),
-                        new Location(1 ,"1" ,"1","1" ));
+
+                        new Location(resultSet.getInt("location_id"),
+                                resultSet.getString ("street"),
+                                resultSet.getString ("zip"),
+                                resultSet.getString("city")));
 
                 logger.info(room.toString());
                 freeRomms.add(room);
