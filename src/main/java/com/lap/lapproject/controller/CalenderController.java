@@ -56,7 +56,7 @@ public class CalenderController extends BaseController {
         Thread updateTimeThread = new Thread("Calendar: Update Time Thread") {
 
             /**
-             * ist eine nested Methode
+             * run() ist eine nested Methode
              * solange sie wahr ist wird die lokale Zeit und das lokale datum im Kalender gesetzt
              * es wird außerdem versucht alle 10 Sekunden upzudaten, falls nicht, wird eine InterruptedException geworfen
              */

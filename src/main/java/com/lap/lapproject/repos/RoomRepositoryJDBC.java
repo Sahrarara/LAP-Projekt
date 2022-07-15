@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,15 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
 
     private static final String SELECT_ROOM_SQL_STRING = "SELECT * FROM rooms JOIN location ON rooms.location_id = location.location_id";
     private static final String SELECT_EQUIPMENT_ID_LIST = "SELECT * FROM equipment INNER JOIN rooms_equipment ON rooms_equipment.equipment_id=equipment.equipment_id WHERE rooms_equipment.room_id=(?) ";
+    private static final String SEARCH_BOOKING_REPEATING_SQL = "SELECT *" +
+            " FROM rooms\n" +
+            " LEFT JOIN booking On rooms.room_id = booking.room_id  \n" +
+            " LEFT JOIN location On rooms.location_id = location.location_id\n" +
+            " LEFT JOIN rooms_equipment ON rooms.room_id = rooms_equipment.room_id\n" +
+            " LEFT JOIN equipment ON rooms_equipment.equipment_id = equipment.equipment_id\n" +
+            " WHERE recurrence_rule = 'keiner'\n" +
+            " AND rooms_equipment.equipment_id = equipment.equipment_id";
+
     private static final String ADD_NEW_ROOM_SQL_STRING = "INSERT INTO rooms(room_number, size, location_id)" + "VALUES (?,?,?)";
     private static final String ADD_EQUIPMENT_SQL_STRING = "INSERT INTO rooms_equipment (room_id, equipment_id)" +
             " VALUES (?,?)";
@@ -82,6 +92,62 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
 
         return roomList;
     }
+
+    public List<Booking> getEmptyRoomsByTimeWindow(LocalDateTime startSearchTime, LocalDateTime endSearchTime) {
+        Connection connection = connect();
+        ArrayList<Booking> bookingList = new ArrayList<>();
+
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            assert connection != null;
+            statement = connection.prepareStatement(SEARCH_BOOKING_REPEATING_SQL);
+            resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+//                int booker = resultSet.getInt("user_id");
+
+
+                Location location = new Location(
+                        resultSet.getInt("location_id"),
+                        resultSet.getString("street"),
+                        resultSet.getString("zip"),
+                        resultSet.getString("city"));
+
+
+                //TODO: Equipment von rooms_equipment hinzufügen
+                //Equipment equipment = new Equipment();
+
+
+                Room room = new Room(
+                        resultSet.getInt("rooms.room_id"),
+                        resultSet.getInt("rooms.room_number"),
+                        resultSet.getInt("rooms.size"),
+                        location);
+
+
+                LocalDateTime startTime = resultSet.getTimestamp("datetime_start").toLocalDateTime();
+                LocalDateTime endTime = resultSet.getTimestamp("datetime_end").toLocalDateTime();
+
+
+                String recurrenceRuleFrequency = resultSet.getString("recurrence_rule");
+                String recurrenceRule = BookingRepositoryJDBC.convertRecurrenceRuleFromFrequencyToText(recurrenceRuleFrequency);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+
+                if (connection != null) connection.close();
+            }catch (SQLException e) {
+                logger.error("Something went wrong, it did not work", e);
+            }
+        }
+        return bookingList;
+    }
+
 
 
     @Override
@@ -239,6 +305,7 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
         }
         return roomCount;
     }
+
 
 
 }

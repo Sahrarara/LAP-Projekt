@@ -1,9 +1,11 @@
 package com.lap.lapproject.repos;
 
+import com.lap.lapproject.model.Booking;
 import com.lap.lapproject.model.Equipment;
 import com.lap.lapproject.model.Room;
 
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -13,6 +15,8 @@ import java.util.List;
 public interface RoomRepository {
 
     List<Room> readAll();
+
+    List<Booking> getEmptyRoomsByTimeWindow(LocalDateTime startSearchTime, LocalDateTime endSearchTime);
 
     void addRoomEquipment(Room room) throws SQLException;
 

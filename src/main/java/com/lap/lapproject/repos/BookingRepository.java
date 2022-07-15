@@ -25,7 +25,6 @@ public interface BookingRepository {
 
     void updateBooking(Booking booking) throws SQLException;
 
-    List<Booking> getBookingsByTimeWindow(LocalDateTime startSearchTime, LocalDateTime endSearchTime);
 
     //void updateBooking(int roomid, int trainerid, int userid, int locationid, int courseid, String recurrenceRule, LocalDateTime localDateTime_start, LocalDateTime localDateTime_end) throws SQLException;
 }

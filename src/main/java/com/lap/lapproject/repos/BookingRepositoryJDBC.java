@@ -21,14 +21,6 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
             " JOIN users ON booking.trainer_id=users.user_id" +
             " JOIN location ON rooms.location_id=location.location_id" +
             " JOIN programs ON courses.program_id=programs.program_id";
-    private static final String SEARCH_BOOKING_NONE_REPEATING_SQL = "SELECT * FROM `booking` " +
-            " JOIN courses ON booking.course_id=courses.course_id" +
-            " JOIN rooms ON booking.room_id=rooms.room_id" +
-            " JOIN users ON booking.trainer_id=users.user_id" +
-            " JOIN location ON rooms.location_id=location.location_id" +
-            " JOIN programs ON courses.program_id=programs.program_id" +
-            " WHERE recurrence_rule = 'keine'";
-    //TODO: join rooms_equipment
 
     private static final String ADD_NEW_BOOKING_SQL_STRING =
             "INSERT INTO booking(room_id, user_id, trainer_id, course_id, recurrence_rule, datetime_start, datetime_end)" +
@@ -214,96 +206,6 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
         }
     }
 
-    @Override
-    public List<Booking> getBookingsByTimeWindow(LocalDateTime startSearchTime, LocalDateTime endSearchTime) {
-        Connection connection = connect();
-        ArrayList<Booking> bookingList = new ArrayList<>();
-
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
-
-        try {
-            assert connection != null;
-            statement = connection.prepareStatement(SEARCH_BOOKING_NONE_REPEATING_SQL);
-            resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-//                int booker = resultSet.getInt("user_id");
-
-
-                Location location = new Location(
-                        resultSet.getInt("location_id"),
-                        resultSet.getString("street"),
-                        resultSet.getString("zip"),
-                        resultSet.getString("city"));
-
-
-                //TODO: Equipment von rooms_equipment hinzufügen
-                //Equipment equipment = new Equipment();
-
-
-                Room room = new Room(
-                        resultSet.getInt("rooms.room_id"),
-                        resultSet.getInt("rooms.room_number"),
-                        resultSet.getInt("rooms.size"),
-                        location);
-
-
-                Trainer trainer = new Trainer(
-                        resultSet.getInt("trainer_id"),
-                        resultSet.getString("username"),
-                        resultSet.getString("first_name"),
-                        resultSet.getString("last_name"),
-                        resultSet.getString("authorization"),
-                        resultSet.getString("email"),
-                        resultSet.getString("phone"),
-                        resultSet.getString("description"),
-                        resultSet.getBoolean("active_status"));
-
-                User user = new Trainer(resultSet.getInt("user_id"));
-
-                Program program = new Program(
-                        resultSet.getInt("program_id"),
-                        resultSet.getString("name"));
-
-
-                LocalDate courseStart = resultSet.getDate("course_start").toLocalDate();
-                LocalDate courseEnd = resultSet.getDate("course_end").toLocalDate();
-
-
-                Course course = new Course(
-                        resultSet.getInt("course_id"),
-                        resultSet.getString("course_name"),
-                        program,
-                        courseStart,
-                        courseEnd,
-                        resultSet.getInt("group_size"));
-
-
-                LocalDateTime startTime = resultSet.getTimestamp("datetime_start").toLocalDateTime();
-                LocalDateTime endTime = resultSet.getTimestamp("datetime_end").toLocalDateTime();
-
-
-                String recurrenceRuleFrequency = resultSet.getString("recurrence_rule");
-                String recurrenceRule = convertRecurrenceRuleFromFrequencyToText(recurrenceRuleFrequency);
-
-                Booking booking = new Booking(
-                        resultSet.getInt("booking_id"),
-                        room, trainer, user, course, startTime, endTime, recurrenceRule);
-                bookingList.add(booking);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-
-                if (connection != null) connection.close();
-            }catch (SQLException e) {
-                logger.error("Something went wrong, it did not work", e);
-            }
-        }
-        return bookingList;
-    }
 
 
     public String convertRecurrenceRuleFromTextToFrequency(String recurrenceRuleText) {
@@ -327,7 +229,7 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
 
 
 
-    public String convertRecurrenceRuleFromFrequencyToText(String recurrenceRuleFrequency) {
+    public static String convertRecurrenceRuleFromFrequencyToText(String recurrenceRuleFrequency) {
         String recurrenceRule;
         switch (recurrenceRuleFrequency) {
             case "RRULE:FREQ=DAILY":
