@@ -9,6 +9,7 @@ module com.lap.lapproject {
 
     requires spring.security.core;
     requires spring.security.crypto;
+    requires junit;
 
     opens com.lap.lapproject to javafx.fxml;
     exports com.lap.lapproject;
@@ -18,4 +19,9 @@ module com.lap.lapproject {
     opens com.lap.lapproject.application to javafx.fxml;
     exports com.lap.lapproject.utility;
     opens com.lap.lapproject.utility to javafx.fxml;
+
+
+//Negin
+    exports com.lap.lapproject.repos to junit;
+    opens com.lap.lapproject.model to javafx.base;
 }

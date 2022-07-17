@@ -190,6 +190,7 @@
             <String fx:value="button-dark" />
          </styleClass>
       </Button>
+
       <Pane prefHeight="90.0" prefWidth="40.0" style="-fx-background-color: #101d2c;" GridPane.columnIndex="3" />
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #101d2c;" />
    </children>

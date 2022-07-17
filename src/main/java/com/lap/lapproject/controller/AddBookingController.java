@@ -27,6 +27,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Diese Klasse extends BasseController. Sie wird genutzt um eine Buchung zu erstellen oder upzudaten, dabei werden die Daten an die dafür zuständigen JDBC klassen gesendet
@@ -125,11 +126,27 @@ public class AddBookingController extends BaseController {
         if (isValidDateTimeForAddBooking(dateStart, dateEnd, timeStart, timeEnd)) {
             localDateTimeStart = LocalDateTime.of(dateStart, timeStart);
             localDateTimeEnd = LocalDateTime.of(dateEnd, timeEnd);
+
+
+            //Negin...................................
+            BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
+            if (bookingRepositoryJDBC.isRoomFree(room.getId(), localDateTimeStart, localDateTimeEnd)) {
+//..................................
+
+
             Booking booking = new Booking(room, trainer, model.getLoggedInUser(), course, localDateTimeStart, localDateTimeEnd, recurrenceRule);
             listModel.bookingList.add(booking);
             moveToBookingPage();
+
+                //Negin.................................
+            }else{
+                QuickAlert.showError("Raum ist bereits gebucht in diesem Zeitraum ");
+
+            }
         }
-    }
+//..........................................
+        }
+
 
     /**
      * Es werden die Daten aus der Datenbank gelesen, die neuen Daten in die Datenbank eingetragen und die Anwedung geschlossen.
@@ -328,3 +345,25 @@ public class AddBookingController extends BaseController {
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
