@@ -95,7 +95,7 @@ public class RoomsController extends BaseController {
 
                     listModel.courseList.setAll(courseRepositoryJDBC.readAll());
                 } else {
-                    QuickAlert.showError("Dieses Raum wird für eine Buchung benötigt, Sie können es nicht löschen! Bearbeiten Sie zuerst Ihre Buchungen!");
+                    QuickAlert.showError("Dieser Raum wird für eine Buchung benötigt, Sie können es nicht löschen! Bearbeiten Sie zuerst Ihre Buchungen!");
                 }
             } catch (SQLException ex) {
                 ex.printStackTrace();

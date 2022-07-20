@@ -30,6 +30,18 @@ public class Room {
         this.equipments = equipments;
     }
 
+    @Override
+    public boolean equals (Object r) {
+//        System.out.println(this);
+        if(!(r instanceof Room)) {
+            return false;
+        }
+//        System.out.println(r);
+        Room r1 = (Room)r;
+        boolean b =  this.id.getValue().equals(r1.id.getValue());
+//        System.out.println(b);
+        return b;
+    }
 
     public int getId() {
         return id.get();

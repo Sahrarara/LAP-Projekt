@@ -2,6 +2,8 @@ package com.lap.lapproject.controller;
 
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
+import com.lap.lapproject.model.Location;
+import com.lap.lapproject.model.Room;
 import com.lap.lapproject.model.User;
 import com.lap.lapproject.repos.UserRepositoryJDBC;
 import com.lap.lapproject.utility.QuickAlert;
@@ -16,7 +18,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
 
 public class LoginController extends BaseController implements Initializable{
 
@@ -68,7 +73,7 @@ public class LoginController extends BaseController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         usernameTF.setText("dorota1"); /*capitanMarvel*/
-        passwordTF.setText("dorota1"); /*carol123*/
+        passwordTF.setText("1234"); /*carol123*/
     }
 
     private void moveToMainPage(){

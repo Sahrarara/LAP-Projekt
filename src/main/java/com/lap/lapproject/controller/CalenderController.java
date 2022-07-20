@@ -49,7 +49,8 @@ public class CalenderController extends BaseController {
         model.bookingModel.loadBookingIntoCalendar();
 
         CalendarView calendarView = new CalendarView();
-        calendarView.getCalendarSources().get(0).getCalendars().get(0).setReadOnly(true);
+//        calendarView.getCalendarSources().get(0).getCalendars().get(0).setReadOnly(true);
+//        calendarView.getCalendarSources().get(0).getCalendars().get(0);
         calendarView.getCalendarSources().addAll(model.bookingModel.getCalendarSource());
         calendarView.setRequestedTime(LocalTime.now());
 
@@ -84,7 +85,7 @@ public class CalenderController extends BaseController {
         updateTimeThread.setPriority(Thread.MIN_PRIORITY);
         updateTimeThread.setDaemon(true);
         updateTimeThread.start();
-        calendarView.setShowDeveloperConsole(true);
+//        calendarView.setShowDeveloperConsole(true);
         borderCalender.setCenter(calendarView);
     }
 

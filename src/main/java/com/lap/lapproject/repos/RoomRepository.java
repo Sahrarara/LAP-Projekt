@@ -16,7 +16,7 @@ public interface RoomRepository {
 
     List<Room> readAll();
 
-    List<Booking> getEmptyRoomsByTimeWindow(LocalDateTime startSearchTime, LocalDateTime endSearchTime);
+//    List<Room> getEmptyRoomsByTimeWindow(LocalDateTime startSearchTime, LocalDateTime endSearchTime);
 
     void addRoomEquipment(Room room) throws SQLException;
 
