@@ -77,8 +77,10 @@ public class BookingModel {
     /**
      * Prüft die Ansicht für jeden Kursnamen mit einer Buchung aus der Datenbank und fragt jeden Kurs nach einer Buchung ab.
      * Jede Buchung, welche aus der Datenbank gelesen wird, wird nach der RecurranceRule befragt.
-     * Die sich wiederholenden Kurse werden mit Regex in einen lesbaren String gewandelt, um diese im Kalender anzuzeigen.
+     * Die sich wiederholenden Kurse werden mit Regex in einen String, für den recurrence String, umgewandelt, um diese im Kalender anzuzeigen.
      * Wenn der Kurs nur einmalig ist, wird er ohne umwandlung in den Kalender eingetragen, da das Startdatum auch das Enddatum ist.
+     *
+     * //TODO: weiterenText hinzufügen
      */
     public void loadBookingIntoCalendar() {
 
@@ -90,22 +92,15 @@ public class BookingModel {
 
         holidays.setStyle(Calendar.Style.STYLE2);
 
-
         model.courses.forEach(course -> {
             String currentCourse = course.getCourseName();
-            System.out.println(course.getCourseName());
-            System.out.println("servus dude");
+            Calendar tempCalendar = new Calendar("temporary");
             Calendar newCalendar = new Calendar(currentCourse);
             model.bookings.forEach(booking -> {
                 if (booking.getCourse().getCourseName().equals(currentCourse)) {
                     Entry<Booking> newEntry = new Entry<>(booking.getCourse().getProgram().getProgramName());
                     newEntry.setLocation(booking.getRoom().getLocation().getStreet());
                     newEntry.setUserObject(booking);
-
-                    System.out.println("servus dude");
-
-                    //TODO: if schleife wenn es kein wochenende oder feiertag ist
-
                     if (!booking.getRecurrenceRule().equals("keiner")) {
                         BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
 
@@ -121,35 +116,24 @@ public class BookingModel {
                         Interval interval = new Interval(booking.getDateTimeStart(), booking.getDateTimeEnd(), ZoneId.systemDefault());
                         newEntry.setInterval(interval);
                     }
-                    newCalendar.addEntry(newEntry);
-
-                    ObservableList<LocalDate> entry = FXCollections.observableArrayList();
-
-                    Map<LocalDate, List<Entry<?>>> entryResult = newCalendar.findEntries(booking.getDateTimeStart().toLocalDate(), booking.getDateTimeEnd().toLocalDate(), ZoneId.systemDefault());
+                    tempCalendar.addEntry(newEntry);
+                    ArrayList<LocalDate> entryList = new ArrayList<LocalDate>();
+                    List<LocalDate> checkDate = new ArrayList<LocalDate>();
+                    Map<LocalDate, List<Entry<?>>> entryResult = tempCalendar.findEntries(booking.getDateTimeStart().toLocalDate(), booking.getDateTimeEnd().toLocalDate(), ZoneId.systemDefault());
                     for (LocalDate key : entryResult.keySet()) {
-                        entry.add(key);
-                    }
-                    //TODO: ausgabe für bookings /isHolidayOrWeekend result und unten in der schleife den entry / oben in der schleife den newEntry alles mit strings ausgeben (sout: println) ausgabe für keys auf 126
-                    for (LocalDate day:
-                         entry) {
-                        LocalDate startTimeOfEntry = day;
-//                        System.out.println(day);
-                        ObservableList<LocalDate> checkDate = FXCollections.observableArrayList();
-                        if(CalenderController.isHolidayOrWeekend(day)) {
-                            checkDate.add(day);
-//                            holidays.set;
+                        entryList.add(key);
+                        if (!CalenderController.isHolidayOrWeekend(key)) {
+                            Entry<Booking> oldEntry = (Entry<Booking>) entryResult.get(key).get(0);
+                            Booking booking1 = oldEntry.getUserObject();
+                            LocalDateTime newStartDate = LocalDateTime.of(key, oldEntry.getStartTime());
+                            LocalDateTime newEndDate = LocalDateTime.of(key, oldEntry.getEndTime());
+                            Entry<Booking> partitionedEntry = new Entry<>(booking1.getCourse().getProgram().getProgramName());
+                            partitionedEntry.setLocation(booking1.getRoom().getLocation().getStreet());
+                            partitionedEntry.setUserObject(booking1);
+                            Interval interval1 = new Interval(newStartDate, newEndDate, ZoneId.systemDefault());
+                            partitionedEntry.setInterval(interval1);
+                            newCalendar.addEntry(partitionedEntry);
                         }
-
-
-                        System.out.println("new dates" + checkDate);
-//                        System.out.println(entry);
-//                        if (isHolidayOrWeekend) {
-//                            removeEntry.add(day) ;
-//                            entry.remove(day);
-//                            System.out.println(entry);
-//                            System.out.println("remove " + day);
-//                            System.out.println(entry);
-//                        }
                     }
                 }
             });

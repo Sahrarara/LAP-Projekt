@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.*;
+import java.time.temporal.ChronoField;
 import java.util.*;
 
 /**
@@ -73,14 +74,13 @@ public class CalenderController extends BaseController {
 
 
 
-    public static ObservableList<LocalDate> checkedDays (LocalDate date) {
-        ObservableList<LocalDate> dayList = FXCollections.observableArrayList();
+    public static List<LocalDate> checkedDays (LocalDate date) {
+        List<LocalDate> dayList = new ArrayList<>();
 
         if(!isHolidayOrWeekend(date)) {
             dayList.add(date);
         }
         return dayList;
-
     }
 
     public static boolean isHolidayOrWeekend(LocalDate date) {
@@ -88,13 +88,10 @@ public class CalenderController extends BaseController {
 
     }
 
-    private static boolean isWeekend(LocalDate ld) {
-
-        GregorianCalendar day = new GregorianCalendar(ld.getYear(),ld.getMonthValue(),ld.getDayOfMonth());
+    private static boolean isWeekend(LocalDate ldate) {
+//
+        Integer day = new GregorianCalendar(ldate.getYear(),ldate.getMonthValue()-1, ldate.getDayOfMonth()).get(GregorianCalendar.DAY_OF_WEEK);
         return day.equals(Calendar.SUNDAY) || day.equals(Calendar.SATURDAY);
-
-//        DayOfWeek day = DayOfWeek.of(ld.get(ChronoField.DAY_OF_WEEK));
-//        return day == DayOfWeek.SUNDAY || day == DayOfWeek.SATURDAY;
     }
 
 
@@ -123,8 +120,9 @@ public class CalenderController extends BaseController {
             day = day % 31;
             month = 3;
         }
-        if (day <= 31)
+        else if (day <= 31){
             month = 2;
+        }
 
 
         if (!holidayMap.containsKey(Integer.valueOf(year))) {
@@ -137,8 +135,8 @@ public class CalenderController extends BaseController {
             holiday.put("easterMonday", gc_ostermonday);
             GregorianCalendar gc_karfriday = new GregorianCalendar(gc_eastersunday.get(Calendar.YEAR), gc_eastersunday.get(Calendar.MONTH), (gc_eastersunday.get(Calendar.DATE) - 2));
             holiday.put("karfriday", gc_karfriday);
-            GregorianCalendar gc_rosenmonday = new GregorianCalendar(gc_eastersunday.get(Calendar.YEAR), gc_eastersunday.get(Calendar.MONTH), (gc_eastersunday.get(Calendar.DATE) - 48));
-            holiday.put("rosenmonday", gc_rosenmonday);
+            GregorianCalendar gc_rosemonday = new GregorianCalendar(gc_eastersunday.get(Calendar.YEAR), gc_eastersunday.get(Calendar.MONTH), (gc_eastersunday.get(Calendar.DATE) - 48));
+            holiday.put("rosemonday", gc_rosemonday);
             GregorianCalendar gc_ascensionDay = new GregorianCalendar(gc_eastersunday.get(Calendar.YEAR), gc_eastersunday.get(Calendar.MONTH), (gc_eastersunday.get(Calendar.DATE) + 39));
             holiday.put("ascensionDay", gc_ascensionDay);
             GregorianCalendar gc_whitSunday = new GregorianCalendar(gc_eastersunday.get(Calendar.YEAR), gc_eastersunday.get(Calendar.MONTH), (gc_eastersunday.get(Calendar.DATE) + 49));
@@ -147,8 +145,7 @@ public class CalenderController extends BaseController {
             holiday.put("whitMonday", gc_whitMonday);
             GregorianCalendar gc_corpusChristy = new GregorianCalendar(gc_eastersunday.get(Calendar.YEAR), (gc_eastersunday.get(Calendar.MONTH)-1), (gc_eastersunday.get(Calendar.DATE) + 60));
             holiday.put("corpusChristy", gc_corpusChristy);
-            GregorianCalendar gc_laborDay = new GregorianCalendar(year, 4, 1
-            );
+            GregorianCalendar gc_laborDay = new GregorianCalendar(year, 4, 1);
             holiday.put("laborDay", gc_laborDay);
             GregorianCalendar gc_nationaHoliday = new GregorianCalendar(year, 9, 26);
             holiday.put("nationaHoliday", gc_nationaHoliday);
@@ -172,7 +169,7 @@ public class CalenderController extends BaseController {
         GregorianCalendar gc_eastersunday = holiday.get("easterSunday");
         GregorianCalendar gc_ostermonday = holiday.get("easterMonday");
         GregorianCalendar gc_karfriday = holiday.get("karfriday");
-        GregorianCalendar gc_rosenmonday = holiday.get("rosenmonday");
+        GregorianCalendar gc_rosemonday = holiday.get("rosemonday");
         GregorianCalendar gc_ascensionDay = holiday.get("ascensionDay");
         GregorianCalendar gc_whitSunday = holiday.get("whitSunday");
         GregorianCalendar gc_whitMonday = holiday.get("whitMonday");
@@ -187,7 +184,7 @@ public class CalenderController extends BaseController {
         GregorianCalendar epiphany = holiday.get("epiphany");
 
 
-        if (gc_ostermonday.equals(gCDate) || gc_karfriday.equals(gCDate) || gc_rosenmonday.equals(gCDate)
+        if (gc_ostermonday.equals(gCDate) || gc_karfriday.equals(gCDate) || gc_rosemonday.equals(gCDate)
                 || gc_ascensionDay.equals(gCDate) || gc_whitMonday.equals(gCDate) || gc_corpusChristy.equals(gCDate)
                 || gc_christmasday_1.equals(gCDate) || gc_christmaseve_2.equals(gCDate) || gc_silvester.equals(gCDate)
                 || newyear.equals(gCDate) || gc_nationaHoliday.equals(gCDate) || gc_laborDay.equals(gCDate)
