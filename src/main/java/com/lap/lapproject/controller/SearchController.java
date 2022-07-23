@@ -1,24 +1,20 @@
 package com.lap.lapproject.controller;
 
-import java.awt.print.Book;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.function.Predicate;
+
 import com.calendarfx.view.TimeField;
 import com.lap.lapproject.model.BookingModel;
 import com.lap.lapproject.model.Room;
-import com.lap.lapproject.repos.*;
+import com.lap.lapproject.utility.UsabilityMethods;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.input.InputMethodEvent;
-import javafx.util.Callback;
 
 import static com.lap.lapproject.controller.BaseController.listModel;
 import static com.lap.lapproject.controller.BaseController.model;
-import static com.lap.lapproject.model.ListModel.*;
 
 public class SearchController {
 
@@ -35,8 +31,6 @@ public class SearchController {
     private TableView<Room> tableViewRoom;
 
     @FXML
-    private Button searchButton;
-    @FXML
     private TableColumn<Room, Integer> roomNumberColumn;
     @FXML
     private TableColumn<Room, Integer> sizeColumn;
@@ -47,14 +41,18 @@ public class SearchController {
 
     private BookingModel bookingModel;
 
+    @FXML
+    private Label searchLabel;
+
 
     public SearchController() {
     }
 
-
-
     @FXML
     void initialize() {
+        searchLabel.setVisible(false);
+        UsabilityMethods.changeListenerDataPicker(startDateSearchDatePicker, searchLabel);
+
         assert startDateSearchDatePicker != null : "fx:id=\"startDateSearchDatePicker\" was not injected: check your FXML file 'search-view.fxml'.";
         assert startSearchTime != null : "fx:id=\"startSearchTime\" was not injected: check your FXML file 'search-view.fxml'.";
         assert searchEndTime != null : "fx:id=\"searchEndTime\" was not injected: check your FXML file 'search-view.fxml'.";
@@ -73,27 +71,7 @@ public class SearchController {
     }
 
     @FXML
-    private void searchParamDate(InputMethodEvent inputMethodEvent) {
-    something();
-    }
-
-    @FXML
-    private void searchParamStartTime(InputMethodEvent inputMethodEvent) {
-    something();
-    }
-
-    @FXML
-    private void searchParamEndTime(InputMethodEvent inputMethodEvent) {
-        something();
-    }
-
-    public void something() {
-        System.out.println("test Text ... Klausi war hier und hat getanzt");
-    }
-
-    @FXML
     public void onButtonClickSearch(ActionEvent actionEvent) {
-
         LocalDate dateStart = null;
         LocalDate dateEnd = null;
         if(startDateSearchDatePicker.getValue() == null || endDateSearchDatePicker.getValue() == null){
@@ -110,39 +88,43 @@ public class SearchController {
         BookingModel bookingModel = new BookingModel( model);
         bookingModel.loadBookingIntoCalendar();
 
-        listModel.roomList.setAll(bookingModel.findEmptyRooms(dateStart, dateEnd, timeStart, timeEnd));
+        boolean validDateTime = isValidDateTimeForSearch(dateStart, dateEnd, timeStart, timeEnd);
 
-        updateSearchTable();
+        if(validDateTime) {
+            listModel.roomList.setAll(bookingModel.findEmptyRooms(dateStart, dateEnd, timeStart, timeEnd));
+            updateSearchTable();
+        }
     }
 
-    //TODO: implement method
-    private boolean isValidDateTimeForSearch(LocalDate dateStart, LocalTime timeStart, LocalTime timeEnd) {
+    private boolean isValidDateTimeForSearch(LocalDate dateStart, LocalDate dateEnd, LocalTime timeStart, LocalTime timeEnd) {
 
-        if(dateStart.isAfter(LocalDate.now())){
-            return false;
+        try {
+            if(dateStart.isAfter(LocalDate.now()) || dateStart.isAfter(dateEnd)){
+                searchLabel.setVisible(true);
+                searchLabel.setText("Das Datum muss mindestens mit dem heutigen beginnen \nund darf nicht nach dem Enddatum stehen.");
+                return false;
+            }
+            else if( timeStart.isAfter(timeEnd)  ){
+                searchLabel.setVisible(true);
+                searchLabel.setText("Die Startzeit darf nicht größer sein als die Endzeit");
+                return false;
+            }
+        } catch (RuntimeException e) {
+            e.printStackTrace();
         }
-
-        if( timeStart.isAfter(timeEnd)  ){
-            return false;
-        }
+        searchLabel.setVisible(false);
         return true;
     }
 
     public void updateSearchTable() {
         tableViewRoom.setItems(listModel.sortedRoomList);
         listModel.sortedRoomList.comparatorProperty().bind(tableViewRoom.comparatorProperty());
-
         roomNumberColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getRoomNumber()));
-
         sizeColumn.setCellValueFactory(dataFeatures -> new SimpleObjectProperty<>(dataFeatures.getValue().getSize()));
         locationColumn.setCellValueFactory(dataFeatures -> new SimpleObjectProperty<>(dataFeatures.getValue().getLocation().getStreet()));
         equipmentColumn.setCellValueFactory(dataFeatures -> new SimpleObjectProperty(dataFeatures.getValue().getEquipmentAsString()));
 
-
     }
-
-
-
 
 
 }

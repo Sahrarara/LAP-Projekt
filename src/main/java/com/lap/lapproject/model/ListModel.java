@@ -79,14 +79,6 @@ public class ListModel {
     public ListModel() {
 
         try {
-            /*courseList.addAll(courseRepositoryJDBC.readAll());
-            programList.addAll(programRepositoryJDBC.readProgram());
-            equipmentList.addAll(equipmentRepositoryJDBC.readAll());
-            locationList.addAll(locationRepositoryJDBC.readAll());
-            bookingList.addAll(bookingRepositoryJDBC.readAll());
-            trainerList.addAll(userRepositoryJDBC.readAllTrainer());
-            roomList.addAll(roomRepositoryJDBC.readAll());
-            authorizationList.addAll(userRepositoryJDBC.readAuthorization());*/
 
             courseList.setAll(courseRepositoryJDBC.readAll());
             programList.setAll(programRepositoryJDBC.readProgram());
@@ -96,12 +88,10 @@ public class ListModel {
             trainerList.setAll(userRepositoryJDBC.readAllTrainer());
             roomList.setAll(roomRepositoryJDBC.readAll());
             authorizationList.setAll(userRepositoryJDBC.readAuthorization());
-            //System.out.println("+++++ Fill All MODEL lists!!!!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-        //addAllListeners();
         addListenerForBooking();
         addListenerForUser();
         addListenerForProgram();

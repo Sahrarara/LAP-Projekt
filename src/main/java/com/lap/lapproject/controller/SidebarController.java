@@ -136,7 +136,7 @@ public class SidebarController extends BaseController {
     }
 
     public boolean authorityVisibility() throws IOException {
-        BufferedImage bImage = ImageIO.read(new FileInputStream("src/main/resources/com/lap/lapproject/images/lapproject/images/user.png"));
+        BufferedImage bImage = ImageIO.read(getClass().getResourceAsStream(Constants.Path_TO_IMG));
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         ImageIO.write(bImage, "png", bos );
         byte [] imageNoVisible = bos.toByteArray();

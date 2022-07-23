@@ -4,6 +4,7 @@ package com.lap.lapproject.application;
  * Definierte Konstanten welche die Pfade von fxml files angeben.
  */
 public class Constants {
+    public final static String Path_TO_IMG = "/com/lap/lapproject/images/lapproject/images/user.png";
     public final static String PATH_TO_FXML = "/com/lap/lapproject/fxml/";
     public final static String PATH_TO_FXML_BIGSCREEN = "/com/lap/lapproject/fxml/bigscreen.fxml";
 
