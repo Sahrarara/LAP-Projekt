@@ -114,6 +114,16 @@ public abstract class User {
        this.photoVisibility = new SimpleBooleanProperty(photoVisibility);
    }
 
+    @Override
+    public boolean equals (Object r) {
+        if(!(r instanceof User)) {
+            return false;
+        }
+        User u1 = (User) r;
+        boolean b =  this.id.getValue().equals(u1.id.getValue());
+        return b;
+    }
+
 
 
     public int getId() {

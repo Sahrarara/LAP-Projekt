@@ -69,7 +69,7 @@ public class UsabilityMethods {
     public static void changeListenerForPhoneNr(TextField textField, Label label) {
         textField.textProperty().addListener(((observable, oldValue, newValue) -> {
             if (!UsabilityMethods.isPhoneNumberValid(newValue)) {
-                label.setText("Bitte dieses Format verwenden: +43 1234567");
+                label.setText("Bitte dieses Format verwenden: +431234567");
                 label.setVisible(true);
             } else {
                 label.setVisible(false);

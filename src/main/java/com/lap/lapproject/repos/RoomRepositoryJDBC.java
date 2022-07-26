@@ -13,7 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RoomRepositoryJDBC extends Repository implements RoomRepository {
-    private static final Logger logger = LoggerFactory.getLogger(AddRoomController.class);
+
+    static {
+        logger = LoggerFactory.getLogger(RoomRepository.class);
+    }
+
 
     private static final String SELECT_ROOM_SQL_STRING = "SELECT * FROM rooms JOIN location ON rooms.location_id = location.location_id";
     private static final String SELECT_EQUIPMENT_ID_LIST = "SELECT * FROM equipment INNER JOIN rooms_equipment ON rooms_equipment.equipment_id=equipment.equipment_id WHERE rooms_equipment.room_id=(?) ";
@@ -25,13 +29,11 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
             "WHERE booking.datetime_start >= (?) \n" +
             "AND booking.datetime_end <= (?)" ;
 */
-    private static final String ADD_NEW_ROOM_SQL_STRING = "INSERT INTO rooms(room_number, size, location_id)" + "VALUES (?,?,?)";
-    private static final String ADD_EQUIPMENT_SQL_STRING = "INSERT INTO rooms_equipment (room_id, equipment_id)" +
-            " VALUES (?,?)";
+    private static final String ADD_NEW_ROOM_SQL_STRING = "INSERT INTO rooms(room_number, size, location_id) VALUES (?,?,?)";
+    private static final String ADD_EQUIPMENT_SQL_STRING = "INSERT INTO rooms_equipment (room_id, equipment_id) VALUES (?,?)";
     private static final String DELETE_ROOM_SQL_STRING = "DELETE FROM rooms WHERE room_id=?";
     private static final String UPDATE_ROOM_SQL_STRING = "UPDATE rooms SET room_number =?, size=?, location_id=? WHERE room_id=? ";
-    private static final String DELETE_EQUIPMENT_ROOM_RT = "DELETE FROM rooms_equipment WHERE room_id=? AND " +
-            "equipment_id=?";
+    private static final String DELETE_EQUIPMENT_ROOM_RT = "DELETE FROM rooms_equipment WHERE room_id=? AND equipment_id=?";
     private static final String GET_ROOM_COUNT_BY_UNIQUE_ROOM_NUMBER_SQL_STRING = "SELECT COUNT(*) AS unique_room_count FROM rooms WHERE room_number = (?) ";
 
     @Override

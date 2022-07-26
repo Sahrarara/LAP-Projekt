@@ -7,7 +7,9 @@ import com.calendarfx.model.Interval;
 import com.calendarfx.view.CalendarView;
 import com.lap.lapproject.controller.CalenderController;
 import com.lap.lapproject.repos.BookingRepositoryJDBC;
+import com.lap.lapproject.repos.CourseRepositoryJDBC;
 import com.lap.lapproject.repos.RoomRepositoryJDBC;
+import com.lap.lapproject.repos.UserRepositoryJDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -19,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+
+//TODO: Kurs start-ende sollte sich nicht mit buchungsende oder start überschneiden
 
 public class BookingModel {
     Model model;
@@ -47,7 +51,15 @@ public class BookingModel {
         return allEntriesInInterval(date, date);
     }
 
-
+    /**
+     * Holt sich aus der allEntriesInInterval-Methode alle Einträge. Es wird eine neue Instanz des RoomRepositoryJDBC erstellt, alle Räume ausgegeben und dann durch die Einträge iteriert
+     *
+     * @param startDate - gesuchter Starttag
+     * @param endDate   - gesuchter Endtag
+     * @param startTime - gesuchte Startzeit
+     * @param endTime   - gesuchte Endzeit
+     * @return es wird eine Liste von Räumen zurück gegeben
+     */
     public List<Room> findEmptyRooms(LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime) {
 
         List<Entry<?>> intervalEntries = allEntriesInInterval(startDate, endDate);
@@ -73,13 +85,64 @@ public class BookingModel {
         return rooms;
     }
 
+    public List<Trainer> findAvailableTrainer(LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime) {
+
+        List<Entry<?>> intervalEntries = allEntriesInInterval(startDate, endDate);
+
+        UserRepositoryJDBC trainerRepo = new UserRepositoryJDBC();
+        List<Trainer> allTrainer = trainerRepo.readAllTrainer();
+
+        for (Entry entry :
+                intervalEntries) {
+            LocalTime startTimeOfEntry = entry.getInterval().getStartTime();
+            LocalTime endTimeOfEntry = entry.getInterval().getEndTime();
+            Booking entryOfUserObject = (Booking) entry.getUserObject();
+
+            Trainer trainer = entryOfUserObject.getTrainer();
+
+            if (!((startTime.isBefore(startTimeOfEntry) && endTime.isBefore(startTimeOfEntry)
+                    || startTime.isAfter(endTimeOfEntry) && endTime.isAfter(endTimeOfEntry)
+                    || startTime.equals(endTimeOfEntry) || endTime.equals(startTimeOfEntry)
+            ))) {
+                allTrainer.remove(trainer);
+            }
+        }
+        return allTrainer;
+    }
+
+    public List<Course> findAvailableCourse(LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime) {
+
+
+        List<Entry<?>> intervalEntries = allEntriesInInterval(startDate, endDate);
+
+        CourseRepositoryJDBC courseRepo = new CourseRepositoryJDBC();
+        List<Course> courses = courseRepo.readAll();
+
+        for (Entry entry :
+                intervalEntries) {
+            LocalTime startTimeOfEntry = entry.getInterval().getStartTime();
+            LocalTime endTimeOfEntry = entry.getInterval().getEndTime();
+            Booking entryOfUserObject = (Booking) entry.getUserObject();
+
+            Course course = entryOfUserObject.getCourse();
+
+            if (!((startTime.isBefore(startTimeOfEntry) && endTime.isBefore(startTimeOfEntry)
+                    || startTime.isAfter(endTimeOfEntry) && endTime.isAfter(endTimeOfEntry)
+                    || startTime.equals(endTimeOfEntry) || endTime.equals(startTimeOfEntry)
+            ))) {
+                courses.remove(course);
+            }
+        }
+        return courses;
+    }
+
 
     /**
      * Prüft die Ansicht für jeden Kursnamen mit einer Buchung aus der Datenbank und fragt jeden Kurs nach einer Buchung ab.
      * Jede Buchung, welche aus der Datenbank gelesen wird, wird nach der RecurranceRule befragt.
      * Die sich wiederholenden Kurse werden mit Regex in einen String, für den recurrence String, umgewandelt, um diese im Kalender anzuzeigen.
      * Wenn der Kurs nur einmalig ist, wird er ohne umwandlung in den Kalender eingetragen, da das Startdatum auch das Enddatum ist.
-     *
+     * <p>
      * //TODO: weiterenText hinzufügen
      */
     public void loadBookingIntoCalendar() {
@@ -103,9 +166,6 @@ public class BookingModel {
                     newEntry.setUserObject(booking);
                     if (!booking.getRecurrenceRule().equals("keiner")) {
                         BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
-
-                        //TODO: frage wegen dailytime , daylytime ist anfangstag und anfangszeit
-                        // sollte es nicht ein endOfdaylyTime geben für das interval
                         LocalDateTime dailytime = LocalDateTime.of(booking.getDateTimeStart().toLocalDate(), booking.getDateTimeEnd().toLocalTime());
                         Interval interval = new Interval(booking.getDateTimeStart(), dailytime, ZoneId.systemDefault());
                         newEntry.setInterval(interval);

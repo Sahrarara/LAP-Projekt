@@ -37,6 +37,7 @@
       <RowConstraints maxHeight="55.0" minHeight="21.0" prefHeight="47.5" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="33.5" minHeight="0.5" prefHeight="20.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="58.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="64.5" minHeight="8.5" prefHeight="48.5" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="52.5" minHeight="0.0" prefHeight="20.5" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="45.0" minHeight="0.0" prefHeight="22.0" vgrow="SOMETIMES" />
@@ -67,19 +68,19 @@
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin></Label>
-      <Label styleClass="input-description" text="Telefon" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="11">
+      <Label styleClass="input-description" text="Telefon" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="12">
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin></Label>
-      <Label styleClass="input-description" text="Aktiv" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="12">
+      <Label styleClass="input-description" text="Aktiv" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="13">
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin></Label>
-      <Label styleClass="input-description" text="Foto" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="14">
+      <Label styleClass="input-description" text="Foto" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="15">
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin></Label>
-      <Label styleClass="input-description" text="Beschreibung" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="15">
+      <Label styleClass="input-description" text="Beschreibung" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="16">
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin></Label>
@@ -125,7 +126,7 @@
             <String fx:value="button-light" />
          </styleClass>
       </TextField>
-      <TextField fx:id="phoneNmbrTextField" maxWidth="400.0" onAction="#onAddBtnClick" prefHeight="31.0" prefWidth="400.0" style="-fx-border-radius: 50px; -fx-text-fill: #101d2c;" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="11">
+      <TextField fx:id="phoneNmbrTextField" maxWidth="400.0" onAction="#onAddBtnClick" prefHeight="31.0" prefWidth="400.0" style="-fx-border-radius: 50px; -fx-text-fill: #101d2c;" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="12">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
@@ -134,7 +135,7 @@
             <String fx:value="button-light" />
          </styleClass>
       </TextField>
-      <TextField fx:id="photoPathTextField" maxWidth="300.0" onAction="#onAddBtnClick" prefHeight="31.0" prefWidth="271.0" style="-fx-border-radius: 50px; -fx-text-fill: #101d2c;" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="14">
+      <TextField fx:id="photoPathTextField" maxWidth="300.0" onAction="#onAddBtnClick" prefHeight="31.0" prefWidth="271.0" style="-fx-border-radius: 50px; -fx-text-fill: #101d2c;" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="15">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
@@ -143,7 +144,7 @@
             <String fx:value="button-light" />
          </styleClass>
       </TextField>
-      <TextArea fx:id="descriptionTextArea" maxWidth="403.0" prefHeight="75.0" prefWidth="403.0" style="-fx-border-radius: 5px; -fx-text-fill: #101d2c; -fx-background-color: #f9f7f6;" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="15">
+      <TextArea fx:id="descriptionTextArea" maxWidth="403.0" prefHeight="75.0" prefWidth="403.0" style="-fx-border-radius: 5px; -fx-text-fill: #101d2c; -fx-background-color: #f9f7f6;" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="16">
          <GridPane.margin>
             <Insets bottom="10.0" top="10.0" />
          </GridPane.margin>
@@ -152,7 +153,7 @@
             <String fx:value="button-light" />
          </styleClass>
       </TextArea>
-      <Button mnemonicParsing="false" onAction="#onAbortBtnClick" prefWidth="128.0" text="ABBRECHEN" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="16">
+      <Button mnemonicParsing="false" onAction="#onAbortBtnClick" prefWidth="128.0" text="ABBRECHEN" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="17">
          <styleClass>
             <String fx:value="button-style" />
             <String fx:value="button-light" />
@@ -161,7 +162,7 @@
             <Insets right="20.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="addAndSaveBtn" mnemonicParsing="false" onAction="#onAddBtnClick" prefHeight="36.0" prefWidth="128.0" text="HINZUFÜGEN" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="16">
+      <Button fx:id="addAndSaveBtn" mnemonicParsing="false" onAction="#onAddBtnClick" prefHeight="36.0" prefWidth="128.0" text="HINZUFÜGEN" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="17">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
@@ -171,17 +172,17 @@
          </styleClass>
       </Button>
       <CheckBox fx:id="emailCheckBox" mnemonicParsing="false" text=" Anzeigen  " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
-      <CheckBox fx:id="phoneNmbrCheckBox" mnemonicParsing="false" text=" Anzeigen  " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
-      <CheckBox fx:id="activeCheckBox" mnemonicParsing="false" text="                   " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="12">
+      <CheckBox fx:id="phoneNmbrCheckBox" mnemonicParsing="false" text=" Anzeigen  " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="12" />
+      <CheckBox fx:id="activeCheckBox" mnemonicParsing="false" text="                   " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="13">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </CheckBox>
-      <CheckBox fx:id="photoCheckBox" mnemonicParsing="false" text=" Anzeigen  " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="14" />
+      <CheckBox fx:id="photoCheckBox" mnemonicParsing="false" text=" Anzeigen  " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="15" />
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #101d2c;" />
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #101d2c;" GridPane.columnIndex="2" />
       <Pane prefHeight="78.0" prefWidth="140.0" style="-fx-background-color: #101d2c;" GridPane.columnIndex="4" />
-      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f9f7f6;" GridPane.columnIndex="3" GridPane.rowIndex="13">
+      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f9f7f6;" GridPane.columnIndex="3" GridPane.rowIndex="14">
          <children>
             <Label fx:id="errorNoPhotoInDB" layoutX="3.0" layoutY="-8.0" prefHeight="17.0" prefWidth="369.0" text="Text" textFill="#f50606" />
          </children></Pane>
@@ -200,8 +201,8 @@
             <Insets left="10.0" />
          </GridPane.margin>
       </Label>
-      <CheckBox fx:id="descriptionCheckBox" layoutX="244.0" layoutY="414.0" mnemonicParsing="false" text=" Anzeigen  " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="15" />
-      <Button mnemonicParsing="false" onAction="#onFileBtnClick" prefHeight="42.0" prefWidth="44.0" style="-fx-background-color: #F9F7F6;" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="14">
+      <CheckBox fx:id="descriptionCheckBox" layoutX="244.0" layoutY="414.0" mnemonicParsing="false" text=" Anzeigen  " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="16" />
+      <Button mnemonicParsing="false" onAction="#onFileBtnClick" prefHeight="42.0" prefWidth="44.0" style="-fx-background-color: #F9F7F6;" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="15">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -232,5 +233,6 @@
          </styleClass></TextField>
       <Label fx:id="errorPassword" text="Text" textFill="RED" GridPane.columnIndex="3" GridPane.rowIndex="7" />
       <CheckBox fx:id="showPassword" mnemonicParsing="false" onAction="#changeVisibility" text=" Anzeigen  " GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+      <Label fx:id="errorPhoneNumber" text="Text" textFill="RED" GridPane.columnIndex="3" GridPane.rowIndex="11" />
    </children>
 </GridPane>

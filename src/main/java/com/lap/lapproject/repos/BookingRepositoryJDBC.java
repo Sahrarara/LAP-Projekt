@@ -13,7 +13,9 @@ import java.util.List;
 
 public class BookingRepositoryJDBC extends Repository implements BookingRepository {
 
-    private static final Logger logger = LoggerFactory.getLogger(BookingRepository.class);
+    static {
+        logger = LoggerFactory.getLogger(BookingRepository.class);
+    }
 
     private static final String SELECT_BOOKING_SQL_STRING = "SELECT * FROM `booking` " +
             " JOIN courses ON booking.course_id=courses.course_id" +
@@ -39,7 +41,7 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
 
 
     @Override
-    public ArrayList<Booking> readAll() throws SQLException {
+    public ArrayList<Booking> readAll() {
         Connection connection = connect();
         ArrayList<Booking> bookingList = new ArrayList<>();
 
@@ -119,7 +121,11 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            if (connection != null) connection.close();
+            try{
+                if (connection != null) connection.close();
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
         }
         return bookingList;
     }

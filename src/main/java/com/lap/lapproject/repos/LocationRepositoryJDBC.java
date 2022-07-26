@@ -1,6 +1,7 @@
 package com.lap.lapproject.repos;
 import com.lap.lapproject.model.Location;
 import com.lap.lapproject.model.Program;
+import org.slf4j.LoggerFactory;
 
 
 import java.sql.*;
@@ -13,6 +14,11 @@ public class LocationRepositoryJDBC extends Repository implements LocationReposi
     private static final String SELECT_LOCATION_SQL_STRING = "SELECT * FROM location";
     private static final String DELETE_LOCATION_SQL_STRING = "DELETE FROM location WHERE location_id=?";
     private static final String UPDATE_LOCATION_SQL_STRING = "UPDATE location SET street=?, zip=?, city=? WHERE location_id=?";
+
+
+    static {
+        logger = LoggerFactory.getLogger(LocationRepository.class);
+    }
 
     @Override
     public List<Location> readAll() throws SQLException {

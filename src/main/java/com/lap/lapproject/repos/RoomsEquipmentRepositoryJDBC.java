@@ -1,12 +1,18 @@
 package com.lap.lapproject.repos;
 
 import com.lap.lapproject.model.RoomsEquipment;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 public class RoomsEquipmentRepositoryJDBC extends Repository implements RoomsEquipmentRepository {
     private static final String ADD_EQUIPMENT_ROOM_RT = "INSERT INTO rooms_equipment ( room_id, equipment_id) " + "VALUES (?,?)";
     //private static final String UPDATE_EQUIPMENT_ROOM_RT = "UPDATE rooms_equipment SET equipment_id=? WHERE rooms_equipment_id =?";
     private static final String DELETE_EQUIPMENT_ROOM_RT = "DELETE FROM rooms_equipment  WHERE room_id=?";
+
+
+    static {
+        logger = LoggerFactory.getLogger(RoomsEquipmentRepository.class);
+    }
 
 
     @Override

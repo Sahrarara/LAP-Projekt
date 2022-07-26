@@ -1,6 +1,8 @@
 package com.lap.lapproject.repos;
 import com.lap.lapproject.model.Course;
 import com.lap.lapproject.model.Program;
+import org.slf4j.LoggerFactory;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,9 +18,14 @@ public class CourseRepositoryJDBC extends Repository implements CourseRepository
    private static final String GET_COURSE_COUNT_BY_UNIQUE_COURSE_NAME_SQL_STRING = "SELECT COUNT(*) AS unique_course_count FROM courses WHERE course_name = (?) ";
 
 
+    static {
+        logger = LoggerFactory.getLogger(CourseRepository.class);
+    }
+
+
 
     @Override
-    public List<Course> readAll() throws SQLException {
+    public List<Course> readAll()  {
         Connection connection = connect();
         List<Course> courses = new ArrayList<>();
 
@@ -31,11 +38,8 @@ public class CourseRepositoryJDBC extends Repository implements CourseRepository
 
             while (resultSet.next()) {
 
-                //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
                 LocalDate courseStart = resultSet.getDate("course_start").toLocalDate();
                 LocalDate courseEnd = resultSet.getDate("course_end").toLocalDate();
-
 
                 Course course = new Course(resultSet.getInt("course_id"), resultSet.getString("course_name"),
                         new Program(resultSet.getString("name")), courseStart, courseEnd, resultSet.getInt("group_size"));
@@ -45,9 +49,13 @@ public class CourseRepositoryJDBC extends Repository implements CourseRepository
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            if (connection != null) connection.close();
-        }
+            try {
+                if (connection != null) connection.close();
 
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
         return courses;
     }
 
@@ -82,7 +90,6 @@ public class CourseRepositoryJDBC extends Repository implements CourseRepository
         } finally {
             if (connection != null) connection.close();
         }
-
         return generatedKey;
     }
 
@@ -99,7 +106,6 @@ public class CourseRepositoryJDBC extends Repository implements CourseRepository
             preparedStatement.setInt(5, course.getGroupSize());
             preparedStatement.setLong(6, course.getId());
             preparedStatement.executeQuery();
-
 
         } catch (SQLException e) {
             e.printStackTrace();

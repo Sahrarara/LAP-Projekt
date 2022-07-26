@@ -44,10 +44,16 @@ public class SearchController {
     @FXML
     private Label searchLabel;
 
-
+    /**
+     * leerer Konstruktor
+     */
     public SearchController() {
     }
 
+    /**
+     * Prüft die alle Eingabe- und Ausgabefelder auf ihren Zustand und zeigt bereits initialisierte felder an.
+     * das searchLabel für die Errormeldung wird auf nicht Sichtbar gesetzt.
+     */
     @FXML
     void initialize() {
         searchLabel.setVisible(false);
@@ -70,6 +76,10 @@ public class SearchController {
 
     }
 
+    /**
+     *
+     * @param actionEvent
+     */
     @FXML
     public void onButtonClickSearch(ActionEvent actionEvent) {
         LocalDate dateStart = null;
@@ -96,6 +106,15 @@ public class SearchController {
         }
     }
 
+    /**
+     * Diese Methode überprüft ob der gesuchte Starttag nicht nach dem gesuchten EndTag und die gesuchte Startzeit nicht nach der gesuchen Endzeit liegt.
+     * Sonst wird eine Errortextmeldung eingeblendet, sonsten ist die Sichtbarkeit der Textmeldung auf (false) gesetzt.
+     * @param dateStart - der Starttag ab dem gesucht wird
+     * @param dateEnd - der EndTag bis zu dem gesucht wird
+     * @param timeStart - die Startueot ab der gesucht wird
+     * @param timeEnd - die Endzeit bis zu der gesucht wird
+     * @return returnt einen boolean
+     */
     private boolean isValidDateTimeForSearch(LocalDate dateStart, LocalDate dateEnd, LocalTime timeStart, LocalTime timeEnd) {
 
         try {
@@ -116,6 +135,9 @@ public class SearchController {
         return true;
     }
 
+    /**
+     * Diese Methode befüllt die Tabelle mit den Werten aus der Datenbank, wie der Raumnummer, Raumgröße, Ort und dem verfügbaren Equpment, nach dem Klick auf den Searchbutton.
+     */
     public void updateSearchTable() {
         tableViewRoom.setItems(listModel.sortedRoomList);
         listModel.sortedRoomList.comparatorProperty().bind(tableViewRoom.comparatorProperty());

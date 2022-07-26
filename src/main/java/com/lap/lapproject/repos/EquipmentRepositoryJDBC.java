@@ -1,6 +1,7 @@
 package com.lap.lapproject.repos;
 
 import com.lap.lapproject.model.Equipment;
+import org.slf4j.LoggerFactory;
 
 
 import java.sql.*;
@@ -14,6 +15,10 @@ public class EquipmentRepositoryJDBC extends Repository implements EquipmentRepo
     private static final String UPDATE_EQUIPMENT_SQL_STRING = "UPDATE equipment SET equipment_description =? WHERE equipment_id=?";
     private static final String DELETE_EQUIPMENT_SQL_STRING = "DELETE FROM equipment WHERE equipment_id=?";
     private static final String GET_EQUIPMENT_COUNT_BY_UNIQUE_EQUIPMENT_DESCRIPTION_SQL_STRING = "SELECT COUNT(*) AS unique_equipment_count FROM equipment WHERE equipment_description = (?) ";
+
+    static {
+        logger = LoggerFactory.getLogger(EquipmentRepository.class);
+    }
 
     @Override
     public List<Equipment> readAll() throws SQLException {

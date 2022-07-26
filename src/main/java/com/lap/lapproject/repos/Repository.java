@@ -19,6 +19,8 @@ public class Repository {
     public static final String dbUser = "root";
     public static final String dbPw = "";
 
+    protected static Logger logger;
+
     /**
      * Stellt eine Verbindung zur Datenbank mit einer try...Catch abfrage her, damit ein Error aufgefangen werden kann
      * @return
@@ -27,9 +29,11 @@ protected static Connection connect() {
         Connection connection;
         try {
             connection = DriverManager.getConnection(dbPrefix + location, dbUser, dbPw);
-            System.out.println("Connection successful");
+            logger.info("Connection successful");
+//            System.out.println("Connection successful");
         } catch (SQLException e) {
-            System.out.println("Connection failed - Check XAMPP");
+            logger.error("Connection failed - Check XAMPP");
+//            System.out.println("Connection failed - Check XAMPP");
             //e.printStackTrace();
             return null;
         }

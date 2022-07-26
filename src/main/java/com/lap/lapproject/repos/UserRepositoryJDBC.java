@@ -18,7 +18,9 @@ import java.util.Optional;
 
 public class UserRepositoryJDBC extends Repository implements UserRepository {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserRepositoryJDBC.class);
+    static {
+        logger = LoggerFactory.getLogger(UserRepository.class);
+    }
 
     //BEISPIEL??
     private static final String SQL_SELECT_WHERE_ID = "SELECT * WHERE id=?";
@@ -28,13 +30,14 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             " authorization,description,phone,email, photo, description_visable, phone_visable, email_visable," +
             "photo_visable) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SELECT_AUTHORIZATION_SQL_STRING = "SELECT DISTINCT authorization FROM users";
-    //    nicht passender und verwirrender Name, was wird selektiert?  es sollte das passwort selectiert werden dem namen zufolge
+
     private static final String SELECT_USERNAME_PASSWORD_SQL_STRING = " SELECT * FROM users WHERE username=? AND active_status='1'";
     public static final String SELECT_USERS_SQL_STRING = "SELECT username FROM users";
     public static final String SELECT_EMAIL_SQL_STRING = "SELECT email FROM users";
     private static final String DELETE_USER_SQL_STRING = "DELETE FROM users WHERE user_id=?";
     private static final String UPDATE_USER_SQL_STRING = "UPDATE users SET username=?,active_status=?," +
-            "title=?,first_name=?, last_name=?,password=?,authorization=?,description=?,phone=?,email=?,photo=?,description_visable=?,phone_visable=?,email_visable=?," +
+            "title=?,first_name=?, last_name=?,password=?,authorization=?,description=?,phone=?,email=?," +
+            "photo=?,description_visable=?,phone_visable=?,email_visable=?," +
             "photo_visable=? WHERE user_id=?";
 
     private static final String UPDATE_PROFILE_SQL_STRING = "UPDATE users SET description=?, phone=?, email=?, photo=?, photo_visable=? WHERE user_id=?";
@@ -54,7 +57,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             preparedStatement.setString(4, user.getfName());
             preparedStatement.setString(5, user.getlName());
 //            preparedStatement.setString(6, hashPassword(user.getUserPassword()));
-            preparedStatement.setString(6, PasswordSecurity.hashPassword(user.getUserPassword()));
+//            preparedStatement.setString(6, PasswordSecurity.hashPassword(user.getUserPassword()));
             preparedStatement.setString(6, PasswordSecurity.hashPassword(user.getUserPassword()));
             preparedStatement.setString(7, user.getAuthority());
             preparedStatement.setString(8, user.getDescription());
@@ -175,7 +178,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
 
 
     @Override
-    public List<Trainer> readAllTrainer() throws SQLException {
+    public List<Trainer> readAllTrainer(){
         Connection connection = connect();
         List<Trainer> trainerList = new ArrayList<>();
         PreparedStatement statement = null;
@@ -210,7 +213,13 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            if (connection != null) connection.close();
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return trainerList;
     }

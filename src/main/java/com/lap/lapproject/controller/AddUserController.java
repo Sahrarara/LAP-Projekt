@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.sql.SQLException;
+import java.sql.SQLNonTransientConnectionException;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -70,6 +71,8 @@ public class AddUserController extends BaseController {
     File file;
     @FXML
     private Label errorNoPhotoInDB;
+    @FXML
+    private Label errorPhoneNumber;
 
 
     @FXML
@@ -117,11 +120,18 @@ public class AddUserController extends BaseController {
 
     @FXML
     private void onAddBtnClick(ActionEvent actionEvent) throws SQLException, IOException {
+        if(showPassword.isSelected()){
+            passwordTextFieldHidden.setText(passwordText.getText());
+            passwordText.setVisible(false);
+            passwordTextFieldHidden.setVisible(true);
+        }
         userAddOrUpdate();    //diese funktion hier wechselt nur je nach dem Text im Button zu der update oder add
     }
 
 
     private void userAddOrUpdate() throws SQLException, IOException {
+
+
         String btnText = addAndSaveBtn.getText().toLowerCase(Locale.ROOT);
         switch (btnText) {
             case "hinzufügen":
@@ -235,13 +245,12 @@ public class AddUserController extends BaseController {
 
         trainer.setEmail(emailTextField.getText());
 
-
-        String photoPath = file == null ? "" : file.getPath();
-        if (!photoPath.equals("")) {
-            trainer.setPhoto(convertToBytes(photoPath));
-        } else {
-            trainer.setPhoto(listModel.getSelectedUser().getPhoto());
-        }
+            String photoPath = file == null ? "" : file.getPath();
+            if (!photoPath.equals("")) {
+                trainer.setPhoto(convertToBytes(photoPath));
+            } else {
+                trainer.setPhoto(listModel.getSelectedUser().getPhoto());
+            }
 
         trainer.setDescription(descriptionTextArea.getText());
         trainer.setDescriptionVisibility(descriptionCheckBox.isSelected());
@@ -264,8 +273,6 @@ public class AddUserController extends BaseController {
         byte[] imageBytes = fileInputStream.readAllBytes();
         return imageBytes;
     }
-
-
 
 
     @FXML
@@ -292,6 +299,7 @@ public class AddUserController extends BaseController {
         fillFormToUpdate();
         checkImageInDB();
 
+        UsabilityMethods.changeListenerForPhoneNr(phoneNmbrTextField, errorPhoneNumber);
         UsabilityMethods.changeListenerInputText(photoPathTextField, errorNoPhotoInDB);
         UsabilityMethods.changeListenerCheckBox(photoPathTextField, photoCheckBox);
 
@@ -301,11 +309,11 @@ public class AddUserController extends BaseController {
     //Befüllt ChoiceBox mit authorization
     @FXML
     public void fillChoiceBox() {
-            ObservableList<String> authorizationName = FXCollections.observableArrayList(
-                    listModel.filteredAuthorizationList.stream()
-                            .map(authorization -> authorization.getAuthority())
-                            .collect(Collectors.toList()));
-            authorizationChoiceBox.setItems(authorizationName);
+        ObservableList<String> authorizationName = FXCollections.observableArrayList(
+                listModel.filteredAuthorizationList.stream()
+                        .map(authorization -> authorization.getAuthority())
+                        .collect(Collectors.toList()));
+        authorizationChoiceBox.setItems(authorizationName);
     }
 
     // Macht Text Feldär unsichtbar
@@ -316,14 +324,16 @@ public class AddUserController extends BaseController {
         errorPassword.setVisible(false);
         passwordText.setVisible(false);
         errorEmail.setVisible(false);
+        errorPhoneNumber.setVisible(false);
 
         errorNoPhotoInDB.setVisible(false);
 
     }
 
     UserRepositoryJDBC userRepositoryJDBC = new UserRepositoryJDBC();
+
     /**
-     *Prüft, ob Username schon in Datenbank vorhanden ist
+     * Prüft, ob Username schon in Datenbank vorhanden ist
      */
     @FXML
     public boolean checkUser(String username) throws SQLException {
@@ -338,7 +348,7 @@ public class AddUserController extends BaseController {
         }
     }
 
-    public boolean checkEmail(String email){
+    public boolean checkEmail(String email) {
         if (userRepositoryJDBC.checkUniqueEmailAdresse(email)) {
             errorEmail.setVisible(false);
             return true;
@@ -351,10 +361,10 @@ public class AddUserController extends BaseController {
 
 
     /**
-     *  prüft ob ein Foto in DB vorhanden ist
+     * prüft ob ein Foto in DB vorhanden ist
      */
-    public  boolean checkImageInDB() throws IOException {
-        while (listModel.getSelectedUser() != null){
+    public boolean checkImageInDB() {
+        while (listModel.getSelectedUser() != null) {
             if (listModel.getSelectedUser().getPhoto() == null && !listModel.getSelectedUser().getPhotoVisibility()) {
                 System.out.println("foto empty");
                 errorNoPhotoInDB.setVisible(true);

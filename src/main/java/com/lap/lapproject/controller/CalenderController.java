@@ -73,16 +73,6 @@ public class CalenderController extends BaseController {
     }
 
 
-
-    public static List<LocalDate> checkedDays (LocalDate date) {
-        List<LocalDate> dayList = new ArrayList<>();
-
-        if(!isHolidayOrWeekend(date)) {
-            dayList.add(date);
-        }
-        return dayList;
-    }
-
     public static boolean isHolidayOrWeekend(LocalDate date) {
         return (isWeekend(date) || isHoliday(date));
 
@@ -90,7 +80,7 @@ public class CalenderController extends BaseController {
 
     private static boolean isWeekend(LocalDate ldate) {
 //
-        Integer day = new GregorianCalendar(ldate.getYear(),ldate.getMonthValue()-1, ldate.getDayOfMonth()).get(GregorianCalendar.DAY_OF_WEEK);
+        Integer day = new GregorianCalendar(ldate.getYear(),(ldate.getMonthValue()-1), ldate.getDayOfMonth()).get(GregorianCalendar.DAY_OF_WEEK);
         return day.equals(Calendar.SUNDAY) || day.equals(Calendar.SATURDAY);
     }
 
@@ -182,7 +172,6 @@ public class CalenderController extends BaseController {
         GregorianCalendar gc_silvester = holiday.get("silvester");
         GregorianCalendar newyear = holiday.get("newyear");
         GregorianCalendar epiphany = holiday.get("epiphany");
-
 
         if (gc_ostermonday.equals(gCDate) || gc_karfriday.equals(gCDate) || gc_rosemonday.equals(gCDate)
                 || gc_ascensionDay.equals(gCDate) || gc_whitMonday.equals(gCDate) || gc_corpusChristy.equals(gCDate)

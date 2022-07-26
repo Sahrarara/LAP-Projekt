@@ -120,7 +120,7 @@
                         <TableColumn fx:id="activeStatusColumn" maxWidth="275.5" minWidth="0.0" prefWidth="59.0" text="Aktiv" />
                         <TableColumn fx:id="emailColumn" prefWidth="215.5" text="E-Mail" />
                         <TableColumn fx:id="phoneColumn" minWidth="0.0" prefWidth="201.5" text="Telefon" />
-                        <TableColumn fx:id="descriptionColumn" prefWidth="346.5" text="Zusatztext" />
+                        <TableColumn fx:id="descriptionColumn" prefWidth="346.5" style="lineWrap: true;" text="Zusatztext" />
                      </columns>
                      <opaqueInsets>
                         <Insets />

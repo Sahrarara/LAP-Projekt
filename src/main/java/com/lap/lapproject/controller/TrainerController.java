@@ -165,21 +165,12 @@ public class TrainerController extends BaseController {
 
         firstNameColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getfName() + " " + dataFeatures.getValue().getlName()));
         descriptionColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>((dataFeatures.getValue().getDescriptionVisibility() || model.getAuthority().equals("admin")) ? dataFeatures.getValue().getDescription() : notVisibleText));
+
+
         emailColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>((dataFeatures.getValue().getEmailVisibility() || model.getAuthority().equals("admin")) ? dataFeatures.getValue().getEmail() : notVisibleText));
-
-
         phoneColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>((dataFeatures.getValue().getPhoneNmbrVisibility() || model.getAuthority().equals("admin"))  ? dataFeatures.getValue().getPhoneNmbr() : notVisibleText ));
 
         activeStatusColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getActiveStatus()));
-
-
-      /*  if(model.getLoggedInUser().getPhoto() != null) {
-            trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream(DataFeatures.getValue().getPhotoVisibility() ? DataFeatures.getValue().getPhoto() : imageNoVisible), 140, 200, false, false)))));
-            listModel.ListModel();
-        } else {
-        trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream(DataFeatures.getValue().getPhoto() : imageNoVisible), 140, 200, false, false)))));
-        }*/
-
 
         //wechsselt boolean Value auf Text ja oder nein
         activeStatusColumn.setCellFactory(col -> new TableCell<Trainer, Boolean>() {
@@ -213,27 +204,6 @@ public class TrainerController extends BaseController {
                 || trainer.getlName().toLowerCase(Locale.ROOT).contains(searchTerm)
                 || trainer.getEmail().toLowerCase(Locale.ROOT).contains(searchTerm)
                 || trainer.getPhoneNmbr().toLowerCase(Locale.ROOT).contains(searchTerm));
-        /*
-        String searchTerm = searchBar.getText();
-        ObservableList<Trainer> filteredList = FXCollections.observableArrayList();
-
-        if (searchTerm.equals("")) {
-            filteredList = listModel.trainerList;
-        } else {
-            for (Trainer elem : listModel.trainerList) {
-
-                if (elem.getfName().toUpperCase().contains(searchTerm.toUpperCase())
-                        || elem.getlName().toUpperCase().contains(searchTerm.toUpperCase())
-                        || elem.getEmail().toUpperCase().contains(searchTerm.toUpperCase())
-                        || elem.getPhoneNmbr().contains(searchTerm)
-//                        || (elem.getActiveStatus() && searchTerm.equalsIgnoreCase("ja"))
-//                        || (!elem.getActiveStatus() && searchTerm.equalsIgnoreCase("nein"))
-
-                ) {
-                    filteredList.add(elem);
-                }
-            }
-            */
 
     }
 
