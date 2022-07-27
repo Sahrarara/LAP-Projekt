@@ -78,7 +78,7 @@ public class ProgramController extends BaseController {
             alert.setHeaderText(null);
             alert.setContentText("Sind Sie sicher, dass Sie es löschen wollen?");
             Optional<ButtonType> action = alert.showAndWait();
-            if(action.get() == ButtonType.OK) {
+            if (action.get() == ButtonType.OK) {
 
                 try {
                     // check in DB how many courses use the particular program
@@ -95,11 +95,10 @@ public class ProgramController extends BaseController {
                     ex.printStackTrace();
                 }
             }
-            }else {
+        } else {
             QuickAlert.showInfo("Bitte gewünschte Zeile markieren");
         }
     }
-
 
 
     @FXML
@@ -165,7 +164,6 @@ public class ProgramController extends BaseController {
                 break;
         }
     }
-
 
 
     @FXML

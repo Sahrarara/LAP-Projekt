@@ -70,7 +70,7 @@ public class SidebarController extends BaseController {
 
     @FXML
     private void onUserBtnClick(ActionEvent actionEvent) {
-       // listModel.ListModel();
+        // listModel.ListModel();
         model.setPathForDetailView(Constants.PATH_TO_FXML_PROFILE);
     }
 
@@ -138,14 +138,14 @@ public class SidebarController extends BaseController {
     public boolean authorityVisibility() throws IOException {
         BufferedImage bImage = ImageIO.read(getClass().getResourceAsStream(Constants.Path_TO_IMG));
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        ImageIO.write(bImage, "png", bos );
-        byte [] imageNoVisible = bos.toByteArray();
+        ImageIO.write(bImage, "png", bos);
+        byte[] imageNoVisible = bos.toByteArray();
         String authority = model.getAuthority();
 
         switch (authority) {
             case "admin":
                 System.out.println("Admin privileges");
-                if(model.getLoggedInUser().getPhoto() != null) {
+                if (model.getLoggedInUser().getPhoto() != null) {
                     bannerImg.setFill(new ImagePattern(imageFromBytes(model.getLoggedInUser().getPhoto())));
                 } else {
                     bannerImg.setFill(new ImagePattern(imageFromBytes(imageNoVisible)));
@@ -154,7 +154,7 @@ public class SidebarController extends BaseController {
             case "coach":
                 System.out.println("Coach privileges");
 
-                if(model.getLoggedInUser().getPhoto() != null) {
+                if (model.getLoggedInUser().getPhoto() != null) {
                     bannerImg.setFill(new ImagePattern(imageFromBytes(model.getLoggedInUser().getPhoto())));
                 } else {
                     bannerImg.setFill(new ImagePattern(imageFromBytes(imageNoVisible)));

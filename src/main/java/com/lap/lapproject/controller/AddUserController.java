@@ -120,7 +120,7 @@ public class AddUserController extends BaseController {
 
     @FXML
     private void onAddBtnClick(ActionEvent actionEvent) throws SQLException, IOException {
-        if(showPassword.isSelected()){
+        if (showPassword.isSelected()) {
             passwordTextFieldHidden.setText(passwordText.getText());
             passwordText.setVisible(false);
             passwordTextFieldHidden.setVisible(true);
@@ -245,12 +245,12 @@ public class AddUserController extends BaseController {
 
         trainer.setEmail(emailTextField.getText());
 
-            String photoPath = file == null ? "" : file.getPath();
-            if (!photoPath.equals("")) {
-                trainer.setPhoto(convertToBytes(photoPath));
-            } else {
-                trainer.setPhoto(listModel.getSelectedUser().getPhoto());
-            }
+        String photoPath = file == null ? "" : file.getPath();
+        if (!photoPath.equals("")) {
+            trainer.setPhoto(convertToBytes(photoPath));
+        } else {
+            trainer.setPhoto(listModel.getSelectedUser().getPhoto());
+        }
 
         trainer.setDescription(descriptionTextArea.getText());
         trainer.setDescriptionVisibility(descriptionCheckBox.isSelected());
@@ -352,6 +352,7 @@ public class AddUserController extends BaseController {
 
     /**
      * checkEmail prüft ob die email bereits in der Datenbank vorhanden ist (bereits genutzt wird)
+     *
      * @param email - erwartet die zu prüfende email
      * @return gibt false zurück, wenn die email-adresse bereits in der DB existiert
      */

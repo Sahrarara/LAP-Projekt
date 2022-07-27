@@ -21,14 +21,6 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
 
     private static final String SELECT_ROOM_SQL_STRING = "SELECT * FROM rooms JOIN location ON rooms.location_id = location.location_id";
     private static final String SELECT_EQUIPMENT_ID_LIST = "SELECT * FROM equipment INNER JOIN rooms_equipment ON rooms_equipment.equipment_id=equipment.equipment_id WHERE rooms_equipment.room_id=(?) ";
-  /*  private static final String SEARCH_BOOKING_REPEATING_SQL = "SELECT * FROM rooms \n" +
-            "LEFT JOIN booking On rooms.room_id = booking.room_id \n" +
-            "LEFT JOIN location On rooms.location_id = location.location_id \n" +
-            "LEFT JOIN rooms_equipment ON rooms.room_id = rooms_equipment.room_id \n" +
-            "LEFT JOIN equipment ON rooms_equipment.equipment_id = equipment.equipment_id \n" +
-            "WHERE booking.datetime_start >= (?) \n" +
-            "AND booking.datetime_end <= (?)" ;
-*/
     private static final String ADD_NEW_ROOM_SQL_STRING = "INSERT INTO rooms(room_number, size, location_id) VALUES (?,?,?)";
     private static final String ADD_EQUIPMENT_SQL_STRING = "INSERT INTO rooms_equipment (room_id, equipment_id) VALUES (?,?)";
     private static final String DELETE_ROOM_SQL_STRING = "DELETE FROM rooms WHERE room_id=?";
@@ -37,7 +29,7 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
     private static final String GET_ROOM_COUNT_BY_UNIQUE_ROOM_NUMBER_SQL_STRING = "SELECT COUNT(*) AS unique_room_count FROM rooms WHERE room_number = (?) ";
 
     @Override
-    public List<Room> readAll()  {
+    public List<Room> readAll() {
         Connection connection = connect();
         List<Room> roomList = new ArrayList<>();
 
@@ -95,78 +87,6 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
 
         return roomList;
     }
-
-/*
-
-    public List<Room> getEmptyRoomsByTimeWindow(LocalDateTime startSearchTime, LocalDateTime endSearchTime) {
-        Connection connection = connect();
-        PreparedStatement statement = null;
-        PreparedStatement equipmentStatement = null;
-
-        ResultSet resultSet = null;
-        ResultSet equipmentResultSet = null;
-        List<Room> roomList = new ArrayList<>();
-
-        String startDateTime = startSearchTime.toString();
-
-        try {
-            assert connection != null;
-            statement = connection.prepareStatement(SEARCH_BOOKING_REPEATING_SQL);
-            statement.setTimestamp(1, Timestamp.valueOf(startSearchTime));
-            statement.setTimestamp(2, Timestamp.valueOf(endSearchTime));
-            resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-
-
-                Location location = new Location(
-                        resultSet.getInt("location_id"),
-                        resultSet.getString("street"),
-                        resultSet.getString("zip"),
-                        resultSet.getString("city"));
-
-
-                //TODO: Equipment von rooms_equipment hinzufügen
-                //Equipment equipment = new Equipment();
-
-                List<Equipment> equipments = new ArrayList<>();
-
-                Room room = new Room(
-                        resultSet.getInt("rooms.room_id"),
-                        resultSet.getInt("rooms.room_number"),
-                        resultSet.getInt("rooms.size"),
-                        location,
-                        equipments);
-
-                equipmentStatement = connection.prepareStatement(SELECT_EQUIPMENT_ID_LIST);
-                equipmentStatement.setInt(1, room.getId());
-                equipmentResultSet = equipmentStatement.executeQuery();
-
-                while (equipmentResultSet.next()) {
-                    Equipment equipment = new Equipment(
-                            equipmentResultSet.getInt("equipment_id"),
-                            equipmentResultSet.getString("equipment_description")
-                    );
-                    equipments.add(equipment);
-                }
-                room.setEquipments(equipments);
-
-                roomList.add(room);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-
-                if (connection != null) connection.close();
-            }catch (SQLException e) {
-                logger.error("Something went wrong, it did not work", e);
-            }
-        }
-        return roomList;
-    }
-
-*/
 
 
     @Override
@@ -304,13 +224,13 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
     }
 
 
-    public int getRoomCountByRoomNumber(int roomNumber){
+    public int getRoomCountByRoomNumber(int roomNumber) {
         Connection connection = connect();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         int roomCount = 0;
         try {
-            preparedStatement = connection.prepareStatement(GET_ROOM_COUNT_BY_UNIQUE_ROOM_NUMBER_SQL_STRING  );
+            preparedStatement = connection.prepareStatement(GET_ROOM_COUNT_BY_UNIQUE_ROOM_NUMBER_SQL_STRING);
             preparedStatement.setInt(1, roomNumber);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -330,7 +250,5 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
         }
         return roomCount;
     }
-
-
 
 }

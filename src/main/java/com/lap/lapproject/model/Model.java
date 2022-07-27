@@ -55,11 +55,10 @@ public class Model {
     }
 
 
-
     private ObjectProperty<User> loggedInUser = new SimpleObjectProperty<>();
 
-    public String getAuthority(){
-        return getLoggedInUser() == null ? "guest" :  getLoggedInUser().getAuthority();
+    public String getAuthority() {
+        return getLoggedInUser() == null ? "guest" : getLoggedInUser().getAuthority();
     }
 
     public User getLoggedInUser() {
@@ -75,8 +74,9 @@ public class Model {
         this.loggedInUser.set(loggedInUser);
     }
 
-    public BookingModel getBookingModel(){ return bookingModel; }
-
+    public BookingModel getBookingModel() {
+        return bookingModel;
+    }
 
 
 }

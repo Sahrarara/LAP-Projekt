@@ -23,9 +23,10 @@ public class Repository {
 
     /**
      * Stellt eine Verbindung zur Datenbank mit einer try...Catch abfrage her, damit ein Error aufgefangen werden kann
+     *
      * @return
      */
-protected static Connection connect() {
+    protected static Connection connect() {
         Connection connection;
         try {
             connection = DriverManager.getConnection(dbPrefix + location, dbUser, dbPw);

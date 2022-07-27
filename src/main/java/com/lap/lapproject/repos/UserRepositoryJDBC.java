@@ -90,7 +90,6 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
     }
 
 
-
     @Override
     public void deleteUser(User user) throws SQLException {
         Connection connection = connect();
@@ -110,7 +109,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
 
 
     @Override
-    public void updateUser(User user) throws SQLException{
+    public void updateUser(User user) throws SQLException {
         Connection connection = connect();
         PreparedStatement preparedStatement = null;
         try {
@@ -178,7 +177,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
 
 
     @Override
-    public List<Trainer> readAllTrainer(){
+    public List<Trainer> readAllTrainer() {
         Connection connection = connect();
         List<Trainer> trainerList = new ArrayList<>();
         PreparedStatement statement = null;
@@ -254,7 +253,6 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
     }
 
 
-
     @Override
     public boolean checkUser(String username, String pass) throws SQLException {
         Connection connection = connect();
@@ -287,7 +285,6 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
 
         return false;
     }
-
 
 
     @Override
@@ -419,7 +416,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
     }
 
     @Override
-    public boolean checkUniqueEmailAdresse(String emailAdresse){
+    public boolean checkUniqueEmailAdresse(String emailAdresse) {
         Connection connection = connect();
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -444,7 +441,7 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
         } finally {
             try {
                 if (connection != null) connection.close();
-            }catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -470,7 +467,6 @@ public class UserRepositoryJDBC extends Repository implements UserRepository {
             if (connection != null) connection.close();
         }
     }
-
 
 
 }

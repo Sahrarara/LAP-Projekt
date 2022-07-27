@@ -37,7 +37,7 @@ public abstract class User {
     }
 
     // addUser konstruktor für Formular
-    public User(String username, String title, Boolean activeStatus,String firstName, String lastName,
+    public User(String username, String title, Boolean activeStatus, String firstName, String lastName,
                 String userPassword,
                 String authority, String description, String phoneNmbr,
                 String email, byte[] photo, Boolean descriptionVisibility,
@@ -73,7 +73,7 @@ public abstract class User {
     }
 
     // UserRepositoryJDBC
-    public User(int id, String username, String title, Boolean activeStatus,String firstName, String lastName,
+    public User(int id, String username, String title, Boolean activeStatus, String firstName, String lastName,
                 String userPassword,
                 String authority, String description, String phoneNmbr,
                 String email, byte[] photo, Boolean descriptionVisibility,
@@ -96,34 +96,33 @@ public abstract class User {
         this.photoVisibility = new SimpleBooleanProperty(photoVisibility);
     }
 
-   /* // ProfileController
-    public User(int id, String description, String phoneNmbr, String email, byte[] photo) {
+    /* // ProfileController
+     public User(int id, String description, String phoneNmbr, String email, byte[] photo) {
+         this.id = new SimpleIntegerProperty(id);
+         this.description = new SimpleStringProperty(description);
+         this.phoneNmbr = new SimpleStringProperty(phoneNmbr);
+         this.email = new SimpleStringProperty(email);
+         this.photo = photo;
+     }*/
+    // ProfileController
+    public User(int id, String description, String phoneNmbr, String email, byte[] photo, Boolean photoVisibility) {
         this.id = new SimpleIntegerProperty(id);
         this.description = new SimpleStringProperty(description);
         this.phoneNmbr = new SimpleStringProperty(phoneNmbr);
         this.email = new SimpleStringProperty(email);
         this.photo = photo;
-    }*/
-   // ProfileController
-   public User(int id, String description, String phoneNmbr, String email, byte[] photo, Boolean photoVisibility) {
-       this.id = new SimpleIntegerProperty(id);
-       this.description = new SimpleStringProperty(description);
-       this.phoneNmbr = new SimpleStringProperty(phoneNmbr);
-       this.email = new SimpleStringProperty(email);
-       this.photo = photo;
-       this.photoVisibility = new SimpleBooleanProperty(photoVisibility);
-   }
+        this.photoVisibility = new SimpleBooleanProperty(photoVisibility);
+    }
 
     @Override
-    public boolean equals (Object r) {
-        if(!(r instanceof User)) {
+    public boolean equals(Object r) {
+        if (!(r instanceof User)) {
             return false;
         }
         User u1 = (User) r;
-        boolean b =  this.id.getValue().equals(u1.id.getValue());
+        boolean b = this.id.getValue().equals(u1.id.getValue());
         return b;
     }
-
 
 
     public int getId() {

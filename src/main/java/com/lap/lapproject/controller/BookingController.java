@@ -279,7 +279,6 @@ public class BookingController {
     }
 
 
-
     // combobox
     @FXML
     private void onFilterButtonClick(ActionEvent actionEvent) {
@@ -320,7 +319,6 @@ public class BookingController {
     }
 
 
-
     public void clearComboBoxSelection() {
         courseNameComboBox.getSelectionModel().clearSelection();
         courseNameComboBox.setButtonCell(new ListCell<Course>());
@@ -334,7 +332,6 @@ public class BookingController {
         trainerComboBox.getSelectionModel().clearSelection();
         trainerComboBox.setButtonCell(new ListCell<Trainer>());
     }
-
 
 
     Map<Integer, Predicate> predicateMap = new HashMap<>();
@@ -425,6 +422,7 @@ public class BookingController {
 
     /**
      * Es werden bei eingabe der gesuchten Namen die Daten gefiltert
+     *
      * @param actionEvent erwartet keinen Parameter
      */
     @FXML
@@ -462,7 +460,6 @@ public class BookingController {
     private void onCloseIconClick(ActionEvent actionEvent) {
         searchBar.setText("");
     }
-
 
 
 }

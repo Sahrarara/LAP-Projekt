@@ -1,6 +1,7 @@
 package com.lap.lapproject.repos;
 
 import com.lap.lapproject.model.Booking;
+
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.List;
 public interface BookingRepository {
 
     ArrayList<Booking> readAll() throws SQLException;
+
     int addBooking(Booking booking) throws SQLException;
 
     void deleteBooking(Booking booking) throws SQLException;

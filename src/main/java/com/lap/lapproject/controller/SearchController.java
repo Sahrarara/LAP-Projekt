@@ -80,13 +80,14 @@ public class SearchController {
      * Es wird mit Ausführen dieser Methode das Datum geprüft, wenn kein Datum angegeben ist, wird das aktuelle Datum für die Suche nach leeren Räumen genommen.
      * Wenn das Datum valide ist, dass heißt, das Startdatum liegt nicht hinter dem Enddatum und die Startzeit liegt nicht hinter der end Uhrzeit, wird die Suche
      * nach leeren Räumen gestartet und der searchTable wird upgedatet und befüllt
+     *
      * @param actionEvent keine parameter notwendig
      */
     @FXML
     public void onButtonClickSearch(ActionEvent actionEvent) {
         LocalDate dateStart = null;
         LocalDate dateEnd = null;
-        if(startDateSearchDatePicker.getValue() == null || endDateSearchDatePicker.getValue() == null){
+        if (startDateSearchDatePicker.getValue() == null || endDateSearchDatePicker.getValue() == null) {
             dateStart = LocalDate.now();
             dateEnd = dateStart;
         } else {
@@ -97,12 +98,12 @@ public class SearchController {
         LocalTime timeStart = startSearchTime.getValue();
         LocalTime timeEnd = searchEndTime.getValue();
 
-        BookingModel bookingModel = new BookingModel( model);
+        BookingModel bookingModel = new BookingModel(model);
         bookingModel.loadBookingIntoCalendar();
 
         boolean validDateTime = isValidDateTimeForSearch(dateStart, dateEnd, timeStart, timeEnd);
 
-        if(validDateTime) {
+        if (validDateTime) {
             listModel.roomList.setAll(bookingModel.findEmptyRooms(dateStart, dateEnd, timeStart, timeEnd));
             updateSearchTable();
         }
@@ -111,21 +112,21 @@ public class SearchController {
     /**
      * Diese Methode überprüft ob der gesuchte Starttag nicht nach dem gesuchten EndTag und die gesuchte Startzeit nicht nach der gesuchen Endzeit liegt.
      * Sonst wird eine Errortextmeldung eingeblendet, sonsten ist die Sichtbarkeit der Textmeldung auf (false) gesetzt.
+     *
      * @param dateStart - der Starttag ab dem gesucht wird
-     * @param dateEnd - der EndTag bis zu dem gesucht wird
+     * @param dateEnd   - der EndTag bis zu dem gesucht wird
      * @param timeStart - die Startueot ab der gesucht wird
-     * @param timeEnd - die Endzeit bis zu der gesucht wird
+     * @param timeEnd   - die Endzeit bis zu der gesucht wird
      * @return returnt true wenn das Datum und die Uhrzeit in der richtigen Reihenfolge stehen, sonst false
      */
     private boolean isValidDateTimeForSearch(LocalDate dateStart, LocalDate dateEnd, LocalTime timeStart, LocalTime timeEnd) {
 
         try {
-            if(dateStart.isAfter(LocalDate.now()) || dateStart.isAfter(dateEnd)){
+            if (dateStart.isAfter(LocalDate.now()) || dateStart.isAfter(dateEnd)) {
                 searchLabel.setVisible(true);
                 searchLabel.setText("Das Datum muss mindestens mit dem heutigen beginnen \nund darf nicht nach dem Enddatum stehen.");
                 return false;
-            }
-            else if( timeStart.isAfter(timeEnd)  ){
+            } else if (timeStart.isAfter(timeEnd)) {
                 searchLabel.setVisible(true);
                 searchLabel.setText("Die Startzeit darf nicht größer sein als die Endzeit");
                 return false;

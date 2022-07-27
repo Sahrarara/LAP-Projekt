@@ -66,7 +66,6 @@ public class ChangePasswordController extends Repository {
     }
 
 
-
     private boolean isValidate() {
         if (currentPasswordTF.getText() != null && !(currentPasswordTF.getText().isBlank())
                 && newPasswordTF.getText() != null && !(newPasswordTF.getText().isBlank())
@@ -81,14 +80,13 @@ public class ChangePasswordController extends Repository {
     }
 
 
-
     private boolean checkPassword() {
 
-        if(PasswordSecurity.isPasswordValid(newPasswordTF.getText())) {
+        if (PasswordSecurity.isPasswordValid(newPasswordTF.getText())) {
 
             if (newPasswordTF.getText().equals(repeatNewPasswordTF.getText())) {
 
-                if(!currentPasswordTF.getText().equals(newPasswordTF.getText())) {
+                if (!currentPasswordTF.getText().equals(newPasswordTF.getText())) {
                     return true;
                 }
                 JOptionPane.showMessageDialog(null, "Das neue Passwort kann nicht wie alte Passwort sein",
@@ -106,7 +104,6 @@ public class ChangePasswordController extends Repository {
     }
 
 
-
     @FXML
     private void onAbortBtnClick(ActionEvent actionEvent) {
         getCurrentStage().close();
@@ -122,19 +119,9 @@ public class ChangePasswordController extends Repository {
     }
 
 
-    private Stage getCurrentStage(){
+    private Stage getCurrentStage() {
         return (Stage) currentPasswordTF.getScene().getWindow();
     }
-
-
-
-
-
-
-
-
-
-
 
 
 }

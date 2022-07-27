@@ -11,8 +11,9 @@ import java.sql.SQLException;
  */
 public interface RoomsEquipmentRepository {
     RoomsEquipment addRoomEquipmentRT(RoomsEquipment roomsEquipment) throws SQLException;
+
     //void updateRoomEquipmentRT(RoomsEquipment roomsEquipment) throws SQLException;
-    void deleteRoomEquipmentRT(RoomsEquipment roomsEquipment)  throws SQLException;
+    void deleteRoomEquipmentRT(RoomsEquipment roomsEquipment) throws SQLException;
 
 
 }

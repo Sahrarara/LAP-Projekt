@@ -10,10 +10,12 @@ import java.util.List;
  * diese Methoden müssen in der Klasse die dieses Interface implementiert definiert werden.
  */
 public interface LocationRepository {
-   List<Location> readAll() throws SQLException;
-   int addLocation(Location location) throws SQLException;
+    List<Location> readAll() throws SQLException;
 
-   void deleteLocation(Location location) throws SQLException;
-   void updateLocation(Location location) throws SQLException;
+    int addLocation(Location location) throws SQLException;
+
+    void deleteLocation(Location location) throws SQLException;
+
+    void updateLocation(Location location) throws SQLException;
 
 }

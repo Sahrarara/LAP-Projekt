@@ -74,6 +74,7 @@ public class CalenderController extends BaseController {
 
     /**
      * Prüft auf Wochenenden und Feiertage
+     *
      * @param date erwartet ein LocalDate
      * @return
      */
@@ -84,17 +85,19 @@ public class CalenderController extends BaseController {
 
     /**
      * Prüft ob der übergebene Tag (LocalDate Parameter) ein Samstag oder Sonntag ist.
+     *
      * @param ldate erwartet ein LocalDate
      * @return
      */
     private static boolean isWeekend(LocalDate ldate) {
-        Integer day = new GregorianCalendar(ldate.getYear(),(ldate.getMonthValue()-1), ldate.getDayOfMonth()).get(GregorianCalendar.DAY_OF_WEEK);
+        Integer day = new GregorianCalendar(ldate.getYear(), (ldate.getMonthValue() - 1), ldate.getDayOfMonth()).get(GregorianCalendar.DAY_OF_WEEK);
         return day.equals(Calendar.SUNDAY) || day.equals(Calendar.SATURDAY);
     }
 
 
     /**
      * Es wird mit der Gausschen "Osterregel" alle Feiertage heraus gefiltert, welche die keine veränderlichen Tage sind wie z.B. Neujahr, sind hardgecodet geschrieben.
+     *
      * @param date - Ein LocalDate wird erwartet
      * @return
      */
@@ -121,8 +124,7 @@ public class CalenderController extends BaseController {
         if (day > 31) {
             day = day % 31;
             month = 3;
-        }
-        else if (day <= 31){
+        } else if (day <= 31) {
             month = 2;
         }
 
@@ -145,7 +147,7 @@ public class CalenderController extends BaseController {
             holiday.put("whitSunday", gc_whitSunday);
             GregorianCalendar gc_whitMonday = new GregorianCalendar(gc_eastersunday.get(Calendar.YEAR), gc_eastersunday.get(Calendar.MONTH), (gc_eastersunday.get(Calendar.DATE) + 50));
             holiday.put("whitMonday", gc_whitMonday);
-            GregorianCalendar gc_corpusChristy = new GregorianCalendar(gc_eastersunday.get(Calendar.YEAR), (gc_eastersunday.get(Calendar.MONTH)-1), (gc_eastersunday.get(Calendar.DATE) + 60));
+            GregorianCalendar gc_corpusChristy = new GregorianCalendar(gc_eastersunday.get(Calendar.YEAR), (gc_eastersunday.get(Calendar.MONTH) - 1), (gc_eastersunday.get(Calendar.DATE) + 60));
             holiday.put("corpusChristy", gc_corpusChristy);
             GregorianCalendar gc_laborDay = new GregorianCalendar(year, 4, 1);
             holiday.put("laborDay", gc_laborDay);

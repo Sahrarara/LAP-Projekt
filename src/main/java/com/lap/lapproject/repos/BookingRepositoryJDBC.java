@@ -34,11 +34,9 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
             "UPDATE booking SET room_id=?, user_id=?, trainer_id=?, course_id=?," +
                     "recurrence_rule=?, datetime_start=?, datetime_end=? WHERE booking_id=?";
 
-
     private static final String GET_BOOKINGS_COUNT_BY_PROGRAM_ID_JOIN_LOCATION_ID_SQL_STRING = "SELECT COUNT(*) AS booking_count_by_location FROM booking JOIN rooms ON booking.room_id=rooms.room_id JOIN location ON location.location_id=rooms.location_id WHERE rooms.location_id =(?) ";
     private static final String GET_BOOKINGS_COUNT_BY_ROOM_ID_SQL_STRING = "SELECT COUNT(*) AS rooms_count FROM booking WHERE room_id = (?) ";
     private static final String GET_BOOKINGS_COUNT_BY_TRAINER_ID_SQL_STRING = "SELECT COUNT(*) AS trainer_count FROM booking WHERE trainer_id = (?) ";
-
 
     @Override
     public ArrayList<Booking> readAll() {
@@ -56,24 +54,20 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
             while (resultSet.next()) {
 //                int booker = resultSet.getInt("user_id");
 
-
                 Location location = new Location(
                         resultSet.getInt("location_id"),
                         resultSet.getString("street"),
                         resultSet.getString("zip"),
                         resultSet.getString("city"));
 
-
                 //TODO: Equipment von rooms_equipment hinzufügen
                 //Equipment equipment = new Equipment();
-
 
                 Room room = new Room(
                         resultSet.getInt("rooms.room_id"),
                         resultSet.getInt("rooms.room_number"),
                         resultSet.getInt("rooms.size"),
                         location);
-
 
                 Trainer trainer = new Trainer(
                         resultSet.getInt("trainer_id"),
@@ -105,7 +99,6 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
                         courseEnd,
                         resultSet.getInt("group_size"));
 
-
                 LocalDateTime startTime = resultSet.getTimestamp("datetime_start").toLocalDateTime();
                 LocalDateTime endTime = resultSet.getTimestamp("datetime_end").toLocalDateTime();
 
@@ -121,15 +114,14 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try{
+            try {
                 if (connection != null) connection.close();
-            }catch (SQLException e){
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
         return bookingList;
     }
-
 
 
     public int addBooking(Booking booking) throws SQLException {
@@ -167,7 +159,6 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
     }
 
 
-
     public void deleteBooking(Booking booking) throws SQLException {
         Connection connection = connect();
         PreparedStatement preparedStatement = null;
@@ -181,7 +172,6 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
             if (connection != null) connection.close();
         }
     }
-
 
 
     @Override
@@ -213,7 +203,6 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
     }
 
 
-
     public String convertRecurrenceRuleFromTextToFrequency(String recurrenceRuleText) {
         String recurrenceRule;
         switch (recurrenceRuleText) {
@@ -232,7 +221,6 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
         }
         return recurrenceRule;
     }
-
 
 
     public static String convertRecurrenceRuleFromFrequencyToText(String recurrenceRuleFrequency) {
@@ -255,7 +243,6 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
 
 
     /**
-     *
      * @param locationId
      * @return
      * @throws SQLException
@@ -267,7 +254,7 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
         ResultSet resultSet = null;
         int roomsCountByLocationId = 0;
         try {
-            preparedStatement = connection.prepareStatement(GET_BOOKINGS_COUNT_BY_PROGRAM_ID_JOIN_LOCATION_ID_SQL_STRING );
+            preparedStatement = connection.prepareStatement(GET_BOOKINGS_COUNT_BY_PROGRAM_ID_JOIN_LOCATION_ID_SQL_STRING);
             preparedStatement.setInt(1, locationId);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -283,7 +270,6 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
     }
 
 
-
     @Override
     public int getBookingCountByRoomId(int roomId) throws SQLException {
         Connection connection = connect();
@@ -291,7 +277,7 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
         ResultSet resultSet = null;
         int bookingsCountByRoomId = 0;
         try {
-            preparedStatement = connection.prepareStatement(GET_BOOKINGS_COUNT_BY_ROOM_ID_SQL_STRING );
+            preparedStatement = connection.prepareStatement(GET_BOOKINGS_COUNT_BY_ROOM_ID_SQL_STRING);
             preparedStatement.setInt(1, roomId);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -307,7 +293,6 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
     }
 
 
-
     @Override
     public int getBookingCountByTrainerId(int trainerId) throws SQLException {
         Connection connection = connect();
@@ -315,7 +300,7 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
         ResultSet resultSet = null;
         int bookingsCountByTrainerId = 0;
         try {
-            preparedStatement = connection.prepareStatement(GET_BOOKINGS_COUNT_BY_TRAINER_ID_SQL_STRING );
+            preparedStatement = connection.prepareStatement(GET_BOOKINGS_COUNT_BY_TRAINER_ID_SQL_STRING);
             preparedStatement.setInt(1, trainerId);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {

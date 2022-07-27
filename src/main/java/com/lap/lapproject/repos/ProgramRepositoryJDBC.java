@@ -62,12 +62,12 @@ public class ProgramRepositoryJDBC extends Repository implements ProgramReposito
             preparedStatement.executeQuery();
             resultSet = preparedStatement.getGeneratedKeys();
 
-            while (resultSet.next() ) {
+            while (resultSet.next()) {
                 generatedKey = resultSet.getInt(1);
                 program.setId(generatedKey);
             }
-            
-        } catch (SQLException e ) {
+
+        } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             if (connection != null) connection.close();
@@ -98,7 +98,7 @@ public class ProgramRepositoryJDBC extends Repository implements ProgramReposito
 
 
     //TODO: search function here
-    public void searchProgram(Program program) throws SQLException{
+    public void searchProgram(Program program) throws SQLException {
         Connection connection = connect();
     }
 
@@ -147,7 +147,7 @@ public class ProgramRepositoryJDBC extends Repository implements ProgramReposito
         ResultSet resultSet = null;
         int programCount = 0;
         try {
-            preparedStatement = connection.prepareStatement(GET_PROGRAM_COUNT_BY_UNIQUE_PROGRAM_NAME_SQL_STRING );
+            preparedStatement = connection.prepareStatement(GET_PROGRAM_COUNT_BY_UNIQUE_PROGRAM_NAME_SQL_STRING);
             preparedStatement.setString(1, programName);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {

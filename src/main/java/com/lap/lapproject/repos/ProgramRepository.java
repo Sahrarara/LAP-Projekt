@@ -13,9 +13,14 @@ import java.util.List;
 public interface ProgramRepository {
 
     List<Program> readProgram() throws SQLException;
+
     int addProgram(Program program) throws SQLException;
+
     void updateProgram(Program program) throws SQLException;
+
     void deleteProgram(Program program) throws SQLException;
+
     Program getProgramByProgramName(String programName) throws SQLException;
+
     int getProgramsCountByProgramName(String programName) throws SQLException;
 }

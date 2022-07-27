@@ -16,7 +16,7 @@ import java.sql.SQLException;
 /**
  * Diese Klasse extends BaseController und fügt dem Equipment (Klasse Equipment) einen String der Datenbank hinzu oder updated einen bereits vorhandenen String
  */
-public class AddEquipmentController extends BaseController{
+public class AddEquipmentController extends BaseController {
     EquipmentRepositoryJDBC equipmentRepositoryJDBC = new EquipmentRepositoryJDBC();
     RoomRepositoryJDBC roomRepositoryJDBC = new RoomRepositoryJDBC();
     @FXML
@@ -40,6 +40,7 @@ public class AddEquipmentController extends BaseController{
 
     /**
      * Schließt die aktuelle gestagete Anwendung
+     *
      * @param actionEvent (hier wird kein Parameter benötigt)
      */
     @FXML
@@ -51,15 +52,16 @@ public class AddEquipmentController extends BaseController{
      * Diese Methode fügt der EquipmentListe eine weitere Ausstattung hinzu, dabei wird abgefragt ob der Name der Ausstattung bereits existiert
      * wenn nicht, dann wird der Name der Datenbank hinzugefügt. Ist der Name bereits in der Datenbank existent, wird ein Label mit der Information, dass der Name schon vorhanden ist, aufgerufen
      * Im anderen Fall wird der Name des Equipments in der Datenbank upgedated.
+     *
      * @param actionEvent (es wird kein Parameter übergeben/ benötigt)
      * @throws SQLException wenn das Element bereits existiert
      */
     @FXML
     private void onAddBtnClick(ActionEvent actionEvent) throws SQLException {
-        Equipment equipment= new Equipment(nameTextField.getText());
+        Equipment equipment = new Equipment(nameTextField.getText());
         EquipmentRepositoryJDBC equipmentRepositoryJDBC = new EquipmentRepositoryJDBC();
 
-        RoomRepositoryJDBC roomRepositoryJDBC= new RoomRepositoryJDBC();
+        RoomRepositoryJDBC roomRepositoryJDBC = new RoomRepositoryJDBC();
 
 
         if (!nameTextField.getText().isBlank()) {     //method is only used if textfield is not empty
@@ -93,13 +95,13 @@ public class AddEquipmentController extends BaseController{
                 String selectedEquipmentName = listModel.getSelectedEquipment().getDescription();
 
                 if (!newEquipmentName.equals(selectedEquipmentName)) {
-                    if ( equipmentRepositoryJDBC.getEquipmentCountByEquipmentDescription(newEquipmentName)  == 0) {
+                    if (equipmentRepositoryJDBC.getEquipmentCountByEquipmentDescription(newEquipmentName) == 0) {
                         updateEquipment();
 
-                    }else {
+                    } else {
                         UsabilityMethods.addMessage(equipmentNameNoticeLabel, "Diese Ausstattung existiert schon!");
                     }
-                }else {
+                } else {
                     updateEquipment();
                 }
             }
@@ -110,9 +112,10 @@ public class AddEquipmentController extends BaseController{
 
     /**
      * holt sich den String aus dem Textfield
+     *
      * @return
      */
-    private Stage getCurrentStage(){
+    private Stage getCurrentStage() {
         return (Stage) nameTextField.getScene().getWindow();
     }
 
@@ -127,7 +130,7 @@ public class AddEquipmentController extends BaseController{
     /**
      * Fügt den String vom Textfield durch das ListModel in die Datenbank ein, löscht den String aus dem Textfeld wieder und schließt die Anwendung.
      */
-    private  void updateEquipment() {
+    private void updateEquipment() {
         listModel.getSelectedEquipment().setDescription(nameTextField.getText());
 //        equipmentRepositoryJDBC.updateEquipment(listModel.getSelectedEquipment());
         listModel.equipmentList.set(listModel.equipmentList.indexOf(listModel.getSelectedEquipment()), listModel.getSelectedEquipment());

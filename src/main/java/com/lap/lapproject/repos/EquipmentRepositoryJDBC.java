@@ -34,7 +34,7 @@ public class EquipmentRepositoryJDBC extends Repository implements EquipmentRepo
                 Equipment equipment = new Equipment(rs.getInt("equipment_id"), rs.getString(
                         "equipment_description"));
 
-              equipmentList.add(equipment);
+                equipmentList.add(equipment);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -58,12 +58,12 @@ public class EquipmentRepositoryJDBC extends Repository implements EquipmentRepo
             preparedStatement.executeQuery();
             resultSet = preparedStatement.getGeneratedKeys();
 
-            while (resultSet.next() ) {
+            while (resultSet.next()) {
                 generatedKey = resultSet.getInt(1);
                 equipment.setId(generatedKey);
             }
 
-        } catch (SQLException e ) {
+        } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             if (connection != null) connection.close();
@@ -113,7 +113,7 @@ public class EquipmentRepositoryJDBC extends Repository implements EquipmentRepo
         ResultSet resultSet = null;
         int equipmentsCount = 0;
         try {
-            preparedStatement = connection.prepareStatement(GET_EQUIPMENT_COUNT_BY_UNIQUE_EQUIPMENT_DESCRIPTION_SQL_STRING );
+            preparedStatement = connection.prepareStatement(GET_EQUIPMENT_COUNT_BY_UNIQUE_EQUIPMENT_DESCRIPTION_SQL_STRING);
             preparedStatement.setString(1, equipmentDescription);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {

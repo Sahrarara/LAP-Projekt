@@ -89,6 +89,7 @@ public class AddCourseController extends BaseController {
 
     /**
      * Schließt die AddCourse-Anwendung wieder
+     *
      * @param actionEvent
      */
     @FXML
@@ -100,6 +101,7 @@ public class AddCourseController extends BaseController {
      * Beim ausführen diese Aktion wird der Kursname, Art des Programms bzw. Veranstaltung Kursdatum und Gruppengröße hinzugefügt
      * dabei wird geprüft ob der Kursname bereits existiert, ob das Datum der korrekten Form entspricht und Kursbeginn nicht nach Kursende steht und sich somit nicht überschneiden.
      * Die Felder dürfen nicht leer sein
+     *
      * @param actionEvent
      * @throws SQLException - wenn nicht alle Felder ausgefüllt sind
      */
@@ -127,11 +129,10 @@ public class AddCourseController extends BaseController {
         LocalDate today = LocalDate.now();
 
 
-        if (courseEnd.compareTo(courseStart) < 0 ) {
+        if (courseEnd.compareTo(courseStart) < 0) {
             UsabilityMethods.addMessage(checkDateNoticeLable, "Kursbeginn ist nach dem Kursende!");
             return;
         }
-
 
 
         if (courseChoiceBox.getValue() == null) {
@@ -147,65 +148,66 @@ public class AddCourseController extends BaseController {
         int programId = program.getId();
 
 
-       if (!courseNameTextField.getText().isBlank()
-               && !courseChoiceBox.getValue().toString().isBlank()
-               && !(courseStart == null) && !(courseEnd == null)
-               && !groupSizeTextField.getText().isBlank()) {
-           int groupSize = Integer.parseInt(groupSizeTextField.getText());
+        if (!courseNameTextField.getText().isBlank()
+                && !courseChoiceBox.getValue().toString().isBlank()
+                && !(courseStart == null) && !(courseEnd == null)
+                && !groupSizeTextField.getText().isBlank()) {
+            int groupSize = Integer.parseInt(groupSizeTextField.getText());
 
-           Course course = new Course(
-                   courseName,
-                   new Program(programId, programName),
-                   courseStart.atStartOfDay().toLocalDate(),
-                   courseEnd.atStartOfDay().toLocalDate(),
-                   groupSize);
+            Course course = new Course(
+                    courseName,
+                    new Program(programId, programName),
+                    courseStart.atStartOfDay().toLocalDate(),
+                    courseEnd.atStartOfDay().toLocalDate(),
+                    groupSize);
 
-           int courseUniqueNameCount;
-           courseUniqueNameCount = courseRepo.getCourseCountByCourseName(courseNameTextField.getText());
-           if (listModel.getSelectedCourse() == null) {
-               if (courseStart.isBefore(today)) {
-                   UsabilityMethods.addMessage(checkDateNoticeLable, "Kursbeginn ist in der Vergangenheit!");
-                   return;
-               }
+            int courseUniqueNameCount;
+            courseUniqueNameCount = courseRepo.getCourseCountByCourseName(courseNameTextField.getText());
+            if (listModel.getSelectedCourse() == null) {
+                if (courseStart.isBefore(today)) {
+                    UsabilityMethods.addMessage(checkDateNoticeLable, "Kursbeginn ist in der Vergangenheit!");
+                    return;
+                }
 
-               if (courseUniqueNameCount == 0) { // check if this course is already in DB
-                   try {
-                       courseRepo.addCourse(course);
-                       listModel.courseList.add(course);
-                       listModel.bookingList.setAll(bookingRepositoryJDBC.readAll());//update booking
-                       courseRepo.readAll();
-                       moveToCoursePage();
-                   } catch (SQLException e) {
-                       e.printStackTrace();
-                   }
-               } else {
-                   UsabilityMethods.addMessage(courseUniqueNameNoticeLable, "So ein Veranstaltungsname existiert schon in DB!");
-               }
+                if (courseUniqueNameCount == 0) { // check if this course is already in DB
+                    try {
+                        courseRepo.addCourse(course);
+                        listModel.courseList.add(course);
+                        listModel.bookingList.setAll(bookingRepositoryJDBC.readAll());//update booking
+                        courseRepo.readAll();
+                        moveToCoursePage();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    UsabilityMethods.addMessage(courseUniqueNameNoticeLable, "So ein Veranstaltungsname existiert schon in DB!");
+                }
 
-           } else {
-               //Update logik
-               course = listModel.getSelectedCourse();
-               //if
-               String newCourseName = courseNameTextField.getText();
-               String selectedCourseName = listModel.getSelectedCourse().getCourseName();
+            } else {
+                //Update logik
+                course = listModel.getSelectedCourse();
+                //if
+                String newCourseName = courseNameTextField.getText();
+                String selectedCourseName = listModel.getSelectedCourse().getCourseName();
 
-               if (!newCourseName.equals(selectedCourseName)) {
-                   if (courseRepo.getCourseCountByCourseName(newCourseName) == 0) {
-                       updateCourse();
-                   }else {
-                       UsabilityMethods.addMessage(courseUniqueNameNoticeLable, "So ein Veranstaltungsname existiert schon in DB!");
-                   }
-               }else {
-                   updateCourse();
-               }
-           }
-       } else {
-               QuickAlert.showError("Bitte alle Felder ausfüllen");
-           }
+                if (!newCourseName.equals(selectedCourseName)) {
+                    if (courseRepo.getCourseCountByCourseName(newCourseName) == 0) {
+                        updateCourse();
+                    } else {
+                        UsabilityMethods.addMessage(courseUniqueNameNoticeLable, "So ein Veranstaltungsname existiert schon in DB!");
+                    }
+                } else {
+                    updateCourse();
+                }
+            }
+        } else {
+            QuickAlert.showError("Bitte alle Felder ausfüllen");
+        }
     }
 
     /**
      * Der aktuelle Status des Fensters wird erfasst, hier wird durch das groupSizeTextField erkannt welches Fenster gemeint ist
+     *
      * @return
      */
     private Stage getCurrentStage() {
@@ -223,6 +225,7 @@ public class AddCourseController extends BaseController {
     /**
      * Updated alle Felder und fügt die geänderten Einträge in der DatenBank ein.
      * Am Ende wird die Anwendung mit moveToCoursePage() wieder geschlossen.
+     *
      * @throws SQLException
      */
     private void updateCourse() throws SQLException {
