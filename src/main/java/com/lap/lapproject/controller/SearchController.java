@@ -122,9 +122,9 @@ public class SearchController {
     private boolean isValidDateTimeForSearch(LocalDate dateStart, LocalDate dateEnd, LocalTime timeStart, LocalTime timeEnd) {
 
         try {
-            if (dateStart.isAfter(LocalDate.now()) || dateStart.isAfter(dateEnd)) {
+            if (dateStart.isAfter(dateEnd)) {
                 searchLabel.setVisible(true);
-                searchLabel.setText("Das Datum muss mindestens mit dem heutigen beginnen \nund darf nicht nach dem Enddatum stehen.");
+                searchLabel.setText("Das Datum darf nicht nach dem Enddatum stehen.");
                 return false;
             } else if (timeStart.isAfter(timeEnd)) {
                 searchLabel.setVisible(true);
