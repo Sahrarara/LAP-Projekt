@@ -70,7 +70,7 @@ public class EquipmentController extends BaseController{
 
             Equipment equipment1 = tableViewEquipment.getSelectionModel().getSelectedItem();
 
-            //Alert CONFIRMATION TODO: wenn es möglich nur einen CONFIRMATION Alert für Alle DELETE
+            //Alert CONFIRMATION
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation Dialog");
             alert.setHeaderText(null);

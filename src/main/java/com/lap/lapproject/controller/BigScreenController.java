@@ -15,6 +15,9 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
+/**
+ * Verbindet alle Views miteinander
+ */
 public class BigScreenController extends BaseController {
 
     private static final Logger log = LoggerFactory.getLogger(BigScreenController.class);

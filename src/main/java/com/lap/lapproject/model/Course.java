@@ -39,6 +39,16 @@ public class Course {
     }
 
 
+    @Override
+    public boolean equals (Object c) {
+        if(!(c instanceof Course)) {
+            return false;
+        }
+        Course c1 = (Course) c;
+        boolean b =  this.id.getValue().equals(c1.id.getValue());
+        return b;
+    }
+
     public int getId() {
         return id.get();
     }

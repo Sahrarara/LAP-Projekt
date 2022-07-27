@@ -77,8 +77,10 @@ public class SearchController {
     }
 
     /**
-     *
-     * @param actionEvent
+     * Es wird mit Ausführen dieser Methode das Datum geprüft, wenn kein Datum angegeben ist, wird das aktuelle Datum für die Suche nach leeren Räumen genommen.
+     * Wenn das Datum valide ist, dass heißt, das Startdatum liegt nicht hinter dem Enddatum und die Startzeit liegt nicht hinter der end Uhrzeit, wird die Suche
+     * nach leeren Räumen gestartet und der searchTable wird upgedatet und befüllt
+     * @param actionEvent keine parameter notwendig
      */
     @FXML
     public void onButtonClickSearch(ActionEvent actionEvent) {
@@ -86,7 +88,7 @@ public class SearchController {
         LocalDate dateEnd = null;
         if(startDateSearchDatePicker.getValue() == null || endDateSearchDatePicker.getValue() == null){
             dateStart = LocalDate.now();
-            dateEnd =dateStart;
+            dateEnd = dateStart;
         } else {
             dateStart = startDateSearchDatePicker.getValue();
             dateEnd = endDateSearchDatePicker.getValue();
@@ -113,7 +115,7 @@ public class SearchController {
      * @param dateEnd - der EndTag bis zu dem gesucht wird
      * @param timeStart - die Startueot ab der gesucht wird
      * @param timeEnd - die Endzeit bis zu der gesucht wird
-     * @return returnt einen boolean
+     * @return returnt true wenn das Datum und die Uhrzeit in der richtigen Reihenfolge stehen, sonst false
      */
     private boolean isValidDateTimeForSearch(LocalDate dateStart, LocalDate dateEnd, LocalTime timeStart, LocalTime timeEnd) {
 

@@ -29,7 +29,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO: check time and recurance for none daily weekly or monthly. so that "keine" can´t have more than 1 day
 // TODO: trainer bzw. admin muss noch angezeigt werden, welcher die buchung erstellt hat.
 
 /**
@@ -109,33 +108,30 @@ public class AddBookingController extends BaseController {
 
     private boolean isValidBooking(Room room, Trainer trainer, Course courseName, LocalDate dateStart, LocalDate dateEnd, LocalTime timeStart, LocalTime timeEnd) {
 
-
         BookingModel bookingModel = new BookingModel(model);
         bookingModel.loadBookingIntoCalendar();
 
         List<Room> filterdEmptyRooms = bookingModel.findEmptyRooms(dateStart, dateEnd, timeStart, timeEnd);
 
-        if (filterdEmptyRooms.indexOf(room) == -1) {
+        if (!filterdEmptyRooms.contains(room)) {
             QuickAlert.showError("Der raum ist nicht frei");
-            System.out.println(filterdEmptyRooms);
             return false;
         }
         List<Trainer> filterdAvailableTrainer = bookingModel.findAvailableTrainer(dateStart, dateEnd, timeStart, timeEnd);
 
-        if (filterdAvailableTrainer.indexOf(trainer) == -1) {
+        if (!filterdAvailableTrainer.contains(trainer)) {
             QuickAlert.showError("Der Trainer ist nicht frei");
             return false;
         }
         List<Course> filterdAvailableCourse = bookingModel.findAvailableCourse(dateStart, dateEnd, timeStart, timeEnd);
 
-        if (filterdAvailableCourse.indexOf(courseName) == -1) {
+        if (!filterdAvailableCourse.contains(courseName)) {
             QuickAlert.showError("Der Kurs ist nicht frei");
             return false;
 
         }
         return true;
     }
-
 
     /**
      * Sammelt die angegebenen Daten( Raumnummer, Trainer, Kursname, die Art des sich wiederholenden Termins (recurenceChoiseBox),
@@ -160,10 +156,10 @@ public class AddBookingController extends BaseController {
         LocalDateTime localDateTimeEnd = null;
 
 
-        boolean isValidDateTimeForAddBooking = isValidDateTimeForAddBooking(dateStart, dateEnd, timeStart, timeEnd);
+        boolean isValidDateTimeForAddOrUpdateBooking = isValidDateTimeForAddOrUpdateBooking(dateStart, dateEnd, timeStart, timeEnd);
         boolean isValidBooking = isValidBooking(room, trainer, course, dateStart, dateEnd, timeStart, timeEnd);
 
-        if (isValidDateTimeForAddBooking && isValidBooking) {
+        if (isValidDateTimeForAddOrUpdateBooking && isValidBooking) {
             localDateTimeStart = LocalDateTime.of(dateStart, timeStart);
             localDateTimeEnd = LocalDateTime.of(dateEnd, timeEnd);
             Booking booking = new Booking(room, trainer, model.getLoggedInUser(), course, localDateTimeStart, localDateTimeEnd, recurrenceRule);
@@ -197,9 +193,10 @@ public class AddBookingController extends BaseController {
         LocalDateTime localDateTimeEnd;
 
         selectedBooking.setRecurrenceRule(recurrenceChoiceBox.getValue());
+        boolean isValidDateTimeForAddOrUpdateBooking = isValidDateTimeForAddOrUpdateBooking(dateStart, dateEnd, timeStart, timeEnd);
         boolean isValidBooking = isValidBooking(room, trainer, course, dateStart, dateEnd, timeStart, timeEnd);
 
-        if (isValidDateTimeForUpdateBooking(dateStart, dateEnd, timeStart, timeEnd) && isValidBooking) {
+        if (isValidDateTimeForAddOrUpdateBooking && isValidBooking) {
             localDateTimeStart = LocalDateTime.of(dateStart, timeStart);
             localDateTimeEnd = LocalDateTime.of(dateEnd, timeEnd);
             selectedBooking.setDateTimeStart(localDateTimeStart);
@@ -322,7 +319,7 @@ public class AddBookingController extends BaseController {
      * @param timeEnd   initialisierte Endzeit
      * @return true wenn das Datum und die Uhrzeit passend ausgefüllt sind
      */
-    private boolean isValidDateTimeForUpdateBooking(LocalDate dateStart, LocalDate dateEnd, LocalTime timeStart, LocalTime timeEnd) {
+/*    private boolean isValidDateTimeForUpdateBooking(LocalDate dateStart, LocalDate dateEnd, LocalTime timeStart, LocalTime timeEnd) {
         if (dateStart.compareTo(dateEnd) > 0) {
             QuickAlert.showError("Datum passt nicht. Bitte kontrollieren!");
             return false;
@@ -333,7 +330,7 @@ public class AddBookingController extends BaseController {
             }
             return true;
         }
-    }
+    }*/
 
     /**
      * Prüft Startdatum und Enddatum auf 0 (darf nicht 0 sein)
@@ -345,19 +342,19 @@ public class AddBookingController extends BaseController {
      * @param timeEnd   initialisierte Endzeit
      * @return true wenn das Datum und die Uhrzeit passend ausgefüllt sind
      */
-    private boolean isValidDateTimeForAddBooking(LocalDate dateStart, LocalDate dateEnd, LocalTime timeStart, LocalTime timeEnd) {
+    private boolean isValidDateTimeForAddOrUpdateBooking(LocalDate dateStart, LocalDate dateEnd, LocalTime timeStart, LocalTime timeEnd) {
+        LocalTime startTimeOfBookings = LocalTime.of(7, 30);
+        LocalTime endTimeOfBookings = LocalTime.of(19, 30);
         if (dateStart.compareTo(dateEnd) > 0 || dateStart.isBefore(LocalDate.now()) || dateEnd.isBefore(LocalDate.now())) {
             QuickAlert.showError("Datum passt nicht. Bitte kontrollieren!");
             return false;
-        } else {
-            if (timeStart.compareTo(timeEnd) > 0 || timeStart.compareTo(timeEnd) == 0 ||
-                    //TODO: Uhrzeit abfrage anpassen, es darf nicht nach 19:30 gebucht werden
-                    (timeStart.equals(LocalTime.of(7, 30)) && timeEnd.equals(LocalTime.of(19, 30)))) {
-                QuickAlert.showError("Uhrzeit passt nicht. Bitte kontrollieren!");
-                return false;
-            }
-            return true;
         }
+        if (timeStart.compareTo(timeEnd) > 0 || timeStart.compareTo(timeEnd) == 0 ||
+                timeStart.isBefore(startTimeOfBookings) || timeEnd.isAfter(endTimeOfBookings)) {
+            QuickAlert.showError("Bitte Prüfe die Zeiten. \nEin Kurs läuft nur in der Uhrzeit zwischen 7:30 und 19:30");
+            return false;
+        }
+        return true;
     }
 
     /**

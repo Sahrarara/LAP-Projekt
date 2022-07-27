@@ -423,7 +423,10 @@ public class BookingController {
     }
 
 
-
+    /**
+     * Es werden bei eingabe der gesuchten Namen die Daten gefiltert
+     * @param actionEvent erwartet keinen Parameter
+     */
     @FXML
     private void onSearchBarClick(KeyEvent actionEvent) {
         String searchTerm = searchBar.getText();

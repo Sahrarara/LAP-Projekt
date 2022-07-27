@@ -267,6 +267,7 @@ public class AddUserController extends BaseController {
         }
     }
 
+
     @FXML
     public byte[] convertToBytes(String pathToImage) throws IOException {
         FileInputStream fileInputStream = new FileInputStream(pathToImage);
@@ -306,7 +307,9 @@ public class AddUserController extends BaseController {
     }
 
 
-    //Befüllt ChoiceBox mit authorization
+    /**
+     * Befüllt ChoiceBox mit authorization
+     */
     @FXML
     public void fillChoiceBox() {
         ObservableList<String> authorizationName = FXCollections.observableArrayList(
@@ -316,18 +319,17 @@ public class AddUserController extends BaseController {
         authorizationChoiceBox.setItems(authorizationName);
     }
 
-    // Macht Text Feldär unsichtbar
+    /**
+     * Setzt die Label (Text) Felder auf unsichtbar
+     */
     @FXML
     public void textLabelInvisible() {
-        //setzt Label auf unsichtbar
         errorUsername.setVisible(false);
         errorPassword.setVisible(false);
         passwordText.setVisible(false);
         errorEmail.setVisible(false);
         errorPhoneNumber.setVisible(false);
-
         errorNoPhotoInDB.setVisible(false);
-
     }
 
     UserRepositoryJDBC userRepositoryJDBC = new UserRepositoryJDBC();
@@ -348,6 +350,11 @@ public class AddUserController extends BaseController {
         }
     }
 
+    /**
+     * checkEmail prüft ob die email bereits in der Datenbank vorhanden ist (bereits genutzt wird)
+     * @param email - erwartet die zu prüfende email
+     * @return gibt false zurück, wenn die email-adresse bereits in der DB existiert
+     */
     public boolean checkEmail(String email) {
         if (userRepositoryJDBC.checkUniqueEmailAdresse(email)) {
             errorEmail.setVisible(false);
@@ -382,7 +389,7 @@ public class AddUserController extends BaseController {
 
 
     /**
-     * Befüllt das Formular für Update Function
+     * Befüllt das Formular für die Update-Function
      */
     @FXML
     public void fillFormToUpdate() {

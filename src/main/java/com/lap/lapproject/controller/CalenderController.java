@@ -72,20 +72,32 @@ public class CalenderController extends BaseController {
         borderCalender.setCenter(calendarView);
     }
 
-
+    /**
+     * Prüft auf Wochenenden und Feiertage
+     * @param date erwartet ein LocalDate
+     * @return
+     */
     public static boolean isHolidayOrWeekend(LocalDate date) {
         return (isWeekend(date) || isHoliday(date));
 
     }
 
+    /**
+     * Prüft ob der übergebene Tag (LocalDate Parameter) ein Samstag oder Sonntag ist.
+     * @param ldate erwartet ein LocalDate
+     * @return
+     */
     private static boolean isWeekend(LocalDate ldate) {
-//
         Integer day = new GregorianCalendar(ldate.getYear(),(ldate.getMonthValue()-1), ldate.getDayOfMonth()).get(GregorianCalendar.DAY_OF_WEEK);
         return day.equals(Calendar.SUNDAY) || day.equals(Calendar.SATURDAY);
     }
 
 
-
+    /**
+     * Es wird mit der Gausschen "Osterregel" alle Feiertage heraus gefiltert, welche die keine veränderlichen Tage sind wie z.B. Neujahr, sind hardgecodet geschrieben.
+     * @param date - Ein LocalDate wird erwartet
+     * @return
+     */
     private static boolean isHoliday(LocalDate date) {
 
         int year = date.getYear();

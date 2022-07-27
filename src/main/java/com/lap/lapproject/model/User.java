@@ -104,7 +104,7 @@ public abstract class User {
         this.email = new SimpleStringProperty(email);
         this.photo = photo;
     }*/
-   // ProfileController //TODO
+   // ProfileController
    public User(int id, String description, String phoneNmbr, String email, byte[] photo, Boolean photoVisibility) {
        this.id = new SimpleIntegerProperty(id);
        this.description = new SimpleStringProperty(description);
