@@ -27,17 +27,16 @@ public class CalenderController extends BaseController {
      * Ruft die loadCalendarFXViewInBorderPaneCenter() Methode auf welche die Ansicht im Kalender prüft
      */
     @FXML
-    private void initialize() {
-        loadCalendarFXViewInBorderPaneCenter();
+    private void initialize() {loadCalendarFXViewInBorderPaneCenter();
     }
 
     private void loadCalendarFXViewInBorderPaneCenter() {
 
-        model.bookingModel.loadBookingIntoCalendar();
+        bookingModel.loadBookingIntoCalendar();
 
         CalendarView calendarView = new CalendarView();
         calendarView.getCalendarSources().get(0).getCalendars().get(0).setReadOnly(true);
-        calendarView.getCalendarSources().addAll(model.bookingModel.getCalendarSource());
+        calendarView.getCalendarSources().addAll(bookingModel.getCalendarSource());
         calendarView.setRequestedTime(LocalTime.now());
 
         Thread updateTimeThread = new Thread("Calendar: Update Time Thread") {

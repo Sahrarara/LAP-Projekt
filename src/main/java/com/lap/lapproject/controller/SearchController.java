@@ -72,7 +72,6 @@ public class SearchController {
         startSearchTime.setValue(LocalTime.of(7, 00));
         searchEndTime.setValue(LocalTime.of(19, 00));
 
-        this.bookingModel = new BookingModel(model);
 
     }
 
@@ -98,7 +97,6 @@ public class SearchController {
         LocalTime timeStart = startSearchTime.getValue();
         LocalTime timeEnd = searchEndTime.getValue();
 
-        BookingModel bookingModel = new BookingModel(model);
         bookingModel.loadBookingIntoCalendar();
 
         boolean validDateTime = isValidDateTimeForSearch(dateStart, dateEnd, timeStart, timeEnd);

@@ -79,7 +79,6 @@ public class ListModel {
     public ListModel() {
 
         try {
-
             courseList.setAll(courseRepositoryJDBC.readAll());
             programList.setAll(programRepositoryJDBC.readProgram());
             equipmentList.setAll(equipmentRepositoryJDBC.readAll());

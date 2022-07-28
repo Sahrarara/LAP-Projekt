@@ -108,7 +108,7 @@ public class AddBookingController extends BaseController {
 
     private boolean isValidBooking(Room room, Trainer trainer, Course courseName, LocalDate dateStart, LocalDate dateEnd, LocalTime timeStart, LocalTime timeEnd) {
 
-        BookingModel bookingModel = new BookingModel(model);
+
         bookingModel.loadBookingIntoCalendar();
 
         List<Room> filterdEmptyRooms = bookingModel.findEmptyRooms(dateStart, dateEnd, timeStart, timeEnd);

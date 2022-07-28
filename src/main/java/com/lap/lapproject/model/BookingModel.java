@@ -25,10 +25,11 @@ import java.util.TreeMap;
 //TODO: Kurs start-ende sollte sich nicht mit buchungsende oder start überschneiden
 
 public class BookingModel {
+    ListModel listModel;
     Model model;
-    CalendarSource calendarSource;
-
-    public BookingModel(Model model) {
+    CalendarSource calendarSource = new CalendarSource("My Calender");
+    public BookingModel(ListModel listModel, Model model) {
+        this.listModel = listModel;
         this.model = model;
     }
 
@@ -146,20 +147,18 @@ public class BookingModel {
      * //TODO: weiterenText hinzufügen
      */
     public void loadBookingIntoCalendar() {
-
-        calendarSource = new CalendarSource("My Calendars");
-
+        calendarSource.getCalendars().clear();
         System.setProperty("calendarfx.developer", "true");
 
-        Calendar holidays = new Calendar("Feiertage");
+//        Calendar holidays = new Calendar("Feiertage");
+//        holidays.setStyle(Calendar.Style.STYLE2);
 
-        holidays.setStyle(Calendar.Style.STYLE2);
 
         model.courses.forEach(course -> {
             String currentCourse = course.getCourseName();
             Calendar tempCalendar = new Calendar("temporary");
             Calendar newCalendar = new Calendar(currentCourse);
-            model.bookings.forEach(booking -> {
+            listModel.bookingList.forEach(booking -> {
                 if (booking.getCourse().getCourseName().equals(currentCourse)) {
                     Entry<Booking> newEntry = new Entry<>(booking.getCourse().getProgram().getProgramName());
                     newEntry.setLocation(booking.getRoom().getLocation().getStreet());

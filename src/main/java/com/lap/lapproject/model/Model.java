@@ -20,9 +20,6 @@ import java.util.ArrayList;
 public class Model {
 
     private static final Logger log = LoggerFactory.getLogger(Model.class);
-
-    public BookingModel bookingModel;
-
     public ArrayList<Booking> bookings = new ArrayList<>();
     public ArrayList<Course> courses = new ArrayList<>();
     public ArrayList<Entry<Booking>> bookingEntries = new ArrayList<>();
@@ -32,9 +29,9 @@ public class Model {
 
     public Model() {
         try {
+            //TODO: fix me, delete bookings because not used
             bookings.addAll(bookingRepo.readAll());
             courses.addAll(courseRepo.readAll());
-            bookingModel = new BookingModel(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -74,9 +71,6 @@ public class Model {
         this.loggedInUser.set(loggedInUser);
     }
 
-    public BookingModel getBookingModel() {
-        return bookingModel;
-    }
 
 
 }
