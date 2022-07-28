@@ -48,12 +48,12 @@
             </Label>
          </children>
       </Pane>
-      <Label styleClass="input-description" text="Standort" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+      <Label styleClass="input-description" text="Standort" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
       </Label>
-      <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+      <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
          <children>
             <ChoiceBox fx:id="locationChoiceBox" prefHeight="31.0" prefWidth="400.0" style="-fx-border-radius: 50px; -fx-background-color: #f9f7f6; -fx-border-color: #c69963;">
                <opaqueInsets>
@@ -77,22 +77,22 @@
             </Label>
          </children>
       </StackPane>
-      <Label styleClass="input-description" text="Raumnummer" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+      <Label styleClass="input-description" text="Raumnummer" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
       </Label>
-      <ChoiceBox fx:id="roomNumberChoiceBox" prefHeight="31.0" prefWidth="400.0" style="-fx-border-radius: 50px; -fx-text-fill: #101d2c;" GridPane.columnIndex="2" GridPane.rowIndex="3">
+      <ChoiceBox fx:id="roomNumberChoiceBox" prefHeight="31.0" prefWidth="400.0" style="-fx-border-radius: 50px; -fx-text-fill: #101d2c;" GridPane.columnIndex="2" GridPane.rowIndex="6">
          <styleClass>
             <String fx:value="input-form" />
             <String fx:value="button-light" />
          </styleClass></ChoiceBox>
-      <Label styleClass="input-description" text="Veranstaltungsnummer" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+      <Label styleClass="input-description" text="Veranstaltungsnummer" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
       </Label>
-      <ChoiceBox fx:id="courseNameChoiceBox" layoutX="309.0" layoutY="194.0" prefHeight="31.0" prefWidth="400.0" style="-fx-border-radius: 50px; -fx-text-fill: #101d2c;" GridPane.columnIndex="2" GridPane.rowIndex="4">
+      <ChoiceBox fx:id="courseNameChoiceBox" layoutX="309.0" layoutY="194.0" prefHeight="31.0" prefWidth="400.0" style="-fx-border-radius: 50px; -fx-text-fill: #101d2c;" GridPane.columnIndex="2" GridPane.rowIndex="3">
          <styleClass>
             <String fx:value="input-form" />
             <String fx:value="button-light" />
@@ -100,22 +100,22 @@
          <GridPane.margin>
             <Insets />
          </GridPane.margin></ChoiceBox>
-      <Label styleClass="input-description" text="Vortragender" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5">
+      <Label styleClass="input-description" text="Vortragender" textFill="#101d2c" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
       </Label>
-      <ChoiceBox fx:id="trainerChoiceBox" layoutX="309.0" layoutY="230.0" prefHeight="31.0" prefWidth="400.0" style="-fx-border-radius: 50px; -fx-text-fill: #101d2c;" GridPane.columnIndex="2" GridPane.rowIndex="5">
+      <ChoiceBox fx:id="trainerChoiceBox" layoutX="309.0" layoutY="230.0" prefHeight="31.0" prefWidth="400.0" style="-fx-border-radius: 50px; -fx-text-fill: #101d2c;" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <styleClass>
             <String fx:value="input-form" />
             <String fx:value="button-light" />
          </styleClass></ChoiceBox>
-      <Label layoutX="30.0" layoutY="338.0" styleClass="input-description" text="Serientermin" textFill="#101d2c" GridPane.columnIndex="1" GridPane.rowIndex="6">
+      <Label layoutX="30.0" layoutY="338.0" styleClass="input-description" text="Serientermin" textFill="#101d2c" GridPane.columnIndex="1" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin>
       </Label>
-      <ChoiceBox fx:id="recurrenceChoiceBox" prefHeight="31.0" prefWidth="400.0" style="-fx-text-fill: #101d2c; -fx-border-radius: 50px;" GridPane.columnIndex="2" GridPane.rowIndex="6">
+      <ChoiceBox fx:id="recurrenceChoiceBox" prefHeight="31.0" prefWidth="400.0" style="-fx-text-fill: #101d2c; -fx-border-radius: 50px;" GridPane.columnIndex="2" GridPane.rowIndex="4">
          <styleClass>
             <String fx:value="input-form" />
             <String fx:value="button-light" />
