@@ -1,6 +1,6 @@
 package com.lap.lapproject.controller;
 
-import com.lap.lapproject.LoginApplication;
+import com.lap.lapproject.RoomsApplication;
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.Trainer;
 import com.lap.lapproject.repos.BookingRepositoryJDBC;
@@ -68,7 +68,7 @@ public class TrainerController extends BaseController {
         tableViewTrainer.getSelectionModel().select(null);
         Stage stage = new Stage();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_TRAINER));
+        FXMLLoader fxmlLoader = new FXMLLoader(RoomsApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_TRAINER));
         Scene scene = null;
 
         try {
@@ -116,7 +116,7 @@ public class TrainerController extends BaseController {
         if (listModel.getSelectedUser() != null) {
             Stage stage = new Stage();
 
-            FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_TRAINER));
+            FXMLLoader fxmlLoader = new FXMLLoader(RoomsApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_TRAINER));
             Scene scene = null;
 
             try {

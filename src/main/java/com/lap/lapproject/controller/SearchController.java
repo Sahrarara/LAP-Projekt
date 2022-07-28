@@ -16,7 +16,7 @@ import javafx.scene.control.*;
 import static com.lap.lapproject.controller.BaseController.listModel;
 import static com.lap.lapproject.controller.BaseController.model;
 
-public class SearchController {
+public class SearchController extends BaseController{
 
     @FXML
     private DatePicker startDateSearchDatePicker;
@@ -39,7 +39,6 @@ public class SearchController {
     @FXML
     private TableColumn<Room, String> equipmentColumn;
 
-    private BookingModel bookingModel;
 
     @FXML
     private Label searchLabel;

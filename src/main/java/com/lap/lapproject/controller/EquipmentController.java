@@ -1,6 +1,6 @@
 package com.lap.lapproject.controller;
 
-import com.lap.lapproject.LoginApplication;
+import com.lap.lapproject.RoomsApplication;
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.Equipment;
 import com.lap.lapproject.repos.EquipmentRepositoryJDBC;
@@ -8,8 +8,6 @@ import com.lap.lapproject.repos.RoomRepositoryJDBC;
 import com.lap.lapproject.utility.QuickAlert;
 import com.lap.lapproject.utility.UsabilityMethods;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -47,7 +45,7 @@ public class EquipmentController extends BaseController {
         tableViewEquipment.getSelectionModel().select(null);
         Stage stage = new Stage();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_EQUIPMENT));
+        FXMLLoader fxmlLoader = new FXMLLoader(RoomsApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_EQUIPMENT));
         Scene scene = null;
 
         try {
@@ -99,7 +97,7 @@ public class EquipmentController extends BaseController {
         if (listModel.getSelectedEquipment() != null) {
             Stage stage = new Stage();
 
-            FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_EQUIPMENT));
+            FXMLLoader fxmlLoader = new FXMLLoader(RoomsApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_EQUIPMENT));
             Scene scene = null;
 
             try {

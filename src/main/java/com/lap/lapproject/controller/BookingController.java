@@ -1,6 +1,6 @@
 package com.lap.lapproject.controller;
 
-import com.lap.lapproject.LoginApplication;
+import com.lap.lapproject.RoomsApplication;
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.*;
 import com.lap.lapproject.utility.QuickAlert;
@@ -23,8 +23,6 @@ import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.swing.*;
-import java.awt.print.Book;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -102,7 +100,7 @@ public class BookingController {
     private void onAddBookingBtnClick(ActionEvent actionEvent) {
         tableViewBooking.getSelectionModel().select(null);
         Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_BOOKING));
+        FXMLLoader fxmlLoader = new FXMLLoader(RoomsApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_BOOKING));
         Scene scene = null;
         try {
             scene = new Scene(fxmlLoader.load());
@@ -141,7 +139,7 @@ public class BookingController {
     private void onEditBtnClick(ActionEvent actionEvent) {
         if (listModel.getSelectedBooking() != null) {
             Stage stage = new Stage();
-            FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_BOOKING));
+            FXMLLoader fxmlLoader = new FXMLLoader(RoomsApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_BOOKING));
             Scene scene = null;
             try {
                 scene = new Scene(fxmlLoader.load());

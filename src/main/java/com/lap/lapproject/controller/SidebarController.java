@@ -1,9 +1,7 @@
 package com.lap.lapproject.controller;
 
-import com.lap.lapproject.LoginApplication;
+import com.lap.lapproject.RoomsApplication;
 import com.lap.lapproject.application.Constants;
-import com.lap.lapproject.repos.CourseRepositoryJDBC;
-import com.lap.lapproject.repos.UserRepositoryJDBC;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,7 +19,6 @@ import org.slf4j.LoggerFactory;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
 
 import static com.lap.lapproject.controller.ProfileController.imageFromBytes;
@@ -189,7 +186,7 @@ public class SidebarController extends BaseController {
         Stage currentStage = this.getCurrentStage();
         currentStage.close();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_LOGIN));
+        FXMLLoader fxmlLoader = new FXMLLoader(RoomsApplication.class.getResource(Constants.PATH_TO_FXML_LOGIN));
         Scene scene = null;
 
         try {

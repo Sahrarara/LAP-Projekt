@@ -1,6 +1,6 @@
 package com.lap.lapproject.utility;
 
-import com.lap.lapproject.LoginApplication;
+import com.lap.lapproject.RoomsApplication;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
@@ -13,7 +13,7 @@ public class ChangeScene {
     public void moveToNextStage(String path) {
         Stage stage = new Stage();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(path));
+        FXMLLoader fxmlLoader = new FXMLLoader(RoomsApplication.class.getResource(path));
         Scene scene = null;
 
         try {

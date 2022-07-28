@@ -1,6 +1,6 @@
 package com.lap.lapproject.controller;
 
-import com.lap.lapproject.LoginApplication;
+import com.lap.lapproject.RoomsApplication;
 import com.lap.lapproject.application.Constants;
 import com.lap.lapproject.model.Course;
 import com.lap.lapproject.utility.QuickAlert;
@@ -56,7 +56,7 @@ public class CoursesController extends BaseController {
         tableViewEvent.getSelectionModel().select(null);
         Stage stage = new Stage();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_COURSE));
+        FXMLLoader fxmlLoader = new FXMLLoader(RoomsApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_COURSE));
         Scene scene = null;
 
         try {
@@ -102,7 +102,7 @@ public class CoursesController extends BaseController {
             System.out.println("Pressed Course settings");
             Stage stage = new Stage();
 
-            FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_COURSE));
+            FXMLLoader fxmlLoader = new FXMLLoader(RoomsApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_COURSE));
             Scene scene = null;
 
             try {
