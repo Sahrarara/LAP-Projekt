@@ -72,7 +72,7 @@ public class CoursesController extends BaseController {
 
     @FXML
     private void onDeleteCourseBtnClick(ActionEvent actionEvent) {
-        if(listModel.getSelectedCourse() != null) {
+        if (listModel.getSelectedCourse() != null) {
             CourseRepositoryJDBC courseRepositoryJDBC = new CourseRepositoryJDBC();
             int myIndex = tableViewEvent.getSelectionModel().getSelectedIndex();
 
@@ -91,7 +91,7 @@ public class CoursesController extends BaseController {
                     e.printStackTrace();
                 }
             }
-        }else {
+        } else {
             QuickAlert.showInfo("Bitte gewünschte Zeile markieren");
         }
     }
@@ -166,7 +166,6 @@ public class CoursesController extends BaseController {
                 break;
         }
     }
-
 
 
     @FXML

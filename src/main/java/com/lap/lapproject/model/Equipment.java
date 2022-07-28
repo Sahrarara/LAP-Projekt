@@ -53,16 +53,13 @@ public class Equipment {
 
     @Override
     public boolean equals(Object o) {
-        if(o == null)
-        {
+        if (o == null) {
             return false;
         }
-        if (o == this)
-        {
+        if (o == this) {
             return true;
         }
-        if (getClass() != o.getClass())
-        {
+        if (getClass() != o.getClass()) {
             return false;
         }
         Equipment e = (Equipment) o;

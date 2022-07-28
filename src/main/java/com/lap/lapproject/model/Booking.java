@@ -20,8 +20,7 @@ public class Booking {
     private Location location;
 
 
-
-    public Booking(int id, Room room, Trainer trainer,  User user, Course course, LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd, String recurrenceRule) {
+    public Booking(int id, Room room, Trainer trainer, User user, Course course, LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd, String recurrenceRule) {
         this.id = id;
         this.room = room;
         this.trainer = trainer;
@@ -32,7 +31,7 @@ public class Booking {
         this.recurrenceRule = recurrenceRule;
     }
 
-    public Booking(Room room, Trainer trainer, User user,Course course, LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd, String recurrenceRule) {
+    public Booking(Room room, Trainer trainer, User user, Course course, LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd, String recurrenceRule) {
         this.room = room;
         this.trainer = trainer;
         this.user = user;
@@ -106,6 +105,9 @@ public class Booking {
         this.id = id;
     }
 
+    public String toString() {
+        return this.room.toString();
+    }
 
 
 }

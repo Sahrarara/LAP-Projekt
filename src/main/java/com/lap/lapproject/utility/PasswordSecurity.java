@@ -42,13 +42,11 @@ public class PasswordSecurity {
     }
 
 
-
     // 1 Großbuchstabe, 1 Kleinbuchstabe, 1 Ziffer, 1 Sonderzeichen enthält und eine Länge von mindestens 8 hat
     @FXML
     public static boolean isPasswordValid(String password, Label label) {
-        Pattern compile = Pattern.compile("^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\\W).*$");
-        Matcher matcher = compile.matcher(password);
-        if (!matcher.matches()) {
+        boolean isValidPassw = isPasswordValid(password);
+        if (!isValidPassw) {
             label.setVisible(true);
             label.setText("8 Zeichen,1 Großbuchstabe, 1 Kleinbuchstabe, 1 Ziffer, 1 Sonderzeichen");
             return false;
@@ -58,19 +56,14 @@ public class PasswordSecurity {
         }
     }
 
-
     @FXML
     public static boolean isPasswordValid(String password) {
         Pattern compile = Pattern.compile("^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\\W).*$");
         Matcher matcher = compile.matcher(password);
-        if (!matcher.matches()) {
-            return false;
-        } else {
+        if (matcher.matches()) {
             return true;
         }
+        return false;
     }
-
-
-
 
 }

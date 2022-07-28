@@ -18,9 +18,6 @@ import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
 
-/**
- *
- */
 public class ListModel {
 
     private static final Logger log = LoggerFactory.getLogger(ListModel.class);
@@ -78,21 +75,10 @@ public class ListModel {
     private ObjectProperty<Trainer> selectedUser = new SimpleObjectProperty<>();
     private ObjectProperty<Room> selectedRoom = new SimpleObjectProperty<>();
 
-    /**
-     *
-     */
+
     public ListModel() {
 
         try {
-            /*courseList.addAll(courseRepositoryJDBC.readAll());
-            programList.addAll(programRepositoryJDBC.readProgram());
-            equipmentList.addAll(equipmentRepositoryJDBC.readAll());
-            locationList.addAll(locationRepositoryJDBC.readAll());
-            bookingList.addAll(bookingRepositoryJDBC.readAll());
-            trainerList.addAll(userRepositoryJDBC.readAllTrainer());
-            roomList.addAll(roomRepositoryJDBC.readAll());
-            authorizationList.addAll(userRepositoryJDBC.readAuthorization());*/
-
             courseList.setAll(courseRepositoryJDBC.readAll());
             programList.setAll(programRepositoryJDBC.readProgram());
             equipmentList.setAll(equipmentRepositoryJDBC.readAll());
@@ -101,12 +87,10 @@ public class ListModel {
             trainerList.setAll(userRepositoryJDBC.readAllTrainer());
             roomList.setAll(roomRepositoryJDBC.readAll());
             authorizationList.setAll(userRepositoryJDBC.readAuthorization());
-            //System.out.println("+++++ Fill All MODEL lists!!!!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-        //addAllListeners();
         addListenerForBooking();
         addListenerForUser();
         addListenerForProgram();
@@ -116,10 +100,6 @@ public class ListModel {
 
     }
 
-    /**
-     *
-     * @param bannerImg
-     */
     public void addListenerForUserImage(Circle bannerImg) {
         userImgProperty.addListener(new ChangeListener<Image>() {
             @Override
@@ -129,9 +109,6 @@ public class ListModel {
         });
     }
 
-    /**
-     *
-     */
     public void addListenerForBooking() {
         bookingList.addListener(new ListChangeListener<Booking>() {
             @Override
@@ -172,9 +149,6 @@ public class ListModel {
         });
     }
 
-    /**
-     *
-     */
     public void addListenerForProgram() {
         programList.addListener(new ListChangeListener<Program>() {
             @Override
@@ -195,7 +169,7 @@ public class ListModel {
                         for (Program program : change.getAddedSubList()) {
                             try {
                                 programRepositoryJDBC.addProgram(program);  //Program is added to a list. programview list
-                                log.info("from addListenerForProgram: {}" , "program added");
+                                log.info("from addListenerForProgram: {}", "program added");
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
@@ -215,9 +189,6 @@ public class ListModel {
         });
     }
 
-    /**
-     *
-     */
     public void addListenerForEquipment() {
         equipmentList.addListener(new ListChangeListener<Equipment>() {
             @Override
@@ -258,9 +229,6 @@ public class ListModel {
         });
     }
 
-    /**
-     *
-     */
     public void addListenerForLocation() {
         locationList.addListener(new ListChangeListener<Location>() {
             @Override
@@ -341,9 +309,6 @@ public class ListModel {
     }*/
 
 
-    /**
-     *
-     */
     public void addListenerForUser() {
         trainerList.addListener(new ListChangeListener<Trainer>() {
             @Override
@@ -383,9 +348,11 @@ public class ListModel {
     public Program getSelectedProgram() {
         return selectedProgram.get();
     }
+
     public ObjectProperty<Program> selectedProgramProperty() {
         return selectedProgram;
     }
+
     public void setSelectedProgram(Program selectedProgram) {
         this.selectedProgram.set(selectedProgram);
     }
@@ -394,9 +361,11 @@ public class ListModel {
     public Equipment getSelectedEquipment() {
         return selectedEquipment.get();
     }
+
     public ObjectProperty<Equipment> selectedEquipmentProperty() {
         return selectedEquipment;
     }
+
     public void setSelectedEquipment(Equipment selectedEquipment) {
         this.selectedEquipment.set(selectedEquipment);
     }
@@ -405,9 +374,11 @@ public class ListModel {
     public Booking getSelectedBooking() {
         return selectedBooking.get();
     }
+
     public ObjectProperty<Booking> selectedBookingProperty() {
         return selectedBooking;
     }
+
     public void setSelectedBooking(Booking selectedBooking) {
         this.selectedBooking.set(selectedBooking);
     }
@@ -416,9 +387,11 @@ public class ListModel {
     public Location getSelectedLocation() {
         return selectedLocation.get();
     }
+
     public ObjectProperty<Location> selectedLocationProperty() {
         return selectedLocation;
     }
+
     public void setSelectedLocation(Location selectedLocation) {
         this.selectedLocation.set(selectedLocation);
     }
@@ -427,9 +400,11 @@ public class ListModel {
     public Course getSelectedCourse() {
         return selectedCourse.get();
     }
+
     public ObjectProperty<Course> selectedCourseProperty() {
         return selectedCourse;
     }
+
     public void setSelectedCourse(Course selectedCourse) {
         this.selectedCourse.set(selectedCourse);
     }
@@ -438,9 +413,11 @@ public class ListModel {
     public Trainer getSelectedUser() {
         return selectedUser.get();
     }
+
     public ObjectProperty<Trainer> selectedUserProperty() {
         return selectedUser;
     }
+
     public void setSelectedUser(Trainer selectedUser) {
         this.selectedUser.set(selectedUser);
     }
@@ -449,9 +426,11 @@ public class ListModel {
     public Room getSelectedRoom() {
         return selectedRoom.get();
     }
+
     public ObjectProperty<Room> selectedRoomProperty() {
         return selectedRoom;
     }
+
     public void setSelectedRoom(Room selectedRoom) {
         this.selectedRoom.set(selectedRoom);
     }
@@ -460,10 +439,16 @@ public class ListModel {
     public ObservableList<Program> getProgramList() {
         return programList;
     }
+
     public void setProgramList(ObservableList<Program> programList) {
         this.programList = programList;
     }
 
-    public Image getCurrentUserImage() { return userImgProperty.get(); }
-    public void setUserImgProperty(Image userImage) { this.userImgProperty.set(userImage); }
+    public Image getCurrentUserImage() {
+        return userImgProperty.get();
+    }
+
+    public void setUserImgProperty(Image userImage) {
+        this.userImgProperty.set(userImage);
+    }
 }

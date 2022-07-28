@@ -28,6 +28,7 @@ public class Course {
         this.courseEnd = courseEnd;
         this.groupSize = new SimpleIntegerProperty(groupSize);
     }
+
     public Course(String courseName, Program program, LocalDate courseStart, LocalDate courseEnd,
                   int groupSize) {
         this.courseName = new SimpleStringProperty(courseName);
@@ -38,6 +39,16 @@ public class Course {
         this.id = new SimpleIntegerProperty();
     }
 
+
+    @Override
+    public boolean equals(Object c) {
+        if (!(c instanceof Course)) {
+            return false;
+        }
+        Course c1 = (Course) c;
+        boolean b = this.id.getValue().equals(c1.id.getValue());
+        return b;
+    }
 
     public int getId() {
         return id.get();
@@ -72,7 +83,8 @@ public class Course {
         this.program = program;
     }
 
-    public int getGroupSize() {return groupSize.get();
+    public int getGroupSize() {
+        return groupSize.get();
     }
 
     public String groupSizeProperty() {

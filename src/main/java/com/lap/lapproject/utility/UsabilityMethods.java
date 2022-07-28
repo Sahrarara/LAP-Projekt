@@ -34,6 +34,7 @@ public class UsabilityMethods {
         Matcher matcher = pattern.matcher(ddMMYYYY);
         return matcher.find();
     }
+
     public static boolean isNumber(String input) {
         Pattern pattern = Pattern.compile("^\\d+$");
         Matcher matcher = pattern.matcher(input);
@@ -47,10 +48,9 @@ public class UsabilityMethods {
     }
 
 
-
     public static void changeListener(TextField searchBar, Button closeIconButton) {
         searchBar.textProperty().addListener(((observable, oldValue, newValue) -> {
-            if (!newValue.isBlank()){
+            if (!newValue.isBlank()) {
                 closeIconButton.setVisible(true);
             } else {
                 closeIconButton.setVisible(false);
@@ -79,7 +79,7 @@ public class UsabilityMethods {
     public static void changeListenerForPhoneNr(TextField textField, Label label) {
         textField.textProperty().addListener(((observable, oldValue, newValue) -> {
             if (!UsabilityMethods.isPhoneNumberValid(newValue)) {
-                label.setText("Bitte dieses Format verwenden: +43 1234567");
+                label.setText("Bitte dieses Format verwenden: +431234567");
                 label.setVisible(true);
             } else {
                 label.setVisible(false);
@@ -129,16 +129,17 @@ public class UsabilityMethods {
 
     public static void changeListenerInputText(TextField textField, Label label) {
         textField.textProperty().addListener(((observable, oldValue, newValue) -> {
-            if (!newValue.isBlank()){
+            if (!newValue.isBlank()) {
                 label.setVisible(false);
             } else {
                 label.setVisible(false);
             }
         }));
     }
+
     public static void changeListenerDataPicker(DatePicker datePicker, Label label) {
         datePicker.valueProperty().addListener(((observable, oldValue, newValue) -> {
-                label.setVisible(false);
+            label.setVisible(false);
 
         }));
     }
@@ -150,7 +151,7 @@ public class UsabilityMethods {
         }));
     }
 
-    public static void  addMessage(Label label, String text) {
+    public static void addMessage(Label label, String text) {
         label.setText(text);
         label.setVisible(true);
     }

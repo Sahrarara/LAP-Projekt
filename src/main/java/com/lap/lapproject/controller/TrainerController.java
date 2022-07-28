@@ -89,7 +89,7 @@ public class TrainerController extends BaseController {
             BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
             Trainer trainer = tableViewTrainer.getSelectionModel().getSelectedItem();
 
-            //Alert CONFIRMATION TODO: wenn es möglich nur einen CONFIRMATION Alert für Alle DELETE
+            //Alert CONFIRMATION
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation Dialog");
             alert.setHeaderText(null);
@@ -106,7 +106,7 @@ public class TrainerController extends BaseController {
                     QuickAlert.showError("Diese : er Trainer  wird für eine Buchung benötigt, Sie können sie:ihn nicht löschen! Bearbeiten Sie zuerst Ihre Buchungen!");
                 }
             }
-            }else {
+        } else {
             QuickAlert.showInfo("Bitte gewünschte Zeile markieren");
         }
     }
@@ -114,20 +114,20 @@ public class TrainerController extends BaseController {
     @FXML
     private void onEditBtnClick(ActionEvent actionEvent) {
         if (listModel.getSelectedUser() != null) {
-        Stage stage = new Stage();
+            Stage stage = new Stage();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_TRAINER));
-        Scene scene = null;
+            FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource(Constants.PATH_TO_FXML_CREATE_NEW_TRAINER));
+            Scene scene = null;
 
-        try {
-            scene = new Scene(fxmlLoader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            try {
+                scene = new Scene(fxmlLoader.load());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-        stage.setTitle("Raum Management");
-        stage.setScene(scene);
-        stage.show();
+            stage.setTitle("Raum Management");
+            stage.setScene(scene);
+            stage.show();
         } else {
             QuickAlert.showInfo("Bitte gewünschte Zeile markieren");
         }
@@ -150,14 +150,14 @@ public class TrainerController extends BaseController {
         authorityVisibility();
         initTrainerTable();
         //nimmt daten von tabele und befüllt das Formular
-         listModel.selectedUserProperty().bind(tableViewTrainer.getSelectionModel().selectedItemProperty());
+        listModel.selectedUserProperty().bind(tableViewTrainer.getSelectionModel().selectedItemProperty());
     }
 
     private void initTrainerTable() throws IOException {
         BufferedImage bImage = ImageIO.read(new FileInputStream("src/main/resources/com/lap/lapproject/images/lapproject/images/user.png"));
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        ImageIO.write(bImage, "png", bos );
-        byte [] imageNoVisible = bos.toByteArray();
+        ImageIO.write(bImage, "png", bos);
+        byte[] imageNoVisible = bos.toByteArray();
         String notVisibleText = " ";
 
         tableViewTrainer.setItems(listModel.sortedTrainerList);
@@ -171,20 +171,9 @@ public class TrainerController extends BaseController {
         firstNameColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getfName() + " " + dataFeatures.getValue().getlName()));
         descriptionColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>((dataFeatures.getValue().getDescriptionVisibility() || model.getAuthority().equals("admin")) ? dataFeatures.getValue().getDescription() : notVisibleText));
         emailColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>((dataFeatures.getValue().getEmailVisibility() || model.getAuthority().equals("admin")) ? dataFeatures.getValue().getEmail() : notVisibleText));
-
-
-        phoneColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>((dataFeatures.getValue().getPhoneNmbrVisibility() || model.getAuthority().equals("admin"))  ? dataFeatures.getValue().getPhoneNmbr() : notVisibleText ));
+        phoneColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>((dataFeatures.getValue().getPhoneNmbrVisibility() || model.getAuthority().equals("admin")) ? dataFeatures.getValue().getPhoneNmbr() : notVisibleText));
 
         activeStatusColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getActiveStatus()));
-
-
-      /*  if(model.getLoggedInUser().getPhoto() != null) {
-            trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream(DataFeatures.getValue().getPhotoVisibility() ? DataFeatures.getValue().getPhoto() : imageNoVisible), 140, 200, false, false)))));
-            listModel.ListModel();
-        } else {
-        trainerImg.setCellValueFactory((DataFeatures -> new SimpleObjectProperty<ImageView>(new ImageView(new Image(new ByteArrayInputStream(DataFeatures.getValue().getPhoto() : imageNoVisible), 140, 200, false, false)))));
-        }*/
-
 
         //wechsselt boolean Value auf Text ja oder nein
         activeStatusColumn.setCellFactory(col -> new TableCell<Trainer, Boolean>() {
@@ -218,27 +207,6 @@ public class TrainerController extends BaseController {
                 || trainer.getlName().toLowerCase(Locale.ROOT).contains(searchTerm)
                 || trainer.getEmail().toLowerCase(Locale.ROOT).contains(searchTerm)
                 || trainer.getPhoneNmbr().toLowerCase(Locale.ROOT).contains(searchTerm));
-        /*
-        String searchTerm = searchBar.getText();
-        ObservableList<Trainer> filteredList = FXCollections.observableArrayList();
-
-        if (searchTerm.equals("")) {
-            filteredList = listModel.trainerList;
-        } else {
-            for (Trainer elem : listModel.trainerList) {
-
-                if (elem.getfName().toUpperCase().contains(searchTerm.toUpperCase())
-                        || elem.getlName().toUpperCase().contains(searchTerm.toUpperCase())
-                        || elem.getEmail().toUpperCase().contains(searchTerm.toUpperCase())
-                        || elem.getPhoneNmbr().contains(searchTerm)
-//                        || (elem.getActiveStatus() && searchTerm.equalsIgnoreCase("ja"))
-//                        || (!elem.getActiveStatus() && searchTerm.equalsIgnoreCase("nein"))
-
-                ) {
-                    filteredList.add(elem);
-                }
-            }
-            */
 
     }
 

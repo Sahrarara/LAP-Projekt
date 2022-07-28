@@ -1,6 +1,7 @@
 package com.lap.lapproject.repos;
 
 import com.lap.lapproject.model.Equipment;
+import org.slf4j.LoggerFactory;
 
 
 import java.sql.*;
@@ -14,6 +15,10 @@ public class EquipmentRepositoryJDBC extends Repository implements EquipmentRepo
     private static final String UPDATE_EQUIPMENT_SQL_STRING = "UPDATE equipment SET equipment_description =? WHERE equipment_id=?";
     private static final String DELETE_EQUIPMENT_SQL_STRING = "DELETE FROM equipment WHERE equipment_id=?";
     private static final String GET_EQUIPMENT_COUNT_BY_UNIQUE_EQUIPMENT_DESCRIPTION_SQL_STRING = "SELECT COUNT(*) AS unique_equipment_count FROM equipment WHERE equipment_description = (?) ";
+
+    static {
+        logger = LoggerFactory.getLogger(EquipmentRepository.class);
+    }
 
     @Override
     public List<Equipment> readAll() throws SQLException {
@@ -29,7 +34,7 @@ public class EquipmentRepositoryJDBC extends Repository implements EquipmentRepo
                 Equipment equipment = new Equipment(rs.getInt("equipment_id"), rs.getString(
                         "equipment_description"));
 
-              equipmentList.add(equipment);
+                equipmentList.add(equipment);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -53,12 +58,12 @@ public class EquipmentRepositoryJDBC extends Repository implements EquipmentRepo
             preparedStatement.executeQuery();
             resultSet = preparedStatement.getGeneratedKeys();
 
-            while (resultSet.next() ) {
+            while (resultSet.next()) {
                 generatedKey = resultSet.getInt(1);
                 equipment.setId(generatedKey);
             }
 
-        } catch (SQLException e ) {
+        } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             if (connection != null) connection.close();
@@ -108,7 +113,7 @@ public class EquipmentRepositoryJDBC extends Repository implements EquipmentRepo
         ResultSet resultSet = null;
         int equipmentsCount = 0;
         try {
-            preparedStatement = connection.prepareStatement(GET_EQUIPMENT_COUNT_BY_UNIQUE_EQUIPMENT_DESCRIPTION_SQL_STRING );
+            preparedStatement = connection.prepareStatement(GET_EQUIPMENT_COUNT_BY_UNIQUE_EQUIPMENT_DESCRIPTION_SQL_STRING);
             preparedStatement.setString(1, equipmentDescription);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {

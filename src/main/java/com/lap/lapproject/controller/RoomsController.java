@@ -7,7 +7,6 @@ import com.lap.lapproject.repos.CourseRepositoryJDBC;
 import com.lap.lapproject.repos.RoomRepositoryJDBC;
 import com.lap.lapproject.utility.ChangeScene;
 import com.lap.lapproject.utility.QuickAlert;
-
 import com.lap.lapproject.utility.UsabilityMethods;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
@@ -17,7 +16,6 @@ import javafx.scene.input.KeyEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Locale;
 import java.util.Optional;
@@ -76,7 +74,7 @@ public class RoomsController extends BaseController {
 
             Room roomToDelete = tableViewRoom.getSelectionModel().getSelectedItem();
 
-            //Alert CONFIRMATION TODO: wenn es möglich nur einen CONFIRMATION Alert für Alle DELETE
+            //Alert CONFIRMATION
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation Dialog");
             alert.setHeaderText(null);
@@ -84,27 +82,27 @@ public class RoomsController extends BaseController {
             Optional<ButtonType> action = alert.showAndWait();
             if (action.get() == ButtonType.OK) {
 
-            try {
-                // check in DB how many bookings use the particular room
-                int bookingCountByRoom = bookingRepositoryJDBC.getBookingCountByRoomId(roomToDelete.getId());
+                try {
+                    // check in DB how many bookings use the particular room
+                    int bookingCountByRoom = bookingRepositoryJDBC.getBookingCountByRoomId(roomToDelete.getId());
 
-                if (bookingCountByRoom == 0) {
+                    if (bookingCountByRoom == 0) {
 
-                    roomRepositoryJDBC.deleteRoom(roomToDelete);
-                    listModel.roomList.remove(roomToDelete);
+                        roomRepositoryJDBC.deleteRoom(roomToDelete);
+                        listModel.roomList.remove(roomToDelete);
 
-                    listModel.courseList.setAll(courseRepositoryJDBC.readAll());
-                } else {
-                    QuickAlert.showError("Dieses Raum wird für eine Buchung benötigt, Sie können es nicht löschen! Bearbeiten Sie zuerst Ihre Buchungen!");
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
+                        listModel.courseList.setAll(courseRepositoryJDBC.readAll());
+                    } else {
+                        QuickAlert.showError("Dieser Raum wird für eine Buchung benötigt, Sie können es nicht löschen! Bearbeiten Sie zuerst Ihre Buchungen!");
+                    }
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
                 }
             }
-            }else {
+        } else {
             QuickAlert.showInfo("Bitte gewünschte Zeile markieren");
+        }
     }
-}
 
 
     @FXML
@@ -112,7 +110,6 @@ public class RoomsController extends BaseController {
         ChangeScene stage = new ChangeScene();
         stage.moveToNextStage(Constants.PATH_TO_FXML_CREATE_NEW_ROOM);
     }
-
 
 
     @FXML
@@ -130,7 +127,6 @@ public class RoomsController extends BaseController {
         closeIconButton.setVisible(false);
         UsabilityMethods.changeListener(searchBar, closeIconButton);
 
-
         authorityVisibility();
         initTableRoom();
         listModel.selectedRoomProperty().bind(tableViewRoom.getSelectionModel().selectedItemProperty());
@@ -140,7 +136,6 @@ public class RoomsController extends BaseController {
     private void initTableRoom() {
         tableViewRoom.setItems(listModel.sortedRoomList);
         listModel.sortedRoomList.comparatorProperty().bind(tableViewRoom.comparatorProperty());
-
         roomNumberColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getRoomNumber()));
         sizeColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getSize()));
         streetColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getLocation().getStreet()));
@@ -163,7 +158,6 @@ public class RoomsController extends BaseController {
     }
 
 
-
     @FXML
     private void onSearchBarClick(KeyEvent actionEvent) {
 
@@ -174,7 +168,6 @@ public class RoomsController extends BaseController {
                 || room.getLocation().getStreet().toLowerCase(Locale.ROOT).contains(searchTerm)
                 || room.getEquipmentAsString().toLowerCase(Locale.ROOT).contains(searchTerm));
     }
-
 
 
     @FXML

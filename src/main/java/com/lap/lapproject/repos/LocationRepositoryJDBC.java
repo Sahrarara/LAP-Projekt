@@ -1,6 +1,8 @@
 package com.lap.lapproject.repos;
+
 import com.lap.lapproject.model.Location;
 import com.lap.lapproject.model.Program;
+import org.slf4j.LoggerFactory;
 
 
 import java.sql.*;
@@ -13,6 +15,11 @@ public class LocationRepositoryJDBC extends Repository implements LocationReposi
     private static final String SELECT_LOCATION_SQL_STRING = "SELECT * FROM location";
     private static final String DELETE_LOCATION_SQL_STRING = "DELETE FROM location WHERE location_id=?";
     private static final String UPDATE_LOCATION_SQL_STRING = "UPDATE location SET street=?, zip=?, city=? WHERE location_id=?";
+
+
+    static {
+        logger = LoggerFactory.getLogger(LocationRepository.class);
+    }
 
     @Override
     public List<Location> readAll() throws SQLException {
@@ -46,7 +53,7 @@ public class LocationRepositoryJDBC extends Repository implements LocationReposi
         ResultSet resultSet = null;
         int generatedKey = 0;
 
-        try{
+        try {
             preparedStatement = connection.prepareStatement(ADD_NEW_LOCATION_SQL_STRING, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, location.getStreet());
             preparedStatement.setString(2, location.getZipcode());
@@ -56,19 +63,19 @@ public class LocationRepositoryJDBC extends Repository implements LocationReposi
             preparedStatement.executeQuery();
             resultSet = preparedStatement.getGeneratedKeys();
 
-            while (resultSet.next() ) {
+            while (resultSet.next()) {
                 generatedKey = resultSet.getInt(1);
-               location.setId(generatedKey);
+                location.setId(generatedKey);
             }
 
-        } catch (SQLException e ) {
+        } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             if (connection != null) connection.close();
         }
 
         return generatedKey;
-        }
+    }
 
 
     @Override

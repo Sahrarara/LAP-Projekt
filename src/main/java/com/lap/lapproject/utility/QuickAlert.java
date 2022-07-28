@@ -7,12 +7,13 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 public class QuickAlert {
-    public static void showError(String message){
+    public static void showError(String message) {
         Alert a = new Alert(Alert.AlertType.ERROR);
         a.setHeaderText(message);
         a.show();
     }
-    public static void showInfo(String message){
+
+    public static void showInfo(String message) {
         Alert a = new Alert(Alert.AlertType.INFORMATION);
         a.setHeaderText(message);
         a.show();

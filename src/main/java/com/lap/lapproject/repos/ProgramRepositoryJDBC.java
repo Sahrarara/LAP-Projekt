@@ -1,6 +1,8 @@
 package com.lap.lapproject.repos;
 
 import com.lap.lapproject.model.Program;
+import org.slf4j.LoggerFactory;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,10 @@ public class ProgramRepositoryJDBC extends Repository implements ProgramReposito
             "DELETE FROM programs WHERE program_id=?" /* + "UPDATE rooms_equipment SET equipment_id = null WHERE program_id=?"*/;
 
     private static final String GET_PROGRAM_COUNT_BY_UNIQUE_PROGRAM_NAME_SQL_STRING = "SELECT COUNT(*) AS unique_program_count FROM programs WHERE name = (?) ";
+
+    static {
+        logger = LoggerFactory.getLogger(ProgramRepository.class);
+    }
 
     @Override
     public List<Program> readProgram() throws SQLException {
@@ -56,12 +62,12 @@ public class ProgramRepositoryJDBC extends Repository implements ProgramReposito
             preparedStatement.executeQuery();
             resultSet = preparedStatement.getGeneratedKeys();
 
-            while (resultSet.next() ) {
+            while (resultSet.next()) {
                 generatedKey = resultSet.getInt(1);
                 program.setId(generatedKey);
             }
-            
-        } catch (SQLException e ) {
+
+        } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             if (connection != null) connection.close();
@@ -92,7 +98,7 @@ public class ProgramRepositoryJDBC extends Repository implements ProgramReposito
 
 
     //TODO: search function here
-    public void searchProgram(Program program) throws SQLException{
+    public void searchProgram(Program program) throws SQLException {
         Connection connection = connect();
     }
 
@@ -141,7 +147,7 @@ public class ProgramRepositoryJDBC extends Repository implements ProgramReposito
         ResultSet resultSet = null;
         int programCount = 0;
         try {
-            preparedStatement = connection.prepareStatement(GET_PROGRAM_COUNT_BY_UNIQUE_PROGRAM_NAME_SQL_STRING );
+            preparedStatement = connection.prepareStatement(GET_PROGRAM_COUNT_BY_UNIQUE_PROGRAM_NAME_SQL_STRING);
             preparedStatement.setString(1, programName);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {

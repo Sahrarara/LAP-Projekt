@@ -44,13 +44,13 @@ public class AddProgramController extends BaseController {
         Program program = new Program(programNameTextField.getText());
 
         if (!programNameTextField.getText().isBlank()) {
-            if ((listModel.getSelectedProgram() == null)){
+            if ((listModel.getSelectedProgram() == null)) {
                 //Add logik
                 System.out.println("AddProgrammController:: onAddBtnClick");
                 int programUniqueNameCount = programRepositoryJDBC.getProgramsCountByProgramName(programNameTextField.getText());
                 if (programUniqueNameCount == 0) {
                     try {
-                    // check if this Program exists in DM
+                        // check if this Program exists in DM
                         programRepositoryJDBC.addProgram(program);  //Program is added to a list. programview list
                         listModel.programList.add(program);
                         programRepositoryJDBC.readProgram();
@@ -70,12 +70,12 @@ public class AddProgramController extends BaseController {
                 String selectedProgramName = listModel.getSelectedProgram().getProgramName();
 
                 if (!newProgramName.equals(selectedProgramName)) {
-                    if ( programRepositoryJDBC.getProgramsCountByProgramName(newProgramName) == 0) {
+                    if (programRepositoryJDBC.getProgramsCountByProgramName(newProgramName) == 0) {
                         updateProgram();
-                    }else {
+                    } else {
                         UsabilityMethods.addMessage(programNameNoticeLabel, "Dieser Programmname existiert schon in DB!");
                     }
-                }else {
+                } else {
                     updateProgram();
                 }
             }
@@ -93,7 +93,7 @@ public class AddProgramController extends BaseController {
         currentStage.close();
     }
 
-    private  void updateProgram() throws SQLException {
+    private void updateProgram() throws SQLException {
         listModel.getSelectedProgram().setProgramName(programNameTextField.getText());
         programRepositoryJDBC.updateProgram(listModel.getSelectedProgram());
         listModel.programList.set(listModel.programList.indexOf(listModel.getSelectedProgram()), listModel.getSelectedProgram());

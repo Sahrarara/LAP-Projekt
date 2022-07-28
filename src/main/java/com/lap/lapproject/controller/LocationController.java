@@ -30,10 +30,8 @@ public class LocationController extends BaseController {
     @FXML
     private Button deleteLocationBtn;
 
-
     @FXML
     private Button settingsLocationBtn;
-
 
     @FXML
     private TableView<Location> tableViewLocation;

@@ -29,14 +29,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: trainer bzw. admin muss noch angezeigt werden, welcher die buchung erstellt hat.
+
 /**
  * Diese Klasse extends BasseController. Sie wird genutzt um eine Buchung zu erstellen oder upzudaten, dabei werden die Daten an die dafür zuständigen JDBC klassen gesendet
  */
 public class AddBookingController extends BaseController {
 
-    /**
-     *
-     */
     private static final Logger logger = LoggerFactory.getLogger(AddBookingController.class);
 
     @FXML
@@ -64,8 +63,10 @@ public class AddBookingController extends BaseController {
     @FXML
     private Label locationNameLabel;
 
+
     /**
      * Schließt die Anwendung wieder
+     *
      * @param actionEvent
      */
     @FXML
@@ -74,15 +75,17 @@ public class AddBookingController extends BaseController {
     }
 
     /**
-     *  Wenn alle Felder Ausgefüllt sind, wird eine Buchung mit addNewBooking() angelegt.
-     *  Wenn die Buchung editiert wird, wird updateSelectedBooking() ausgeführt.
+     * Wenn alle Felder Ausgefüllt sind, wird eine Buchung mit addNewBooking() angelegt.
+     * Wenn die Buchung editiert wird, wird updateSelectedBooking() ausgeführt.
+     *
      * @param actionEvent
      * @throws SQLException wenn nicht alle Felder ausgefüllt sind
      */
     @FXML
-    private void onAddBtnClick(ActionEvent actionEvent) throws SQLException {
+    private void onAddBtnClick(ActionEvent actionEvent) {
 
         //TODO: if Bedingung damit Booking nur angelegt wird wenn möglich
+
 
         if (locationChoiceBox.getValue() != null && courseNameChoiceBox.getValue() != null &&
                 trainerChoiceBox.getValue() != null && roomNumberChoiceBox.getValue() != null &&
@@ -99,6 +102,35 @@ public class AddBookingController extends BaseController {
         } else {
             QuickAlert.showError("Bitte alle nötigen Felder ausfüllen");
         }
+
+
+    }
+
+    private boolean isValidBooking(Room room, Trainer trainer, Course courseName, LocalDate dateStart, LocalDate dateEnd, LocalTime timeStart, LocalTime timeEnd) {
+
+
+        bookingModel.loadBookingIntoCalendar();
+
+        List<Room> filterdEmptyRooms = bookingModel.findEmptyRooms(dateStart, dateEnd, timeStart, timeEnd);
+
+        if (!filterdEmptyRooms.contains(room)) {
+            QuickAlert.showError("Der raum ist nicht frei");
+            return false;
+        }
+        List<Trainer> filterdAvailableTrainer = bookingModel.findAvailableTrainer(dateStart, dateEnd, timeStart, timeEnd);
+
+        if (!filterdAvailableTrainer.contains(trainer)) {
+            QuickAlert.showError("Der Trainer ist nicht frei");
+            return false;
+        }
+        List<Course> filterdAvailableCourse = bookingModel.findAvailableCourse(dateStart, dateEnd, timeStart, timeEnd);
+
+        if (!filterdAvailableCourse.contains(courseName)) {
+            QuickAlert.showError("Der Kurs ist nicht frei");
+            return false;
+
+        }
+        return true;
     }
 
     /**
@@ -123,30 +155,18 @@ public class AddBookingController extends BaseController {
         LocalDateTime localDateTimeStart = null;
         LocalDateTime localDateTimeEnd = null;
 
-        if (isValidDateTimeForAddBooking(dateStart, dateEnd, timeStart, timeEnd)) {
+
+        boolean isValidDateTimeForAddOrUpdateBooking = isValidDateTimeForAddOrUpdateBooking(dateStart, dateEnd, timeStart, timeEnd);
+        boolean isValidBooking = isValidBooking(room, trainer, course, dateStart, dateEnd, timeStart, timeEnd);
+
+        if (isValidDateTimeForAddOrUpdateBooking && isValidBooking) {
             localDateTimeStart = LocalDateTime.of(dateStart, timeStart);
             localDateTimeEnd = LocalDateTime.of(dateEnd, timeEnd);
-
-
-            //Negin...................................
-            BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
-            if (bookingRepositoryJDBC.isRoomFree(room.getId(), localDateTimeStart, localDateTimeEnd)) {
-//..................................
-
-
             Booking booking = new Booking(room, trainer, model.getLoggedInUser(), course, localDateTimeStart, localDateTimeEnd, recurrenceRule);
             listModel.bookingList.add(booking);
             moveToBookingPage();
-
-                //Negin.................................
-            }else{
-                QuickAlert.showError("Raum ist bereits gebucht in diesem Zeitraum ");
-
-            }
         }
-//..........................................
-        }
-
+    }
 
     /**
      * Es werden die Daten aus der Datenbank gelesen, die neuen Daten in die Datenbank eingetragen und die Anwedung geschlossen.
@@ -155,10 +175,14 @@ public class AddBookingController extends BaseController {
 
         Booking selectedBooking = listModel.getSelectedBooking();
 
+        Room room = roomNumberChoiceBox.getValue();
+        Trainer trainer = trainerChoiceBox.getValue();
+        Course course = courseNameChoiceBox.getValue();
+
         selectedBooking.setRoom(roomNumberChoiceBox.getValue());
-        selectedBooking.setUser(model.getLoggedInUser());
         selectedBooking.setTrainer(trainerChoiceBox.getValue());
         selectedBooking.setCourse(courseNameChoiceBox.getValue());
+        selectedBooking.setUser(model.getLoggedInUser());
 
         LocalDate dateStart = startDatePicker.getValue();
         LocalDate dateEnd = endDatePicker.getValue();
@@ -169,8 +193,10 @@ public class AddBookingController extends BaseController {
         LocalDateTime localDateTimeEnd;
 
         selectedBooking.setRecurrenceRule(recurrenceChoiceBox.getValue());
+        boolean isValidDateTimeForAddOrUpdateBooking = isValidDateTimeForAddOrUpdateBooking(dateStart, dateEnd, timeStart, timeEnd);
+        boolean isValidBooking = isValidBooking(room, trainer, course, dateStart, dateEnd, timeStart, timeEnd);
 
-        if (isValidDateTimeForUpdateBooking(dateStart, dateEnd, timeStart, timeEnd)) {
+        if (isValidDateTimeForAddOrUpdateBooking && isValidBooking) {
             localDateTimeStart = LocalDateTime.of(dateStart, timeStart);
             localDateTimeEnd = LocalDateTime.of(dateEnd, timeEnd);
             selectedBooking.setDateTimeStart(localDateTimeStart);
@@ -183,7 +209,7 @@ public class AddBookingController extends BaseController {
     }
 
     /**
-     *Prüft den Zustand der InputFelder des AddBookingControllers und befüllt die ChoiceBoxes mit den standart Werten,
+     * Prüft den Zustand der InputFelder des AddBookingControllers und befüllt die ChoiceBoxes mit den standart Werten,
      * wenn es kein SelectedBooking ist. Sonst wird die Methode fillChoiceBoxesForUpdate() aufgerufen.
      */
     @FXML
@@ -242,6 +268,7 @@ public class AddBookingController extends BaseController {
         timeEndTimeField.setValue(listModel.getSelectedBooking().getDateTimeEnd().toLocalTime());
     }
 
+
     /**
      * Befüllt die ChoiceBox des Serientermin mit Wiederholungsarten.
      * Die Standardeinstellung ist "keiner"
@@ -285,13 +312,14 @@ public class AddBookingController extends BaseController {
     /**
      * Prüft Startdatum und Enddatum auf 0 (darf nicht 0 sein)
      * und Startzeit und Endzeit auf 0 (darf nicht 0 sein) beim Updaten des Datepicker und Timefield
+     *
      * @param dateStart initialisiertes Startdatum
-     * @param dateEnd initialisiertes Enddatum
+     * @param dateEnd   initialisiertes Enddatum
      * @param timeStart initialisierte Startzeit
-     * @param timeEnd initialisierte Endzeit
+     * @param timeEnd   initialisierte Endzeit
      * @return true wenn das Datum und die Uhrzeit passend ausgefüllt sind
      */
-    private boolean isValidDateTimeForUpdateBooking(LocalDate dateStart, LocalDate dateEnd, LocalTime timeStart, LocalTime timeEnd) {
+/*    private boolean isValidDateTimeForUpdateBooking(LocalDate dateStart, LocalDate dateEnd, LocalTime timeStart, LocalTime timeEnd) {
         if (dateStart.compareTo(dateEnd) > 0) {
             QuickAlert.showError("Datum passt nicht. Bitte kontrollieren!");
             return false;
@@ -302,34 +330,36 @@ public class AddBookingController extends BaseController {
             }
             return true;
         }
-    }
+    }*/
 
     /**
      * Prüft Startdatum und Enddatum auf 0 (darf nicht 0 sein)
      * und Startzeit und Endzeit auf 0 (darf nicht 0 sein) beim Erstellen eines Zeitraumes im Datepicker und Timefield
+     *
      * @param dateStart initialisiertes Startdatum
-     * @param dateEnd initialisiertes Enddatum
+     * @param dateEnd   initialisiertes Enddatum
      * @param timeStart initialisierte Startzeit
-     * @param timeEnd initialisierte Endzeit
+     * @param timeEnd   initialisierte Endzeit
      * @return true wenn das Datum und die Uhrzeit passend ausgefüllt sind
      */
-    private boolean isValidDateTimeForAddBooking(LocalDate dateStart, LocalDate dateEnd, LocalTime timeStart, LocalTime timeEnd) {
+    private boolean isValidDateTimeForAddOrUpdateBooking(LocalDate dateStart, LocalDate dateEnd, LocalTime timeStart, LocalTime timeEnd) {
+        LocalTime startTimeOfBookings = LocalTime.of(7, 30);
+        LocalTime endTimeOfBookings = LocalTime.of(19, 30);
         if (dateStart.compareTo(dateEnd) > 0 || dateStart.isBefore(LocalDate.now()) || dateEnd.isBefore(LocalDate.now())) {
             QuickAlert.showError("Datum passt nicht. Bitte kontrollieren!");
             return false;
-        } else {
-            if (timeStart.compareTo(timeEnd) > 0 || timeStart.compareTo(timeEnd) == 0 ||
-                    (timeStart.equals(LocalTime.of(7, 30)) && timeEnd.equals(LocalTime.of(19, 30)))) {
-                QuickAlert.showError("Uhrzeit passt nicht. Bitte kontrollieren!");
-                return false;
-            }
-            return true;
         }
+        if (timeStart.compareTo(timeEnd) > 0 || timeStart.compareTo(timeEnd) == 0 ||
+                timeStart.isBefore(startTimeOfBookings) || timeEnd.isAfter(endTimeOfBookings)) {
+            QuickAlert.showError("Bitte Prüfe die Zeiten. \nEin Kurs läuft nur in der Uhrzeit zwischen 7:30 und 19:30");
+            return false;
+        }
+        return true;
     }
 
-    //TODO: Bei Mona nachfragen wegen der Methode
     /**
      * Holt sich das aktuelle Fenster
+     *
      * @return
      */
     private Stage getCurrentStage() {
@@ -345,8 +375,6 @@ public class AddBookingController extends BaseController {
     }
 
 }
-
-
 
 
 

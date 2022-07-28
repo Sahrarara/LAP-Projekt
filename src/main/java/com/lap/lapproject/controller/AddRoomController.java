@@ -58,6 +58,9 @@ public class AddRoomController extends BaseController {
     BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
 
 
+    /**
+     * Initialisiert
+     */
     @FXML
     void initialize() {
         assert roomNmbrTextField != null : "fx:id=\"roomNmbrTextField\" was not injected: check your FXML file 'addroom-view.fxml'.";
@@ -72,14 +75,14 @@ public class AddRoomController extends BaseController {
         UsabilityMethods.changeListenerForNumber(roomNmbrTextField, roomNumberNoticeLabel);//!
         UsabilityMethods.changeListenerForNumber(sizeTextField, roomSizeNoticeLabel);//!
 
-
         addListenerForEquipmentList();
 
         fillDataForUpdate();
-
     }
 
-
+    /**
+     * Befüllt alle Textfelder mit den bereits vorhandenen Values vom Raum
+     */
     private void fillDataForUpdate() {
         //Update logik
         if (listModel.getSelectedRoom() != null) {
@@ -97,14 +100,15 @@ public class AddRoomController extends BaseController {
         }
     }
 
+    /**
+     * addListenerForEquipmentList hört auf die Veränderungen, welche bei der Auswahl vom Equipment oder Löschen eines Equipements passieren
+     */
     private void addListenerForEquipmentList() {
 
         if (listModel.getSelectedRoom() != null) {
 //             teil der update logik
             if (listModel.getSelectedRoom().getEquipments() != null) {
-
                 equipmentPerList.setAll(listModel.getSelectedRoom().getEquipments());
-
             }
         }
 
@@ -113,17 +117,13 @@ public class AddRoomController extends BaseController {
         equipmentPerList.addListener(new ListChangeListener<Equipment>() {
             @Override
             public void onChanged(Change<? extends Equipment> change) {
-
                 while (change.next()) {
-
                     if (change.wasAdded()) {
                         for (Equipment equipment : change.getAddedSubList()) {
                             logger.info("added: {}", equipment.getDescription());
-
                             try {
                                 // add to database
                                 roomRepositoryJDBC.addEquipment(room, equipment);
-
                             } catch (SQLException ex) {
                                 throw new RuntimeException(ex);
                             }
@@ -134,7 +134,6 @@ public class AddRoomController extends BaseController {
                             try {
                                 // delete from database
                                 roomRepositoryJDBC.deleteEquipment(room, equipment);
-
                             } catch (SQLException ex) {
                                 throw new RuntimeException(ex);
                             }
@@ -148,9 +147,7 @@ public class AddRoomController extends BaseController {
 
     private void generateItemDynamicToUpdate(List<Equipment> equipmentList) {
         for (Equipment equipment : equipmentList) {
-
             generateItemDynamic(equipment, equipmentList);
-
         }
     }
 

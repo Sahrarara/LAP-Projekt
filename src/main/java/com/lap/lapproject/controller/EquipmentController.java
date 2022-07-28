@@ -17,12 +17,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Locale;
 import java.util.Optional;
 
-public class EquipmentController extends BaseController{
+public class EquipmentController extends BaseController {
     @FXML
     private Button addEquipmentBtn;
     @FXML
@@ -70,7 +71,7 @@ public class EquipmentController extends BaseController{
 
             Equipment equipment1 = tableViewEquipment.getSelectionModel().getSelectedItem();
 
-            //Alert CONFIRMATION TODO: wenn es möglich nur einen CONFIRMATION Alert für Alle DELETE
+            //Alert CONFIRMATION
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation Dialog");
             alert.setHeaderText(null);
@@ -78,19 +79,19 @@ public class EquipmentController extends BaseController{
             Optional<ButtonType> action = alert.showAndWait();
             if (action.get() == ButtonType.OK) {
                 try {
-                equipmentRepositoryJDBC.deleteEquipment(equipment1);
-                listModel.equipmentList.remove(equipment1);
+                    equipmentRepositoryJDBC.deleteEquipment(equipment1);
+                    listModel.equipmentList.remove(equipment1);
 
-                listModel.roomList.setAll(roomRepositoryJDBC.readAll());// TODO: put later to ListModel
+                    listModel.roomList.setAll(roomRepositoryJDBC.readAll());// TODO: put later to ListModel
 
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
             }
-            } else {
-                QuickAlert.showInfo("Bitte gewünschte Zeile markieren");
-            }
+        } else {
+            QuickAlert.showInfo("Bitte gewünschte Zeile markieren");
         }
+    }
 
 
     @FXML
@@ -114,7 +115,6 @@ public class EquipmentController extends BaseController{
             QuickAlert.showInfo("Bitte gewünschte Zeile markieren");
         }
     }
-
 
 
     @FXML
@@ -154,7 +154,6 @@ public class EquipmentController extends BaseController{
                 break;
         }
     }
-
 
 
     @FXML

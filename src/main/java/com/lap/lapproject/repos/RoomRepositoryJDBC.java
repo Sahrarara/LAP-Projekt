@@ -2,29 +2,34 @@ package com.lap.lapproject.repos;
 
 import com.lap.lapproject.controller.AddRoomController;
 import com.lap.lapproject.model.*;
+import javafx.util.converter.LocalDateTimeStringConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RoomRepositoryJDBC extends Repository implements RoomRepository {
-    private static final Logger logger = LoggerFactory.getLogger(AddRoomController.class);
+
+    static {
+        logger = LoggerFactory.getLogger(RoomRepository.class);
+    }
+
 
     private static final String SELECT_ROOM_SQL_STRING = "SELECT * FROM rooms JOIN location ON rooms.location_id = location.location_id";
     private static final String SELECT_EQUIPMENT_ID_LIST = "SELECT * FROM equipment INNER JOIN rooms_equipment ON rooms_equipment.equipment_id=equipment.equipment_id WHERE rooms_equipment.room_id=(?) ";
-    private static final String ADD_NEW_ROOM_SQL_STRING = "INSERT INTO rooms(room_number, size, location_id)" + "VALUES (?,?,?)";
-    private static final String ADD_EQUIPMENT_SQL_STRING = "INSERT INTO rooms_equipment (room_id, equipment_id)" +
-            " VALUES (?,?)";
+    private static final String ADD_NEW_ROOM_SQL_STRING = "INSERT INTO rooms(room_number, size, location_id) VALUES (?,?,?)";
+    private static final String ADD_EQUIPMENT_SQL_STRING = "INSERT INTO rooms_equipment (room_id, equipment_id) VALUES (?,?)";
     private static final String DELETE_ROOM_SQL_STRING = "DELETE FROM rooms WHERE room_id=?";
     private static final String UPDATE_ROOM_SQL_STRING = "UPDATE rooms SET room_number =?, size=?, location_id=? WHERE room_id=? ";
-    private static final String DELETE_EQUIPMENT_ROOM_RT = "DELETE FROM rooms_equipment WHERE room_id=? AND " +
-            "equipment_id=?";
+    private static final String DELETE_EQUIPMENT_ROOM_RT = "DELETE FROM rooms_equipment WHERE room_id=? AND equipment_id=?";
     private static final String GET_ROOM_COUNT_BY_UNIQUE_ROOM_NUMBER_SQL_STRING = "SELECT COUNT(*) AS unique_room_count FROM rooms WHERE room_number = (?) ";
 
     @Override
-    public List<Room> readAll() throws SQLException {
+    public List<Room> readAll() {
         Connection connection = connect();
         List<Room> roomList = new ArrayList<>();
 
@@ -71,7 +76,13 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            if (connection != null) connection.close();
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
         return roomList;
@@ -213,13 +224,13 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
     }
 
 
-    public int getRoomCountByRoomNumber(int roomNumber) throws SQLException {
+    public int getRoomCountByRoomNumber(int roomNumber) {
         Connection connection = connect();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         int roomCount = 0;
         try {
-            preparedStatement = connection.prepareStatement(GET_ROOM_COUNT_BY_UNIQUE_ROOM_NUMBER_SQL_STRING  );
+            preparedStatement = connection.prepareStatement(GET_ROOM_COUNT_BY_UNIQUE_ROOM_NUMBER_SQL_STRING);
             preparedStatement.setInt(1, roomNumber);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -229,10 +240,15 @@ public class RoomRepositoryJDBC extends Repository implements RoomRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            if (connection != null) connection.close();
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return roomCount;
     }
-
 
 }

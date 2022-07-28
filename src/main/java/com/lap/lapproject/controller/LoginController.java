@@ -2,6 +2,8 @@ package com.lap.lapproject.controller;
 
 import com.lap.lapproject.LoginApplication;
 import com.lap.lapproject.application.Constants;
+import com.lap.lapproject.model.Location;
+import com.lap.lapproject.model.Room;
 import com.lap.lapproject.model.User;
 import com.lap.lapproject.repos.UserRepositoryJDBC;
 import com.lap.lapproject.utility.QuickAlert;
@@ -16,9 +18,12 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
 
-public class LoginController extends BaseController implements Initializable{
+public class LoginController extends BaseController implements Initializable {
 
 
     @FXML
@@ -42,7 +47,7 @@ public class LoginController extends BaseController implements Initializable{
         String username = usernameTF.getText();
         String password = passwordTF.getText();
 
-        if (checkFieldsFilled() &&  userRepositoryJDBC.checkUser(username, password)) {
+        if (checkFieldsFilled() && userRepositoryJDBC.checkUser(username, password)) {
 
             User user = userRepositoryJDBC.loginUser(username);
 
@@ -67,11 +72,11 @@ public class LoginController extends BaseController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        usernameTF.setText("dorota1"); /*capitanMarvel*/
-        passwordTF.setText("1234"); /*carol123*/
+        usernameTF.setText("Tina1"); /*capitanMarvel*/
+        passwordTF.setText("1234!QAy"); /*carol123*/
     }
 
-    private void moveToMainPage(){
+    private void moveToMainPage() {
         Stage currentStage = this.getCurrentStage();
         currentStage.close();
 
@@ -79,8 +84,8 @@ public class LoginController extends BaseController implements Initializable{
         Scene scene = null;
 
         try {
-            scene= new Scene(fxmlLoader.load());
-        } catch (IOException e){
+            scene = new Scene(fxmlLoader.load());
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -89,7 +94,7 @@ public class LoginController extends BaseController implements Initializable{
         currentStage.show();
     }
 
-    private Stage getCurrentStage(){
+    private Stage getCurrentStage() {
         return (Stage) usernameTF.getScene().getWindow();
     }
 

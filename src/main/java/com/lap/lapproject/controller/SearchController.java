@@ -1,150 +1,153 @@
 package com.lap.lapproject.controller;
 
-import java.net.URL;
-import java.text.DecimalFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.function.Predicate;
 
+import com.calendarfx.view.TimeField;
+import com.lap.lapproject.model.BookingModel;
 import com.lap.lapproject.model.Room;
-import com.lap.lapproject.repos.*;
-import com.lap.lapproject.utility.QuickAlert;
-import javafx.beans.binding.Bindings;
-import javafx.collections.ObservableList;
+import com.lap.lapproject.utility.UsabilityMethods;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.*;
 
-import static javafx.application.Application.launch;
+import static com.lap.lapproject.controller.BaseController.listModel;
+import static com.lap.lapproject.controller.BaseController.model;
 
 public class SearchController {
 
+    @FXML
+    private DatePicker startDateSearchDatePicker;
+    @FXML
+    private DatePicker endDateSearchDatePicker;
 
     @FXML
-    private DatePicker startDatePicker;
-
+    private TimeField startSearchTime;
     @FXML
-    private DatePicker endDatePicker;
-
-    @FXML
-    private ChoiceBox<String>  startTimeSearchChoiceBox;
-
-    @FXML
-    private ChoiceBox<String> endTimeSearchChoiceBox;
-
-
-    // Attribute
-    RoomsController model = new RoomsController();
-
-    //Tablle
+    private TimeField searchEndTime;
     @FXML
     private TableView<Room> tableViewRoom;
+
     @FXML
     private TableColumn<Room, Integer> roomNumberColumn;
     @FXML
-    private  TableColumn<Room,Integer> sizeColumn;
+    private TableColumn<Room, Integer> sizeColumn;
     @FXML
-    private TableColumn<Room,String> streetColumn;
+    private TableColumn<Room, String> locationColumn;
     @FXML
-    private TableColumn<Room,Integer> equipmentColumn;
+    private TableColumn<Room, String> equipmentColumn;
 
+    private BookingModel bookingModel;
 
+    @FXML
+    private Label searchLabel;
 
- /*   @Override
- public void initialize(URL location, ResourceBundle resources) {
-    }*/
-    public   SearchController() {
+    /**
+     * leerer Konstruktor
+     */
+    public SearchController() {
     }
 
+    /**
+     * Prüft die alle Eingabe- und Ausgabefelder auf ihren Zustand und zeigt bereits initialisierte felder an.
+     * das searchLabel für die Errormeldung wird auf nicht Sichtbar gesetzt.
+     */
     @FXML
     void initialize() {
-        assert startDatePicker != null : "fx:id=\"startDatePicker\" was not injected: check your FXML file 'search-view.fxml'.";
-        assert endDatePicker != null : "fx:id=\"endDatePicker\" was not injected: check your FXML file 'search-view.fxml'.";
-        assert endTimeSearchChoiceBox != null : "fx:id=\"endTimeSearchChoiceBox\" was not injected: check your FXML file 'search-view.fxml'.";
-        assert startTimeSearchChoiceBox != null : "fx:id=\"startTimeSearchChoiceBox\" was not injected: check your FXML file 'search-view.fxml'.";
-        //TableView konfigurieren:
+        searchLabel.setVisible(false);
+        UsabilityMethods.changeListenerDataPicker(startDateSearchDatePicker, searchLabel);
 
-        roomNumberColumn.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
-        sizeColumn.setCellValueFactory(new PropertyValueFactory<>("size"));
-        streetColumn.setCellValueFactory(
-                cell -> Bindings.selectString(cell.getValue().getLocation(),"street"));
-        //streetColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
-        //equipmentColumn.setCellValueFactory(new PropertyValueFactory<>("equipments"));
+        assert startDateSearchDatePicker != null : "fx:id=\"startDateSearchDatePicker\" was not injected: check your FXML file 'search-view.fxml'.";
+        assert startSearchTime != null : "fx:id=\"startSearchTime\" was not injected: check your FXML file 'search-view.fxml'.";
+        assert searchEndTime != null : "fx:id=\"searchEndTime\" was not injected: check your FXML file 'search-view.fxml'.";
 
-//Negin........................................................
-        ArrayList<String> times = new ArrayList<String>();
+        assert tableViewRoom != null : "fx:id=\"tableViewRoom\" was not injected: check your FXML file 'search-view.fxml'.";
+        assert roomNumberColumn != null : "fx:id=\"roomNumberColumn\" was not injected: check your FXML file 'search-view.fxml'.";
+        assert sizeColumn != null : "fx:id=\"sizeColumn\" was not injected: check your FXML file 'search-view.fxml'.";
+        assert locationColumn != null : "fx:id=\"locationColumn\" was not injected: check your FXML file 'search-view.fxml'.";
+        assert equipmentColumn != null : "fx:id=\"equipmentColumn\" was not injected: check your FXML file 'search-view.fxml'.";
 
-        for (int i = 7; i <= 17; i++) {
+        startSearchTime.setValue(LocalTime.of(7, 00));
+        searchEndTime.setValue(LocalTime.of(19, 00));
 
-            DecimalFormat df = new DecimalFormat("00");
-            String iFormatted = df.format(i);
-            times.add(iFormatted + ":00");
-            times.add(iFormatted + ":15");
-            times.add(iFormatted + ":30");
-            times.add(iFormatted + ":45");
-
-        }
-
-                startTimeSearchChoiceBox.getItems().addAll(times);
-                endTimeSearchChoiceBox.getItems().addAll(times);
-
-//..............................................
-        // get all existing programs from DB
-        ProgramRepositoryJDBC programRepositoryJDBC = new ProgramRepositoryJDBC();
-        UserRepositoryJDBC userRepo = new UserRepositoryJDBC();
-        LocationRepositoryJDBC locationRepo = new LocationRepositoryJDBC();
-        RoomRepositoryJDBC roomNumberRepo = new RoomRepositoryJDBC();
-        //programRepositoryJDBC.getAllPrograms();
 
     }
-    //Negin..........................infxml hinzu......................
-    public void findFreeRooms() {
-        //ToDo
-        // Date != null;
-        // Time != null;
 
+    /**
+     * Es wird mit Ausführen dieser Methode das Datum geprüft, wenn kein Datum angegeben ist, wird das aktuelle Datum für die Suche nach leeren Räumen genommen.
+     * Wenn das Datum valide ist, dass heißt, das Startdatum liegt nicht hinter dem Enddatum und die Startzeit liegt nicht hinter der end Uhrzeit, wird die Suche
+     * nach leeren Räumen gestartet und der searchTable wird upgedatet und befüllt
+     *
+     * @param actionEvent keine parameter notwendig
+     */
+    @FXML
+    public void onButtonClickSearch(ActionEvent actionEvent) {
+        LocalDate dateStart = null;
+        LocalDate dateEnd = null;
+        if (startDateSearchDatePicker.getValue() == null || endDateSearchDatePicker.getValue() == null) {
+            dateStart = LocalDate.now();
+            dateEnd = dateStart;
+        } else {
+            dateStart = startDateSearchDatePicker.getValue();
+            dateEnd = endDateSearchDatePicker.getValue();
+        }
 
+        LocalTime timeStart = startSearchTime.getValue();
+        LocalTime timeEnd = searchEndTime.getValue();
 
-        BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
+        bookingModel.loadBookingIntoCalendar();
 
-        LocalDate dateStart = startDatePicker.getValue();
-        LocalDate dateEnd = endDatePicker.getValue();
+        boolean validDateTime = isValidDateTimeForSearch(dateStart, dateEnd, timeStart, timeEnd);
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-
-        LocalTime timeStart = LocalTime.parse(startTimeSearchChoiceBox.getValue(),formatter);
-        LocalTime timeEnd = LocalTime.parse(endTimeSearchChoiceBox.getValue(),formatter);
-
-        LocalDateTime localDateTimeStart;
-        LocalDateTime localDateTimeEnd;
-
-        localDateTimeStart = LocalDateTime.of(dateStart, timeStart);
-
-        localDateTimeEnd = LocalDateTime.of(dateEnd, timeEnd);
-
-        List<Room> freeRooms = bookingRepositoryJDBC.findFreeRoomsByTime(localDateTimeStart, localDateTimeEnd);
-        tableViewRoom.getItems().clear();
-        if (freeRooms.isEmpty()){
-            QuickAlert.showError("Keine freien Räume  gefunden");
-        }else{
-            tableViewRoom.getItems().addAll(freeRooms);
+        if (validDateTime) {
+            listModel.roomList.setAll(bookingModel.findEmptyRooms(dateStart, dateEnd, timeStart, timeEnd));
+            updateSearchTable();
         }
     }
 
-    public void onfindFreeRumBtnClick(ActionEvent event) {
-        findFreeRooms();
+    /**
+     * Diese Methode überprüft ob der gesuchte Starttag nicht nach dem gesuchten EndTag und die gesuchte Startzeit nicht nach der gesuchen Endzeit liegt.
+     * Sonst wird eine Errortextmeldung eingeblendet, sonsten ist die Sichtbarkeit der Textmeldung auf (false) gesetzt.
+     *
+     * @param dateStart - der Starttag ab dem gesucht wird
+     * @param dateEnd   - der EndTag bis zu dem gesucht wird
+     * @param timeStart - die Startueot ab der gesucht wird
+     * @param timeEnd   - die Endzeit bis zu der gesucht wird
+     * @return returnt true wenn das Datum und die Uhrzeit in der richtigen Reihenfolge stehen, sonst false
+     */
+    private boolean isValidDateTimeForSearch(LocalDate dateStart, LocalDate dateEnd, LocalTime timeStart, LocalTime timeEnd) {
+
+        try {
+            if (dateStart.isAfter(dateEnd)) {
+                searchLabel.setVisible(true);
+                searchLabel.setText("Das Datum darf nicht nach dem Enddatum stehen.");
+                return false;
+            } else if (timeStart.isAfter(timeEnd)) {
+                searchLabel.setVisible(true);
+                searchLabel.setText("Die Startzeit darf nicht größer sein als die Endzeit");
+                return false;
+            }
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
+        searchLabel.setVisible(false);
+        return true;
+    }
+
+    /**
+     * Diese Methode befüllt die Tabelle mit den Werten aus der Datenbank, wie der Raumnummer, Raumgröße, Ort und dem verfügbaren Equpment, nach dem Klick auf den Searchbutton.
+     */
+    public void updateSearchTable() {
+        tableViewRoom.setItems(listModel.sortedRoomList);
+        listModel.sortedRoomList.comparatorProperty().bind(tableViewRoom.comparatorProperty());
+        roomNumberColumn.setCellValueFactory((dataFeatures) -> new SimpleObjectProperty<>(dataFeatures.getValue().getRoomNumber()));
+        sizeColumn.setCellValueFactory(dataFeatures -> new SimpleObjectProperty<>(dataFeatures.getValue().getSize()));
+        locationColumn.setCellValueFactory(dataFeatures -> new SimpleObjectProperty<>(dataFeatures.getValue().getLocation().getStreet()));
+        equipmentColumn.setCellValueFactory(dataFeatures -> new SimpleObjectProperty(dataFeatures.getValue().getEquipmentAsString()));
+
     }
 
 
-
-    //................................................................
 }

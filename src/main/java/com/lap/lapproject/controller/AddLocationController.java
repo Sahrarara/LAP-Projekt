@@ -33,8 +33,8 @@ public class AddLocationController extends BaseController {
 
     @FXML
     private void onAddBtnClick(ActionEvent actionEvent) throws SQLException {
-        RoomRepositoryJDBC roomRepositoryJDBC= new RoomRepositoryJDBC();
-        BookingRepositoryJDBC bookingRepositoryJDBC= new BookingRepositoryJDBC();
+        RoomRepositoryJDBC roomRepositoryJDBC = new RoomRepositoryJDBC();
+        BookingRepositoryJDBC bookingRepositoryJDBC = new BookingRepositoryJDBC();
 
         String street = streetNameTextField.getText();
         String zip = zipCodeTextField.getText();

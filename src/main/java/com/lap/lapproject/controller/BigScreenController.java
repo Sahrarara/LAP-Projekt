@@ -15,6 +15,9 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
+/**
+ * Verbindet alle Views miteinander
+ */
 public class BigScreenController extends BaseController {
 
     private static final Logger log = LoggerFactory.getLogger(BigScreenController.class);
@@ -29,16 +32,16 @@ public class BigScreenController extends BaseController {
     }
 
     @FXML
-    private void initialize(){
+    private void initialize() {
         log.info("initialized");
         model.pathForDetailViewProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
-                if (newValue != null){
-                    try{
+                if (newValue != null) {
+                    try {
                         loadFXMLInBorderPaneCenter(newValue);
-                    } catch (IOException e){
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
@@ -46,7 +49,6 @@ public class BigScreenController extends BaseController {
         });
         log.info("Listener registered");
     }
-
 
 
 }
