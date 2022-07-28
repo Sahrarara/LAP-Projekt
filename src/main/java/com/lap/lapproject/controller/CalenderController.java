@@ -36,8 +36,7 @@ public class CalenderController extends BaseController {
         model.bookingModel.loadBookingIntoCalendar();
 
         CalendarView calendarView = new CalendarView();
-//        calendarView.getCalendarSources().get(0).getCalendars().get(0).setReadOnly(true);
-//        calendarView.getCalendarSources().get(0).getCalendars().get(0);
+        calendarView.getCalendarSources().get(0).getCalendars().get(0).setReadOnly(true);
         calendarView.getCalendarSources().addAll(model.bookingModel.getCalendarSource());
         calendarView.setRequestedTime(LocalTime.now());
 
