@@ -206,17 +206,17 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
     public String convertRecurrenceRuleFromTextToFrequency(String recurrenceRuleText) {
         String recurrenceRule;
         switch (recurrenceRuleText) {
-            case "täglich":
+            case "Täglich":
                 recurrenceRule = "RRULE:FREQ=DAILY";
                 break;
-            case "wöchentlich":
+            case "Wöchentlich":
                 recurrenceRule = "RRULE:FREQ=WEEKLY";
                 break;
-            case "monatlich":
+            case "Monatlich":
                 recurrenceRule = "RRULE:FREQ=MONTHLY";
                 break;
             default:
-                recurrenceRule = "keiner";
+                recurrenceRule = "Einzeltermin";
                 break;
         }
         return recurrenceRule;
@@ -227,16 +227,16 @@ public class BookingRepositoryJDBC extends Repository implements BookingReposito
         String recurrenceRule;
         switch (recurrenceRuleFrequency) {
             case "RRULE:FREQ=DAILY":
-                recurrenceRule = "täglich";
+                recurrenceRule = "Täglich";
                 break;
             case "RRULE:FREQ=WEEKLY":
-                recurrenceRule = "wöchentlich";
+                recurrenceRule = "Wöchentlich";
                 break;
             case "RRULE:FREQ=MONTHLY":
-                recurrenceRule = "monatlich";
+                recurrenceRule = "Monatlich";
                 break;
             default:
-                recurrenceRule = "keiner";
+                recurrenceRule = "Einzeltermin";
         }
         return recurrenceRule;
     }

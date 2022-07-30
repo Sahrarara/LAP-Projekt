@@ -41,6 +41,14 @@ public class Booking {
         this.recurrenceRule = recurrenceRule;
     }
 
+    @Override
+    public boolean equals (Object b) {
+        if(!(b instanceof Booking b1)) {
+            return false;
+        }
+        return this.id == b1.id;
+    }
+
     public Room getRoom() {
         return room;
     }
@@ -107,6 +115,10 @@ public class Booking {
 
     public String toString() {
         return this.room.toString();
+    }
+
+    public String toDebuggString() {
+        return "\"" +this.getCourse() + "\" \"" + this.getId() + "\" \"" + this.getRoom() + "\" \"" + this.getTrainer() + "\"";
     }
 
 

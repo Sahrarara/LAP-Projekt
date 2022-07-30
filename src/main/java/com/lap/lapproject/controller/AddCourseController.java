@@ -108,7 +108,6 @@ public class AddCourseController extends BaseController {
     @FXML
     private void onAddBtnClick(ActionEvent actionEvent) throws SQLException {
 
-        System.out.println("AddCourseController:: onAddBtnClick");
         String courseName = courseNameTextField.getText();
 
 
@@ -120,7 +119,7 @@ public class AddCourseController extends BaseController {
 
 
         if (!UsabilityMethods.isDDMMYYYYDate(courseStartDateAsText) || !UsabilityMethods.isDDMMYYYYDate(courseEndDateAsText)) {
-            UsabilityMethods.addMessage(checkDateNoticeLable, "Bitte das Datum im dd.mm.yyyy Format angeben!");
+            UsabilityMethods.addMessage(checkDateNoticeLable, "Bitte gib das Datum im dd.mm.yyyy Format ein.");
             return;
         }
         LocalDate courseStart = LocalDate.parse(courseStartDateAsText, formatter);
@@ -128,22 +127,20 @@ public class AddCourseController extends BaseController {
 
         LocalDate today = LocalDate.now();
 
-
         if (courseEnd.compareTo(courseStart) < 0) {
-            UsabilityMethods.addMessage(checkDateNoticeLable, "Kursbeginn ist nach dem Kursende!");
+            UsabilityMethods.addMessage(checkDateNoticeLable, "Ein Kursstart kann nicht vor Kursende sein.");
             return;
         }
 
-
         if (courseChoiceBox.getValue() == null) {
-            QuickAlert.showError("Bitte Programm wählen!");
+            QuickAlert.showError("Bitte wähle ein Programm.");
             return;
         }
 
         String programName = courseChoiceBox.getValue().toString();
         Program program = programRepositoryJDBC.getProgramByProgramName(programName);
         if (program == null) {
-            QuickAlert.showError("Program wurde nicht gefunden");
+            QuickAlert.showError("Programm wurde nicht gefunden.");
         }
         int programId = program.getId();
 
@@ -165,7 +162,7 @@ public class AddCourseController extends BaseController {
             courseUniqueNameCount = courseRepo.getCourseCountByCourseName(courseNameTextField.getText());
             if (listModel.getSelectedCourse() == null) {
                 if (courseStart.isBefore(today)) {
-                    UsabilityMethods.addMessage(checkDateNoticeLable, "Kursbeginn ist in der Vergangenheit!");
+                    UsabilityMethods.addMessage(checkDateNoticeLable, "Kursbeginn ist in der Vergangenheit.");
                     return;
                 }
 
@@ -180,7 +177,7 @@ public class AddCourseController extends BaseController {
                         e.printStackTrace();
                     }
                 } else {
-                    UsabilityMethods.addMessage(courseUniqueNameNoticeLable, "So ein Veranstaltungsname existiert schon in DB!");
+                    UsabilityMethods.addMessage(courseUniqueNameNoticeLable, "Der Veranstaltungsname existiert bereits in.");
                 }
 
             } else {
@@ -194,14 +191,14 @@ public class AddCourseController extends BaseController {
                     if (courseRepo.getCourseCountByCourseName(newCourseName) == 0) {
                         updateCourse();
                     } else {
-                        UsabilityMethods.addMessage(courseUniqueNameNoticeLable, "So ein Veranstaltungsname existiert schon in DB!");
+                        UsabilityMethods.addMessage(courseUniqueNameNoticeLable, "Der Veranstaltungsname existiert bereits");
                     }
                 } else {
                     updateCourse();
                 }
             }
         } else {
-            QuickAlert.showError("Bitte alle Felder ausfüllen");
+            QuickAlert.showError("Bitte fülle alle Felder aus");
         }
     }
 
